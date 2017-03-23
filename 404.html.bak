@@ -21,6 +21,6 @@
         </div>
     </div>
     <!-- Mainly scripts -->
-    <script src="static/assets/fof-20170307.min.js"></script>
+    <script src="/static/assets/fof-20170307.min.js"></script>
 </body>
 </html>
