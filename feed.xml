@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CrazyAndy</title>
+    <description>CrazyAndy's blog,use Jekyll and github pages.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 23 Mar 2017 13:51:37 +0800</pubDate>
+    <lastBuildDate>Thu, 23 Mar 2017 13:51:37 +0800</lastBuildDate>
+    <generator>Jekyll v3.4.2</generator>
+    
+      <item>
+        <title>构建简单的Java 爬虫框架</title>
+        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;我在之前工作中负责做过java爬虫系统。
+主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。 😊
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 31 Jul 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2016/07/31/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/07/31/Java-Crawler.html</guid>
+        
+        <category>java</category>
+        
+        <category>Crawler</category>
+        
+        
+        <category>JAVA</category>
+        
+      </item>
+    
+  </channel>
+</rss>
