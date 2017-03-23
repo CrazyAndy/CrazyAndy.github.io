@@ -16,13 +16,13 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/crazyandy/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
 
   <!-- Main CSS -->
-  <link href="/crazyandy/static/assets/app-20170307.min.css" rel="stylesheet">
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
 
   <!-- Main Scripts -->
-  <script src="/crazyandy/static/assets/app-20170307.min.js"></script>
+  <script src="/static/assets/app-20170307.min.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {
@@ -68,7 +68,7 @@
         toggleSearch(true);
       });
 
-      $.getJSON("/crazyandy/search/cb-search.json")
+      $.getJSON("/search/cb-search.json")
         .done(function (data) {
           if (data.code == 0) {
             $("#search-content").typeahead({
@@ -99,12 +99,12 @@
     <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
 
     <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
-        <img src="/crazyandy/search/img/cb-close.png" id="close-btn"/>
+        <img src="/search/img/cb-close.png" id="close-btn"/>
     </div>
 </div>
 
 <div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
-    <img src="/crazyandy/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
 </div>
 
 <div class="navbar-wrapper">
@@ -117,59 +117,59 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/crazyandy/">CrazyAndy</a>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="/crazyandyblog/"></a></li>
+                    <li><a class="page-scroll" href="blog/"></a></li>
                     
                         
                         
                         <li>
                         
-                        <a class="page-scroll" href="/crazyandy/blog/">博客</a></li>
-                        
-                    
-                        
-                        
-                        <li>
-                        
-                        <a class="page-scroll" href="/crazyandy/java/">Java</a></li>
+                        <a class="page-scroll" href="/blog/">博客</a></li>
                         
                     
                         
                         
                         <li>
                         
-                        <a class="page-scroll" href="/crazyandy/linux/">Linux</a></li>
+                        <a class="page-scroll" href="/java/">Java</a></li>
+                        
+                    
+                        
+                        
+                        <li>
+                        
+                        <a class="page-scroll" href="/linux/">Linux</a></li>
                         
                     
                         
                         
                         <li class="active">
                         
-                        <a class="page-scroll" href="/crazyandy/html/">HTML</a></li>
+                        <a class="page-scroll" href="/html/">HTML</a></li>
                         
                     
                         
                         
                         <li>
                         
-                        <a class="page-scroll" href="/crazyandy/database/">Database</a></li>
+                        <a class="page-scroll" href="/database/">Database</a></li>
                         
                     
                         
                         
                         <li>
                         
-                        <a class="page-scroll" href="/crazyandy/mac/">BootStrap</a></li>
+                        <a class="page-scroll" href="/mac/">BootStrap</a></li>
                         
                     
                         
                         
                         <li>
                         
-                        <a class="page-scroll" href="/crazyandy/life/">生活</a></li>
+                        <a class="page-scroll" href="/life/">生活</a></li>
                         
                     
                 </ul>
@@ -217,7 +217,7 @@
 	
 
         <!-- jPages -->
-<script src="/crazyandy/static/assets/jPage-20170307.min.js"></script>
+<script src="/static/assets/jPage-20170307.min.js"></script>
 <script type="text/javascript">
 $(function(){
   /* initiate the plugin */
