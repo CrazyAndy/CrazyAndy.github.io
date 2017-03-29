@@ -5,9 +5,29 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Mar 2017 10:19:41 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Mar 2017 10:19:41 +0800</lastBuildDate>
+    <pubDate>Wed, 29 Mar 2017 18:22:37 +0800</pubDate>
+    <lastBuildDate>Wed, 29 Mar 2017 18:22:37 +0800</lastBuildDate>
     <generator>Jekyll v3.4.2</generator>
+    
+      <item>
+        <title>构建简单的Java 爬虫框架(二)</title>
+        <description>&lt;p&gt;　　本节主要介绍依靠SpringMvc搭建的web框架,从网上借鉴了一套框架，随后做了很多删减，组装成了一个精简版。随后我会上传一套代码到新的目录，方便下载。&lt;/p&gt;
+
+  	待续…
+
+</description>
+        <pubDate>Tue, 02 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2016/08/02/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/02/Java-Crawler.html</guid>
+        
+        <category>java</category>
+        
+        <category>Crawler</category>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>构建简单的Java 爬虫框架(一)</title>
@@ -15,7 +35,7 @@
 
 &lt;p&gt;　　主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。&lt;/p&gt;
 
-&lt;p&gt;　　Jsoup是java语言中特有的爬取网页数据技术，它仿照jquery访问页面节点的语法风格，极大的方便了java开发者根据id，class等选择器选择所需节点，并获取页面元素值。也支持通过xpath规则去解析html页面。现在市面流行的大多都用python scrapy去写，我暂时还没学习过python，所以就用java去实现，但是非常感兴趣能了解一下scrapy的操作流程，了解人家的设计思想，想必考虑到了爬虫中的方方面面，爬取规则制定，定时任务，应对反爬虫策略的一些独门绝技等等，即便吃不到猪肉，看看猪是怎么跑的也是挺好的(说这句话发觉自己特么的好屌丝)。&lt;/p&gt;
+&lt;p&gt;　　Jsoup是java语言中特有的爬取网页数据技术，它仿照jquery访问页面节点的语法风格，极大的方便了java开发者根据id，class等选择器选择所需节点，并获取页面元素值。也支持通过xpath规则去解析html页面。在爬取的过程中，也遇到了有些页面数据是js动态生成的现象，所以又加入了phantomjs技术支持，如果在jsoup爬取不到的情况下，会调用phantomjs进行爬取。现在市面流行的大多都用python scrapy去写，我暂时还没学习过python，所以就用java去实现，但是非常感兴趣能了解一下scrapy的操作流程，了解人家的设计思想，想必考虑到了爬虫中的方方面面，爬取规则制定，定时任务，应对反爬虫策略的一些独门绝技等等，即便吃不到猪肉，看看猪是怎么跑的也是挺好的(说这句话发觉自己特么的好屌丝)。&lt;/p&gt;
 
 &lt;p&gt;　　本系统中，通过自己研发的chrome插件监听鼠标操作，并根据一定算法计算得到xpath规则，存入数据库中，方便job任务执行爬取操作。&lt;/p&gt;
 

@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|构建简单的Java 爬虫框架(一)
+        CrazyAndy|构建简单的Java 爬虫框架(二)
     
   </title>
   <!-- favicon -->
@@ -231,32 +231,14 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Aug 2016</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Aug 2016</span>
                         <h1>
-                            构建简单的Java 爬虫框架(一)
+                            构建简单的Java 爬虫框架(二)
                         </h1>
                     </div>
-                    	<p>　　本节主要介绍该爬虫系统的框架设计。</p>
+                    	<p>　　本节主要介绍依靠SpringMvc搭建的web框架,从网上借鉴了一套框架，随后做了很多删减，组装成了一个精简版。随后我会上传一套代码到新的目录，方便下载。</p>
 
-<p>　　主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。</p>
-
-<p>　　Jsoup是java语言中特有的爬取网页数据技术，它仿照jquery访问页面节点的语法风格，极大的方便了java开发者根据id，class等选择器选择所需节点，并获取页面元素值。也支持通过xpath规则去解析html页面。在爬取的过程中，也遇到了有些页面数据是js动态生成的现象，所以又加入了phantomjs技术支持，如果在jsoup爬取不到的情况下，会调用phantomjs进行爬取。现在市面流行的大多都用python scrapy去写，我暂时还没学习过python，所以就用java去实现，但是非常感兴趣能了解一下scrapy的操作流程，了解人家的设计思想，想必考虑到了爬虫中的方方面面，爬取规则制定，定时任务，应对反爬虫策略的一些独门绝技等等，即便吃不到猪肉，看看猪是怎么跑的也是挺好的(说这句话发觉自己特么的好屌丝)。</p>
-
-<p>　　本系统中，通过自己研发的chrome插件监听鼠标操作，并根据一定算法计算得到xpath规则，存入数据库中，方便job任务执行爬取操作。</p>
-
-<p>　　Spring Quartz是一套很不错的定时任务框架，它支持内存插入，xml配置，持久化这三种方式，内存插入如果在系统停止服务的时候就会消失job和定时器；xml配置不灵活，可扩展性差；所以最后还是拥抱了一下持久化方式。而且，Quratz还支持分布式集群功能，好吧，集群我没用到。</p>
-
-<p>　　在信息分类编辑中，用到了zTree.js插件，并稍微改造了一下，实现bootstrap风格。</p>
-
-<p>　　本系统分成信息cms系统和爬虫job系统两个子系统，cms制定爬取规则，爬虫job系统根据规则进行爬取，两系统之间采用webservice方式进行通信。</p>
-
-<p>　　系统页面采用的是inspinia 基于bootstrap的前端模板。</p>
-
-<p>　　代码编辑器用的是idea project，这是头一回真正使用idea作为项目开发工具，那种感觉真的是太酷了，比eclipse好的不止一星半点，而且占用内存也不大，甚至小于myeclipse。</p>
-
-<p>　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。</p>
-
-<p>　　以上就是对这套系统的简单描述，在以后的章节中，我会详细介绍系统实现的每个细节，如果有设计不合理的地方还请各位民间高手不吝赐教，毕竟发现问题是解决问题的第一步。</p>
+  	待续…
 
 
                     <hr>
@@ -275,7 +257,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2016/08/01/Java-Crawler.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2016/08/02/Java-Crawler.html">0</span> comments
                                 
                                 </div>
                             </div>
