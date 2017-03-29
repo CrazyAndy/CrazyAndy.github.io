@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Mar 2017 10:18:41 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Mar 2017 10:18:41 +0800</lastBuildDate>
+    <pubDate>Wed, 29 Mar 2017 10:19:41 +0800</pubDate>
+    <lastBuildDate>Wed, 29 Mar 2017 10:19:41 +0800</lastBuildDate>
     <generator>Jekyll v3.4.2</generator>
     
       <item>
@@ -29,7 +29,7 @@
 
 &lt;p&gt;　　代码编辑器用的是idea project，这是头一回真正使用idea作为项目开发工具，那种感觉真的是太酷了，比eclipse好的不止一星半点，而且占用内存也不大，甚至小于myeclipse。&lt;/p&gt;
 
-&lt;p&gt;　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。&lt;/p&gt;
+&lt;p&gt;　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。&lt;/p&gt;
 
 &lt;p&gt;　　以上就是对这套系统的简单描述，在以后的章节中，我会详细介绍系统实现的每个细节，如果有设计不合理的地方还请各位民间高手不吝赐教，毕竟发现问题是解决问题的第一步。&lt;/p&gt;
 
