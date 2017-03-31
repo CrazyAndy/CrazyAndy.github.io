@@ -4,7 +4,7 @@ $(document).ready(function() {
     $.ajax({
         type: "get",
         async: false,
-        url: "https://vps.jarrekk.com:8443/api/v1.0/jalpc/pv_count",
+        url: "https://api.baidu.com/json/tongji/v1/ReportService/getData",
         dataType: "jsonp",
         jsonp: "callback",
         jsonpCallback: "flightHandler",
@@ -16,4 +16,18 @@ $(document).ready(function() {
             console.log('fail');
         }
     });
+	$.ajax({
+            type: 'post',
+            url: 'https://api.baidu.com/json/tongji/v1/ReportService/getData',
+            cache: false,
+            data: {"site_id":"31d4d3da408942182f35606f94a67f3d",
+					"method":"source/all/a",
+					"metrics":"pv_count",
+					"start_date":"20170301",
+					"end_date":"20170901"},
+            dataType: 'json',
+            success: function (data) {
+                $("#jalpc_site_pv").html(data);
+            }
+        });
 });
