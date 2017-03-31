@@ -27,25 +27,7 @@
 <script>
 var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-_hmt.push(['_setAccount', '31d4d3da408942182f35606f94a67f3d']);
 
-
-var sendData = {"site_id":"31d4d3da408942182f35606f94a67f3d","method":"source/all/a","metrics":"pv_count","start_date":"20170301","end_date":"20170901"};
-	$.ajax({
-            type: 'post',
-            url: 'https://api.baidu.com/json/tongji/v1/ReportService/getData',
-            cache: false,
-            data: JSON.stringify(sendData),
-        	contentType: "application/json",
-        	dataType:'json',
-            success: function (data) {
-                alert(data);
-            }
-        });
 })();
 </script>
 </head>
