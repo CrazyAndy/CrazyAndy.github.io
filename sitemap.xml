@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://localhost:4000/java/2016/08/02/Java-Crawler.html</loc>
+        <loc>http://localhost:4000/boot/2017/01/01/SpringBoot.html</loc>
     </url>
 
     <url>
@@ -19,6 +19,10 @@
     </url>
 
     <url>
+        <loc>http://localhost:4000/boot/</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/search/cb-search.json</loc>
     </url>
 
@@ -28,10 +32,6 @@
 
     <url>
         <loc>http://localhost:4000/feed.xml</loc>
-    </url>
-
-    <url>
-        <loc>http://localhost:4000/html/</loc>
     </url>
 
     <url>

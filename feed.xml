@@ -5,32 +5,32 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Mar 2017 18:22:37 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Mar 2017 18:22:37 +0800</lastBuildDate>
+    <pubDate>Fri, 31 Mar 2017 16:02:15 +0800</pubDate>
+    <lastBuildDate>Fri, 31 Mar 2017 16:02:15 +0800</lastBuildDate>
     <generator>Jekyll v3.4.2</generator>
     
       <item>
-        <title>构建简单的Java 爬虫框架(二)</title>
-        <description>&lt;p&gt;　　本节主要介绍依靠SpringMvc搭建的web框架,从网上借鉴了一套框架，随后做了很多删减，组装成了一个精简版。随后我会上传一套代码到新的目录，方便下载。&lt;/p&gt;
+        <title>使用Spring Boot构建web框架(一)</title>
+        <description>&lt;p&gt;　　本节以及接下来的几章将会陆续介绍我根据Spring Boot搭建的web框架。&lt;/p&gt;
 
-  	待续…
+&lt;p&gt;　　&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 02 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/02/Java-Crawler.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/02/Java-Crawler.html</guid>
+        <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/boot/2017/01/01/SpringBoot.html</link>
+        <guid isPermaLink="true">http://localhost:4000/boot/2017/01/01/SpringBoot.html</guid>
         
         <category>java</category>
         
         <category>Crawler</category>
         
         
-        <category>java</category>
+        <category>boot</category>
         
       </item>
     
       <item>
-        <title>构建简单的Java 爬虫框架(一)</title>
+        <title>构建简单的Java 爬虫框架</title>
         <description>&lt;p&gt;　　本节主要介绍该爬虫系统的框架设计。&lt;/p&gt;
 
 &lt;p&gt;　　主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。&lt;/p&gt;
@@ -52,6 +52,8 @@
 &lt;p&gt;　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。&lt;/p&gt;
 
 &lt;p&gt;　　以上就是对这套系统的简单描述，在以后的章节中，我会详细介绍系统实现的每个细节，如果有设计不合理的地方还请各位民间高手不吝赐教，毕竟发现问题是解决问题的第一步。&lt;/p&gt;
+
+&lt;p&gt;如果需要代码，朋友们可通过邮件联系找我要。&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>

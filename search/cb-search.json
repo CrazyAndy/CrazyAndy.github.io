@@ -3,15 +3,15 @@
 	"data" : [
 	 
 	{
-		"title" : "构建简单的Java 爬虫框架(二) - 2016-08-02",
-		"url" : "/java/2016/08/02/Java-Crawler.html"
+		"title" : "使用Spring Boot构建web框架(一) - 2017-01-01",
+		"url" : "/boot/2017/01/01/SpringBoot.html"
 	}
 	
 	,
 	
     
 	{
-		"title" : "构建简单的Java 爬虫框架(一) - 2016-08-01",
+		"title" : "构建简单的Java 爬虫框架 - 2016-08-01",
 		"url" : "/java/2016/08/01/Java-Crawler.html"
 	}
 	
