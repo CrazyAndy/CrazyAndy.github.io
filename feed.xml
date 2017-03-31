@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 31 Mar 2017 16:02:15 +0800</pubDate>
-    <lastBuildDate>Fri, 31 Mar 2017 16:02:15 +0800</lastBuildDate>
+    <pubDate>Fri, 31 Mar 2017 16:30:16 +0800</pubDate>
+    <lastBuildDate>Fri, 31 Mar 2017 16:30:16 +0800</lastBuildDate>
     <generator>Jekyll v3.4.2</generator>
     
       <item>
@@ -26,6 +26,157 @@
         
         
         <category>boot</category>
+        
+      </item>
+    
+      <item>
+        <title>linux环境搭建</title>
+        <description>&lt;p&gt;一、文件上传&lt;/p&gt;
+
+&lt;p&gt;　　(1).创建文件夹&lt;/p&gt;
+
+&lt;p&gt;　　mkdir /itec/upload&lt;/p&gt;
+
+&lt;p&gt;　　(2)上传文件&lt;/p&gt;
+
+&lt;p&gt;　　apache-tomcat-7.0.68(文件夹)
+　　MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle(文件夹)
+　　jdk-6u45-linux-i586-rpm.bin(文件)&lt;/p&gt;
+
+&lt;p&gt;二、Openjdk卸载&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;　　rpm -qa&lt;/td&gt;
+      &lt;td&gt;grep java&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;　　rpm -e –nodeps  ***&lt;/p&gt;
+
+&lt;p&gt;三、Jdk安装&lt;/p&gt;
+
+&lt;p&gt;　　(1)修改权限&lt;/p&gt;
+
+&lt;p&gt;　　chmod 755 jdk-6u45-linux-i586-rpm.bin&lt;/p&gt;
+
+&lt;p&gt;　　(2)安装jdk&lt;/p&gt;
+
+&lt;p&gt;　　./jdk-6u45-linux-i586-rpm.bin
+  	rpm –ivh jdk-6u45-linux-i586.rpm&lt;/p&gt;
+
+&lt;p&gt;　　(3)修改配置&lt;/p&gt;
+
+&lt;p&gt;　　vi /etc/profile&lt;/p&gt;
+
+&lt;p&gt;　　export JAVA_HOME=/usr/java/ jdk1.6.0_45&lt;/p&gt;
+
+&lt;p&gt;　　export PATH=$PATH:$JAVA_HOME/bin&lt;/p&gt;
+
+&lt;p&gt;　　.  /etc/profile&lt;/p&gt;
+
+&lt;p&gt;　　.和/之间有空格&lt;/p&gt;
+
+&lt;p&gt;四、防火墙设置&lt;/p&gt;
+
+&lt;p&gt;　　Service iptables stop&lt;/p&gt;
+
+&lt;p&gt;五、Tomcat安装&lt;/p&gt;
+
+&lt;p&gt;　　cd /itec/upload&lt;/p&gt;
+
+&lt;p&gt;　　mv apache-tomcat-7.0.68 /itec&lt;/p&gt;
+
+&lt;p&gt;　　cd /itec/apache-tomcat-7.0.68/bin&lt;/p&gt;
+
+&lt;p&gt;　　./startup.sh&lt;/p&gt;
+
+&lt;p&gt;六、Mysql安装&lt;/p&gt;
+
+&lt;p&gt;　　cd /itec/upload/ MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle&lt;/p&gt;
+
+&lt;p&gt;　　(1)安装share&lt;/p&gt;
+
+&lt;p&gt;　　rpm –ivh MySQL-shared-5.6.29-1.linux_glibc2.5.i386.rpm&lt;/p&gt;
+
+&lt;p&gt;　　(2)安装server&lt;/p&gt;
+
+&lt;p&gt;　　rpm –ivh	MySQL-server-5.6.29-1.linux_glibc2.5.i386.rpm&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;　　rpm -qa&lt;/td&gt;
+      &lt;td&gt;grep mysql&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;　　rpm -ev –nodeps mysql-libs-5.1.66-2.el6_3.i686&lt;/p&gt;
+
+&lt;p&gt;　　(3)安装client&lt;/p&gt;
+
+&lt;p&gt;　　rpm –ivh	MySQL-client-5.6.29-1.linux_glibc2.5.i386.rpm&lt;/p&gt;
+
+&lt;p&gt;　　(4)修改密码&lt;/p&gt;
+
+&lt;p&gt;　　more /root/.mysql_secret
+  	service mysql start
+  	mysql –uroot –p&lt;/p&gt;
+
+  	set password=password(‘itec_jtwz’);
+
+&lt;p&gt;　　(5)修改访问用户权限&lt;/p&gt;
+
+&lt;p&gt;　　use mysql&lt;/p&gt;
+
+&lt;p&gt;　　select host from user;&lt;/p&gt;
+
+&lt;p&gt;　　delete from user where host=’localhost’;&lt;/p&gt;
+
+&lt;p&gt;　　update user set host=’%’;&lt;/p&gt;
+
+&lt;p&gt;　　flush privileges;&lt;/p&gt;
+
+&lt;p&gt;　　(6)修改utf8编码&lt;/p&gt;
+
+&lt;p&gt;　　show variables like’character%’;&lt;/p&gt;
+
+&lt;p&gt;　　vi /usr	/my.cnf&lt;/p&gt;
+
+&lt;p&gt;　　character-set-server=utf8&lt;/p&gt;
+
+&lt;p&gt;　　lower_case_table_names=1;(让linux下mysql大小写不敏感)&lt;/p&gt;
+
+&lt;p&gt;　　(7) mysqld_safe –skip-grant-tables&lt;/p&gt;
+
+&lt;p&gt;　　 /etc/rc.d/init.d/mysql stop&lt;/p&gt;
+
+&lt;p&gt;　　/etc/rc.d/init.d/mysql start&lt;/p&gt;
+
+&lt;p&gt;　　sudo mysql -uroot –p&lt;/p&gt;
+
+&lt;p&gt;　　(8)删root用户 user&lt;/p&gt;
+
+&lt;p&gt;　　Insert root %,localhost&lt;/p&gt;
+
+&lt;p&gt;　　INSERT INTO &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; VALUES (‘localhost’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);&lt;/p&gt;
+
+&lt;p&gt;　　INSERT INTO &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; VALUES (‘%’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 13 Oct 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/linux/2016/10/13/Linux.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2016/10/13/Linux.html</guid>
+        
+        <category>linux</category>
+        
+        <category>环境搭建</category>
+        
+        
+        <category>linux</category>
         
       </item>
     
