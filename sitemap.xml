@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000/literature/2017/04/05/PaperPlane.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/boot/2017/01/01/SpringBoot.html</loc>
     </url>
 
@@ -55,7 +59,15 @@
     </url>
 
     <url>
+        <loc>http://localhost:4000/literature/</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/mac/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/movie/</loc>
     </url>
 
     <url>
