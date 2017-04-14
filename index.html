@@ -39,7 +39,7 @@ var formData = {"site_id":"31d4d3da408942182f35606f94a67f3d","method":"overview/
 $.ajax({type:'post',
 url:'https://api.baidu.com/json/tongji/v1/ReportService/getData',
 cache : false,
-dataType:'JSONP',
+dataType:'json',
 data : JSON.stringify(formData),
 success:function(data){
 alert(data);
