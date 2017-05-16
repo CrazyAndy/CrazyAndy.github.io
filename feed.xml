@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 28 Apr 2017 09:35:38 +0800</pubDate>
-    <lastBuildDate>Fri, 28 Apr 2017 09:35:38 +0800</lastBuildDate>
+    <pubDate>Tue, 16 May 2017 23:10:16 +0800</pubDate>
+    <lastBuildDate>Tue, 16 May 2017 23:10:16 +0800</lastBuildDate>
     <generator>Jekyll v3.4.2</generator>
     
       <item>
@@ -226,6 +226,30 @@
         
         
         <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>黄勇-架构探险-从零开始写Java Web框架</title>
+        <description>&lt;p&gt;　　偶然从论坛上看到黄勇老师写的一本书，《架构探险-从零开始写Java Web框架》，读了读绪论和目录，饶有兴趣，于是买来书看一看，感觉使用java web开发这几年来，自己心里对java web框架一些模棱两可的猜测，也有了更清晰的界定。&lt;/p&gt;
+
+&lt;p&gt;　　本书从头边看边敲代码，注解，反射，代理，aop这些虽然再实际开发工作中经常用到，但是了解不深的知识，在这里有了更新的认识，更对java web常用的mvc框架有了进一步的认识，也借此推荐给工作3年以上的java程序开发者看一看，真心有用，至少让我开阔了眼界。&lt;/p&gt;
+
+&lt;p&gt;　　而其中的代码风格，也对我自己有些教育作用，看来还是要多看人家写的优秀代码，别自己闭门造车，否则眼界不够，很容易变成一只井底之蛙。所以，也督促自己以后多看一些开源的项目。勇哥说啦，开源的不仅仅是代码，更重要的是思想，回顾原来自己的技术，感觉特别的薄弱，需要提高的地方还有很多，不多说啦，自己加油吧。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
+        
+        <category>java</category>
+        
+        <category>黄勇</category>
+        
+        
+        <category>java</category>
         
       </item>
     
