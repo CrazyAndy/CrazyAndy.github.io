@@ -5,9 +5,9 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 May 2017 23:10:16 +0800</pubDate>
-    <lastBuildDate>Tue, 16 May 2017 23:10:16 +0800</lastBuildDate>
-    <generator>Jekyll v3.4.2</generator>
+    <pubDate>Fri, 14 Jul 2017 18:44:51 +0800</pubDate>
+    <lastBuildDate>Fri, 14 Jul 2017 18:44:51 +0800</lastBuildDate>
+    <generator>Jekyll v3.5.0</generator>
     
       <item>
         <title>Paper Plane</title>
@@ -287,6 +287,694 @@
         <category>java</category>
         
         <category>Crawler</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>关于Java设计模式的肤浅看法--观察者模式（三）</title>
+        <description>&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
+
+&lt;p&gt;　　策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。&lt;/p&gt;
+
+&lt;p&gt;　　刚开始会通过鸭子模型由浅入深讲一下实际问题的出现和寻找解决方法，然后将解决方法归纳形成最终的设计模式–策略模式。&lt;/p&gt;
+
+&lt;p&gt;　　然后会再次抽象，引用策略模式比较官方的知识点，归纳总结策略模式（在和别人讨论的时候，你总不能和人上来就讲小鸭子的故事吧）。&lt;/p&gt;
+
+&lt;p&gt;　　最后升华一下，再次赘述一下 其中使用到的 设计规则 和 设计思想。&lt;/p&gt;
+&lt;h1 id=&quot;二正文&quot;&gt;二、正文&lt;/h1&gt;
+
+&lt;h3 id=&quot;一鸭子模型&quot;&gt;（一）鸭子模型&lt;/h3&gt;
+
+&lt;h4 id=&quot;1问题抛出&quot;&gt;      1，问题抛出&lt;/h4&gt;
+
+&lt;p&gt;　　某公司设计的鸭子游戏，鸭子有呱呱叫，游泳，展示三种行为，但是现在想加入飞行的行为，该怎么设计程序。&lt;/p&gt;
+&lt;h4 id=&quot;2尝试解决方法1&quot;&gt;      2，尝试解决方法1&lt;/h4&gt;
+
+&lt;p&gt;　　直接在Duck父类上加入fly()方法，但问题出来了，所有继承改父类的鸭子都会飞了，包括游戏中的橡皮鸭子，这显然是不符合实际情况的。根源在于，为了复用而使用了继承，但没有屏蔽掉继承的缺点。&lt;/p&gt;
+&lt;h4 id=&quot;3尝试解决方法2&quot;&gt;      3，尝试解决方法2&lt;/h4&gt;
+
+&lt;p&gt;　　继承不可以，那就用接口，让实现类去实现接口的fly()方法，但是这样下来会出现这种情况，10种鸭子中，有6种是会飞的，那这6种是否都要重新实现的飞行逻辑，也就是说飞行逻辑的代码被重复写了5次，以后要是维护飞行代码，就需要维护6个地方，这显然是一种噩梦。&lt;/p&gt;
+&lt;h4 id=&quot;4思路整理&quot;&gt;      4，思路整理&lt;/h4&gt;
+
+&lt;p&gt;　　在之前的尝试解决中，继承不能以直接继承Duck父类的方式使用，接口又不具备实现代码，让每个子类都实现一遍代码编写和后期维护都是问题。&lt;/p&gt;
+
+&lt;p&gt;　　那可不可以把飞行这个行为，有些鸭子具备，有些鸭子不具备的可变的行为独立出来，让会飞的鸭子拿来用，不会的就不用。这样解耦出来，以后也方便对飞行行为的改动和扩展（这样只改动一处代码就好）。&lt;/p&gt;
+
+&lt;p&gt;　　上段文字则是某项设计原则的实际体现：找出应用中可能需要变化之处“封装”起来，以防止可变动的逻辑会影响到不需要变动的逻辑。&lt;/p&gt;
+
+&lt;p&gt;　　另外，针对接口编程也是很重要的设计原则，鸭子的子类使用接口表示的行为，而不是直接将改行为写死在子类代码中，这样会比较灵活。&lt;/p&gt;
+
+&lt;p&gt;　　增加飞行和呱呱叫两个接口只是开始，在以后的游戏升级中，鸭子会增加更多的行为，而按照这种思路去设计，则在增加新功能的同事，又不会影响原来的业务逻辑。&lt;/p&gt;
+&lt;h4 id=&quot;5代码实现&quot;&gt;      5，代码实现&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	//鸭子父类
+	public class Duck {
+	    protected FlyBehavior flyBehavior;
+	    protected QuackBehavior quackBehavior;
+	
+	    //两个Setter方式是用来动态设定行为用的
+	    public void setFlyBehavior(FlyBehavior flyBehavior) {
+	        this.flyBehavior = flyBehavior;
+	    }
+	    public void setQuackBehavior(QuackBehavior quackBehavior) {
+	        this.quackBehavior = quackBehavior;
+	    }
+
+	    //用perform***方法包装一下，是为了让父类代理属性对象的行为，
+	    // 其实这里就是代理模式的使用，以后再细说
+	    public void performFly(){
+	        flyBehavior.fly();
+	    }
+	    public void performQuack(){
+	        quackBehavior.quack();
+	    }
+	    //不同的鸭子有不同的游泳特点和外观表现形式，这两个方法由子类重写实现
+	    public void swim(){}
+	    public void display(){}
+	}
+	//飞行接口
+	public interface FlyBehavior {
+	    void fly();
+	}
+	public class FlyWithWings implements FlyBehavior{
+	    @Override
+	    public void fly() {
+	        System.out.println(&quot;I'm flying&quot;);
+    	}
+	}
+	//呱呱叫接口
+	public interface QuackBehavior {
+	    void quack();
+	}
+	public class Quack implements QuackBehavior{
+	    @Override
+	    public void quack() {
+	        System.out.println(&quot;呱呱叫&quot;);
+	    }
+	}
+	//绿头鸭具体实现
+	public class MallardDuck extends Duck{
+	    public MallardDuck(){
+	        quackBehavior = new Quack();
+	        flyBehavior = new FlyWithWings();
+	    }
+	    @Override
+	    public void display() {
+	        System.out.println(&quot;I'm a real Mallard Duck !&quot;);
+	    }
+	}
+	//测试方法
+	public class MainActivity {
+	    public static void main(String[] args) {
+	        Duck duck = new MallardDuck();
+	        duck.performFly();
+	        duck.performQuack();
+	        duck.display();
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;二设计规格和设计思想&quot;&gt;（二）设计规格和设计思想&lt;/h3&gt;
+
+&lt;p&gt;　　将鸭子的飞行行为或者呱呱叫行为看成是一组算法。&lt;/p&gt;
+
+&lt;p&gt;　　鸭子的飞行行为和呱呱叫行为被Duck组合成两个属性，从而Duck以及其子类也就都拥有了飞行行为和呱呱叫行为，这里遵循的设计规则则是 多用组合，少用继承。&lt;/p&gt;
+&lt;h3 id=&quot;三知识架构&quot;&gt;（三）知识架构&lt;/h3&gt;
+
+&lt;h4 id=&quot;1模式结构&quot;&gt;      1，模式结构&lt;/h4&gt;
+&lt;p&gt;　　策略模式是对算法的包装，是把使用算法的责任和算法本身分割开来，委派给不同的对象管理。策略模式通常把一个系列的算法包装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是：“准备一组算法，并将每一个算法封装起来，使得它们可以互换”。下面就以一个示意性的实现讲解策略模式实例的结构。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/StrategyPattern.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/StrategyPattern.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　这个模式涉及到三个角色：&lt;/p&gt;
+
+&lt;p&gt;　　●  环境(Context)角色：持有一个Strategy的引用。&lt;/p&gt;
+
+&lt;p&gt;　　●  抽象策略(Strategy)角色：这是一个抽象角色，通常由一个接口或抽象类实现。此角色给出所有的具体策略类所需的接口。&lt;/p&gt;
+
+&lt;p&gt;　　●  具体策略(ConcreteStrategy)角色：包装了相关的算法或行为。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Context {
+	    //持有一个具体策略的对象
+	    private Strategy strategy;
+	    /**
+	     * 构造函数，传入一个具体策略对象
+	     * @param strategy    具体策略对象
+	     */
+	    public Context(Strategy strategy){
+	        this.strategy = strategy;
+	    }
+	    /**
+	     * 策略方法
+	     */
+	    public void contextInterface(){
+	        
+	        strategy.strategyInterface();
+	    }
+	}
+
+	public interface Strategy {
+	    /**
+	     * 策略方法
+	     */
+	    public void strategyInterface();
+	}
+	public class ConcreteStrategyA implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+	public class ConcreteStrategyB implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+	public class ConcreteStrategyC implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;2使用场景&quot;&gt;      2，使用场景&lt;/h4&gt;
+
+&lt;p&gt;　　假设现在要设计一个贩卖各类书籍的电子商务网站的购物车系统。一个最简单的情况就是把所有货品的单价乘上数量，但是实际情况肯定比这要复杂。比如，本网站可能对所有的高级会员提供每本20%的促销折扣；对中级会员提供每本10%的促销折扣；对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　根据描述，折扣是根据以下的几个算法中的一个进行的：&lt;/p&gt;
+
+&lt;p&gt;　　      算法一：对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法二：对中级会员提供10%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法三：对高级会员提供20%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　使用策略模式来实现的结构图如下：
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/price.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　源代码如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 折扣接口
+	*/
+	public interface MemberStrategy {
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double calcPrice(double booksPrice);
+	}
+	/**
+	*初级会员折扣类
+	*/
+	public class PrimaryMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于初级会员的没有折扣&quot;);
+	        return booksPrice;
+	    }
+	}
+	/**
+	*中级会员折扣类
+	*/
+	public class IntermediateMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于中级会员的折扣为10%&quot;);
+	        return booksPrice * 0.9;
+	    }
+	}
+	/**
+	*高级会员折扣类
+	*/
+	public class AdvancedMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) { 
+	        System.out.println(&quot;对于高级会员的折扣为20%&quot;);
+	        return booksPrice * 0.8;
+	    }
+	}
+	/**
+	*价格类
+	*/
+	public class Price {
+	    //持有一个具体的策略对象
+	    private MemberStrategy strategy;
+	    /**
+	     * 构造函数，传入一个具体的策略对象
+	     * @param strategy    具体的策略对象
+	     */
+	    public Price(MemberStrategy strategy){
+	        this.strategy = strategy;
+	    }
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double quote(double booksPrice){
+	        return this.strategy.calcPrice(booksPrice);
+	    }
+	}
+	/**
+	* 测试
+	*/
+	public class Test {
+	    public static void main(String[] args) {
+	        //选择并创建需要使用的策略对象
+	        MemberStrategy strategy = new AdvancedMemberStrategy();
+	        //创建环境
+	        Price price = new Price(strategy);
+	        //计算价格
+	        double quote = price.quote(300);
+	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
+&lt;h4 id=&quot;3模式认知&quot;&gt;      3，模式认知&lt;/h4&gt;
+
+&lt;p&gt;　　●  策略模式的重心&lt;/p&gt;
+
+&lt;p&gt;　　策略模式的重心不是如何实现算法，而是如何组织、调用这些算法，从而让程序结构更灵活，具有更好的维护性和扩展性。&lt;/p&gt;
+
+&lt;p&gt;　　●  算法的平等性&lt;/p&gt;
+
+&lt;p&gt;　　策略模式一个很大的特点就是各个策略算法的平等性。对于一系列具体的策略算法，大家的地位是完全一样的，正因为这个平等性，才能实现算法之间可以相互替换。所有的策略算法在实现上也是相互独立的，相互之间是没有依赖的。所以可以这样描述这一系列策略算法：策略算法是相同行为的不同实现。&lt;/p&gt;
+
+&lt;p&gt;　　●  运行时策略的唯一性&lt;/p&gt;
+
+&lt;p&gt;　　运行期间，策略模式在每一个时刻只能使用一个具体的策略实现对象，虽然可以动态地在不同的策略实现中切换，但是同时只能使用一个。&lt;/p&gt;
+
+&lt;p&gt;　　●  公有的行为&lt;/p&gt;
+
+&lt;p&gt;　　经常见到的是，所有的具体策略类都有一些公有的行为。这时候，就应当把这些公有的行为放到共同的抽象策略角色Strategy类里面。当然这时候抽象策略角色必须要用Java抽象类实现，而不能使用接口。这其实也是典型的将代码向继承等级结构的上方集中的标准做法。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/codefx.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/codefx.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;h4 id=&quot;4模式优缺点&quot;&gt;      4，模式优缺点&lt;/h4&gt;
+
+&lt;p&gt;　　●  优点&lt;/p&gt;
+
+&lt;p&gt;　　（1）策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。&lt;/p&gt;
+
+&lt;p&gt;　　（2）使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。&lt;/p&gt;
+
+&lt;p&gt;　　●  缺点&lt;/p&gt;
+
+&lt;p&gt;　　（1）客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。换言之，策略模式只适用于客户端知道算法或行为的情况。&lt;/p&gt;
+
+&lt;p&gt;　　（2）由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。&lt;/p&gt;
+&lt;h1 id=&quot;三引用&quot;&gt;三、引用&lt;/h1&gt;
+
+&lt;p&gt;　　《Head First 设计模式》&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/02/StrategyPattern.html&quot;&gt;关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
+&lt;p&gt;　　本篇博客采用的是从实际问题出发，引出问题根源，然后解决问题，然后总结解决方法，抽象成设计原则和设计思想，这种方式远比反过来讲解内容要让人更容易接受的多^_^&lt;/p&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 03 Apr 2012 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2012/04/03/ObserverPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2012/04/03/ObserverPattern.html</guid>
+        
+        <category>java</category>
+        
+        <category>观察者模式</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>关于Java设计模式的肤浅看法--策略模式（二）</title>
+        <description>&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
+
+&lt;p&gt;　　策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。&lt;/p&gt;
+
+&lt;p&gt;　　刚开始会通过鸭子模型由浅入深讲一下实际问题的出现和寻找解决方法，然后将解决方法归纳形成最终的设计模式–策略模式。&lt;/p&gt;
+
+&lt;p&gt;　　然后会再次抽象，引用策略模式比较官方的知识点，归纳总结策略模式（在和别人讨论的时候，你总不能和人上来就讲小鸭子的故事吧）。&lt;/p&gt;
+
+&lt;p&gt;　　最后升华一下，再次赘述一下 其中使用到的 设计规则 和 设计思想。&lt;/p&gt;
+&lt;h1 id=&quot;二正文&quot;&gt;二、正文&lt;/h1&gt;
+
+&lt;h3 id=&quot;一鸭子模型&quot;&gt;（一）鸭子模型&lt;/h3&gt;
+
+&lt;h4 id=&quot;1问题抛出&quot;&gt;      1，问题抛出&lt;/h4&gt;
+
+&lt;p&gt;　　某公司设计的鸭子游戏，鸭子有呱呱叫，游泳，展示三种行为，但是现在想加入飞行的行为，该怎么设计程序。&lt;/p&gt;
+&lt;h4 id=&quot;2尝试解决方法1&quot;&gt;      2，尝试解决方法1&lt;/h4&gt;
+
+&lt;p&gt;　　直接在Duck父类上加入fly()方法，但问题出来了，所有继承改父类的鸭子都会飞了，包括游戏中的橡皮鸭子，这显然是不符合实际情况的。根源在于，为了复用而使用了继承，但没有屏蔽掉继承的缺点。&lt;/p&gt;
+&lt;h4 id=&quot;3尝试解决方法2&quot;&gt;      3，尝试解决方法2&lt;/h4&gt;
+
+&lt;p&gt;　　继承不可以，那就用接口，让实现类去实现接口的fly()方法，但是这样下来会出现这种情况，10种鸭子中，有6种是会飞的，那这6种是否都要重新实现的飞行逻辑，也就是说飞行逻辑的代码被重复写了5次，以后要是维护飞行代码，就需要维护6个地方，这显然是一种噩梦。&lt;/p&gt;
+&lt;h4 id=&quot;4思路整理&quot;&gt;      4，思路整理&lt;/h4&gt;
+
+&lt;p&gt;　　在之前的尝试解决中，继承不能以直接继承Duck父类的方式使用，接口又不具备实现代码，让每个子类都实现一遍代码编写和后期维护都是问题。&lt;/p&gt;
+
+&lt;p&gt;　　那可不可以把飞行这个行为，有些鸭子具备，有些鸭子不具备的可变的行为独立出来，让会飞的鸭子拿来用，不会的就不用。这样解耦出来，以后也方便对飞行行为的改动和扩展（这样只改动一处代码就好）。&lt;/p&gt;
+
+&lt;p&gt;　　上段文字则是某项设计原则的实际体现：找出应用中可能需要变化之处“封装”起来，以防止可变动的逻辑会影响到不需要变动的逻辑。&lt;/p&gt;
+
+&lt;p&gt;　　另外，针对接口编程也是很重要的设计原则，鸭子的子类使用接口表示的行为，而不是直接将改行为写死在子类代码中，这样会比较灵活。&lt;/p&gt;
+
+&lt;p&gt;　　增加飞行和呱呱叫两个接口只是开始，在以后的游戏升级中，鸭子会增加更多的行为，而按照这种思路去设计，则在增加新功能的同事，又不会影响原来的业务逻辑。&lt;/p&gt;
+&lt;h4 id=&quot;5代码实现&quot;&gt;      5，代码实现&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	//鸭子父类
+	public class Duck {
+	    protected FlyBehavior flyBehavior;
+	    protected QuackBehavior quackBehavior;
+	
+	    //两个Setter方式是用来动态设定行为用的
+	    public void setFlyBehavior(FlyBehavior flyBehavior) {
+	        this.flyBehavior = flyBehavior;
+	    }
+	    public void setQuackBehavior(QuackBehavior quackBehavior) {
+	        this.quackBehavior = quackBehavior;
+	    }
+
+	    //用perform***方法包装一下，是为了让父类代理属性对象的行为，
+	    // 其实这里就是代理模式的使用，以后再细说
+	    public void performFly(){
+	        flyBehavior.fly();
+	    }
+	    public void performQuack(){
+	        quackBehavior.quack();
+	    }
+	    //不同的鸭子有不同的游泳特点和外观表现形式，这两个方法由子类重写实现
+	    public void swim(){}
+	    public void display(){}
+	}
+	//飞行接口
+	public interface FlyBehavior {
+	    void fly();
+	}
+	public class FlyWithWings implements FlyBehavior{
+	    @Override
+	    public void fly() {
+	        System.out.println(&quot;I'm flying&quot;);
+    	}
+	}
+	//呱呱叫接口
+	public interface QuackBehavior {
+	    void quack();
+	}
+	public class Quack implements QuackBehavior{
+	    @Override
+	    public void quack() {
+	        System.out.println(&quot;呱呱叫&quot;);
+	    }
+	}
+	//绿头鸭具体实现
+	public class MallardDuck extends Duck{
+	    public MallardDuck(){
+	        quackBehavior = new Quack();
+	        flyBehavior = new FlyWithWings();
+	    }
+	    @Override
+	    public void display() {
+	        System.out.println(&quot;I'm a real Mallard Duck !&quot;);
+	    }
+	}
+	//测试方法
+	public class MainActivity {
+	    public static void main(String[] args) {
+	        Duck duck = new MallardDuck();
+	        duck.performFly();
+	        duck.performQuack();
+	        duck.display();
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;二设计规格和设计思想&quot;&gt;（二）设计规格和设计思想&lt;/h3&gt;
+
+&lt;p&gt;　　将鸭子的飞行行为或者呱呱叫行为看成是一组算法。&lt;/p&gt;
+
+&lt;p&gt;　　鸭子的飞行行为和呱呱叫行为被Duck组合成两个属性，从而Duck以及其子类也就都拥有了飞行行为和呱呱叫行为，这里遵循的设计规则则是 多用组合，少用继承。&lt;/p&gt;
+&lt;h3 id=&quot;三知识架构&quot;&gt;（三）知识架构&lt;/h3&gt;
+
+&lt;h4 id=&quot;1模式结构&quot;&gt;      1，模式结构&lt;/h4&gt;
+&lt;p&gt;　　策略模式是对算法的包装，是把使用算法的责任和算法本身分割开来，委派给不同的对象管理。策略模式通常把一个系列的算法包装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是：“准备一组算法，并将每一个算法封装起来，使得它们可以互换”。下面就以一个示意性的实现讲解策略模式实例的结构。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/StrategyPattern.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/StrategyPattern.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　这个模式涉及到三个角色：&lt;/p&gt;
+
+&lt;p&gt;　　●  环境(Context)角色：持有一个Strategy的引用。&lt;/p&gt;
+
+&lt;p&gt;　　●  抽象策略(Strategy)角色：这是一个抽象角色，通常由一个接口或抽象类实现。此角色给出所有的具体策略类所需的接口。&lt;/p&gt;
+
+&lt;p&gt;　　●  具体策略(ConcreteStrategy)角色：包装了相关的算法或行为。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Context {
+	    //持有一个具体策略的对象
+	    private Strategy strategy;
+	    /**
+	     * 构造函数，传入一个具体策略对象
+	     * @param strategy    具体策略对象
+	     */
+	    public Context(Strategy strategy){
+	        this.strategy = strategy;
+	    }
+	    /**
+	     * 策略方法
+	     */
+	    public void contextInterface(){
+	        
+	        strategy.strategyInterface();
+	    }
+	}
+
+	public interface Strategy {
+	    /**
+	     * 策略方法
+	     */
+	    public void strategyInterface();
+	}
+	public class ConcreteStrategyA implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+	public class ConcreteStrategyB implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+	public class ConcreteStrategyC implements Strategy {
+	    @Override
+	    public void strategyInterface() {
+	        //相关的业务
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;2使用场景&quot;&gt;      2，使用场景&lt;/h4&gt;
+
+&lt;p&gt;　　假设现在要设计一个贩卖各类书籍的电子商务网站的购物车系统。一个最简单的情况就是把所有货品的单价乘上数量，但是实际情况肯定比这要复杂。比如，本网站可能对所有的高级会员提供每本20%的促销折扣；对中级会员提供每本10%的促销折扣；对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　根据描述，折扣是根据以下的几个算法中的一个进行的：&lt;/p&gt;
+
+&lt;p&gt;　　      算法一：对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法二：对中级会员提供10%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法三：对高级会员提供20%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　使用策略模式来实现的结构图如下：
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/price.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　源代码如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 折扣接口
+	*/
+	public interface MemberStrategy {
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double calcPrice(double booksPrice);
+	}
+	/**
+	*初级会员折扣类
+	*/
+	public class PrimaryMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于初级会员的没有折扣&quot;);
+	        return booksPrice;
+	    }
+	}
+	/**
+	*中级会员折扣类
+	*/
+	public class IntermediateMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于中级会员的折扣为10%&quot;);
+	        return booksPrice * 0.9;
+	    }
+	}
+	/**
+	*高级会员折扣类
+	*/
+	public class AdvancedMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) { 
+	        System.out.println(&quot;对于高级会员的折扣为20%&quot;);
+	        return booksPrice * 0.8;
+	    }
+	}
+	/**
+	*价格类
+	*/
+	public class Price {
+	    //持有一个具体的策略对象
+	    private MemberStrategy strategy;
+	    /**
+	     * 构造函数，传入一个具体的策略对象
+	     * @param strategy    具体的策略对象
+	     */
+	    public Price(MemberStrategy strategy){
+	        this.strategy = strategy;
+	    }
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double quote(double booksPrice){
+	        return this.strategy.calcPrice(booksPrice);
+	    }
+	}
+	/**
+	* 测试
+	*/
+	public class Test {
+	    public static void main(String[] args) {
+	        //选择并创建需要使用的策略对象
+	        MemberStrategy strategy = new AdvancedMemberStrategy();
+	        //创建环境
+	        Price price = new Price(strategy);
+	        //计算价格
+	        double quote = price.quote(300);
+	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
+&lt;h4 id=&quot;3模式认知&quot;&gt;      3，模式认知&lt;/h4&gt;
+
+&lt;p&gt;　　●  策略模式的重心&lt;/p&gt;
+
+&lt;p&gt;　　策略模式的重心不是如何实现算法，而是如何组织、调用这些算法，从而让程序结构更灵活，具有更好的维护性和扩展性。&lt;/p&gt;
+
+&lt;p&gt;　　●  算法的平等性&lt;/p&gt;
+
+&lt;p&gt;　　策略模式一个很大的特点就是各个策略算法的平等性。对于一系列具体的策略算法，大家的地位是完全一样的，正因为这个平等性，才能实现算法之间可以相互替换。所有的策略算法在实现上也是相互独立的，相互之间是没有依赖的。所以可以这样描述这一系列策略算法：策略算法是相同行为的不同实现。&lt;/p&gt;
+
+&lt;p&gt;　　●  运行时策略的唯一性&lt;/p&gt;
+
+&lt;p&gt;　　运行期间，策略模式在每一个时刻只能使用一个具体的策略实现对象，虽然可以动态地在不同的策略实现中切换，但是同时只能使用一个。&lt;/p&gt;
+
+&lt;p&gt;　　●  公有的行为&lt;/p&gt;
+
+&lt;p&gt;　　经常见到的是，所有的具体策略类都有一些公有的行为。这时候，就应当把这些公有的行为放到共同的抽象策略角色Strategy类里面。当然这时候抽象策略角色必须要用Java抽象类实现，而不能使用接口。这其实也是典型的将代码向继承等级结构的上方集中的标准做法。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/codefx.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/codefx.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;h4 id=&quot;4模式优缺点&quot;&gt;      4，模式优缺点&lt;/h4&gt;
+
+&lt;p&gt;　　●  优点&lt;/p&gt;
+
+&lt;p&gt;　　（1）策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。&lt;/p&gt;
+
+&lt;p&gt;　　（2）使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。&lt;/p&gt;
+
+&lt;p&gt;　　●  缺点&lt;/p&gt;
+
+&lt;p&gt;　　（1）客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。换言之，策略模式只适用于客户端知道算法或行为的情况。&lt;/p&gt;
+
+&lt;p&gt;　　（2）由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。&lt;/p&gt;
+&lt;h1 id=&quot;三引用&quot;&gt;三、引用&lt;/h1&gt;
+
+&lt;p&gt;　　《Head First 设计模式》&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/05/10/2491891.html&quot;&gt;《JAVA与模式》之策略模式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/01/PatternBefore.html&quot;&gt;关于Java设计模式的肤浅看法–前言（一）&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/03/ObserverPattern.html&quot;&gt;关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
+&lt;p&gt;　　本篇博客采用的是从实际问题出发，引出问题根源，然后解决问题，然后总结解决方法，抽象成设计原则和设计思想，这种方式远比反过来讲解内容要让人更容易接受的多^_^&lt;/p&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 02 Apr 2012 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2012/04/02/StrategyPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2012/04/02/StrategyPattern.html</guid>
+        
+        <category>java</category>
+        
+        <category>策略模式</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>关于Java设计模式的肤浅看法--前言（一）</title>
+        <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
+&lt;p&gt;　　笔者看过好多版本的书籍介绍的设计模式，最近又看了看《Head First 设计模式》，感觉中国人和外国人写书写的真的不一样。&lt;/p&gt;
+
+&lt;p&gt;　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？&lt;/p&gt;
+
+&lt;p&gt;　　可是结果如何呢，我们往往会出现老师告诉我们1+2=3，我们却不知道 应用 交换律 得出2+1 = 3，等到老师告诉我们2+1的确等于3，哦，我们才恍然大悟，2+1真的也可以等于3啊。多么滑稽的事情啊 !&lt;/p&gt;
+
+&lt;p&gt;　　不止高中以下的应试教育是这样，连大学所谓的素质教育也是这样，笔者记得清楚的一次是，读研究生时为了通过数学考试去从网上找找 线性代数的教学视频来看，当时找的是美国麻省理工学院的Gilbert Strang教授讲的线代视频，有兴趣的可以去网易公开课看看，当你看完前三集，兴许你就会和我一样有着同样的感悟，为什么和我们原来听过的线性代数课程有那么大的不一样，为什么我会越听越想听Gilbert Strang讲的课程，兴许我还会考虑学学他其他的教学视频，兴许我突然间打开了一扇大门，我可以以后多找些外国人的教学视频来看。那么，为什么会这样呢？&lt;/p&gt;
+
+&lt;p&gt;　　笔者认为，出现上溯问题的根源在于，中国人喜欢从上往下向学生灌输知识和思想，而外国人喜欢从下往上引导，辅助学习者塑造自己的思想。被动接受pk主动获取，必然后者完胜。而且，很无奈的是，从上往下教条式的教书理论上讲没有任何毛病，但是似乎冥冥之中感觉到这却让为师者省了很大一部分力气，为师者只要照本宣科的把知识点讲完，然后再让学生做海量的习题即可，老师省事啊，反正作业又不是他写，习题又不是他算，他只要动动嘴唇，便可将本该属于自己分内责任，教书育人的事情，甩了大部分出去。我们经常从网上看到中国小学生作业多的不行，连家长都看不过去，屡屡曝光家长群里老师布置作业的聊天记录，感觉现在的老师们真的做的有些过分！当然，受限于应试教育的弊病，谁分高谁能进好中学，好高中，好大学的现实，当老师的也是无奈，黔驴技穷了，只能苦了孩子。&lt;/p&gt;
+
+&lt;p&gt;　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。&lt;/p&gt;
+
+&lt;p&gt;　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。&lt;/p&gt;
+
+&lt;p&gt;　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^&lt;/p&gt;
+
+&lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/02/StrategyPattern.html&quot;&gt;关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2012/04/01/PatternBefore.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2012/04/01/PatternBefore.html</guid>
+        
+        <category>java</category>
+        
+        <category>设计模式</category>
         
         
         <category>java</category>

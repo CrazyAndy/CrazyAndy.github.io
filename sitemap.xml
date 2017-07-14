@@ -21,6 +21,18 @@
         <loc>http://localhost:4000/java/2016/08/01/Java-Crawler.html</loc>
     </url>
 
+    <url>
+        <loc>http://localhost:4000/java/2012/04/03/ObserverPattern.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/java/2012/04/02/StrategyPattern.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/java/2012/04/01/PatternBefore.html</loc>
+    </url>
+
 
     <url>
         <loc>http://localhost:4000/404.html</loc>
