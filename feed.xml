@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 Jul 2017 18:44:51 +0800</pubDate>
-    <lastBuildDate>Fri, 14 Jul 2017 18:44:51 +0800</lastBuildDate>
+    <pubDate>Sat, 15 Jul 2017 18:07:19 +0800</pubDate>
+    <lastBuildDate>Sat, 15 Jul 2017 18:07:19 +0800</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
@@ -294,174 +294,157 @@
       </item>
     
       <item>
-        <title>关于Java设计模式的肤浅看法--观察者模式（三）</title>
-        <description>&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
+        <title>关于Java设计模式的肤浅看法--装饰者模式（四）</title>
+        <description>&lt;h1 id=&quot;以下内容为观察者模式内容还未修改成装饰者模式敬请期待&quot;&gt;以下内容为观察者模式内容，还未修改成装饰者模式，敬请期待。&lt;/h1&gt;
+&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
 
-&lt;p&gt;　　策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。&lt;/p&gt;
+&lt;p&gt;　　观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。&lt;/p&gt;
 
-&lt;p&gt;　　刚开始会通过鸭子模型由浅入深讲一下实际问题的出现和寻找解决方法，然后将解决方法归纳形成最终的设计模式–策略模式。&lt;/p&gt;
+&lt;p&gt;　　观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己。&lt;/p&gt;
 
-&lt;p&gt;　　然后会再次抽象，引用策略模式比较官方的知识点，归纳总结策略模式（在和别人讨论的时候，你总不能和人上来就讲小鸭子的故事吧）。&lt;/p&gt;
+&lt;p&gt;　　刚开始会通过气象局模型由浅入深讲一下实际问题的出现，然后举例简述一下观察者模式的使用场景，然后再归纳总结该模式的设计原则，设计思想和组织架构，最后应用此设计模式到气象局项目代码中去。&lt;/p&gt;
 
-&lt;p&gt;　　最后升华一下，再次赘述一下 其中使用到的 设计规则 和 设计思想。&lt;/p&gt;
+&lt;p&gt;　　然后会提出一些气象局项目中出现的弊端，并找出根源所在。&lt;/p&gt;
+
+&lt;p&gt;　　阐述一下java原生对观察者模式的支持。&lt;/p&gt;
+
+&lt;p&gt;　　最后归纳使用该模式的优缺点，以备将来实际开发中发挥其长处，规避其短处。&lt;/p&gt;
 &lt;h1 id=&quot;二正文&quot;&gt;二、正文&lt;/h1&gt;
 
-&lt;h3 id=&quot;一鸭子模型&quot;&gt;（一）鸭子模型&lt;/h3&gt;
+&lt;h3 id=&quot;一气象局模型需求分析&quot;&gt;（一）气象局模型需求分析&lt;/h3&gt;
 
-&lt;h4 id=&quot;1问题抛出&quot;&gt;      1，问题抛出&lt;/h4&gt;
+&lt;h4 id=&quot;1需求抛出&quot;&gt;      1，需求抛出&lt;/h4&gt;
 
-&lt;p&gt;　　某公司设计的鸭子游戏，鸭子有呱呱叫，游泳，展示三种行为，但是现在想加入飞行的行为，该怎么设计程序。&lt;/p&gt;
-&lt;h4 id=&quot;2尝试解决方法1&quot;&gt;      2，尝试解决方法1&lt;/h4&gt;
+&lt;p&gt;　　气象局想建立一个应用，该应用提供多个布告板，分别显示天气的不同维度的数据，当天气数据更新时，布告板的数据需要实时更新。&lt;/p&gt;
+&lt;h4 id=&quot;2需求确定&quot;&gt;      2，需求确定&lt;/h4&gt;
 
-&lt;p&gt;　　直接在Duck父类上加入fly()方法，但问题出来了，所有继承改父类的鸭子都会飞了，包括游戏中的橡皮鸭子，这显然是不符合实际情况的。根源在于，为了复用而使用了继承，但没有屏蔽掉继承的缺点。&lt;/p&gt;
-&lt;h4 id=&quot;3尝试解决方法2&quot;&gt;      3，尝试解决方法2&lt;/h4&gt;
+&lt;p&gt;　　气象数据类WeatherData目前有温度，湿度，气压三种测试数据，而 “目前状况”，“气象统计”，“天气预报”三个布告板会在WeatherData数据更新时候即时更新自己的数据显示。此系统必须可扩展，布告板可定制，用户可随意添加或删除布告板。&lt;/p&gt;
+&lt;h4 id=&quot;3尝试解决&quot;&gt;      3，尝试解决&lt;/h4&gt;
 
-&lt;p&gt;　　继承不可以，那就用接口，让实现类去实现接口的fly()方法，但是这样下来会出现这种情况，10种鸭子中，有6种是会飞的，那这6种是否都要重新实现的飞行逻辑，也就是说飞行逻辑的代码被重复写了5次，以后要是维护飞行代码，就需要维护6个地方，这显然是一种噩梦。&lt;/p&gt;
-&lt;h4 id=&quot;4思路整理&quot;&gt;      4，思路整理&lt;/h4&gt;
+&lt;p&gt;　　直接在WeatherData类中引入三个布告板的引用，并在数据更新时，直接通过布告板的引用调用其自身更新业务逻辑方法。问题出来了，这种编程实际是针对具体实现编程，而非针对接口编程，耦合度太高；新增或者删除布告板，我们都需要修改代码，侵犯了WeatherData的封装。需要通知的布告板集合实际为动态变化的部分，我们需要将变化的逻辑封装，防止影响不变化的部分。&lt;/p&gt;
+&lt;h3 id=&quot;二举例观察者模式的使用&quot;&gt;（二）举例观察者模式的使用&lt;/h3&gt;
 
-&lt;p&gt;　　在之前的尝试解决中，继承不能以直接继承Duck父类的方式使用，接口又不具备实现代码，让每个子类都实现一遍代码编写和后期维护都是问题。&lt;/p&gt;
+&lt;h4 id=&quot;1报纸和杂志订阅&quot;&gt;      1，报纸和杂志订阅&lt;/h4&gt;
 
-&lt;p&gt;　　那可不可以把飞行这个行为，有些鸭子具备，有些鸭子不具备的可变的行为独立出来，让会飞的鸭子拿来用，不会的就不用。这样解耦出来，以后也方便对飞行行为的改动和扩展（这样只改动一处代码就好）。&lt;/p&gt;
+&lt;p&gt;　　报社出版报纸或杂志，当用户订阅之后，报社就会一直定期送下去；当用户取消订阅(到期在这里也归纳成取消的一种)，报社就会停止送报。&lt;/p&gt;
 
-&lt;p&gt;　　上段文字则是某项设计原则的实际体现：找出应用中可能需要变化之处“封装”起来，以防止可变动的逻辑会影响到不需要变动的逻辑。&lt;/p&gt;
-
-&lt;p&gt;　　另外，针对接口编程也是很重要的设计原则，鸭子的子类使用接口表示的行为，而不是直接将改行为写死在子类代码中，这样会比较灵活。&lt;/p&gt;
-
-&lt;p&gt;　　增加飞行和呱呱叫两个接口只是开始，在以后的游戏升级中，鸭子会增加更多的行为，而按照这种思路去设计，则在增加新功能的同事，又不会影响原来的业务逻辑。&lt;/p&gt;
-&lt;h4 id=&quot;5代码实现&quot;&gt;      5，代码实现&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	//鸭子父类
-	public class Duck {
-	    protected FlyBehavior flyBehavior;
-	    protected QuackBehavior quackBehavior;
-	
-	    //两个Setter方式是用来动态设定行为用的
-	    public void setFlyBehavior(FlyBehavior flyBehavior) {
-	        this.flyBehavior = flyBehavior;
-	    }
-	    public void setQuackBehavior(QuackBehavior quackBehavior) {
-	        this.quackBehavior = quackBehavior;
-	    }
-
-	    //用perform***方法包装一下，是为了让父类代理属性对象的行为，
-	    // 其实这里就是代理模式的使用，以后再细说
-	    public void performFly(){
-	        flyBehavior.fly();
-	    }
-	    public void performQuack(){
-	        quackBehavior.quack();
-	    }
-	    //不同的鸭子有不同的游泳特点和外观表现形式，这两个方法由子类重写实现
-	    public void swim(){}
-	    public void display(){}
-	}
-	//飞行接口
-	public interface FlyBehavior {
-	    void fly();
-	}
-	public class FlyWithWings implements FlyBehavior{
-	    @Override
-	    public void fly() {
-	        System.out.println(&quot;I'm flying&quot;);
-    	}
-	}
-	//呱呱叫接口
-	public interface QuackBehavior {
-	    void quack();
-	}
-	public class Quack implements QuackBehavior{
-	    @Override
-	    public void quack() {
-	        System.out.println(&quot;呱呱叫&quot;);
-	    }
-	}
-	//绿头鸭具体实现
-	public class MallardDuck extends Duck{
-	    public MallardDuck(){
-	        quackBehavior = new Quack();
-	        flyBehavior = new FlyWithWings();
-	    }
-	    @Override
-	    public void display() {
-	        System.out.println(&quot;I'm a real Mallard Duck !&quot;);
-	    }
-	}
-	//测试方法
-	public class MainActivity {
-	    public static void main(String[] args) {
-	        Duck duck = new MallardDuck();
-	        duck.performFly();
-	        duck.performQuack();
-	        duck.display();
-	    }
-	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;二设计规格和设计思想&quot;&gt;（二）设计规格和设计思想&lt;/h3&gt;
-
-&lt;p&gt;　　将鸭子的飞行行为或者呱呱叫行为看成是一组算法。&lt;/p&gt;
-
-&lt;p&gt;　　鸭子的飞行行为和呱呱叫行为被Duck组合成两个属性，从而Duck以及其子类也就都拥有了飞行行为和呱呱叫行为，这里遵循的设计规则则是 多用组合，少用继承。&lt;/p&gt;
+&lt;h4 id=&quot;2求职者和猎头&quot;&gt;      2，求职者和猎头&lt;/h4&gt;
+&lt;p&gt;　　求职者A告诉猎头B他需要一份工作，猎头B就会将该求职者列入他的客户列表中，并在招聘公司有招聘消息之后，及时推送招聘信息给他客户列表中的所有客户，显然包括A；当A通过猎头或者自己找到工作之后，他就会告诉猎头我找到工作了，不需要再推送消息给他，猎头确认之后就会将A从他的客户列表中删除，在以后的招聘信息推送时，就不会再推送到A那去了。&lt;/p&gt;
 &lt;h3 id=&quot;三知识架构&quot;&gt;（三）知识架构&lt;/h3&gt;
 
 &lt;h4 id=&quot;1模式结构&quot;&gt;      1，模式结构&lt;/h4&gt;
-&lt;p&gt;　　策略模式是对算法的包装，是把使用算法的责任和算法本身分割开来，委派给不同的对象管理。策略模式通常把一个系列的算法包装到一系列的策略类里面，作为一个抽象策略类的子类。用一句话来说，就是：“准备一组算法，并将每一个算法封装起来，使得它们可以互换”。下面就以一个示意性的实现讲解策略模式实例的结构。
-　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/StrategyPattern.png) --&gt;
-	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/StrategyPattern.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
-　　这个模式涉及到三个角色：&lt;/p&gt;
+&lt;p&gt;　　当两个对象之间松耦合，它们依然可以交互，但是不太清楚彼此的细节。观察者提供了一种对象设计方式，它让主题和观察者之间松耦合。松耦合的设计之所以能让我们建立有弹性的OO系统，能够应对变化，是因为对象之间的互相依赖降到了最低。下面就以一个示意性的实现讲解观察者模式的结构。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/3-1.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/3-1.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　观察者模式所涉及的角色有：&lt;/p&gt;
 
-&lt;p&gt;　　●  环境(Context)角色：持有一个Strategy的引用。&lt;/p&gt;
+&lt;p&gt;　　●  抽象主题(Subject)角色：抽象主题角色把所有对观察者对象的引用保存在一个聚集（比如ArrayList对象）里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象，抽象主题角色又叫做抽象被观察者(Observable)角色。&lt;/p&gt;
 
-&lt;p&gt;　　●  抽象策略(Strategy)角色：这是一个抽象角色，通常由一个接口或抽象类实现。此角色给出所有的具体策略类所需的接口。&lt;/p&gt;
+&lt;p&gt;　　●  具体主题(ConcreteSubject)角色：将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。具体主题角色又叫做具体被观察者(Concrete Observable)角色。&lt;/p&gt;
 
-&lt;p&gt;　　●  具体策略(ConcreteStrategy)角色：包装了相关的算法或行为。&lt;/p&gt;
+&lt;p&gt;　　●  抽象观察者(Observer)角色：为所有的具体观察者定义一个接口，在得到主题的通知时更新自己，这个接口叫做更新接口。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Context {
-	    //持有一个具体策略的对象
-	    private Strategy strategy;
+&lt;p&gt;　　●  具体观察者(ConcreteObserver)角色：存储与主题的状态自恰的状态。具体观察者角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态 像协调。如果需要，具体观察者角色可以保持一个指向具体主题对象的引用。&lt;/p&gt;
+
+&lt;p&gt;　　源代码如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 抽象主题角色类
+     */
+	public abstract class Subject {
 	    /**
-	     * 构造函数，传入一个具体策略对象
-	     * @param strategy    具体策略对象
+	     * 用来保存注册的观察者对象
 	     */
-	    public Context(Strategy strategy){
-	        this.strategy = strategy;
+	    private	List&amp;lt;Observer&amp;gt; list = new ArrayList&amp;lt;Observer&amp;gt;();
+	    /**
+	     * 注册观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void attach(Observer observer){
+	        list.add(observer);
+	        System.out.println(&quot;Attached an observer&quot;);
 	    }
 	    /**
-	     * 策略方法
+	     * 删除观察者对象
+	     * @param observer    观察者对象
 	     */
-	    public void contextInterface(){
+	    public void detach(Observer observer){
 	        
-	        strategy.strategyInterface();
+	        list.remove(observer);
 	    }
-	}
-
-	public interface Strategy {
 	    /**
-	     * 策略方法
+	     * 通知所有注册的观察者对象
 	     */
-	    public void strategyInterface();
-	}
-	public class ConcreteStrategyA implements Strategy {
-	    @Override
-	    public void strategyInterface() {
-	        //相关的业务
+	    public void nodifyObservers(String newState){
+	        
+	        for(Observer observer : list){
+	            observer.update(newState);
+	        }
 	    }
 	}
-	public class ConcreteStrategyB implements Strategy {
-	    @Override
-	    public void strategyInterface() {
-	        //相关的业务
+	/**
+     * 具体主题角色类
+     */
+	public class ConcreteSubject extends Subject{
+	    private String state;
+	    public String getState() {
+	        return state;
+	    }
+		public void change(String newState){
+	        state = newState;
+	        System.out.println(&quot;主题状态为：&quot; + state);
+	        //状态发生改变，通知各个观察者
+	        this.nodifyObservers(state);
 	    }
 	}
-	public class ConcreteStrategyC implements Strategy {
+	/**
+     * 抽象观察者角色类
+     */
+	public interface Observer {
+	    /**
+	     * 更新接口
+	     * @param state    更新的状态
+	     */
+	    public void update(String state);
+	}
+	/**
+     * 具体观察者角色类
+     */
+	public class ConcreteObserver implements Observer {
+	    //观察者的状态
+	    private String observerState;
 	    @Override
-	    public void strategyInterface() {
-	        //相关的业务
+	    public void update(String state) {
+	        /**
+	         * 更新观察者的状态，使其与目标的状态保持一致
+	         */
+	        observerState = state;
+	        System.out.println(&quot;状态为：&quot;+observerState);
 	    }
+	
+	}
+	/**
+     * 测试类
+     */
+	public class Client {
+		public static void main(String[] args) {
+	        //创建主题对象
+	        ConcreteSubject subject = new ConcreteSubject();
+	        //创建观察者对象
+	        Observer observer = new ConcreteObserver();
+	        //将观察者对象登记到主题对象上
+	        subject.attach(observer);
+	        //改变主题对象的状态
+	        subject.change(&quot;new state&quot;);
+	    }
+	
 	}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
+&lt;p&gt;　　在运行时，这个客户端首先创建了具体主题类的实例，以及一个观察者对象。然后，它调用主题对象的attach()方法，将这个观察者对象向主题对象登记，也就是将它加入到主题对象的聚集中去。&lt;/p&gt;
+
+&lt;p&gt;　　这时，客户端调用主题的change()方法，改变了主题对象的内部状态。主题对象在状态发生变化时，调用超类的notifyObservers()方法，通知所有登记过的观察者对象。&lt;/p&gt;
 &lt;h4 id=&quot;2使用场景&quot;&gt;      2，使用场景&lt;/h4&gt;
 
 &lt;p&gt;　　假设现在要设计一个贩卖各类书籍的电子商务网站的购物车系统。一个最简单的情况就是把所有货品的单价乘上数量，但是实际情况肯定比这要复杂。比如，本网站可能对所有的高级会员提供每本20%的促销折扣；对中级会员提供每本10%的促销折扣；对初级会员没有折扣。&lt;/p&gt;
@@ -560,46 +543,762 @@
 &lt;/div&gt;
 
 &lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
-&lt;h4 id=&quot;3模式认知&quot;&gt;      3，模式认知&lt;/h4&gt;
+&lt;h3 id=&quot;四气象局项目实现&quot;&gt;（四）气象局项目实现&lt;/h3&gt;
+&lt;h4 id=&quot;1编写接口&quot;&gt;      1，编写接口&lt;/h4&gt;
 
-&lt;p&gt;　　●  策略模式的重心&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 主题接口
+	*/
+	public interface Subject{
+		void registerObserver(Observer o);
+		void removeObserver(Observer o);
+		void notifyObservers();
+	}
+	/**
+	* 观察者接口
+	* 所有观察者都必须实现此接口
+	*/
+	public interface Observer{
+		void registerObserver();
+		void removeObserver();
+		void update(float temp,float humidity,float pressure);
+	}
+	/**
+	* 主题接口
+	*/
+	public interface DisplayElement{
+		void display();
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;　　策略模式的重心不是如何实现算法，而是如何组织、调用这些算法，从而让程序结构更灵活，具有更好的维护性和扩展性。&lt;/p&gt;
+&lt;h4 id=&quot;2实现主题&quot;&gt;      2，实现主题&lt;/h4&gt;
 
-&lt;p&gt;　　●  算法的平等性&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
+		private ArrayList observers;//已经注册在内的观察者集合
+		private float temperature;//温度
+		private float humidity;//湿度
+		private float pressure;//气压
 
-&lt;p&gt;　　策略模式一个很大的特点就是各个策略算法的平等性。对于一系列具体的策略算法，大家的地位是完全一样的，正因为这个平等性，才能实现算法之间可以相互替换。所有的策略算法在实现上也是相互独立的，相互之间是没有依赖的。所以可以这样描述这一系列策略算法：策略算法是相同行为的不同实现。&lt;/p&gt;
+		public WeatherData(){
+			observers = new ArrayList();
+		}
+		/**
+		* 注册观察者实例
+		*/
+		public void registerObserver(Observer o){
+			observers.add(o);
+		}
+		/**
+		* 移除观察者实例
+		*/
+		public void removeObserver(Observer o){
+			int i = observers.indexOf(o);
+			if(i &amp;gt;= 0) observers.remove(i);
+		}
+		/**
+		* 向所有已经注册的观察者实例发送消息
+		*/
+		public void notifyObservers(){
+			for(Observer o:observers){
+				o.update(temperature,humidity,pressure);
+			}
+		}
+		/**
+		* 气象数据更新时调用的方法
+		*/
+		public void measurementsChanged(){
+			notifyObservers();
+		}
+		/**
+		* 改动气象数据，方便测试用
+		*/
+		public void setMeasurements(float temperature,float humidity,float pressure){
+			this.temperature = temperature;
+			this.humidity = humidity;
+			this.pressure = pressure;
+			measurementsChanged();
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;　　●  运行时策略的唯一性&lt;/p&gt;
+&lt;h4 id=&quot;3实现观察者这里只写其中一个布告板&quot;&gt;      3，实现观察者(这里只写其中一个布告板)&lt;/h4&gt;
 
-&lt;p&gt;　　运行期间，策略模式在每一个时刻只能使用一个具体的策略实现对象，虽然可以动态地在不同的策略实现中切换，但是同时只能使用一个。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 目前状况布告板 实现
+	*/
+	public class CurrentConditionsDisplay implements Observer,DisplayElement{
+		private float temperature;
+		private float humidity;
+		private Subject weatherData;
 
-&lt;p&gt;　　●  公有的行为&lt;/p&gt;
+		public CurrentConditionsDisplay(Subject weatherData){
+			this.weatherData = weatherData;
+			registerObserver();
+		}
+		publid void registerObserver(){
+			weatherData.registerObserver(this);
+		}
+		public void removeObserver(){
+			weatherData.removeObserver(this);
+		}
+		/**
+		* 观察者被通知时调用的方法
+		*/
+		public void update(float temperature,float humidity,float pressure){
+			this.temperature = temperature;
+			this.humidity = humidity;
+			display();
+		}
+		/**
+		* 显示数据
+		*/
+		public void display(){
+			System.out.println(&quot;Current conditions:&quot;+temperature+
+				&quot;F degress and &quot;+ humidity +&quot;% humidity&quot;);
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;　　经常见到的是，所有的具体策略类都有一些公有的行为。这时候，就应当把这些公有的行为放到共同的抽象策略角色Strategy类里面。当然这时候抽象策略角色必须要用Java抽象类实现，而不能使用接口。这其实也是典型的将代码向继承等级结构的上方集中的标准做法。
-　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/codefx.png) --&gt;
-	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/codefx.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
-&lt;h4 id=&quot;4模式优缺点&quot;&gt;      4，模式优缺点&lt;/h4&gt;
+&lt;h4 id=&quot;4测试&quot;&gt;      4，测试&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
+		public static void main(String args[]){
+			WeatherData weatherData = new WeatherData();
+			CurrentConditionsDisplay currentDisplay = 
+				new CurrentConditionsDisplay(weatherData);
+			weatherData.setMeasurements(80,65,30.4f);
+			weatherData.setMeasurements(81,63,31.4f);
+			weatherData.setMeasurements(82,64,32.4f);
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;　　●  优点&lt;/p&gt;
+&lt;h3 id=&quot;五推模型and拉模型&quot;&gt;（五）推模型And拉模型&lt;/h3&gt;
 
-&lt;p&gt;　　（1）策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。&lt;/p&gt;
+&lt;p&gt;　　在上一小节气象局项目中，我们注意到，观察者只能被动的接受数据，可能有些数据并不是它想要的，比如CurrentConditionsDisplay这个类中，它只关心当前温度和湿度，不关心气压，但是update方法不得不接受这个参数，因为update方法是在观察者统一接口中定义的，不允许改变（当然可以在接口中实现重载方法，但是还是感觉不大妥当），所以是不是需要让观察者可以主动获取它想要的数据信息，这样代码更优雅一些。而这个问题正是我们接下来要讨论的两种模型，推模型和拉模型。&lt;/p&gt;
 
-&lt;p&gt;　　（2）使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。&lt;/p&gt;
+&lt;p&gt;　　●  推模型&lt;/p&gt;
 
-&lt;p&gt;　　●  缺点&lt;/p&gt;
+&lt;p&gt;　　主题对象向观察者推送主题的详细信息，不管观察者是否需要，推送的信息通常是主题对象的全部或部分数据。&lt;/p&gt;
 
-&lt;p&gt;　　（1）客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。换言之，策略模式只适用于客户端知道算法或行为的情况。&lt;/p&gt;
+&lt;p&gt;　　●  拉模型&lt;/p&gt;
 
-&lt;p&gt;　　（2）由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。&lt;/p&gt;
+&lt;p&gt;　　主题对象在通知观察者的时候，只传递少量信息。如果观察者需要更具体的信息，由观察者主动到主题对象中获取，相当于是观察者从主题对象中拉数据。一般这种模型的实现中，会把主题对象自身通过update()方法传递给观察者，这样在观察者需要获取数据的时候，就可以通过这个引用来获取了。&lt;/p&gt;
+
+&lt;p&gt;　　根据上面的描述，发现气象局项目的例子就是典型的推模型，下面给出一个拉模型的实例。&lt;/p&gt;
+
+&lt;h4 id=&quot;1拉模型的抽象观察者类&quot;&gt;      1，拉模型的抽象观察者类&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
+	    /**
+	     * 更新接口
+	     * @param subject 传入主题对象，方面获取相应的主题对象的状态
+	     */
+	    public void update(Subject subject);
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;2拉模型的具体观察者类&quot;&gt;      2，拉模型的具体观察者类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
+	    //观察者的状态
+	    private String observerState;
+	    @Override
+	    public void update(Subject subject) {
+	        /**
+	         * 更新观察者的状态，使其与目标的状态保持一致
+	         */
+	        observerState = ((ConcreteSubject)subject).getState();
+	        System.out.println(&quot;观察者状态为：&quot;+observerState);
+	    }
+	
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;3拉模型的抽象主题类&quot;&gt;      3，拉模型的抽象主题类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
+	    /**
+	     * 用来保存注册的观察者对象
+	     */
+	    private List&amp;lt;Observer&amp;gt; list = new ArrayList&amp;lt;Observer&amp;gt;();
+	    /**
+	     * 注册观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void attach(Observer observer){
+	        list.add(observer);
+	        System.out.println(&quot;Attached an observer&quot;);
+	    }
+	    /**
+	     * 删除观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void detach(Observer observer){
+	        list.remove(observer);
+	    }
+	    /**
+	     * 通知所有注册的观察者对象
+	     */
+	    public void nodifyObservers(){
+	        for(Observer observer : list){
+	            observer.update(this);
+	        }
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;4拉模型的具体主题类&quot;&gt;      4，拉模型的具体主题类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
+	    private String state;
+	    public String getState() {
+	        return state;
+	    }
+	    public void change(String newState){
+	        state = newState;
+	        System.out.println(&quot;主题状态为：&quot; + state);
+	        //状态发生改变，通知各个观察者
+	        this.nodifyObservers();
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;5两种模式的比较&quot;&gt;      5，两种模式的比较&lt;/h4&gt;
+&lt;p&gt;　　■　　推模型是假定主题对象知道观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，没有办法的情况下，干脆把自身传递给观察者，让观察者自己去按需要取值。&lt;/p&gt;
+
+&lt;p&gt;　　■　　推模型可能会使得观察者对象难以复用，因为观察者的update()方法是按需要定义的参数，可能无法兼顾没有考虑到的使用情况。这就意味着出现新情况的时候，就可能提供新的update()方法，或者是干脆重新实现观察者；而拉模型就不会造成这样的情况，因为拉模型下，update()方法的参数是主题对象本身，这基本上是主题对象能传递的最大数据集合了，基本上可以适应各种情况的需要。&lt;/p&gt;
+&lt;h3 id=&quot;六java内置观察者模式&quot;&gt;（六）Java内置观察者模式&lt;/h3&gt;
+
+&lt;p&gt;　　java内置的观察者模式有以下缺点：&lt;/p&gt;
+
+&lt;p&gt;　　■　　Observable（主题）是一个类，而不是接口，因为java不能实现多继承，假如有一个类需要同时具有Observable类和另外一个超类的行为，那就不好办了。&lt;/p&gt;
+
 &lt;h1 id=&quot;三引用&quot;&gt;三、引用&lt;/h1&gt;
 
 &lt;p&gt;　　《Head First 设计模式》&lt;/p&gt;
 
+&lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/04/20/2455726.html&quot;&gt;《JAVA与模式》之装饰者模式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/03/ObserverPattern.html&quot;&gt;关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
+&lt;p&gt;　　据笔者了解，MQ消息队列分点对点和订阅发布两种模式，而订阅发布就是利用的观察者模式的思想。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 04 Apr 2012 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2012/04/04/DecoratorPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2012/04/04/DecoratorPattern.html</guid>
+        
+        <category>java</category>
+        
+        <category>装饰者模式</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>关于Java设计模式的肤浅看法--观察者模式（三）</title>
+        <description>&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
+
+&lt;p&gt;　　观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式或从属者(Dependents)模式。&lt;/p&gt;
+
+&lt;p&gt;　　观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己。&lt;/p&gt;
+
+&lt;p&gt;　　刚开始会通过气象局模型由浅入深讲一下实际问题的出现，然后举例简述一下观察者模式的使用场景，然后再归纳总结该模式的设计原则，设计思想和组织架构，最后应用此设计模式到气象局项目代码中去。&lt;/p&gt;
+
+&lt;p&gt;　　然后会提出一些气象局项目中出现的弊端，并找出根源所在。&lt;/p&gt;
+
+&lt;p&gt;　　阐述一下java原生对观察者模式的支持。&lt;/p&gt;
+
+&lt;p&gt;　　最后归纳使用该模式的优缺点，以备将来实际开发中发挥其长处，规避其短处。&lt;/p&gt;
+&lt;h1 id=&quot;二正文&quot;&gt;二、正文&lt;/h1&gt;
+
+&lt;h3 id=&quot;一气象局模型需求分析&quot;&gt;（一）气象局模型需求分析&lt;/h3&gt;
+
+&lt;h4 id=&quot;1需求抛出&quot;&gt;      1，需求抛出&lt;/h4&gt;
+
+&lt;p&gt;　　气象局想建立一个应用，该应用提供多个布告板，分别显示天气的不同维度的数据，当天气数据更新时，布告板的数据需要实时更新。&lt;/p&gt;
+&lt;h4 id=&quot;2需求确定&quot;&gt;      2，需求确定&lt;/h4&gt;
+
+&lt;p&gt;　　气象数据类WeatherData目前有温度，湿度，气压三种测试数据，而 “目前状况”，“气象统计”，“天气预报”三个布告板会在WeatherData数据更新时候即时更新自己的数据显示。此系统必须可扩展，布告板可定制，用户可随意添加或删除布告板。&lt;/p&gt;
+&lt;h4 id=&quot;3尝试解决&quot;&gt;      3，尝试解决&lt;/h4&gt;
+
+&lt;p&gt;　　直接在WeatherData类中引入三个布告板的引用，并在数据更新时，直接通过布告板的引用调用其自身更新业务逻辑方法。问题出来了，这种编程实际是针对具体实现编程，而非针对接口编程，耦合度太高；新增或者删除布告板，我们都需要修改代码，侵犯了WeatherData的封装。需要通知的布告板集合实际为动态变化的部分，我们需要将变化的逻辑封装，防止影响不变化的部分。&lt;/p&gt;
+&lt;h3 id=&quot;二举例观察者模式的使用&quot;&gt;（二）举例观察者模式的使用&lt;/h3&gt;
+
+&lt;h4 id=&quot;1报纸和杂志订阅&quot;&gt;      1，报纸和杂志订阅&lt;/h4&gt;
+
+&lt;p&gt;　　报社出版报纸或杂志，当用户订阅之后，报社就会一直定期送下去；当用户取消订阅(到期在这里也归纳成取消的一种)，报社就会停止送报。&lt;/p&gt;
+
+&lt;h4 id=&quot;2求职者和猎头&quot;&gt;      2，求职者和猎头&lt;/h4&gt;
+&lt;p&gt;　　求职者A告诉猎头B他需要一份工作，猎头B就会将该求职者列入他的客户列表中，并在招聘公司有招聘消息之后，及时推送招聘信息给他客户列表中的所有客户，显然包括A；当A通过猎头或者自己找到工作之后，他就会告诉猎头我找到工作了，不需要再推送消息给他，猎头确认之后就会将A从他的客户列表中删除，在以后的招聘信息推送时，就不会再推送到A那去了。&lt;/p&gt;
+&lt;h3 id=&quot;三知识架构&quot;&gt;（三）知识架构&lt;/h3&gt;
+
+&lt;h4 id=&quot;1模式结构&quot;&gt;      1，模式结构&lt;/h4&gt;
+&lt;p&gt;　　当两个对象之间松耦合，它们依然可以交互，但是不太清楚彼此的细节。观察者提供了一种对象设计方式，它让主题和观察者之间松耦合。松耦合的设计之所以能让我们建立有弹性的OO系统，能够应对变化，是因为对象之间的互相依赖降到了最低。下面就以一个示意性的实现讲解观察者模式的结构。
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/3-1.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/3-1.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　观察者模式所涉及的角色有：&lt;/p&gt;
+
+&lt;p&gt;　　●  抽象主题(Subject)角色：抽象主题角色把所有对观察者对象的引用保存在一个聚集（比如ArrayList对象）里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象，抽象主题角色又叫做抽象被观察者(Observable)角色。&lt;/p&gt;
+
+&lt;p&gt;　　●  具体主题(ConcreteSubject)角色：将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。具体主题角色又叫做具体被观察者(Concrete Observable)角色。&lt;/p&gt;
+
+&lt;p&gt;　　●  抽象观察者(Observer)角色：为所有的具体观察者定义一个接口，在得到主题的通知时更新自己，这个接口叫做更新接口。&lt;/p&gt;
+
+&lt;p&gt;　　●  具体观察者(ConcreteObserver)角色：存储与主题的状态自恰的状态。具体观察者角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态 像协调。如果需要，具体观察者角色可以保持一个指向具体主题对象的引用。&lt;/p&gt;
+
+&lt;p&gt;　　源代码如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 抽象主题角色类
+     */
+	public abstract class Subject {
+	    /**
+	     * 用来保存注册的观察者对象
+	     */
+	    private	List&amp;lt;Observer&amp;gt; list = new ArrayList&amp;lt;Observer&amp;gt;();
+	    /**
+	     * 注册观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void attach(Observer observer){
+	        list.add(observer);
+	        System.out.println(&quot;Attached an observer&quot;);
+	    }
+	    /**
+	     * 删除观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void detach(Observer observer){
+	        
+	        list.remove(observer);
+	    }
+	    /**
+	     * 通知所有注册的观察者对象
+	     */
+	    public void nodifyObservers(String newState){
+	        
+	        for(Observer observer : list){
+	            observer.update(newState);
+	        }
+	    }
+	}
+	/**
+     * 具体主题角色类
+     */
+	public class ConcreteSubject extends Subject{
+	    private String state;
+	    public String getState() {
+	        return state;
+	    }
+		public void change(String newState){
+	        state = newState;
+	        System.out.println(&quot;主题状态为：&quot; + state);
+	        //状态发生改变，通知各个观察者
+	        this.nodifyObservers(state);
+	    }
+	}
+	/**
+     * 抽象观察者角色类
+     */
+	public interface Observer {
+	    /**
+	     * 更新接口
+	     * @param state    更新的状态
+	     */
+	    public void update(String state);
+	}
+	/**
+     * 具体观察者角色类
+     */
+	public class ConcreteObserver implements Observer {
+	    //观察者的状态
+	    private String observerState;
+	    @Override
+	    public void update(String state) {
+	        /**
+	         * 更新观察者的状态，使其与目标的状态保持一致
+	         */
+	        observerState = state;
+	        System.out.println(&quot;状态为：&quot;+observerState);
+	    }
+	
+	}
+	/**
+     * 测试类
+     */
+	public class Client {
+		public static void main(String[] args) {
+	        //创建主题对象
+	        ConcreteSubject subject = new ConcreteSubject();
+	        //创建观察者对象
+	        Observer observer = new ConcreteObserver();
+	        //将观察者对象登记到主题对象上
+	        subject.attach(observer);
+	        //改变主题对象的状态
+	        subject.change(&quot;new state&quot;);
+	    }
+	
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;　　在运行时，这个客户端首先创建了具体主题类的实例，以及一个观察者对象。然后，它调用主题对象的attach()方法，将这个观察者对象向主题对象登记，也就是将它加入到主题对象的聚集中去。&lt;/p&gt;
+
+&lt;p&gt;　　这时，客户端调用主题的change()方法，改变了主题对象的内部状态。主题对象在状态发生变化时，调用超类的notifyObservers()方法，通知所有登记过的观察者对象。&lt;/p&gt;
+&lt;h4 id=&quot;2使用场景&quot;&gt;      2，使用场景&lt;/h4&gt;
+
+&lt;p&gt;　　假设现在要设计一个贩卖各类书籍的电子商务网站的购物车系统。一个最简单的情况就是把所有货品的单价乘上数量，但是实际情况肯定比这要复杂。比如，本网站可能对所有的高级会员提供每本20%的促销折扣；对中级会员提供每本10%的促销折扣；对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　根据描述，折扣是根据以下的几个算法中的一个进行的：&lt;/p&gt;
+
+&lt;p&gt;　　      算法一：对初级会员没有折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法二：对中级会员提供10%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　      算法三：对高级会员提供20%的促销折扣。&lt;/p&gt;
+
+&lt;p&gt;　　使用策略模式来实现的结构图如下：
+　　&lt;!-- ![edit](/static/assets/img/blog/java/patterns/price.png) --&gt;
+	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+　　源代码如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 折扣接口
+	*/
+	public interface MemberStrategy {
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double calcPrice(double booksPrice);
+	}
+	/**
+	*初级会员折扣类
+	*/
+	public class PrimaryMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于初级会员的没有折扣&quot;);
+	        return booksPrice;
+	    }
+	}
+	/**
+	*中级会员折扣类
+	*/
+	public class IntermediateMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) {
+	        System.out.println(&quot;对于中级会员的折扣为10%&quot;);
+	        return booksPrice * 0.9;
+	    }
+	}
+	/**
+	*高级会员折扣类
+	*/
+	public class AdvancedMemberStrategy implements MemberStrategy {
+	    @Override
+	    public double calcPrice(double booksPrice) { 
+	        System.out.println(&quot;对于高级会员的折扣为20%&quot;);
+	        return booksPrice * 0.8;
+	    }
+	}
+	/**
+	*价格类
+	*/
+	public class Price {
+	    //持有一个具体的策略对象
+	    private MemberStrategy strategy;
+	    /**
+	     * 构造函数，传入一个具体的策略对象
+	     * @param strategy    具体的策略对象
+	     */
+	    public Price(MemberStrategy strategy){
+	        this.strategy = strategy;
+	    }
+	    /**
+	     * 计算图书的价格
+	     * @param booksPrice    图书的原价
+	     * @return    计算出打折后的价格
+	     */
+	    public double quote(double booksPrice){
+	        return this.strategy.calcPrice(booksPrice);
+	    }
+	}
+	/**
+	* 测试
+	*/
+	public class Test {
+	    public static void main(String[] args) {
+	        //选择并创建需要使用的策略对象
+	        MemberStrategy strategy = new AdvancedMemberStrategy();
+	        //创建环境
+	        Price price = new Price(strategy);
+	        //计算价格
+	        double quote = price.quote(300);
+	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
+&lt;h3 id=&quot;四气象局项目实现&quot;&gt;（四）气象局项目实现&lt;/h3&gt;
+&lt;h4 id=&quot;1编写接口&quot;&gt;      1，编写接口&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 主题接口
+	*/
+	public interface Subject{
+		void registerObserver(Observer o);
+		void removeObserver(Observer o);
+		void notifyObservers();
+	}
+	/**
+	* 观察者接口
+	* 所有观察者都必须实现此接口
+	*/
+	public interface Observer{
+		void registerObserver();
+		void removeObserver();
+		void update(float temp,float humidity,float pressure);
+	}
+	/**
+	* 主题接口
+	*/
+	public interface DisplayElement{
+		void display();
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;2实现主题&quot;&gt;      2，实现主题&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
+		private ArrayList observers;//已经注册在内的观察者集合
+		private float temperature;//温度
+		private float humidity;//湿度
+		private float pressure;//气压
+
+		public WeatherData(){
+			observers = new ArrayList();
+		}
+		/**
+		* 注册观察者实例
+		*/
+		public void registerObserver(Observer o){
+			observers.add(o);
+		}
+		/**
+		* 移除观察者实例
+		*/
+		public void removeObserver(Observer o){
+			int i = observers.indexOf(o);
+			if(i &amp;gt;= 0) observers.remove(i);
+		}
+		/**
+		* 向所有已经注册的观察者实例发送消息
+		*/
+		public void notifyObservers(){
+			for(Observer o:observers){
+				o.update(temperature,humidity,pressure);
+			}
+		}
+		/**
+		* 气象数据更新时调用的方法
+		*/
+		public void measurementsChanged(){
+			notifyObservers();
+		}
+		/**
+		* 改动气象数据，方便测试用
+		*/
+		public void setMeasurements(float temperature,float humidity,float pressure){
+			this.temperature = temperature;
+			this.humidity = humidity;
+			this.pressure = pressure;
+			measurementsChanged();
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;3实现观察者这里只写其中一个布告板&quot;&gt;      3，实现观察者(这里只写其中一个布告板)&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+	* 目前状况布告板 实现
+	*/
+	public class CurrentConditionsDisplay implements Observer,DisplayElement{
+		private float temperature;
+		private float humidity;
+		private Subject weatherData;
+
+		public CurrentConditionsDisplay(Subject weatherData){
+			this.weatherData = weatherData;
+			registerObserver();
+		}
+		publid void registerObserver(){
+			weatherData.registerObserver(this);
+		}
+		public void removeObserver(){
+			weatherData.removeObserver(this);
+		}
+		/**
+		* 观察者被通知时调用的方法
+		*/
+		public void update(float temperature,float humidity,float pressure){
+			this.temperature = temperature;
+			this.humidity = humidity;
+			display();
+		}
+		/**
+		* 显示数据
+		*/
+		public void display(){
+			System.out.println(&quot;Current conditions:&quot;+temperature+
+				&quot;F degress and &quot;+ humidity +&quot;% humidity&quot;);
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;4测试&quot;&gt;      4，测试&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
+		public static void main(String args[]){
+			WeatherData weatherData = new WeatherData();
+			CurrentConditionsDisplay currentDisplay = 
+				new CurrentConditionsDisplay(weatherData);
+			weatherData.setMeasurements(80,65,30.4f);
+			weatherData.setMeasurements(81,63,31.4f);
+			weatherData.setMeasurements(82,64,32.4f);
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;五推模型and拉模型&quot;&gt;（五）推模型And拉模型&lt;/h3&gt;
+
+&lt;p&gt;　　在上一小节气象局项目中，我们注意到，观察者只能被动的接受数据，可能有些数据并不是它想要的，比如CurrentConditionsDisplay这个类中，它只关心当前温度和湿度，不关心气压，但是update方法不得不接受这个参数，因为update方法是在观察者统一接口中定义的，不允许改变（当然可以在接口中实现重载方法，但是还是感觉不大妥当），所以是不是需要让观察者可以主动获取它想要的数据信息，这样代码更优雅一些。而这个问题正是我们接下来要讨论的两种模型，推模型和拉模型。&lt;/p&gt;
+
+&lt;p&gt;　　●  推模型&lt;/p&gt;
+
+&lt;p&gt;　　主题对象向观察者推送主题的详细信息，不管观察者是否需要，推送的信息通常是主题对象的全部或部分数据。&lt;/p&gt;
+
+&lt;p&gt;　　●  拉模型&lt;/p&gt;
+
+&lt;p&gt;　　主题对象在通知观察者的时候，只传递少量信息。如果观察者需要更具体的信息，由观察者主动到主题对象中获取，相当于是观察者从主题对象中拉数据。一般这种模型的实现中，会把主题对象自身通过update()方法传递给观察者，这样在观察者需要获取数据的时候，就可以通过这个引用来获取了。&lt;/p&gt;
+
+&lt;p&gt;　　根据上面的描述，发现气象局项目的例子就是典型的推模型，下面给出一个拉模型的实例。&lt;/p&gt;
+
+&lt;h4 id=&quot;1拉模型的抽象观察者类&quot;&gt;      1，拉模型的抽象观察者类&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
+	    /**
+	     * 更新接口
+	     * @param subject 传入主题对象，方面获取相应的主题对象的状态
+	     */
+	    public void update(Subject subject);
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;2拉模型的具体观察者类&quot;&gt;      2，拉模型的具体观察者类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
+	    //观察者的状态
+	    private String observerState;
+	    @Override
+	    public void update(Subject subject) {
+	        /**
+	         * 更新观察者的状态，使其与目标的状态保持一致
+	         */
+	        observerState = ((ConcreteSubject)subject).getState();
+	        System.out.println(&quot;观察者状态为：&quot;+observerState);
+	    }
+	
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;3拉模型的抽象主题类&quot;&gt;      3，拉模型的抽象主题类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
+	    /**
+	     * 用来保存注册的观察者对象
+	     */
+	    private List&amp;lt;Observer&amp;gt; list = new ArrayList&amp;lt;Observer&amp;gt;();
+	    /**
+	     * 注册观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void attach(Observer observer){
+	        list.add(observer);
+	        System.out.println(&quot;Attached an observer&quot;);
+	    }
+	    /**
+	     * 删除观察者对象
+	     * @param observer    观察者对象
+	     */
+	    public void detach(Observer observer){
+	        list.remove(observer);
+	    }
+	    /**
+	     * 通知所有注册的观察者对象
+	     */
+	    public void nodifyObservers(){
+	        for(Observer observer : list){
+	            observer.update(this);
+	        }
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;4拉模型的具体主题类&quot;&gt;      4，拉模型的具体主题类&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
+	    private String state;
+	    public String getState() {
+	        return state;
+	    }
+	    public void change(String newState){
+	        state = newState;
+	        System.out.println(&quot;主题状态为：&quot; + state);
+	        //状态发生改变，通知各个观察者
+	        this.nodifyObservers();
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;5两种模式的比较&quot;&gt;      5，两种模式的比较&lt;/h4&gt;
+&lt;p&gt;　　■　　推模型是假定主题对象知道观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，没有办法的情况下，干脆把自身传递给观察者，让观察者自己去按需要取值。&lt;/p&gt;
+
+&lt;p&gt;　　■　　推模型可能会使得观察者对象难以复用，因为观察者的update()方法是按需要定义的参数，可能无法兼顾没有考虑到的使用情况。这就意味着出现新情况的时候，就可能提供新的update()方法，或者是干脆重新实现观察者；而拉模型就不会造成这样的情况，因为拉模型下，update()方法的参数是主题对象本身，这基本上是主题对象能传递的最大数据集合了，基本上可以适应各种情况的需要。&lt;/p&gt;
+&lt;h3 id=&quot;六java内置观察者模式&quot;&gt;（六）Java内置观察者模式&lt;/h3&gt;
+
+&lt;p&gt;　　java内置的观察者模式有以下缺点：&lt;/p&gt;
+
+&lt;p&gt;　　■　　Observable（主题）是一个类，而不是接口，因为java不能实现多继承，假如有一个类需要同时具有Observable类和另外一个超类的行为，那就不好办了。&lt;/p&gt;
+
+&lt;h1 id=&quot;三引用&quot;&gt;三、引用&lt;/h1&gt;
+
+&lt;p&gt;　　《Head First 设计模式》&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/05/16/2502279.html&quot;&gt;《JAVA与模式》之策略模式&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;　　&lt;a href=&quot;/java/2012/04/02/StrategyPattern.html&quot;&gt;关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/04/DecoratorPattern.html&quot;&gt;关于Java设计模式的肤浅看法–装饰者模式（四）&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
-&lt;p&gt;　　本篇博客采用的是从实际问题出发，引出问题根源，然后解决问题，然后总结解决方法，抽象成设计原则和设计思想，这种方式远比反过来讲解内容要让人更容易接受的多^_^&lt;/p&gt;
+&lt;p&gt;　　据笔者了解，MQ消息队列分点对点和订阅发布两种模式，而订阅发布就是利用的观察者模式的思想。&lt;/p&gt;
 
 &lt;p&gt;　　&lt;/p&gt;
 

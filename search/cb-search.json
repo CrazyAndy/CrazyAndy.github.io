@@ -43,6 +43,14 @@
 	
     
 	{
+		"title" : "关于Java设计模式的肤浅看法--装饰者模式（四） - 2012-04-04",
+		"url" : "/java/2012/04/04/DecoratorPattern.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "关于Java设计模式的肤浅看法--观察者模式（三） - 2012-04-03",
 		"url" : "/java/2012/04/03/ObserverPattern.html"
 	}
