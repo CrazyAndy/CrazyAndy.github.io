@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Jul 2017 18:07:19 +0800</pubDate>
-    <lastBuildDate>Sat, 15 Jul 2017 18:07:19 +0800</lastBuildDate>
+    <pubDate>Mon, 17 Jul 2017 10:48:39 +0800</pubDate>
+    <lastBuildDate>Mon, 17 Jul 2017 10:48:39 +0800</lastBuildDate>
     <generator>Jekyll v3.5.0</generator>
     
       <item>
@@ -75,6 +75,70 @@
         
         
         <category>boot</category>
+        
+      </item>
+    
+      <item>
+        <title>黄勇-架构探险-从零开始写Java Web框架</title>
+        <description>&lt;p&gt;　　偶然从论坛上看到黄勇老师写的一本书，《架构探险-从零开始写Java Web框架》，读了读绪论和目录，饶有兴趣，于是买来书看一看，感觉使用java web开发这几年来，自己心里对java web框架一些模棱两可的猜测，也有了更清晰的界定。&lt;/p&gt;
+
+&lt;p&gt;　　本书从头边看边敲代码，注解，反射，代理，aop这些虽然再实际开发工作中经常用到，但是了解不深的知识，在这里有了更新的认识，更对java web常用的mvc框架有了进一步的认识，也借此推荐给工作3年以上的java程序开发者看一看，真心有用，至少让我开阔了眼界。&lt;/p&gt;
+
+&lt;p&gt;　　而其中的代码风格，也对我自己有些教育作用，看来还是要多看人家写的优秀代码，别自己闭门造车，否则眼界不够，很容易变成一只井底之蛙。所以，也督促自己以后多看一些开源的项目。勇哥说啦，开源的不仅仅是代码，更重要的是思想，回顾原来自己的技术，感觉特别的薄弱，需要提高的地方还有很多，不多说啦，自己加油吧。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
+        
+        <category>java</category>
+        
+        <category>黄勇</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
+        <title>构建简单的Java 爬虫框架</title>
+        <description>&lt;p&gt;　　本节主要介绍该爬虫系统的框架设计。&lt;/p&gt;
+
+&lt;p&gt;　　主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。&lt;/p&gt;
+
+&lt;p&gt;　　Jsoup是java语言中特有的爬取网页数据技术，它仿照jquery访问页面节点的语法风格，极大的方便了java开发者根据id，class等选择器选择所需节点，并获取页面元素值。也支持通过xpath规则去解析html页面。在爬取的过程中，也遇到了有些页面数据是js动态生成的现象，所以又加入了phantomjs技术支持，如果在jsoup爬取不到的情况下，会调用phantomjs进行爬取。现在市面流行的大多都用python scrapy去写，我暂时还没学习过python，所以就用java去实现，但是非常感兴趣能了解一下scrapy的操作流程，了解人家的设计思想，想必考虑到了爬虫中的方方面面，爬取规则制定，定时任务，应对反爬虫策略的一些独门绝技等等，即便吃不到猪肉，看看猪是怎么跑的也是挺好的(说这句话发觉自己特么的好屌丝)。&lt;/p&gt;
+
+&lt;p&gt;　　本系统中，通过自己研发的chrome插件监听鼠标操作，并根据一定算法计算得到xpath规则，存入数据库中，方便job任务执行爬取操作。&lt;/p&gt;
+
+&lt;p&gt;　　Spring Quartz是一套很不错的定时任务框架，它支持内存插入，xml配置，持久化这三种方式，内存插入如果在系统停止服务的时候就会消失job和定时器；xml配置不灵活，可扩展性差；所以最后还是拥抱了一下持久化方式。而且，Quratz还支持分布式集群功能，好吧，集群我没用到。&lt;/p&gt;
+
+&lt;p&gt;　　在信息分类编辑中，用到了zTree.js插件，并稍微改造了一下，实现bootstrap风格。&lt;/p&gt;
+
+&lt;p&gt;　　本系统分成信息cms系统和爬虫job系统两个子系统，cms制定爬取规则，爬虫job系统根据规则进行爬取，两系统之间采用webservice方式进行通信。&lt;/p&gt;
+
+&lt;p&gt;　　系统页面采用的是inspinia 基于bootstrap的前端模板。&lt;/p&gt;
+
+&lt;p&gt;　　代码编辑器用的是idea project，这是头一回真正使用idea作为项目开发工具，那种感觉真的是太酷了，比eclipse好的不止一星半点，而且占用内存也不大，甚至小于myeclipse。&lt;/p&gt;
+
+&lt;p&gt;　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。&lt;/p&gt;
+
+&lt;p&gt;　　以上就是对这套系统的简单描述，在以后的章节中，我会详细介绍系统实现的每个细节，如果有设计不合理的地方还请各位民间高手不吝赐教，毕竟发现问题是解决问题的第一步。&lt;/p&gt;
+
+&lt;p&gt;如果需要代码，朋友们可通过邮件联系找我要。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2016/08/01/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/Java-Crawler.html</guid>
+        
+        <category>java</category>
+        
+        <category>Crawler</category>
+        
+        
+        <category>java</category>
         
       </item>
     
@@ -216,9 +280,9 @@
 &lt;p&gt;　　INSERT INTO &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; VALUES (‘%’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 13 Oct 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2016/10/13/Linux.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2016/10/13/Linux.html</guid>
+        <pubDate>Wed, 13 Mar 2013 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/linux/2013/03/13/LinuxConfig.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/13/LinuxConfig.html</guid>
         
         <category>linux</category>
         
@@ -230,66 +294,51 @@
       </item>
     
       <item>
-        <title>黄勇-架构探险-从零开始写Java Web框架</title>
-        <description>&lt;p&gt;　　偶然从论坛上看到黄勇老师写的一本书，《架构探险-从零开始写Java Web框架》，读了读绪论和目录，饶有兴趣，于是买来书看一看，感觉使用java web开发这几年来，自己心里对java web框架一些模棱两可的猜测，也有了更清晰的界定。&lt;/p&gt;
+        <title>Win7上安装Linux双系统</title>
+        <description>&lt;h1 id=&quot;一硬盘准备&quot;&gt;一、硬盘准备&lt;/h1&gt;
 
-&lt;p&gt;　　本书从头边看边敲代码，注解，反射，代理，aop这些虽然再实际开发工作中经常用到，但是了解不深的知识，在这里有了更新的认识，更对java web常用的mvc框架有了进一步的认识，也借此推荐给工作3年以上的java程序开发者看一看，真心有用，至少让我开阔了眼界。&lt;/p&gt;
+&lt;p&gt;　　linux对于java程序猿来说是必备技能，为了学习linux，也不可能专门整台电脑，好多人都为了图方便，用vmware做，我感觉的确是太水了，一点没有极客的style，还是做个双系统比较帅气。&lt;/p&gt;
 
-&lt;p&gt;　　而其中的代码风格，也对我自己有些教育作用，看来还是要多看人家写的优秀代码，别自己闭门造车，否则眼界不够，很容易变成一只井底之蛙。所以，也督促自己以后多看一些开源的项目。勇哥说啦，开源的不仅仅是代码，更重要的是思想，回顾原来自己的技术，感觉特别的薄弱，需要提高的地方还有很多，不多说啦，自己加油吧。&lt;/p&gt;
+&lt;p&gt;　　首先，我们要准备一个空闲的硬盘空间，我就是用u盘启动盘里面的分区软件，把我常用来下载缓存的50G的F盘给格式化，然后删除了，这样我们就有了50G的空闲存储。不用格式化，不用再分盘符，只要让其实空闲存储空间就行，这里说的空闲存储不是说有个F盘能访问，但是里面什么文件都没有，而是你在往这个区内安装系统之前，根本就没法访问这块区域。&lt;/p&gt;
 
-&lt;p&gt;　　&lt;/p&gt;
+&lt;h1 id=&quot;二镜像准备&quot;&gt;二、镜像准备&lt;/h1&gt;
 
-</description>
-        <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
-        
-        <category>java</category>
-        
-        <category>黄勇</category>
-        
-        
-        <category>java</category>
-        
-      </item>
-    
-      <item>
-        <title>构建简单的Java 爬虫框架</title>
-        <description>&lt;p&gt;　　本节主要介绍该爬虫系统的框架设计。&lt;/p&gt;
+&lt;p&gt;　　Centos，Redhat什么的都可以，我用的是Centos7，从官网下载dvd版本，everything版本的太大，内存8G实际只能使用6G多点的U盘装不下，只能下载4G多点的dvd版本。&lt;/p&gt;
 
-&lt;p&gt;　　主要是利用了SpringMvc + Spring quartz + Jsoup 技术，还写了简单的Chrome浏览器插件，供用户用鼠标选择页面内容，生成Xpath爬取规则入库，启动Quartz定时任务，进行爬取。中间遇到了好多问题，尤其是在编写Chrome插件这块，希望能将当时开发的心得体会介绍给大家，如果能帮助到大家，那会是一件很愉悦的事情，也期待大家能联系我多交流技术。&lt;/p&gt;
+&lt;h1 id=&quot;三upan准备&quot;&gt;三、Upan准备&lt;/h1&gt;
 
-&lt;p&gt;　　Jsoup是java语言中特有的爬取网页数据技术，它仿照jquery访问页面节点的语法风格，极大的方便了java开发者根据id，class等选择器选择所需节点，并获取页面元素值。也支持通过xpath规则去解析html页面。在爬取的过程中，也遇到了有些页面数据是js动态生成的现象，所以又加入了phantomjs技术支持，如果在jsoup爬取不到的情况下，会调用phantomjs进行爬取。现在市面流行的大多都用python scrapy去写，我暂时还没学习过python，所以就用java去实现，但是非常感兴趣能了解一下scrapy的操作流程，了解人家的设计思想，想必考虑到了爬虫中的方方面面，爬取规则制定，定时任务，应对反爬虫策略的一些独门绝技等等，即便吃不到猪肉，看看猪是怎么跑的也是挺好的(说这句话发觉自己特么的好屌丝)。&lt;/p&gt;
+&lt;p&gt;　　在上述第一步操作中，准备空闲区域可以用U盘启动制作程序（网上随便搜一个就行）把U盘制作成系统启动U盘，然后重启电脑，进入U盘中的PE系统，里面有个硬盘分区工具，可以帮助你将平时用不着的硬盘分区转换成空闲区域。&lt;/p&gt;
 
-&lt;p&gt;　　本系统中，通过自己研发的chrome插件监听鼠标操作，并根据一定算法计算得到xpath规则，存入数据库中，方便job任务执行爬取操作。&lt;/p&gt;
+&lt;p&gt;　　在上述两步都做完的前提之下，用UltraISO将linux镜像写入到U盘中，在写入之前请先格式化U盘。&lt;/p&gt;
 
-&lt;p&gt;　　Spring Quartz是一套很不错的定时任务框架，它支持内存插入，xml配置，持久化这三种方式，内存插入如果在系统停止服务的时候就会消失job和定时器；xml配置不灵活，可扩展性差；所以最后还是拥抱了一下持久化方式。而且，Quratz还支持分布式集群功能，好吧，集群我没用到。&lt;/p&gt;
+&lt;h1 id=&quot;四安装centos7&quot;&gt;四、安装Centos7&lt;/h1&gt;
+&lt;p&gt;　　使用U盘启动盘之前呢，先进入电脑的bios模式，修改U盘启动在先；当然，你也可以直接在开机时，多次敲击Del键或者F2键，选择从U盘进入系统也行。&lt;/p&gt;
 
-&lt;p&gt;　　在信息分类编辑中，用到了zTree.js插件，并稍微改造了一下，实现bootstrap风格。&lt;/p&gt;
+&lt;h3 id=&quot;一装系统&quot;&gt;（一）装系统&lt;/h3&gt;
 
-&lt;p&gt;　　本系统分成信息cms系统和爬虫job系统两个子系统，cms制定爬取规则，爬虫job系统根据规则进行爬取，两系统之间采用webservice方式进行通信。&lt;/p&gt;
+&lt;p&gt;　　关机，插入U盘，然后开机，选择进入U盘系统，过会会有centos安装界面，第一步是让你选择系统语言，选择中文之后，然后这一步是很多配置项，选择安装位置 处 选择当前空闲的 50G 所在的硬盘选项。&lt;/p&gt;
 
-&lt;p&gt;　　系统页面采用的是inspinia 基于bootstrap的前端模板。&lt;/p&gt;
+&lt;h3 id=&quot;二安装软件&quot;&gt;（二）安装软件&lt;/h3&gt;
 
-&lt;p&gt;　　代码编辑器用的是idea project，这是头一回真正使用idea作为项目开发工具，那种感觉真的是太酷了，比eclipse好的不止一星半点，而且占用内存也不大，甚至小于myeclipse。&lt;/p&gt;
+&lt;p&gt;　　然后选择安装软件，建议你选择最后一个带界面的方便开发用的选项，右边多选除了数据库其他都选上吧。&lt;/p&gt;
 
-&lt;p&gt;　　当然，如果应用在商业用途，还是建议大家使用正版软件，毕竟人家的程序猿也是需要吃饭的，程序猿何苦为难程序猿。&lt;/p&gt;
+&lt;h3 id=&quot;三其他设置&quot;&gt;（三）其他设置&lt;/h3&gt;
 
-&lt;p&gt;　　以上就是对这套系统的简单描述，在以后的章节中，我会详细介绍系统实现的每个细节，如果有设计不合理的地方还请各位民间高手不吝赐教，毕竟发现问题是解决问题的第一步。&lt;/p&gt;
-
-&lt;p&gt;如果需要代码，朋友们可通过邮件联系找我要。&lt;/p&gt;
+&lt;p&gt;　　然后选择网络，直接找个连上就好，然后进入下一步，设置root密码，建议设个简单好记的，要不然很麻烦。然后等待安装结束，估计需要半个小时左右。安装完毕之后，重启电脑，立即拔掉U盘，然后过会就能看到期待已久的Centos图形界面，这样下来系统就安装完毕了。
+　　  	
+　　&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/Java-Crawler.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/Java-Crawler.html</guid>
+        <pubDate>Fri, 01 Mar 2013 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</guid>
         
-        <category>java</category>
+        <category>linux</category>
         
-        <category>Crawler</category>
+        <category>双系统</category>
         
         
-        <category>java</category>
+        <category>linux</category>
         
       </item>
     

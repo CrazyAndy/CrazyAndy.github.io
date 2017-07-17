@@ -7,12 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+    <meta content="linux环境搭建" name="description">
+  
+  
+    <meta name="keywords" content="linux,环境">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|Linux
+        CrazyAndy|linux环境搭建
     
   </title>
   <!-- favicon -->
@@ -145,7 +149,7 @@
                     
                         
                         
-                        <li class="active">
+                        <li>
                         
                         <a class="tagname" href="/linux/">Linux</a></li>
                         
@@ -222,134 +226,224 @@
 
 	
 
-        <!-- jPages -->
-<script src="/static/assets/jPage-20170307.min.js"></script>
-<script type="text/javascript">
-$(function(){
-  /* initiate the plugin */
-  $("div.pag-holder").jPages({
-      containerID  : "pag-itemContainer",
-      perPage      : 5,  /* num of items per page */
-      startPage    : 1,
-      startRange   : 1,
-      midRange     : 3,
-      endRange     : 1
-  });
-});
-</script>
-
-<div class="row">
-    <div class="col-lg-12 text-center">
-        <div class="navy-line"></div>
-        
-		
-        <h1>Linux</h1>
-    </div>
-</div>
-<div class="wrapper wrapper-content  animated fadeInRight blog">
+    <div class="wrapper wrapper-content  animated fadeInRight article">
     <div class="row">
-        <ul id="pag-itemContainer" style="list-style:none;">
-            
-            
-            
-            <li>
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <a href="/linux/2013/03/13/LinuxConfig.html" class="btn-link">
-                                <h2>linux环境搭建</h2>
-                            </a>
-                            <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Mar 2013</span>
-                            </div>
-                            <p>
-                                一、文件上传
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">linux</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Mar 2013</span>
+                        <h1>
+                            linux环境搭建
+                        </h1>
+                    </div>
+                    	<p>一、文件上传</p>
 
-　　(1).创建文件夹
+<p>　　(1).创建文件夹</p>
 
-　　mkdir /itec/upload
+<p>　　mkdir /itec/upload</p>
 
-　　(2)上传文件
+<p>　　(2)上传文件</p>
 
-　　apache-tomcat-7.0.68(文件夹)
-　　MySQL-5.6.29-...
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="display: inline;">Tags:</h5>
-                                    
-                                    <button class="btn btn-white btn-xs">linux</button>
-                                    
-                                    <button class="btn btn-white btn-xs">环境搭建</button>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div>
-                                            
-                                            
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2013/03/13/LinuxConfig.html">0</span> comments
-                                            
-                                        </div>
-                                    </div>
+<p>　　apache-tomcat-7.0.68(文件夹)
+　　MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle(文件夹)
+　　jdk-6u45-linux-i586-rpm.bin(文件)</p>
+
+<p>二、Openjdk卸载</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>　　rpm -qa</td>
+      <td>grep java</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>　　rpm -e –nodeps  ***</p>
+
+<p>三、Jdk安装</p>
+
+<p>　　(1)修改权限</p>
+
+<p>　　chmod 755 jdk-6u45-linux-i586-rpm.bin</p>
+
+<p>　　(2)安装jdk</p>
+
+<p>　　./jdk-6u45-linux-i586-rpm.bin
+  	rpm –ivh jdk-6u45-linux-i586.rpm</p>
+
+<p>　　(3)修改配置</p>
+
+<p>　　vi /etc/profile</p>
+
+<p>　　export JAVA_HOME=/usr/java/ jdk1.6.0_45</p>
+
+<p>　　export PATH=$PATH:$JAVA_HOME/bin</p>
+
+<p>　　.  /etc/profile</p>
+
+<p>　　.和/之间有空格</p>
+
+<p>四、防火墙设置</p>
+
+<p>　　Service iptables stop</p>
+
+<p>五、Tomcat安装</p>
+
+<p>　　cd /itec/upload</p>
+
+<p>　　mv apache-tomcat-7.0.68 /itec</p>
+
+<p>　　cd /itec/apache-tomcat-7.0.68/bin</p>
+
+<p>　　./startup.sh</p>
+
+<p>六、Mysql安装</p>
+
+<p>　　cd /itec/upload/ MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle</p>
+
+<p>　　(1)安装share</p>
+
+<p>　　rpm –ivh MySQL-shared-5.6.29-1.linux_glibc2.5.i386.rpm</p>
+
+<p>　　(2)安装server</p>
+
+<p>　　rpm –ivh	MySQL-server-5.6.29-1.linux_glibc2.5.i386.rpm</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>　　rpm -qa</td>
+      <td>grep mysql</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>　　rpm -ev –nodeps mysql-libs-5.1.66-2.el6_3.i686</p>
+
+<p>　　(3)安装client</p>
+
+<p>　　rpm –ivh	MySQL-client-5.6.29-1.linux_glibc2.5.i386.rpm</p>
+
+<p>　　(4)修改密码</p>
+
+<p>　　more /root/.mysql_secret
+  	service mysql start
+  	mysql –uroot –p</p>
+
+  	set password=password(‘itec_jtwz’);
+
+<p>　　(5)修改访问用户权限</p>
+
+<p>　　use mysql</p>
+
+<p>　　select host from user;</p>
+
+<p>　　delete from user where host=’localhost’;</p>
+
+<p>　　update user set host=’%’;</p>
+
+<p>　　flush privileges;</p>
+
+<p>　　(6)修改utf8编码</p>
+
+<p>　　show variables like’character%’;</p>
+
+<p>　　vi /usr	/my.cnf</p>
+
+<p>　　character-set-server=utf8</p>
+
+<p>　　lower_case_table_names=1;(让linux下mysql大小写不敏感)</p>
+
+<p>　　(7) mysqld_safe –skip-grant-tables</p>
+
+<p>　　 /etc/rc.d/init.d/mysql stop</p>
+
+<p>　　/etc/rc.d/init.d/mysql start</p>
+
+<p>　　sudo mysql -uroot –p</p>
+
+<p>　　(8)删root用户 user</p>
+
+<p>　　Insert root %,localhost</p>
+
+<p>　　INSERT INTO <code class="highlighter-rouge">user</code> VALUES (‘localhost’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);</p>
+
+<p>　　INSERT INTO <code class="highlighter-rouge">user</code> VALUES (‘%’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);</p>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">linux</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">环境搭建</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2013/03/13/LinuxConfig.html">0</span> comments
+                                
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            
-            
-            <li>
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <a href="/linux/2013/03/01/LinuxSetUp.html" class="btn-link">
-                                <h2>Win7上安装Linux双系统</h2>
-                            </a>
-                            <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Mar 2013</span>
-                            </div>
-                            <p>
-                                一、硬盘准备
-
-　　linux对于java程序猿来说是必备技能，为了学习linux，也不可能专门整台电脑，好多人都为了图方便，用vmware做，我感觉的确是太水了，一点没有极客的style，还是...
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="display: inline;">Tags:</h5>
-                                    
-                                    <button class="btn btn-white btn-xs">linux</button>
-                                    
-                                    <button class="btn btn-white btn-xs">双系统</button>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div>
-                                            
-                                            
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2013/03/01/LinuxSetUp.html">0</span> comments
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            
-        </ul>
-        
-
-
-    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
 </div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
 	

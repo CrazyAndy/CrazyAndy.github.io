@@ -19,14 +19,6 @@
 	
     
 	{
-		"title" : "linux环境搭建 - 2016-10-13",
-		"url" : "/linux/2016/10/13/Linux.html"
-	}
-	
-	,
-	
-    
-	{
 		"title" : "黄勇-架构探险-从零开始写Java Web框架 - 2016-08-01",
 		"url" : "/java/2016/08/01/SmartFrame.html"
 	}
@@ -37,6 +29,22 @@
 	{
 		"title" : "构建简单的Java 爬虫框架 - 2016-08-01",
 		"url" : "/java/2016/08/01/Java-Crawler.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "linux环境搭建 - 2013-03-13",
+		"url" : "/linux/2013/03/13/LinuxConfig.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Win7上安装Linux双系统 - 2013-03-01",
+		"url" : "/linux/2013/03/01/LinuxSetUp.html"
 	}
 	
 	,

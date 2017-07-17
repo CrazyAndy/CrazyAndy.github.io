@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="linux环境搭建" name="description">
+    <meta content="Win7上安装Linux双系统" name="description">
   
   
-    <meta name="keywords" content="linux,环境">
+    <meta name="keywords" content="linux,双系统">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|linux环境搭建
+        CrazyAndy|Win7上安装Linux双系统
     
   </title>
   <!-- favicon -->
@@ -237,145 +237,43 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Oct 2016</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Mar 2013</span>
                         <h1>
-                            linux环境搭建
+                            Win7上安装Linux双系统
                         </h1>
                     </div>
-                    	<p>一、文件上传</p>
+                    	<h1 id="一硬盘准备">一、硬盘准备</h1>
 
-<p>　　(1).创建文件夹</p>
+<p>　　linux对于java程序猿来说是必备技能，为了学习linux，也不可能专门整台电脑，好多人都为了图方便，用vmware做，我感觉的确是太水了，一点没有极客的style，还是做个双系统比较帅气。</p>
 
-<p>　　mkdir /itec/upload</p>
+<p>　　首先，我们要准备一个空闲的硬盘空间，我就是用u盘启动盘里面的分区软件，把我常用来下载缓存的50G的F盘给格式化，然后删除了，这样我们就有了50G的空闲存储。不用格式化，不用再分盘符，只要让其实空闲存储空间就行，这里说的空闲存储不是说有个F盘能访问，但是里面什么文件都没有，而是你在往这个区内安装系统之前，根本就没法访问这块区域。</p>
 
-<p>　　(2)上传文件</p>
+<h1 id="二镜像准备">二、镜像准备</h1>
 
-<p>　　apache-tomcat-7.0.68(文件夹)
-　　MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle(文件夹)
-　　jdk-6u45-linux-i586-rpm.bin(文件)</p>
+<p>　　Centos，Redhat什么的都可以，我用的是Centos7，从官网下载dvd版本，everything版本的太大，内存8G实际只能使用6G多点的U盘装不下，只能下载4G多点的dvd版本。</p>
 
-<p>二、Openjdk卸载</p>
+<h1 id="三upan准备">三、Upan准备</h1>
 
-<table>
-  <tbody>
-    <tr>
-      <td>　　rpm -qa</td>
-      <td>grep java</td>
-    </tr>
-  </tbody>
-</table>
+<p>　　在上述第一步操作中，准备空闲区域可以用U盘启动制作程序（网上随便搜一个就行）把U盘制作成系统启动U盘，然后重启电脑，进入U盘中的PE系统，里面有个硬盘分区工具，可以帮助你将平时用不着的硬盘分区转换成空闲区域。</p>
 
-<p>　　rpm -e –nodeps  ***</p>
+<p>　　在上述两步都做完的前提之下，用UltraISO将linux镜像写入到U盘中，在写入之前请先格式化U盘。</p>
 
-<p>三、Jdk安装</p>
+<h1 id="四安装centos7">四、安装Centos7</h1>
+<p>　　使用U盘启动盘之前呢，先进入电脑的bios模式，修改U盘启动在先；当然，你也可以直接在开机时，多次敲击Del键或者F2键，选择从U盘进入系统也行。</p>
 
-<p>　　(1)修改权限</p>
+<h3 id="一装系统">（一）装系统</h3>
 
-<p>　　chmod 755 jdk-6u45-linux-i586-rpm.bin</p>
+<p>　　关机，插入U盘，然后开机，选择进入U盘系统，过会会有centos安装界面，第一步是让你选择系统语言，选择中文之后，然后这一步是很多配置项，选择安装位置 处 选择当前空闲的 50G 所在的硬盘选项。</p>
 
-<p>　　(2)安装jdk</p>
+<h3 id="二安装软件">（二）安装软件</h3>
 
-<p>　　./jdk-6u45-linux-i586-rpm.bin
-  	rpm –ivh jdk-6u45-linux-i586.rpm</p>
+<p>　　然后选择安装软件，建议你选择最后一个带界面的方便开发用的选项，右边多选除了数据库其他都选上吧。</p>
 
-<p>　　(3)修改配置</p>
+<h3 id="三其他设置">（三）其他设置</h3>
 
-<p>　　vi /etc/profile</p>
-
-<p>　　export JAVA_HOME=/usr/java/ jdk1.6.0_45</p>
-
-<p>　　export PATH=$PATH:$JAVA_HOME/bin</p>
-
-<p>　　.  /etc/profile</p>
-
-<p>　　.和/之间有空格</p>
-
-<p>四、防火墙设置</p>
-
-<p>　　Service iptables stop</p>
-
-<p>五、Tomcat安装</p>
-
-<p>　　cd /itec/upload</p>
-
-<p>　　mv apache-tomcat-7.0.68 /itec</p>
-
-<p>　　cd /itec/apache-tomcat-7.0.68/bin</p>
-
-<p>　　./startup.sh</p>
-
-<p>六、Mysql安装</p>
-
-<p>　　cd /itec/upload/ MySQL-5.6.29-1.linux_glibc2.5.i386.rpm-bundle</p>
-
-<p>　　(1)安装share</p>
-
-<p>　　rpm –ivh MySQL-shared-5.6.29-1.linux_glibc2.5.i386.rpm</p>
-
-<p>　　(2)安装server</p>
-
-<p>　　rpm –ivh	MySQL-server-5.6.29-1.linux_glibc2.5.i386.rpm</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>　　rpm -qa</td>
-      <td>grep mysql</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>　　rpm -ev –nodeps mysql-libs-5.1.66-2.el6_3.i686</p>
-
-<p>　　(3)安装client</p>
-
-<p>　　rpm –ivh	MySQL-client-5.6.29-1.linux_glibc2.5.i386.rpm</p>
-
-<p>　　(4)修改密码</p>
-
-<p>　　more /root/.mysql_secret
-  	service mysql start
-  	mysql –uroot –p</p>
-
-  	set password=password(‘itec_jtwz’);
-
-<p>　　(5)修改访问用户权限</p>
-
-<p>　　use mysql</p>
-
-<p>　　select host from user;</p>
-
-<p>　　delete from user where host=’localhost’;</p>
-
-<p>　　update user set host=’%’;</p>
-
-<p>　　flush privileges;</p>
-
-<p>　　(6)修改utf8编码</p>
-
-<p>　　show variables like’character%’;</p>
-
-<p>　　vi /usr	/my.cnf</p>
-
-<p>　　character-set-server=utf8</p>
-
-<p>　　lower_case_table_names=1;(让linux下mysql大小写不敏感)</p>
-
-<p>　　(7) mysqld_safe –skip-grant-tables</p>
-
-<p>　　 /etc/rc.d/init.d/mysql stop</p>
-
-<p>　　/etc/rc.d/init.d/mysql start</p>
-
-<p>　　sudo mysql -uroot –p</p>
-
-<p>　　(8)删root用户 user</p>
-
-<p>　　Insert root %,localhost</p>
-
-<p>　　INSERT INTO <code class="highlighter-rouge">user</code> VALUES (‘localhost’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);</p>
-
-<p>　　INSERT INTO <code class="highlighter-rouge">user</code> VALUES (‘%’,’root’,’’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’Y’,’’,’’,’’,’‘,0,0,0,0);</p>
+<p>　　然后选择网络，直接找个连上就好，然后进入下一步，设置root密码，建议设个简单好记的，要不然很麻烦。然后等待安装结束，估计需要半个小时左右。安装完毕之后，重启电脑，立即拔掉U盘，然后过会就能看到期待已久的Centos图形界面，这样下来系统就安装完毕了。
+　　  	
+　　</p>
 
 
                     <hr>
@@ -385,7 +283,7 @@
                                 
                                     <button class="btn btn-white btn-xs" type="button">linux</button>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">环境搭建</button>
+                                    <button class="btn btn-white btn-xs" type="button">双系统</button>
                                 
                         </div>
                         <div class="col-md-6">
@@ -394,7 +292,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2016/10/13/Linux.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2013/03/01/LinuxSetUp.html">0</span> comments
                                 
                                 </div>
                             </div>
