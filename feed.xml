@@ -3,11 +3,11 @@
   <channel>
     <title>CrazyAndy</title>
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 17 Jul 2017 10:48:39 +0800</pubDate>
-    <lastBuildDate>Mon, 17 Jul 2017 10:48:39 +0800</lastBuildDate>
-    <generator>Jekyll v3.5.0</generator>
+    <link>http://CrazyAndy.github.io/</link>
+    <atom:link href="http://CrazyAndy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 20 May 2018 00:00:28 +0800</pubDate>
+    <lastBuildDate>Sun, 20 May 2018 00:00:28 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.1</generator>
     
       <item>
         <title>Paper Plane</title>
@@ -44,8 +44,8 @@
 
 </description>
         <pubDate>Wed, 05 Apr 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/literature/2017/04/05/PaperPlane.html</link>
-        <guid isPermaLink="true">http://localhost:4000/literature/2017/04/05/PaperPlane.html</guid>
+        <link>http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</guid>
         
         <category>大时代</category>
         
@@ -53,8 +53,10 @@
         
         <category>纸飞机</category>
         
+        <category>ideas</category>
         
-        <category>literature</category>
+        
+        <category>reading</category>
         
       </item>
     
@@ -66,12 +68,14 @@
 
 </description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/boot/2017/01/01/SpringBoot.html</link>
-        <guid isPermaLink="true">http://localhost:4000/boot/2017/01/01/SpringBoot.html</guid>
+        <link>http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</guid>
         
         <category>java</category>
         
         <category>Crawler</category>
+        
+        <category>blog</category>
         
         
         <category>boot</category>
@@ -90,12 +94,14 @@
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
+        <link>http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</guid>
         
         <category>java</category>
         
         <category>黄勇</category>
+        
+        <category>blog</category>
         
         
         <category>java</category>
@@ -130,12 +136,14 @@
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/Java-Crawler.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/Java-Crawler.html</guid>
+        <link>http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</guid>
         
         <category>java</category>
         
         <category>Crawler</category>
+        
+        <category>blog</category>
         
         
         <category>java</category>
@@ -281,12 +289,14 @@
 
 </description>
         <pubDate>Wed, 13 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/13/LinuxConfig.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/13/LinuxConfig.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</guid>
         
         <category>linux</category>
         
         <category>环境搭建</category>
+        
+        <category>blog</category>
         
         
         <category>linux</category>
@@ -330,12 +340,14 @@
 
 </description>
         <pubDate>Fri, 01 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</guid>
         
         <category>linux</category>
         
         <category>双系统</category>
+        
+        <category>blog</category>
         
         
         <category>linux</category>
@@ -397,7 +409,7 @@
 
 &lt;p&gt;　　源代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
      * 抽象主题角色类
      */
 	public abstract class Subject {
@@ -488,8 +500,7 @@
 	    }
 	
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;　　在运行时，这个客户端首先创建了具体主题类的实例，以及一个观察者对象。然后，它调用主题对象的attach()方法，将这个观察者对象向主题对象登记，也就是将它加入到主题对象的聚集中去。&lt;/p&gt;
 
@@ -511,7 +522,7 @@
 	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
 　　源代码如下&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 折扣接口
 	*/
 	public interface MemberStrategy {
@@ -588,14 +599,13 @@
 	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
 &lt;h3 id=&quot;四气象局项目实现&quot;&gt;（四）气象局项目实现&lt;/h3&gt;
 &lt;h4 id=&quot;1编写接口&quot;&gt;      1，编写接口&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 主题接口
 	*/
 	public interface Subject{
@@ -618,12 +628,11 @@
 	public interface DisplayElement{
 		void display();
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;2实现主题&quot;&gt;      2，实现主题&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
 		private ArrayList observers;//已经注册在内的观察者集合
 		private float temperature;//温度
 		private float humidity;//湿度
@@ -669,12 +678,11 @@
 			measurementsChanged();
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;3实现观察者这里只写其中一个布告板&quot;&gt;      3，实现观察者(这里只写其中一个布告板)&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 目前状况布告板 实现
 	*/
 	public class CurrentConditionsDisplay implements Observer,DisplayElement{
@@ -708,11 +716,10 @@
 				&quot;F degress and &quot;+ humidity +&quot;% humidity&quot;);
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;4测试&quot;&gt;      4，测试&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
 		public static void main(String args[]){
 			WeatherData weatherData = new WeatherData();
 			CurrentConditionsDisplay currentDisplay = 
@@ -722,8 +729,7 @@
 			weatherData.setMeasurements(82,64,32.4f);
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;五推模型and拉模型&quot;&gt;（五）推模型And拉模型&lt;/h3&gt;
 
@@ -741,18 +747,17 @@
 
 &lt;h4 id=&quot;1拉模型的抽象观察者类&quot;&gt;      1，拉模型的抽象观察者类&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
 	    /**
 	     * 更新接口
 	     * @param subject 传入主题对象，方面获取相应的主题对象的状态
 	     */
 	    public void update(Subject subject);
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;2拉模型的具体观察者类&quot;&gt;      2，拉模型的具体观察者类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
 	    //观察者的状态
 	    private String observerState;
 	    @Override
@@ -765,11 +770,10 @@
 	    }
 	
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;3拉模型的抽象主题类&quot;&gt;      3，拉模型的抽象主题类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
 	    /**
 	     * 用来保存注册的观察者对象
 	     */
@@ -798,11 +802,10 @@
 	        }
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;4拉模型的具体主题类&quot;&gt;      4，拉模型的具体主题类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
 	    private String state;
 	    public String getState() {
 	        return state;
@@ -814,8 +817,7 @@
 	        this.nodifyObservers();
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;5两种模式的比较&quot;&gt;      5，两种模式的比较&lt;/h4&gt;
 &lt;p&gt;　　■　　推模型是假定主题对象知道观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，没有办法的情况下，干脆把自身传递给观察者，让观察者自己去按需要取值。&lt;/p&gt;
@@ -841,15 +843,17 @@
 
 </description>
         <pubDate>Wed, 04 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2012/04/04/DecoratorPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2012/04/04/DecoratorPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</guid>
         
         <category>java</category>
         
         <category>装饰者模式</category>
         
+        <category>blog</category>
         
-        <category>java</category>
+        
+        <category>design</category>
         
       </item>
     
@@ -907,7 +911,7 @@
 
 &lt;p&gt;　　源代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
      * 抽象主题角色类
      */
 	public abstract class Subject {
@@ -998,8 +1002,7 @@
 	    }
 	
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;　　在运行时，这个客户端首先创建了具体主题类的实例，以及一个观察者对象。然后，它调用主题对象的attach()方法，将这个观察者对象向主题对象登记，也就是将它加入到主题对象的聚集中去。&lt;/p&gt;
 
@@ -1021,7 +1024,7 @@
 	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
 　　源代码如下&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 折扣接口
 	*/
 	public interface MemberStrategy {
@@ -1098,14 +1101,13 @@
 	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
 &lt;h3 id=&quot;四气象局项目实现&quot;&gt;（四）气象局项目实现&lt;/h3&gt;
 &lt;h4 id=&quot;1编写接口&quot;&gt;      1，编写接口&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 主题接口
 	*/
 	public interface Subject{
@@ -1128,12 +1130,11 @@
 	public interface DisplayElement{
 		void display();
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;2实现主题&quot;&gt;      2，实现主题&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class WeatherData implements Subject{
 		private ArrayList observers;//已经注册在内的观察者集合
 		private float temperature;//温度
 		private float humidity;//湿度
@@ -1179,12 +1180,11 @@
 			measurementsChanged();
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;3实现观察者这里只写其中一个布告板&quot;&gt;      3，实现观察者(这里只写其中一个布告板)&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 目前状况布告板 实现
 	*/
 	public class CurrentConditionsDisplay implements Observer,DisplayElement{
@@ -1218,11 +1218,10 @@
 				&quot;F degress and &quot;+ humidity +&quot;% humidity&quot;);
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;4测试&quot;&gt;      4，测试&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Test(){
 		public static void main(String args[]){
 			WeatherData weatherData = new WeatherData();
 			CurrentConditionsDisplay currentDisplay = 
@@ -1232,8 +1231,7 @@
 			weatherData.setMeasurements(82,64,32.4f);
 		}
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;五推模型and拉模型&quot;&gt;（五）推模型And拉模型&lt;/h3&gt;
 
@@ -1251,18 +1249,17 @@
 
 &lt;h4 id=&quot;1拉模型的抽象观察者类&quot;&gt;      1，拉模型的抽象观察者类&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public interface Observer {
 	    /**
 	     * 更新接口
 	     * @param subject 传入主题对象，方面获取相应的主题对象的状态
 	     */
 	    public void update(Subject subject);
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;2拉模型的具体观察者类&quot;&gt;      2，拉模型的具体观察者类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteObserver implements Observer {
 	    //观察者的状态
 	    private String observerState;
 	    @Override
@@ -1275,11 +1272,10 @@
 	    }
 	
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;3拉模型的抽象主题类&quot;&gt;      3，拉模型的抽象主题类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public abstract class Subject {
 	    /**
 	     * 用来保存注册的观察者对象
 	     */
@@ -1308,11 +1304,10 @@
 	        }
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;4拉模型的具体主题类&quot;&gt;      4，拉模型的具体主题类&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class ConcreteSubject extends Subject{
 	    private String state;
 	    public String getState() {
 	        return state;
@@ -1324,8 +1319,7 @@
 	        this.nodifyObservers();
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;5两种模式的比较&quot;&gt;      5，两种模式的比较&lt;/h4&gt;
 &lt;p&gt;　　■　　推模型是假定主题对象知道观察者需要的数据；而拉模型是主题对象不知道观察者具体需要什么数据，没有办法的情况下，干脆把自身传递给观察者，让观察者自己去按需要取值。&lt;/p&gt;
@@ -1353,15 +1347,17 @@
 
 </description>
         <pubDate>Tue, 03 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2012/04/03/ObserverPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2012/04/03/ObserverPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</guid>
         
         <category>java</category>
         
         <category>观察者模式</category>
         
+        <category>blog</category>
         
-        <category>java</category>
+        
+        <category>design</category>
         
       </item>
     
@@ -1401,7 +1397,7 @@
 
 &lt;p&gt;　　增加飞行和呱呱叫两个接口只是开始，在以后的游戏升级中，鸭子会增加更多的行为，而按照这种思路去设计，则在增加新功能的同事，又不会影响原来的业务逻辑。&lt;/p&gt;
 &lt;h4 id=&quot;5代码实现&quot;&gt;      5，代码实现&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	//鸭子父类
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	//鸭子父类
 	public class Duck {
 	    protected FlyBehavior flyBehavior;
 	    protected QuackBehavior quackBehavior;
@@ -1466,8 +1462,7 @@
 	        duck.display();
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;二设计规格和设计思想&quot;&gt;（二）设计规格和设计思想&lt;/h3&gt;
 
@@ -1488,7 +1483,7 @@
 
 &lt;p&gt;　　●  具体策略(ConcreteStrategy)角色：包装了相关的算法或行为。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Context {
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class Context {
 	    //持有一个具体策略的对象
 	    private Strategy strategy;
 	    /**
@@ -1531,8 +1526,7 @@
 	        //相关的业务
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;2使用场景&quot;&gt;      2，使用场景&lt;/h4&gt;
 
@@ -1551,7 +1545,7 @@
 	&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/patterns/price.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
 　　源代码如下&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
 	* 折扣接口
 	*/
 	public interface MemberStrategy {
@@ -1628,8 +1622,7 @@
 	        System.out.println(&quot;图书的最终价格为：&quot; + quote);
 	    }
 	}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;　　从上面的示例可以看出，策略模式仅仅封装算法，提供新的算法插入到已有系统中，以及老算法从系统中“退休”的方法，策略模式并不决定在何时使用何种算法。在什么情况下使用什么算法是由客户端决定的。&lt;/p&gt;
 &lt;h4 id=&quot;3模式认知&quot;&gt;      3，模式认知&lt;/h4&gt;
@@ -1680,15 +1673,17 @@
 
 </description>
         <pubDate>Mon, 02 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2012/04/02/StrategyPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2012/04/02/StrategyPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</guid>
         
         <category>java</category>
         
         <category>策略模式</category>
         
+        <category>blog</category>
         
-        <category>java</category>
+        
+        <category>design</category>
         
       </item>
     
@@ -1717,15 +1712,17 @@
 
 </description>
         <pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2012/04/01/PatternBefore.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2012/04/01/PatternBefore.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</guid>
         
         <category>java</category>
         
         <category>设计模式</category>
         
+        <category>blog</category>
         
-        <category>java</category>
+        
+        <category>design</category>
         
       </item>
     

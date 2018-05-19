@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
   <meta content="CrazyAndy's blog,use Jekyll and github pages." name="description">
   <meta name="keywords" content="CrazyAndy,blog,Jekyll,github,gh-pages">
   <meta name="author" content="CrazyAndy">
@@ -15,296 +15,179 @@
   <link rel="shortcut icon" href="static/assets/img/favicon.ico">
 
   <!-- Main CSS -->
-  <link href="static/assets/app-20170307.min.css" rel="stylesheet">
+  <link href="static/assets/app-20170307.min.css" rel="stylesheet"/>
 
   <!-- Main scripts -->
  <script src="static/assets/app-index-20170307.min.js"></script>
-  
-  <script async defer src="static/js/github_api.min.js"></script>
-  
-  
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="static/css/adam/font-awesome.min.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="static/css/adam/main.css">
 </head>
 
 	
 
-<body id="page-top" class="landing-page">
-
+<body id="page-top" class="landing-page" data-spy="scroll" >
 	
 
         <div class="navbar-wrapper">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#page-top" id="i18_title"><span data-i18n="website.title">CrazyAndy</span></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" id="i18_navbar">
-                
-					
-	                    <li>
-	                      <a class="page-scroll" href="#about-me">
-	                        <span data-i18n="nav.about_me">关于</span>
-	                      </a>
-	                    </li>
-					
-					
-                
-					
-	                    <li>
-	                      <a class="page-scroll" href="#career">
-	                        <span data-i18n="nav.career">生涯</span>
-	                      </a>
-	                    </li>
-					
-					
-                
-					
-					
-	                    <li>
-	                      <a class="page-scroll" href="/blog/">
-	                        <span data-i18n="nav.blog">博客</span>
-	                      </a>
-	                    </li>
-					
-                
-					
-	                    <li>
-	                      <a class="page-scroll" href="#links">
-	                        <span data-i18n="nav.link">联系</span>
-	                      </a>
-	                    </li>
-					
-					
-                
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#page-top" id="i18_title"><span data-i18n="website.title">CrazyAndy</span></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right" id="i18_navbar">
+          
+          
+         
+         
+         <li>
+           <a class="page-scroll" href="#page-top">
+             <span data-i18n="nav.about">首页</span>
+           </a>
+         </li>
+         
+         
+          
+         
+         <li>
+           <a class="page-scroll" href="/ideas/ideas">
+             <span data-i18n="nav.ideas">碎碎念</span>
+           </a>
+         </li>
+         
+         
+         
+          
+          <li>
+           <a class="page-scroll" href="/blog/">
+             <span data-i18n="nav.blog">技术博客</span>
+           </a>
+         </li>
+         
+         
+         
+         
+          
+         
+         
+         <li>
+           <a class="page-scroll" href="#links">
+             <span data-i18n="nav.link">联系方式</span>
+           </a>
+         </li>
+         
+         
 
-                
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
-<div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#inSlider" data-slide-to="0" class="active"></li>
-        <li data-target="#inSlider" data-slide-to="1"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="container">
-                <div class="carousel-caption">
-                </div>
-                <div class="carousel-image wow zoomIn">
-                    <!-- <img src="static/img/landing/laptop.png" alt="laptop"/> -->
-                </div>
-            </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back one"></div>
-        </div>
-        <div class="item">
-            <div class="container">
-                <div class="carousel-caption blank">
-                </div>
-            </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back two"></div>
-        </div>
+         
+         <li>
+          <a id="set_lang_" class="btn btn-sm set_" data-locale="">
+            <img src="" height="16px" width="16px">
+          </a>
+        </li>
+        
+      </ul>
     </div>
-    <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#inSlider" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+  </div>
+</nav>
 </div>
 
-
-	
-  		
-  		<section id="about-me" class="features  " style="margin-top: 0;">
-		<div class="container" id="i18_about_me">
-    <div class="row m-b-lg">
-        <div class="col-lg-12 text-center">
-        </div>
-    </div>
-    <div class="row">
-        <!-- first two icons -->
-        
-        <div class="col-xs-2 wow fadeInLeft">
-            <div class="team-member">
-                <div class="vote-icon">
-                    <i class="fa icon-apache"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xs-2 wow fadeInLeft">
-            <div class="team-member">
-                <div class="vote-icon">
-                    <i class="fa fa-linux"></i>
-                </div>
-            </div>
-        </div>
-        
-        <!-- avatar -->
-        <div class="col-xs-4">
-            <div class="team-member wow zoomIn">
-                <img src="/static/assets/img/landing/avatar.jpg" height="110" width="110" class="img-responsive img-circle" alt="">
-                <h4><span class="navy">CrazyAndy</span></h4>
-                <ul class="list-inline social-icon">
-                    
-                    <li><a href="https://github.com/CrazyAndy" target="blank"><i class="fa fa-github"></i></a></li>
-                    
-                    
-                    
-                    
-                    
-                    <li><a href="mailto:auden.sh@163.com"><i class="fa fa-envelope-o"></i></a></li>
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- second two icons -->
-        
-        <div class="col-xs-2 wow fadeInRight">
-            <div class="team-member">
-                <div class="vote-icon">
-                    <i class="fa fa-linux"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xs-2 wow fadeInRight">
-            <div class="team-member">
-                <div class="vote-icon">
-                    <i class="fa icon-apache"></i>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg wow zoomIn">
-            <p><span data-i18n="about_me.des">喜欢看《海贼王》的程序猿。</span></p>
-        </div>
-    </div>
+<article class="article-page">
+  <div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;"></div>
 </div>
+  <div class="wrapper">
+    <div class="page-content">
+      <div class="header-page" >
+        <h1 class="page-title">有关于我的故事</h1>
+        <div class="page-date"><time datetime="2017-08-24 13:32:20 +0300">2016, Aug 24</time></div>
+      </div>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序猿一只，山东汉子一个，不求有日能显贵世人，但求小富即安，能让自己的家人过的舒服安稳就好。</p>
 
-	
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一直使用java作为编程语言，偶尔研究bootstrap改改页面。刚入行几年主要做后台管理系统，后来喜欢微服务，现在兴趣点主要在微服务，领域驱动设计，大数据在线分析这三块，将来想做个架构师，将自己的设计思想附能于真实的业务场景中去。</p>
 
-	
-  		
-  		<section id="career" class="features  gray-section  timeline" style="margin-top: 0;">
-		<div class="container" id="i18_career">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1><span data-i18n="career.my_career">生涯</span></h1>
-        </div>
-    </div>
-    <div class="row features-block">
-        <div class="col-lg-12">
-            <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
-            
-            
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg wow rotateIn">
-                        <i class="fa fa-plus-square"></i>
-                    </div>
-                    <div class="vertical-timeline-content wow  rotateInUpRight ">
-                        <h2><span data-i18n="career.">TTFW</span></h2>
-                        <p><span data-i18n="career.">接触一些新技术，对项目管理有些更新的认识 </span></p>
-                        <span class="vertical-date"><span data-i18n="career."> 2016-09-18 </span>
-                        <br/> <small><span data-i18n="career.">Java 主程 + 架构</span></small> </span>
-                    </div>
-                </div>
-            
-            
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg wow rotateIn">
-                        <i class="fa fa-plus-square"></i>
-                    </div>
-                    <div class="vertical-timeline-content wow  rotateInUpLeft ">
-                        <h2><span data-i18n="career.">Itec</span></h2>
-                        <p><span data-i18n="career.company_a_desc">认识了一些人，交了几个朋友，学到一些东西，算没白来 </span></p>
-                        <span class="vertical-date"><span data-i18n="career.company_a_date"> 2014-04-01 </span>
-                        <br/> <small><span data-i18n="career.company_a_job">Java 项目组长</span></small> </span>
-                    </div>
-                </div>
-            
-            
-                <div class="vertical-timeline-block">
-                    <div class="vertical-timeline-icon navy-bg wow rotateIn">
-                        <i class="fa fa-plus-square"></i>
-                    </div>
-                    <div class="vertical-timeline-content wow  rotateInUpRight ">
-                        <h2><span data-i18n="career.RockMobile">RockMobile</span></h2>
-                        <p><span data-i18n="career.company_b_desc">一段愉悦难忘的美好时光 </span></p>
-                        <span class="vertical-date"><span data-i18n="career.company_b_date"> 2011-09-01 </span>
-                        <br/> <small><span data-i18n="career.company_b_job">Java 工程师</span></small> </span>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</div>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;过了30岁之后，性情也沉稳了许多，看淡了周边的一些事情，也对将来的发展路线有个比以往更清晰的认知，希望通过自己努力实现自己的梦想。</p>                                                                                                          
+      <div class="page-footer">
 
-	
+        <section class="author-box">
+          <img src="static/assets/img/adam/adam-face.jpg" alt="Adam Neilson" class="author-img">
+          <div class="author-desc">
+            <h2>CrazyAndy</h2>
+            <p>我的英文名字叫CrazyAndy，一个喜欢在编程世界里探知新奇事物的孩子。平时喜欢看看技术之类的书籍，微服务，领域驱动设计，消息队列。喜欢狗狗，崇尚领养代替购买的理念，希望能为小动物领养做点自己的贡献</p>
+            <ul>
 
-	
+              <li class="email"><a href="mailto:auden.sh@163.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
 
-	
-  		
-  		<section id="links" class="features  gray-section  contact" style="margin-top: 0;">
-		<div class="container" id="i18_link">
-	<div style="height: 80px;"></div>
-    <div class="row m-b-lg">
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1><span data-i18n="link.link">联系</span></h1>
-        </div>
-    </div>
-    <div class="row">
-    
-        
-        
-            
-        <div class="col-sm-4 col-sm-offset-4 wow zoomIn">
-                
-        
-        <div class="team-member">
-            <h4><span class="navy">CrazyAndy</span> </h4>
-            <p>版主</p>
-			<ul class="list-inline social-icon">
-                <li>Email:auden.sh@163.com
-                </li>
+
+              <li class="phone"><a href="tel:13821352155"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+
+
+              <li class="github"><a href="https://github.com/CrazyAndy" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+
+
             </ul>
+          </div>
+        </section>
+
+        <div class="recent-box">
+          <h2 class="recent-title">最近博客</h2>
+          <div class="recent-list">
+              
+                <a href="/reading/2017/04/05/PaperPlane.html" class="recent-item" 
+                style="background: url('static/assets/img/adam/post-1.jpg') center no-repeat; background-size: cover;">
+                <span>Paper Plane</span>
+                </a>
+              
+                <a href="/boot/2017/01/01/SpringBoot.html" class="recent-item" 
+                style="background: url('static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;">
+                <span>使用Spring Boot构建web框架(一)</span>
+                </a>
+              
+                <a href="/java/2016/08/01/SmartFrame.html" class="recent-item" 
+                style="background: url('static/assets/img/adam/post-3.jpg') center no-repeat; background-size: cover;">
+                <span>黄勇-架构探险-从零开始写Java Web框架</span>
+                </a>
+              
+                <a href="/java/2016/08/01/Java-Crawler.html" class="recent-item" 
+                style="background: url('static/assets/img/adam/post-4.jpg') center no-repeat; background-size: cover;">
+                <span>构建简单的Java 爬虫框架</span>
+                </a>
+              
+            
+          </div>
+        </div> <!-- End Recent-Box -->
+
+        <div class="newsletter" id="links">
+          <h2 class="newsletter-title">联系我</h2>
+          <div class="form-container">
+            <p>Email: auden.sh@163.com</p>
+          </div>
         </div>
-        </div>
-    
+
+      </div>
+    </div> <!-- End Wrapper -->
+  </article>
+
+  <footer class="main-footer">
+    <div class="copyright">
+      <p>2018 © Crazy Andy</p>
     </div>
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-            <p id="jalpc_site_pv"><strong>&copy; 2017 CrazyAndy</strong></p>
-        </div>
-    </div>
-	<div style="height: 240px;"></div>
+  </footer> <!-- End Footer -->
+
 </div>
-
-	
-
 <style type="text/css">
-    iframe {
+iframe {
   -moz-transform: scale(0.25, 0.25);
   -webkit-transform: scale(0.25, 0.25);
   -o-transform: scale(0.25, 0.25);
@@ -337,7 +220,6 @@ var _hmt = _hmt || [];
 })();
 _hmt.push(['_setAutoPageview', true]);
 </script>
-
 
 
 	

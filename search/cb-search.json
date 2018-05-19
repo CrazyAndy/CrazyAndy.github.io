@@ -4,7 +4,7 @@
 	 
 	{
 		"title" : "Paper Plane - 2017-04-05",
-		"url" : "/literature/2017/04/05/PaperPlane.html"
+		"url" : "/reading/2017/04/05/PaperPlane.html"
 	}
 	
 	,
@@ -52,7 +52,7 @@
     
 	{
 		"title" : "关于Java设计模式的肤浅看法--装饰者模式（四） - 2012-04-04",
-		"url" : "/java/2012/04/04/DecoratorPattern.html"
+		"url" : "/design/2012/04/04/DecoratorPattern.html"
 	}
 	
 	,
@@ -60,7 +60,7 @@
     
 	{
 		"title" : "关于Java设计模式的肤浅看法--观察者模式（三） - 2012-04-03",
-		"url" : "/java/2012/04/03/ObserverPattern.html"
+		"url" : "/design/2012/04/03/ObserverPattern.html"
 	}
 	
 	,
@@ -68,7 +68,7 @@
     
 	{
 		"title" : "关于Java设计模式的肤浅看法--策略模式（二） - 2012-04-02",
-		"url" : "/java/2012/04/02/StrategyPattern.html"
+		"url" : "/design/2012/04/02/StrategyPattern.html"
 	}
 	
 	,
@@ -76,7 +76,7 @@
     
 	{
 		"title" : "关于Java设计模式的肤浅看法--前言（一） - 2012-04-01",
-		"url" : "/java/2012/04/01/PatternBefore.html"
+		"url" : "/design/2012/04/01/PatternBefore.html"
 	}
 	
     
