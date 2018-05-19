@@ -3,10 +3,10 @@
   <channel>
     <title>CrazyAndy</title>
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
-    <link>http://CrazyAndy.github.io/</link>
-    <atom:link href="http://CrazyAndy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 May 2018 00:05:07 +0800</pubDate>
-    <lastBuildDate>Sun, 20 May 2018 00:05:07 +0800</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 20 May 2018 00:09:33 +0800</pubDate>
+    <lastBuildDate>Sun, 20 May 2018 00:09:33 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -44,8 +44,8 @@
 
 </description>
         <pubDate>Wed, 05 Apr 2017 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</guid>
+        <link>http://localhost:4000/reading/2017/04/05/PaperPlane.html</link>
+        <guid isPermaLink="true">http://localhost:4000/reading/2017/04/05/PaperPlane.html</guid>
         
         <category>大时代</category>
         
@@ -68,8 +68,8 @@
 
 </description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</guid>
+        <link>http://localhost:4000/boot/2017/01/01/SpringBoot.html</link>
+        <guid isPermaLink="true">http://localhost:4000/boot/2017/01/01/SpringBoot.html</guid>
         
         <category>java</category>
         
@@ -94,8 +94,8 @@
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</guid>
+        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
         
         <category>java</category>
         
@@ -136,8 +136,8 @@
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</guid>
+        <link>http://localhost:4000/java/2016/08/01/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/Java-Crawler.html</guid>
         
         <category>java</category>
         
@@ -289,8 +289,8 @@
 
 </description>
         <pubDate>Wed, 13 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</guid>
+        <link>http://localhost:4000/linux/2013/03/13/LinuxConfig.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/13/LinuxConfig.html</guid>
         
         <category>linux</category>
         
@@ -340,8 +340,8 @@
 
 </description>
         <pubDate>Fri, 01 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</guid>
+        <link>http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</guid>
         
         <category>linux</category>
         
@@ -843,8 +843,8 @@
 
 </description>
         <pubDate>Wed, 04 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</guid>
+        <link>http://localhost:4000/design/2012/04/04/DecoratorPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/design/2012/04/04/DecoratorPattern.html</guid>
         
         <category>java</category>
         
@@ -1347,8 +1347,8 @@
 
 </description>
         <pubDate>Tue, 03 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</guid>
+        <link>http://localhost:4000/design/2012/04/03/ObserverPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/design/2012/04/03/ObserverPattern.html</guid>
         
         <category>java</category>
         
@@ -1673,8 +1673,8 @@
 
 </description>
         <pubDate>Mon, 02 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</guid>
+        <link>http://localhost:4000/design/2012/04/02/StrategyPattern.html</link>
+        <guid isPermaLink="true">http://localhost:4000/design/2012/04/02/StrategyPattern.html</guid>
         
         <category>java</category>
         
@@ -1712,8 +1712,8 @@
 
 </description>
         <pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</link>
-        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</guid>
+        <link>http://localhost:4000/design/2012/04/01/PatternBefore.html</link>
+        <guid isPermaLink="true">http://localhost:4000/design/2012/04/01/PatternBefore.html</guid>
         
         <category>java</category>
         
