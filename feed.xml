@@ -5,9 +5,103 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 20 May 2018 22:57:55 +0800</pubDate>
-    <lastBuildDate>Sun, 20 May 2018 22:57:55 +0800</lastBuildDate>
+    <pubDate>Mon, 21 May 2018 22:03:44 +0800</pubDate>
+    <lastBuildDate>Mon, 21 May 2018 22:03:44 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>presto讲解002</title>
+        <description>&lt;h1 id=&quot;一安装建议&quot;&gt;一、安装建议&lt;/h1&gt;
+&lt;p&gt;　　Presto安装可分成单节点和多节点两种方式，单节点也就是协调器和worker都在一个主机上，由同一个程序担任提供协调器和worker两个角色，而多节点则推荐一个协调器节点和多个worker节点，查询性能瓶颈主要体现在worker上，粗俗点讲分的worker节点越多，性能越好，而协调器节点主要是用于接受sql查询输入，并进行分析之后拆分成多个任务分发到多个worker节点之上，在学习presto初期，建议使用单节点方式即可，以避免无谓的时间和精力浪费。&lt;/p&gt;
+&lt;h1 id=&quot;二安装步骤&quot;&gt;二、安装步骤&lt;/h1&gt;
+&lt;h3 id=&quot;一java环境安装&quot;&gt;（一）java环境安装&lt;/h3&gt;
+&lt;p&gt;　　presto源代码中大量使用了java lamba表达式写法，因此需要jdk1.8以上环境。安装方式可自行百度，不做详细说明。&lt;/p&gt;
+&lt;h3 id=&quot;二maven环境安装&quot;&gt;（二）maven环境安装&lt;/h3&gt;
+&lt;p&gt;　　presto需要使用maven 2.3.3版本，建议使用最近maven版本既可。&lt;/p&gt;
+&lt;h1 id=&quot;二资料整理&quot;&gt;二、资料整理&lt;/h1&gt;
+&lt;h3 id=&quot;一英文官网&quot;&gt;（一）英文官网&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://prestodb.io/&quot;&gt;https://prestodb.io/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;二中文官网&quot;&gt;（二）中文官网&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://prestodb-china.com/&quot;&gt;http://prestodb-china.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;三github源码&quot;&gt;（三）github源码&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/prestodb/presto&quot;&gt;https://github.com/prestodb/presto&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;四京东源码&quot;&gt;（四）京东源码&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/CHINA-JD/presto/&quot;&gt;https://github.com/CHINA-JD/presto/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;五mysql版本源码某位大神在官网源码上针对mysql做出了一些修改&quot;&gt;（五）mysql版本源码(某位大神在官网源码上针对mysql做出了一些修改)&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/HackShare/presto&quot;&gt;https://github.com/HackShare/presto&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;三小结&quot;&gt;三、小结&lt;/h1&gt;
+&lt;p&gt;　　Presto可跨数据引擎操作，它会根据你输入的sql语句判断具体该使用哪个数据源或者哪几个数据源。&lt;/p&gt;
+
+&lt;p&gt;　　Presto是解决查询时使用的，它并没有针对修改，删除，增加等数据操作做太细致的代码编写，甚至很多数据源还不支持这三种操作，当然你可以根据自己需求在源码基础之上进行定制扩展开发。&lt;/p&gt;
+
+&lt;p&gt;　　Presto先将sql语句进行语义和语法分析，然后根据分析结果拆分成多个任务，然后分发多个任务，最后将多个任务返回结果汇总并在需要的时候进行特定的计算，然后将最终结果返回给调用端。它之所以查询快速，就是因为它的任务拆分，并行处理，提高了计算机的cpu使用率，而且个MapReduce相比，它不会在中间过程进行数据落地，只是将数据在内存中保留，然后经过一系列流转，最后返回数据。也正因为如此，它需要运行在大内存，高性能的服务器上，才能发挥出它的效率，据多方数据显示，它的查询效率比淡出使用hive查询快10倍。&lt;/p&gt;
+
+&lt;p&gt;　　当然，如果指定特定业务场景的话，presto并不是最快的查询方式，kylin则在特定应用场景下具有更快的查询效率，简单来说，kylin使用预计算方式，它会根据你预先指定的数据模型查询出你想要的数据集合，默认存储大hbase上，你在执行真正的sql查询时，并不是查询真正的hdfs文件中的数据，而是查询它已经预先统计出来的结果，这就比方说，你需要在100亿条行车记录里面查询想要的最近1星期某路口每天通过车辆次数，他已经使用你给它提前设定的数据模型计算生成最近一个月的该路口通过车辆次数，并以每天多少车次统计成一条数据，假如说有100个路口，也就是说你只需要在100*365条数据里面查找该路口最近一个星期，也就是7条数据，那你就可以想象这种查询效率比直接从那100亿条数据中查询要快多少，而且在商用生产中，我们更倾向于使用便宜的低性能机器的条件下。&lt;/p&gt;
+
+&lt;p&gt;　　《人月神话》里说过，技术永远没有银弹，我们可以理解成在现实某种状况下，某种技术更加适合，是结合当前条件的最优妥协罢了。在笔者看来，presto适合数据建模并不十分明朗的数据查询，相对于直接查询hive更快，却又和kylin相比在特定建模下性能有所差距。而且，presto倡议只是用来查询分析，你非要拿兰博基尼当拖拉机去耕地，这不大热天喝热茶，越喝越热么 ^_^&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/bigdata/2018/01/01/Presto.html</link>
+        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/01/Presto.html</guid>
+        
+        <category>blog</category>
+        
+        <category>presto</category>
+        
+        <category>bigdata</category>
+        
+        
+        <category>bigdata</category>
+        
+      </item>
+    
+      <item>
+        <title>presto讲解001</title>
+        <description>&lt;h1 id=&quot;一内容概述&quot;&gt;一、内容概述&lt;/h1&gt;
+&lt;p&gt;　　Presto 是 Facebook 推出的一个基于Java开发的大数据分布式 SQL 查询引擎，可对从数 G 到数 P 的大数据进行交互式的查询，查询的速度达到商业数据仓库的级别
+　　Presto是一个运行在多台服务器上的分布式系统。 完整安装包括一个coordinator和多个worker。 由客户端提交查询，从Presto命令行CLI提交到coordinator。 coordinator进行解析，分析并执行查询计划，然后分发处理队列到worker。&lt;/p&gt;
+&lt;h3 id=&quot;一硬件架构图&quot;&gt;（一）硬件架构图&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/presto/presto001.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/presto/presto001.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;二软件架构图&quot;&gt;（二）软件架构图&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/presto/presto002.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/presto/presto002.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;h1 id=&quot;二资料整理&quot;&gt;二、资料整理&lt;/h1&gt;
+&lt;h3 id=&quot;一英文官网&quot;&gt;（一）英文官网&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://prestodb.io/&quot;&gt;https://prestodb.io/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;二中文官网&quot;&gt;（二）中文官网&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://prestodb-china.com/&quot;&gt;http://prestodb-china.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;三github源码&quot;&gt;（三）github源码&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/prestodb/presto&quot;&gt;https://github.com/prestodb/presto&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;四京东源码&quot;&gt;（四）京东源码&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/CHINA-JD/presto/&quot;&gt;https://github.com/CHINA-JD/presto/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;五mysql版本源码某位大神在官网源码上针对mysql做出了一些修改&quot;&gt;（五）mysql版本源码(某位大神在官网源码上针对mysql做出了一些修改)&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/HackShare/presto&quot;&gt;https://github.com/HackShare/presto&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;三小结&quot;&gt;三、小结&lt;/h1&gt;
+&lt;p&gt;　　Presto可跨数据引擎操作，它会根据你输入的sql语句判断具体该使用哪个数据源或者哪几个数据源。&lt;/p&gt;
+
+&lt;p&gt;　　Presto是解决查询时使用的，它并没有针对修改，删除，增加等数据操作做太细致的代码编写，甚至很多数据源还不支持这三种操作，当然你可以根据自己需求在源码基础之上进行定制扩展开发。&lt;/p&gt;
+
+&lt;p&gt;　　Presto先将sql语句进行语义和语法分析，然后根据分析结果拆分成多个任务，然后分发多个任务，最后将多个任务返回结果汇总并在需要的时候进行特定的计算，然后将最终结果返回给调用端。它之所以查询快速，就是因为它的任务拆分，并行处理，提高了计算机的cpu使用率，而且个MapReduce相比，它不会在中间过程进行数据落地，只是将数据在内存中保留，然后经过一系列流转，最后返回数据。也正因为如此，它需要运行在大内存，高性能的服务器上，才能发挥出它的效率，据多方数据显示，它的查询效率比淡出使用hive查询快10倍。&lt;/p&gt;
+
+&lt;p&gt;　　当然，如果指定特定业务场景的话，presto并不是最快的查询方式，kylin则在特定应用场景下具有更快的查询效率，简单来说，kylin使用预计算方式，它会根据你预先指定的数据模型查询出你想要的数据集合，默认存储大hbase上，你在执行真正的sql查询时，并不是查询真正的hdfs文件中的数据，而是查询它已经预先统计出来的结果，这就比方说，你需要在100亿条行车记录里面查询想要的最近1星期某路口每天通过车辆次数，他已经使用你给它提前设定的数据模型计算生成最近一个月的该路口通过车辆次数，并以每天多少车次统计成一条数据，假如说有100个路口，也就是说你只需要在100*365条数据里面查找该路口最近一个星期，也就是7条数据，那你就可以想象这种查询效率比直接从那100亿条数据中查询要快多少，而且在商用生产中，我们更倾向于使用便宜的低性能机器的条件下。&lt;/p&gt;
+
+&lt;p&gt;　　《人月神话》里说过，技术永远没有银弹，我们可以理解成在现实某种状况下，某种技术更加适合，是结合当前条件的最优妥协罢了。在笔者看来，presto适合数据建模并不十分明朗的数据查询，相对于直接查询hive更快，却又和kylin相比在特定建模下性能有所差距。而且，presto倡议只是用来查询分析，你非要拿兰博基尼当拖拉机去耕地，这不大热天喝热茶，越喝越热么 ^_^&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/bigdata/2018/01/01/Presto.html</link>
+        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/01/Presto.html</guid>
+        
+        <category>blog</category>
+        
+        <category>presto</category>
+        
+        <category>bigdata</category>
+        
+        
+        <category>bigdata</category>
+        
+      </item>
     
       <item>
         <title>Paper Plane</title>
