@@ -5,9 +5,34 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 May 2018 22:58:48 +0800</pubDate>
-    <lastBuildDate>Mon, 21 May 2018 22:58:48 +0800</lastBuildDate>
+    <pubDate>Mon, 21 May 2018 23:11:37 +0800</pubDate>
+    <lastBuildDate>Mon, 21 May 2018 23:11:37 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>Spring Cloud 整体概括篇</title>
+        <description>&lt;h1 id=&quot;一参考资料&quot;&gt;一、参考资料&lt;/h1&gt;
+&lt;p&gt;　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
+翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的微服务电子书 Designing and Deploying Microservices 的中文版，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。&lt;/p&gt;
+&lt;h1 id=&quot;二感谢&quot;&gt;二、感谢&lt;/h1&gt;
+&lt;p&gt;　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。&lt;/p&gt;
+&lt;h1 id=&quot;三博客结构&quot;&gt;三、博客结构&lt;/h1&gt;
+&lt;p&gt;　　本篇为整体概括篇为第一篇，主要是大体介绍一下Spring Cloud微服务全家桶体系下，都有哪些内容，方便大家从整体了解其知识体系。笔者认为，个人愚见啊，想要学习一项技术，开始的时候需要了解该技术应用场景，它都能干什么，它的优缺点是什么，目前市场上有没有其他替代产品，他们之间差异是什么，最后再考虑是否高度符合当前业务需求；然后再说技术具体细节使用的事情。&lt;/p&gt;
+
+&lt;p&gt;　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 01 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/01/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/01/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
     
       <item>
         <title>presto讲解002</title>
@@ -19,9 +44,9 @@
 &lt;h3 id=&quot;二maven环境安装&quot;&gt;（二）maven环境安装&lt;/h3&gt;
 &lt;p&gt;　　presto需要使用maven 2.3.3版本，建议使用最近maven版本既可。&lt;/p&gt;
 </description>
-        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigdata/2018/01/01/Presto.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/01/Presto.html</guid>
+        <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/bigdata/2018/01/02/Presto.html</link>
+        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/02/Presto.html</guid>
         
         <category>blog</category>
         

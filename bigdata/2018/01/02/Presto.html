@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="presto架构知识了解" name="description">
+    <meta content="presto安装" name="description">
   
   
     <meta name="keywords" content="presto,bigdata">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|presto讲解001
+        CrazyAndy|presto讲解002
     
   </title>
   <!-- favicon -->
@@ -214,41 +214,18 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jan 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2018</span>
                         <h1>
-                            presto讲解001
+                            presto讲解002
                         </h1>
                     </div>
-                    	<h1 id="一内容概述">一、内容概述</h1>
-<p>　　Presto 是 Facebook 推出的一个基于Java开发的大数据分布式 SQL 查询引擎，可对从数 G 到数 P 的大数据进行交互式的查询，查询的速度达到商业数据仓库的级别
-　　Presto是一个运行在多台服务器上的分布式系统。 完整安装包括一个coordinator和多个worker。 由客户端提交查询，从Presto命令行CLI提交到coordinator。 coordinator进行解析，分析并执行查询计划，然后分发处理队列到worker。</p>
-<h3 id="一硬件架构图">（一）硬件架构图</h3>
-<!-- ![edit](/static/assets/img/blog/presto/presto001.png) -->
-<center><img src="/static/assets/img/blog/presto/presto001.png" width="75%" /></center>
-<h3 id="二软件架构图">（二）软件架构图</h3>
-<!-- ![edit](/static/assets/img/blog/presto/presto002.png) -->
-<center><img src="/static/assets/img/blog/presto/presto002.png" width="75%" /></center>
-<h1 id="二资料整理">二、资料整理</h1>
-<h3 id="一英文官网">（一）英文官网</h3>
-<p><a href="https://prestodb.io/">https://prestodb.io/</a></p>
-<h3 id="二中文官网">（二）中文官网</h3>
-<p><a href="http://prestodb-china.com/">http://prestodb-china.com/</a></p>
-<h3 id="三github源码">（三）github源码</h3>
-<p><a href="https://github.com/prestodb/presto">https://github.com/prestodb/presto</a></p>
-<h3 id="四京东源码">（四）京东源码</h3>
-<p><a href="https://github.com/CHINA-JD/presto/">https://github.com/CHINA-JD/presto/</a></p>
-<h3 id="五mysql版本源码某位大神在官网源码上针对mysql做出了一些修改">（五）mysql版本源码(某位大神在官网源码上针对mysql做出了一些修改)</h3>
-<p><a href="https://github.com/HackShare/presto">https://github.com/HackShare/presto</a></p>
-<h1 id="三小结">三、小结</h1>
-<p>　　Presto可跨数据引擎操作，它会根据你输入的sql语句判断具体该使用哪个数据源或者哪几个数据源。</p>
-
-<p>　　Presto是解决查询时使用的，它并没有针对修改，删除，增加等数据操作做太细致的代码编写，甚至很多数据源还不支持这三种操作，当然你可以根据自己需求在源码基础之上进行定制扩展开发。</p>
-
-<p>　　Presto先将sql语句进行语义和语法分析，然后根据分析结果拆分成多个任务，然后分发多个任务，最后将多个任务返回结果汇总并在需要的时候进行特定的计算，然后将最终结果返回给调用端。它之所以查询快速，就是因为它的任务拆分，并行处理，提高了计算机的cpu使用率，而且个MapReduce相比，它不会在中间过程进行数据落地，只是将数据在内存中保留，然后经过一系列流转，最后返回数据。也正因为如此，它需要运行在大内存，高性能的服务器上，才能发挥出它的效率，据多方数据显示，它的查询效率比淡出使用hive查询快10倍。</p>
-
-<p>　　当然，如果指定特定业务场景的话，presto并不是最快的查询方式，kylin则在特定应用场景下具有更快的查询效率，简单来说，kylin使用预计算方式，它会根据你预先指定的数据模型查询出你想要的数据集合，默认存储大hbase上，你在执行真正的sql查询时，并不是查询真正的hdfs文件中的数据，而是查询它已经预先统计出来的结果，这就比方说，你需要在100亿条行车记录里面查询想要的最近1星期某路口每天通过车辆次数，他已经使用你给它提前设定的数据模型计算生成最近一个月的该路口通过车辆次数，并以每天多少车次统计成一条数据，假如说有100个路口，也就是说你只需要在100*365条数据里面查找该路口最近一个星期，也就是7条数据，那你就可以想象这种查询效率比直接从那100亿条数据中查询要快多少，而且在商用生产中，我们更倾向于使用便宜的低性能机器的条件下。</p>
-
-<p>　　《人月神话》里说过，技术永远没有银弹，我们可以理解成在现实某种状况下，某种技术更加适合，是结合当前条件的最优妥协罢了。在笔者看来，presto适合数据建模并不十分明朗的数据查询，相对于直接查询hive更快，却又和kylin相比在特定建模下性能有所差距。而且，presto倡议只是用来查询分析，你非要拿兰博基尼当拖拉机去耕地，这不大热天喝热茶，越喝越热么 ^_^</p>
+                    	<h1 id="一安装建议">一、安装建议</h1>
+<p>　　Presto安装可分成单节点和多节点两种方式，单节点也就是协调器和worker都在一个主机上，由同一个程序担任提供协调器和worker两个角色，而多节点则推荐一个协调器节点和多个worker节点，查询性能瓶颈主要体现在worker上，粗俗点讲分的worker节点越多，性能越好，而协调器节点主要是用于接受sql查询输入，并进行分析之后拆分成多个任务分发到多个worker节点之上，在学习presto初期，建议使用单节点方式即可，以避免无谓的时间和精力浪费。</p>
+<h1 id="二安装步骤">二、安装步骤</h1>
+<h3 id="一java环境安装">（一）java环境安装</h3>
+<p>　　presto源代码中大量使用了java lamba表达式写法，因此需要jdk1.8以上环境。安装方式可自行百度，不做详细说明。</p>
+<h3 id="二maven环境安装">（二）maven环境安装</h3>
+<p>　　presto需要使用maven 2.3.3版本，建议使用最近maven版本既可。</p>
 
                     <hr>
                     <div class="row">
@@ -268,7 +245,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/bigdata/2018/01/01/Presto.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/bigdata/2018/01/02/Presto.html">0</span> comments
                                 
                                 </div>
                             </div>
