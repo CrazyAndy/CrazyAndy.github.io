@@ -5,9 +5,379 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 21 May 2018 23:11:37 +0800</pubDate>
-    <lastBuildDate>Mon, 21 May 2018 23:11:37 +0800</lastBuildDate>
+    <pubDate>Tue, 22 May 2018 21:14:43 +0800</pubDate>
+    <lastBuildDate>Tue, 22 May 2018 21:14:43 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>Spring Cloud整体概括篇051_请求上下文配置</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。
+比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
+你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/&lt;strong&gt;，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？
+如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
+如果是Api网关 zuul 怎么办？在配置文件中加入
+zuul.routes.user-service.path=/user-service/&lt;/strong&gt;;
+zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)&lt;/p&gt;
+</description>
+        <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/01/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/01/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇009_devops</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
+　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇008_监控中心</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　监控中心可监控微服务实例被请求次数，时间，断路次数等,也可以进行全链路跟踪。
+　　大众点评技术中心开源了cat系统用来配置服务监控，并提供ui显示各服务运行情况，在以后章节会在进行深入详细讲解。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/08/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/08/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇007_配置中心</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　Spring boot 配置文件管理在 application.properties里面 ，如果有需要还要根据dev,test,prod 做分别的配置，在部署时不好管理，配置信息更新时也不方便修改所有配置文件，而且有可能有的业务场景还避讳生产机Ip和port。
+　　Spring cloud 默认使用 git ，其实也可以用svn，甚至于本地一个文件。
+　　Spring cloud 有专门的插件 叫做 config ，它又分成 客户端 和服务器端。
+　　　　1. 服务器端指定 git 地址，为客户端提供查询具体配置的接口；
+　　　　2. 客户端通过请求服务端为其提供的服务接口，查询具体配置并应用到客户端所在的服务中去。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 07 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/07/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/07/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇006_断路器</title>
+        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
+&lt;p&gt;　　断路器主要是针对某服务出现故障不能响应，而将访问请求转发到其他能正常工作的服务实例上去，当然也可以做一些降级策略，比如所有同类型服务都出现故障，可降级返回客户端能理解的错误编码等方式，避免客户端看到500服务器错误，避免影响用户使用体验。断路器模式如下图所示：
+&lt;!-- ![edit](/static/assets/img/blog/cloud/cloud003.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/cloud/cloud003.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　低水平的服务的服务失败会导致级联故障一直给到用户。当调用一个特定的服务达到一定阈值(默认5秒失败20次),打开断路器。在错误的情况下和一个开启的断路回滚fallback应可以由开发人员提供。 
+如上图，b服务依然挂掉，不能再提供正常服务，这时候如果还将前端请求转发到b，显然是不合适的，我们会为b服务实现回滚逻辑，也就是降级处理。这样，在下次请求b服务的时候，断路器会直接执行回滚逻辑，告知前端通知，比如该服务不能正常运行，或者提供该服务的一个“应付”数据等等。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 06 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/06/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/06/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇005_服务发现</title>
+        <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
+&lt;p&gt;　　服务注册与发现，其实就是对服务列表的维护。
+　　比如我们写一个user-service 的微服务，我们需要将 该服务运行所在的ip和port还有其他一些信息配置到一个配置中心去，如果其他服务需要使用user-service所提供的服务的时候，它们可以自然而然的从配置中心获取关于user-service的ip，port等信息，然后用http client的方式去请求user-service 提供的服务。
+　　上面所说的配置中心，就是我们要将的服务注册中心，微服务在启动时会将自身信息提交给注册中心，我们称之为注册；其他微服务根据注册中心配置的服务信息列表，访问具体的微服务，我们称之为发现。
+　　而服务治理则指的是以下这些活动：
+　　　　1. 对开发新服务和升级现有服务的计划
+　　　　2. 管理服务的生命周期：确保升级服务不会影响目前的服务消费者
+　　　　3. 制定方针来限制服务行为：制定所有服务都要遵从的规则，确保服务的一致性
+　　　　4. 监控服务的性能：由于服务组合，服务停机和性能低下的后果是严重的。通过监控服务的性能和可用性，当问题出现的时候能马上采取应对措施。
+　　　　5. 管理由谁来调用服务、怎样调用服务&lt;/p&gt;
+&lt;h1 id=&quot;二实现思路&quot;&gt;二、实现思路&lt;/h1&gt;
+&lt;p&gt;Spring cloud 体系中，用eureka web服务提供注册中心功能。
+服务注册中心并不能起到负载均衡的作用，而负载均衡指的是 获取服务注册中心的服务列表，按照某种策略从中选取其中一个符合条件的服务实例配置，然后再请求该实例的行为。&lt;/p&gt;
+&lt;h3 id=&quot;一注册方式有两种&quot;&gt;（一）注册方式有两种：&lt;/h3&gt;
+&lt;p&gt;　　一种是微服务自身启动时向服务注册中心注册自己；
+　　另外一种是服务注册器通过轮询部署环境或订阅事件来跟踪运行实例集的变更情况。当它检测到一个新的可用服务实例时，它会将该实例注册到服务注册中心。此外，服务注册器可以注销终止的服务实例。&lt;/p&gt;
+&lt;h3 id=&quot;二发现方式也有两种&quot;&gt;（二）发现方式也有两种：&lt;/h3&gt;
+&lt;p&gt;　　一种是服务端发现，比如前端访问请求到nginx ，nginx根据配置的策略转发请求到具体的一台主机上去，前端请求到这台主机上，由不得前端选择，是服务器端帮助前端选择的，所以称之为服务端发现模式；
+　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 05 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/05/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/05/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇004_进程间通讯</title>
+        <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
+&lt;p&gt;　　之前说的是api网关调用后端微服务，现在说的是后端微服务之间的互相调用。
+　　比如说有个人定了一张电影票，订票服务需要先调用用户服务的余额查询，然后再处理自身的业务处理。订票服务调用余额查询就是进程间通讯，其实刚才说的api网关转发请求也是进程间通讯。&lt;/p&gt;
+&lt;h1 id=&quot;二通讯模式&quot;&gt;二、通讯模式&lt;/h1&gt;
+&lt;h3 id=&quot;一分类&quot;&gt;（一）分类：&lt;/h3&gt;
+&lt;p&gt;　　对通讯模式分类有多种维度，根据生产者实例数量维度可分为一对一和一对多（没有多对一和多对多）；根据响应方式的维度又可以分为请求/响应，通知，请求/异步响应(最典型的如ajax)。
+　　对于进程间通讯，我自认为不如 《微服务实战》写的好，在此引用一下：
+　　当为服务选择一种 IPC 机制时，首先需要考虑服务如何交互。有许多种客户端 — 服务交互方式。它们可以分为两个类。
+　　第一类是一对一交互与一对多交互：
+　　　　一对一：每个客户端请求都由一个服务实例处理。
+　　　　一对多：每个请求由多个服务实例处理。
+　　第二类是同步交互与异步交互：
+　　　　同步：客户端要求服务及时响应，在等待过程中可能会发生阻塞。
+　　　　异步：客户端在等待响应时不会发生阻塞，但响应（如果有）不一定立即返回。&lt;/p&gt;
+&lt;h3 id=&quot;二名词解释&quot;&gt;（二）名词解释：&lt;/h3&gt;
+&lt;p&gt;　　一对一交互分为以下列举的类型，包括同步（请求/响应）与异步（通知与请求/异步响应）：
+　　请求/响应：
+　　　　客户端向服务发出请求并等待响应。客户端要求响应及时到达。在基于线程的应用程序中，发出请求的线程可能在等待时发生阻塞。
+　　通知（又称为单向请求）：
+　　　　客户端向服务发送请求，但不要求响应。
+　　请求/异步响应：
+　　　　客户端向服务发送请求，服务异步响应。客户端在等待时不发生阻止，适用于假设响应可能不会立即到达的场景。
+　　一对多交互可分为以下列举的类型，它们都是异步的：
+　　发布/订阅：
+　　　　客户端发布通知消息，由零个或多个感兴趣的服务消费。
+　　发布/异步响应：
+　　　　客户端发布请求消息，之后等待一定时间来接收消费者的响应。
+　　通常，每个服务都组合着使用这些交互方式。对一些服务而言，单一的 IPC 机制就足够了，但其他服务可能需要组合多个 IPC 机制。&lt;/p&gt;
+&lt;h3 id=&quot;三应用实例&quot;&gt;（三）应用实例：&lt;/h3&gt;
+&lt;p&gt;　　下图显示了当用户请求打车时，打车应用中的服务可能会发生交互：
+&lt;!-- ![edit](/static/assets/img/blog/cloud/cloud003.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/cloud/cloud003.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　该打车流程使用了多种 IPC 机制的服务交互方式。
+　　服务使用了通知、请求/响应和发布/订阅组合。例如，乘客的智能手机向 Trip Management 微服务发送一条通知以请求一辆车。Trip Management 服务通过使用请求/响应来调用 Passenger Management 服务以验证乘客的帐户是否可用。之后，Trip Management 服务创建路线，并使用发布/订阅通知其他服务，包括用于定位可用司机的 Dispatcher。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 04 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/04/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/04/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇003_API网关</title>
+        <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
+&lt;p&gt;　　API网关是干什么用的呢，它就是所有微服务的“大门看守员”，它可以实现请求路由，负载均衡，校验过滤，请求失败熔断，服务聚合，监控，缓存，静态响应处理等一大堆功能。其中以一大部分功能是在响应当前请求做真正业务处理之前，做一些周边的类似于aop形式的工作。&lt;/p&gt;
+&lt;h1 id=&quot;二名词解析&quot;&gt;二、名词解析&lt;/h1&gt;
+&lt;h3 id=&quot;一请求路由&quot;&gt;（一）请求路由：&lt;/h3&gt;
+&lt;p&gt;　　判断当前请求路径需要转发请求到具体单个微服务，然后根据相应ip和端口配置转发请求到该服务上去。对于微服务所在机器的ip和端口配置，其实是由特定功能组件存储的，具体详细以后再讲，在这给你讲了你也听不懂。&lt;/p&gt;
+&lt;h3 id=&quot;二负载均衡&quot;&gt;（二）负载均衡：&lt;/h3&gt;
+&lt;p&gt;　　比如说需要查询用户列表的微服务有 a1,a2,a3 三个实例（它们分别运行在不同的ip和端口组合上），前端页面请求api网关，需要查询用户列表，这时候网关就会根据轮询或者权重或者随机或者自定义机制，从这三个服务实例中挑选出唯一一个实例出来，将请求转发到该实例上，该实例执行其内部业务逻辑之后将用户列表返回给网关，网关再返回给前端页面。在这个过程中，网关挑选服务实例的过程就是在做负载均衡，因为api网关主动为前端选择了一个实例进行处理响应，所以我们大可以将这种模式理解为服务器端负载均衡，而如果以后要讲的微服务之间调用，服务消费方则是主动从服务实例配置中选择一个服务实例，则这种方式又称为客户端负载均衡。&lt;/p&gt;
+&lt;h3 id=&quot;三校验过滤&quot;&gt;（三）校验过滤：&lt;/h3&gt;
+&lt;p&gt;　　原来的单体应用都会在前置过滤器中，插入验证机制，比如shiro，Spring Security 等；但是改成微服务之后呢，你总不能再每个微服务的前置过滤器中都加入验证逻辑吧，所以将校验逻辑放入api网关是再好不过的设计。&lt;/p&gt;
+&lt;h3 id=&quot;四请求失败熔断&quot;&gt;（四）请求失败熔断：&lt;/h3&gt;
+&lt;p&gt;　　请求失败次数过多，说明这个服务有问题，就不应该再让前端访问，在api网关直接返回error信息即可，这样可以保护后端服务器。&lt;/p&gt;
+&lt;h3 id=&quot;五服务聚合&quot;&gt;（五）服务聚合：&lt;/h3&gt;
+&lt;p&gt;　　一个页面上可能多个请求到后台，在api网关层聚合可以减少后端请求次数，保护后端服务器，让其使用率更高。&lt;/p&gt;
+&lt;h3 id=&quot;六监控&quot;&gt;（六）监控：&lt;/h3&gt;
+&lt;p&gt;　　监控每次请求内容，响应时间，单个服务请求频率，监控是否有爬虫爬取，恶意攻击等。也可以根据监控情况，增加高并发服务的运行实例以此来达到负载均衡，修补木桶的最矮木条。&lt;/p&gt;
+&lt;h3 id=&quot;七缓存&quot;&gt;（七）缓存：&lt;/h3&gt;
+&lt;p&gt;　　登陆用户缓存，图片缓存，热度信息缓存等。这样会减少后台具体业务逻辑的计算，从而缩短调用时长，降低后台服务器的使用压力，也提高的整体系统的承压能力。&lt;/p&gt;
+&lt;h3 id=&quot;八静态响应处理&quot;&gt;（八）静态响应处理：&lt;/h3&gt;
+&lt;p&gt;　　静态资源，比如图片，js，css文件等等，都可以直接在网关层就返回，不需要再转发到靠后的微服务。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 03 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/03/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/03/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud整体概括篇002_微服务简介</title>
+        <description>&lt;h1 id=&quot;一微服务简介&quot;&gt;一、微服务简介&lt;/h1&gt;
+&lt;p&gt;　　微服务一词来源于Martin Fowler的名为Microservices的博文，它和我们常用的Restful api 一样，都是一种设计风格，它的主旨是将巨石应用拆分成多个小型服务，各个小型服务独立运行，他们之间可以因为业务需求进行互相友好访问，也可单独或者多个集成到一块对外提供服务。高内聚，低耦合是软件工程经常运用的架构思想，旨在更方便的拆分开发任务，以及为将来升级维护做更好的铺垫(可单独修改单个小型服务而不影响其他服务运行)。而在拆分的同时，我们可以单独对某项小型服务部署多个实例，从而对该小型服务提供的服务进行负载处理。&lt;/p&gt;
+&lt;h1 id=&quot;二应用场景&quot;&gt;二、应用场景&lt;/h1&gt;
+&lt;p&gt;下图是摘自Martin Flower博文中插图，横轴表示复杂度，纵轴表示生产率；绿线表示巨石单体应用，蓝线表示微服务：
+&lt;!-- ![edit](/static/assets/img/blog/cloud/cloud001.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/cloud/cloud001.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;一低复杂度期&quot;&gt;（一）低复杂度期：&lt;/h3&gt;
+&lt;p&gt;　　当复杂度较低时(比如某软件项目第一期)，单体应用因为代码都耦合在一起，程序之间互相调用比较方便；而微服务因为需要根据不同业务拆分出多个模块分别开发(哪怕这个模块只需要几行代码就能完成)，还要约定需要数据交互的微服务之间的接口规范(这显然会增大工作量和工作复杂度)；所以这时候单体应用再生产率方便和微服务相比还是比较有优势的。这也在向我们阐述一个道理，就是并不是所有项目都需要拆成微服务形式的，就简单几个页面的增删该查，访问量一个月加起来都不够程序员月收入数额的，你要什么微服务？&lt;/p&gt;
+&lt;h3 id=&quot;二生产率相等转折点也就是绿蓝线交点&quot;&gt;（二）生产率相等转折点，也就是绿蓝线交点：&lt;/h3&gt;
+&lt;p&gt;　　单体应用随着项目复杂度增加，项目组成员沟通成本加大(一个开发者自己写的这块可能要牵动很多其他代码逻辑)，代码维护难度增加(过3个月有的时候连开发者本人都搞不懂自己当时为什么那么写，当然这个开发者自身也有问题，比如代码不规范，注释太少，设计别扭等等)；而此时微服务却因为复杂度增加而愈发显示出它的优势所在，独立开发，独自部署，只要接口约定好就可以。这个焦点恰恰是很难以把握的，或是在交点之前就需要将巨石应用微服务化（要考虑到将来扩展）。当然项目是分期做的，有的项目为了赶进度，可以先做成简单单体应用(最好根据业务分成多个模块，以便以后好拆分)，让boss们看到他们的钱没有白花。然后适当的在第一期boss们有新主意，评审项目需要加功能的时候，尽快完成微服务化。&lt;/p&gt;
+&lt;h3 id=&quot;三高复杂三&quot;&gt;（三）高复杂三：&lt;/h3&gt;
+&lt;p&gt;　　这时候已经不能阻止微服务的优势了。。。
+　　微服务因为其服务拆分的特点有着很多独特的优势，也正因为其特点也会产生很多新的问题，各种网友们真可谓是仁者见仁、智者见智，活脱脱的一千个人的心中有一千个哈姆雷特，谨劝各位，与其听别人白活还不如自己投入实战亲身体会比较好。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 02 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/02/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/02/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
     
       <item>
         <title>Spring Cloud 整体概括篇</title>
