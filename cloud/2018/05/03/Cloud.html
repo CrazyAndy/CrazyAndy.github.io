@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="请求上下文配置" name="description">
+    <meta content="服务间调用规范" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud问题解决篇001_请求上下文配置
+        CrazyAndy|Spring Cloud问题解决篇003_服务间调用规范
     
   </title>
   <!-- favicon -->
@@ -215,21 +215,60 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 May 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 May 2018</span>
                         <h1>
-                            Spring Cloud问题解决篇001_请求上下文配置
+                            Spring Cloud问题解决篇003_服务间调用规范
                         </h1>
                     </div>
                     	<h1 id="一问题描述">一、问题描述</h1>
-<p>　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。</p>
-
-<p>　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
-你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？</p>
+<p>　　Spring cloud 体系中，为服务间调用是用FeignClient（ribbon 和hystrix的功能合集）的。
+　　两个微服务，一个消费者，一个生产者，他们之间通讯最好需要约定一个接口，生产者实现该接口，消费者注入该接口的引用。</p>
 <h1 id="二解决思路">二、解决思路</h1>
-<p>　　如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
-如果是Api网关 zuul 怎么办？在配置文件中加入
-zuul.routes.user-service.path=/user-service/**;
-zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)</p>
+<p>　　现在有user-service 和 ticket-service 两个微服务，它们各自建立独立的 Spring boot工程，现在需要 写一个 user-service 的余额查询服务，ticket-service 需要调用这个服务。下面我们将用代码实现简单逻辑，以下代码完全手敲，可能有拼写错误，请忽略这点不完美。
+　　1. 我们首先定义一个通讯的规范标准接口，它需要定义在独立于前两个工程的另外一个单独工程里面，命名为 adapter-api ，其中有一个接口是这么写的
+　　</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	@RestController
+	@RequestMapping(“/adapter”)
+	public interface  AdapterApiInf {
+		@RequestMapping(“/queryBalanceByUserId”)
+		BigDecimal queryBalanceByUserId(String userId);
+	}
+</code></pre></div></div>
+
+<p>　　2. 在user-service 中，我们定义实现该接口的controller</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	public class AdapterController implements AdapterApiInf {
+		@overide 
+		public BigDecimal queryBalanceByUserId(String userId){
+			return BigDecimal.valueOf(39f); 
+		}
+	}
+</code></pre></div></div>
+
+<p>　　3. 在ticket-service中，我们用一个service 继承是AdapterApiInf</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	@Service
+	@FeignClient(name=”USER-SERVICE”)
+	public interface AdapterService extends AdapterApiInf {
+	}
+</code></pre></div></div>
+
+<p>　　在该项目中的一个controller中，我们这么写</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	@RestController
+	@RequestMapping(“/ticket”)
+	public class TicketController {
+		@Autowired
+		Private AdapterService  adapterService ;
+
+		@RequestMapping(method=RequestMethod.POST)
+		Public String buyTicket(@RequestParam(“userId”) String userId){
+			BigDecimal userBalance = adapterService.queryBalanceByUserId(userId);
+		}
+	} 
+</code></pre></div></div>
+
 
                     <hr>
                     <div class="row">
@@ -247,7 +286,7 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/01/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/03/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

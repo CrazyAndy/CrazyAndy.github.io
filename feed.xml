@@ -5,19 +5,296 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 May 2018 22:14:53 +0800</pubDate>
-    <lastBuildDate>Tue, 22 May 2018 22:14:53 +0800</lastBuildDate>
+    <pubDate>Tue, 22 May 2018 23:10:42 +0800</pubDate>
+    <lastBuildDate>Tue, 22 May 2018 23:10:42 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
-        <title>Spring Cloud整体概括篇051_请求上下文配置</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。
-比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
-你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/&lt;strong&gt;，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？
-如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
+        <title>Spring Cloud问题解决篇006_zuul转发超时</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　作为网关api的zuul转发超时该怎么处理&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　是这样的，今天碰到了微服务响应超时问题，而且超时时间特别短，2秒就超时，zuul就走熔断了。 
+我采用zuul作为网关，根据不同的访问路径进行微服务的路由，譬如有个服务是user，我访问user服务的某个接口时，该接口执行时间很慢，2秒多，然后还没执行完，zuul就执行熔断了，进入了我配好的ZuulFallbackProvider里。所以来研究一下zuul的超时处理。&lt;/p&gt;
+
+&lt;p&gt;　　前提，zuul和微服务都已经注册到了eureka中，zuul采用service-id来进行路由，当访问/user时进入到user服务中。而且，已经为user服务设置好了zuul的熔断，譬如已经写好了UserFallbackProvider implements ZuulFallbackProvider。我特别设置了模拟超时的接口，就是搞几个接口sleep不同的时间。&lt;/p&gt;
+
+&lt;p&gt;@GetMapping(“/test1”)
+    public Object test1() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return “dbToEs”;
+    }&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@GetMapping(&quot;/test2&quot;)
+public Object test2() {
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return &quot;dbToEs&quot;;
+}
+
+@GetMapping(&quot;/test3&quot;)
+public Object test3() {
+    try {
+        Thread.sleep(5500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return &quot;dbToEs&quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　关键是zuul的配置文件，通过配置不同的超时策略来完成超时处理。 
+注意看官方的文档：http://cloud.spring.io/spring-cloud-netflix/single/spring-cloud-netflix.html#_zuul_timeouts 
+这里就是讲zuul的超时的，配置很简单： 
+ribbon.ReadTimeout， ribbon.SocketTimeout这两个就是ribbon超时时间设置，当在yml写时，应该是没有提示的，给人的感觉好像是不是这么配的一样，其实不用管它，直接配上就生效了。 
+还有zuul.host.connect-timeout-millis， zuul.host.socket-timeout-millis这两个配置，这两个和上面的ribbon都是配超时的。区别在于，如果路由方式是serviceId的方式，那么ribbon的生效，如果是url的方式，则zuul.host开头的生效。（此处重要！使用serviceId路由和url路由是不一样的超时策略） 
+如果你在zuul配置了熔断fallback的话，熔断超时也要配置，不然如果你配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于你配的ribbon超时就不生效了。 
+熔断超时是这样的： 
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000 
+default代表默认，如果你想为某个特定的service配熔断超时策略，可以用这种方式： 
+这里写图片描述
+&lt;!-- ![edit](/static/assets/img/blog/cloud/cloud005.jpg) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/cloud/cloud005.jpg&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　总结起来就是三种超时配置： 
+　　网关的超时层级&lt;/p&gt;
+
+&lt;p&gt;　　zuul&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	zuul: 
+	max: 
+	host: 
+	connections: 500 
+	host: 
+	socket-timeout-millis: 60000 
+	connect-timeout-millis: 60000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　ribbon&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	ribbon: 
+	ReadTimeout: 10000 
+	ConnectTimeout: 10000 
+	MaxAutoRetries: 0 
+	MaxAutoRetriesNextServer: 1 
+	eureka: 
+	enabled: true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　hystrix&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	hystrix: 
+	command: 
+	default: 
+	execution: 
+	timeout: 
+	enabled: true 
+	isolation: 
+	thread: 
+	timeoutInMilliseconds: 60000 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　这里面ribbon和hystrix是同时生效的，哪个值小哪个生效，另一个就看不到效果了。 
+我的例子是这样配置的这里写图片描述 
+&lt;!-- ![edit](/static/assets/img/blog/cloud/cloud005.jpg) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/cloud/cloud005.jpg&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　我启动项目，访问test1，也就是sleep3秒那个时，会进入熔断超时，访问test2，sleep1秒时能正常返回，访问test3同样进入熔断。 
+可以自行修改超时时间来测试一下。&lt;/p&gt;
+
+&lt;p&gt;　　我引用的是这篇博客的内容，写的不错
+　　&lt;a href=&quot;https://blog.csdn.net/tianyaleixiaowu/article/details/78772269&quot;&gt;https://blog.csdn.net/tianyaleixiaowu/article/details/78772269&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 06 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/06/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/06/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇005_跨域</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　api网关有时候需要设置跨域访问。网关 zuul 和 底下的服务都设置 跨域 CorsFilter 导致 前段跨域失败 。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　只要网关配置就好 ， 底下的服务不需要配置。 两个同时配置还导致了 跨域失败 适得其反。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	@Configuration
+	public class CorsConfig {
+	
+	    @Bean
+	    public CorsFilter corsFilter() {
+	        final UrlBasedCorsConfigurationSource source =
+				 new UrlBasedCorsConfigurationSource();
+	        final CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowCredentials(true); // 允许cookies跨域
+		/**
+		*  允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，
+		*  会自动* 转成当前请求头中的Origin
+		*/
+	        config.addAllowedOrigin(&quot;*&quot;);
+	        config.addAllowedHeader(&quot;*&quot;);// #允许访问的头信息,*表示全部
+		/**
+		*预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会
+		*再预检了	
+		*/
+	        config.setMaxAge(18000L);
+	        config.addAllowedMethod(&quot;*&quot;);// 允许提交请求的方法，*表示全部允许
+	        source.registerCorsConfiguration(&quot;/**&quot;, config);
+	        return new CorsFilter(source);
+	    }
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 05 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/05/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/05/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇004_透传</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　api网关有时候需要将token内容传入转发目的地的服务中去，所以在网关api层需要做一些相应的配置。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　全局设置：&lt;/p&gt;
+
+&lt;p&gt;　　zuul.sensitive-headers=true&lt;/p&gt;
+
+&lt;p&gt;　　指定路由设置：&lt;/p&gt;
+
+&lt;p&gt;　　zuul.routes.&lt;routeName&gt;.sensitive-headers=true&lt;/routeName&gt;&lt;/p&gt;
+
+&lt;p&gt;　　zuul.routes.&lt;routeName&gt;.custom-sensitive-headers=true&lt;/routeName&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 04 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/04/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/04/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇003_服务间调用规范</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　Spring cloud 体系中，为服务间调用是用FeignClient（ribbon 和hystrix的功能合集）的。
+　　两个微服务，一个消费者，一个生产者，他们之间通讯最好需要约定一个接口，生产者实现该接口，消费者注入该接口的引用。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　现在有user-service 和 ticket-service 两个微服务，它们各自建立独立的 Spring boot工程，现在需要 写一个 user-service 的余额查询服务，ticket-service 需要调用这个服务。下面我们将用代码实现简单逻辑，以下代码完全手敲，可能有拼写错误，请忽略这点不完美。
+　　1. 我们首先定义一个通讯的规范标准接口，它需要定义在独立于前两个工程的另外一个单独工程里面，命名为 adapter-api ，其中有一个接口是这么写的
+　　&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	@RestController
+	@RequestMapping(“/adapter”)
+	public interface  AdapterApiInf {
+		@RequestMapping(“/queryBalanceByUserId”)
+		BigDecimal queryBalanceByUserId(String userId);
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　2. 在user-service 中，我们定义实现该接口的controller&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	public class AdapterController implements AdapterApiInf {
+		@overide 
+		public BigDecimal queryBalanceByUserId(String userId){
+			return BigDecimal.valueOf(39f); 
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　3. 在ticket-service中，我们用一个service 继承是AdapterApiInf&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	@Service
+	@FeignClient(name=”USER-SERVICE”)
+	public interface AdapterService extends AdapterApiInf {
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　在该项目中的一个controller中，我们这么写&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	@RestController
+	@RequestMapping(“/ticket”)
+	public class TicketController {
+		@Autowired
+		Private AdapterService  adapterService ;
+
+		@RequestMapping(method=RequestMethod.POST)
+		Public String buyTicket(@RequestParam(“userId”) String userId){
+			BigDecimal userBalance = adapterService.queryBalanceByUserId(userId);
+		}
+	} 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Thu, 03 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/03/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/03/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇002_跨主机访问</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　我当时在写demo的时候都是在一台机子上访问的，用的都是localhost，微服务注册到注册中心的时候，默认将主机名注册上去，微服务间调用其实是先解析注册上来的主机名，更换成ip，然后进行调用，当我自己准备附诸demo到实战的时候，出现问题了，找不到 某个主机名 ，因为他们dns不同，无法进行解析。这可怎么办？&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　解决办法是 在配置文件中设置eureka.instance.prefer-ip-address=true 
+当时解决这个问题，参照了网上很多建议，各种不一，他们都没有将真正原理给说清楚，或许只是自己运行了能用就说这样好使，当时我的demo因为还有个其他的设置干扰了 这种解决方案的测试，后来是在给源代码打断点一步步调试，才了解到eureka-client 运行机制，所以说调错这东西，真心能反应一个人技术功底，原来有个大哥说，有些问题是百度解决不了的，我越来越信了，越来越相信读源代码的重要性。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/02/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/02/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇001_请求上下文配置</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。&lt;/p&gt;
+
+&lt;p&gt;　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
+你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
 如果是Api网关 zuul 怎么办？在配置文件中加入
-zuul.routes.user-service.path=/user-service/&lt;/strong&gt;;
+zuul.routes.user-service.path=/user-service/**;
 zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
@@ -34,105 +311,11 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
       </item>
     
       <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud整体概括篇009_devops</title>
-        <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
-&lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
+        <title>Spring Cloud问题解决篇007_网关过滤option</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　网关层过滤器代码中，如果判断请求的时候，需要将option试探放过，否则会出问题。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤器中需要做判断，如果接收到了之后，需要放过，下次才是正式请求，这时候才会时get,post,put,delete等请求方式。&lt;/p&gt;
 </description>
         <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>

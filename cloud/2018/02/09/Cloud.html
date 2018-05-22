@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud整体概括篇009_devops
+        CrazyAndy|Spring Cloud问题解决篇007_网关过滤option
     
   </title>
   <!-- favicon -->
@@ -217,12 +217,13 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Feb 2018</span>
                         <h1>
-                            Spring Cloud整体概括篇009_devops
+                            Spring Cloud问题解决篇007_网关过滤option
                         </h1>
                     </div>
-                    	<h1 id="一综述">一、综述</h1>
-<p>　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。</p>
+                    	<h1 id="一问题描述">一、问题描述</h1>
+<p>　　网关层过滤器代码中，如果判断请求的时候，需要将option试探放过，否则会出问题。</p>
+<h1 id="二解决思路">二、解决思路</h1>
+<p>　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤器中需要做判断，如果接收到了之后，需要放过，下次才是正式请求，这时候才会时get,post,put,delete等请求方式。</p>
 
                     <hr>
                     <div class="row">

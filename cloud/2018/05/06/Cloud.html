@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="请求上下文配置" name="description">
+    <meta content="zuul转发超时" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud问题解决篇001_请求上下文配置
+        CrazyAndy|Spring Cloud问题解决篇006_zuul转发超时
     
   </title>
   <!-- favicon -->
@@ -215,21 +215,109 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 May 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 May 2018</span>
                         <h1>
-                            Spring Cloud问题解决篇001_请求上下文配置
+                            Spring Cloud问题解决篇006_zuul转发超时
                         </h1>
                     </div>
                     	<h1 id="一问题描述">一、问题描述</h1>
-<p>　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。</p>
-
-<p>　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
-你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？</p>
+<p>　　作为网关api的zuul转发超时该怎么处理</p>
 <h1 id="二解决思路">二、解决思路</h1>
-<p>　　如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
-如果是Api网关 zuul 怎么办？在配置文件中加入
-zuul.routes.user-service.path=/user-service/**;
-zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)</p>
+<p>　　是这样的，今天碰到了微服务响应超时问题，而且超时时间特别短，2秒就超时，zuul就走熔断了。 
+我采用zuul作为网关，根据不同的访问路径进行微服务的路由，譬如有个服务是user，我访问user服务的某个接口时，该接口执行时间很慢，2秒多，然后还没执行完，zuul就执行熔断了，进入了我配好的ZuulFallbackProvider里。所以来研究一下zuul的超时处理。</p>
+
+<p>　　前提，zuul和微服务都已经注册到了eureka中，zuul采用service-id来进行路由，当访问/user时进入到user服务中。而且，已经为user服务设置好了zuul的熔断，譬如已经写好了UserFallbackProvider implements ZuulFallbackProvider。我特别设置了模拟超时的接口，就是搞几个接口sleep不同的时间。</p>
+
+<p>@GetMapping(“/test1”)
+    public Object test1() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return “dbToEs”;
+    }</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GetMapping("/test2")
+public Object test2() {
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return "dbToEs";
+}
+
+@GetMapping("/test3")
+public Object test3() {
+    try {
+        Thread.sleep(5500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    return "dbToEs";
+}
+</code></pre></div></div>
+
+<p>　　关键是zuul的配置文件，通过配置不同的超时策略来完成超时处理。 
+注意看官方的文档：http://cloud.spring.io/spring-cloud-netflix/single/spring-cloud-netflix.html#_zuul_timeouts 
+这里就是讲zuul的超时的，配置很简单： 
+ribbon.ReadTimeout， ribbon.SocketTimeout这两个就是ribbon超时时间设置，当在yml写时，应该是没有提示的，给人的感觉好像是不是这么配的一样，其实不用管它，直接配上就生效了。 
+还有zuul.host.connect-timeout-millis， zuul.host.socket-timeout-millis这两个配置，这两个和上面的ribbon都是配超时的。区别在于，如果路由方式是serviceId的方式，那么ribbon的生效，如果是url的方式，则zuul.host开头的生效。（此处重要！使用serviceId路由和url路由是不一样的超时策略） 
+如果你在zuul配置了熔断fallback的话，熔断超时也要配置，不然如果你配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于你配的ribbon超时就不生效了。 
+熔断超时是这样的： 
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000 
+default代表默认，如果你想为某个特定的service配熔断超时策略，可以用这种方式： 
+这里写图片描述
+<!-- ![edit](/static/assets/img/blog/cloud/cloud005.jpg) --></p>
+<center><img src="/static/assets/img/blog/cloud/cloud005.jpg" width="75%" /></center>
+<p>　　总结起来就是三种超时配置： 
+　　网关的超时层级</p>
+
+<p>　　zuul</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	zuul: 
+	max: 
+	host: 
+	connections: 500 
+	host: 
+	socket-timeout-millis: 60000 
+	connect-timeout-millis: 60000
+</code></pre></div></div>
+
+<p>　　ribbon</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	ribbon: 
+	ReadTimeout: 10000 
+	ConnectTimeout: 10000 
+	MaxAutoRetries: 0 
+	MaxAutoRetriesNextServer: 1 
+	eureka: 
+	enabled: true
+</code></pre></div></div>
+
+<p>　　hystrix</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	hystrix: 
+	command: 
+	default: 
+	execution: 
+	timeout: 
+	enabled: true 
+	isolation: 
+	thread: 
+	timeoutInMilliseconds: 60000 
+</code></pre></div></div>
+
+<p>　　这里面ribbon和hystrix是同时生效的，哪个值小哪个生效，另一个就看不到效果了。 
+我的例子是这样配置的这里写图片描述 
+<!-- ![edit](/static/assets/img/blog/cloud/cloud005.jpg) --></p>
+<center><img src="/static/assets/img/blog/cloud/cloud005.jpg" width="75%" /></center>
+<p>　　我启动项目，访问test1，也就是sleep3秒那个时，会进入熔断超时，访问test2，sleep1秒时能正常返回，访问test3同样进入熔断。 
+可以自行修改超时时间来测试一下。</p>
+
+<p>　　我引用的是这篇博客的内容，写的不错
+　　<a href="https://blog.csdn.net/tianyaleixiaowu/article/details/78772269">https://blog.csdn.net/tianyaleixiaowu/article/details/78772269</a></p>
 
                     <hr>
                     <div class="row">
@@ -247,7 +335,7 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/01/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/06/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

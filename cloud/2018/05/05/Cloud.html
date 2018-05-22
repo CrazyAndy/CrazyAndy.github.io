@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="请求上下文配置" name="description">
+    <meta content="跨域" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud问题解决篇001_请求上下文配置
+        CrazyAndy|Spring Cloud问题解决篇005_跨域
     
   </title>
   <!-- favicon -->
@@ -215,21 +215,42 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 May 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 May 2018</span>
                         <h1>
-                            Spring Cloud问题解决篇001_请求上下文配置
+                            Spring Cloud问题解决篇005_跨域
                         </h1>
                     </div>
                     	<h1 id="一问题描述">一、问题描述</h1>
-<p>　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。</p>
-
-<p>　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
-你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？</p>
+<p>　　api网关有时候需要设置跨域访问。网关 zuul 和 底下的服务都设置 跨域 CorsFilter 导致 前段跨域失败 。</p>
 <h1 id="二解决思路">二、解决思路</h1>
-<p>　　如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
-如果是Api网关 zuul 怎么办？在配置文件中加入
-zuul.routes.user-service.path=/user-service/**;
-zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)</p>
+<p>　　只要网关配置就好 ， 底下的服务不需要配置。 两个同时配置还导致了 跨域失败 适得其反。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	@Configuration
+	public class CorsConfig {
+	
+	    @Bean
+	    public CorsFilter corsFilter() {
+	        final UrlBasedCorsConfigurationSource source =
+				 new UrlBasedCorsConfigurationSource();
+	        final CorsConfiguration config = new CorsConfiguration();
+	        config.setAllowCredentials(true); // 允许cookies跨域
+		/**
+		*  允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，
+		*  会自动* 转成当前请求头中的Origin
+		*/
+	        config.addAllowedOrigin("*");
+	        config.addAllowedHeader("*");// #允许访问的头信息,*表示全部
+		/**
+		*预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会
+		*再预检了	
+		*/
+	        config.setMaxAge(18000L);
+	        config.addAllowedMethod("*");// 允许提交请求的方法，*表示全部允许
+	        source.registerCorsConfiguration("/**", config);
+	        return new CorsFilter(source);
+	    }
+	}
+</code></pre></div></div>
 
                     <hr>
                     <div class="row">
@@ -247,7 +268,7 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/01/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/05/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>
