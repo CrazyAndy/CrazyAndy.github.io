@@ -5,9 +5,29 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 May 2018 23:10:42 +0800</pubDate>
-    <lastBuildDate>Tue, 22 May 2018 23:10:42 +0800</lastBuildDate>
+    <pubDate>Tue, 22 May 2018 23:27:09 +0800</pubDate>
+    <lastBuildDate>Tue, 22 May 2018 23:27:09 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>Spring Cloud问题解决篇007_网关过滤option</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　网关层过滤器代码中，如果判断请求的时候，需要将option试探放过，否则会出问题。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤器中需要做判断，如果接收到了之后，需要放过，下次才是正式请求，这时候才会时get,post,put,delete等请求方式。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 07 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/07/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/07/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
     
       <item>
         <title>Spring Cloud问题解决篇006_zuul转发超时</title>
@@ -300,26 +320,6 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
         <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/05/01/Cloud.html</link>
         <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/01/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud问题解决篇007_网关过滤option</title>
-        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
-&lt;p&gt;　　网关层过滤器代码中，如果判断请求的时候，需要将option试探放过，否则会出问题。&lt;/p&gt;
-&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
-&lt;p&gt;　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤器中需要做判断，如果接收到了之后，需要放过，下次才是正式请求，这时候才会时get,post,put,delete等请求方式。&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
         
         <category>blog</category>
         
