@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 22 May 2018 23:27:09 +0800</pubDate>
-    <lastBuildDate>Tue, 22 May 2018 23:27:09 +0800</lastBuildDate>
+    <pubDate>Wed, 23 May 2018 20:58:07 +0800</pubDate>
+    <lastBuildDate>Wed, 23 May 2018 20:58:07 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -309,13 +309,13 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
         <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
 &lt;p&gt;　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我们可能将应用需要放到tomcat等服务器中间件中，比如在tomcat中，除非你把web程序放入到root目录下，否则tomcat会根据你的文件夹目录多映射出一级目录来。而如果其他服务调用，就会出现问题。&lt;/p&gt;
 
-&lt;p&gt;　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要 http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service
-你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？&lt;/p&gt;
+&lt;p&gt;　　比如user-service 这个微服务，放在tomcat下运行，程序文件夹为 user-service，那么你需要http://localhost:8080/user-service/** 的形式才能请求其提供的服务 ，而user-service注册到注册中心的是 所在ip和端口，即便配置文件中加入spring.contentPath=/user-service，你也只能从eureka服务注册中心管理页面上，点击显示连接服务，而其他需要从注册中心获取服务列表来调用 user-service 的微服务则会将user-service 转化成localhost和80890调用  http://localhost:8080/**，这显然是请求不到的，那怎么办，蛋疼的业务需求又必须要求将tomcat-service 放到tomcat下面？&lt;/p&gt;
 &lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
 &lt;p&gt;　　如果是其他微服务调用，它用的是FeignClient的话，在注解@FeignClient()中修改path属性 即 @FeignClient(name=”user-service”,path=”user-service”) 即可
 如果是Api网关 zuul 怎么办？在配置文件中加入
-zuul.routes.user-service.path=/user-service/**;
-zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)&lt;/p&gt;
+　　zuul.routes.user-service.path=/user-service/**;
+　　zuul.routes.user-service.stripPrifix=false;
+　　这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/05/01/Cloud.html</link>
@@ -566,7 +566,7 @@ zuul.routes.user-service.stripPrifix=false;这是告诉zuul，在转发请求致
         <title>Spring Cloud 整体概括篇</title>
         <description>&lt;h1 id=&quot;一参考资料&quot;&gt;一、参考资料&lt;/h1&gt;
 &lt;p&gt;　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
-翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的微服务电子书 Designing and Deploying Microservices 的中文版，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。&lt;/p&gt;
+翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的&lt;a href=&quot;http://oopsguy.com/books/microservices/index.html&quot;&gt;微服务电子书 Designing and Deploying Microservices 的中文版&lt;/a&gt;，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。&lt;/p&gt;
 &lt;h1 id=&quot;二感谢&quot;&gt;二、感谢&lt;/h1&gt;
 &lt;p&gt;　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。&lt;/p&gt;
 &lt;h1 id=&quot;三博客结构&quot;&gt;三、博客结构&lt;/h1&gt;
