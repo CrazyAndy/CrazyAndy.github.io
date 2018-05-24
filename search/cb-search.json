@@ -3,6 +3,14 @@
 	"data" : [
 	 
 	{
+		"title" : "使用jekyll搭建github博客 - 2018-05-24",
+		"url" : "/it/2018/05/24/JekyllBlog.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "Spring Cloud问题解决篇007_网关过滤option - 2018-05-07",
 		"url" : "/cloud/2018/05/07/Cloud.html"
 	}

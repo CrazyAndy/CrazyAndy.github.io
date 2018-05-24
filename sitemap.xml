@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000/it/2018/05/24/JekyllBlog.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/cloud/2018/05/07/Cloud.html</loc>
     </url>
 
@@ -164,6 +168,10 @@
 
     <url>
         <loc>http://localhost:4000/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/it/</loc>
     </url>
 
     <url>

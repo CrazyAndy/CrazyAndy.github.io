@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="Spring Cloud 前言" name="description">
+    <meta content="使用jekyll搭建github博客" name="description">
   
   
-    <meta name="keywords" content="cloud">
+    <meta name="keywords" content="it,jekyll,github">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|Spring Cloud 整体概括篇
+        CrazyAndy|使用jekyll搭建github博客
     
   </title>
   <!-- favicon -->
@@ -165,7 +165,7 @@
                     
                         
                             
-                                <li class="active">
+                                <li>
                             
                             <a class="tagname" href="/cloud/">微服务</a></li>
                         
@@ -193,7 +193,7 @@
                     
                         
                             
-                                <li>
+                                <li class="active">                                                     
                             
                             <a class="tagname" href="/it/">IT</a></li>
                         
@@ -218,33 +218,59 @@
                 <div class="ibox-content">
                     <div class="pull-right">
                     	
-                        	<button class="btn btn-white btn-xs" type="button">cloud</button>
+                        	<button class="btn btn-white btn-xs" type="button">it</button>
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 24 May 2018</span>
                         <h1>
-                            Spring Cloud 整体概括篇
+                            使用jekyll搭建github博客
                         </h1>
                     </div>
-                    	<h1 id="一参考资料">一、参考资料</h1>
-<p>　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
-翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的<a href="http://oopsguy.com/books/microservices/index.html">微服务电子书 Designing and Deploying Microservices 的中文版</a>，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。</p>
-<h1 id="二感谢">二、感谢</h1>
-<p>　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。</p>
-<h1 id="三博客结构">三、博客结构</h1>
-<p>　　本篇为整体概括篇为第一篇，主要是大体介绍一下Spring Cloud微服务全家桶体系下，都有哪些内容，方便大家从整体了解其知识体系。笔者认为，个人愚见啊，想要学习一项技术，开始的时候需要了解该技术应用场景，它都能干什么，它的优缺点是什么，目前市场上有没有其他替代产品，他们之间差异是什么，最后再考虑是否高度符合当前业务需求；然后再说技术具体细节使用的事情。</p>
+                    	<p>零、创建个人博客的好处</p>
 
-<p>　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。</p>
+<p>　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。
+　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。
+　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，那么你的能力也就跟上来了。
+　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。
+　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!</p>
+
+<p>一、jekyll描述
+　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
+
+<p>二、jekyll环境配置</p>
+
+<p>　　1. 安装ruby环境
+　　2. 安装gem
+　　3. 安装jekyll
+　　</p>
+
+<p>三、jekyll目录结构介绍</p>
+
+<p>四、jekyll模板下载</p>
+
+<p>五、jekyll根据模板创建个人博客</p>
+
+<p>六、上传jekyll到github博客</p>
+
+<p>七、引用</p>
+
+<p><a href="https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;fps=1">Jekyll搭建个人博客 韩俊强的博客</a></p>
+
+<p><a href="http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll">基于Jekyll的GitHub建站指南</a></p>
 
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
                                 <h5 style="display: inline;">Tags:</h5>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                    <button class="btn btn-white btn-xs" type="button">it</button>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">cloud</button>
+                                    <button class="btn btn-white btn-xs" type="button">jekyll</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">github</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
                                 
                         </div>
                         <div class="col-md-6">
@@ -253,7 +279,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/01/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/it/2018/05/24/JekyllBlog.html">0</span> comments
                                 
                                 </div>
                             </div>
