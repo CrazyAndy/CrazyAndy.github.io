@@ -5,28 +5,35 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 May 2018 23:52:01 +0800</pubDate>
-    <lastBuildDate>Thu, 24 May 2018 23:52:01 +0800</lastBuildDate>
+    <pubDate>Thu, 24 May 2018 23:57:28 +0800</pubDate>
+    <lastBuildDate>Thu, 24 May 2018 23:57:28 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
         <title>使用jekyll搭建github博客</title>
         <description>&lt;p&gt;零、创建个人博客的好处&lt;/p&gt;
 
-&lt;p&gt;　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。
-　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。
-　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，那么你的能力也就跟上来了。
-　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。
-　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!&lt;/p&gt;
+&lt;p&gt;　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。&lt;/p&gt;
 
-&lt;p&gt;一、jekyll描述
-　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。&lt;/p&gt;
+&lt;p&gt;　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。&lt;/p&gt;
+
+&lt;p&gt;　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，那么你的能力也就跟上来了。&lt;/p&gt;
+
+&lt;p&gt;　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。&lt;/p&gt;
+
+&lt;p&gt;　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!&lt;/p&gt;
+
+&lt;p&gt;一、jekyll描述&lt;/p&gt;
+
+&lt;p&gt;　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。&lt;/p&gt;
 
 &lt;p&gt;二、jekyll环境配置&lt;/p&gt;
 
-&lt;p&gt;　　1. 安装ruby环境
-　　2. 安装gem
-　　3. 安装jekyll
+&lt;p&gt;　　1. 安装ruby环境&lt;/p&gt;
+
+&lt;p&gt;　　2. 安装gem&lt;/p&gt;
+
+&lt;p&gt;　　3. 安装jekyll
 　　&lt;/p&gt;
 
 &lt;p&gt;三、jekyll目录结构介绍&lt;/p&gt;
@@ -39,9 +46,9 @@
 
 &lt;p&gt;七、引用&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;amp;fps=1&quot;&gt;Jekyll搭建个人博客 韩俊强的博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　1. &lt;a href=&quot;https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;amp;fps=1&quot;&gt;Jekyll搭建个人博客 韩俊强的博客&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll&quot;&gt;基于Jekyll的GitHub建站指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　2. &lt;a href=&quot;http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll&quot;&gt;基于Jekyll的GitHub建站指南&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 24 May 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/it/2018/05/24/JekyllBlog.html</link>
