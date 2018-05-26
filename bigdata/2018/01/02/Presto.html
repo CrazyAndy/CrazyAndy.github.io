@@ -236,6 +236,14 @@
 <p>　　presto源代码中大量使用了java lamba表达式写法，因此需要jdk1.8以上环境。安装方式可自行百度，不做详细说明。</p>
 <h3 id="三maven环境安装">（三）maven环境安装</h3>
 <p>　　presto需要使用maven 2.3.3版本，建议使用最近maven版本既可。</p>
+<h3 id="四hive安装">（四）hive安装</h3>
+<p>　　如果用presto查询hive数据，则需要部署一个HiveMetaStore服务提供的Hive的元数据信息，本章不做详细说明。</p>
+<h3 id="五presto启动">（五）presto启动</h3>
+<p>　　presto分协调器和worker两端，我们在刚开始学习的时候可以使用两个角色一体的方式启动presto-server，运行presto-server下bin目录下launcher命令即可。</p>
+
+<p>　　调用presto服务端我们有两种方式使用，一种是使用cli工具executor.jar；另一种是通过java程序调用presto提供的jdbc，在学习初期，我们可以使用cli方式。</p>
+
+<p>　　如果想查看程序运行流程，那么就需要使用java ide工具运行presto源码，我们当时是在界面版linux上，使用idea软件跑起来的，debug调试以查看presto执行流程。</p>
 
                     <hr>
                     <div class="row">

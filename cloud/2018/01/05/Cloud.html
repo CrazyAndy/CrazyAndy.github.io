@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="使用jekyll搭建github博客" name="description">
+    <meta content="服务发现" name="description">
   
   
-    <meta name="keywords" content="it,jekyll,github">
+    <meta name="keywords" content="cloud">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|使用jekyll搭建github博客
+        CrazyAndy|Spring Cloud整体概括篇005_服务发现
     
   </title>
   <!-- favicon -->
@@ -165,7 +165,7 @@
                     
                         
                             
-                                <li>
+                                <li class="active">
                             
                             <a class="tagname" href="/cloud/">微服务</a></li>
                         
@@ -193,7 +193,7 @@
                     
                         
                             
-                                <li class="active">  
+                                <li>
                             
                             <a class="tagname" href="/it/">IT</a></li>
                         
@@ -218,122 +218,43 @@
                 <div class="ibox-content">
                     <div class="pull-right">
                     	
-                        	<button class="btn btn-white btn-xs" type="button">it</button>
+                        	<button class="btn btn-white btn-xs" type="button">cloud</button>
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 24 May 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Jan 2018</span>
                         <h1>
-                            使用jekyll搭建github博客
+                            Spring Cloud整体概括篇005_服务发现
                         </h1>
                     </div>
-                    	<p>零、创建个人博客的好处</p>
-
-<p>　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。</p>
-
-<p>　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。</p>
-
-<p>　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，你的能力也就跟上来了。</p>
-
-<p>　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。</p>
-
-<p>　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!</p>
-
-<p>一、jekyll描述</p>
-
-<p>　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
-
-<p>二、jekyll环境配置</p>
-
-<p>　　1. 安装ruby环境</p>
-
-<p>　　windows安装ruby环境特别简单，新版本的ruby安装包已经自带devkit,这样省的安装单纯ruby之后再找对应版本devkit，下载网址为<a href="https://rubyinstaller.org/downloads/">https://rubyinstaller.org/downloads/</a>,选择with devkit 下载安装即可。
-　　2. 切换gem source源</p>
-
-<p>　　使用gem国外的源安装jekyll特别慢，我们需要切换源，阿里巴巴已经停止维护gem 源,推荐使用ruby china源。但是你可以访问阿里巴巴源，参照其提供的安装方式，地址为 <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
-
-<p>　　3. 安装jekyll</p>
-
-<p>　　安装jekyll前先按照依赖包bundler，下述命令即可安装
-　　<code class="highlighter-rouge">
-	gem install bundler
-　　</code>
-　　之后，直接可以通过下述命令安装jekyll
-　　<code class="highlighter-rouge">
-	gem install jekyll
-　　</code>
-　　使用 jekyll -v 查看版本，如果有版本出现则证明安装成功</p>
-
-<p>三、jekyll目录结构介绍</p>
-
-<p>　　正常的Jekyll工程包含以下几个目录：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>　　　　_posts  博客内容
-        _pages  其他需要生成的网页，如About页
-        _layouts 网页排版模板
-        _includes 被模板包含的HTML片段，可在_config.yml中修改位置
-        assets 辅助资源 css布局 js脚本 图片等
-        _data 动态数据
-        _sites  最终生成的静态网页
-</code></pre></div></div>
-
-<p>　　在项目文件夹(含有_config.yml)中运行jekyll build 指令后，jekyll会依次做如下几件事</p>
-
-<p>　　加载_layout文件夹内的所有模板，并将其中的{ % include xxxx.html % }字段(真实使用中{ 和 % 之间没有空格，这里空出一格，是因为jekyll编辑此博客的时候会认为该博客要引入xxx.html，显然我的博客代码目录中是没有xxx.html的)按照_includes文件夹内对应文件填入遍历_post文件夹及子文件夹，对所有命名符合yyyy-mm–dd-title.md 格式的博客文件放入site.posts 变量(按时间倒序)，并对其进行解析，根据Front Matter 头的内容套入layout生成对应title的博客
-遍历整个项目子目录，扫描所有含Front Matter 头的文件，放入site.pages 变量并根据permalink 字段指定的URL目标位置生成index.html</p>
-
-<p>　　在生成过程中，文件中包含的Liquid脚本<code class="highlighter-rouge"> { { content } } </code>会被解析并替换。Liquid指令 包括Object、Tag、Filter三类，其中object是变量，在解析过程中会被直接文本替换，如</p>
-
-<p>四、jekyll模板下载</p>
-
-<p>　　可以从网上搜一些jekyll模板拿来修改，没必要重新搭建，<a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a>就是一个不错的jekyll模板网站，我首页的内容就是参照了其中的一个模板。当然博客主体架构还是参照的<a href="https://github.com/jarrekk/Jalpc">https://github.com/jarrekk/Jalpc</a>，在此对他们的无私奉献做出感谢。</p>
-
-<p>五、jekyll根据模板创建个人博客</p>
-
-<p>　　其实，你可以在本地自己创建一个文件夹，直接在里面执行以下脚本即可，但是页面是一片荒凉，还是用人家现成的吧。
-		jekyll new 你的博客根目录文件夹名称</p>
-
-<p>　　在下载了模板之后，你只需要在_posts文件夹下增加一片新的后缀名为.md的文件即可，文件内容参考该模板里_posts其他文件</p>
-
-<p>六、jekyll插件</p>
-
-<p>　　jekyll中文官网是<a href="https://www.jekyll.com.cn/">https://www.jekyll.com.cn/</a>，里面有jekyll使用文档，可以随时查看。</p>
-
-<p>　　jekyll支持分页，需要使用gem安装jekyll-paginate插件，具体命令如下</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	gem install jekyll-paginate
-</code></pre></div></div>
-
-<p>七、使用markdown编写博客</p>
-
-<p>　　我们需要使用markdown编写后缀名为.md的文件，并把文件放入到_post文件夹下某一级目录下。markdown使用的是liquid语法，它能被jekyll编译成静态html，关于语法细则请自行百度。markdown软件我推荐使用haroopad，而不是使用markdown pad。haroopad相比来说更好用一点。</p>
-
-<p>八、上传jekyll到github博客</p>
-
-<p>　　我们根据模板修改成自己满意的网页的时候，便可将_site下的文件上传到github上去，github在此操作之前需要创建自己的github pages 仓库，具体方法可自行百度。这里不再赘述。</p>
-
-<p>九、引用</p>
-
-<p>　　<a href="https://blog.csdn.net/a724888/article/details/79183874">jekyll博客搭建之艰辛之路</a></p>
-
-<p>　　<a href="https://blog.csdn.net/HopefulLight/article/details/78366374">Jekyll目录结构和运行机理</a></p>
-
-<p>　　<a href="https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;fps=1">Jekyll搭建个人博客 韩俊强的博客</a></p>
-
-<p>　　<a href="http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll">基于Jekyll的GitHub建站指南</a></p>
-
+                    	<h1 id="一概述">一、概述</h1>
+<p>　　服务注册与发现，其实就是对服务列表的维护。
+　　比如我们写一个user-service 的微服务，我们需要将 该服务运行所在的ip和port还有其他一些信息配置到一个配置中心去，如果其他服务需要使用user-service所提供的服务的时候，它们可以自然而然的从配置中心获取关于user-service的ip，port等信息，然后用http client的方式去请求user-service 提供的服务。
+　　上面所说的配置中心，就是我们要将的服务注册中心，微服务在启动时会将自身信息提交给注册中心，我们称之为注册；其他微服务根据注册中心配置的服务信息列表，访问具体的微服务，我们称之为发现。
+　　而服务治理则指的是以下这些活动：
+　　　　1. 对开发新服务和升级现有服务的计划
+　　　　2. 管理服务的生命周期：确保升级服务不会影响目前的服务消费者
+　　　　3. 制定方针来限制服务行为：制定所有服务都要遵从的规则，确保服务的一致性
+　　　　4. 监控服务的性能：由于服务组合，服务停机和性能低下的后果是严重的。通过监控服务的性能和可用性，当问题出现的时候能马上采取应对措施。
+　　　　5. 管理由谁来调用服务、怎样调用服务</p>
+<h1 id="二实现思路">二、实现思路</h1>
+<p>Spring cloud 体系中，用eureka web服务提供注册中心功能。
+服务注册中心并不能起到负载均衡的作用，而负载均衡指的是 获取服务注册中心的服务列表，按照某种策略从中选取其中一个符合条件的服务实例配置，然后再请求该实例的行为。</p>
+<h3 id="一注册方式有两种">（一）注册方式有两种：</h3>
+<p>　　一种是微服务自身启动时向服务注册中心注册自己；
+　　另外一种是服务注册器通过轮询部署环境或订阅事件来跟踪运行实例集的变更情况。当它检测到一个新的可用服务实例时，它会将该实例注册到服务注册中心。此外，服务注册器可以注销终止的服务实例。</p>
+<h3 id="二发现方式也有两种">（二）发现方式也有两种：</h3>
+<p>　　一种是服务端发现，比如前端访问请求到nginx ，nginx根据配置的策略转发请求到具体的一台主机上去，前端请求到这台主机上，由不得前端选择，是服务器端帮助前端选择的，所以称之为服务端发现模式；
+　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。</p>
 
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
                                 <h5 style="display: inline;">Tags:</h5>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">it</button>
-                                
-                                    <button class="btn btn-white btn-xs" type="button">jekyll</button>
-                                
-                                    <button class="btn btn-white btn-xs" type="button">github</button>
-                                
                                     <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">cloud</button>
                                 
                         </div>
                         <div class="col-md-6">
@@ -342,7 +263,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/it/2018/05/24/JekyllBlog.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/01/05/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

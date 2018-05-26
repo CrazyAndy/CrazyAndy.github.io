@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 May 2018 23:57:28 +0800</pubDate>
-    <lastBuildDate>Thu, 24 May 2018 23:57:28 +0800</lastBuildDate>
+    <pubDate>Sat, 26 May 2018 09:35:35 +0800</pubDate>
+    <lastBuildDate>Sat, 26 May 2018 09:35:35 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -17,7 +17,7 @@
 
 &lt;p&gt;　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。&lt;/p&gt;
 
-&lt;p&gt;　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，那么你的能力也就跟上来了。&lt;/p&gt;
+&lt;p&gt;　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，你的能力也就跟上来了。&lt;/p&gt;
 
 &lt;p&gt;　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。&lt;/p&gt;
 
@@ -31,24 +31,80 @@
 
 &lt;p&gt;　　1. 安装ruby环境&lt;/p&gt;
 
-&lt;p&gt;　　2. 安装gem&lt;/p&gt;
+&lt;p&gt;　　windows安装ruby环境特别简单，新版本的ruby安装包已经自带devkit,这样省的安装单纯ruby之后再找对应版本devkit，下载网址为&lt;a href=&quot;https://rubyinstaller.org/downloads/&quot;&gt;https://rubyinstaller.org/downloads/&lt;/a&gt;,选择with devkit 下载安装即可。
+　　2. 切换gem source源&lt;/p&gt;
 
-&lt;p&gt;　　3. 安装jekyll
-　　&lt;/p&gt;
+&lt;p&gt;　　使用gem国外的源安装jekyll特别慢，我们需要切换源，阿里巴巴已经停止维护gem 源,推荐使用ruby china源。但是你可以访问阿里巴巴源，参照其提供的安装方式，地址为 &lt;a href=&quot;https://ruby.taobao.org/&quot;&gt;https://ruby.taobao.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　3. 安装jekyll&lt;/p&gt;
+
+&lt;p&gt;　　安装jekyll前先按照依赖包bundler，下述命令即可安装
+　　&lt;code class=&quot;highlighter-rouge&quot;&gt;
+	gem install bundler
+　　&lt;/code&gt;
+　　之后，直接可以通过下述命令安装jekyll
+　　&lt;code class=&quot;highlighter-rouge&quot;&gt;
+	gem install jekyll
+　　&lt;/code&gt;
+　　使用 jekyll -v 查看版本，如果有版本出现则证明安装成功&lt;/p&gt;
 
 &lt;p&gt;三、jekyll目录结构介绍&lt;/p&gt;
 
+&lt;p&gt;　　正常的Jekyll工程包含以下几个目录：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;　　　　_posts  博客内容
+        _pages  其他需要生成的网页，如About页
+        _layouts 网页排版模板
+        _includes 被模板包含的HTML片段，可在_config.yml中修改位置
+        assets 辅助资源 css布局 js脚本 图片等
+        _data 动态数据
+        _sites  最终生成的静态网页
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　在项目文件夹(含有_config.yml)中运行jekyll build 指令后，jekyll会依次做如下几件事&lt;/p&gt;
+
+&lt;p&gt;　　加载_layout文件夹内的所有模板，并将其中的{ % include xxxx.html % }字段(真实使用中{ 和 % 之间没有空格，这里空出一格，是因为jekyll编辑此博客的时候会认为该博客要引入xxx.html，显然我的博客代码目录中是没有xxx.html的)按照_includes文件夹内对应文件填入遍历_post文件夹及子文件夹，对所有命名符合yyyy-mm–dd-title.md 格式的博客文件放入site.posts 变量(按时间倒序)，并对其进行解析，根据Front Matter 头的内容套入layout生成对应title的博客
+遍历整个项目子目录，扫描所有含Front Matter 头的文件，放入site.pages 变量并根据permalink 字段指定的URL目标位置生成index.html&lt;/p&gt;
+
+&lt;p&gt;　　在生成过程中，文件中包含的Liquid脚本&lt;code class=&quot;highlighter-rouge&quot;&gt; { { content } } &lt;/code&gt;会被解析并替换。Liquid指令 包括Object、Tag、Filter三类，其中object是变量，在解析过程中会被直接文本替换，如&lt;/p&gt;
+
 &lt;p&gt;四、jekyll模板下载&lt;/p&gt;
+
+&lt;p&gt;　　可以从网上搜一些jekyll模板拿来修改，没必要重新搭建，&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;就是一个不错的jekyll模板网站，我首页的内容就是参照了其中的一个模板。当然博客主体架构还是参照的&lt;a href=&quot;https://github.com/jarrekk/Jalpc&quot;&gt;https://github.com/jarrekk/Jalpc&lt;/a&gt;，在此对他们的无私奉献做出感谢。&lt;/p&gt;
 
 &lt;p&gt;五、jekyll根据模板创建个人博客&lt;/p&gt;
 
-&lt;p&gt;六、上传jekyll到github博客&lt;/p&gt;
+&lt;p&gt;　　其实，你可以在本地自己创建一个文件夹，直接在里面执行以下脚本即可，但是页面是一片荒凉，还是用人家现成的吧。
+		jekyll new 你的博客根目录文件夹名称&lt;/p&gt;
 
-&lt;p&gt;七、引用&lt;/p&gt;
+&lt;p&gt;　　在下载了模板之后，你只需要在_posts文件夹下增加一片新的后缀名为.md的文件即可，文件内容参考该模板里_posts其他文件&lt;/p&gt;
 
-&lt;p&gt;　　1. &lt;a href=&quot;https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;amp;fps=1&quot;&gt;Jekyll搭建个人博客 韩俊强的博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;六、jekyll插件&lt;/p&gt;
 
-&lt;p&gt;　　2. &lt;a href=&quot;http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll&quot;&gt;基于Jekyll的GitHub建站指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　jekyll中文官网是&lt;a href=&quot;https://www.jekyll.com.cn/&quot;&gt;https://www.jekyll.com.cn/&lt;/a&gt;，里面有jekyll使用文档，可以随时查看。&lt;/p&gt;
+
+&lt;p&gt;　　jekyll支持分页，需要使用gem安装jekyll-paginate插件，具体命令如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	gem install jekyll-paginate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;七、使用markdown编写博客&lt;/p&gt;
+
+&lt;p&gt;　　我们需要使用markdown编写后缀名为.md的文件，并把文件放入到_post文件夹下某一级目录下。markdown使用的是liquid语法，它能被jekyll编译成静态html，关于语法细则请自行百度。markdown软件我推荐使用haroopad，而不是使用markdown pad。haroopad相比来说更好用一点。&lt;/p&gt;
+
+&lt;p&gt;八、上传jekyll到github博客&lt;/p&gt;
+
+&lt;p&gt;　　我们根据模板修改成自己满意的网页的时候，便可将_site下的文件上传到github上去，github在此操作之前需要创建自己的github pages 仓库，具体方法可自行百度。这里不再赘述。&lt;/p&gt;
+
+&lt;p&gt;九、引用&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://blog.csdn.net/a724888/article/details/79183874&quot;&gt;jekyll博客搭建之艰辛之路&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://blog.csdn.net/HopefulLight/article/details/78366374&quot;&gt;Jekyll目录结构和运行机理&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;amp;fps=1&quot;&gt;Jekyll搭建个人博客 韩俊强的博客&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll&quot;&gt;基于Jekyll的GitHub建站指南&lt;/a&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Thu, 24 May 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/it/2018/05/24/JekyllBlog.html</link>
@@ -389,14 +445,35 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
       </item>
     
       <item>
+        <title>Spring Cloud 最快上手篇001_前言</title>
+        <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
+&lt;p&gt;　　本篇的这几个章节，我会参考翟永超的 《Spring Cloud微服务实战》的源代码，搭建一套最简单版本的spring cloud实战。它包括 网关api，服务注册中心eureka，服务生产者样例，服务消费者样例，通过这套配置，我们能快速了解spring cloud典型的使用方式，也能具象化的理解上一篇章 整体概括篇 的理论知识。&lt;/p&gt;
+
+&lt;h1 id=&quot;二博客结构&quot;&gt;二、博客结构&lt;/h1&gt;
+&lt;p&gt;　　本篇细分成 前言，服务治理，客户端负载均衡，声明式服务调用，API网关服务，这几个章节，在这些章节里面，我会简单描述一下各部分内容，并用代码示例具体说明。这些内容算是spring cloud的精简版，我是想遵循学习由简到难的思路，尽可能让学习曲线变得平滑，更容易让大家理解和接受，这也是我当时学习的节奏，事实证明这种学习方法很有效。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 01 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/01/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/01/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
         <title>Spring Cloud整体概括篇009_devops</title>
         <description>&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
 &lt;p&gt;　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
 　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 09 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/09/Cloud.html</guid>
+        <pubDate>Tue, 09 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/09/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/09/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -413,9 +490,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　监控中心可监控微服务实例被请求次数，时间，断路次数等,也可以进行全链路跟踪。
 　　大众点评技术中心开源了cat系统用来配置服务监控，并提供ui显示各服务运行情况，在以后章节会在进行深入详细讲解。&lt;/p&gt;
 </description>
-        <pubDate>Thu, 08 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/08/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/08/Cloud.html</guid>
+        <pubDate>Mon, 08 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/08/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/08/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -435,9 +512,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 　　　　1. 服务器端指定 git 地址，为客户端提供查询具体配置的接口；
 　　　　2. 客户端通过请求服务端为其提供的服务接口，查询具体配置并应用到客户端所在的服务中去。&lt;/p&gt;
 </description>
-        <pubDate>Wed, 07 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/07/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/07/Cloud.html</guid>
+        <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/07/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/07/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -458,9 +535,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　低水平的服务的服务失败会导致级联故障一直给到用户。当调用一个特定的服务达到一定阈值(默认5秒失败20次),打开断路器。在错误的情况下和一个开启的断路回滚fallback应可以由开发人员提供。 
 如上图，b服务依然挂掉，不能再提供正常服务，这时候如果还将前端请求转发到b，显然是不合适的，我们会为b服务实现回滚逻辑，也就是降级处理。这样，在下次请求b服务的时候，断路器会直接执行回滚逻辑，告知前端通知，比如该服务不能正常运行，或者提供该服务的一个“应付”数据等等。&lt;/p&gt;
 </description>
-        <pubDate>Tue, 06 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/06/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/06/Cloud.html</guid>
+        <pubDate>Sat, 06 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/06/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/06/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -493,9 +570,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　一种是服务端发现，比如前端访问请求到nginx ，nginx根据配置的策略转发请求到具体的一台主机上去，前端请求到这台主机上，由不得前端选择，是服务器端帮助前端选择的，所以称之为服务端发现模式；
 　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。&lt;/p&gt;
 </description>
-        <pubDate>Mon, 05 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/05/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/05/Cloud.html</guid>
+        <pubDate>Fri, 05 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/05/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/05/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -543,9 +620,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　该打车流程使用了多种 IPC 机制的服务交互方式。
 　　服务使用了通知、请求/响应和发布/订阅组合。例如，乘客的智能手机向 Trip Management 微服务发送一条通知以请求一辆车。Trip Management 服务通过使用请求/响应来调用 Passenger Management 服务以验证乘客的帐户是否可用。之后，Trip Management 服务创建路线，并使用发布/订阅通知其他服务，包括用于定位可用司机的 Dispatcher。&lt;/p&gt;
 </description>
-        <pubDate>Sun, 04 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/04/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/04/Cloud.html</guid>
+        <pubDate>Thu, 04 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/04/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/04/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -578,9 +655,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;h3 id=&quot;八静态响应处理&quot;&gt;（八）静态响应处理：&lt;/h3&gt;
 &lt;p&gt;　　静态资源，比如图片，js，css文件等等，都可以直接在网关层就返回，不需要再转发到靠后的微服务。&lt;/p&gt;
 </description>
-        <pubDate>Sat, 03 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/03/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/03/Cloud.html</guid>
+        <pubDate>Wed, 03 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/03/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/03/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -607,34 +684,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　这时候已经不能阻止微服务的优势了。。。
 　　微服务因为其服务拆分的特点有着很多独特的优势，也正因为其特点也会产生很多新的问题，各种网友们真可谓是仁者见仁、智者见智，活脱脱的一千个人的心中有一千个哈姆雷特，谨劝各位，与其听别人白活还不如自己投入实战亲身体会比较好。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 02 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/02/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/02/Cloud.html</guid>
-        
-        <category>blog</category>
-        
-        <category>cloud</category>
-        
-        
-        <category>cloud</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Cloud 整体概括篇</title>
-        <description>&lt;h1 id=&quot;一参考资料&quot;&gt;一、参考资料&lt;/h1&gt;
-&lt;p&gt;　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
-翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的&lt;a href=&quot;http://oopsguy.com/books/microservices/index.html&quot;&gt;微服务电子书 Designing and Deploying Microservices 的中文版&lt;/a&gt;，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。&lt;/p&gt;
-&lt;h1 id=&quot;二感谢&quot;&gt;二、感谢&lt;/h1&gt;
-&lt;p&gt;　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。&lt;/p&gt;
-&lt;h1 id=&quot;三博客结构&quot;&gt;三、博客结构&lt;/h1&gt;
-&lt;p&gt;　　本篇为整体概括篇为第一篇，主要是大体介绍一下Spring Cloud微服务全家桶体系下，都有哪些内容，方便大家从整体了解其知识体系。笔者认为，个人愚见啊，想要学习一项技术，开始的时候需要了解该技术应用场景，它都能干什么，它的优缺点是什么，目前市场上有没有其他替代产品，他们之间差异是什么，最后再考虑是否高度符合当前业务需求；然后再说技术具体细节使用的事情。&lt;/p&gt;
-
-&lt;p&gt;　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 01 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/01/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/01/Cloud.html</guid>
+        <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/02/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/02/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -656,6 +708,14 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　presto源代码中大量使用了java lamba表达式写法，因此需要jdk1.8以上环境。安装方式可自行百度，不做详细说明。&lt;/p&gt;
 &lt;h3 id=&quot;三maven环境安装&quot;&gt;（三）maven环境安装&lt;/h3&gt;
 &lt;p&gt;　　presto需要使用maven 2.3.3版本，建议使用最近maven版本既可。&lt;/p&gt;
+&lt;h3 id=&quot;四hive安装&quot;&gt;（四）hive安装&lt;/h3&gt;
+&lt;p&gt;　　如果用presto查询hive数据，则需要部署一个HiveMetaStore服务提供的Hive的元数据信息，本章不做详细说明。&lt;/p&gt;
+&lt;h3 id=&quot;五presto启动&quot;&gt;（五）presto启动&lt;/h3&gt;
+&lt;p&gt;　　presto分协调器和worker两端，我们在刚开始学习的时候可以使用两个角色一体的方式启动presto-server，运行presto-server下bin目录下launcher命令即可。&lt;/p&gt;
+
+&lt;p&gt;　　调用presto服务端我们有两种方式使用，一种是使用cli工具executor.jar；另一种是通过java程序调用presto提供的jdbc，在学习初期，我们可以使用cli方式。&lt;/p&gt;
+
+&lt;p&gt;　　如果想查看程序运行流程，那么就需要使用java ide工具运行presto源码，我们当时是在界面版linux上，使用idea软件跑起来的，debug调试以查看presto执行流程。&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/bigdata/2018/01/02/Presto.html</link>
@@ -669,6 +729,31 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
         
         
         <category>bigdata</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 整体概括篇001_前言</title>
+        <description>&lt;h1 id=&quot;一参考资料&quot;&gt;一、参考资料&lt;/h1&gt;
+&lt;p&gt;　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
+翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的&lt;a href=&quot;http://oopsguy.com/books/microservices/index.html&quot;&gt;微服务电子书 Designing and Deploying Microservices 的中文版&lt;/a&gt;，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。&lt;/p&gt;
+&lt;h1 id=&quot;二感谢&quot;&gt;二、感谢&lt;/h1&gt;
+&lt;p&gt;　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。&lt;/p&gt;
+&lt;h1 id=&quot;三博客结构&quot;&gt;三、博客结构&lt;/h1&gt;
+&lt;p&gt;　　本篇为整体概括篇为第一篇，主要是大体介绍一下Spring Cloud微服务全家桶体系下，都有哪些内容，方便大家从整体了解其知识体系。笔者认为，个人愚见啊，想要学习一项技术，开始的时候需要了解该技术应用场景，它都能干什么，它的优缺点是什么，目前市场上有没有其他替代产品，他们之间差异是什么，最后再考虑是否高度符合当前业务需求；然后再说技术具体细节使用的事情。&lt;/p&gt;
+
+&lt;p&gt;　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/01/01/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/01/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
         
       </item>
     

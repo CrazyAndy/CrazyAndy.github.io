@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="服务发现" name="description">
+    <meta content="Spring Cloud 前言" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud整体概括篇005_服务发现
+        CrazyAndy|Spring Cloud 整体概括篇001_前言
     
   </title>
   <!-- favicon -->
@@ -222,30 +222,20 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jan 2018</span>
                         <h1>
-                            Spring Cloud整体概括篇005_服务发现
+                            Spring Cloud 整体概括篇001_前言
                         </h1>
                     </div>
-                    	<h1 id="一概述">一、概述</h1>
-<p>　　服务注册与发现，其实就是对服务列表的维护。
-　　比如我们写一个user-service 的微服务，我们需要将 该服务运行所在的ip和port还有其他一些信息配置到一个配置中心去，如果其他服务需要使用user-service所提供的服务的时候，它们可以自然而然的从配置中心获取关于user-service的ip，port等信息，然后用http client的方式去请求user-service 提供的服务。
-　　上面所说的配置中心，就是我们要将的服务注册中心，微服务在启动时会将自身信息提交给注册中心，我们称之为注册；其他微服务根据注册中心配置的服务信息列表，访问具体的微服务，我们称之为发现。
-　　而服务治理则指的是以下这些活动：
-　　　　1. 对开发新服务和升级现有服务的计划
-　　　　2. 管理服务的生命周期：确保升级服务不会影响目前的服务消费者
-　　　　3. 制定方针来限制服务行为：制定所有服务都要遵从的规则，确保服务的一致性
-　　　　4. 监控服务的性能：由于服务组合，服务停机和性能低下的后果是严重的。通过监控服务的性能和可用性，当问题出现的时候能马上采取应对措施。
-　　　　5. 管理由谁来调用服务、怎样调用服务</p>
-<h1 id="二实现思路">二、实现思路</h1>
-<p>Spring cloud 体系中，用eureka web服务提供注册中心功能。
-服务注册中心并不能起到负载均衡的作用，而负载均衡指的是 获取服务注册中心的服务列表，按照某种策略从中选取其中一个符合条件的服务实例配置，然后再请求该实例的行为。</p>
-<h3 id="一注册方式有两种">（一）注册方式有两种：</h3>
-<p>　　一种是微服务自身启动时向服务注册中心注册自己；
-　　另外一种是服务注册器通过轮询部署环境或订阅事件来跟踪运行实例集的变更情况。当它检测到一个新的可用服务实例时，它会将该实例注册到服务注册中心。此外，服务注册器可以注销终止的服务实例。</p>
-<h3 id="二发现方式也有两种">（二）发现方式也有两种：</h3>
-<p>　　一种是服务端发现，比如前端访问请求到nginx ，nginx根据配置的策略转发请求到具体的一台主机上去，前端请求到这台主机上，由不得前端选择，是服务器端帮助前端选择的，所以称之为服务端发现模式；
-　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。</p>
+                    	<h1 id="一参考资料">一、参考资料</h1>
+<p>　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
+翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Richardson 和 Floyd Smith 联合编写的<a href="http://oopsguy.com/books/microservices/index.html">微服务电子书 Designing and Deploying Microservices 的中文版</a>，周立的教学视频还有微服务架构实战，Spring Cloud的官方文档（在后续篇幅中我会将其翻译成中文版），也从github上看了一些Spring Cloud项目脚手架源代码，老A的AG-Admin。</p>
+<h1 id="二感谢">二、感谢</h1>
+<p>　　正是由于前面这些资料的阅读，才让我对Spring Cloud微服务有了清晰和深刻的认识，在此谢谢他们，如果在博客中有引用他们的言论我就不再明确指出出处，我写这套博客内容的目的就是为了帮助同样学习Spring Cloud的各位道友降低学习曲线，能尽快的应用到实战中去而做的工作，如果博客中内容的引用有侵犯到相关作者著作权等问题，还请指出批评并予以谅解，再次感谢以上这些为Spring Cloud知识普及做出贡献的人。</p>
+<h1 id="三博客结构">三、博客结构</h1>
+<p>　　本篇为整体概括篇为第一篇，主要是大体介绍一下Spring Cloud微服务全家桶体系下，都有哪些内容，方便大家从整体了解其知识体系。笔者认为，个人愚见啊，想要学习一项技术，开始的时候需要了解该技术应用场景，它都能干什么，它的优缺点是什么，目前市场上有没有其他替代产品，他们之间差异是什么，最后再考虑是否高度符合当前业务需求；然后再说技术具体细节使用的事情。</p>
+
+<p>　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。</p>
 
                     <hr>
                     <div class="row">
@@ -263,7 +253,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/05/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/01/01/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

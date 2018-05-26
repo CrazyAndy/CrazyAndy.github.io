@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="配置中心" name="description">
+    <meta content="微服务简介" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud整体概括篇007_配置中心
+        CrazyAndy|Spring Cloud整体概括篇002_微服务简介
     
   </title>
   <!-- favicon -->
@@ -222,17 +222,24 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2018</span>
                         <h1>
-                            Spring Cloud整体概括篇007_配置中心
+                            Spring Cloud整体概括篇002_微服务简介
                         </h1>
                     </div>
-                    	<h1 id="一综述">一、综述</h1>
-<p>　　Spring boot 配置文件管理在 application.properties里面 ，如果有需要还要根据dev,test,prod 做分别的配置，在部署时不好管理，配置信息更新时也不方便修改所有配置文件，而且有可能有的业务场景还避讳生产机Ip和port。
-　　Spring cloud 默认使用 git ，其实也可以用svn，甚至于本地一个文件。
-　　Spring cloud 有专门的插件 叫做 config ，它又分成 客户端 和服务器端。
-　　　　1. 服务器端指定 git 地址，为客户端提供查询具体配置的接口；
-　　　　2. 客户端通过请求服务端为其提供的服务接口，查询具体配置并应用到客户端所在的服务中去。</p>
+                    	<h1 id="一微服务简介">一、微服务简介</h1>
+<p>　　微服务一词来源于Martin Fowler的名为Microservices的博文，它和我们常用的Restful api 一样，都是一种设计风格，它的主旨是将巨石应用拆分成多个小型服务，各个小型服务独立运行，他们之间可以因为业务需求进行互相友好访问，也可单独或者多个集成到一块对外提供服务。高内聚，低耦合是软件工程经常运用的架构思想，旨在更方便的拆分开发任务，以及为将来升级维护做更好的铺垫(可单独修改单个小型服务而不影响其他服务运行)。而在拆分的同时，我们可以单独对某项小型服务部署多个实例，从而对该小型服务提供的服务进行负载处理。</p>
+<h1 id="二应用场景">二、应用场景</h1>
+<p>下图是摘自Martin Flower博文中插图，横轴表示复杂度，纵轴表示生产率；绿线表示巨石单体应用，蓝线表示微服务：
+<!-- ![edit](/static/assets/img/blog/cloud/cloud001.png) --></p>
+<center><img src="/static/assets/img/blog/cloud/cloud001.png" width="75%" /></center>
+<h3 id="一低复杂度期">（一）低复杂度期：</h3>
+<p>　　当复杂度较低时(比如某软件项目第一期)，单体应用因为代码都耦合在一起，程序之间互相调用比较方便；而微服务因为需要根据不同业务拆分出多个模块分别开发(哪怕这个模块只需要几行代码就能完成)，还要约定需要数据交互的微服务之间的接口规范(这显然会增大工作量和工作复杂度)；所以这时候单体应用再生产率方便和微服务相比还是比较有优势的。这也在向我们阐述一个道理，就是并不是所有项目都需要拆成微服务形式的，就简单几个页面的增删该查，访问量一个月加起来都不够程序员月收入数额的，你要什么微服务？</p>
+<h3 id="二生产率相等转折点也就是绿蓝线交点">（二）生产率相等转折点，也就是绿蓝线交点：</h3>
+<p>　　单体应用随着项目复杂度增加，项目组成员沟通成本加大(一个开发者自己写的这块可能要牵动很多其他代码逻辑)，代码维护难度增加(过3个月有的时候连开发者本人都搞不懂自己当时为什么那么写，当然这个开发者自身也有问题，比如代码不规范，注释太少，设计别扭等等)；而此时微服务却因为复杂度增加而愈发显示出它的优势所在，独立开发，独自部署，只要接口约定好就可以。这个焦点恰恰是很难以把握的，或是在交点之前就需要将巨石应用微服务化（要考虑到将来扩展）。当然项目是分期做的，有的项目为了赶进度，可以先做成简单单体应用(最好根据业务分成多个模块，以便以后好拆分)，让boss们看到他们的钱没有白花。然后适当的在第一期boss们有新主意，评审项目需要加功能的时候，尽快完成微服务化。</p>
+<h3 id="三高复杂三">（三）高复杂三：</h3>
+<p>　　这时候已经不能阻止微服务的优势了。。。
+　　微服务因为其服务拆分的特点有着很多独特的优势，也正因为其特点也会产生很多新的问题，各种网友们真可谓是仁者见仁、智者见智，活脱脱的一千个人的心中有一千个哈姆雷特，谨劝各位，与其听别人白活还不如自己投入实战亲身体会比较好。</p>
 
                     <hr>
                     <div class="row">
@@ -250,7 +257,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/07/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/01/02/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

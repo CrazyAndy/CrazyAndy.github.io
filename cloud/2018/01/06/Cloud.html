@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="devops" name="description">
+    <meta content="断路器" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud整体概括篇009_devops
+        CrazyAndy|Spring Cloud整体概括篇006_断路器
     
   </title>
   <!-- favicon -->
@@ -222,14 +222,18 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2018</span>
                         <h1>
-                            Spring Cloud整体概括篇009_devops
+                            Spring Cloud整体概括篇006_断路器
                         </h1>
                     </div>
                     	<h1 id="一综述">一、综述</h1>
-<p>　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，测试，发布动作，极大的节省了运维操作复杂度，保证不出错，为快速迭代产品提供了运维基础。
-　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。</p>
+<p>　　断路器主要是针对某服务出现故障不能响应，而将访问请求转发到其他能正常工作的服务实例上去，当然也可以做一些降级策略，比如所有同类型服务都出现故障，可降级返回客户端能理解的错误编码等方式，避免客户端看到500服务器错误，避免影响用户使用体验。断路器模式如下图所示：
+<!-- ![edit](/static/assets/img/blog/cloud/cloud003.png) --></p>
+<center><img src="/static/assets/img/blog/cloud/cloud003.png" width="75%" /></center>
+
+<p>　　低水平的服务的服务失败会导致级联故障一直给到用户。当调用一个特定的服务达到一定阈值(默认5秒失败20次),打开断路器。在错误的情况下和一个开启的断路回滚fallback应可以由开发人员提供。 
+如上图，b服务依然挂掉，不能再提供正常服务，这时候如果还将前端请求转发到b，显然是不合适的，我们会为b服务实现回滚逻辑，也就是降级处理。这样，在下次请求b服务的时候，断路器会直接执行回滚逻辑，告知前端通知，比如该服务不能正常运行，或者提供该服务的一个“应付”数据等等。</p>
 
                     <hr>
                     <div class="row">
@@ -247,7 +251,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/09/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/01/06/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>

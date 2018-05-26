@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="Api网关" name="description">
+    <meta content="配置中心" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud整体概括篇003_API网关
+        CrazyAndy|Spring Cloud整体概括篇007_配置中心
     
   </title>
   <!-- favicon -->
@@ -222,30 +222,17 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Jan 2018</span>
                         <h1>
-                            Spring Cloud整体概括篇003_API网关
+                            Spring Cloud整体概括篇007_配置中心
                         </h1>
                     </div>
-                    	<h1 id="一概述">一、概述</h1>
-<p>　　API网关是干什么用的呢，它就是所有微服务的“大门看守员”，它可以实现请求路由，负载均衡，校验过滤，请求失败熔断，服务聚合，监控，缓存，静态响应处理等一大堆功能。其中以一大部分功能是在响应当前请求做真正业务处理之前，做一些周边的类似于aop形式的工作。</p>
-<h1 id="二名词解析">二、名词解析</h1>
-<h3 id="一请求路由">（一）请求路由：</h3>
-<p>　　判断当前请求路径需要转发请求到具体单个微服务，然后根据相应ip和端口配置转发请求到该服务上去。对于微服务所在机器的ip和端口配置，其实是由特定功能组件存储的，具体详细以后再讲，在这给你讲了你也听不懂。</p>
-<h3 id="二负载均衡">（二）负载均衡：</h3>
-<p>　　比如说需要查询用户列表的微服务有 a1,a2,a3 三个实例（它们分别运行在不同的ip和端口组合上），前端页面请求api网关，需要查询用户列表，这时候网关就会根据轮询或者权重或者随机或者自定义机制，从这三个服务实例中挑选出唯一一个实例出来，将请求转发到该实例上，该实例执行其内部业务逻辑之后将用户列表返回给网关，网关再返回给前端页面。在这个过程中，网关挑选服务实例的过程就是在做负载均衡，因为api网关主动为前端选择了一个实例进行处理响应，所以我们大可以将这种模式理解为服务器端负载均衡，而如果以后要讲的微服务之间调用，服务消费方则是主动从服务实例配置中选择一个服务实例，则这种方式又称为客户端负载均衡。</p>
-<h3 id="三校验过滤">（三）校验过滤：</h3>
-<p>　　原来的单体应用都会在前置过滤器中，插入验证机制，比如shiro，Spring Security 等；但是改成微服务之后呢，你总不能再每个微服务的前置过滤器中都加入验证逻辑吧，所以将校验逻辑放入api网关是再好不过的设计。</p>
-<h3 id="四请求失败熔断">（四）请求失败熔断：</h3>
-<p>　　请求失败次数过多，说明这个服务有问题，就不应该再让前端访问，在api网关直接返回error信息即可，这样可以保护后端服务器。</p>
-<h3 id="五服务聚合">（五）服务聚合：</h3>
-<p>　　一个页面上可能多个请求到后台，在api网关层聚合可以减少后端请求次数，保护后端服务器，让其使用率更高。</p>
-<h3 id="六监控">（六）监控：</h3>
-<p>　　监控每次请求内容，响应时间，单个服务请求频率，监控是否有爬虫爬取，恶意攻击等。也可以根据监控情况，增加高并发服务的运行实例以此来达到负载均衡，修补木桶的最矮木条。</p>
-<h3 id="七缓存">（七）缓存：</h3>
-<p>　　登陆用户缓存，图片缓存，热度信息缓存等。这样会减少后台具体业务逻辑的计算，从而缩短调用时长，降低后台服务器的使用压力，也提高的整体系统的承压能力。</p>
-<h3 id="八静态响应处理">（八）静态响应处理：</h3>
-<p>　　静态资源，比如图片，js，css文件等等，都可以直接在网关层就返回，不需要再转发到靠后的微服务。</p>
+                    	<h1 id="一综述">一、综述</h1>
+<p>　　Spring boot 配置文件管理在 application.properties里面 ，如果有需要还要根据dev,test,prod 做分别的配置，在部署时不好管理，配置信息更新时也不方便修改所有配置文件，而且有可能有的业务场景还避讳生产机Ip和port。
+　　Spring cloud 默认使用 git ，其实也可以用svn，甚至于本地一个文件。
+　　Spring cloud 有专门的插件 叫做 config ，它又分成 客户端 和服务器端。
+　　　　1. 服务器端指定 git 地址，为客户端提供查询具体配置的接口；
+　　　　2. 客户端通过请求服务端为其提供的服务接口，查询具体配置并应用到客户端所在的服务中去。</p>
 
                     <hr>
                     <div class="row">
@@ -263,7 +250,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/03/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/01/07/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>
