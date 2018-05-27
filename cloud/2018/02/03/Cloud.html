@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="Spring Cloud 最快上手篇客户端负载均衡" name="description">
+  
+  
+    <meta name="keywords" content="cloud">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Spring Cloud 最快上手篇003_客户端负载均衡
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20170307.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">cloud</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Feb 2018</span>
+                        <h1>
+                            Spring Cloud 最快上手篇003_客户端负载均衡
+                        </h1>
+                    </div>
+                    	<h1 id="一概述">一、概述</h1>
+<p>　　Spring Cloud Ribbon是一个基于Http和Tcp的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松的将面向服务的Rest模板请求自动转换成客户端负载均衡的的服务调用。Spring Cloud Ribbon虽然只是一个工具类框架，它不像服务注册中心、配置中心、API网关那样需要独立部署，但是它几乎存在于每一个Spring Cloud构建的微服务和基础设施中。因为服务之间的调用，API网关的请求转发等内容，实际上都是通过Ribbon来实现的，包括我们后续将要介绍的Feign，它是基于Ribbon实现的工具。</p>
+
+<h1 id="二负载均衡">二、负载均衡</h1>
+<p>　　负载均衡是对系统的高可用，网络压力的缓解和处理能力扩容的重要手段之一。我们常说的负载均衡是服务端负载均衡，其中又分硬件、软件这这两种方式。硬件负载均衡主要是通过在服务器节点之间安装专门用户负载均衡的设备，比如F5;而软件负载均衡则是通过在服务器上安装一些具有均衡负载功能或模块的软件来完成请求分发工作，比如Nginx。</p>
+
+<p>　　客户端负载均衡和服务端负载均衡最大的不同点在于服务清单存储在客户端，每个客户端节点都会从注册中心拉取服务清单并缓存在本地，还会定期更新这个服务清单。Ribbon则是客户端负载均衡软件方式的一种体现，它分以下两部实现：</p>
+
+<p>　　1. 服务提供者只需要启动多个服务实例并注册到一个注册中心或是多个相关联的服务注册中心。</p>
+
+<p>　　2.  服务消费者直接通过调用被@LoadBalanced注解修饰过的RestTemplate来实现面向服务的接口调用。</p>
+<h1 id="三重试机制">三、重试机制</h1>
+
+<p>　　CAP理论：CAP原则又称CAP定理，指的是在一个分布式系统中，Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性），三者不可同时存在，只能两两存在，舍弃一个。</p>
+
+<p>　　分布式系统的CAP理论：理论首先把分布式系统中的三个特性进行了如下归纳：</p>
+
+<p>　　● 一致性（C）：在分布式系统中的所有数据备份，在同一时刻是否同样的值。（等同于所有节点访问同一份最新的数据副本）</p>
+
+<p>　　● 可用性（A）：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）</p>
+
+<p>　　● 分区容错性（P）：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</p>
+
+<p>　　spring cloud eureka 实现的服务治理机制强调了ap，可用性和可靠性，它为了实现更高的服务可用性，牺牲了一定的一致性。</p>
+
+<p>　　Spring Cloud 整合了spring retry来增强RestTemplate的重试能力,配置如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    spring.cloud.loadbalancer.retry.enabled=true
+</code></pre></div></div>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">cloud</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/03/Cloud.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    <!-- Google analytics -->
+
+
+<!-- GrowingIO -->
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+_hmt.push(['_setAutoPageview', true]);
+</script>
+
+
+	
+
+</body>
+</html>
