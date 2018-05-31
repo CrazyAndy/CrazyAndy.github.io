@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 May 2018 23:04:20 +0800</pubDate>
-    <lastBuildDate>Sun, 27 May 2018 23:04:20 +0800</lastBuildDate>
+    <pubDate>Thu, 31 May 2018 23:51:06 +0800</pubDate>
+    <lastBuildDate>Thu, 31 May 2018 23:51:06 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -15,7 +15,7 @@
 
 &lt;p&gt;　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。&lt;/p&gt;
 
-&lt;p&gt;　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临幸抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。&lt;/p&gt;
+&lt;p&gt;　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临时抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。&lt;/p&gt;
 
 &lt;p&gt;　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，你的能力也就跟上来了。&lt;/p&gt;
 
@@ -434,6 +434,236 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
         <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/05/01/Cloud.html</link>
         <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/01/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 最快上手篇006_网关API</title>
+        <description>&lt;h1 id=&quot;一应用场景&quot;&gt;一、应用场景&lt;/h1&gt;
+&lt;p&gt;　　对外服务我们称之为边缘服务。我们需要在所有服务的前面挡一层网关服务，让所有外部客户端访问都经过它来进行调度和过滤。我们可以在网关层实现请求路由，软件负载均衡(相对于F5等硬件负载均衡来说)，校验过滤，还可以用来进行服务治理框架的整合，请求转发时的熔断机制，服务的聚合等一系列高级功能。Spring cloud 提供了基于netflix zuul实现的API网关组件Spring Cloud Zuul。&lt;/p&gt;
+
+&lt;h1 id=&quot;二快速入门&quot;&gt;二、快速入门&lt;/h1&gt;
+&lt;p&gt;####(一)构建网关
+####(二)请求路由
+####(三)请求过滤&lt;/p&gt;
+&lt;h1 id=&quot;三路由详解&quot;&gt;三、路由详解&lt;/h1&gt;
+&lt;p&gt;####(一)传统路由配置
+####(二)服务路由配置
+####(三)服务路由的默认规则
+####(四)自定义路由映射规则
+####(五)路径匹配
+####(六)路由前缀
+####(七)本地跳转
+####(八)Cookie与头消息
+####(九)hystrix和Ribbon支持&lt;/p&gt;
+&lt;h1 id=&quot;四过滤器详解&quot;&gt;四、过滤器详解&lt;/h1&gt;
+&lt;p&gt;####(一)过滤器
+####(二)请求声明周期
+####(三)核心过滤器
+####(四)异常处理&lt;/p&gt;
+&lt;h1 id=&quot;五动态加载&quot;&gt;五、动态加载&lt;/h1&gt;
+&lt;p&gt;####(一)动态路由
+####(二)动态过滤器&lt;/p&gt;
+</description>
+        <pubDate>Tue, 06 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/06/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/06/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 最快上手篇005_声明式服务调用</title>
+        <description>&lt;h1 id=&quot;一应用场景&quot;&gt;一、应用场景&lt;/h1&gt;
+&lt;p&gt;　　Spring Cloud Feign整合了Spring Cloud Ribbon与Spring Cloud Hystrix，除了提供这两者的强大功能之外，它还提供给了一种声明式的web服务客户端定义方式。&lt;/p&gt;
+&lt;h1 id=&quot;二实例搭建&quot;&gt;二、实例搭建&lt;/h1&gt;
+&lt;p&gt;　　1. 引入依赖&lt;/p&gt;
+
+&lt;p&gt;　　spring-cloud-starter-eureka
+　　spring-cloud-starter-feign&lt;/p&gt;
+
+&lt;p&gt;　　2. 加入注解&lt;/p&gt;
+
+&lt;p&gt;　　主类加入注解@EnbaleFeignClients&lt;/p&gt;
+
+&lt;p&gt;　　定义HelloService接口,通过指定@FeignClient注解指定服务名来绑定服务，然后再使用Spring MVC的注解来绑定具体该服务提供的REST接口。&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@FeignClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello-service&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　3. 调用&lt;/p&gt;
+
+&lt;p&gt;　　创建一个ConsumerController来实现对Feign客户端的调用。使用@Autowired直接注入上面定义的HelloService实例，并在helloConsumser方法中调用这个实例来发起对服务接口/hello的调用。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;4. 参数绑定
+@RequestParam ,@RequestHeader，@RequestBody # 三、继承特性
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　如果按照上面第二节的思路，我们需要在服务消费者和生产者两方都要定义映射方法，比如&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　生产者需要在controller层去实现该方法真正的业务逻辑，而消费者则需要定义包含该方法的接口，并在上面加入注解@FeignClient(“HELLO-SERVICE”)，这样一来就会有重复代码出现，而且如果修改一端，那么另一端也需要做相应修改，而且还需要告知给那一端的开发，假如要式生产者和消费者是一对多或者多对一呢，很可能有漏改的地方。所以我们可以通过指定数据交互接口规范，让生产者和消费者都去使用这个接口，这样就会减少代码量，还避免出错。而spring cloud feign的继承特性又可以实现rest接口定义的复用，那么我们刚才的解决思路也就完全可以落地了。&lt;/p&gt;
+
+&lt;p&gt;　　1. 创建公共maven工程，里面包括dto和接口定义，主要是供生产者和消费者两端复用&lt;/p&gt;
+
+&lt;p&gt;　　2. 创建生产者&lt;/p&gt;
+
+&lt;p&gt;　　3. 创建消费者&lt;/p&gt;
+&lt;h1 id=&quot;四ribbon配置&quot;&gt;四、Ribbon配置&lt;/h1&gt;
+&lt;p&gt;　　feign的负载均衡是通过ribbon实现的，所以我们需要通过配置ribbo客户端的方式来自定义各个服务客户端调用的参数。&lt;/p&gt;
+
+&lt;p&gt;　　1. 全局配置&lt;/p&gt;
+
+&lt;p&gt;　　ribbon.&amp;lt; key &amp;gt; = &amp;lt; value &amp;gt;&lt;/p&gt;
+
+&lt;p&gt;　　比如修改默认的客户端调用超时时间：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-java　&quot;&gt;ribbon.ConnectTimeout=500
+ribbon.ReadTimeout=5000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;　　2. 指定服务配置&lt;/p&gt;
+
+&lt;p&gt;　　使用@FeignClient(value=”HELLO-SERVICE”)来创建Feign客户端的时候，同时也创建了一个名为HELLO-SERVICE的Ribbo客户端。所以我们可以直接通过使用HELLO-SERVICE，也就是@FeignClient中name或value的属性值来设置对应的Ribbon参数，比如：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;HELLO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ribbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ConnectTimeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HELLO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ribbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ReadTimeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HELLO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ribbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OkToRetryOnAllOperations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HELLO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ribbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MaxAutoRetriesNextServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HELLO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ribbon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MaxAutoRetries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　3. 重试机制&lt;/p&gt;
+
+&lt;p&gt;　　Feign默认实现了请求的重试机制，就是根据第二步 指定服务配置 设置的重试配置。
+　　这里要注意的是，Ribbon的超时和hystrix的超时是两回事，我们要讲hystrix超时时间大于ribbo的超时时间，否则hystrix命令超时后，该命令直接熔断，ribbo的重试也就没有意义了。&lt;/p&gt;
+&lt;h1 id=&quot;五hystrix配置&quot;&gt;五、Hystrix配置&lt;/h1&gt;
+&lt;p&gt;　　1. 全局配置&lt;/p&gt;
+
+&lt;p&gt;　　使用默认配置前缀hystrix.command.default就可以进行配置，比如设置全局的超时时间。
+　　hystrix.command.default.execution.isolation.thread.timeoutinMilliseconds=5000
+　　我们可以通过全局设置hystrix.command.default.execution.timeout.enabled=false来关闭hystrix功能　　&lt;/p&gt;
+
+&lt;p&gt;　　2. 禁用hystrix&lt;/p&gt;
+
+&lt;p&gt;　　通过feign.hystrix.enabled=false来关闭hystrix功能。
+　　但是如果不想使该消费者全局关闭hystrix支持，而只想针对某个服务客户端关闭hystrix支持，需要通过使用@Scoppe(“prototype”)的注解为指定的客户端配置Feign.Builder实例
+　　构建一个关闭hystrix的配置类&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DisableHystrixConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Scopt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;prototype&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;feignBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　在helloService的@FeignClient注解中，通过Configuration参数一如上面实现的设置&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@FeignClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HELLO-SERVICE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DisableHystrixConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　3. 指定命令配置&lt;/p&gt;
+
+&lt;p&gt;　　采用hystrix.command.&lt;commandKey&gt;作为前缀，&lt;commandKey&gt;默认情况下回采用Feign客户端中的方法名作为标识。&lt;/commandKey&gt;&lt;/commandKey&gt;&lt;/p&gt;
+
+&lt;p&gt;　　4. 服务降级配置&lt;/p&gt;
+
+&lt;p&gt;　　和原来spring cloud hystrix通过@HystrixCommand注解的fallback参数来指定具体的服务降级处理方法不同，feign提供了另外一种更简单的定义方式。（关于spring cloud的所有服务中，我们说的ribbo和feign或者hystrix等都是指的是spring cloud下的对应插件，文中只是简化书写，请不要理解成netflix开源框架中的对应插件）&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloServiceFallback&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@FeignClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HELLO-SERVICE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HelloServiceFallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;六其他配置&quot;&gt;六、其他配置&lt;/h1&gt;
+&lt;p&gt;　　1. 请求压缩&lt;/p&gt;
+
+&lt;p&gt;　　feign支持对请求与响应进行GZIP压缩，以减少通信过程中的性能损耗。我们需要通过以下两个配置：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　我们还可以指定压缩的请求数据类型，并设置了请求压缩的大小下限，只有超过这个大小的请求才会对其进行压缩。&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xml&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xml&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;feign&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compression&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2048&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　2. 日志配置&lt;/p&gt;
+
+&lt;p&gt;　　feign在构建被@FeignClient注解修饰的服务客户端时，会为每一个客户端都创建一个feign.Logger实例，我们可以通过配置开启，也可以在应用主类中加入Logger.Level的bean创建，还可以在具体的feign客户端指定配置类以实现是否要调整不同的日志级别。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 05 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/05/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/05/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 最快上手篇004_服务容错保护</title>
+        <description>&lt;h1 id=&quot;一应用场景&quot;&gt;一、应用场景&lt;/h1&gt;
+&lt;p&gt;　　假如有这样一个应用场景，用户创建一个订单的时候，客户端将调用订单服务的创建订单接口，此时创建订单接口又会向库存服务来请求出货，此时，若库存服务因自身处理逻辑等原因造成响应缓慢，会直接导致创建订单服务的线程被挂起以等待库存申请服务的响应，在漫长的等待之后用户会因为请求库存失败而得到创建订单失败的结果。如果在高并发情况之下，因这些挂起的线程在等待库存服务的响应而未能释放，使得后续到来的创建订单请求被阻塞，最终导致订单服务也不可用。&lt;/p&gt;
+
+&lt;p&gt;　　在微服务架构中，若一个服务单元出现故障，则会很容易引发调用该服务单元的一系列服务单元无法正常响应，即造成故障的蔓延，最终导致整个系统瘫痪，为了解决类似问题，产生了断路器等一系列的服务保护机制。&lt;/p&gt;
+
+&lt;p&gt;　　为此，我们使用spring cloud hystrix，它具备了服务降级，服务熔断，线程和信号隔离，请求缓存，请求合并以及服务监控等强大功能。&lt;/p&gt;
+
+&lt;h1 id=&quot;二实例搭建&quot;&gt;二、实例搭建&lt;/h1&gt;
+&lt;p&gt;　　1. 添加pom依赖&lt;/p&gt;
+
+&lt;p&gt;　　spring-cloud-starter-hystrix&lt;/p&gt;
+
+&lt;p&gt;　　2. 主类加入注解&lt;/p&gt;
+
+&lt;p&gt;　　@EnableCircuitBreaker&lt;/p&gt;
+
+&lt;p&gt;　　3. 更改调用方式&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;		&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;RestTemplate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+		&lt;span class=&quot;nd&quot;&gt;@HystrixCommand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallbackMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;helloFallback&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;helloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+				&lt;span class=&quot;nf&quot;&gt;getForEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://HELLO-SERVICE/hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;getBody&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;helloFallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　&lt;/p&gt;
+</description>
+        <pubDate>Sun, 04 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/04/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/04/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -1198,8 +1428,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
       <item>
         <title>linux多主机建立SSH信任关系</title>
         <description>&lt;h1 id=&quot;一实现原理&quot;&gt;一、实现原理&lt;/h1&gt;
-&lt;p&gt;　　使用“公私钥”认证的方式来进行SSH登录，“公私钥”认证方式如下：
-　　假如有两台服务器：server1和server2，我们需要建立从server1到server2的SSH信任关系。首先要在server1上创建一对公私钥（公钥文件路径：~/.ssh/id_rsa.pub；私钥文件路径：~/.ssh/id_rsa），然后将server1上公钥的内容追加到server2上的文件：~/.ssh/authorized_keys 的末尾（注意：不要再server2的文件：~/.ssh/authorized_keys的最后一行追加，而是在最最后另起一行），在server1上保留好私钥。当从server1通过SSH登陆到server2时，SSH程序会将server1上的私钥和server2上的公钥做匹配。如果匹配成功，则不需要输入密码便可以登陆了。&lt;/p&gt;
+&lt;p&gt;　　使用“公私钥”认证的方式来进行SSH登录，“公私钥”认证方式如下：&lt;/p&gt;
+
+&lt;p&gt;　　假如有两台服务器：server1和server2，我们需要建立从server1到server2的SSH信任关系。首先要在server1上创建一对公私钥（公钥文件路径：~/.ssh/id_rsa.pub；私钥文件路径：~/.ssh/id_rsa），然后将server1上公钥的内容追加到server2上的文件：~/.ssh/authorized_keys 的末尾（注意：不要再server2的文件：~/.ssh/authorized_keys的最后一行追加，而是在最最后另起一行），在server1上保留好私钥。当从server1通过SSH登陆到server2时，SSH程序会将server1上的私钥和server2上的公钥做匹配。如果匹配成功，则不需要输入密码便可以登陆了。&lt;/p&gt;
 
 &lt;h1 id=&quot;二环境说明&quot;&gt;二、环境说明&lt;/h1&gt;
 
@@ -1209,8 +1440,9 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;h1 id=&quot;三建立ssh信任&quot;&gt;三、建立SSH信任&lt;/h1&gt;
 &lt;p&gt;　　1. 在server1上生成证书&lt;/p&gt;
 
-&lt;p&gt;　　在server1的presto用户下执行ssh-keygen命令，在需要输入的地方，直接输入回车符，生成建立安全信任关系的证书。执行结果命令如下： ssh-keygen -t rsa
-　　注意：在程序提示输入passphrase时直接输入回车符，表示无证书密码。
+&lt;p&gt;　　在server1的presto用户下执行ssh-keygen命令，在需要输入的地方，直接输入回车符，生成建立安全信任关系的证书。执行结果命令如下： ssh-keygen -t rsa&lt;/p&gt;
+
+&lt;p&gt;　　注意：在程序提示输入passphrase时直接输入回车符，表示无证书密码。
 　　上述命令将生成私钥证书id_rsa和公钥证书id_rsa.pub，存放在当前登陆用户的根目录下的.ssh子目录中。&lt;/p&gt;
 
 &lt;p&gt;　　2. 查看生成的公私钥证书&lt;/p&gt;
@@ -1228,7 +1460,13 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;h1 id=&quot;四验证&quot;&gt;四、验证&lt;/h1&gt;
 &lt;p&gt;　　在server1上执行命令 ssh 192.168.100.2 ，如果能登陆server2则证明ssh认证成功。&lt;/p&gt;
 
-&lt;h1 id=&quot;五自动化脚本&quot;&gt;五、自动化脚本&lt;/h1&gt;
+&lt;h1 id=&quot;五设置了免密码登陆但是还是需要输入密码&quot;&gt;五、设置了免密码登陆但是还是需要输入密码&lt;/h1&gt;
+
+&lt;p&gt;　　.ssh这个文件夹下所有文件的权限都必须设置为700，因为sshd文件中明确说过如果该文件夹下文件可以被所有者之外的对象进行写操作，免密登陆将会拒绝访问。&lt;/p&gt;
+
+&lt;p&gt;　　如果上面的你都照做了，还是要输入密码，那么你可以看看.ssh文件的父目录是否是700权限。&lt;/p&gt;
+
+&lt;h1 id=&quot;六自动化脚本&quot;&gt;六、自动化脚本&lt;/h1&gt;
 &lt;p&gt;　　使用以上的方式进行SSH认证，两个节点还好，那如果是集群很多个节点呢，势必会进行非常繁琐的重复性工作，因此可以在主节点上使用shell脚本一次性自动化完成整个集群SSH认证关系的建立。
 　　首先需要建立一个文件server.txt，在该文件中记录了集群中所有服务器的ip地址，内容如下&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	192.168.100.1

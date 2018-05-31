@@ -67,6 +67,30 @@
 	
     
 	{
+		"title" : "Spring Cloud 最快上手篇006_网关API - 2018-02-06",
+		"url" : "/cloud/2018/02/06/Cloud.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Spring Cloud 最快上手篇005_声明式服务调用 - 2018-02-05",
+		"url" : "/cloud/2018/02/05/Cloud.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Spring Cloud 最快上手篇004_服务容错保护 - 2018-02-04",
+		"url" : "/cloud/2018/02/04/Cloud.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "Spring Cloud 最快上手篇003_客户端负载均衡 - 2018-02-03",
 		"url" : "/cloud/2018/02/03/Cloud.html"
 	}

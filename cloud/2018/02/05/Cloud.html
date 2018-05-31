@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="Spring Cloud 最快上手篇_声明式服务调用" name="description">
+  
+  
+    <meta name="keywords" content="cloud">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Spring Cloud 最快上手篇005_声明式服务调用
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20170307.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">cloud</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Feb 2018</span>
+                        <h1>
+                            Spring Cloud 最快上手篇005_声明式服务调用
+                        </h1>
+                    </div>
+                    	<h1 id="一应用场景">一、应用场景</h1>
+<p>　　Spring Cloud Feign整合了Spring Cloud Ribbon与Spring Cloud Hystrix，除了提供这两者的强大功能之外，它还提供给了一种声明式的web服务客户端定义方式。</p>
+<h1 id="二实例搭建">二、实例搭建</h1>
+<p>　　1. 引入依赖</p>
+
+<p>　　spring-cloud-starter-eureka
+　　spring-cloud-starter-feign</p>
+
+<p>　　2. 加入注解</p>
+
+<p>　　主类加入注解@EnbaleFeignClients</p>
+
+<p>　　定义HelloService接口,通过指定@FeignClient注解指定服务名来绑定服务，然后再使用Spring MVC的注解来绑定具体该服务提供的REST接口。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FeignClient</span><span class="o">(</span><span class="s">"hello-service"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span><span class="o">{</span>
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+	<span class="n">String</span> <span class="nf">hello</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>　　3. 调用</p>
+
+<p>　　创建一个ConsumerController来实现对Feign客户端的调用。使用@Autowired直接注入上面定义的HelloService实例，并在helloConsumser方法中调用这个实例来发起对服务接口/hello的调用。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4. 参数绑定
+@RequestParam ,@RequestHeader，@RequestBody # 三、继承特性
+</code></pre></div></div>
+
+<p>　　如果按照上面第二节的思路，我们需要在服务消费者和生产者两方都要定义映射方法，比如</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+	<span class="n">String</span> <span class="nf">hello</span><span class="o">();</span>
+</code></pre></div></div>
+<p>　　生产者需要在controller层去实现该方法真正的业务逻辑，而消费者则需要定义包含该方法的接口，并在上面加入注解@FeignClient(“HELLO-SERVICE”)，这样一来就会有重复代码出现，而且如果修改一端，那么另一端也需要做相应修改，而且还需要告知给那一端的开发，假如要式生产者和消费者是一对多或者多对一呢，很可能有漏改的地方。所以我们可以通过指定数据交互接口规范，让生产者和消费者都去使用这个接口，这样就会减少代码量，还避免出错。而spring cloud feign的继承特性又可以实现rest接口定义的复用，那么我们刚才的解决思路也就完全可以落地了。</p>
+
+<p>　　1. 创建公共maven工程，里面包括dto和接口定义，主要是供生产者和消费者两端复用</p>
+
+<p>　　2. 创建生产者</p>
+
+<p>　　3. 创建消费者</p>
+<h1 id="四ribbon配置">四、Ribbon配置</h1>
+<p>　　feign的负载均衡是通过ribbon实现的，所以我们需要通过配置ribbo客户端的方式来自定义各个服务客户端调用的参数。</p>
+
+<p>　　1. 全局配置</p>
+
+<p>　　ribbon.&lt; key &gt; = &lt; value &gt;</p>
+
+<p>　　比如修改默认的客户端调用超时时间：</p>
+<pre><code class="language-java　">ribbon.ConnectTimeout=500
+ribbon.ReadTimeout=5000
+</code></pre>
+
+<p>　　2. 指定服务配置</p>
+
+<p>　　使用@FeignClient(value=”HELLO-SERVICE”)来创建Feign客户端的时候，同时也创建了一个名为HELLO-SERVICE的Ribbo客户端。所以我们可以直接通过使用HELLO-SERVICE，也就是@FeignClient中name或value的属性值来设置对应的Ribbon参数，比如：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HELLO</span><span class="o">-</span><span class="n">SERVICE</span><span class="o">.</span><span class="na">ribbon</span><span class="o">.</span><span class="na">ConnectTimeout</span><span class="o">=</span><span class="mi">500</span>
+<span class="n">HELLO</span><span class="o">-</span><span class="n">SERVICE</span><span class="o">.</span><span class="na">ribbon</span><span class="o">.</span><span class="na">ReadTimeout</span><span class="o">=</span><span class="mi">2000</span>
+<span class="n">HELLO</span><span class="o">-</span><span class="n">SERVICE</span><span class="o">.</span><span class="na">ribbon</span><span class="o">.</span><span class="na">OkToRetryOnAllOperations</span><span class="o">=</span><span class="kc">true</span>
+<span class="n">HELLO</span><span class="o">-</span><span class="n">SERVICE</span><span class="o">.</span><span class="na">ribbon</span><span class="o">.</span><span class="na">MaxAutoRetriesNextServer</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">HELLO</span><span class="o">-</span><span class="n">SERVICE</span><span class="o">.</span><span class="na">ribbon</span><span class="o">.</span><span class="na">MaxAutoRetries</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></div>
+<p>　　3. 重试机制</p>
+
+<p>　　Feign默认实现了请求的重试机制，就是根据第二步 指定服务配置 设置的重试配置。
+　　这里要注意的是，Ribbon的超时和hystrix的超时是两回事，我们要讲hystrix超时时间大于ribbo的超时时间，否则hystrix命令超时后，该命令直接熔断，ribbo的重试也就没有意义了。</p>
+<h1 id="五hystrix配置">五、Hystrix配置</h1>
+<p>　　1. 全局配置</p>
+
+<p>　　使用默认配置前缀hystrix.command.default就可以进行配置，比如设置全局的超时时间。
+　　hystrix.command.default.execution.isolation.thread.timeoutinMilliseconds=5000
+　　我们可以通过全局设置hystrix.command.default.execution.timeout.enabled=false来关闭hystrix功能　　</p>
+
+<p>　　2. 禁用hystrix</p>
+
+<p>　　通过feign.hystrix.enabled=false来关闭hystrix功能。
+　　但是如果不想使该消费者全局关闭hystrix支持，而只想针对某个服务客户端关闭hystrix支持，需要通过使用@Scoppe(“prototype”)的注解为指定的客户端配置Feign.Builder实例
+　　构建一个关闭hystrix的配置类</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DisableHystrixConfiguration</span><span class="o">{</span>
+	<span class="nd">@Bean</span>
+	<span class="nd">@Scopt</span><span class="o">(</span><span class="s">"prototype"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">Feign</span><span class="o">.</span><span class="na">Builder</span> <span class="nf">feignBuilder</span><span class="o">(){</span>
+		<span class="k">return</span> <span class="n">Feign</span><span class="o">.</span><span class="na">builder</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>　　在helloService的@FeignClient注解中，通过Configuration参数一如上面实现的设置</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FeignClient</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"HELLO-SERVICE"</span><span class="o">,</span><span class="n">configuration</span><span class="o">=</span><span class="n">DisableHystrixConfiguration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span><span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>　　3. 指定命令配置</p>
+
+<p>　　采用hystrix.command.<commandKey>作为前缀，<commandKey>默认情况下回采用Feign客户端中的方法名作为标识。</commandKey></commandKey></p>
+
+<p>　　4. 服务降级配置</p>
+
+<p>　　和原来spring cloud hystrix通过@HystrixCommand注解的fallback参数来指定具体的服务降级处理方法不同，feign提供了另外一种更简单的定义方式。（关于spring cloud的所有服务中，我们说的ribbo和feign或者hystrix等都是指的是spring cloud下的对应插件，文中只是简化书写，请不要理解成netflix开源框架中的对应插件）</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloServiceFallback</span> <span class="kd">implements</span> <span class="n">HelloService</span><span class="o">{</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="o">(){</span>
+		<span class="k">return</span> <span class="s">"error"</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="nd">@FeignClient</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"HELLO-SERVICE"</span><span class="o">,</span><span class="n">fallback</span><span class="o">=</span><span class="n">HelloServiceFallback</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span><span class="o">{</span>
+	<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+	<span class="n">String</span> <span class="nf">hello</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h1 id="六其他配置">六、其他配置</h1>
+<p>　　1. 请求压缩</p>
+
+<p>　　feign支持对请求与响应进行GZIP压缩，以减少通信过程中的性能损耗。我们需要通过以下两个配置：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feign</span><span class="o">.</span><span class="na">compression</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">enabled</span><span class="o">=</span><span class="kc">true</span>
+<span class="n">feign</span><span class="o">.</span><span class="na">compression</span><span class="o">.</span><span class="na">response</span><span class="o">.</span><span class="na">enabled</span><span class="o">=</span><span class="kc">true</span>
+</code></pre></div></div>
+<p>　　我们还可以指定压缩的请求数据类型，并设置了请求压缩的大小下限，只有超过这个大小的请求才会对其进行压缩。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">feign</span><span class="o">.</span><span class="na">compression</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">enabled</span><span class="o">=</span><span class="kc">true</span>
+<span class="n">feign</span><span class="o">.</span><span class="na">compression</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">mime</span><span class="o">-</span><span class="n">types</span><span class="o">=</span><span class="n">text</span><span class="o">/</span><span class="n">xml</span><span class="o">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="o">,</span><span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">feign</span><span class="o">.</span><span class="na">compression</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">min</span><span class="o">-</span><span class="n">request</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">2048</span>
+</code></pre></div></div>
+<p>　　2. 日志配置</p>
+
+<p>　　feign在构建被@FeignClient注解修饰的服务客户端时，会为每一个客户端都创建一个feign.Logger实例，我们可以通过配置开启，也可以在应用主类中加入Logger.Level的bean创建，还可以在具体的feign客户端指定配置类以实现是否要调整不同的日志级别。</p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">cloud</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/05/Cloud.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    <!-- Google analytics -->
+
+
+<!-- GrowingIO -->
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+_hmt.push(['_setAutoPageview', true]);
+</script>
+
+
+	
+
+</body>
+</html>

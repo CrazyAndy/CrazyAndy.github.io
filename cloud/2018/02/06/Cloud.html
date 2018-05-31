@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="linux多主机建立SSH信任关系" name="description">
+    <meta content="Spring Cloud 最快上手篇服务网关API" name="description">
   
   
-    <meta name="keywords" content="linux,SSH">
+    <meta name="keywords" content="cloud">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|linux多主机建立SSH信任关系
+        CrazyAndy|Spring Cloud 最快上手篇006_网关API
     
   </title>
   <!-- favicon -->
@@ -144,7 +144,7 @@
                     
                         
                             
-                                <li class="active">
+                                <li>
                             
                             <a class="tagname" href="/linux/">LINUX</a></li>
                         
@@ -165,7 +165,7 @@
                     
                         
                             
-                                <li>
+                                <li class="active">
                             
                             <a class="tagname" href="/cloud/">微服务</a></li>
                         
@@ -218,87 +218,49 @@
                 <div class="ibox-content">
                     <div class="pull-right">
                     	
-                        	<button class="btn btn-white btn-xs" type="button">linux</button>
+                        	<button class="btn btn-white btn-xs" type="button">cloud</button>
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Mar 2013</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Feb 2018</span>
                         <h1>
-                            linux多主机建立SSH信任关系
+                            Spring Cloud 最快上手篇006_网关API
                         </h1>
                     </div>
-                    	<h1 id="一实现原理">一、实现原理</h1>
-<p>　　使用“公私钥”认证的方式来进行SSH登录，“公私钥”认证方式如下：</p>
+                    	<h1 id="一应用场景">一、应用场景</h1>
+<p>　　对外服务我们称之为边缘服务。我们需要在所有服务的前面挡一层网关服务，让所有外部客户端访问都经过它来进行调度和过滤。我们可以在网关层实现请求路由，软件负载均衡(相对于F5等硬件负载均衡来说)，校验过滤，还可以用来进行服务治理框架的整合，请求转发时的熔断机制，服务的聚合等一系列高级功能。Spring cloud 提供了基于netflix zuul实现的API网关组件Spring Cloud Zuul。</p>
 
-<p>　　假如有两台服务器：server1和server2，我们需要建立从server1到server2的SSH信任关系。首先要在server1上创建一对公私钥（公钥文件路径：~/.ssh/id_rsa.pub；私钥文件路径：~/.ssh/id_rsa），然后将server1上公钥的内容追加到server2上的文件：~/.ssh/authorized_keys 的末尾（注意：不要再server2的文件：~/.ssh/authorized_keys的最后一行追加，而是在最最后另起一行），在server1上保留好私钥。当从server1通过SSH登陆到server2时，SSH程序会将server1上的私钥和server2上的公钥做匹配。如果匹配成功，则不需要输入密码便可以登陆了。</p>
-
-<h1 id="二环境说明">二、环境说明</h1>
-
-<p>　　server1：192.168.100.1
-　　server2：192.168.100.2</p>
-
-<h1 id="三建立ssh信任">三、建立SSH信任</h1>
-<p>　　1. 在server1上生成证书</p>
-
-<p>　　在server1的presto用户下执行ssh-keygen命令，在需要输入的地方，直接输入回车符，生成建立安全信任关系的证书。执行结果命令如下： ssh-keygen -t rsa</p>
-
-<p>　　注意：在程序提示输入passphrase时直接输入回车符，表示无证书密码。
-　　上述命令将生成私钥证书id_rsa和公钥证书id_rsa.pub，存放在当前登陆用户的根目录下的.ssh子目录中。</p>
-
-<p>　　2. 查看生成的公私钥证书</p>
-
-<p>　　生成的公私钥证书存放在目录~/.ssh目录下</p>
-
-<p>　　3. 建立server1到server2的SSH信任关系</p>
-
-<p>　　将server1上的公钥证书~/.ssh/id_rsa.pub中的内容添加到server2的用户根目录的.ssh子目录中authorized_keys文件的末尾另起一行。建立了server1到server2的信任关系之后，server1就可以不用验证直接ssh登陆server2.建立这种信任关系有两种方式：</p>
-
-<p>　　第一种：复制server1的文件~/.ssh/id_rsa.pub中的内容，并将其追加到server2的文件~/.ssh/authorized_keys中的末尾另起一行。</p>
-
-<p>　　第二种：在server1上执行命令：ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.100.2，完成信任关系的建立。</p>
-
-<h1 id="四验证">四、验证</h1>
-<p>　　在server1上执行命令 ssh 192.168.100.2 ，如果能登陆server2则证明ssh认证成功。</p>
-
-<h1 id="五设置了免密码登陆但是还是需要输入密码">五、设置了免密码登陆但是还是需要输入密码</h1>
-
-<p>　　.ssh这个文件夹下所有文件的权限都必须设置为700，因为sshd文件中明确说过如果该文件夹下文件可以被所有者之外的对象进行写操作，免密登陆将会拒绝访问。</p>
-
-<p>　　如果上面的你都照做了，还是要输入密码，那么你可以看看.ssh文件的父目录是否是700权限。</p>
-
-<h1 id="六自动化脚本">六、自动化脚本</h1>
-<p>　　使用以上的方式进行SSH认证，两个节点还好，那如果是集群很多个节点呢，势必会进行非常繁琐的重复性工作，因此可以在主节点上使用shell脚本一次性自动化完成整个集群SSH认证关系的建立。
-　　首先需要建立一个文件server.txt，在该文件中记录了集群中所有服务器的ip地址，内容如下</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	192.168.100.1
-        192.168.100.2
-        192.168.100.3
-        192.168.100.4
-        192.168.100.5
-        192.168.100.6
-</code></pre></div></div>
-
-<p>　　其次建立一个shell脚本：establishSSH.sh，用于自动完成主节点到各个服务器节点SSH信任关系的建立，脚本内容如下</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="c">#指定需要建立信任关系的用户名</span>
-USER_UID <span class="o">=</span> root
-<span class="c">#系统用户的家目录</span>
-USER_DIR <span class="o">=</span> /home/renzheng
-<span class="c">#用户对应的密码，从这里可以看出，该脚本要求每台服务器的相同用户的密码必须一致</span>
-IP_PW <span class="o">=</span> 
-待续。。。
-</code></pre></div></div>
-
+<h1 id="二快速入门">二、快速入门</h1>
+<p>####(一)构建网关
+####(二)请求路由
+####(三)请求过滤</p>
+<h1 id="三路由详解">三、路由详解</h1>
+<p>####(一)传统路由配置
+####(二)服务路由配置
+####(三)服务路由的默认规则
+####(四)自定义路由映射规则
+####(五)路径匹配
+####(六)路由前缀
+####(七)本地跳转
+####(八)Cookie与头消息
+####(九)hystrix和Ribbon支持</p>
+<h1 id="四过滤器详解">四、过滤器详解</h1>
+<p>####(一)过滤器
+####(二)请求声明周期
+####(三)核心过滤器
+####(四)异常处理</p>
+<h1 id="五动态加载">五、动态加载</h1>
+<p>####(一)动态路由
+####(二)动态过滤器</p>
 
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
                                 <h5 style="display: inline;">Tags:</h5>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">linux</button>
-                                
-                                    <button class="btn btn-white btn-xs" type="button">SSH</button>
-                                
                                     <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">cloud</button>
                                 
                         </div>
                         <div class="col-md-6">
@@ -307,7 +269,7 @@ IP_PW <span class="o">=</span>
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/linux/2013/03/02/LinuxSSH.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/06/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>
