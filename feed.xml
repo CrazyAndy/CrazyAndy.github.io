@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Jun 2018 23:11:48 +0800</pubDate>
-    <lastBuildDate>Sat, 02 Jun 2018 23:11:48 +0800</lastBuildDate>
+    <pubDate>Sat, 02 Jun 2018 23:40:01 +0800</pubDate>
+    <lastBuildDate>Sat, 02 Jun 2018 23:40:01 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -438,6 +438,36 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
         <category>blog</category>
         
         <category>cloud</category>
+        
+        
+        <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 最快上手篇007_分布式配置中心</title>
+        <description>&lt;h1 id=&quot;一应用场景&quot;&gt;一、应用场景&lt;/h1&gt;
+&lt;p&gt;　　spring cloud config分为服务端于客户端两个部分，服务端也成微分布式配置中心，他是一个独立的微服务应用，用来连接配置仓库并未客户端提供获取配置信息，加密/解密信息等访问接口；而客户端则是微服务架构中的各个微服务应用或基础设置，它们通过指定的配置中心来管理应用资源与业务相关的配置内容，并在启动的时候从配置中心获取和加载配置信息。它默认采用git来存储配置信息，当然也支持svn仓库，本地化文件系统。&lt;/p&gt;
+&lt;h1 id=&quot;二快速入门&quot;&gt;二、快速入门&lt;/h1&gt;
+&lt;h4 id=&quot;一构建配置中心&quot;&gt;(一)构建配置中心&lt;/h4&gt;
+
+&lt;h4 id=&quot;二配置规则详解&quot;&gt;(二)配置规则详解&lt;/h4&gt;
+
+&lt;h4 id=&quot;三客户端配置映射&quot;&gt;(三)客户端配置映射&lt;/h4&gt;
+
+&lt;h1 id=&quot;三服务端详解&quot;&gt;三、服务端详解&lt;/h1&gt;
+
+&lt;h1 id=&quot;四客户端详解&quot;&gt;四、客户端详解&lt;/h1&gt;
+</description>
+        <pubDate>Wed, 07 Feb 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/02/07/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/07/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        <category>config</category>
         
         
         <category>cloud</category>
