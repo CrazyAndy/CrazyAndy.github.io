@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 31 May 2018 23:51:06 +0800</pubDate>
-    <lastBuildDate>Thu, 31 May 2018 23:51:06 +0800</lastBuildDate>
+    <pubDate>Sat, 02 Jun 2018 23:11:48 +0800</pubDate>
+    <lastBuildDate>Sat, 02 Jun 2018 23:11:48 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -450,27 +450,140 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　对外服务我们称之为边缘服务。我们需要在所有服务的前面挡一层网关服务，让所有外部客户端访问都经过它来进行调度和过滤。我们可以在网关层实现请求路由，软件负载均衡(相对于F5等硬件负载均衡来说)，校验过滤，还可以用来进行服务治理框架的整合，请求转发时的熔断机制，服务的聚合等一系列高级功能。Spring cloud 提供了基于netflix zuul实现的API网关组件Spring Cloud Zuul。&lt;/p&gt;
 
 &lt;h1 id=&quot;二快速入门&quot;&gt;二、快速入门&lt;/h1&gt;
-&lt;p&gt;####(一)构建网关
-####(二)请求路由
-####(三)请求过滤&lt;/p&gt;
+&lt;h4 id=&quot;一构建网关&quot;&gt;(一)构建网关&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;在pom.xml中添加依赖spring-cloud-starter-zuul&lt;/li&gt;
+  &lt;li&gt;在主类中添加注解@EnableZuulProxy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;二请求路由&quot;&gt;(二)请求路由&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;传统路由方式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/**&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//localhost:8080/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;面向服务路由方式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;　　我们可以让路由映射到某个具体的服务，而具体的url则交给eureka的服务发现机制去自动维护。
+所以我们需要加入eureka的依赖。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/**&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;serviceId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;三请求过滤&quot;&gt;(三)请求过滤&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;定义zuul过滤器
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccessFilter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZuulFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filterType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//过滤器类型，它决定过滤器在哪个生命周期执行&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filterOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//执行顺序，从0开始，数值越小，越靠前&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;shouldFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//判断该过滤器是否需要被执行。实际运用中我们可以利用该函数来指定过滤器的有效范围&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//过滤器具体逻辑&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//如果验证失败，我们需要通过ctx.setSendZuulResponse(false)令zuul过滤该请求，不对其路由&lt;/span&gt;
+ &lt;span class=&quot;c1&quot;&gt;//然后通过ctx.setResponseStatusCode(401)设置了其返回的错误码&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;在主类中创建具体的过滤器bean&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccessFilter&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;accessFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AccessFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h1 id=&quot;三路由详解&quot;&gt;三、路由详解&lt;/h1&gt;
-&lt;p&gt;####(一)传统路由配置
-####(二)服务路由配置
-####(三)服务路由的默认规则
-####(四)自定义路由映射规则
-####(五)路径匹配
-####(六)路由前缀
-####(七)本地跳转
-####(八)Cookie与头消息
-####(九)hystrix和Ribbon支持&lt;/p&gt;
+&lt;h4 id=&quot;一服务路由的默认规则&quot;&gt;(一)服务路由的默认规则&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;zuul.routes.&amp;lt;serviceId&amp;gt;=&amp;lt;path&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;二自定义路由映射规则&quot;&gt;(二)自定义路由映射规则&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;可以自定义路由入 /v1/userservice/** ，目前用不着
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;三路径匹配&quot;&gt;(三)路径匹配&lt;/h4&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/?&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;匹配&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* 匹配 /user-service/a ，/user-service/aaa,/user-service/abc,但是无法匹配/user-service/a/b
+/user-service/**  匹配/user-service/*包含内容外，还可匹配 /user-service/a/b的多级目录
+我们可以通过使用yaml文件来配置先后顺序
+忽略表达式
+zuul.ignored-patterns = /**/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/**&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;四路由前缀&quot;&gt;(四)路由前缀&lt;/h4&gt;
+&lt;p&gt;　　我们可以通过zuul.prefix=/api的方式为网关上的路由规则都增加/aip前缀。目前很少用到。&lt;/p&gt;
+&lt;h4 id=&quot;五本地跳转&quot;&gt;(五)本地跳转&lt;/h4&gt;
+&lt;p&gt;　　zuul实现的api网关路由功能中，还支持forward形式的服务端跳转配置。实现非常简单，只需要通过使用path与url的配置方式就能完成，通过url使用forward来指定需要跳转的服务器资源路径。&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/**&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zuul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;forward:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localhost&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　这个功能比较有趣，我们可以基于此功能做api接口聚合操作，就是首页显示的数据来自很多个接口，我们使用/index ，然后再api local 接口上映射/index 然后在方法实现体里面调用各个接口，将数据组合之后，然后一次性返给客户端。&lt;/p&gt;
+
+&lt;h4 id=&quot;六kie与头消息&quot;&gt;(六)kie与头消息&lt;/h4&gt;
+&lt;p&gt;　　默认情况下，zuul在请求路由时，会过滤掉http请求头信息中的一些敏感信息，但是我们实现登陆和鉴权又需要从请求头中获取信息。所以我们需要做一些配置来解决。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;全局设置
+ zuul.sensitiveHeaders=&lt;/li&gt;
+  &lt;li&gt;指定路由配置
+ zuul.routes.&lt;router&gt;.customSensitiveHeaders=true
+ 或使用
+ zuul.routes.&lt;router&gt;.sensitiveHeaders=&lt;/router&gt;&lt;/router&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;重定向问题：&lt;/p&gt;
+
+&lt;p&gt;　　zuul网关路由转发之后，跳转的也买你url时具体web应用的地址，这是因为重定向之后，请求响应头信息中的location指向了具体的服务实例地址，而请求头信息中的ehost也指向了具体的服务实例ip地址和端口。
+我们需要在进行路由转发前为请求设置host头信息，以标识最初的服务端请求地址。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    zuul.addHostHeader=true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;九hystrix和ribbon支持&quot;&gt;(九)hystrix和Ribbon支持&lt;/h4&gt;
+&lt;p&gt;　　hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds
+　　路由转发请求的HystrixCommand执行超时时间&lt;/p&gt;
+
+&lt;p&gt;　　ribbon.ConnectTimeout
+　　该参数用来设置路由转发请求的时候，创建请求来凝结超时时间&lt;/p&gt;
+
+&lt;p&gt;　　ribbon.ReadTimeout
+　　该参数用来设置路由转发请求的超时时间。&lt;/p&gt;
+
+&lt;p&gt;三个时间之间的关系：&lt;/p&gt;
+
+&lt;p&gt;　　设置ReadTImeout小于timeoutInMilliseconds的时候，
+api转发请求开始，直至连接到具体服务的时间限制最大为ConnectTimeout，如果实际连接时间超过限制时间ConnectTimeout，那么网关会自动进行重试路由请求，如果充值后依然没有获得请求响应，zuul会返回timeout的错误消息给客户端。而如果在ConnectTimeout时间内连接上具体服务，也就是请求连接建立成功，但是在具体服务内的处理时间如果超过ReadTimeout，那么也会被网关重试，如果重试后依然没有获得请求响应，则会zuul会返回约定重试次数内都没有响应的消息给客户端。&lt;/p&gt;
+
+&lt;p&gt;　　设置ReadTImeout大于timeoutInMilliseconds的时候，如果网关连接具体服务时间大于ReadTImeout的时候，它不会重试路由请求，会直接按请求命令超时处理，返回timeout的错误消息。
+这里的概念有点绕，需要我们真正跑以下程序理解最好。&lt;/p&gt;
 &lt;h1 id=&quot;四过滤器详解&quot;&gt;四、过滤器详解&lt;/h1&gt;
-&lt;p&gt;####(一)过滤器
-####(二)请求声明周期
-####(三)核心过滤器
-####(四)异常处理&lt;/p&gt;
+&lt;h4 id=&quot;一过滤器&quot;&gt;(一)过滤器&lt;/h4&gt;
+&lt;p&gt;　　过滤器实现请求校验，服务聚合等功能。以下这几个功能我们会在逐个突破篇里详解.&lt;/p&gt;
+&lt;h4 id=&quot;二请求声明周期&quot;&gt;(二)请求声明周期&lt;/h4&gt;
+&lt;h4 id=&quot;三核心过滤器&quot;&gt;(三)核心过滤器&lt;/h4&gt;
+&lt;h4 id=&quot;四异常处理&quot;&gt;(四)异常处理&lt;/h4&gt;
 &lt;h1 id=&quot;五动态加载&quot;&gt;五、动态加载&lt;/h1&gt;
-&lt;p&gt;####(一)动态路由
-####(二)动态过滤器&lt;/p&gt;
+&lt;h4 id=&quot;一动态路由&quot;&gt;(一)动态路由&lt;/h4&gt;
+&lt;p&gt;　　这个需要借助spring cloud config配置,在逐个突破篇里讲&lt;/p&gt;
+&lt;h4 id=&quot;二动态过滤器&quot;&gt;(二)动态过滤器&lt;/h4&gt;
+&lt;p&gt;　　网关路由时依靠于配置文件，可借助config实现动态路由很方便，但是过滤器则是通过编码实现，我们则需要基于jvm实现的动态语言的帮助，比如groovy。我们项目中一般用不到，所以这里也不再叙述。&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Feb 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/02/06/Cloud.html</link>
@@ -1417,6 +1530,66 @@ ribbon.ReadTimeout=5000
         <category>linux</category>
         
         <category>环境搭建</category>
+        
+        <category>blog</category>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>linux搭建httpd</title>
+        <description>&lt;h1 id=&quot;一实现原理&quot;&gt;一、实现原理&lt;/h1&gt;
+&lt;p&gt;　　httpd是Apache超文本传输协议(HTTP)服务器的主程序。它被设计为一个独立运行的后台进程，它会建立一个处理请求的子进程或线程的池对外提供服务。我在安装ambari的时候需要先搭建httpd服务，并将ambari的安装包上传到httpd的文档目录下以便安装,如果使用ambari在线安装，它有个半小时限制，超过半小时安装不完就停止，而ambari安装包有6G多。我们可以使用httpd服务对外提供文件下载，在linux上面搭建还是比较简单的。&lt;/p&gt;
+
+&lt;h1 id=&quot;二准备&quot;&gt;二、准备&lt;/h1&gt;
+
+&lt;p&gt;　　1. 有些版本的linux已经安装httpd服务，所以我们先查看httpd是否已安装&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;查看是否有&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;进程正在运行&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ef&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;查看&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;是否已经安装&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qa&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;查看&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;系统服务中有没有&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;chkconfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;三安装httpd&quot;&gt;三、安装httpd&lt;/h1&gt;
+&lt;p&gt;　　1. 安装及验证httpd&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　2. 使用rpm方式寻找配置文件&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　3. 常用的配置文件&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/*.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;conf&lt;/span&gt;        &lt;span class=&quot;err&quot;&gt;###辅助配置文件&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;conf&lt;/span&gt;      &lt;span class=&quot;err&quot;&gt;###主配置文件&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sysconfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;            &lt;span class=&quot;err&quot;&gt;###&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;工作模式配置文件&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　4. 启动脚本：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httpd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　5. 日志文件目录:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-java　　&quot;&gt;　　 /var/log/httpd
+        access_log：访问日志
+        error_log: 错误日志 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;　　6. 站点文档目录：（站点根目录）
+　　/var/www/html ,这个，还有端口都可以在 /etc/httpd/conf/httpd.conf 配置文件里面配置，端口默认是80&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Mar 2013 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/linux/2013/03/03/LinuxHttpd.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/03/LinuxHttpd.html</guid>
+        
+        <category>linux</category>
+        
+        <category>httpd</category>
         
         <category>blog</category>
         

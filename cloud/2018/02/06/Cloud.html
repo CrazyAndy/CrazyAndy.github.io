@@ -231,27 +231,140 @@
 <p>　　对外服务我们称之为边缘服务。我们需要在所有服务的前面挡一层网关服务，让所有外部客户端访问都经过它来进行调度和过滤。我们可以在网关层实现请求路由，软件负载均衡(相对于F5等硬件负载均衡来说)，校验过滤，还可以用来进行服务治理框架的整合，请求转发时的熔断机制，服务的聚合等一系列高级功能。Spring cloud 提供了基于netflix zuul实现的API网关组件Spring Cloud Zuul。</p>
 
 <h1 id="二快速入门">二、快速入门</h1>
-<p>####(一)构建网关
-####(二)请求路由
-####(三)请求过滤</p>
+<h4 id="一构建网关">(一)构建网关</h4>
+<ol>
+  <li>在pom.xml中添加依赖spring-cloud-starter-zuul</li>
+  <li>在主类中添加注解@EnableZuulProxy</li>
+</ol>
+
+<h4 id="二请求路由">(二)请求路由</h4>
+<ol>
+  <li>传统路由方式</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">api</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">url</span><span class="o">/**</span>
+    <span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">url</span><span class="o">.</span><span class="na">url</span><span class="o">=</span><span class="nl">http:</span><span class="c1">//localhost:8080/</span>
+</code></pre></div></div>
+
+<ol>
+  <li>面向服务路由方式</li>
+</ol>
+
+<p>　　我们可以让路由映射到某个具体的服务，而具体的url则交给eureka的服务发现机制去自动维护。
+所以我们需要加入eureka的依赖。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">api</span><span class="o">-</span><span class="n">a</span><span class="o">/**</span>
+	<span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="na">serviceId</span><span class="o">=</span><span class="n">hello</span><span class="o">-</span><span class="n">service</span>
+</code></pre></div></div>
+
+<h4 id="三请求过滤">(三)请求过滤</h4>
+<ol>
+  <li>定义zuul过滤器
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span><span class="o">{</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="n">String</span> <span class="nf">filterType</span><span class="o">(){</span>
+ <span class="c1">//过滤器类型，它决定过滤器在哪个生命周期执行</span>
+ <span class="o">}</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="kt">int</span> <span class="nf">filterOrder</span><span class="o">(){</span>
+ <span class="c1">//执行顺序，从0开始，数值越小，越靠前</span>
+ <span class="o">}</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldFilter</span><span class="o">(){</span>
+ <span class="c1">//判断该过滤器是否需要被执行。实际运用中我们可以利用该函数来指定过滤器的有效范围</span>
+ <span class="o">}</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">(){</span>
+ <span class="c1">//过滤器具体逻辑</span>
+ <span class="c1">//如果验证失败，我们需要通过ctx.setSendZuulResponse(false)令zuul过滤该请求，不对其路由</span>
+ <span class="c1">//然后通过ctx.setResponseStatusCode(401)设置了其返回的错误码</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>在主类中创建具体的过滤器bean</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
 <h1 id="三路由详解">三、路由详解</h1>
-<p>####(一)传统路由配置
-####(二)服务路由配置
-####(三)服务路由的默认规则
-####(四)自定义路由映射规则
-####(五)路径匹配
-####(六)路由前缀
-####(七)本地跳转
-####(八)Cookie与头消息
-####(九)hystrix和Ribbon支持</p>
+<h4 id="一服务路由的默认规则">(一)服务路由的默认规则</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zuul.routes.&lt;serviceId&gt;=&lt;path&gt;
+</code></pre></div></div>
+
+<h4 id="二自定义路由映射规则">(二)自定义路由映射规则</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>可以自定义路由入 /v1/userservice/** ，目前用不着
+</code></pre></div></div>
+
+<h4 id="三路径匹配">(三)路径匹配</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="o">/?</span> <span class="err">匹配</span> <span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="o">/</span><span class="n">a</span> <span class="o">,</span> <span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="o">/</span><span class="n">b</span> <span class="o">,/</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="o">/</span><span class="n">c</span>
+<span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">service</span><span class="cm">/* 匹配 /user-service/a ，/user-service/aaa,/user-service/abc,但是无法匹配/user-service/a/b
+/user-service/**  匹配/user-service/*包含内容外，还可匹配 /user-service/a/b的多级目录
+我们可以通过使用yaml文件来配置先后顺序
+忽略表达式
+zuul.ignored-patterns = /**/</span><span class="n">hello</span><span class="o">/**</span>
+</code></pre></div></div>
+
+<h4 id="四路由前缀">(四)路由前缀</h4>
+<p>　　我们可以通过zuul.prefix=/api的方式为网关上的路由规则都增加/aip前缀。目前很少用到。</p>
+<h4 id="五本地跳转">(五)本地跳转</h4>
+<p>　　zuul实现的api网关路由功能中，还支持forward形式的服务端跳转配置。实现非常简单，只需要通过使用path与url的配置方式就能完成，通过url使用forward来指定需要跳转的服务器资源路径。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">b</span><span class="o">.</span><span class="na">path</span><span class="o">=/</span><span class="n">api</span><span class="o">-</span><span class="n">b</span><span class="o">/**</span>
+    <span class="n">zuul</span><span class="o">.</span><span class="na">routes</span><span class="o">.</span><span class="na">api</span><span class="o">-</span><span class="n">b</span><span class="o">.</span><span class="na">url</span><span class="o">=</span><span class="nl">forward:</span><span class="o">/</span><span class="n">localhost</span>
+</code></pre></div></div>
+<p>　　这个功能比较有趣，我们可以基于此功能做api接口聚合操作，就是首页显示的数据来自很多个接口，我们使用/index ，然后再api local 接口上映射/index 然后在方法实现体里面调用各个接口，将数据组合之后，然后一次性返给客户端。</p>
+
+<h4 id="六kie与头消息">(六)kie与头消息</h4>
+<p>　　默认情况下，zuul在请求路由时，会过滤掉http请求头信息中的一些敏感信息，但是我们实现登陆和鉴权又需要从请求头中获取信息。所以我们需要做一些配置来解决。</p>
+<ol>
+  <li>全局设置
+ zuul.sensitiveHeaders=</li>
+  <li>指定路由配置
+ zuul.routes.<router>.customSensitiveHeaders=true
+ 或使用
+ zuul.routes.<router>.sensitiveHeaders=</router></router></li>
+</ol>
+
+<p>重定向问题：</p>
+
+<p>　　zuul网关路由转发之后，跳转的也买你url时具体web应用的地址，这是因为重定向之后，请求响应头信息中的location指向了具体的服务实例地址，而请求头信息中的ehost也指向了具体的服务实例ip地址和端口。
+我们需要在进行路由转发前为请求设置host头信息，以标识最初的服务端请求地址。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    zuul.addHostHeader=true
+</code></pre></div></div>
+
+<h4 id="九hystrix和ribbon支持">(九)hystrix和Ribbon支持</h4>
+<p>　　hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds
+　　路由转发请求的HystrixCommand执行超时时间</p>
+
+<p>　　ribbon.ConnectTimeout
+　　该参数用来设置路由转发请求的时候，创建请求来凝结超时时间</p>
+
+<p>　　ribbon.ReadTimeout
+　　该参数用来设置路由转发请求的超时时间。</p>
+
+<p>三个时间之间的关系：</p>
+
+<p>　　设置ReadTImeout小于timeoutInMilliseconds的时候，
+api转发请求开始，直至连接到具体服务的时间限制最大为ConnectTimeout，如果实际连接时间超过限制时间ConnectTimeout，那么网关会自动进行重试路由请求，如果充值后依然没有获得请求响应，zuul会返回timeout的错误消息给客户端。而如果在ConnectTimeout时间内连接上具体服务，也就是请求连接建立成功，但是在具体服务内的处理时间如果超过ReadTimeout，那么也会被网关重试，如果重试后依然没有获得请求响应，则会zuul会返回约定重试次数内都没有响应的消息给客户端。</p>
+
+<p>　　设置ReadTImeout大于timeoutInMilliseconds的时候，如果网关连接具体服务时间大于ReadTImeout的时候，它不会重试路由请求，会直接按请求命令超时处理，返回timeout的错误消息。
+这里的概念有点绕，需要我们真正跑以下程序理解最好。</p>
 <h1 id="四过滤器详解">四、过滤器详解</h1>
-<p>####(一)过滤器
-####(二)请求声明周期
-####(三)核心过滤器
-####(四)异常处理</p>
+<h4 id="一过滤器">(一)过滤器</h4>
+<p>　　过滤器实现请求校验，服务聚合等功能。以下这几个功能我们会在逐个突破篇里详解.</p>
+<h4 id="二请求声明周期">(二)请求声明周期</h4>
+<h4 id="三核心过滤器">(三)核心过滤器</h4>
+<h4 id="四异常处理">(四)异常处理</h4>
 <h1 id="五动态加载">五、动态加载</h1>
-<p>####(一)动态路由
-####(二)动态过滤器</p>
+<h4 id="一动态路由">(一)动态路由</h4>
+<p>　　这个需要借助spring cloud config配置,在逐个突破篇里讲</p>
+<h4 id="二动态过滤器">(二)动态过滤器</h4>
+<p>　　网关路由时依靠于配置文件，可借助config实现动态路由很方便，但是过滤器则是通过编码实现，我们则需要基于jvm实现的动态语言的帮助，比如groovy。我们项目中一般用不到，所以这里也不再叙述。</p>
 
                     <hr>
                     <div class="row">
