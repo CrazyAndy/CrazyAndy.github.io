@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jun 2018 23:15:08 +0800</pubDate>
-    <lastBuildDate>Sun, 03 Jun 2018 23:15:08 +0800</lastBuildDate>
+    <pubDate>Tue, 05 Jun 2018 23:03:45 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Jun 2018 23:03:45 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -120,6 +120,58 @@
         
         
         <category>it</category>
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud问题解决篇008_feign bean not found</title>
+        <description>&lt;h1 id=&quot;一问题描述&quot;&gt;一、问题描述&lt;/h1&gt;
+&lt;p&gt;　　feign在配置@FeignClient的时候，如果启动主程序，有可能报错 bean not found。&lt;/p&gt;
+&lt;h1 id=&quot;二解决思路&quot;&gt;二、解决思路&lt;/h1&gt;
+&lt;p&gt;　　我们的服务消费者，也就是feign客户端，如果需要调用生产者提供的接口时，代码写法是这样的。&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@FeignClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;produce002&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/hello&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConsumerController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HelloService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;helloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/consume&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;consume&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;helloService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　在以上代码中，我们的controller注入 helloService的时候，发现找不到它的实现类而报错bean not found，
+这说明我们的应用并没有接受 HelloService为feign客户端的形式存在，而是认为其为普通的interface，而spring容器中在为controller注入该service的时候，需要从容器中寻找该service的具体实现类，很显然，实现类是要写在生产者服务中的，所以我们要想办法让该消费者知道HelloService为feignclient，这时候不仅要在HelloService上加注解@FeignClient，而且要在主应用上假如feignclient的扫描注解,代码如下：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@EnableFeignClients&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basePackages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;com.demo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//com.demo为HelloService接口所在的包，这样它就能扫描到&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Consumer002Application&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Consumer002Application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 08 May 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/cloud/2018/05/08/Cloud.html</link>
+        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/08/Cloud.html</guid>
+        
+        <category>blog</category>
+        
+        <category>cloud</category>
+        
+        
+        <category>cloud</category>
         
       </item>
     
@@ -451,13 +503,14 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;h1 id=&quot;二快速入门&quot;&gt;二、快速入门&lt;/h1&gt;
 &lt;h4 id=&quot;一构建配置中心&quot;&gt;(一)构建配置中心&lt;/h4&gt;
 &lt;p&gt;　　依赖spring-cloud-config-server，在主类加入注解@EnableConfigServer，在application.properties中添加配置服务的基本信息以及版本管理仓库的相关信息。&lt;/p&gt;
-&lt;h4 id=&quot;二配置规则详解&quot;&gt;(二)配置规则详解&lt;/h4&gt;
-
-&lt;h4 id=&quot;三客户端配置映射&quot;&gt;(三)客户端配置映射&lt;/h4&gt;
+&lt;h4 id=&quot;二客户端配置映射&quot;&gt;(二)客户端配置映射&lt;/h4&gt;
+&lt;p&gt;　　我们需要注意的是我们需要将spring cloud config客户端的配置要放在bootstrap.properties中，只有这样才能从config-server中的配置信息加载到客户端中。&lt;/p&gt;
 
 &lt;h1 id=&quot;三服务端详解&quot;&gt;三、服务端详解&lt;/h1&gt;
 
 &lt;h1 id=&quot;四客户端详解&quot;&gt;四、客户端详解&lt;/h1&gt;
+
+&lt;p&gt;本章内容待完善，因为我想先把git搞明白再说。&lt;/p&gt;
 </description>
         <pubDate>Wed, 07 Feb 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/cloud/2018/02/07/Cloud.html</link>

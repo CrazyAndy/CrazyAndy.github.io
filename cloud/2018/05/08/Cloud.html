@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="Spring Cloud 最快上手篇服务分布式配置中心" name="description">
+    <meta content="feign bean not found" name="description">
   
   
     <meta name="keywords" content="cloud">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Spring Cloud 最快上手篇007_分布式配置中心
+        CrazyAndy|Spring Cloud问题解决篇008_feign bean not found
     
   </title>
   <!-- favicon -->
@@ -222,24 +222,47 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Feb 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 8 May 2018</span>
                         <h1>
-                            Spring Cloud 最快上手篇007_分布式配置中心
+                            Spring Cloud问题解决篇008_feign bean not found
                         </h1>
                     </div>
-                    	<h1 id="一应用场景">一、应用场景</h1>
-<p>　　spring cloud config分为服务端于客户端两个部分，服务端也成微分布式配置中心，他是一个独立的微服务应用，用来连接配置仓库并未客户端提供获取配置信息，加密/解密信息等访问接口；而客户端则是微服务架构中的各个微服务应用或基础设置，它们通过指定的配置中心来管理应用资源与业务相关的配置内容，并在启动的时候从配置中心获取和加载配置信息。它默认采用git来存储配置信息，当然也支持svn仓库，本地化文件系统。</p>
-<h1 id="二快速入门">二、快速入门</h1>
-<h4 id="一构建配置中心">(一)构建配置中心</h4>
-<p>　　依赖spring-cloud-config-server，在主类加入注解@EnableConfigServer，在application.properties中添加配置服务的基本信息以及版本管理仓库的相关信息。</p>
-<h4 id="二客户端配置映射">(二)客户端配置映射</h4>
-<p>　　我们需要注意的是我们需要将spring cloud config客户端的配置要放在bootstrap.properties中，只有这样才能从config-server中的配置信息加载到客户端中。</p>
+                    	<h1 id="一问题描述">一、问题描述</h1>
+<p>　　feign在配置@FeignClient的时候，如果启动主程序，有可能报错 bean not found。</p>
+<h1 id="二解决思路">二、解决思路</h1>
+<p>　　我们的服务消费者，也就是feign客户端，如果需要调用生产者提供的接口时，代码写法是这样的。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FeignClient</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"produce002"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">HelloService</span> <span class="o">{</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+    <span class="n">String</span> <span class="nf">hello</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConsumerController</span> <span class="o">{</span>
 
-<h1 id="三服务端详解">三、服务端详解</h1>
+    <span class="nd">@Autowired</span>
+    <span class="n">HelloService</span> <span class="n">helloService</span><span class="o">;</span>
 
-<h1 id="四客户端详解">四、客户端详解</h1>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/consume"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">consume</span><span class="o">(){</span>
+        <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">helloService</span><span class="o">.</span><span class="na">hello</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">msg</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>　　在以上代码中，我们的controller注入 helloService的时候，发现找不到它的实现类而报错bean not found，
+这说明我们的应用并没有接受 HelloService为feign客户端的形式存在，而是认为其为普通的interface，而spring容器中在为controller注入该service的时候，需要从容器中寻找该service的具体实现类，很显然，实现类是要写在生产者服务中的，所以我们要想办法让该消费者知道HelloService为feignclient，这时候不仅要在HelloService上加注解@FeignClient，而且要在主应用上假如feignclient的扫描注解,代码如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableFeignClients</span><span class="o">(</span><span class="n">basePackages</span> <span class="o">=</span> <span class="s">"com.demo"</span><span class="o">)</span><span class="c1">//com.demo为HelloService接口所在的包，这样它就能扫描到</span>
+<span class="nd">@EnableDiscoveryClient</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Consumer002Application</span> <span class="o">{</span>
 
-<p>本章内容待完善，因为我想先把git搞明白再说。</p>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">Consumer002Application</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
 
                     <hr>
                     <div class="row">
@@ -250,8 +273,6 @@
                                 
                                     <button class="btn btn-white btn-xs" type="button">cloud</button>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">config</button>
-                                
                         </div>
                         <div class="col-md-6">
                             <div class="small text-right">
@@ -259,7 +280,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/02/07/Cloud.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/cloud/2018/05/08/Cloud.html">0</span> comments
                                 
                                 </div>
                             </div>
