@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="Ambari了解一下001_Ambari安装" name="description">
+  
+  
+    <meta name="keywords" content="ambari,bigdata">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Ambari了解一下001_Ambari安装
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20170307.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">  
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">bigdata</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Mar 2018</span>
+                        <h1>
+                            Ambari了解一下001_Ambari安装
+                        </h1>
+                    </div>
+                    	<h1 id="一ambari简介">一、Ambari简介</h1>
+<p>　　Ambari是Hortonworks开源的Hadoop平台的管理软件，具备Hadoop组件的安装、管理、运维等基本功能，提供Web UI进行可视化的集群管理，简化了大数据平台的安装、使用难度。ambari提供自定义服务功能，我们也可以通过这项功能编写自定义脚本，安装自己想要部署的服务应用。</p>
+<h1 id="二安装环境要求">二、安装环境要求</h1>
+<h3 id="一集群节点说明">（一）集群节点说明</h3>
+<p>　　我们将会拿出ip为 172和118两台机器做测试，172安装server端和agent端，118只是安装agent端。</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">192.168</span><span class="o">.</span><span class="mf">100.172</span>  <span class="n">devserver06</span><span class="err">（</span><span class="n">ambari</span><span class="err">主节点）</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">100.118</span>  <span class="n">devserver08</span> <span class="err">（</span><span class="n">agent</span><span class="err">节点）</span>
+</code></pre></div></div>
+<h3 id="二安装包准备">（二）安装包准备</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ambari</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+<span class="n">HDP</span><span class="o">-</span><span class="n">UTILS</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">0.21</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+<span class="n">HDP</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">3.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">rpm</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+<span class="n">jdk</span><span class="o">-</span><span class="mi">8</span><span class="n">u112</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x64</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span><span class="c1">//如果当前机器已经安装jdk,请确保版本在1.8以上即可</span>
+<span class="n">jce_policy</span><span class="o">-</span><span class="mi">8</span><span class="o">.</span><span class="na">zip</span>
+<span class="n">mysql</span><span class="o">-</span><span class="n">connector</span><span class="o">-</span><span class="n">java</span><span class="o">.</span><span class="na">jar</span><span class="c1">//我们使用mysql作为ambari的配置数据库，当然如果使用其他数据库则也可以将此替换成其他驱动包</span>
+<span class="n">ambari</span><span class="o">.</span><span class="na">repo</span>
+<span class="n">hdp</span><span class="o">.</span><span class="na">repo</span>
+</code></pre></div></div>
+<h1 id="三设置ssh免密登陆">三、设置ssh免密登陆</h1>
+<h3 id="一生成ssh公钥私钥">（一）生成ssh公钥私钥</h3>
+<p>　　root 用户登陆下，执行命令：ssh-keygen -t rsa
+执行完毕后，在/root/.ssh/ 目录下面会有 id_rsa  id_rsa.pub这两个文件</p>
+<h3 id="二修改etcprofile">（二）修改/etc/profile</h3>
+<p>　　我们需要让机器互认，就需要让他们知道对方的机器名称，可以在/etc/hosts里面声明
+ambari-server端，需要记录本机机器名称(可以通过hostname命令查看)，还有各个ambari-agent节点的机器名称，记录内容举例如下所示</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">192.168</span><span class="o">.</span><span class="mf">100.172</span>  <span class="n">devserver06</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">100.118</span>  <span class="n">devserver08</span>
+</code></pre></div></div>
+<h3 id="三推送公钥到ambari-agent节点">（三）推送公钥到ambari agent节点</h3>
+<p>　　ssh-copy-id -i id_rsa.pub root@devserver08</p>
+<h3 id="四测试ssh登陆">（四）测试ssh登陆</h3>
+<p>　　通过命令 ssh devserver08 进行测试，第一次测试，会需要你确认，以后不用再确认</p>
+<h3 id="五备注">（五）备注</h3>
+<p>　　如果在进行以上四部操作之后还不能免密登陆，那么可以尝试修改 .ssh文件夹以及其目录下文件的操作权限，都改成700，命令为：chmod 700 /root/.ssh</p>
+<h1 id="四安装ntp服务">四、安装ntp服务</h1>
+<p>　　安装ambari集群需要保证集群内机器时间同步，我们需要在所有机器上都安装ntp服务，安装命令如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">ntp</span>
+<span class="n">chkconfig</span> <span class="n">ntpd</span> <span class="n">on</span>
+</code></pre></div></div>
+<h1 id="五防火墙设置">五、防火墙设置</h1>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">service</span> <span class="n">firewalld</span> <span class="n">stop</span><span class="err"> </span>
+<span class="n">systemctl</span> <span class="n">disable</span> <span class="n">firewalld</span>
+</code></pre></div></div>
+<h1 id="六安装httpd服务">六、安装httpd服务</h1>
+<p>　　由于安装ambari需要拉取安装文件，但是文件有6G之多，拉取时间超过半小时，ambari默认安装失败并退出安装，所以我们需要在主机节点搭建httpd服务，而且安装自定义服务的时候，我们可以把需要的程序包放到此服务下面。</p>
+<h3 id="一安装httpd">（一）安装httpd</h3>
+<p>　　首先查看 httpd服务是否已经存在，systemctl status httpd 
+安装命令如下：# yum install httpd
+　　我们可以通过修改httpd.conf文件来修改httpd服务配置(端口，文件存放位置等)
+配置文件默认在 /etc/httpd/conf/httpd.conf
+　　文件存放目录默认为/var/www/html，如果不存在，需要手动创建</p>
+<h3 id="二上传ambari安装包">（二）上传ambari安装包</h3>
+<p>　　我们将以下文件上传到 /var/www/html目录下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ambari</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+<span class="n">HDP</span><span class="o">-</span><span class="n">UTILS</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">0.21</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+<span class="n">HDP</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">3.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">rpm</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span>
+</code></pre></div></div>
+<p>　　并在/var/www/html目录下面进行解压</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tar</span> <span class="o">-</span><span class="n">zxf</span> <span class="n">ambari</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">0.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="err"> </span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">zxf</span> <span class="n">HDP</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">3.0</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">rpm</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span> <span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">hdp</span><span class="err"> </span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">zxf</span> <span class="n">HDP</span><span class="o">-</span><span class="n">UTILS</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">0.21</span><span class="o">-</span><span class="n">centos7</span><span class="o">.</span><span class="na">tar</span><span class="o">.</span><span class="na">gz</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span> <span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">hdp</span>
+</code></pre></div></div>
+<h3 id="三确认httpd服务是否能正常使用">（三）确认httpd服务是否能正常使用</h3>
+<p>　　通过访问http://192.168.100.172/hdp来验证</p>
+<h1 id="七安装ambari-server">七、安装ambari-server</h1>
+<h3 id="一配置repo源">（一）配置repo源</h3>
+<p>　　我们需要通过yum命令安装ambari，所以需要修改repo文件，让其指向之前搭建的http服务地址(一定要确认真正能访问到)
+　　修改之前准备好的ambari.repo和hdp.repo文件内容，将内容中url指向正确能用的地址，并上传这两个文件到集群各个节点 /etc/yum.repos.d/目录下</p>
+<h3 id="二安装ambari-server">（二）安装ambari-server</h3>
+<p>　　在192.168.100.172主节点上我们安装ambari-server端，其他节点安装ambari-agent端
+yum install ambari-server
+操作中会提示 is this ok 请输入y</p>
+<h3 id="三配置ambari数据库">（三）配置ambari数据库</h3>
+<p>　　/var/lib/ambari-server/resources下有数据库执行脚本文件Ambari-DDL-MySQL-CREATE.sql
+Ambari运行需要有自己的数据库，我们使用mysql数据库，我们需要将Ambari-DDL-MySQL-CREATE.sql文件在数据库机器上执行，安装对应数据库，并创建数据库用户，而且还要允许该用户在主机节点可以访问该数据库。</p>
+<h3 id="四配置ambari-server">（四）配置ambari-server</h3>
+<p>　　我们需要将提前准备好的jce_policy-8.zip，jdk-8u112-linux-x64.tar.gz这两个文件上传到主节点 c目录下
+server.jdbc.driver.path=[path/to/custom_jdbc_driver]
+　　我们需要将mysql-connector-java.jar 上传到/usr/share/java上去，这样ambari才能正常连接mysql数据库
+执行命令ambari-server setup
+<!-- ![edit](/static/assets/img/blog/ambari/ambari001.png) --></p>
+<center><img src="/static/assets/img/blog/ambari/ambari001.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari002.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari002.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari003.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari003.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari004.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari004.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari005.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari005.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari006.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari006.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari007.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari007.png" width="100%" /></center>
+<p>　　数据库访问用户密码需要在数据库端创建用户，并设定密码(密码不能为空)，在以上Ambari-server setup的时候，需要填入用户密码</p>
+
+<p>　　Ambari的配置文件位置为 /etc/ambari-server/conf/ambari.properties安装成功之后,需要启动ambari-server，执行命令为ambari-server start</p>
+<h1 id="八安装hdp-2630">八、安装HDP-2.6.3.0</h1>
+<h3 id="一点击按钮launch-install-wizard开启集群安装向导输入自定义的集群名">（一）点击按钮：Launch Install Wizard，开启集群安装向导，输入自定义的集群名</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari008.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari008.png" width="100%" /></center>
+<h3 id="二选择hdp版本及资源库地址">（二）选择HDP版本及资源库地址</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari009.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari009.png" width="100%" /></center>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HDP</span><span class="o">-</span><span class="mf">2.6</span><span class="err"> </span><span class="nl">http:</span><span class="c1">//192.168.100.172/hdp/HDP/centos7/2.6.3.0-235 </span>
+<span class="n">HDP</span><span class="o">-</span><span class="n">UTILS</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">0.21</span><span class="err"> </span><span class="nl">http:</span><span class="c1">//192.168.100.172/hdp/HDP-UTILS-1.1.0.21</span>
+</code></pre></div></div>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari010.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari010.png" width="100%" /></center>
+<h3 id="三确认集群节点主机是否配置正确">（三）确认集群节点主机是否配置正确</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari011.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari011.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari012.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari012.png" width="100%" /></center>
+<h3 id="四选择要安装的服务">（四）选择要安装的服务</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari013.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari013.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari014.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari014.png" width="100%" /></center>
+<h3 id="五确认master服务安装">（五）确认master服务安装</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari015.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari015.png" width="100%" /></center>
+<h3 id="六确认slaveclients服务安装">（六）确认Slave、Clients服务安装</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari016.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari016.png" width="100%" /></center>
+<h3 id="七定制化服务设置">（七）定制化服务设置</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari017.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari017.png" width="100%" /></center>
+<p>　　需要设置Grafana 和 SmartSense的admin用户的密码
+都设置成 admin即可
+<!-- ![edit](/static/assets/img/blog/ambari/ambari018.png) --></p>
+<center><img src="/static/assets/img/blog/ambari/ambari018.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari019.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari019.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari020.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari020.png" width="100%" /></center>
+<h3 id="八部署">（八）部署</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari021.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari021.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari022.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari022.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari023.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari023.png" width="100%" /></center>
+<h3 id="九显示首页">（九）显示首页</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari024.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari024.png" width="100%" /></center>
+<h1 id="九安装ambari-agent">九、安装ambari-agent</h1>
+<h3 id="一安装">（一）安装</h3>
+<p>　　我们需要在ambari集群下的所有agent节点安装此命令
+　　yum install ambari-agent即可</p>
+<h3 id="二修改etchosts">（二）修改/etc/hosts</h3>
+<p>　　我们需要让agent能认识主节点机器
+　　Vi /etc/hosts
+　　192.168.100.172 devserver06</p>
+<h3 id="三修改agent配置">（三）修改agent配置</h3>
+<p>　　vi /etc/ambari-agent/conf/ambari-agent.ini
+　　修改 server hostname，内容如下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">server</span><span class="o">]</span>
+<span class="n">hostname</span><span class="o">=</span><span class="n">devserver06</span>
+</code></pre></div></div>
+<h3 id="四在ambari-server上增加agent-host">（四）在ambari-server上增加agent host</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari025.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari025.png" width="100%" /></center>
+<p>　　点击 Add New Hosts ，界面如下
+<!-- ![edit](/static/assets/img/blog/ambari/ambari026.png) --></p>
+<center><img src="/static/assets/img/blog/ambari/ambari026.png" width="100%" /></center>
+<p>　　我们已经在devserver08机器上安装了ambari-agent，也通过了ssh认证，在界面上只需要将devserver08机器纳入到集群中即可。按照上图选择方式进行操作。
+<!-- ![edit](/static/assets/img/blog/ambari/ambari027.png) --></p>
+<center><img src="/static/assets/img/blog/ambari/ambari027.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari028.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari028.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari029.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari029.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari030.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari030.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari031.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari031.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari032.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari032.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari033.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari033.png" width="100%" /></center>
+<h1 id="十备注">十、备注</h1>
+<h3 id="一查看ambari日志">（一）查看ambari日志</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span>  <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">server</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">server</span><span class="o">.</span><span class="na">log</span>
+<span class="n">cat</span>  <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">agent</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">agent</span><span class="o">.</span><span class="na">log</span>
+</code></pre></div></div>
+<h3 id="二查看安装启动操作">（二）查看安装、启动操作</h3>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari034.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari034.png" width="100%" /></center>
+<p>　　点击 0 ops处，可以弹出日志记录情况。</p>
+<h3 id="三ambari在mysql设置用户以及权限配置">（三）ambari在mysql设置用户以及权限配置</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CREATE</span> <span class="n">USER</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="o">%</span><span class="err">'</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="err">'</span><span class="n">ambari</span><span class="err">'</span><span class="o">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="o">%</span><span class="err">'</span><span class="o">;</span>
+<span class="n">CREATE</span> <span class="n">USER</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="n">datacube152</span><span class="err">'</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="err">'</span><span class="n">ambari</span><span class="err">'</span><span class="o">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="n">datacube152</span><span class="err">'</span><span class="o">;</span>
+<span class="n">CREATE</span> <span class="n">USER</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="n">ambari</span><span class="err">'</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="err">'</span><span class="n">ambari</span><span class="err">'</span><span class="o">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="err">'</span><span class="n">ambari</span><span class="sc">'@'</span><span class="n">ambari</span><span class="err">'</span><span class="o">;</span>
+<span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="o">;</span>
+</code></pre></div></div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">ambari</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">bigdata</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/bigdata/2018/03/01/ambari.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    <!-- Google analytics -->
+
+
+<!-- GrowingIO -->
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+_hmt.push(['_setAutoPageview', true]);
+</script>
+
+
+	
+
+</body>
+</html>

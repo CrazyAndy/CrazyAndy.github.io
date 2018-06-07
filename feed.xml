@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Jun 2018 23:03:45 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Jun 2018 23:03:45 +0800</lastBuildDate>
+    <pubDate>Thu, 07 Jun 2018 21:36:39 +0800</pubDate>
+    <lastBuildDate>Thu, 07 Jun 2018 21:36:39 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -493,6 +493,409 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
         
         
         <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Ambari了解一下002_Ambari自定义服务</title>
+        <description>&lt;h1 id=&quot;一自定义服务安装思路&quot;&gt;一、自定义服务安装思路&lt;/h1&gt;
+&lt;p&gt;　　Ambari允许我们安装自定义服务，它提供钩子设置，我们将自定义服务的关于ambari配置脚本放在特定目录下，重启ambari-server之后，便可在操作界面安装这个自定义服务。&lt;/p&gt;
+&lt;h1 id=&quot;二需求分析&quot;&gt;二、需求分析&lt;/h1&gt;
+&lt;p&gt;1，安装某web服务到指定服务器&lt;/p&gt;
+
+&lt;p&gt;2，提供 启动，重启服务&lt;/p&gt;
+
+&lt;p&gt;3，监听以上这些服务状态&lt;/p&gt;
+
+&lt;p&gt;4，能修改这些服务的配置属性&lt;/p&gt;
+&lt;h1 id=&quot;三安装前准备&quot;&gt;三、安装前准备&lt;/h1&gt;
+&lt;h3 id=&quot;一web服务程序包&quot;&gt;（一）web服务程序包&lt;/h3&gt;
+&lt;p&gt;　　我们可以简单写一个helloworld的java web项目，并打包成war包&lt;/p&gt;
+&lt;h3 id=&quot;二为ambari提供的安装启动重启的钩子脚本&quot;&gt;（二）为ambari提供的安装，启动，重启的钩子脚本&lt;/h3&gt;
+&lt;p&gt;　　它们都以文件夹的形式提供，并会在安装具体自定义服务之前上传到ambari-server端服务器下ambari service目录下。&lt;/p&gt;
+&lt;h3 id=&quot;三服务器节点&quot;&gt;（三）服务器节点&lt;/h3&gt;
+&lt;p&gt;　　ambari-server安装在一台服务器上，ambari-agent可安装在任意一台服务器上。&lt;/p&gt;
+&lt;h3 id=&quot;四重启服务&quot;&gt;（四）重启服务&lt;/h3&gt;
+&lt;p&gt;　　在每次上传service包到服务器的时候，都需要重启ambari服务，才能让新增自定义服务显示在安装备选界面，脚本命令如下：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;restart&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;五自定义服务脚本编写&quot;&gt;（五）自定义服务脚本编写&lt;/h3&gt;
+&lt;p&gt;　　Ambari关于自定义服务安装的配置脚本是通过python语言实现的。我们需要将一系列文件准备好，并上传到ambari自定义服务需要配置的位置。&lt;/p&gt;
+
+&lt;p&gt;　　1. 在ambari-server所在主机上找到service安装目录&lt;/p&gt;
+
+&lt;p&gt;　　ambari默认安装之后，service目录默认为：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stacks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　2. 自定义服务脚本文件目录结构&lt;/p&gt;
+
+&lt;p&gt;　　Service包目录结构(顶级目录必须要大写，这里为HELLO_WEB)如下：
+　　HELLO_WEB/configuration/application.xml//该文件为该web服务所需配置文件
+　　HELLO_WEB/package/scripts/hello_master.py(启动，停止，重启，状态监听逻辑在这里编写，使用python脚本)
+　　HELLO_WEB/metainfo.xml(内容包含自定义服务名称，调用脚本位置配置)&lt;/p&gt;
+
+&lt;p&gt;　　3. metainfo配置详解&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metainfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;schemaVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;schemaVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HELLO_WEB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HELLO_WEB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloweb&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;服务&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HelloMaster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello_master&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MASTER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cardinality&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cardinality&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;versionAdvertised&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;versionAdvertised&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commandScript&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello_master&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;py&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scriptType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PYTHON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scriptType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1200&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;commandScript&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metainfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　ambari-server会读取该配置文件，认定该服务为自定义服务，并在UI界面提供安装服务，该配置主要是配置了自定义服务名名称以及脚本位置，脚本主类名称，脚本类型等。&lt;/p&gt;
+
+&lt;p&gt;　　4. configuration/application.xml详解&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supports_final&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;supports_adding_forbidden&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dfinedLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;spring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloworld&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upgrade&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　我们在这里写的是简单版本的，在ui操作页面上会显示一个textarea输入框，这里的内容是默认配置，你也可以在安装或者修改配置的时候，在ui界面修改此配置。&lt;/p&gt;
+
+&lt;p&gt;　　5. hello_master.py详解&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-*-&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;coding:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;utf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-*-&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;libraries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;functions&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;stack_select&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;libraries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;functions&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;StackFeature&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;libraries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;functions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stack_features&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;check_stack_feature&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;libraries&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;functions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;security_commons&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;build_expectations&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;cached_kinit_executor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_params_from_filesystem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;validate_security_config_properties&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;FILE_TYPE_XML&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ambari_commons&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;os_family_impl&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;OsFamilyImpl&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ambari_commons&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;OSConst&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource_management&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;core&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exceptions&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ClientComponentHasNoStatus&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;HelloMaster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;#资源地址&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;warPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;warname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;pidPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;这里是在&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;安装此自定义服务时候触发的&lt;/span&gt;
+	&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;我们这里需要将&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;包放到&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;下面，并启动&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Install plat PlatMaster&quot;&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+		&lt;span class=&quot;err&quot;&gt;#这里主要是在配置修改时被触发，比如&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UI&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;页面修改&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;项目配置文件，我们需要将配置内容更新到&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;下对应的&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;里面去&lt;/span&gt;
+	
+		&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Configure My PlatMaster&quot;&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;upgrade_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+		&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;我们这里需要将&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;启动，并记录其进程号到指定文件&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pid&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;start the plat service&quot;&lt;/span&gt; 
+
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;upgrade_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;		
+		&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;我们这里需要将&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;停止，可根据&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;文件中存储的进程号，直接杀掉&lt;/span&gt;							
+		&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Stop plat PlatMaster&quot;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+		&lt;span class=&quot;err&quot;&gt;#监听进程号，这样&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;就能知道该服务是否启动&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;check_process_status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HelloMaster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pidPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;HelloMaster Status ... &quot;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;):&lt;/span&gt;
+		&lt;span class=&quot;err&quot;&gt;#重启服务时调用&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;HelloMaster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　6. 脚本编码&lt;/p&gt;
+
+&lt;p&gt;　　python脚本编码我们使用utf-8，否则在安装服务的时候会报错，我们只需要在脚本hello_master.py第一行加入# -&lt;em&gt;- coding: utf-8 -&lt;/em&gt;- 即可&lt;/p&gt;
+
+&lt;p&gt;　　7. 备注&lt;/p&gt;
+
+&lt;p&gt;　　以上脚本是最简单版本，我们还可以增加tomcat监控视图，在配置处做key value配置等内容，这个可自行百度，不再详细描述。&lt;/p&gt;
+&lt;h1 id=&quot;四安装自定义服务&quot;&gt;四、安装自定义服务&lt;/h1&gt;
+&lt;h3 id=&quot;一在ambari-server所在主机上找到service安装目录&quot;&gt;（一）在ambari-server所在主机上找到service安装目录&lt;/h3&gt;
+&lt;p&gt;　　ambari默认安装之后，service目录默认为：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stacks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　将准备好的service包上传到安装目录下,service包便是我们上一步编写的 HELLO_WEB 包文件。&lt;/p&gt;
+&lt;h3 id=&quot;二ambari界面安装操作&quot;&gt;（二）Ambari界面安装操作&lt;/h3&gt;
+&lt;h4 id=&quot;1-点击add-service按钮&quot;&gt;1. 点击add service按钮&lt;/h4&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari035.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari035.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h4 id=&quot;2-选中所需安装服务选项&quot;&gt;2. 选中所需安装服务选项&lt;/h4&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari036.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari036.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h4 id=&quot;3-选择安装服务器节点&quot;&gt;3. 选择安装服务器节点&lt;/h4&gt;
+&lt;p&gt;　　以下几项因为涉及公司项目，不再一一截图，按照ui界面导航一步步操作即可&lt;/p&gt;
+&lt;h4 id=&quot;4-默认选择配置属性&quot;&gt;4. 默认选择配置属性&lt;/h4&gt;
+&lt;h4 id=&quot;5-确认安装&quot;&gt;5. 确认安装&lt;/h4&gt;
+&lt;h4 id=&quot;6-安装进度页面&quot;&gt;6. 安装进度页面&lt;/h4&gt;
+&lt;h4 id=&quot;7-最终完成&quot;&gt;7. 最终完成&lt;/h4&gt;
+&lt;h3 id=&quot;三web服务启动停止重启配置操作&quot;&gt;（三）web服务启动，停止，重启，配置操作&lt;/h3&gt;
+&lt;p&gt;　　我们为ambari提供的service包中python脚本中，写了关于启动，停止，重启，配置，监听的脚本逻辑。在ambari页面点击相关按钮，可以触发相关脚本逻辑。&lt;/p&gt;
+
+&lt;p&gt;　　如果根据需要修改配置之后，ambari会触发python脚本hello_master.py中的configure方法逻辑。
+如果想删除该服务的时候，务必要先停止该服务，再删除，否则记录该服务进程号的文件中仍然含有上次启动成功时的进程号，下次安装并启动的时候，服务状态监听会出问题。&lt;/p&gt;
+&lt;h1 id=&quot;五在其他节点上安装服务&quot;&gt;五、在其他节点上安装服务&lt;/h1&gt;
+&lt;p&gt;　　在其他服务节点上安装服务相对来说很简单，我们只需要在主界面点击hosts按钮，跳转到服务器节点列表页面之后，点击要安装的节点，进入之后，安装即可。&lt;/p&gt;
+
+&lt;p&gt;　　而如果该自定义配置和主节点配置不同，我们可以在主界面对应该服务配置处修改。&lt;/p&gt;
+
+&lt;p&gt;　　相信当你操作到此步的时候，这一步骤对你来说已经不是问题了，所以这里不再详细截图展示。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 02 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/bigdata/2018/03/02/ambari.html</link>
+        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/03/02/ambari.html</guid>
+        
+        <category>blog</category>
+        
+        <category>ambari</category>
+        
+        <category>bigdata</category>
+        
+        
+        <category>bigdata</category>
+        
+      </item>
+    
+      <item>
+        <title>Ambari了解一下001_Ambari安装</title>
+        <description>&lt;h1 id=&quot;一ambari简介&quot;&gt;一、Ambari简介&lt;/h1&gt;
+&lt;p&gt;　　Ambari是Hortonworks开源的Hadoop平台的管理软件，具备Hadoop组件的安装、管理、运维等基本功能，提供Web UI进行可视化的集群管理，简化了大数据平台的安装、使用难度。ambari提供自定义服务功能，我们也可以通过这项功能编写自定义脚本，安装自己想要部署的服务应用。&lt;/p&gt;
+&lt;h1 id=&quot;二安装环境要求&quot;&gt;二、安装环境要求&lt;/h1&gt;
+&lt;h3 id=&quot;一集群节点说明&quot;&gt;（一）集群节点说明&lt;/h3&gt;
+&lt;p&gt;　　我们将会拿出ip为 172和118两台机器做测试，172安装server端和agent端，118只是安装agent端。&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mf&quot;&gt;192.168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.172&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;devserver06&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;（&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;主节点）&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;192.168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.118&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;devserver08&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;（&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;agent&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;节点）&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;二安装包准备&quot;&gt;（二）安装包准备&lt;/h3&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTILS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;jdk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;u112&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//如果当前机器已经安装jdk,请确保版本在1.8以上即可&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;jce_policy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;zip&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//我们使用mysql作为ambari的配置数据库，当然如果使用其他数据库则也可以将此替换成其他驱动包&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;repo&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hdp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;repo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;三设置ssh免密登陆&quot;&gt;三、设置ssh免密登陆&lt;/h1&gt;
+&lt;h3 id=&quot;一生成ssh公钥私钥&quot;&gt;（一）生成ssh公钥私钥&lt;/h3&gt;
+&lt;p&gt;　　root 用户登陆下，执行命令：ssh-keygen -t rsa
+执行完毕后，在/root/.ssh/ 目录下面会有 id_rsa  id_rsa.pub这两个文件&lt;/p&gt;
+&lt;h3 id=&quot;二修改etcprofile&quot;&gt;（二）修改/etc/profile&lt;/h3&gt;
+&lt;p&gt;　　我们需要让机器互认，就需要让他们知道对方的机器名称，可以在/etc/hosts里面声明
+ambari-server端，需要记录本机机器名称(可以通过hostname命令查看)，还有各个ambari-agent节点的机器名称，记录内容举例如下所示&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mf&quot;&gt;192.168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.172&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;devserver06&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;192.168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;100.118&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;devserver08&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;三推送公钥到ambari-agent节点&quot;&gt;（三）推送公钥到ambari agent节点&lt;/h3&gt;
+&lt;p&gt;　　ssh-copy-id -i id_rsa.pub root@devserver08&lt;/p&gt;
+&lt;h3 id=&quot;四测试ssh登陆&quot;&gt;（四）测试ssh登陆&lt;/h3&gt;
+&lt;p&gt;　　通过命令 ssh devserver08 进行测试，第一次测试，会需要你确认，以后不用再确认&lt;/p&gt;
+&lt;h3 id=&quot;五备注&quot;&gt;（五）备注&lt;/h3&gt;
+&lt;p&gt;　　如果在进行以上四部操作之后还不能免密登陆，那么可以尝试修改 .ssh文件夹以及其目录下文件的操作权限，都改成700，命令为：chmod 700 /root/.ssh&lt;/p&gt;
+&lt;h1 id=&quot;四安装ntp服务&quot;&gt;四、安装ntp服务&lt;/h1&gt;
+&lt;p&gt;　　安装ambari集群需要保证集群内机器时间同步，我们需要在所有机器上都安装ntp服务，安装命令如下：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;yum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntp&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;chkconfig&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ntpd&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;五防火墙设置&quot;&gt;五、防火墙设置&lt;/h1&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firewalld&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;systemctl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firewalld&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;六安装httpd服务&quot;&gt;六、安装httpd服务&lt;/h1&gt;
+&lt;p&gt;　　由于安装ambari需要拉取安装文件，但是文件有6G之多，拉取时间超过半小时，ambari默认安装失败并退出安装，所以我们需要在主机节点搭建httpd服务，而且安装自定义服务的时候，我们可以把需要的程序包放到此服务下面。&lt;/p&gt;
+&lt;h3 id=&quot;一安装httpd&quot;&gt;（一）安装httpd&lt;/h3&gt;
+&lt;p&gt;　　首先查看 httpd服务是否已经存在，systemctl status httpd 
+安装命令如下：# yum install httpd
+　　我们可以通过修改httpd.conf文件来修改httpd服务配置(端口，文件存放位置等)
+配置文件默认在 /etc/httpd/conf/httpd.conf
+　　文件存放目录默认为/var/www/html，如果不存在，需要手动创建&lt;/p&gt;
+&lt;h3 id=&quot;二上传ambari安装包&quot;&gt;（二）上传ambari安装包&lt;/h3&gt;
+&lt;p&gt;　　我们将以下文件上传到 /var/www/html目录下&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTILS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;　　并在/var/www/html目录下面进行解压&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zxf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zxf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rpm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdp&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zxf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTILS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;centos7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;www&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hdp&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;三确认httpd服务是否能正常使用&quot;&gt;（三）确认httpd服务是否能正常使用&lt;/h3&gt;
+&lt;p&gt;　　通过访问http://192.168.100.172/hdp来验证&lt;/p&gt;
+&lt;h1 id=&quot;七安装ambari-server&quot;&gt;七、安装ambari-server&lt;/h1&gt;
+&lt;h3 id=&quot;一配置repo源&quot;&gt;（一）配置repo源&lt;/h3&gt;
+&lt;p&gt;　　我们需要通过yum命令安装ambari，所以需要修改repo文件，让其指向之前搭建的http服务地址(一定要确认真正能访问到)
+　　修改之前准备好的ambari.repo和hdp.repo文件内容，将内容中url指向正确能用的地址，并上传这两个文件到集群各个节点 /etc/yum.repos.d/目录下&lt;/p&gt;
+&lt;h3 id=&quot;二安装ambari-server&quot;&gt;（二）安装ambari-server&lt;/h3&gt;
+&lt;p&gt;　　在192.168.100.172主节点上我们安装ambari-server端，其他节点安装ambari-agent端
+yum install ambari-server
+操作中会提示 is this ok 请输入y&lt;/p&gt;
+&lt;h3 id=&quot;三配置ambari数据库&quot;&gt;（三）配置ambari数据库&lt;/h3&gt;
+&lt;p&gt;　　/var/lib/ambari-server/resources下有数据库执行脚本文件Ambari-DDL-MySQL-CREATE.sql
+Ambari运行需要有自己的数据库，我们使用mysql数据库，我们需要将Ambari-DDL-MySQL-CREATE.sql文件在数据库机器上执行，安装对应数据库，并创建数据库用户，而且还要允许该用户在主机节点可以访问该数据库。&lt;/p&gt;
+&lt;h3 id=&quot;四配置ambari-server&quot;&gt;（四）配置ambari-server&lt;/h3&gt;
+&lt;p&gt;　　我们需要将提前准备好的jce_policy-8.zip，jdk-8u112-linux-x64.tar.gz这两个文件上传到主节点 c目录下
+server.jdbc.driver.path=[path/to/custom_jdbc_driver]
+　　我们需要将mysql-connector-java.jar 上传到/usr/share/java上去，这样ambari才能正常连接mysql数据库
+执行命令ambari-server setup
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari001.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari002.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari002.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari003.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari003.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari004.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari004.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari005.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari005.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari006.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari006.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari007.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari007.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　数据库访问用户密码需要在数据库端创建用户，并设定密码(密码不能为空)，在以上Ambari-server setup的时候，需要填入用户密码&lt;/p&gt;
+
+&lt;p&gt;　　Ambari的配置文件位置为 /etc/ambari-server/conf/ambari.properties安装成功之后,需要启动ambari-server，执行命令为ambari-server start&lt;/p&gt;
+&lt;h1 id=&quot;八安装hdp-2630&quot;&gt;八、安装HDP-2.6.3.0&lt;/h1&gt;
+&lt;h3 id=&quot;一点击按钮launch-install-wizard开启集群安装向导输入自定义的集群名&quot;&gt;（一）点击按钮：Launch Install Wizard，开启集群安装向导，输入自定义的集群名&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari008.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari008.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;二选择hdp版本及资源库地址&quot;&gt;（二）选择HDP版本及资源库地址&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari009.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari009.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.6&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//192.168.100.172/hdp/HDP/centos7/2.6.3.0-235 &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HDP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTILS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.21&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//192.168.100.172/hdp/HDP-UTILS-1.1.0.21&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari010.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari010.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;三确认集群节点主机是否配置正确&quot;&gt;（三）确认集群节点主机是否配置正确&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari011.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari011.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari012.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari012.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;四选择要安装的服务&quot;&gt;（四）选择要安装的服务&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari013.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari013.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari014.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari014.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;五确认master服务安装&quot;&gt;（五）确认master服务安装&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari015.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari015.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;六确认slaveclients服务安装&quot;&gt;（六）确认Slave、Clients服务安装&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari016.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari016.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;七定制化服务设置&quot;&gt;（七）定制化服务设置&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari017.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari017.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　需要设置Grafana 和 SmartSense的admin用户的密码
+都设置成 admin即可
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari018.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari018.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari019.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari019.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari020.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari020.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;八部署&quot;&gt;（八）部署&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari021.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari021.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari022.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari022.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari023.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari023.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;九显示首页&quot;&gt;（九）显示首页&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari024.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari024.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h1 id=&quot;九安装ambari-agent&quot;&gt;九、安装ambari-agent&lt;/h1&gt;
+&lt;h3 id=&quot;一安装&quot;&gt;（一）安装&lt;/h3&gt;
+&lt;p&gt;　　我们需要在ambari集群下的所有agent节点安装此命令
+　　yum install ambari-agent即可&lt;/p&gt;
+&lt;h3 id=&quot;二修改etchosts&quot;&gt;（二）修改/etc/hosts&lt;/h3&gt;
+&lt;p&gt;　　我们需要让agent能认识主节点机器
+　　Vi /etc/hosts
+　　192.168.100.172 devserver06&lt;/p&gt;
+&lt;h3 id=&quot;三修改agent配置&quot;&gt;（三）修改agent配置&lt;/h3&gt;
+&lt;p&gt;　　vi /etc/ambari-agent/conf/ambari-agent.ini
+　　修改 server hostname，内容如下&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;devserver06&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;四在ambari-server上增加agent-host&quot;&gt;（四）在ambari-server上增加agent host&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari025.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari025.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　点击 Add New Hosts ，界面如下
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari026.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari026.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　我们已经在devserver08机器上安装了ambari-agent，也通过了ssh认证，在界面上只需要将devserver08机器纳入到集群中即可。按照上图选择方式进行操作。
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari027.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari027.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari028.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari028.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari029.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari029.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari030.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari030.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari031.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari031.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari032.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari032.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari033.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari033.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h1 id=&quot;十备注&quot;&gt;十、备注&lt;/h1&gt;
+&lt;h3 id=&quot;一查看ambari日志&quot;&gt;（一）查看ambari日志&lt;/h3&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;agent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;agent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;二查看安装启动操作&quot;&gt;（二）查看安装、启动操作&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/ambari/ambari034.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/ambari/ambari034.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　点击 0 ops处，可以弹出日志记录情况。&lt;/p&gt;
+&lt;h3 id=&quot;三ambari在mysql设置用户以及权限配置&quot;&gt;（三）ambari在mysql设置用户以及权限配置&lt;/h3&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USER&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVILEGES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*.*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USER&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datacube152&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVILEGES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*.*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datacube152&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;USER&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVILEGES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*.*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'@'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ambari&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;FLUSH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PRIVILEGES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/bigdata/2018/03/01/ambari.html</link>
+        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/03/01/ambari.html</guid>
+        
+        <category>blog</category>
+        
+        <category>ambari</category>
+        
+        <category>bigdata</category>
+        
+        
+        <category>bigdata</category>
         
       </item>
     

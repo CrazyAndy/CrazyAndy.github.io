@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="Ambari了解一下002_Ambari自定义服务" name="description">
+  
+  
+    <meta name="keywords" content="ambari,bigdata">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Ambari了解一下002_Ambari自定义服务
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20170307.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">  
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/post-2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">bigdata</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Mar 2018</span>
+                        <h1>
+                            Ambari了解一下002_Ambari自定义服务
+                        </h1>
+                    </div>
+                    	<h1 id="一自定义服务安装思路">一、自定义服务安装思路</h1>
+<p>　　Ambari允许我们安装自定义服务，它提供钩子设置，我们将自定义服务的关于ambari配置脚本放在特定目录下，重启ambari-server之后，便可在操作界面安装这个自定义服务。</p>
+<h1 id="二需求分析">二、需求分析</h1>
+<p>1，安装某web服务到指定服务器</p>
+
+<p>2，提供 启动，重启服务</p>
+
+<p>3，监听以上这些服务状态</p>
+
+<p>4，能修改这些服务的配置属性</p>
+<h1 id="三安装前准备">三、安装前准备</h1>
+<h3 id="一web服务程序包">（一）web服务程序包</h3>
+<p>　　我们可以简单写一个helloworld的java web项目，并打包成war包</p>
+<h3 id="二为ambari提供的安装启动重启的钩子脚本">（二）为ambari提供的安装，启动，重启的钩子脚本</h3>
+<p>　　它们都以文件夹的形式提供，并会在安装具体自定义服务之前上传到ambari-server端服务器下ambari service目录下。</p>
+<h3 id="三服务器节点">（三）服务器节点</h3>
+<p>　　ambari-server安装在一台服务器上，ambari-agent可安装在任意一台服务器上。</p>
+<h3 id="四重启服务">（四）重启服务</h3>
+<p>　　在每次上传service包到服务器的时候，都需要重启ambari服务，才能让新增自定义服务显示在安装备选界面，脚本命令如下：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ambari</span><span class="o">-</span><span class="n">server</span> <span class="n">restart</span>
+</code></pre></div></div>
+<h3 id="五自定义服务脚本编写">（五）自定义服务脚本编写</h3>
+<p>　　Ambari关于自定义服务安装的配置脚本是通过python语言实现的。我们需要将一系列文件准备好，并上传到ambari自定义服务需要配置的位置。</p>
+
+<p>　　1. 在ambari-server所在主机上找到service安装目录</p>
+
+<p>　　ambari默认安装之后，service目录默认为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">server</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">stacks</span><span class="o">/</span><span class="n">HDP</span><span class="o">/</span><span class="mf">2.6</span><span class="o">/</span><span class="n">services</span>
+</code></pre></div></div>
+<p>　　2. 自定义服务脚本文件目录结构</p>
+
+<p>　　Service包目录结构(顶级目录必须要大写，这里为HELLO_WEB)如下：
+　　HELLO_WEB/configuration/application.xml//该文件为该web服务所需配置文件
+　　HELLO_WEB/package/scripts/hello_master.py(启动，停止，重启，状态监听逻辑在这里编写，使用python脚本)
+　　HELLO_WEB/metainfo.xml(内容包含自定义服务名称，调用脚本位置配置)</p>
+
+<p>　　3. metainfo配置详解</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">metainfo</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">schemaVersion</span><span class="o">&gt;</span><span class="mf">2.0</span><span class="o">&lt;/</span><span class="n">schemaVersion</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">services</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">service</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">HELLO_WEB</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">displayName</span><span class="o">&gt;</span><span class="n">HELLO_WEB</span><span class="o">&lt;/</span><span class="n">displayName</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">comment</span><span class="o">&gt;</span><span class="n">helloweb</span><span class="err">服务</span><span class="o">&lt;/</span><span class="n">comment</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">1.0</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">components</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">component</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">HelloMaster</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">displayName</span><span class="o">&gt;</span><span class="n">hello_master</span><span class="o">&lt;/</span><span class="n">displayName</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">category</span><span class="o">&gt;</span><span class="n">MASTER</span><span class="o">&lt;/</span><span class="n">category</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">cardinality</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">+&lt;/</span><span class="n">cardinality</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">versionAdvertised</span><span class="o">&gt;</span><span class="kc">true</span><span class="o">&lt;/</span><span class="n">versionAdvertised</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="n">commandScript</span><span class="o">&gt;</span>
+			<span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span><span class="n">scripts</span><span class="o">/</span><span class="n">hello_master</span><span class="o">.</span><span class="na">py</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+			<span class="o">&lt;</span><span class="n">scriptType</span><span class="o">&gt;</span><span class="n">PYTHON</span><span class="o">&lt;/</span><span class="n">scriptType</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">timeout</span><span class="o">&gt;</span><span class="mi">1200</span><span class="o">&lt;/</span><span class="n">timeout</span><span class="o">&gt;</span>
+          <span class="o">&lt;/</span><span class="n">commandScript</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">component</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">components</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">service</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">services</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">metainfo</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<p>　　ambari-server会读取该配置文件，认定该服务为自定义服务，并在UI界面提供安装服务，该配置主要是配置了自定义服务名名称以及脚本位置，脚本主类名称，脚本类型等。</p>
+
+<p>　　4. configuration/application.xml详解</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">configuration</span> <span class="n">supports_final</span><span class="o">=</span><span class="s">"false"</span> <span class="n">supports_adding_forbidden</span><span class="o">=</span><span class="s">"true"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">property</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">content</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">dfinedLoader</span> <span class="n">template</span><span class="o">&lt;/</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;&lt;/</span><span class="n">description</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span>
+		<span class="n">spring</span><span class="o">.</span><span class="na">application</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">helloworld</span>
+		<span class="n">server</span><span class="o">.</span><span class="na">port</span><span class="o">=</span><span class="mi">8080</span>
+    <span class="o">&lt;/</span><span class="n">value</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">value</span><span class="o">-</span><span class="n">attributes</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">content</span><span class="o">&lt;/</span><span class="n">type</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">empty</span><span class="o">-</span><span class="n">value</span><span class="o">-</span><span class="n">valid</span><span class="o">&gt;</span><span class="kc">true</span><span class="o">&lt;/</span><span class="n">empty</span><span class="o">-</span><span class="n">value</span><span class="o">-</span><span class="n">valid</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">show</span><span class="o">-</span><span class="n">property</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="kc">false</span><span class="o">&lt;/</span><span class="n">show</span><span class="o">-</span><span class="n">property</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">value</span><span class="o">-</span><span class="n">attributes</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">on</span><span class="o">-</span><span class="n">ambari</span><span class="o">-</span><span class="n">upgrade</span> <span class="n">add</span><span class="o">=</span><span class="s">"true"</span><span class="o">/&gt;</span>
+  <span class="o">&lt;/</span><span class="n">property</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">configuration</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<p>　　我们在这里写的是简单版本的，在ui操作页面上会显示一个textarea输入框，这里的内容是默认配置，你也可以在安装或者修改配置的时候，在ui界面修改此配置。</p>
+
+<p>　　5. hello_master.py详解</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="o">-*-</span> <span class="nl">coding:</span> <span class="n">utf</span><span class="o">-</span><span class="mi">8</span> <span class="o">-*-</span>
+<span class="n">from</span> <span class="n">resource_management</span> <span class="kn">import</span> <span class="err">*</span>
+<span class="nn">from</span> <span class="n">resource_management</span><span class="o">.</span><span class="na">libraries</span><span class="o">.</span><span class="na">functions</span> <span class="kn">import</span> <span class="nn">stack_select</span>
+<span class="n">from</span> <span class="n">resource_management</span><span class="o">.</span><span class="na">libraries</span><span class="o">.</span><span class="na">functions</span> <span class="kn">import</span> <span class="nn">StackFeature</span>
+<span class="n">from</span> <span class="n">resource_management</span><span class="o">.</span><span class="na">libraries</span><span class="o">.</span><span class="na">functions</span><span class="o">.</span><span class="na">stack_features</span> <span class="kn">import</span> <span class="nn">check_stack_feature</span>
+<span class="n">from</span> <span class="n">resource_management</span><span class="o">.</span><span class="na">libraries</span><span class="o">.</span><span class="na">functions</span><span class="o">.</span><span class="na">security_commons</span> <span class="kn">import</span> <span class="nn">build_expectations</span><span class="o">,</span> <span class="err">\</span>
+  <span class="n">cached_kinit_executor</span><span class="o">,</span> <span class="n">get_params_from_filesystem</span><span class="o">,</span> <span class="n">validate_security_config_properties</span><span class="o">,</span> <span class="err">\</span>
+  <span class="n">FILE_TYPE_XML</span>
+<span class="n">from</span> <span class="n">ambari_commons</span><span class="o">.</span><span class="na">os_family_impl</span> <span class="kn">import</span> <span class="nn">OsFamilyImpl</span>
+<span class="n">from</span> <span class="n">ambari_commons</span> <span class="kn">import</span> <span class="nn">OSConst</span>
+<span class="n">from</span> <span class="n">resource_management</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">exceptions</span> <span class="kn">import</span> <span class="nn">ClientComponentHasNoStatus</span>
+<span class="kd">class</span> <span class="nf">HelloMaster</span><span class="o">(</span><span class="n">Script</span><span class="o">):</span>
+	<span class="err">#资源地址</span>
+	<span class="n">warPath</span><span class="o">=</span><span class="err">'</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">helloworld</span><span class="o">/</span><span class="err">'</span>
+	<span class="n">warname</span><span class="o">=</span><span class="err">'</span><span class="n">helloworld</span><span class="o">.</span><span class="na">war</span><span class="err">'</span>
+	<span class="n">pidPath</span> <span class="o">=</span> <span class="err">'</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">helloworld</span><span class="o">/</span><span class="n">load</span><span class="o">.</span><span class="na">pid</span><span class="err">'</span>
+	<span class="n">def</span> <span class="nf">install</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">env</span><span class="o">):</span>
+	<span class="err">#</span> <span class="err">这里是在</span><span class="n">ambari</span><span class="err">安装此自定义服务时候触发的</span>
+	<span class="err">#</span> <span class="mi">1</span><span class="o">.</span><span class="err">我们这里需要将</span><span class="n">war</span><span class="err">包放到</span><span class="n">tomcat</span><span class="err">下面，并启动</span><span class="n">tomcat</span>
+		<span class="n">print</span> <span class="s">"Install plat PlatMaster"</span>
+
+	<span class="n">def</span> <span class="nf">configure</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">env</span><span class="o">):</span>
+		<span class="err">#这里主要是在配置修改时被触发，比如</span><span class="n">UI</span><span class="err">页面修改</span><span class="n">web</span><span class="err">项目配置文件，我们需要将配置内容更新到</span><span class="n">web</span><span class="err">下对应的</span><span class="n">application</span><span class="o">.</span><span class="na">properties</span><span class="err">里面去</span>
+	
+		<span class="n">print</span> <span class="s">"Configure My PlatMaster"</span>
+
+	<span class="n">def</span> <span class="nf">start</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">env</span><span class="o">,</span> <span class="n">upgrade_type</span><span class="o">=</span><span class="n">None</span><span class="o">):</span>
+		<span class="err">#</span> <span class="err">我们这里需要将</span><span class="n">tomcat</span><span class="err">启动，并记录其进程号到指定文件</span><span class="n">load</span><span class="o">.</span><span class="na">pid</span>
+		
+		<span class="n">print</span> <span class="s">"start the plat service"</span> 
+
+	<span class="n">def</span> <span class="nf">stop</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">env</span><span class="o">,</span> <span class="n">upgrade_type</span><span class="o">=</span><span class="n">None</span><span class="o">):</span>		
+		<span class="err">#</span> <span class="err">我们这里需要将</span><span class="n">tomcat</span><span class="err">停止，可根据</span><span class="n">load</span><span class="o">.</span><span class="na">pid</span><span class="err">文件中存储的进程号，直接杀掉</span>							
+		<span class="n">print</span> <span class="s">"Stop plat PlatMaster"</span>
+	<span class="n">def</span> <span class="nf">status</span><span class="o">(</span><span class="n">self</span><span class="o">,</span> <span class="n">env</span><span class="o">):</span>
+		<span class="err">#监听进程号，这样</span><span class="n">ambari</span><span class="err">就能知道该服务是否启动</span>
+		<span class="n">check_process_status</span><span class="o">(</span><span class="n">HelloMaster</span><span class="o">.</span><span class="na">pidPath</span><span class="o">)</span>
+		<span class="n">print</span> <span class="s">"HelloMaster Status ... "</span>
+	<span class="n">def</span> <span class="nf">restart</span><span class="o">(</span><span class="n">self</span> <span class="o">,</span><span class="n">env</span><span class="o">):</span>
+		<span class="err">#重启服务时调用</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="o">:</span>
+	<span class="n">HelloMaster</span><span class="o">().</span><span class="na">execute</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>　　6. 脚本编码</p>
+
+<p>　　python脚本编码我们使用utf-8，否则在安装服务的时候会报错，我们只需要在脚本hello_master.py第一行加入# -<em>- coding: utf-8 -</em>- 即可</p>
+
+<p>　　7. 备注</p>
+
+<p>　　以上脚本是最简单版本，我们还可以增加tomcat监控视图，在配置处做key value配置等内容，这个可自行百度，不再详细描述。</p>
+<h1 id="四安装自定义服务">四、安装自定义服务</h1>
+<h3 id="一在ambari-server所在主机上找到service安装目录">（一）在ambari-server所在主机上找到service安装目录</h3>
+<p>　　ambari默认安装之后，service目录默认为：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">ambari</span><span class="o">-</span><span class="n">server</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">stacks</span><span class="o">/</span><span class="n">HDP</span><span class="o">/</span><span class="mf">2.6</span><span class="o">/</span><span class="n">services</span>
+</code></pre></div></div>
+<p>　　将准备好的service包上传到安装目录下,service包便是我们上一步编写的 HELLO_WEB 包文件。</p>
+<h3 id="二ambari界面安装操作">（二）Ambari界面安装操作</h3>
+<h4 id="1-点击add-service按钮">1. 点击add service按钮</h4>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari035.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari035.png" width="100%" /></center>
+<h4 id="2-选中所需安装服务选项">2. 选中所需安装服务选项</h4>
+<!-- ![edit](/static/assets/img/blog/ambari/ambari036.png) -->
+<center><img src="/static/assets/img/blog/ambari/ambari036.png" width="100%" /></center>
+<h4 id="3-选择安装服务器节点">3. 选择安装服务器节点</h4>
+<p>　　以下几项因为涉及公司项目，不再一一截图，按照ui界面导航一步步操作即可</p>
+<h4 id="4-默认选择配置属性">4. 默认选择配置属性</h4>
+<h4 id="5-确认安装">5. 确认安装</h4>
+<h4 id="6-安装进度页面">6. 安装进度页面</h4>
+<h4 id="7-最终完成">7. 最终完成</h4>
+<h3 id="三web服务启动停止重启配置操作">（三）web服务启动，停止，重启，配置操作</h3>
+<p>　　我们为ambari提供的service包中python脚本中，写了关于启动，停止，重启，配置，监听的脚本逻辑。在ambari页面点击相关按钮，可以触发相关脚本逻辑。</p>
+
+<p>　　如果根据需要修改配置之后，ambari会触发python脚本hello_master.py中的configure方法逻辑。
+如果想删除该服务的时候，务必要先停止该服务，再删除，否则记录该服务进程号的文件中仍然含有上次启动成功时的进程号，下次安装并启动的时候，服务状态监听会出问题。</p>
+<h1 id="五在其他节点上安装服务">五、在其他节点上安装服务</h1>
+<p>　　在其他服务节点上安装服务相对来说很简单，我们只需要在主界面点击hosts按钮，跳转到服务器节点列表页面之后，点击要安装的节点，进入之后，安装即可。</p>
+
+<p>　　而如果该自定义配置和主节点配置不同，我们可以在主界面对应该服务配置处修改。</p>
+
+<p>　　相信当你操作到此步的时候，这一步骤对你来说已经不是问题了，所以这里不再详细截图展示。</p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">ambari</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">bigdata</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/bigdata/2018/03/02/ambari.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    <!-- Google analytics -->
+
+
+<!-- GrowingIO -->
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+_hmt.push(['_setAutoPageview', true]);
+</script>
+
+
+	
+
+</body>
+</html>
