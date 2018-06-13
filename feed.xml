@@ -5,9 +5,33 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Jun 2018 21:36:39 +0800</pubDate>
-    <lastBuildDate>Thu, 07 Jun 2018 21:36:39 +0800</lastBuildDate>
+    <pubDate>Wed, 13 Jun 2018 23:06:42 +0800</pubDate>
+    <lastBuildDate>Wed, 13 Jun 2018 23:06:42 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>这是最好的时代，也是最坏的时代</title>
+        <description>&lt;p&gt;　　这是最好的时代，也是最坏的时代。来自狄更斯《双城记》的名言吸引着我们每一个度过它的人，它像太阳，像烛火，像彩虹，在我们头顶，在我们眼中，在我们心里。&lt;/p&gt;
+
+&lt;p&gt;　　人生过了小半，虽然没有多少成绩，但是荒唐事却做了不少，想想就唏嘘不已，怎么可以那样，哎，已经那样了。。。
+接下来的生活该怎么过，飘过么，哈哈。我觉得还是按照自己的心意来活比较好，毕竟自由比什么都重要。&lt;/p&gt;
+
+&lt;p&gt;　　和志同道合的伙伴在一起，做着喜欢做的事情，累点，苦点，都无所谓，因为心甘情愿，因为义无反顾。相信生活也会美好起来，就像夏天耳边的海风，湿润柔软。&lt;/p&gt;
+
+&lt;p&gt;　　流星虽然消逝，也在最后证明了自己。我们总有一天也会消逝，正如我们的前辈一样，但是我想让自己更亮眼一些，我想证明自己，我会的，我会和我的伙伴一起努力来证明我们自己，我们一定可以。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 13 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/reading/2018/06/13/soso.html</link>
+        <guid isPermaLink="true">http://localhost:4000/reading/2018/06/13/soso.html</guid>
+        
+        <category>狄更斯</category>
+        
+        <category>ideas</category>
+        
+        
+        <category>reading</category>
+        
+      </item>
     
       <item>
         <title>使用jekyll搭建github博客</title>

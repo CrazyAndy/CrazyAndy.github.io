@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000/reading/2018/06/13/soso.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/it/2018/05/24/JekyllBlog.html</loc>
     </url>
 
