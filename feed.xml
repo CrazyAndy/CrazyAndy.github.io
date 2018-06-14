@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 13 Jun 2018 23:50:36 +0800</pubDate>
-    <lastBuildDate>Wed, 13 Jun 2018 23:50:36 +0800</lastBuildDate>
+    <pubDate>Thu, 14 Jun 2018 21:18:26 +0800</pubDate>
+    <lastBuildDate>Thu, 14 Jun 2018 21:18:26 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -30,6 +30,42 @@
         
         
         <category>reading</category>
+        
+      </item>
+    
+      <item>
+        <title>单点登陆CAS了解一下(一)</title>
+        <description>&lt;h1 id=&quot;一知识点&quot;&gt;一、知识点&lt;/h1&gt;
+&lt;p&gt;　　单点登录（Single Sign On），简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。CAS框架：CAS（Central Authentication Service）是实现SSO单点登录的框架。&lt;/p&gt;
+
+&lt;h1 id=&quot;二业务流程&quot;&gt;二、业务流程&lt;/h1&gt;
+
+&lt;p&gt;　　当用户第一次访问应用系统A的时候，因为还没有登录会被引导到认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据（ticket）；用户再访问别的应用的时候，就会将这个ticket带上，作为自己认证的凭据，应用系统接受到请求之后会把ticket送到认证系统进行校验，检查ticket的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统B和应用系统C了。&lt;/p&gt;
+
+&lt;h1 id=&quot;三基于cookie的单点登录的回顾&quot;&gt;三、基于Cookie的单点登录的回顾&lt;/h1&gt;
+
+&lt;!-- ![edit](/static/assets/img/blog/java/cas/cas001.jpg) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/cas/cas001.jpg&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　
+　　用户登陆www.&lt;/p&gt;
+
+&lt;h1 id=&quot;六引用&quot;&gt;六、引用&lt;/h1&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/lihuidu/p/6495247.html&quot;&gt;CAS单点登录原理解析&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 01 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2018/06/01/CAS.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2018/06/01/CAS.html</guid>
+        
+        <category>java</category>
+        
+        <category>cas</category>
+        
+        <category>blog</category>
+        
+        
+        <category>java</category>
         
       </item>
     
