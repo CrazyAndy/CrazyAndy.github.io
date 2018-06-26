@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="单点登陆CAS了解一下(二)" name="description">
+  
+  
+    <meta name="keywords" content="java,web,cas">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|单点登陆CAS了解一下(二)cas流程图分析
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/app-20170307.min.css" rel="stylesheet">
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20170307.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">java</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jun 2018</span>
+                        <h1>
+                            单点登陆CAS了解一下(二)cas流程图分析
+                        </h1>
+                    </div>
+                    	<h1 id="一cas协议">一、CAS协议</h1>
+
+<p>###（一）基础协议
+<!-- ![edit](/static/assets/img/blog/java/cas/cas013.jpg) --></p>
+<center><img src="/static/assets/img/blog/java/cas/cas013.jpg" width="75%" /></center>
+
+<center>图1 基础模式</center>
+
+<h4 id="1-cas-client以filter的形式保护web应用的受保护资源过滤从客户端过来的每一个请求step-1">1. CAS Client以Filter的形式保护Web应用的受保护资源，过滤从客户端过来的每一个请求（Step 1）。</h4>
+<h4 id="2-cas-client分析http请求中是否包含service-ticket如果没有则重定向到cas-serverstep-2">2. CAS Client分析HTTP请求中是否包含Service Ticket，如果没有则重定向到CAS Server（Step 2）。</h4>
+<h4 id="3-用户认证过程如果用户提供了正确的credentialscas-server会产生随机的ticket然后缓存该ticketstep3并生成tgcticket-grant-cookie给user浏览器">3. 用户认证过程，如果用户提供了正确的Credentials，CAS Server会产生随机的Ticket，然后缓存该Ticket（Step3），并生成TGC（Ticket Grant Cookie）给User浏览器。</h4>
+<h4 id="4-并重定向用户到cas-client并携带刚才产生的ticketstep4">4. 并重定向用户到CAS Client并携带刚才产生的Ticket（Step4）。</h4>
+<h4 id="5-cas-client与cas-server通过ticket完成身份认真step4和step5">5. CAS Client与CAS Server通过Ticket完成身份认真（Step4和Step5）。</h4>
+<h4 id="6-验证成功后cas-client对当前request用户进行服务">6. 验证成功后，CAS Client对当前Request用户进行服务。</h4>
+<h4 id="7-用户再次访问时携带tgccas-server会判断该cookie的有效性并决定是否再次验证">7. 用户再次访问时携带TGC，CAS Server会判断该Cookie的有效性并决定是否再次验证。</h4>
+<h3 id="二cas代理模式">（二）CAS代理模式</h3>
+<p>　　基础协议已经能够满足绝大多数的场景，但是对于通过service1访问service2这种场景就无能为力了，如果我们对service2也进行验证，从用户角度来说，将会看到频繁的重定向，因此引入了Proxy（代理）模式，由CAS Client代理用户去访问其他Web应用。</p>
+
+<p>　　代理的前提是需要CAS Client拥有身份信息（类似凭据），用户持有的TGC（Ticket Granted Cookie），而代理持有的是PGT（Proxy Granted Ticket），凭借TGC用户可以免登陆获取其他应用的Service Ticket，同样的，通过PGT，Web应用可以代理用户实现后端认真而无需前端的用户参与。</p>
+
+<p>　　如何获取PGT？</p>
+
+<p>　　如下图示，CAS Client在基础协议之上，提供了一个额外的PGT URL给CAS Server，CAS Server通过该接口提供PGT给CAS Client。
+<!-- ![edit](/static/assets/img/blog/java/cas/cas014.jpg) --></p>
+<center><img src="/static/assets/img/blog/java/cas/cas014.jpg" width="75%" /></center>
+<center>图2 Proxy模式</center>
+
+<p>　　与基础协议不同，在Proxy模式中起作用的是PT（Proxy Ticket），基础模式使用的是ST（Service Ticket）。</p>
+
+<!-- ![edit](/static/assets/img/blog/java/cas/cas015.jpg) -->
+<center><img src="/static/assets/img/blog/java/cas/cas015.jpg" width="75%" /></center>
+<center>图3 代理模式的访问模式</center>
+
+<p>　　当helloservice需要helloservice2的数据时，helloservice首先使用自己保存的PGT向CAS Server获取PT。</p>
+
+<p>　　当获取到PT之后，helloservice携带该PT向helloservice2请求数据。</p>
+
+<p>　　Helloservice2使用该PT向CAS Server验证请求，CAS Server返回验证结果。</p>
+
+<p>　　Helloservice2此时知道可以合法的为Helloservice服务，从而返回数据。</p>
+
+<h3 id="三cas浏览器请求认证序列图">（三）CAS浏览器请求认证序列图</h3>
+<!-- ![edit](/static/assets/img/blog/java/cas/cas016.jpg) -->
+<center><img src="/static/assets/img/blog/java/cas/cas016.jpg" width="100%" /></center>
+<p>其中：</p>
+<ul>
+  <li>ST：Service Ticket，用于客户端应用持有，每个ST对应一个用户在一个客户端上</li>
+  <li>TGT：Ticket Granting Ticket，存储在CAS服务器端和用户cookie两个地方
+    <h3 id="四cas服务器端登陆流程图">（四）CAS服务器端登陆流程图</h3>
+    <!-- ![edit](/static/assets/img/blog/java/cas/cas017.jpg) -->
+  </li>
+</ul>
+<center><img src="/static/assets/img/blog/java/cas/cas017.jpg" width="100%" /></center>
+<p>下面的HTTP请求的参数可通过/login，这时它作为凭证索取者。他们都是区分大小写的，他们都必须处理/login。</p>
+
+<p>·         service[可选] -客户端尝试访问的应用的标识符。在几乎所有情况下，这将是应用的URL。请注意，作为一个HTTP请求的参数，此URL的值必须是符合RFC 中URL编码的描述。（详情参见RFC 1738 [ 4 ]的第2.2节）。如果没有指定service并且单点登录session尚不存在，CAS应要求具有凭证的用户发起一个单点登录session。如果没有指定service但单点登录session已经存在，CAS应显示一条消息，通知客户，这是已经登录</p>
+
+<p>·         Renew[可选] -如果此参数设置，单点登录将被绕过。在这种情况下，CAS将要求客户提交证书，不论是否存在一个CAS的单点登录session。这个参数与“gateway”参数不兼容。服务重定向到/login的URI和登录表单视图，张贴在/login的URI中的值不应同时出现在“renew”和“gateway”请求参数。两个参数都设置这种行为是未定义的。CAS推荐：在实施时，如果设置“renew”参数则忽略“gateway”参数。推荐：当设置“renew”参数时，其值应该为“true”。</p>
+
+<p>注：也就是说：https://server/cas/login?service=serviceUrl&amp;renew=true&amp;gateway=true这种参数传递是错误的，不能同时出现两个参数。</p>
+
+<p>注：CAS协议允许客户端选择是否跳出单点登录，这就是renew。它允许一个客户端通知CAS服务器总是验证一个用户，不管一个单点登录的session是否存在。这是一个非常有用的属性，当一个特定的使用CAS认证机制的服务允许访问敏感资料时，它能强迫CAS重新认证一个用户，确保登录的是一个正确的用户。这时，那个应经存在的单点登录session应该是被终止的。使用这个属性通知CAS重新验证凭证时，客户端应用应该中定向用户到以下的URL上：</p>
+
+<p>https://server/cas/login?service=serviceUrl&amp;renew=true</p>
+
+<p>当请求验证这个票据时，客户端可以要求CAS确保这个票据是来自一个新的认证请求。</p>
+
+<p>应用场景可参见：部署的客户端集成示例bookshop，改变该参数值，体验效果。</p>
+
+<p>·         Gateway[可选] -如果这个参数设定，CAS将不会向客户端索要凭据。如果客户端有一个已存在的CAS单点登录的session，或者如果单点登录session可以通过非交互方式（i.e. trust authentication，信托认证）建立，CAS可以将客户端请求重定向到“service”参数指定的URL，而且还加上有效的服务票据（Service Ticket，ST）。 （CAS还可以插入一个通知页面，通知客户端一个CAS认证已经发生了。）</p>
+
+<p>如果客户端没有CAS单点登录的session，并且也不可能通过非交互方式建立认证，CAS必须将客户端重定向到“service”参数指定的URL，并且不在URL后面附加“ticket”。如果“service”参数未指定但设置了“gateway”参数，CAS将认为这种行为未定义。在这种情况下推荐：如果两个参数都没有指定，CAS应要求凭据。同样这个参数与“renew”参数不兼容。如果要设置“gateway”参数，推荐设置为“true”。</p>
+
+<p>注：</p>
+
+<p>应用场景可参见：部署的客户端集成示例bookshop，改变该参数值，体验效果。</p>
+
+<p>总结：“renew”参数的作用：在存在SSO session的情况下client请求访问资源，是重新认证用户信息还是不用认证放这个请求过去。</p>
+
+<p>“gateway”参数的作用：与“renew”参数相反，“gateway=true”时是指只要存在SSO session就不用重新认证了。</p>
+
+<p>Renew始终要求用户进行主认证，所谓主认证就是借助于/login进行的认证操作，此时IE用户必须手工提供自身的帐号信息。基于TGC、PT的登录都不属于主认证。相比之下，gateway始终不会允许CAS服务器丢出/login登录页面给IE用户，从而不可能进行主认证。只要gateway=true则永远进不到/login登录页面，只有确认用户能从其他途径得到SSO session才可以设置true。</p>
+
+<h1 id="二引用">二、引用</h1>
+
+<p>　　<a href="https://www.cnblogs.com/lihuidu/p/6495247.html">CAS单点登录原理解析</a></p>
+
+<p>　　<a href="https://www.cnblogs.com/jiyuqi/p/5446883.html">单点登录系统构建之二——SSO原理及CAS架构</a></p>
+
+<p>　　<a href="https://blog.csdn.net/heyeweiwan/article/details/38726071">CAS单点登陆的两个原理图</a></p>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">java</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">cas</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/06/02/CAS.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    <!-- Google analytics -->
+
+
+<!-- GrowingIO -->
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?31d4d3da408942182f35606f94a67f3d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+_hmt.push(['_setAutoPageview', true]);
+</script>
+
+
+	
+
+</body>
+</html>
