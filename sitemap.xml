@@ -114,7 +114,15 @@
     </url>
 
     <url>
+        <loc>http://localhost:4000/java/2018/01/03/OAuth2.0.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/cloud/2018/01/03/Cloud.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/java/2018/01/02/OAuth2.0.html</loc>
     </url>
 
     <url>
@@ -123,6 +131,10 @@
 
     <url>
         <loc>http://localhost:4000/bigdata/2018/01/02/Presto.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/java/2018/01/01/OAuth2.0.html</loc>
     </url>
 
     <url>
@@ -223,7 +235,7 @@
     </url>
 
     <url>
-        <loc>http://localhost:4000/ideas/ideas/</loc>
+        <loc>http://localhost:4000/ideas/ideas</loc>
     </url>
 
     <url>

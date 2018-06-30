@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Jun 2018 20:44:34 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Jun 2018 20:44:34 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Jun 2018 11:17:21 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Jun 2018 11:17:21 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -1899,6 +1899,100 @@ ribbon.ReadTimeout=5000
       </item>
     
       <item>
+        <title>OAuth2.0探索(三)java代码实战</title>
+        <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
+&lt;p&gt;　　我们需要开发oauth-client 和 oauth-server两个web项目，&lt;/p&gt;
+
+&lt;p&gt;　　oauth-client负责开发第三方应用程序，也就是客户端程序，如果对应第一章就是云冲印，如果对应第二章就是豆瓣。&lt;/p&gt;
+
+&lt;p&gt;　　oauth-server负责开发服务提供商，主要包括认证服务器和资源服务器两部分。对应第一章就是谷歌，第二张就是qq。&lt;/p&gt;
+
+&lt;p&gt;　　在实际业务流程中，http请求会从这两个web服务来回跳转，可有意思了^_^。&lt;/p&gt;
+
+&lt;h1 id=&quot;二java实战描述&quot;&gt;二、java实战描述&lt;/h1&gt;
+&lt;h3 id=&quot;一-序列图&quot;&gt;（一） 序列图&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth012.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth012.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　我们会根据上图所示的时序流程去介绍我们的代码，因为http请求是在四个角色来回跳转的，所以我们讲代码的时候也会根据此顺序讲解。&lt;/p&gt;
+&lt;h3 id=&quot;二-用户点击客户端页面确认授权&quot;&gt;（二） 用户点击客户端页面，确认授权&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth013.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth013.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　上面的点击确认授权，实质上是请求 http://localhost:8091/oauthclient01/requestServerCode对应时序图中的1阶段&lt;/p&gt;
+
+&lt;p&gt;　　oauthclient01/requestServerCode这个请求对应的后台代码在oauth-client项目ClientServerController类中，对应时序图中的2阶段，代码如下所示&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientServerController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clientId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clientSecret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessTokenUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userInfoUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redirectUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/requestServerCode&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;requestServerFirst&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RedirectAttributes&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OAuthProblemException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;clientId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;clientId&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;clientSecret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;clientSecret&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;accessTokenUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;responseCode&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;redirectUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://localhost:8091/oauthclient01/callbackCode&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;response_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;code&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;OAuthClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oAuthClient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OAuthClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;URLConnectionClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//构建oauth的请求。设置请求服务地址（accessTokenUrl）、clientId、response_type、redirectUrl&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;OAuthClientRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessTokenRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OAuthClientRequest&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizationLocation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accessTokenUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setResponseType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setClientId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clientId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setRedirectURI&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;redirectUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;buildQueryMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;requestUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessTokenRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getLocationUri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OAuthSystemException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;redirect:http://localhost:8082/oauthserver/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;三-重定向请求code&quot;&gt;（三） 重定向请求code&lt;/h3&gt;
+&lt;p&gt;对应时序图3阶段，对应java代码在oauth-server项目下的AccessTokenController类中，代码如下&lt;/p&gt;
+
+&lt;h3 id=&quot;二-序列图&quot;&gt;（二） 序列图&lt;/h3&gt;
+
+&lt;h3 id=&quot;二-序列图-1&quot;&gt;（二） 序列图&lt;/h3&gt;
+
+&lt;h3 id=&quot;二-序列图-2&quot;&gt;（二） 序列图&lt;/h3&gt;
+
+&lt;h1 id=&quot;三引用&quot;&gt;三、引用&lt;/h1&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://blog.csdn.net/jing12062011/article/details/78147306&quot;&gt;Java的oauth2.0 服务端与客户端的实现&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 03 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2018/01/03/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2018/01/03/OAuth2.0.html</guid>
+        
+        <category>java</category>
+        
+        <category>oauth2.0</category>
+        
+        <category>blog</category>
+        
+        
+        <category>java</category>
+        
+      </item>
+    
+      <item>
         <title>Spring Cloud整体概括篇003_API网关</title>
         <description>&lt;h1 id=&quot;一概述&quot;&gt;一、概述&lt;/h1&gt;
 &lt;p&gt;　　API网关是干什么用的呢，它就是所有微服务的“大门看守员”，它可以实现请求路由，负载均衡，校验过滤，请求失败熔断，服务聚合，监控，缓存，静态响应处理等一大堆功能。其中以一大部分功能是在响应当前请求做真正业务处理之前，做一些周边的类似于aop形式的工作。&lt;/p&gt;
@@ -1930,6 +2024,77 @@ ribbon.ReadTimeout=5000
         
         
         <category>cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>OAuth2.0探索(二)授权码模式</title>
+        <description>&lt;h1 id=&quot;一应用场景&quot;&gt;一、应用场景&lt;/h1&gt;
+
+&lt;p&gt;　　此节我们主要将OAuth2.0授权码模式，我们会使用在豆瓣上使用qq登陆这个应用场景来解释授权流程。&lt;/p&gt;
+
+&lt;p&gt;　　假如你想登录豆瓣去看看电影评论，但你从来没注册过豆瓣账号，又不想新注册一个再使用豆瓣，怎么办呢？不用担心，豆瓣已经为你这种懒人做了准备，用你的qq号可以授权给豆瓣进行登录，请看下图所示。&lt;/p&gt;
+&lt;h3 id=&quot;第一步在豆瓣官网点击用qq登录&quot;&gt;第一步：在豆瓣官网点击用qq登录&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth005.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth005.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;第二步跳转到qq登录页面输入用户名密码然后点授权并登录&quot;&gt;第二步：跳转到qq登录页面输入用户名密码，然后点授权并登录&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth006.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth006.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;第三步跳回到豆瓣页面成功登录&quot;&gt;第三步：跳回到豆瓣页面，成功登录&lt;/h3&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth007.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth007.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　这几秒钟之内发生的事情，在无知的用户视角看来，就是在豆瓣官网上输了个qq号和密码就登录成功了。在一些细心的用户视角看来，页面经历了从豆瓣到qq，再从qq到豆瓣的两次页面跳转。但作为一群专业的程序员，我们还应该从上帝视角来看这个过程。&lt;/p&gt;
+
+&lt;h1 id=&quot;二上帝视角&quot;&gt;二、上帝视角&lt;/h1&gt;
+&lt;p&gt;　　简单来说，上述例子中的豆瓣就是客户端，QQ就是认证服务器，OAuth2.0就是客户端和认证服务器之间由于相互不信任而产生的一个授权协议。&lt;/p&gt;
+
+&lt;p&gt;　　下图描绘了只几秒钟发生的所有事情用上帝视角来看的流程
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth008.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth008.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　如上图所示，来说一下上述例子中的三个步骤在图中的表现。所用到的请求路径名称都是虚构的，所附带的请求参数忽略了一些非重点的。&lt;/p&gt;
+&lt;h3 id=&quot;第一步在豆瓣官网点击用qq登录-1&quot;&gt;第一步：在豆瓣官网点击用qq登录&lt;/h3&gt;
+&lt;p&gt;　　当你点击用qq登录的小图标时，实际上是向豆瓣的服务器发起了一个 http://www.douban.com/leadToAuthorize 的请求，豆瓣服务器会响应一个重定向地址，指向qq授权登录&lt;/p&gt;
+
+&lt;p&gt;　　浏览器接到重定向地址 http://www.qq.com/authorize?callback=www.douban.com/callback ，再次访问。并注意到这次访问带了一个参数是callback，以便qq那边授权成功再次让浏览器发起这个callback请求。不然qq无法知道你让我授权后要返回那个页面。&lt;/p&gt;
+
+&lt;p&gt;　　至于访问这个地址之后，qq那边做出怎样的回应，就是第二步的事情了。总之第一步即对应了图中的这些部分。
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth009.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth009.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;第二步跳转到qq登录页面输入用户名密码然后点授权并登录-1&quot;&gt;第二步：跳转到qq登录页面输入用户名密码，然后点授权并登录&lt;/h3&gt;
+&lt;p&gt;　　上一步中浏览器接到重定向地址并访问 http://www.qq.com/authorize?callback=www.douban.com/callback&lt;/p&gt;
+
+&lt;p&gt;　　qq的服务器接受到了豆瓣访问的authorize，在次例中所给出的回应是跳转到qq的登录页面，用户输入账号密码点击授权并登录按钮后，一定还会访问qq服务器中校验用户名密码的方法，若校验成功，该方法会响应浏览器一个重定向地址，并附上一个code（授权码）。由于豆瓣只关心像qq发起authorize请求后会返回一个code，并不关心qq是如何校验用户的，并且这个过程每个授权服务器可能会做些个性化的处理，只要最终的结果是返回给浏览器一个重定向并附上code即可，所以这个过程在图中并没有详细展开。现把展开图画给大家。
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth010.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth010.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;h3 id=&quot;第三步跳回到豆瓣页面成功登录-1&quot;&gt;第三步：跳回到豆瓣页面，成功登录&lt;/h3&gt;
+&lt;p&gt;　　这一步背后的过程其实是最繁琐的，但对于用户来说是完全感知不到的。用户在QQ登录页面点击授权登陆后，就直接跳转到豆瓣首页了，但其实经历了很多隐藏的过程。&lt;/p&gt;
+
+&lt;p&gt;　　首先接上一步，QQ服务器在判断登录成功后，使页面重定向到之前豆瓣发来的callback并附上code授权码，即 callback=www.douban.com/callback&lt;/p&gt;
+
+&lt;p&gt;　　页面接到重定向，发起 http://www.douban.com/callback 请求&lt;/p&gt;
+
+&lt;p&gt;　　豆瓣服务器收到请求后，做了两件再次与QQ沟通的事，即模拟浏览器发起了两次请求。一个是用拿到的code去换token，另一个就是用拿到的token换取用户信息。最后将用户信息储存起来，返回给浏览器其首页的视图。到此OAuth2.0授权结束。
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth011.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth011.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　我们在下一章将讲述java代码实现方式。&lt;/p&gt;
+&lt;h1 id=&quot;七引用&quot;&gt;七、引用　　&lt;/h1&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/flashsun/p/7424071.html&quot;&gt;一张图搞定OAuth2.0&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2018/01/02/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2018/01/02/OAuth2.0.html</guid>
+        
+        <category>java</category>
+        
+        <category>oauth2.0</category>
+        
+        <category>blog</category>
+        
+        
+        <category>java</category>
         
       </item>
     
@@ -1994,6 +2159,68 @@ ribbon.ReadTimeout=5000
         
         
         <category>bigdata</category>
+        
+      </item>
+    
+      <item>
+        <title>OAuth2.0探索(一)初步了解</title>
+        <description>&lt;h1 id=&quot;一前言&quot;&gt;一、前言&lt;/h1&gt;
+&lt;p&gt;　　OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。&lt;/p&gt;
+&lt;h1 id=&quot;二应用场景&quot;&gt;二、应用场景&lt;/h1&gt;
+
+&lt;p&gt;　　我们现在模拟一个简单的应用场景来阐述OAuth的使用方式。&lt;/p&gt;
+
+&lt;p&gt;　　有一个”云冲印”的网站，可以将用户储存在Google的照片，冲印出来。用户为了使用该服务，必须让”云冲印”读取自己储存在Google上的照片。问题是只有得到用户的授权，Google才会同意”云冲印”读取这些照片。那么，”云冲印”怎样获得用户的授权呢？&lt;/p&gt;
+
+&lt;p&gt;　　传统方法是，用户将自己的Google用户名和密码，告诉”云冲印”，后者就可以读取用户的照片了。这样的做法有以下几个严重的缺点
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth001.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　OAuth就是为了解决上面这些问题而诞生的。&lt;/p&gt;
+&lt;h1 id=&quot;三名词定义&quot;&gt;三、名词定义&lt;/h1&gt;
+&lt;p&gt;　　在详细讲解OAuth 2.0之前，需要了解几个专用名词。它们对读懂后面的讲解，尤其是几张图，至关重要。
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth002.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth002.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　知道了上面这些名词，就不难理解，OAuth的作用就是让”客户端”安全可控地获取”用户”的授权，与”服务商提供商”进行互动。&lt;/p&gt;
+&lt;h1 id=&quot;四oauth的思路&quot;&gt;四、OAuth的思路&lt;/h1&gt;
+&lt;p&gt;　　OAuth在”客户端”与”服务提供商”之间，设置了一个授权层（authorization layer）。”客户端”不能直接登录”服务提供商”，只能登录授权层，以此将用户与客户端区分开来。”客户端”登录授权层所用的令牌（token），与用户的密码不同。用户可以在登录的时候，指定授权层令牌的权限范围和有效期。&lt;/p&gt;
+
+&lt;p&gt;　　”客户端”登录授权层以后，”服务提供商”根据令牌的权限范围和有效期，向”客户端”开放用户储存的资料。&lt;/p&gt;
+&lt;h1 id=&quot;五运行流程&quot;&gt;五、运行流程&lt;/h1&gt;
+&lt;p&gt;　　OAuth 2.0的运行流程如下图，摘自RFC 6749。
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth003.png) --&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth003.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+&lt;!-- ![edit](/static/assets/img/blog/java/oauth/oauth004.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/java/oauth/oauth004.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;　　不难看出来，上面六个步骤之中，B是关键，即用户怎样才能给于客户端授权。有了这个授权以后，客户端就可以获取令牌，进而凭令牌获取资源。&lt;/p&gt;
+
+&lt;p&gt;　　下面一一讲解客户端获取授权的四种模式。&lt;/p&gt;
+&lt;h1 id=&quot;六客户端的授权模式&quot;&gt;六、客户端的授权模式&lt;/h1&gt;
+&lt;p&gt;　　客户端必须得到用户的授权（authorization grant），才能获得令牌（access token）。OAuth 2.0定义了四种授权方式。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;授权码模式（authorization code）&lt;/li&gt;
+  &lt;li&gt;简化模式（implicit）&lt;/li&gt;
+  &lt;li&gt;密码模式（resource owner password credentials）&lt;/li&gt;
+  &lt;li&gt;客户端模式（client credentials）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;　　我们在下一章先详细讲述一下授权码模式，然后再简单阐述一下其他模式。&lt;/p&gt;
+&lt;h1 id=&quot;七引用&quot;&gt;七、引用　　&lt;/h1&gt;
+&lt;p&gt;　　&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html&quot;&gt;理解OAuth 2.0(阮一峰)&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2018/01/01/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2018/01/01/OAuth2.0.html</guid>
+        
+        <category>java</category>
+        
+        <category>oauth2.0</category>
+        
+        <category>blog</category>
+        
+        
+        <category>java</category>
         
       </item>
     

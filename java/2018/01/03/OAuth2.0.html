@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="OAuth2.0探索(三)java代码实战" name="description">
+  
+  
+    <meta name="keywords" content="java,web,oauth2.0">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|OAuth2.0探索(三)java代码实战
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">java</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Jan 2018</span>
+                        <h1>
+                            OAuth2.0探索(三)java代码实战
+                        </h1>
+                    </div>
+                    	<h1 id="一概述">一、概述</h1>
+<p>　　我们需要开发oauth-client 和 oauth-server两个web项目，</p>
+
+<p>　　oauth-client负责开发第三方应用程序，也就是客户端程序，如果对应第一章就是云冲印，如果对应第二章就是豆瓣。</p>
+
+<p>　　oauth-server负责开发服务提供商，主要包括认证服务器和资源服务器两部分。对应第一章就是谷歌，第二张就是qq。</p>
+
+<p>　　在实际业务流程中，http请求会从这两个web服务来回跳转，可有意思了^_^。</p>
+
+<h1 id="二java实战描述">二、java实战描述</h1>
+<h3 id="一-序列图">（一） 序列图</h3>
+<!-- ![edit](/static/assets/img/blog/java/oauth/oauth012.png) -->
+<center><img src="/static/assets/img/blog/java/oauth/oauth012.png" width="100%" /></center>
+<p>　　我们会根据上图所示的时序流程去介绍我们的代码，因为http请求是在四个角色来回跳转的，所以我们讲代码的时候也会根据此顺序讲解。</p>
+<h3 id="二-用户点击客户端页面确认授权">（二） 用户点击客户端页面，确认授权</h3>
+<!-- ![edit](/static/assets/img/blog/java/oauth/oauth013.png) -->
+<center><img src="/static/assets/img/blog/java/oauth/oauth013.png" width="100%" /></center>
+<p>　　上面的点击确认授权，实质上是请求 http://localhost:8091/oauthclient01/requestServerCode对应时序图中的1阶段</p>
+
+<p>　　oauthclient01/requestServerCode这个请求对应的后台代码在oauth-client项目ClientServerController类中，对应时序图中的2阶段，代码如下所示</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientServerController</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">clientId</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">clientSecret</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">accessTokenUrl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">userInfoUrl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">redirectUrl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">response_type</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">code</span><span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">;</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">;</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/requestServerCode"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">requestServerFirst</span><span class="o">(</span><span class="n">RedirectAttributes</span> <span class="n">attr</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">OAuthProblemException</span> <span class="o">{</span>
+        <span class="n">clientId</span> <span class="o">=</span> <span class="s">"clientId"</span><span class="o">;</span>
+        <span class="n">clientSecret</span> <span class="o">=</span> <span class="s">"clientSecret"</span><span class="o">;</span>
+        <span class="n">accessTokenUrl</span> <span class="o">=</span> <span class="s">"responseCode"</span><span class="o">;</span>
+        <span class="n">redirectUrl</span> <span class="o">=</span> <span class="s">"http://localhost:8091/oauthclient01/callbackCode"</span><span class="o">;</span>
+        <span class="n">response_type</span> <span class="o">=</span> <span class="s">"code"</span><span class="o">;</span>
+        <span class="n">OAuthClient</span> <span class="n">oAuthClient</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthClient</span><span class="o">(</span><span class="k">new</span> <span class="n">URLConnectionClient</span><span class="o">());</span>
+        <span class="n">String</span> <span class="n">requestUrl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//构建oauth的请求。设置请求服务地址（accessTokenUrl）、clientId、response_type、redirectUrl</span>
+            <span class="n">OAuthClientRequest</span> <span class="n">accessTokenRequest</span> <span class="o">=</span> <span class="n">OAuthClientRequest</span>
+                    <span class="o">.</span><span class="na">authorizationLocation</span><span class="o">(</span><span class="n">accessTokenUrl</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setResponseType</span><span class="o">(</span><span class="n">response_type</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setClientId</span><span class="o">(</span><span class="n">clientId</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setRedirectURI</span><span class="o">(</span><span class="n">redirectUrl</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">buildQueryMessage</span><span class="o">();</span>
+            <span class="n">requestUrl</span> <span class="o">=</span> <span class="n">accessTokenRequest</span><span class="o">.</span><span class="na">getLocationUri</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">requestUrl</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthSystemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="s">"redirect:http://localhost:8082/oauthserver/"</span><span class="o">+</span><span class="n">requestUrl</span> <span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>    
+</code></pre></div></div>
+
+<h3 id="三-重定向请求code">（三） 重定向请求code</h3>
+<p>对应时序图3阶段，对应java代码在oauth-server项目下的AccessTokenController类中，代码如下</p>
+
+<h3 id="二-序列图">（二） 序列图</h3>
+
+<h3 id="二-序列图-1">（二） 序列图</h3>
+
+<h3 id="二-序列图-2">（二） 序列图</h3>
+
+<h1 id="三引用">三、引用</h1>
+
+<p>　　<a href="https://blog.csdn.net/jing12062011/article/details/78147306">Java的oauth2.0 服务端与客户端的实现</a></p>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">java</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">oauth2.0</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/03/OAuth2.0.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    
+	
+
+</body>
+</html>
