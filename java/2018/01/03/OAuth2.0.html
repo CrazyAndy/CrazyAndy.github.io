@@ -291,15 +291,270 @@
 </code></pre></div></div>
 
 <h3 id="三-重定向请求code">（三） 重定向请求code</h3>
-<p>对应时序图3阶段，对应java代码在oauth-server项目下的AccessTokenController类中，代码如下</p>
+<p>　　对应时序图3阶段，对应java代码在oauth-server项目下的AuthorizeController类中，代码如下</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizeController</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">;</span>
 
-<h3 id="二-序列图">（二） 序列图</h3>
+    <span class="c1">//向客户端返回授权许可码 code</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/responseCode"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toShowUser</span><span class="o">(</span><span class="n">Model</span> <span class="n">model</span><span class="o">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"----------服务端/responseCode--------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//构建OAuth授权请求</span>
+            <span class="n">OAuthAuthzRequest</span> <span class="n">oauthRequest</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthAuthzRequest</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
 
-<h3 id="二-序列图-1">（二） 序列图</h3>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getClientId</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getResponseType</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getRedirectURI</span><span class="o">());</span>
 
-<h3 id="二-序列图-2">（二） 序列图</h3>
+            <span class="k">if</span><span class="o">(</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getClientId</span><span class="o">()!=</span><span class="kc">null</span><span class="o">&amp;&amp;</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getClientId</span><span class="o">()!=</span><span class="s">""</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="c1">//设置授权码</span>
+                <span class="n">String</span> <span class="n">authorizationCode</span> <span class="o">=</span><span class="s">"authorizationCode"</span><span class="o">;</span>
+                <span class="c1">//利用oauth授权请求设置responseType，目前仅支持CODE，另外还有TOKEN</span>
+                <span class="n">String</span> <span class="n">responseType</span> <span class="o">=</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getParam</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">OAUTH_RESPONSE_TYPE</span><span class="o">);</span>
+                <span class="c1">//进行OAuth响应构建</span>
+                <span class="n">OAuthASResponse</span><span class="o">.</span><span class="na">OAuthAuthorizationResponseBuilder</span> <span class="n">builder</span> <span class="o">=</span>
+                        <span class="n">OAuthASResponse</span><span class="o">.</span><span class="na">authorizationResponse</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span><span class="o">.</span><span class="na">SC_FOUND</span><span class="o">);</span>
 
-<h1 id="三引用">三、引用</h1>
+                <span class="c1">//设置授权码</span>
+                <span class="n">builder</span><span class="o">.</span><span class="na">setCode</span><span class="o">(</span><span class="n">authorizationCode</span><span class="o">);</span>
+                <span class="c1">//得到到客户端重定向地址</span>
+                <span class="n">String</span> <span class="n">redirectURI</span> <span class="o">=</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getParam</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">OAUTH_REDIRECT_URI</span><span class="o">);</span>
+                <span class="c1">//构建响应</span>
+                <span class="kd">final</span> <span class="n">OAuthResponse</span> <span class="n">response</span> <span class="o">=</span><span class="n">builder</span><span class="o">.</span><span class="na">location</span><span class="o">(</span><span class="n">redirectURI</span><span class="o">).</span><span class="na">buildQueryMessage</span><span class="o">();</span>
+
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务端/responseCode内，返回的回调路径："</span><span class="o">+</span><span class="n">response</span><span class="o">.</span><span class="na">getLocationUri</span><span class="o">());</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"----------服务端/responseCode--------------------------------------------------------------"</span><span class="o">);</span>
+
+                <span class="n">String</span> <span class="n">responceUri</span> <span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="na">getLocationUri</span><span class="o">();</span>
+
+                <span class="c1">//根据OAuthResponse返回ResponseEntity响应</span>
+                <span class="n">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span><span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">headers</span><span class="o">.</span><span class="na">setLocation</span><span class="o">(</span><span class="k">new</span> <span class="n">URI</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getLocationUri</span><span class="o">()));</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">URISyntaxException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="s">"redirect:"</span><span class="o">+</span><span class="n">responceUri</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthSystemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthProblemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"----------服务端/responseCode--------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h3 id="四接受服务端端返回的code提交申请access-token的请求">（四）接受服务端端返回的code，提交申请access token的请求</h3>
+<p>　　代码位于oauth-client中类ClientServerController中</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//接受服务端端返回的code，提交申请access token的请求</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/callbackCode"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">callbackCode</span><span class="o">()</span><span class="kd">throws</span> <span class="n">OAuthProblemException</span><span class="o">{</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-----------客户端/callbackCode--------------------------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="n">clientId</span> <span class="o">=</span> <span class="s">"clientId"</span><span class="o">;</span>
+        <span class="n">clientSecret</span> <span class="o">=</span> <span class="s">"clientSecret"</span><span class="o">;</span>
+        <span class="n">accessTokenUrl</span><span class="o">=</span><span class="s">"http://localhost:8082/oauthserver/responseAccessToken"</span><span class="o">;</span>
+        <span class="n">userInfoUrl</span> <span class="o">=</span> <span class="s">"userInfoUrl"</span><span class="o">;</span>
+        <span class="n">redirectUrl</span> <span class="o">=</span> <span class="s">"http://localhost:8091/oauthclient01/accessToken"</span><span class="o">;</span>
+
+        <span class="n">HttpServletRequest</span> <span class="n">httpRequest</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletRequest</span><span class="o">)</span><span class="n">request</span><span class="o">;</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">httpRequest</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"code"</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">code</span><span class="o">);</span>
+        <span class="n">OAuthClient</span> <span class="n">oAuthClient</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthClient</span><span class="o">(</span><span class="k">new</span> <span class="n">URLConnectionClient</span><span class="o">());</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">OAuthClientRequest</span> <span class="n">accessTokenRequest</span> <span class="o">=</span> <span class="n">OAuthClientRequest</span>
+                    <span class="o">.</span><span class="na">tokenLocation</span><span class="o">(</span><span class="n">accessTokenUrl</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setGrantType</span><span class="o">(</span><span class="n">GrantType</span><span class="o">.</span><span class="na">AUTHORIZATION_CODE</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setClientId</span><span class="o">(</span><span class="n">clientId</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setClientSecret</span><span class="o">(</span><span class="n">clientSecret</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setCode</span><span class="o">(</span><span class="n">code</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setRedirectURI</span><span class="o">(</span><span class="n">redirectUrl</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">buildQueryMessage</span><span class="o">();</span>
+
+            <span class="c1">//去服务端请求access token，并返回响应</span>
+            <span class="n">OAuthAccessTokenResponse</span> <span class="n">oAuthResponse</span> <span class="o">=</span><span class="n">oAuthClient</span><span class="o">.</span><span class="na">accessToken</span><span class="o">(</span><span class="n">accessTokenRequest</span><span class="o">,</span> <span class="n">OAuth</span><span class="o">.</span><span class="na">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">);</span>
+
+            <span class="c1">//获取服务端返回过来的access token</span>
+            <span class="n">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">oAuthResponse</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">();</span>
+
+            <span class="c1">//查看access token是否过期</span>
+            <span class="n">Long</span> <span class="n">expiresIn</span> <span class="o">=</span><span class="n">oAuthResponse</span><span class="o">.</span><span class="na">getExpiresIn</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"过期时间："</span><span class="o">+</span><span class="n">expiresIn</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"客户端/callbackCode方法的token：：："</span><span class="o">+</span><span class="n">accessToken</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-----------客户端/callbackCode--------------------------------------------------------------------------------"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="s">"redirect:http://localhost:8091/oauthclient01/accessToken?accessToken="</span><span class="o">+</span><span class="n">accessToken</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthSystemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<h3 id="五-获取客户端的code码向客户端返回access-token">（五） 获取客户端的code码，向客户端返回access token</h3>
+<p>　　在第四步中的代码中，客户端会自动请求服务端，用code换取token，而服务端代码放在oauth-server中AccessTokenController类中</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessTokenController</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">;</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">;</span>
+
+    <span class="c1">//获取客户端的code码，向客户端返回access token</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"/responseAccessToken"</span><span class="o">,</span><span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">HttpEntity</span> <span class="nf">token</span><span class="o">(){</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------服务端/responseAccessToken-----------------------------------------------------------"</span><span class="o">);</span>
+
+        <span class="n">OAuthIssuer</span> <span class="n">oauthIssuerImpl</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+        <span class="n">OAuthResponse</span> <span class="n">response</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+
+        <span class="c1">//构建OAuth请求</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">OAuthTokenRequest</span> <span class="n">oauthRequest</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthTokenRequest</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">authCode</span> <span class="o">=</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getParam</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">OAUTH_CODE</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">clientSecret</span> <span class="o">=</span> <span class="n">oauthRequest</span><span class="o">.</span><span class="na">getClientSecret</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">clientSecret</span><span class="o">!=</span><span class="kc">null</span><span class="o">||</span><span class="n">clientSecret</span><span class="o">!=</span><span class="s">""</span><span class="o">){</span>
+                <span class="c1">//生成Access Token</span>
+                <span class="n">oauthIssuerImpl</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthIssuerImpl</span><span class="o">(</span><span class="k">new</span> <span class="n">MD5Generator</span><span class="o">());</span>
+                <span class="kd">final</span> <span class="n">String</span> <span class="n">accessToken</span> <span class="o">=</span><span class="n">oauthIssuerImpl</span><span class="o">.</span><span class="na">accessToken</span><span class="o">();</span>
+
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">accessToken</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--oooo---"</span><span class="o">);</span>
+                <span class="c1">//生成OAuth响应</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">OAuthASResponse</span>
+                        <span class="o">.</span><span class="na">tokenResponse</span><span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">.</span><span class="na">SC_OK</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">setAccessToken</span><span class="o">(</span><span class="n">accessToken</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">buildJSONMessage</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------服务端/responseAccessToken-----------------------------------------------------------"</span><span class="o">);</span>
+            <span class="c1">//根据OAuthResponse生成ResponseEntity</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">(),</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getResponseStatus</span><span class="o">()));</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthSystemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthProblemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--------服务端/responseAccessToken-----------------------------------------------------------"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h3 id="六-接受服务端传回来的access-token由此token去请求服务端的资源用户信息等">（六） 接受服务端传回来的access token，由此token去请求服务端的资源（用户信息等）</h3>
+<p>　　在第四步末尾，会携带从服务端获取的token去请求服务端的资源，代码在ClientServerController中</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">//接受服务端传回来的access token，由此token去请求服务端的资源（用户信息等）</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/accessToken"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">accessToken</span><span class="o">(</span><span class="n">String</span> <span class="n">accessToken</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"---------客户端/accessToken----------------------------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="n">userInfoUrl</span> <span class="o">=</span> <span class="s">"http://localhost:8082/oauthserver/userInfo"</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"accessToken"</span><span class="o">);</span>
+        <span class="n">OAuthClient</span> <span class="n">oAuthClient</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthClient</span><span class="o">(</span><span class="k">new</span> <span class="n">URLConnectionClient</span><span class="o">());</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">OAuthClientRequest</span> <span class="n">userInfoRequest</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthBearerClientRequest</span><span class="o">(</span><span class="n">userInfoUrl</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setAccessToken</span><span class="o">(</span><span class="n">accessToken</span><span class="o">).</span><span class="na">buildQueryMessage</span><span class="o">();</span>
+            <span class="n">OAuthResourceResponse</span> <span class="n">resourceResponse</span> <span class="o">=</span><span class="n">oAuthClient</span><span class="o">.</span><span class="na">resource</span><span class="o">(</span><span class="n">userInfoRequest</span><span class="o">,</span> <span class="n">OAuth</span><span class="o">.</span><span class="na">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">OAuthResourceResponse</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">resourceResponse</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
+            <span class="n">ModelAndView</span> <span class="n">modelAndView</span> <span class="o">=</span><span class="k">new</span> <span class="n">ModelAndView</span><span class="o">(</span><span class="s">"usernamePage"</span><span class="o">);</span>
+            <span class="n">modelAndView</span><span class="o">.</span><span class="na">addObject</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span><span class="n">username</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"---------客户端/accessToken----------------------------------------------------------------------------------"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="s">"username:"</span><span class="o">+</span><span class="n">username</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthSystemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthProblemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"---------客户端/accessToken----------------------------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="七-携带token获取服务端资源">（七） 携带token获取服务端资源</h3>
+<p>　　第六步中携带token请求服务器资源，而服务器资源代码逻辑我们放在了oauth-server中的UserInfoController类中</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserInfoController</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">;</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">;</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/userInfo"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">HttpEntity</span> <span class="nf">userInfo</span><span class="o">()</span><span class="kd">throws</span> <span class="n">OAuthSystemException</span> <span class="o">{</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-----------服务端/userInfo-------------------------------------------------------------"</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">//获取客户端传来的OAuth资源请求</span>
+            <span class="n">OAuthAccessResourceRequest</span> <span class="n">oauthRequest</span> <span class="o">=</span><span class="k">new</span> <span class="n">OAuthAccessResourceRequest</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">ParameterStyle</span><span class="o">.</span><span class="na">QUERY</span><span class="o">);</span>
+
+            <span class="c1">//获取Access Token</span>
+            <span class="n">String</span> <span class="n">accessToken</span> <span class="o">=</span><span class="n">oauthRequest</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"accessToken"</span><span class="o">);</span>
+            <span class="c1">//验证Access Token</span>
+            <span class="cm">/*if (accessToken==null||accessToken=="") {
+              // 如果不存在/过期了，返回未验证错误，需重新验证
+            OAuthResponse oauthResponse = OAuthRSResponse
+                    .errorResponse(HttpServletResponse.SC_UNAUTHORIZED)
+                    .setError(OAuthError.ResourceResponse.INVALID_TOKEN)
+                    .buildHeaderMessage();
+              HttpHeaders headers = new HttpHeaders();
+              headers.add(OAuth.HeaderType.WWW_AUTHENTICATE,
+                oauthResponse.getHeader(OAuth.HeaderType.WWW_AUTHENTICATE));
+            return new ResponseEntity(headers, HttpStatus.UNAUTHORIZED);
+            }  */</span>
+
+            <span class="c1">//返回用户名</span>
+            <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">accessToken</span><span class="o">+</span><span class="s">"---"</span><span class="o">+</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()+</span><span class="s">"----CrazyAndy"</span><span class="o">;</span>
+
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"服务端/userInfo::::::ppp"</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-----------服务端/userInfo----------------------------------------------------------"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">OAuthProblemException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="c1">//检查是否设置了错误码</span>
+            <span class="n">String</span> <span class="n">errorCode</span> <span class="o">=</span><span class="n">e</span><span class="o">.</span><span class="na">getError</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">OAuthUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">errorCode</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">OAuthResponse</span> <span class="n">oauthResponse</span> <span class="o">=</span> <span class="n">OAuthRSResponse</span>
+                        <span class="o">.</span><span class="na">errorResponse</span><span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">.</span><span class="na">SC_UNAUTHORIZED</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">buildHeaderMessage</span><span class="o">();</span>
+                <span class="n">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span><span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
+
+                <span class="n">headers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">HeaderType</span><span class="o">.</span><span class="na">WWW_AUTHENTICATE</span><span class="o">,</span>
+                        <span class="n">oauthResponse</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">HeaderType</span><span class="o">.</span><span class="na">WWW_AUTHENTICATE</span><span class="o">));</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">headers</span><span class="o">,</span> <span class="n">HttpStatus</span><span class="o">.</span><span class="na">UNAUTHORIZED</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">OAuthResponse</span> <span class="n">oauthResponse</span> <span class="o">=</span> <span class="n">OAuthRSResponse</span>
+                    <span class="o">.</span><span class="na">errorResponse</span><span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">.</span><span class="na">SC_UNAUTHORIZED</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">setError</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getError</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">setErrorDescription</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getDescription</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">setErrorUri</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getUri</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">buildHeaderMessage</span><span class="o">();</span>
+
+            <span class="n">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span><span class="k">new</span> <span class="n">HttpHeaders</span><span class="o">();</span>
+            <span class="n">headers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">HeaderType</span><span class="o">.</span><span class="na">WWW_AUTHENTICATE</span><span class="o">,</span>
+                    <span class="n">oauthResponse</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="n">OAuth</span><span class="o">.</span><span class="na">HeaderType</span><span class="o">.</span><span class="na">WWW_AUTHENTICATE</span><span class="o">));</span>
+
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"-----------服务端/userInfo------------------------------------------------------------------------------"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+<p>　　我们在第六步代码最后将第七步返回内容显示在页面上，至此，我们完成了oauth2.0整套流程逻辑，当然在服务器端AccessTokenController中token()方法中，我们并没有真正将code换token，这个需要clientid,code,token它们形成的一条记录要事先存储到数据库或其他地方的，我们并没有做深入的实现，只是在那搭了个架子而已。</p>
+
+<p>　　而实际生产中，我们一般是需要页面重定向到认证服务器的时候，是要有界面提供方便用户输入账号密码的，然后才能得到code值，而这我们也没有做详细实现，在此要说明以下，以免读者的你误会或者总感觉哪里缺少什么却说不出来。</p>
+
+<h1 id="二引用">二、引用</h1>
 
 <p>　　<a href="https://blog.csdn.net/jing12062011/article/details/78147306">Java的oauth2.0 服务端与客户端的实现</a></p>
 
