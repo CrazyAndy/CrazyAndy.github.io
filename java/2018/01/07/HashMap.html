@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="HashMap过来看看(四)hashmap其他" name="description">
+  
+  
+    <meta name="keywords" content="java,web,hashmap">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|HashMap过来看看(四)hashmap其他
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">java</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Jan 2018</span>
+                        <h1>
+                            HashMap过来看看(四)hashmap其他
+                        </h1>
+                    </div>
+                    	<h1 id="一hashmap实现的cloneable接口">一、HashMap实现的Cloneable接口</h1>
+<p>　　HashMap实现了Cloneable接口，即实现了clone()方法。</p>
+
+<p>　　clone()方法的作用很简单，就是克隆一个HashMap对象并返回。</p>
+<pre><code class="language-w">// 克隆一个HashMap，并返回Object对象
+public Object clone() {
+    HashMap&lt;K,V&gt; result = null;
+    try {
+        result = (HashMap&lt;K,V&gt;)super.clone();
+    } catch (CloneNotSupportedException e) {
+        // assert false;
+    }
+    result.table = new Entry[table.length];
+    result.entrySet = null;
+    result.modCount = 0;
+    result.size = 0;
+    result.init();
+    // 调用putAllForCreate()将全部元素添加到HashMap中
+    result.putAllForCreate(this);
+
+    return result;
+}
+</code></pre>
+<h1 id="二-hashmap实现的serializable接口">二、 HashMap实现的Serializable接口</h1>
+<p>　　HashMap实现java.io.Serializable，分别实现了串行读取、写入功能。</p>
+
+<p>　　串行写入函数是writeObject()，它的作用是将HashMap的“总的容量，实际容量，所有的Entry”都写入到输出流中。</p>
+
+<p>　　而串行读取函数是readObject()，它的作用是将HashMap的“总的容量，实际容量，所有的Entry”依次读出</p>
+<pre><code class="language-w">// java.io.Serializable的写入函数
+// 将HashMap的“总的容量，实际容量，所有的Entry”都写入到输出流中
+private void writeObject(java.io.ObjectOutputStream s)
+    throws IOException
+{
+    Iterator&lt;Map.Entry&lt;K,V&gt;&gt; i =
+        (size &gt; 0) ? entrySet0().iterator() : null;
+
+    // Write out the threshold, loadfactor, and any hidden stuff
+    s.defaultWriteObject();
+
+    // Write out number of buckets
+    s.writeInt(table.length);
+
+    // Write out size (number of Mappings)
+    s.writeInt(size);
+
+    // Write out keys and values (alternating)
+    if (i != null) {
+        while (i.hasNext()) {
+        Map.Entry&lt;K,V&gt; e = i.next();
+        s.writeObject(e.getKey());
+        s.writeObject(e.getValue());
+        }
+    }
+}
+
+// java.io.Serializable的读取函数：根据写入方式读出
+// 将HashMap的“总的容量，实际容量，所有的Entry”依次读出
+private void readObject(java.io.ObjectInputStream s)
+     throws IOException, ClassNotFoundException
+{
+    // Read in the threshold, loadfactor, and any hidden stuff
+    s.defaultReadObject();
+
+    // Read in number of buckets and allocate the bucket array;
+    int numBuckets = s.readInt();
+    table = new Entry[numBuckets];
+
+    init();  // Give subclass a chance to do its thing.
+
+    // Read in size (number of Mappings)
+    int size = s.readInt();
+
+    // Read the keys and values, and put the mappings in the HashMap
+    for (int i=0; i&lt;size; i++) {
+        K key = (K) s.readObject();
+        V value = (V) s.readObject();
+        putForCreate(key, value);
+    }
+}
+</code></pre>
+<h1 id="三hashmap遍历方式">三、HashMap遍历方式</h1>
+<h3 id="一-遍历hashmap的键值对">（一） 遍历HashMap的键值对</h3>
+<p>　　第一步：根据entrySet()获取HashMap的“键值对”的Set集合。</p>
+
+<p>　　第二步：通过Iterator迭代器遍历“第一步”得到的集合。</p>
+<pre><code class="language-w">// 假设map是HashMap对象
+// map中的key是String类型，value是Integer类型
+Integer integ = null;
+Iterator iter = map.entrySet().iterator();
+while(iter.hasNext()) {
+    Map.Entry entry = (Map.Entry)iter.next();
+    // 获取key
+    key = (String)entry.getKey();
+        // 获取value
+    integ = (Integer)entry.getValue();
+}
+</code></pre>
+<h3 id="二-遍历hashmap的键">（二） 遍历HashMap的键</h3>
+<p>　　第一步：根据keySet()获取HashMap的“键”的Set集合。</p>
+
+<p>　　第二步：通过Iterator迭代器遍历“第一步”得到的集合。</p>
+<pre><code class="language-w">// 假设map是HashMap对象
+// map中的key是String类型，value是Integer类型
+String key = null;
+Integer integ = null;
+Iterator iter = map.keySet().iterator();
+while (iter.hasNext()) {
+        // 获取key
+    key = (String)iter.next();
+        // 根据key，获取value
+    integ = (Integer)map.get(key);
+}
+</code></pre>
+<h3 id="三-遍历hashmap的值">（三） 遍历HashMap的值</h3>
+<p>　　第一步：根据value()获取HashMap的“值”的集合。</p>
+
+<p>　　第二步：通过Iterator迭代器遍历“第一步”得到的集合。</p>
+<pre><code class="language-w">// 假设map是HashMap对象
+// map中的key是String类型，value是Integer类型
+Integer value = null;
+Collection c = map.values();
+Iterator iter= c.iterator();
+while (iter.hasNext()) {
+    value = (Integer)iter.next();
+}
+</code></pre>
+<p>　　遍历测试程序如下：</p>
+<pre><code class="language-w">import java.util.Map;
+import java.util.Random;
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
+import java.util.Collection;
+
+/*
+ * @desc 遍历HashMap的测试程序。
+ *   (01) 通过entrySet()去遍历key、value，参考实现函数：
+ *        iteratorHashMapByEntryset()
+ *   (02) 通过keySet()去遍历key、value，参考实现函数：
+ *        iteratorHashMapByKeyset()
+ *   (03) 通过values()去遍历value，参考实现函数：
+ *        iteratorHashMapJustValues()
+ *
+ * @author skywang
+ */
+public class HashMapIteratorTest {
+
+    public static void main(String[] args) {
+        int val = 0;
+        String key = null;
+        Integer value = null;
+        Random r = new Random();
+        HashMap map = new HashMap();
+
+        for (int i=0; i&lt;12; i++) {
+            // 随机获取一个[0,100)之间的数字
+            val = r.nextInt(100);
+            
+            key = String.valueOf(val);
+            value = r.nextInt(5);
+            // 添加到HashMap中
+            map.put(key, value);
+            System.out.println(" key:"+key+" value:"+value);
+        }
+        // 通过entrySet()遍历HashMap的key-value
+        iteratorHashMapByEntryset(map) ;
+        
+        // 通过keySet()遍历HashMap的key-value
+        iteratorHashMapByKeyset(map) ;
+        
+        // 单单遍历HashMap的value
+        iteratorHashMapJustValues(map);        
+    }
+    
+    /*
+     * 通过entry set遍历HashMap
+     * 效率高!
+     */
+    private static void iteratorHashMapByEntryset(HashMap map) {
+        if (map == null)
+            return ;
+
+        System.out.println("\niterator HashMap By entryset");
+        String key = null;
+        Integer integ = null;
+        Iterator iter = map.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry entry = (Map.Entry)iter.next();
+            
+            key = (String)entry.getKey();
+            integ = (Integer)entry.getValue();
+            System.out.println(key+" -- "+integ.intValue());
+        }
+    }
+
+    /*
+     * 通过keyset来遍历HashMap
+     * 效率低!
+     */
+    private static void iteratorHashMapByKeyset(HashMap map) {
+        if (map == null)
+            return ;
+
+        System.out.println("\niterator HashMap By keyset");
+        String key = null;
+        Integer integ = null;
+        Iterator iter = map.keySet().iterator();
+        while (iter.hasNext()) {
+            key = (String)iter.next();
+            integ = (Integer)map.get(key);
+            System.out.println(key+" -- "+integ.intValue());
+        }
+    }
+    
+
+    /*
+     * 遍历HashMap的values
+     */
+    private static void iteratorHashMapJustValues(HashMap map) {
+        if (map == null)
+            return ;
+        
+        Collection c = map.values();
+        Iterator iter= c.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+       }
+    }
+}
+</code></pre>
+<h1 id="四hashmap示例">四、HashMap示例</h1>
+<p>　　下面通过一个实例学习如何使用HashMap</p>
+<pre><code class="language-w">import java.util.Map;
+import java.util.Random;
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
+import java.util.Collection;
+
+/*
+ * @desc HashMap测试程序
+ *        
+ * @author skywang
+ */
+public class HashMapTest {
+
+    public static void main(String[] args) {
+        testHashMapAPIs();
+    }
+    
+    private static void testHashMapAPIs() {
+        // 初始化随机种子
+        Random r = new Random();
+        // 新建HashMap
+        HashMap map = new HashMap();
+        // 添加操作
+        map.put("one", r.nextInt(10));
+        map.put("two", r.nextInt(10));
+        map.put("three", r.nextInt(10));
+
+        // 打印出map
+        System.out.println("map:"+map );
+
+        // 通过Iterator遍历key-value
+        Iterator iter = map.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry entry = (Map.Entry)iter.next();
+            System.out.println("next : "+ entry.getKey() +" - "+entry.getValue());
+        }
+
+        // HashMap的键值对个数        
+        System.out.println("size:"+map.size());
+
+        // containsKey(Object key) :是否包含键key
+        System.out.println("contains key two : "+map.containsKey("two"));
+        System.out.println("contains key five : "+map.containsKey("five"));
+
+        // containsValue(Object value) :是否包含值value
+        System.out.println("contains value 0 : "+map.containsValue(new Integer(0)));
+
+        // remove(Object key) ： 删除键key对应的键值对
+        map.remove("three");
+
+        System.out.println("map:"+map );
+
+        // clear() ： 清空HashMap
+        map.clear();
+
+        // isEmpty() : HashMap是否为空
+        System.out.println((map.isEmpty()?"map is empty":"map is not empty") );
+    }
+}
+</code></pre>
+<p>　　(某一次)运行结果：</p>
+<pre><code class="language-w">map:{two=7, one=9, three=6}
+next : two - 7
+next : one - 9
+next : three - 6
+size:3
+contains key two : true
+contains key five : false
+contains value 0 : false
+map:{two=7, one=9}
+map is empty
+</code></pre>
+<h1 id="五引用">五、引用</h1>
+
+<p>　　<a href="https://www.cnblogs.com/skywang12345/p/3310835.html#a25">Java 集合系列10之 HashMap详细介绍(源码解析)和使用示例</a></p>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">java</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">hashmap</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/07/HashMap.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    
+	
+
+</body>
+</html>

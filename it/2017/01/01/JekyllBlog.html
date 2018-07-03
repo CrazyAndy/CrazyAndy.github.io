@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="使用jekyll搭建github博客" name="description">
+  
+  
+    <meta name="keywords" content="it,jekyll,github">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|使用jekyll搭建github博客
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">  
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">it</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jan 2017</span>
+                        <h1>
+                            使用jekyll搭建github博客
+                        </h1>
+                    </div>
+                    	<p>零、创建个人博客的好处</p>
+
+<p>　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。</p>
+
+<p>　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临时抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。</p>
+
+<p>　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，你的能力也就跟上来了。</p>
+
+<p>　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。</p>
+
+<p>　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!</p>
+
+<p>一、jekyll描述</p>
+
+<p>　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
+
+<p>二、jekyll环境配置</p>
+
+<p>　　1. 安装ruby环境</p>
+
+<p>　　windows安装ruby环境特别简单，新版本的ruby安装包已经自带devkit,这样省的安装单纯ruby之后再找对应版本devkit，下载网址为<a href="https://rubyinstaller.org/downloads/">https://rubyinstaller.org/downloads/</a>,选择with devkit 下载安装即可。
+　　2. 切换gem source源</p>
+
+<p>　　使用gem国外的源安装jekyll特别慢，我们需要切换源，阿里巴巴已经停止维护gem 源,推荐使用ruby china源。但是你可以访问阿里巴巴源，参照其提供的安装方式，地址为 <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
+
+<p>　　3. 安装jekyll</p>
+
+<p>　　安装jekyll前先按照依赖包bundler，下述命令即可安装
+　　<code class="highlighter-rouge">
+	gem install bundler
+　　</code>
+　　之后，直接可以通过下述命令安装jekyll
+　　<code class="highlighter-rouge">
+	gem install jekyll
+　　</code>
+　　使用 jekyll -v 查看版本，如果有版本出现则证明安装成功</p>
+
+<p>三、jekyll目录结构介绍</p>
+
+<p>　　正常的Jekyll工程包含以下几个目录：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>　　　　_posts  博客内容
+        _pages  其他需要生成的网页，如About页
+        _layouts 网页排版模板
+        _includes 被模板包含的HTML片段，可在_config.yml中修改位置
+        assets 辅助资源 css布局 js脚本 图片等
+        _data 动态数据
+        _sites  最终生成的静态网页
+</code></pre></div></div>
+
+<p>　　在项目文件夹(含有_config.yml)中运行jekyll build 指令后，jekyll会依次做如下几件事</p>
+
+<p>　　加载_layout文件夹内的所有模板，并将其中的{ % include xxxx.html % }字段(真实使用中{ 和 % 之间没有空格，这里空出一格，是因为jekyll编辑此博客的时候会认为该博客要引入xxx.html，显然我的博客代码目录中是没有xxx.html的)按照_includes文件夹内对应文件填入遍历_post文件夹及子文件夹，对所有命名符合yyyy-mm–dd-title.md 格式的博客文件放入site.posts 变量(按时间倒序)，并对其进行解析，根据Front Matter 头的内容套入layout生成对应title的博客
+遍历整个项目子目录，扫描所有含Front Matter 头的文件，放入site.pages 变量并根据permalink 字段指定的URL目标位置生成index.html</p>
+
+<p>　　在生成过程中，文件中包含的Liquid脚本<code class="highlighter-rouge"> { { content } } </code>会被解析并替换。Liquid指令 包括Object、Tag、Filter三类，其中object是变量，在解析过程中会被直接文本替换，如</p>
+
+<p>四、jekyll模板下载</p>
+
+<p>　　可以从网上搜一些jekyll模板拿来修改，没必要重新搭建，<a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a>就是一个不错的jekyll模板网站，我首页的内容就是参照了其中的一个模板。当然博客主体架构还是参照的<a href="https://github.com/jarrekk/Jalpc">https://github.com/jarrekk/Jalpc</a>，在此对他们的无私奉献做出感谢。</p>
+
+<p>五、jekyll根据模板创建个人博客</p>
+
+<p>　　其实，你可以在本地自己创建一个文件夹，直接在里面执行以下脚本即可，但是页面是一片荒凉，还是用人家现成的吧。
+		jekyll new 你的博客根目录文件夹名称</p>
+
+<p>　　在下载了模板之后，你只需要在_posts文件夹下增加一片新的后缀名为.md的文件即可，文件内容参考该模板里_posts其他文件</p>
+
+<p>六、jekyll插件</p>
+
+<p>　　jekyll中文官网是<a href="https://www.jekyll.com.cn/">https://www.jekyll.com.cn/</a>，里面有jekyll使用文档，可以随时查看。</p>
+
+<p>　　jekyll支持分页，需要使用gem安装jekyll-paginate插件，具体命令如下</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	gem install jekyll-paginate
+</code></pre></div></div>
+
+<p>七、使用markdown编写博客</p>
+
+<p>　　我们需要使用markdown编写后缀名为.md的文件，并把文件放入到_post文件夹下某一级目录下。markdown使用的是liquid语法，它能被jekyll编译成静态html，关于语法细则请自行百度。markdown软件我推荐使用haroopad，而不是使用markdown pad。haroopad相比来说更好用一点。</p>
+
+<p>八、上传jekyll到github博客</p>
+
+<p>　　我们根据模板修改成自己满意的网页的时候，便可将_site下的文件上传到github上去，github在此操作之前需要创建自己的github pages 仓库，具体方法可自行百度。这里不再赘述。</p>
+
+<p>九、引用</p>
+
+<p>　　<a href="https://blog.csdn.net/a724888/article/details/79183874">jekyll博客搭建之艰辛之路</a></p>
+
+<p>　　<a href="https://blog.csdn.net/HopefulLight/article/details/78366374">Jekyll目录结构和运行机理</a></p>
+
+<p>　　<a href="https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;fps=1">Jekyll搭建个人博客 韩俊强的博客</a></p>
+
+<p>　　<a href="http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll">基于Jekyll的GitHub建站指南</a></p>
+
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">it</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">jekyll</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">github</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/it/2017/01/01/JekyllBlog.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    
+	
+
+</body>
+</html>

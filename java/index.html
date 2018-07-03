@@ -240,17 +240,17 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/java/2018/06/03/CAS.html" class="btn-link">
-                                <h2>单点登陆CAS了解一下(三)问题解决</h2>
+                            <a href="/java/2018/01/07/HashMap.html" class="btn-link">
+                                <h2>HashMap过来看看(四)hashmap其他</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Jun 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Jan 2018</span>
                             </div>
                             <p>
-                                一、maven依赖
-实际开发中我用的是一个人在github开源的第三方jar包
-	&lt;dependency&gt;
-			&lt;groupId&gt;net.unicon.cas&lt;/...
+                                一、HashMap实现的Cloneable接口
+　　HashMap实现了Cloneable接口，即实现了clone()方法。
+
+　　clone()方法的作用很简单，就是克隆一个HashMap对象...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -258,7 +258,7 @@ $(function(){
                                     
                                     <button class="btn btn-white btn-xs">java</button>
                                     
-                                    <button class="btn btn-white btn-xs">cas</button>
+                                    <button class="btn btn-white btn-xs">hashmap</button>
                                     
                                     <button class="btn btn-white btn-xs">blog</button>
                                     
@@ -269,7 +269,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/06/03/CAS.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/07/HashMap.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -285,23 +285,20 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/java/2018/06/02/CAS.html" class="btn-link">
-                                <h2>单点登陆CAS了解一下(二)cas流程图分析</h2>
+                            <a href="/java/2018/01/06/HashMap.html" class="btn-link">
+                                <h2>HashMap过来看看(三)hashmap“拉链法”相关内容</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jun 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2018</span>
                             </div>
                             <p>
-                                一、CAS协议
+                                一、HashMap数据存储数组
 
-###（一）基础协议
+transient Entry[] table;
 
-
-
-图1 基础模式
-
-1. CAS Client以Filter的形式保护Web应用的受保护资源，过滤从客户端过来的每一个请求（Step 1）。
-2. C...
+　　HashMap中的key-value都是存储在Entry数组中的。
+二、数据节点Entry的数据结构
+s...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -309,7 +306,7 @@ $(function(){
                                     
                                     <button class="btn btn-white btn-xs">java</button>
                                     
-                                    <button class="btn btn-white btn-xs">cas</button>
+                                    <button class="btn btn-white btn-xs">hashmap</button>
                                     
                                     <button class="btn btn-white btn-xs">blog</button>
                                     
@@ -320,7 +317,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/06/02/CAS.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/06/HashMap.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -336,15 +333,21 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/java/2018/06/01/CAS.html" class="btn-link">
-                                <h2>单点登陆CAS了解一下(一)cas原理简介</h2>
+                            <a href="/java/2018/01/05/HashMap.html" class="btn-link">
+                                <h2>HashMap过来看看(二)hashmap简介</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jun 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Jan 2018</span>
                             </div>
                             <p>
-                                一、SSO简介
-　　单点登录（Single Sign On），简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任...
+                                一、FAQ
+1. 为什么要有HashMap？
+
+答：我非常期待能在Java 中使用Hash表 这种数据结构 ，因为它的快速存取特性。
+
+2. Hash表 和HashMap的关系？
+
+答：Hash...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -352,7 +355,7 @@ $(function(){
                                     
                                     <button class="btn btn-white btn-xs">java</button>
                                     
-                                    <button class="btn btn-white btn-xs">cas</button>
+                                    <button class="btn btn-white btn-xs">hashmap</button>
                                     
                                     <button class="btn btn-white btn-xs">blog</button>
                                     
@@ -363,7 +366,50 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/06/01/CAS.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/05/HashMap.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/java/2018/01/04/HashMap.html" class="btn-link">
+                                <h2>HashMap过来看看(一)哈希表</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Jan 2018</span>
+                            </div>
+                            <p>
+                                一、概述
+　　我们使用的redis中有一种数据类型是hash数据类型，它就是键值对集合，因为它独有的特点特别适合用户存储对象，所以是redis存储数据的主要方式。我们在研究java中的hashm...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">java</button>
+                                    
+                                    <button class="btn btn-white btn-xs">hashmap</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/04/HashMap.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -501,6 +547,145 @@ $(function(){
                                             
                                             
                                             <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/01/OAuth2.0.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/java/2017/10/03/CAS.html" class="btn-link">
+                                <h2>单点登陆CAS了解一下(三)问题解决</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Oct 2017</span>
+                            </div>
+                            <p>
+                                一、maven依赖
+实际开发中我用的是一个人在github开源的第三方jar包
+	&lt;dependency&gt;
+			&lt;groupId&gt;net.unicon.cas&lt;/...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">java</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cas</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2017/10/03/CAS.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/java/2017/10/02/CAS.html" class="btn-link">
+                                <h2>单点登陆CAS了解一下(二)cas流程图分析</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Oct 2017</span>
+                            </div>
+                            <p>
+                                一、CAS协议
+
+###（一）基础协议
+
+
+
+图1 基础模式
+
+1. CAS Client以Filter的形式保护Web应用的受保护资源，过滤从客户端过来的每一个请求（Step 1）。
+2. C...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">java</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cas</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2017/10/02/CAS.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/java/2017/10/01/CAS.html" class="btn-link">
+                                <h2>单点登陆CAS了解一下(一)cas原理简介</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2017</span>
+                            </div>
+                            <p>
+                                一、SSO简介
+　　单点登录（Single Sign On），简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">java</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cas</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2017/10/01/CAS.html">0</span> comments
                                             
                                         </div>
                                     </div>

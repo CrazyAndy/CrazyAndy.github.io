@@ -7,16 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="使用jekyll搭建github博客" name="description">
+    <meta content="HashMap过来看看(一)hashmap简介" name="description">
   
   
-    <meta name="keywords" content="it,jekyll,github">
+    <meta name="keywords" content="java,web,hashmap">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|使用jekyll搭建github博客
+        CrazyAndy|HashMap过来看看(二)hashmap简介
     
   </title>
   <!-- favicon -->
@@ -137,7 +137,7 @@
                     
                         
                             
-                                <li>
+                                <li class="active">
                             
                             <a class="tagname" href="/java/">JAVA</a></li>
                         
@@ -193,7 +193,7 @@
                     
                         
                             
-                                <li class="active">  
+                                <li>
                             
                             <a class="tagname" href="/it/">IT</a></li>
                         
@@ -218,108 +218,116 @@
                 <div class="ibox-content">
                     <div class="pull-right">
                     	
-                        	<button class="btn btn-white btn-xs" type="button">it</button>
+                        	<button class="btn btn-white btn-xs" type="button">java</button>
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 24 May 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Jan 2018</span>
                         <h1>
-                            使用jekyll搭建github博客
+                            HashMap过来看看(二)hashmap简介
                         </h1>
                     </div>
-                    	<p>零、创建个人博客的好处</p>
+                    	<h1 id="一faq">一、FAQ</h1>
+<h4 id="1-为什么要有hashmap">1. 为什么要有HashMap？</h4>
 
-<p>　　当程序猿就是一个入坑，爬坑，再入坑的过程，循环往复，无休无止。毫不谦虚的说，我们程序猿就是战士。</p>
+<p>答：我非常期待能在Java 中使用Hash表 这种数据结构 ，因为它的快速存取特性。</p>
 
-<p>　　写程序写了这几年，也看了一些书，看了别人一些代码，和他人讨论过软件设计，当然，也经历过几次面试，大言不惭的说，失败的居多。可是心凉之后，我们要想想，为什么我们的输出并不像我们平时自认为的那样，人家问你你都含含糊糊，虽然可能用过，却又不能说出个123来。为什么呢？我觉得就是基本功不扎实，用功要在一朝一夕，切不可急于求成，临时抱佛脚，你即便应付得了笔试题，却会在老师傅面前分分钟被打回原形。</p>
+<h4 id="2-hash表-和hashmap的关系">2. Hash表 和HashMap的关系？</h4>
 
-<p>　　至少我很多次在学习新技术的时候发现，看一本书很容易，一周的业余时间就能翻完，可是如果你将书中的只是应用于时间，那你这本书却要在之后的时间里翻个很多遍。写博客介绍该技术也是，你需要对这门技术各个方面都要有个比较清晰的认知，才能写的出来，也就是才会有好的“输出”。而当你产生好的输出的时候，你的能力也就跟上来了。</p>
+<p>答：Hash表 是一种逻辑数据结构，HashMap是Java中的一种数据类型，它通过代码实现了Hash表 这种数据结构，并利用此结构实现了Map的功能。去除value部分只看key部分就是一个Hash表 了。</p>
 
-<p>　　再进一步，则可联想到我们在公司每每做的技术分享沙龙，这个对自己学习能力，语言组织能力，应对能力等等都会有所提升，而且还能得到同事的尊重，领导的赏识。</p>
+<h4 id="3-这一章节我们要干嘛">3. 这一章节我们要干嘛？</h4>
 
-<p>　　好多技术书籍的作者都是在某一技术领域写心得写多了，然后改吧改吧就编册成书了，这是真哒!</p>
+<p>答：首先要明白我们是在干嘛？我们是在分析一个叫做哈希表的数据结构吗？</p>
 
-<p>一、jekyll描述</p>
+<p>不是的！我们是在讨论Java 这个高级程序设计语言中一个数据类型Map的实现HashMap，它利用了哈希表这个数据结构但它不是哈希表本身，它就是它自己 - HashMap类型。所以，我们再看一次HashMap父接口Map的JavaDoc描述： “An object that maps keys to values. ”，即“Map是一个键值对对象”。</p>
 
-<p>　　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
+<h4 id="4-java中的数据类型">4. Java中的数据类型</h4>
 
-<p>二、jekyll环境配置</p>
+<p>答：有些话不明白的说出来，其实容易让人想不明白。所以我想说：</p>
 
-<p>　　1. 安装ruby环境</p>
+<ol>
+  <li>实际上，编程语言中数据类型都是层层封装的结果。</li>
+  <li>实际上，Java 中只有3类数据类型：原生类型（primitive8个）、数组、Object。</li>
+  <li>实际上，无论官方的集合框架也好，你自己创建的类也好，都只能是源自于Object并依赖于原有的这3类数据类型；</li>
+  <li>最终，到现在你可能才会发现，“数组”这种类型竟是如此的重要，在Java 中，如果没有数组作为基础结构，你是不可能构造出任何想实现某种数据结构的Object类型的。</li>
+</ol>
 
-<p>　　windows安装ruby环境特别简单，新版本的ruby安装包已经自带devkit,这样省的安装单纯ruby之后再找对应版本devkit，下载网址为<a href="https://rubyinstaller.org/downloads/">https://rubyinstaller.org/downloads/</a>,选择with devkit 下载安装即可。
-　　2. 切换gem source源</p>
+<h1 id="二上帝视角的hashmap">二、上帝视角的hashmap</h1>
 
-<p>　　使用gem国外的源安装jekyll特别慢，我们需要切换源，阿里巴巴已经停止维护gem 源,推荐使用ruby china源。但是你可以访问阿里巴巴源，参照其提供的安装方式，地址为 <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
+<pre><code class="language-w">1. HashMap是基于数组来实现哈希表的，数组就好比内存储空间，数组的index就好比内存的地址。
 
-<p>　　3. 安装jekyll</p>
+2. HashMap中的每个记录就是数组中存储的一个Entry&lt;K, V&gt;对象(链)。
 
-<p>　　安装jekyll前先按照依赖包bundler，下述命令即可安装
-　　<code class="highlighter-rouge">
-	gem install bundler
-　　</code>
-　　之后，直接可以通过下述命令安装jekyll
-　　<code class="highlighter-rouge">
-	gem install jekyll
-　　</code>
-　　使用 jekyll -v 查看版本，如果有版本出现则证明安装成功</p>
+3. HashMap的哈希函数为 f(key) = key.hashCode() &amp; (table.length - 1);，这里简化了hashCode的优化部分，后面会继续说。
 
-<p>三、jekyll目录结构介绍</p>
+4. HashMap冲突方法是：链地址法，即每个数组位置上(称为bucket)存放的实际上都是一个Entry链而不是单个对象。这表现在Entry对象都有一个属性next来指向链表的下一个Entry。
 
-<p>　　正常的Jekyll工程包含以下几个目录：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>　　　　_posts  博客内容
-        _pages  其他需要生成的网页，如About页
-        _layouts 网页排版模板
-        _includes 被模板包含的HTML片段，可在_config.yml中修改位置
-        assets 辅助资源 css布局 js脚本 图片等
-        _data 动态数据
-        _sites  最终生成的静态网页
-</code></pre></div></div>
+5. HashMap的装填因子：默认为0.75。
 
-<p>　　在项目文件夹(含有_config.yml)中运行jekyll build 指令后，jekyll会依次做如下几件事</p>
+6. HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。
 
-<p>　　加载_layout文件夹内的所有模板，并将其中的{ % include xxxx.html % }字段(真实使用中{ 和 % 之间没有空格，这里空出一格，是因为jekyll编辑此博客的时候会认为该博客要引入xxx.html，显然我的博客代码目录中是没有xxx.html的)按照_includes文件夹内对应文件填入遍历_post文件夹及子文件夹，对所有命名符合yyyy-mm–dd-title.md 格式的博客文件放入site.posts 变量(按时间倒序)，并对其进行解析，根据Front Matter 头的内容套入layout生成对应title的博客
-遍历整个项目子目录，扫描所有含Front Matter 头的文件，放入site.pages 变量并根据permalink 字段指定的URL目标位置生成index.html</p>
+7. HashMap 的实现不是同步的，这意味着它不是线程安全的。它的key、value都可以为null。此外，HashMap中的映射不是有序的。
+</code></pre>
 
-<p>　　在生成过程中，文件中包含的Liquid脚本<code class="highlighter-rouge"> { { content } } </code>会被解析并替换。Liquid指令 包括Object、Tag、Filter三类，其中object是变量，在解析过程中会被直接文本替换，如</p>
+<h1 id="三hashmap构造器和api">三、hashmap构造器和api</h1>
+<p>　　HashMap共有4个构造函数,如下：</p>
+<pre><code class="language-w">// 默认构造函数。
+HashMap()
 
-<p>四、jekyll模板下载</p>
+// 指定“容量大小”的构造函数
+HashMap(int capacity)
 
-<p>　　可以从网上搜一些jekyll模板拿来修改，没必要重新搭建，<a href="http://jekyllthemes.org/">http://jekyllthemes.org/</a>就是一个不错的jekyll模板网站，我首页的内容就是参照了其中的一个模板。当然博客主体架构还是参照的<a href="https://github.com/jarrekk/Jalpc">https://github.com/jarrekk/Jalpc</a>，在此对他们的无私奉献做出感谢。</p>
+// 指定“容量大小”和“加载因子”的构造函数
+HashMap(int capacity, float loadFactor)
 
-<p>五、jekyll根据模板创建个人博客</p>
+// 包含“子Map”的构造函数
+HashMap(Map&lt;? extends K, ? extends V&gt; map)
+</code></pre>
+<p>　　HashMap的API</p>
+<pre><code class="language-w">void                 clear()
+Object               clone()
+boolean              containsKey(Object key)
+boolean              containsValue(Object value)
+Set&lt;Entry&lt;K, V&gt;&gt;     entrySet()
+V                    get(Object key)
+boolean              isEmpty()
+Set&lt;K&gt;               keySet()
+V                    put(K key, V value)
+void                 putAll(Map&lt;? extends K, ? extends V&gt; map)
+V                    remove(Object key)
+int                  size()
+Collection&lt;V&gt;        values()
+</code></pre>
+<h1 id="三hashmap的数据结构">三、hashmap的数据结构</h1>
+<p>　　HashMap的继承关系</p>
+<pre><code class="language-w">java.lang.Object
+   ↳     java.util.AbstractMap&lt;K, V&gt;
+         ↳     java.util.HashMap&lt;K, V&gt;
 
-<p>　　其实，你可以在本地自己创建一个文件夹，直接在里面执行以下脚本即可，但是页面是一片荒凉，还是用人家现成的吧。
-		jekyll new 你的博客根目录文件夹名称</p>
+public class HashMap&lt;K,V&gt;
+    extends AbstractMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Cloneable, Serializable { }
+</code></pre>
+<p>　　HashMap与Map关系如下图：
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap008.png) --></p>
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap008.png" width="60%" /></center>
+<p>　　从图中可以看出：</p>
 
-<p>　　在下载了模板之后，你只需要在_posts文件夹下增加一片新的后缀名为.md的文件即可，文件内容参考该模板里_posts其他文件</p>
+<p>　　(01) HashMap继承于AbstractMap类，实现了Map接口。Map是”key-value键值对”接口，AbstractMap实现了”键值对”的通用函数接口。</p>
 
-<p>六、jekyll插件</p>
+<p>　　(02) HashMap是通过”拉链法”实现的哈希表。它包括几个重要的成员变量：table, size, threshold, loadFactor, modCount。</p>
+<pre><code class="language-w">table是一个Entry[]数组类型，而Entry实际上就是一个单向链表。哈希表的"key-value键值对"都是存储在    Entry数组中的。 
+size是HashMap的大小，它是HashMap保存的键值对的数量。 
+threshold是HashMap的阈值，用于判断是否需要调整HashMap的容量。threshold的值="容量*加载因子"，当HashMap中存储数据的数量达到threshold时，就需要将HashMap的容量加倍。
+loadFactor就是加载因子。 
+modCount是用来实现fail-fast机制的。
+</code></pre>
+<h1 id="四引用">四、引用</h1>
 
-<p>　　jekyll中文官网是<a href="https://www.jekyll.com.cn/">https://www.jekyll.com.cn/</a>，里面有jekyll使用文档，可以随时查看。</p>
+<p>　　<a href="https://www.cnblogs.com/skywang12345/p/3310835.html#a25">Java 集合系列10之 HashMap详细介绍(源码解析)和使用示例</a></p>
 
-<p>　　jekyll支持分页，需要使用gem安装jekyll-paginate插件，具体命令如下</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	gem install jekyll-paginate
-</code></pre></div></div>
-
-<p>七、使用markdown编写博客</p>
-
-<p>　　我们需要使用markdown编写后缀名为.md的文件，并把文件放入到_post文件夹下某一级目录下。markdown使用的是liquid语法，它能被jekyll编译成静态html，关于语法细则请自行百度。markdown软件我推荐使用haroopad，而不是使用markdown pad。haroopad相比来说更好用一点。</p>
-
-<p>八、上传jekyll到github博客</p>
-
-<p>　　我们根据模板修改成自己满意的网页的时候，便可将_site下的文件上传到github上去，github在此操作之前需要创建自己的github pages 仓库，具体方法可自行百度。这里不再赘述。</p>
-
-<p>九、引用</p>
-
-<p>　　<a href="https://blog.csdn.net/a724888/article/details/79183874">jekyll博客搭建之艰辛之路</a></p>
-
-<p>　　<a href="https://blog.csdn.net/HopefulLight/article/details/78366374">Jekyll目录结构和运行机理</a></p>
-
-<p>　　<a href="https://blog.csdn.net/qq_31810357/article/details/65441258?locationNum=6&amp;fps=1">Jekyll搭建个人博客 韩俊强的博客</a></p>
-
-<p>　　<a href="http://qianjiye.de/2012/07/host-your-pages-at-github-using-jekyll">基于Jekyll的GitHub建站指南</a></p>
+<p>　　<a href="https://blog.csdn.net/u010297957/article/details/51974340">哈希表、Java中HashMap</a></p>
 
 
                     <hr>
@@ -327,11 +335,9 @@
                         <div class="col-md-6">
                                 <h5 style="display: inline;">Tags:</h5>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">it</button>
+                                    <button class="btn btn-white btn-xs" type="button">java</button>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">jekyll</button>
-                                
-                                    <button class="btn btn-white btn-xs" type="button">github</button>
+                                    <button class="btn btn-white btn-xs" type="button">hashmap</button>
                                 
                                     <button class="btn btn-white btn-xs" type="button">blog</button>
                                 
@@ -342,7 +348,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/it/2018/05/24/JekyllBlog.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/01/05/HashMap.html">0</span> comments
                                 
                                 </div>
                             </div>

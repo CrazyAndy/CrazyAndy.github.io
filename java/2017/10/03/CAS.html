@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="单点登陆CAS了解一下(二)" name="description">
+    <meta content="单点登陆CAS了解一下(三)" name="description">
   
   
     <meta name="keywords" content="java,web,cas">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|单点登陆CAS了解一下(二)cas流程图分析
+        CrazyAndy|单点登陆CAS了解一下(三)问题解决
     
   </title>
   <!-- favicon -->
@@ -222,93 +222,23 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jun 2018</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Oct 2017</span>
                         <h1>
-                            单点登陆CAS了解一下(二)cas流程图分析
+                            单点登陆CAS了解一下(三)问题解决
                         </h1>
                     </div>
-                    	<h1 id="一cas协议">一、CAS协议</h1>
+                    	<h1 id="一maven依赖">一、maven依赖</h1>
+<p>实际开发中我用的是一个人在github开源的第三方jar包</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+			<span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">net</span><span class="o">.</span><span class="na">unicon</span><span class="o">.</span><span class="na">cas</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+			<span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">cas</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">autoconfig</span><span class="o">-</span><span class="n">support</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+			<span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">GA</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
+		<span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<h1 id="二不能跳转到cas-server认证页面">二、不能跳转到cas server认证页面</h1>
 
-<p>###（一）基础协议
-<!-- ![edit](/static/assets/img/blog/java/cas/cas013.jpg) --></p>
-<center><img src="/static/assets/img/blog/java/cas/cas013.jpg" width="75%" /></center>
-
-<center>图1 基础模式</center>
-
-<h4 id="1-cas-client以filter的形式保护web应用的受保护资源过滤从客户端过来的每一个请求step-1">1. CAS Client以Filter的形式保护Web应用的受保护资源，过滤从客户端过来的每一个请求（Step 1）。</h4>
-<h4 id="2-cas-client分析http请求中是否包含service-ticket如果没有则重定向到cas-serverstep-2">2. CAS Client分析HTTP请求中是否包含Service Ticket，如果没有则重定向到CAS Server（Step 2）。</h4>
-<h4 id="3-用户认证过程如果用户提供了正确的credentialscas-server会产生随机的ticket然后缓存该ticketstep3并生成tgcticket-grant-cookie给user浏览器">3. 用户认证过程，如果用户提供了正确的Credentials，CAS Server会产生随机的Ticket，然后缓存该Ticket（Step3），并生成TGC（Ticket Grant Cookie）给User浏览器。</h4>
-<h4 id="4-并重定向用户到cas-client并携带刚才产生的ticketstep4">4. 并重定向用户到CAS Client并携带刚才产生的Ticket（Step4）。</h4>
-<h4 id="5-cas-client与cas-server通过ticket完成身份认真step4和step5">5. CAS Client与CAS Server通过Ticket完成身份认真（Step4和Step5）。</h4>
-<h4 id="6-验证成功后cas-client对当前request用户进行服务">6. 验证成功后，CAS Client对当前Request用户进行服务。</h4>
-<h4 id="7-用户再次访问时携带tgccas-server会判断该cookie的有效性并决定是否再次验证">7. 用户再次访问时携带TGC，CAS Server会判断该Cookie的有效性并决定是否再次验证。</h4>
-<h3 id="二cas代理模式">（二）CAS代理模式</h3>
-<p>　　基础协议已经能够满足绝大多数的场景，但是对于通过service1访问service2这种场景就无能为力了，如果我们对service2也进行验证，从用户角度来说，将会看到频繁的重定向，因此引入了Proxy（代理）模式，由CAS Client代理用户去访问其他Web应用。</p>
-
-<p>　　代理的前提是需要CAS Client拥有身份信息（类似凭据），用户持有的TGC（Ticket Granted Cookie），而代理持有的是PGT（Proxy Granted Ticket），凭借TGC用户可以免登陆获取其他应用的Service Ticket，同样的，通过PGT，Web应用可以代理用户实现后端认真而无需前端的用户参与。</p>
-
-<p>　　如何获取PGT？</p>
-
-<p>　　如下图示，CAS Client在基础协议之上，提供了一个额外的PGT URL给CAS Server，CAS Server通过该接口提供PGT给CAS Client。
-<!-- ![edit](/static/assets/img/blog/java/cas/cas014.jpg) --></p>
-<center><img src="/static/assets/img/blog/java/cas/cas014.jpg" width="75%" /></center>
-<center>图2 Proxy模式</center>
-
-<p>　　与基础协议不同，在Proxy模式中起作用的是PT（Proxy Ticket），基础模式使用的是ST（Service Ticket）。</p>
-
-<!-- ![edit](/static/assets/img/blog/java/cas/cas015.jpg) -->
-<center><img src="/static/assets/img/blog/java/cas/cas015.jpg" width="75%" /></center>
-<center>图3 代理模式的访问模式</center>
-
-<p>　　当helloservice需要helloservice2的数据时，helloservice首先使用自己保存的PGT向CAS Server获取PT。</p>
-
-<p>　　当获取到PT之后，helloservice携带该PT向helloservice2请求数据。</p>
-
-<p>　　Helloservice2使用该PT向CAS Server验证请求，CAS Server返回验证结果。</p>
-
-<p>　　Helloservice2此时知道可以合法的为Helloservice服务，从而返回数据。</p>
-
-<h3 id="三cas浏览器请求认证序列图">（三）CAS浏览器请求认证序列图</h3>
-<!-- ![edit](/static/assets/img/blog/java/cas/cas016.jpg) -->
-<center><img src="/static/assets/img/blog/java/cas/cas016.jpg" width="100%" /></center>
-<p>其中：</p>
-<ul>
-  <li>ST：Service Ticket，用于客户端应用持有，每个ST对应一个用户在一个客户端上</li>
-  <li>TGT：Ticket Granting Ticket，存储在CAS服务器端和用户cookie两个地方
-    <h3 id="四cas服务器端登陆流程图">（四）CAS服务器端登陆流程图</h3>
-    <!-- ![edit](/static/assets/img/blog/java/cas/cas017.jpg) -->
-  </li>
-</ul>
-<center><img src="/static/assets/img/blog/java/cas/cas017.jpg" width="100%" /></center>
-<p>下面的HTTP请求的参数可通过/login，这时它作为凭证索取者。他们都是区分大小写的，他们都必须处理/login。</p>
-
-<p>·         service[可选] -客户端尝试访问的应用的标识符。在几乎所有情况下，这将是应用的URL。请注意，作为一个HTTP请求的参数，此URL的值必须是符合RFC 中URL编码的描述。（详情参见RFC 1738 [ 4 ]的第2.2节）。如果没有指定service并且单点登录session尚不存在，CAS应要求具有凭证的用户发起一个单点登录session。如果没有指定service但单点登录session已经存在，CAS应显示一条消息，通知客户，这是已经登录</p>
-
-<p>·         Renew[可选] -如果此参数设置，单点登录将被绕过。在这种情况下，CAS将要求客户提交证书，不论是否存在一个CAS的单点登录session。这个参数与“gateway”参数不兼容。服务重定向到/login的URI和登录表单视图，张贴在/login的URI中的值不应同时出现在“renew”和“gateway”请求参数。两个参数都设置这种行为是未定义的。CAS推荐：在实施时，如果设置“renew”参数则忽略“gateway”参数。推荐：当设置“renew”参数时，其值应该为“true”。</p>
-
-<p>注：也就是说：https://server/cas/login?service=serviceUrl&amp;renew=true&amp;gateway=true这种参数传递是错误的，不能同时出现两个参数。</p>
-
-<p>注：CAS协议允许客户端选择是否跳出单点登录，这就是renew。它允许一个客户端通知CAS服务器总是验证一个用户，不管一个单点登录的session是否存在。这是一个非常有用的属性，当一个特定的使用CAS认证机制的服务允许访问敏感资料时，它能强迫CAS重新认证一个用户，确保登录的是一个正确的用户。这时，那个应经存在的单点登录session应该是被终止的。使用这个属性通知CAS重新验证凭证时，客户端应用应该中定向用户到以下的URL上：</p>
-
-<p>https://server/cas/login?service=serviceUrl&amp;renew=true</p>
-
-<p>当请求验证这个票据时，客户端可以要求CAS确保这个票据是来自一个新的认证请求。</p>
-
-<p>应用场景可参见：部署的客户端集成示例bookshop，改变该参数值，体验效果。</p>
-
-<p>·         Gateway[可选] -如果这个参数设定，CAS将不会向客户端索要凭据。如果客户端有一个已存在的CAS单点登录的session，或者如果单点登录session可以通过非交互方式（i.e. trust authentication，信托认证）建立，CAS可以将客户端请求重定向到“service”参数指定的URL，而且还加上有效的服务票据（Service Ticket，ST）。 （CAS还可以插入一个通知页面，通知客户端一个CAS认证已经发生了。）</p>
-
-<p>如果客户端没有CAS单点登录的session，并且也不可能通过非交互方式建立认证，CAS必须将客户端重定向到“service”参数指定的URL，并且不在URL后面附加“ticket”。如果“service”参数未指定但设置了“gateway”参数，CAS将认为这种行为未定义。在这种情况下推荐：如果两个参数都没有指定，CAS应要求凭据。同样这个参数与“renew”参数不兼容。如果要设置“gateway”参数，推荐设置为“true”。</p>
-
-<p>注：</p>
-
-<p>应用场景可参见：部署的客户端集成示例bookshop，改变该参数值，体验效果。</p>
-
-<p>总结：“renew”参数的作用：在存在SSO session的情况下client请求访问资源，是重新认证用户信息还是不用认证放这个请求过去。</p>
-
-<p>“gateway”参数的作用：与“renew”参数相反，“gateway=true”时是指只要存在SSO session就不用重新认证了。</p>
-
-<p>Renew始终要求用户进行主认证，所谓主认证就是借助于/login进行的认证操作，此时IE用户必须手工提供自身的帐号信息。基于TGC、PT的登录都不属于主认证。相比之下，gateway始终不会允许CAS服务器丢出/login登录页面给IE用户，从而不可能进行主认证。只要gateway=true则永远进不到/login登录页面，只有确认用户能从其他途径得到SSO session才可以设置true。</p>
+<p>如果你访问 具体cas client应用的的某个接口，但是又没有传票据过去，按理说应该跳转到cas server认证登陆页面，但是你请求接口的时候，如果不先通过浏览器请求 应用下的某个页面，它是不会跳转的。
+原因也很简单，是因为，只有在请求页面的时候，你的request header里面塞入的mime类型是text/html，或application/xhtml+xml，你的cas client端应用在没有票据的话才会跳转到cas登陆页面。</p>
 
 <h1 id="二引用">二、引用</h1>
 
@@ -337,7 +267,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2018/06/02/CAS.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2017/10/03/CAS.html">0</span> comments
                                 
                                 </div>
                             </div>
