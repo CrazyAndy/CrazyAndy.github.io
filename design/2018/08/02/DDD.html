@@ -227,24 +227,116 @@
                             领域驱动设计概览篇---002---我眼中的领域驱动设计
                         </h1>
                     </div>
-                    	<h1 id="一正文">一、正文</h1>
-<p>　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容。</p>
+                    	<h1 id="一为什么要使用领域驱动设计">一、为什么要使用领域驱动设计</h1>
+<p>　　从Eric Evans的《领域驱动设计：软件核心复杂性应对之道》一书的书名就可以看出这一方法论是为了解决软件核心复杂性的。也就是说软件业务越来越复杂了，领域驱动设计可以让事情变得简单。而实际情况是：领域驱动设计的门槛很高，没有很深厚的面向对象编码能力几乎不可能实践成功。</p>
 
-<p>　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？</p>
+<p>　　这一说法是否自相矛盾呢？Martin Fowler在PoEAA一书中给了一个有力的解释：
+  　　<!-- ![edit](/static/assets/img/blog/design/ddd/ddd001.png) -->
+	<center><img src="/static/assets/img/blog/design/ddd/ddd001.png" width="75%" /></center></p>
 
-<p>　　可是结果如何呢，我们往往会出现老师告诉我们1+2=3，我们却不知道 应用 交换律 得出2+1 = 3，等到老师告诉我们2+1的确等于3，哦，我们才恍然大悟，2+1真的也可以等于3啊。多么滑稽的事情啊 !</p>
+<p>　　我们把三层架构等除了领域驱动之外的架构方式都可以归纳为以数据为中心的架构方式，在图中是黑色的粗实线；领域驱动设计在图中是绿色的粗实线：</p>
+<ol>
+  <li>当软件在开发初期，以数据驱动的架构方式非常容易上手，但是随着业务的增长和项目的推进，软件开发和维护难度急剧升高。</li>
+  <li>领域驱动设计则在项目初期就处在一个比较难以上手的位置，但是随着业务的增长和项目的推进，软件开发和维护难度平滑上升。</li>
+</ol>
 
-<p>　　不止高中以下的应试教育是这样，连大学所谓的素质教育也是这样，笔者记得清楚的一次是，读研究生时为了通过数学考试去从网上找找 线性代数的教学视频来看，当时找的是美国麻省理工学院的Gilbert Strang教授讲的线代视频，有兴趣的可以去网易公开课看看，当你看完前三集，兴许你就会和我一样有着同样的感悟，为什么和我们原来听过的线性代数课程有那么大的不一样，为什么我会越听越想听Gilbert Strang讲的课程，兴许我还会考虑学学他其他的教学视频，兴许我突然间打开了一扇大门，我可以以后多找些外国人的教学视频来看。那么，为什么会这样呢？</p>
+<p>　　这幅图形象的解释了领域驱动设计和传统的软件架构模式两者在软件开发过程中解决复杂性之间的差异。</p>
+<h1 id="二领域驱动设计的核心是什么">二、领域驱动设计的核心是什么？</h1>
+<p>　　顾名思义，领域驱动设计的核心是领域模型，这一方法论可以通俗的理解为先找到业务中的领域模型，以领域模型为中心驱动项目的开发。而领域模型的设计精髓在于面向对象分析，在于对事物的抽象能力，一个领域驱动架构师必然是一个面向对象分析的大师。</p>
 
-<p>　　笔者认为，出现上溯问题的根源在于，中国人喜欢从上往下向学生灌输知识和思想，而外国人喜欢从下往上引导，辅助学习者塑造自己的思想。被动接受pk主动获取，必然后者完胜。而且，很无奈的是，从上往下教条式的教书理论上讲没有任何毛病，但是似乎冥冥之中感觉到这却让为师者省了很大一部分力气，为师者只要照本宣科的把知识点讲完，然后再让学生做海量的习题即可，老师省事啊，反正作业又不是他写，习题又不是他算，他只要动动嘴唇，便可将本该属于自己分内责任，教书育人的事情，甩了大部分出去。我们经常从网上看到中国小学生作业多的不行，连家长都看不过去，屡屡曝光家长群里老师布置作业的聊天记录，感觉现在的老师们真的做的有些过分！当然，受限于应试教育的弊病，谁分高谁能进好中学，好高中，好大学的现实，当老师的也是无奈，黔驴技穷了，只能苦了孩子。</p>
+<p>　　在面向对象编程中讲究封装，讲究设计低耦合，高内聚的类。而对于一个软件工程来讲，仅仅只靠类的设计是不够的，我们需要把紧密联系在一起的业务设计为一个领域模型，让领域模型内部隐藏一些细节，这样一来领域模型和领域模型之间的关系就会变得简单。这一思想有效的降低了复杂的业务之间千丝万缕的耦合关系。</p>
 
-<p>　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。</p>
+<p>　　下图为“以数据为中心的架构模式”，表和表之间关系错综复杂：
+  　　<!-- ![edit](/static/assets/img/blog/design/ddd/ddd002.png) -->
+	<center><img src="/static/assets/img/blog/design/ddd/ddd002.png" width="75%" /></center>
+　　下图是“领域模型”：领域和领域之间只存在大粒度的接口和交互：
+  　　<!-- ![edit](/static/assets/img/blog/design/ddd/ddd003.png) -->
+	<center><img src="/static/assets/img/blog/design/ddd/ddd003.png" width="75%" /></center></p>
 
-<p>　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。</p>
+<p>　　初期学习DDD的朋友一定不会错过Eric Evans写的《领域驱动设计：软件核心复杂性应对之道》，这本书名气很大，也是很多人入门领域驱动设计的首选读物，这本书提到了领域驱动设计中的一些概念：Repository，Domain，ValueObject等。但是初学者有可能得出一个错误的结论：有人误认为项目架构中加入<strong><em>Repository，</em></strong>Domain，***ValueObject就变成了DDD架构。如果没有悟出其精髓就在项目中加入这些概念，那充其量也不过是个三层架构；反之对于一个面向对象分析的高手而言，不使用这些概念也可以实现领域驱动设计。</p>
 
-<p>　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^</p>
+<p>　　以IUserRepository这样一个接口定义为例：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IUserRepository</span> <span class="o">:</span> <span class="n">IRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+<span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+    <span class="c1">//....</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<h1 id="二引用">二、引用</h1>
+<p>　　一个IUserRepository是一个Repository，他只能以User聚合根为单位进行操作。方法List<Rule> GetRules(int id)将此Repository打回了原形，这不再是一个Repository，这是一个DAL。</Rule></p>
+
+<p>　　正确的实现方式：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span><span class="o">:</span><span class="n">AggregateRoot</span>
+<span class="o">{</span>
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+     
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ApproveRequest</span><span class="o">(</span><span class="n">Request</span> <span class="n">request</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="n">var</span> <span class="n">rules</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">GetRules</span><span class="o">();</span>
+        <span class="c1">//......</span>
+        <span class="c1">//如果有权限就批准  </span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　这段代码体现了User作为一个领域模型，他拥有自己的职责和能力。</p>
+<h1 id="三如何开始实践领域驱动设计">三、如何开始实践领域驱动设计？</h1>
+<p>　　正如本文通篇所说，领域驱动设计讲究的是领域模型的分析和对事物的抽象，从来没有提起过数据如何存取这个话题，言下之意在领域驱动设计中，我们不关心过数据如何存取，怎么样写linq效率高，使用懒加载还是include，这些实现细节会将你带入传统的三层架构模式中。</p>
+
+<p>　　在领域驱动设计中要先设计领域模型，接着写Domain逻辑，至于数据库，仅仅是用来存储数据的工具。使用database first那不叫领域驱动设计，很明显你先设计的表结构，所以应该叫数据库驱动设计更为准确。更不要引入数据库独有的技术，例如触发器，存储过程等。数据库除了存储数据外，其余一切逻辑都是Domain逻辑。</p>
+
+<p>　　我们不妨以大家都比较熟悉的医院门诊看病流程举个例子，看看如何开始实践领域驱动设计：</p>
+
+<p>　　我们暂且认为一个门诊看病流程就是一个完整的领域模型，此时你要忘掉数据库，不要再想表结构如何设计，而是就这一领域模型进行抽象：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutPatientProcess</span><span class="o">:</span><span class="n">AggregateRoot</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Registration</span> <span class="n">_registration</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//挂号单</span>
+ 
+    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Examination</span><span class="o">&gt;</span> <span class="n">_examinations</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">Examination</span><span class="o">&gt;</span> <span class="n">Examinations</span> <span class="o">=&gt;</span> <span class="n">_examinations</span><span class="o">.</span><span class="na">AsReadOnly</span><span class="o">();</span><span class="c1">//化验单</span>
+    <span class="kd">public</span> <span class="n">Prescription</span> <span class="n">Prescription</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//处方</span>
+    <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">ConsultaionTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊时间</span>
+    <span class="kd">public</span> <span class="n">Doctor</span> <span class="n">Doctor</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊医师</span>
+ 
+    <span class="c1">//开始一个门诊治疗过程</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">StartProcess</span><span class="o">(</span><span class="n">Registration</span> <span class="n">registration</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="n">_registration</span> <span class="o">=</span> <span class="n">registration</span><span class="o">;</span>
+ 
+        <span class="n">InquireSymptoms</span><span class="o">();</span>
+ 
+        <span class="n">WriteOutExamination</span><span class="o">();</span>
+ 
+        <span class="n">WritePrescription</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="c1">//询问病人病情</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">InquireSymptoms</span><span class="o">()</span>
+    <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="c1">//开立化验单</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">WriteOutExamination</span><span class="o">()</span>
+    <span class="o">{</span>
+        <span class="n">_examinations</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">Examination</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="c1">//填写处方</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">WritePrescription</span><span class="o">()</span>
+    <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>　　我们暂且不讨论这一模型是否符合真实场景，但是这个例子带你迈入了领域驱动设计的第一步，同时这个例子也向你展示了软件开发可以不用先设计数据库。当你写好所有的Domain逻辑后再考虑把这个类持久化在数据库中就好了。在我眼中，数据库仅仅是一个保存数据的东西，不要把他过早的耦合在代码中。这一强调了很多遍的观点影响着你能否成功实践DDD。</p>
+<h1 id="四cqrs架构展望">四、CQRS架构展望</h1>
+<p>　　话虽这样说，但是既然你在使用关系数据库，有人就会免不了跟你提起性能怎么优化这样的话题。这也是传统ORM+关系数据库实现领域驱动设计的硬伤，特别是当你的领域模型Scope设计过大，意味着Repository中的操作每次都要关联一堆表出来，特别是有人设计数据喜欢遵守第N范式这种基本就没辙了（没有贬低遵守这些范式的意思，只是这样设计的数据库+ORM会产生较多关联，相对应的设计为表结构冗余设计，有利于ORM提升性能），不得不说到了最后由于数据库的存储性能问题，我们又一次将数据库纳入到了考虑范围。</p>
+
+<p>　　解决这一问题的方案是CQRS架构， Query端各种缓存和Nosql，顺便把搜索引擎也用上，让你的软件飞奔起来。这一架构解耦了数据库操作，你基本没有机会跟数据库打交道并且还解决了数据存储的性能问题。
+  　　<!-- ![edit](/static/assets/img/blog/design/ddd/ddd004.png) -->
+	<center><img src="/static/assets/img/blog/design/ddd/ddd004.png" width="75%" /></center></p>
+
+<p>　　这一进化过程也解开了一些人的疑虑，为什么从刚开始写代码就开始学习各种设计模式，但是从来没有机会使用过？因为你所写的代码无时无刻不耦合着数据库这一“毒瘤”，而数据库操作作为一种实现细节掺杂在你的代码中，所以领域驱动设计为此而生，你准备好了吗？</p>
+<h1 id="五引用">五、引用</h1>
 
 <p>　　<a href="http://www.cnblogs.com/richieyang/p/5373250.html">转自原文–我眼中的领域驱动设计</a></p>
 
