@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Sep 2018 23:30:29 +0800</pubDate>
-    <lastBuildDate>Tue, 04 Sep 2018 23:30:29 +0800</lastBuildDate>
+    <pubDate>Tue, 04 Sep 2018 23:34:18 +0800</pubDate>
+    <lastBuildDate>Tue, 04 Sep 2018 23:34:18 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -177,7 +177,7 @@
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/softidea/p/7257910.html&quot;&gt;从零开始的领域驱动设计&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;http://www.uml.org.cn/mxdx/201409034.asp&quot;&gt;领域模型驱动设计（Domain Driven Design）入门概述&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 07 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/07/DDD.html</link>
