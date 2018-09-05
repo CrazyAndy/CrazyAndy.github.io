@@ -48,6 +48,9 @@ http://www.uml.org.cn/mxdx/201409034.asp
 https://www.cnblogs.com/yubaolee/p/4552646.html
 
 
+DDD初学指南
+http://www.cnblogs.com/saaav/p/4548019.html
+
 
 （二）领域驱动设计 田园里的蟋蟀 专栏
 
@@ -120,25 +123,28 @@ http://www.cnblogs.com/yangecnu/p/Introduction-CQRS.html
 四色原型
 http://www.cnblogs.com/netfocus/archive/2011/03/05/1971899.html
 
-张译博客
+张译博客主页
 https://www.cnblogs.com/wayfarer/
+
+张逸 领域驱动设计实践
 http://www.cnblogs.com/wayfarer/archive/2010/06/30/1768694.html
 
+
+腾云 高级程序员与CTO技术总监首席架构师
 https://www.cnblogs.com/Leo_wl/p/8621267.html
 
-
+汤雪华的博客
 https://www.cnblogs.com/netfocus/category/361987.html
 
 
 
-领域结构图 
+领域结构图  process on
 https://www.processon.com/diagrams/new#temp-system
 
 TYPORA的使用手册
 https://blog.csdn.net/SIMBA1949/article/details/79001226#typora%E5%BF%AB%E6%8D%B7%E9%94%AE
 
-DDD初学指南
-http://www.cnblogs.com/saaav/p/4548019.html
+
 
 四色建模
 http://insights.thoughtworkers.org/paper-pen-modeling/
@@ -148,12 +154,13 @@ https://www.jianshu.com/p/18d1d582f5c2
 
 有一篇文章和这篇文章类似，需要找一找
 
-
+2018-05-17 架构师技能图谱
 https://www.jianshu.com/p/a9195f4ac7e0
 
+后端架构师技术图谱
 https://www.jianshu.com/p/5d121d107849
 
 
-（三）张译 gitchat
+浅谈命令查询职责分离(CQRS)模式
 
 http://www.cnblogs.com/yangecnu/p/Introduction-CQRS.html
