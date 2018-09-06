@@ -273,8 +273,6 @@
 
 <h2 id="二实体entity">（二）实体Entity</h2>
 
-<p>　　</p>
-
 <ul>
   <li>有一类对象拥有唯一标识符</li>
   <li>能够跨越系统的生命周期甚至能超越软件系统的一系列的延续性和标识符</li>
@@ -316,15 +314,178 @@
 
 <p>　　语言中对应那些名词的动词变成那些对象的行为。但是有些领域中的动作，它们是一些动词，看上去却不属于任何对象。它们代表了领域中的一个重要的行为，所以不能忽略它们或者简单的把它们合并到某个实体或者值对象中。给一个对象增加这样的行为会破坏这个对象，让它看上去拥有了本该不属于它的功能。</p>
 
-<p>　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。</p>
+<h2 id="五模块">（五）模块</h2>
 
-<p>　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。</p>
+<ul>
+  <li>将相关领域模型提炼分类，分而治之</li>
+  <li>将高关联度的模型分组到一个模块以提供尽可能大的内聚（以能完整完成任务为准）</li>
+  <li>分层是水平划分</li>
+  <li>模块是垂直划分(Domain内部)</li>
+</ul>
 
-<p>　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^</p>
+<p>　　参考架构概述</p>
 
-<h1 id="二引用">二、引用</h1>
+<ul>
+  <li>领域驱动设计(DomainDriven Design)有一个官方的sample工程，名为DDDSample</li>
+  <li>官网：http://dddsample.sourceforge.net/</li>
+  <li>该工程给出了一种实践领域驱动设计的参考架构</li>
+</ul>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd019.png" width="100%" /></center>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd020.png" width="100%" /></center>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd021.png" width="100%" /></center>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd022.png" width="100%" /></center>
+
+<p>　　<strong><em>架构概述</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd023.png" width="100%" /></center>
+
+<p>　　<strong><em>详细架构</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd024.png" width="100%" /></center>
+
+<p>　　<strong><em>架构详解:Interfaces-接口层</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd025.png" width="100%" /></center>
+
+<ul>
+  <li>该层包含与其他系统进行交互的接口与通信设施，在多数应用里</li>
+  <li>可能提供包括WebServices、RMI或Rest等在内的一种或多种通信接口</li>
+  <li>该层主要由Facade、DTO和Assembler三类组件构成，三类组件均是典型的J2EE模式</li>
+</ul>
+
+<p>　　<strong><em>DTO</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd026.png" width="100%" /></center>
+
+<ul>
+  <li>DTO- DataTransfer Object（数据传输对象），也常被称作VO-ValueObject(值对象)</li>
+  <li>DTO设计之初是为了将细粒度的领域对象包装为粗粒度的数据结构，减少网络通信并简化调用接口</li>
+</ul>
+
+<p>　　DTO 作用</p>
+
+<ul>
+  <li>减少网络流量</li>
+  <li>简化远程对象和远程接口</li>
+  <li>传输更多的数据减少远程调用次数</li>
+  <li>避免将领域状态跨层次传递</li>
+  <li>由于同步和版本控制增加了复杂性</li>
+</ul>
+
+<p>　　DTO 应用时序图</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd027.png" width="100%" /></center>
+
+<p>　　<strong><em>Assembler</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd028.png" width="100%" /></center>
+
+<ul>
+  <li>DTO与领域对象之间的相互转换工作多由Assembler承担</li>
+  <li>因此Assembler几乎总是同DTO一起出现。</li>
+</ul>
+
+<p>　　Assembler 实现方案</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd029.png" width="100%" /></center>
+
+<p>　　<strong><em>Facade</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd030.png" width="100%" /></center>
+
+<ul>
+  <li>实践Facade的过程中最难把握的问题就是Facade的粒度问题。</li>
+  <li>传统的Service均以实体为单位进行组织，而Facade应该具有更粗粒度的组织依据，较为合适的粒度依据有：</li>
+  <li>一个高度内聚的模块一个Facade</li>
+  <li>或者是一个“聚合”(特指领域驱动设计)一个Facade.</li>
+</ul>
+
+<p>　　Facade 实现方案</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd031.png" width="100%" /></center>
+
+<p>　　Facade 应用时序图</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd032.png" width="100%" /></center>
+
+<p>　　<strong><em>Service</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd033.png" width="100%" /></center>
+
+<ul>
+  <li>
+    <p>Service会与多种组件进行交互</p>
+  </li>
+  <li>
+    <p>这些组件包括：</p>
+
+    <p>（1）其他的Service</p>
+
+    <p>（2）领域对象</p>
+
+    <p>（3）Repository</p>
+
+    <p>（4）DAO</p>
+  </li>
+</ul>
+
+<p>　　Service 应用时序图</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd034.png" width="100%" /></center>
+
+<p>　　<strong><em>Domain-领域层</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd035.png" width="100%" /></center>
+
+<ul>
+  <li>
+    <p>Domain层是整个系统的核心层，该层维护一个使用面向对象技术实现的领域模型，几乎全部的业务逻辑会在该层实现</p>
+  </li>
+  <li>
+    <p>Domain层包含:</p>
+
+    <p>（1）Entity（实体）</p>
+
+    <p>（2）ValueObject(值对象)</p>
+
+    <p>（3）Domain Event（领域事件）</p>
+
+    <p>（4）Repository（仓储）等</p>
+  </li>
+</ul>
+
+<p>　　<strong><em>Infrastructure-基础设施层</em></strong></p>
+
+<ul>
+  <li>基础设施层nfrastructure为Interfaces、Application和Domain三层提供支撑</li>
+  <li>所有与具体平台、框架相关的实现会在Infrastructure中提供，避免三层特别是Domain层掺杂进这些实现，从而“污染”领域模型</li>
+  <li>Infrastructure中最常见的一类设施是对象持久化的具体实现</li>
+</ul>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd036.png" width="30%" /></center>
+
+<p>　　<strong><em>“传统”架构-贫血领域模型</em></strong></p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd037.png" width="100%" /></center>
+
+<p>　　<strong><em>DDD &amp;&amp; SOA</em></strong></p>
+
+<ul>
+  <li>DDD 领域模型驱动设计</li>
+  <li>SOA 面向服务的架构</li>
+</ul>
+
+<h1 id="四引用">四、引用</h1>
 
 <p>　　<a href="http://www.uml.org.cn/mxdx/201409034.asp">领域模型驱动设计（Domain Driven Design）入门概述</a></p>
+
+<p>　　*<a href="/design/2018/08/06/DDD.html">上一章—领域驱动设计概览篇—006—腾云 –领域驱动设计(DDD)实现之路</a></p>
+
+<p>　　*<a href="/design/2018/08/08/DDD.html">下一章—领域驱动设计概览篇—008—领域驱动设计，战略建模)</a></p>
 
                     <hr>
                     <div class="row">

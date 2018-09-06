@@ -44,12 +44,14 @@ http://www.cnblogs.com/Leo_wl/p/3866629.html
 http://www.uml.org.cn/mxdx/201409034.asp
 
 
-领域驱动设计，战略建模
+8----领域驱动设计，战略建模
 https://www.cnblogs.com/yubaolee/p/4552646.html
 
 
-DDD初学指南
+9----DDD初学指南
 http://www.cnblogs.com/saaav/p/4548019.html
+
+10---总结
 
 
 （二）领域驱动设计 田园里的蟋蟀 专栏

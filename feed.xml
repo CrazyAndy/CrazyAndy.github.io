@@ -5,32 +5,30 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Sep 2018 17:43:37 +0800</pubDate>
-    <lastBuildDate>Wed, 05 Sep 2018 17:43:37 +0800</lastBuildDate>
+    <pubDate>Thu, 06 Sep 2018 10:54:10 +0800</pubDate>
+    <lastBuildDate>Thu, 06 Sep 2018 10:54:10 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
-        <title>领域驱动设计蟋蟀专栏---010---Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？</title>
+        <title>领域驱动设计概览篇---010---概览篇总结</title>
         <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
-&lt;p&gt;　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容。&lt;/p&gt;
+&lt;p&gt;　　看了这么多关于领域驱动设计的总结概括文章，想必大家都对ddd有了一定的认识了。&lt;/p&gt;
 
-&lt;p&gt;　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？&lt;/p&gt;
+&lt;p&gt;　　我们了解了 ddd 是一种软件设计思想，分成战略设计和战术设计两方面。&lt;/p&gt;
 
-&lt;p&gt;　　可是结果如何呢，我们往往会出现老师告诉我们1+2=3，我们却不知道 应用 交换律 得出2+1 = 3，等到老师告诉我们2+1的确等于3，哦，我们才恍然大悟，2+1真的也可以等于3啊。多么滑稽的事情啊 !&lt;/p&gt;
+&lt;p&gt;　　战略设计在整体软件系统设计中，起到高屋建瓴的作用，它的重要性也就可想而知。我们在学习ddd的起初，一定要在简单理解ddd初衷之后，好好掌握战略设计的思想，而且要结合实际应用场景进行深度研究学习，这是我们以后在自己项目中对ddd进行真正落地的起初关键。&lt;/p&gt;
 
-&lt;p&gt;　　不止高中以下的应试教育是这样，连大学所谓的素质教育也是这样，笔者记得清楚的一次是，读研究生时为了通过数学考试去从网上找找 线性代数的教学视频来看，当时找的是美国麻省理工学院的Gilbert Strang教授讲的线代视频，有兴趣的可以去网易公开课看看，当你看完前三集，兴许你就会和我一样有着同样的感悟，为什么和我们原来听过的线性代数课程有那么大的不一样，为什么我会越听越想听Gilbert Strang讲的课程，兴许我还会考虑学学他其他的教学视频，兴许我突然间打开了一扇大门，我可以以后多找些外国人的教学视频来看。那么，为什么会这样呢？&lt;/p&gt;
+&lt;p&gt;　　战术设计主要是指导代码实现方面，有了良好战略设计的底子，我们便可以学习其中的 ui层，应用层，领域模型层，基础支撑层，实体，值对象，领域服务，模块，聚合，工厂，资源库等概念，并尝试在模拟场景中进行演练，以便能真正了解这些名字背后锁代表的真正含义。&lt;/p&gt;
 
-&lt;p&gt;　　笔者认为，出现上溯问题的根源在于，中国人喜欢从上往下向学生灌输知识和思想，而外国人喜欢从下往上引导，辅助学习者塑造自己的思想。被动接受pk主动获取，必然后者完胜。而且，很无奈的是，从上往下教条式的教书理论上讲没有任何毛病，但是似乎冥冥之中感觉到这却让为师者省了很大一部分力气，为师者只要照本宣科的把知识点讲完，然后再让学生做海量的习题即可，老师省事啊，反正作业又不是他写，习题又不是他算，他只要动动嘴唇，便可将本该属于自己分内责任，教书育人的事情，甩了大部分出去。我们经常从网上看到中国小学生作业多的不行，连家长都看不过去，屡屡曝光家长群里老师布置作业的聊天记录，感觉现在的老师们真的做的有些过分！当然，受限于应试教育的弊病，谁分高谁能进好中学，好高中，好大学的现实，当老师的也是无奈，黔驴技穷了，只能苦了孩子。&lt;/p&gt;
+&lt;p&gt;　　另外，我们要抱着怀疑的态度去审视他人的言论，关于ddd的所有文章兴许会有一些言辞稍欠妥当的地方，我们在刚开始学习的时候很容易收到其误导，但是因为自身知识体系尚未建立，我们还无法判断他们言论的准确性，所以对于他们的言论我们相信60%即可。&lt;/p&gt;
 
-&lt;p&gt;　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。&lt;/p&gt;
-
-&lt;p&gt;　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。&lt;/p&gt;
-
-&lt;p&gt;　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^&lt;/p&gt;
+&lt;p&gt;　　接下来的我们要具体学习领域驱动设计里面的具体细节，这里我会引用 田园的蟋蟀 的系统性博客内容。&lt;/p&gt;
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html&quot;&gt;Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/10/DDD.html</link>
@@ -48,8 +46,8 @@
       </item>
     
       <item>
-        <title>领域驱动设计蟋蟀专栏---009---应对具体业务场景，如何聚焦 Domain Model（领域模型）？</title>
-        <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
+        <title>领域驱动设计概览篇---009---DDD初学指南</title>
+        <description>&lt;h1 id=&quot;一前言&quot;&gt;一、前言&lt;/h1&gt;
 &lt;p&gt;　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容。&lt;/p&gt;
 
 &lt;p&gt;　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？&lt;/p&gt;
@@ -68,7 +66,11 @@
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/3800656.html&quot;&gt;应对具体业务场景，如何聚焦 Domain Model（领域模型）？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/saaav/p/4548019.html&quot;&gt;DDD初学指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/08/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—008—领域驱动设计，战略建模&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/10/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—010—概览篇总结)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 09 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/09/DDD.html</link>
@@ -86,8 +88,8 @@
       </item>
     
       <item>
-        <title>领域驱动设计蟋蟀专栏---008---DDD（领域驱动设计）理论结合实践</title>
-        <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
+        <title>领域驱动设计概览篇---008---领域驱动设计实战--战略建模</title>
+        <description>&lt;h1 id=&quot;一引子&quot;&gt;一、引子&lt;/h1&gt;
 &lt;p&gt;　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容。&lt;/p&gt;
 
 &lt;p&gt;　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？&lt;/p&gt;
@@ -106,7 +108,11 @@
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/3762826.html&quot;&gt;DDD（领域驱动设计）理论结合实践&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/yubaolee/p/4552646.html&quot;&gt;领域驱动设计实战–战略建模&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/07/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—007—领域模型驱动设计（Domain Driven Design）入门概述&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—009—DDD初学指南)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 08 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/08/DDD.html</link>
@@ -171,8 +177,6 @@
 
 &lt;h2 id=&quot;二实体entity&quot;&gt;（二）实体Entity&lt;/h2&gt;
 
-&lt;p&gt;　　&lt;/p&gt;
-
 &lt;ul&gt;
   &lt;li&gt;有一类对象拥有唯一标识符&lt;/li&gt;
   &lt;li&gt;能够跨越系统的生命周期甚至能超越软件系统的一系列的延续性和标识符&lt;/li&gt;
@@ -214,15 +218,178 @@
 
 &lt;p&gt;　　语言中对应那些名词的动词变成那些对象的行为。但是有些领域中的动作，它们是一些动词，看上去却不属于任何对象。它们代表了领域中的一个重要的行为，所以不能忽略它们或者简单的把它们合并到某个实体或者值对象中。给一个对象增加这样的行为会破坏这个对象，让它看上去拥有了本该不属于它的功能。&lt;/p&gt;
 
-&lt;p&gt;　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。&lt;/p&gt;
+&lt;h2 id=&quot;五模块&quot;&gt;（五）模块&lt;/h2&gt;
 
-&lt;p&gt;　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;将相关领域模型提炼分类，分而治之&lt;/li&gt;
+  &lt;li&gt;将高关联度的模型分组到一个模块以提供尽可能大的内聚（以能完整完成任务为准）&lt;/li&gt;
+  &lt;li&gt;分层是水平划分&lt;/li&gt;
+  &lt;li&gt;模块是垂直划分(Domain内部)&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^&lt;/p&gt;
+&lt;p&gt;　　参考架构概述&lt;/p&gt;
 
-&lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;领域驱动设计(DomainDriven Design)有一个官方的sample工程，名为DDDSample&lt;/li&gt;
+  &lt;li&gt;官网：http://dddsample.sourceforge.net/&lt;/li&gt;
+  &lt;li&gt;该工程给出了一种实践领域驱动设计的参考架构&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd019.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd020.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd021.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd022.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;架构概述&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd023.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;详细架构&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd024.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;架构详解:Interfaces-接口层&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd025.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;该层包含与其他系统进行交互的接口与通信设施，在多数应用里&lt;/li&gt;
+  &lt;li&gt;可能提供包括WebServices、RMI或Rest等在内的一种或多种通信接口&lt;/li&gt;
+  &lt;li&gt;该层主要由Facade、DTO和Assembler三类组件构成，三类组件均是典型的J2EE模式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;DTO&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd026.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DTO- DataTransfer Object（数据传输对象），也常被称作VO-ValueObject(值对象)&lt;/li&gt;
+  &lt;li&gt;DTO设计之初是为了将细粒度的领域对象包装为粗粒度的数据结构，减少网络通信并简化调用接口&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　DTO 作用&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;减少网络流量&lt;/li&gt;
+  &lt;li&gt;简化远程对象和远程接口&lt;/li&gt;
+  &lt;li&gt;传输更多的数据减少远程调用次数&lt;/li&gt;
+  &lt;li&gt;避免将领域状态跨层次传递&lt;/li&gt;
+  &lt;li&gt;由于同步和版本控制增加了复杂性&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　DTO 应用时序图&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd027.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;Assembler&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd028.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DTO与领域对象之间的相互转换工作多由Assembler承担&lt;/li&gt;
+  &lt;li&gt;因此Assembler几乎总是同DTO一起出现。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　Assembler 实现方案&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd029.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;Facade&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd030.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;实践Facade的过程中最难把握的问题就是Facade的粒度问题。&lt;/li&gt;
+  &lt;li&gt;传统的Service均以实体为单位进行组织，而Facade应该具有更粗粒度的组织依据，较为合适的粒度依据有：&lt;/li&gt;
+  &lt;li&gt;一个高度内聚的模块一个Facade&lt;/li&gt;
+  &lt;li&gt;或者是一个“聚合”(特指领域驱动设计)一个Facade.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　Facade 实现方案&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd031.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　Facade 应用时序图&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd032.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;Service&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd033.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Service会与多种组件进行交互&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;这些组件包括：&lt;/p&gt;
+
+    &lt;p&gt;（1）其他的Service&lt;/p&gt;
+
+    &lt;p&gt;（2）领域对象&lt;/p&gt;
+
+    &lt;p&gt;（3）Repository&lt;/p&gt;
+
+    &lt;p&gt;（4）DAO&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　Service 应用时序图&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd034.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;Domain-领域层&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd035.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Domain层是整个系统的核心层，该层维护一个使用面向对象技术实现的领域模型，几乎全部的业务逻辑会在该层实现&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Domain层包含:&lt;/p&gt;
+
+    &lt;p&gt;（1）Entity（实体）&lt;/p&gt;
+
+    &lt;p&gt;（2）ValueObject(值对象)&lt;/p&gt;
+
+    &lt;p&gt;（3）Domain Event（领域事件）&lt;/p&gt;
+
+    &lt;p&gt;（4）Repository（仓储）等&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;Infrastructure-基础设施层&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基础设施层nfrastructure为Interfaces、Application和Domain三层提供支撑&lt;/li&gt;
+  &lt;li&gt;所有与具体平台、框架相关的实现会在Infrastructure中提供，避免三层特别是Domain层掺杂进这些实现，从而“污染”领域模型&lt;/li&gt;
+  &lt;li&gt;Infrastructure中最常见的一类设施是对象持久化的具体实现&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd036.png&quot; width=&quot;30%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;“传统”架构-贫血领域模型&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd037.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;　　&lt;strong&gt;&lt;em&gt;DDD &amp;amp;&amp;amp; SOA&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DDD 领域模型驱动设计&lt;/li&gt;
+  &lt;li&gt;SOA 面向服务的架构&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;四引用&quot;&gt;四、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.uml.org.cn/mxdx/201409034.asp&quot;&gt;领域模型驱动设计（Domain Driven Design）入门概述&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/06/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—006—腾云 –领域驱动设计(DDD)实现之路&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/08/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—008—领域驱动设计，战略建模)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 07 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/07/DDD.html</link>
@@ -427,6 +594,10 @@
 &lt;h1 id=&quot;十四引用&quot;&gt;十四、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/Leo_wl/p/3866629.html&quot;&gt;腾云之领域驱动设计(DDD)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/05/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—005—浅析DDD(领域驱动设计)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/07/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—007—领域模型驱动设计（Domain Driven Design）入门概述)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 06 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/06/DDD.html</link>
@@ -627,6 +798,10 @@
 &lt;h1 id=&quot;八引用&quot;&gt;八、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;https://www.jianshu.com/p/b6ec06d6b594&quot;&gt;浅析DDD(领域驱动设计)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/04/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—004—浅谈我对DDD领域驱动设计的理解&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/06/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—006—腾云 –领域驱动设计(DDD)实现之路)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 05 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/05/DDD.html</link>
@@ -800,6 +975,10 @@
 &lt;p&gt;　　&lt;a href=&quot;https://www.bbsmax.com/A/VGzl69ay5b/&quot;&gt;DDD领域驱动设计的理解&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/netfocus/archive/2011/03/05/1971899.html&quot;&gt;四色原型&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/03/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—003—从零开始的领域驱动设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/05/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—005—浅析DDD(领域驱动设计)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 04 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/04/DDD.html</link>
@@ -825,9 +1004,12 @@
 &lt;ol&gt;
   &lt;li&gt;没有阅读软件设计丛书的习惯，更多人偏向于阅读偏应用层面的书籍，“talk is cheap，show me the code”往往更符合大多数人的习惯。&lt;/li&gt;
   &lt;li&gt;没有太多的开发经验支撑。没有踩过坑，就不会意识到设计的重要性，无法产生共情。&lt;/li&gt;
-  &lt;li&gt;年代有些久远，这本书写于2004年，书中很多软件设计的反例，在当时是非常流行的，但是在现在已经基本绝迹了。大师之所以为大师，是因为其能跨越时代的限制，预见未来的问题，这也是为什么DDD在十几年前就被提出，却在微服务逐渐流行的现阶段才被大家重视。
-  　　&lt;!-- ![edit](/static/assets/img/blog/design/ddd/ddd001.png) --&gt;
-    &lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd001.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;年代有些久远，这本书写于2004年，书中很多软件设计的反例，在当时是非常流行的，但是在现在已经基本绝迹了。大师之所以为大师，是因为其能跨越时代的限制，预见未来的问题，这也是为什么DDD在十几年前就被提出，却在微服务逐渐流行的现阶段才被大家重视。
+   　&lt;!-- ![edit](/static/assets/img/blog/design/ddd/ddd001.png) --&gt;&lt;/p&gt;
+
+    &lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd001.png&quot; width=&quot;75%&quot; /&gt;&lt;/center&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;　　遵循领域驱动设计的规范使得项目初期的开发甚至不如不使用它来的快，原因有很多，程序员的素质，代码的规范，限界上下文的划分…甚至需求修改后导致需要重新建模。但是遵循领域驱动设计的规范，在项目越来越复杂之后，可以不至于让项目僵死。这也是为什么很多系统不断迭代着，最终就黄了。书名的副标题“软件核心复杂性应对之道”正是阐释了这一点。&lt;/p&gt;
@@ -1122,6 +1304,10 @@
 &lt;h1 id=&quot;八引用&quot;&gt;八、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/softidea/p/7257910.html&quot;&gt;原文-从零开始的领域驱动设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/02/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—002—我眼中的领域驱动设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/04/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—004—浅谈我对DDD领域驱动设计的理解&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 03 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/03/DDD.html</link>
@@ -1252,6 +1438,10 @@
 &lt;h1 id=&quot;五引用&quot;&gt;五、引用&lt;/h1&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/richieyang/p/5373250.html&quot;&gt;转自原文–我眼中的领域驱动设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/01/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—001—前言&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/03/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—003—从零开始的领域驱动设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 02 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/02/DDD.html</link>
@@ -1286,6 +1476,10 @@
 &lt;p&gt;　　所有的文章但凡引用他人博客，我都会在文章末尾追加原文链接。&lt;/p&gt;
 
 &lt;p&gt;　　当然在看所有内容之前，你可以看一下&lt;a href=&quot;https://www.bilibili.com/video/av17769882?from=search&amp;amp;seid=4845335019842973492&quot;&gt;浅谈领域驱动设计&lt;/a&gt;这个视频，讲师通俗易懂的简单讲了讲ddd整体理论。&lt;/p&gt;
+
+&lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/02/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—002—我眼中的领域驱动设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/01/DDD.html</link>
@@ -5936,7 +6130,7 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/04/20/2455726.html&quot;&gt;《JAVA与模式》之装饰者模式&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/03/ObserverPattern.html&quot;&gt;关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/03/ObserverPattern.html&quot;&gt;上一篇—关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
 &lt;p&gt;　　据笔者了解，MQ消息队列分点对点和订阅发布两种模式，而订阅发布就是利用的观察者模式的思想。&lt;/p&gt;
 
@@ -6438,9 +6632,9 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/05/16/2502279.html&quot;&gt;《JAVA与模式》之策略模式&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/02/StrategyPattern.html&quot;&gt;关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/02/StrategyPattern.html&quot;&gt;上一篇—关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/04/DecoratorPattern.html&quot;&gt;关于Java设计模式的肤浅看法–装饰者模式（四）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/04/DecoratorPattern.html&quot;&gt;下一篇—关于Java设计模式的肤浅看法–装饰者模式（四）&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
 &lt;p&gt;　　据笔者了解，MQ消息队列分点对点和订阅发布两种模式，而订阅发布就是利用的观察者模式的思想。&lt;/p&gt;
 
@@ -6764,9 +6958,9 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 &lt;p&gt;　　&lt;a href=&quot;http://www.cnblogs.com/java-my-life/archive/2012/05/10/2491891.html&quot;&gt;《JAVA与模式》之策略模式&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/01/PatternBefore.html&quot;&gt;关于Java设计模式的肤浅看法–前言（一）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/01/PatternBefore.html&quot;&gt;上一篇—关于Java设计模式的肤浅看法–前言（一）&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/03/ObserverPattern.html&quot;&gt;关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/03/ObserverPattern.html&quot;&gt;下一篇—关于Java设计模式的肤浅看法–观察者模式（三）&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;四结束语&quot;&gt;四、结束语&lt;/h1&gt;
 &lt;p&gt;　　本篇博客采用的是从实际问题出发，引出问题根源，然后解决问题，然后总结解决方法，抽象成设计原则和设计思想，这种方式远比反过来讲解内容要让人更容易接受的多^_^&lt;/p&gt;
 
@@ -6809,7 +7003,7 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;/java/2012/04/02/StrategyPattern.html&quot;&gt;关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;/design/2012/04/02/StrategyPattern.html&quot;&gt;下一篇—关于Java设计模式的肤浅看法–策略模式（二）&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate>
