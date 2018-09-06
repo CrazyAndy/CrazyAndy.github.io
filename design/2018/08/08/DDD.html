@@ -228,29 +228,125 @@
                         </h1>
                     </div>
                     	<h1 id="一引子">一、引子</h1>
-<p>　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容。</p>
+<p>　　自从去年接触DDD以来，阅读了大量的相关书籍，看了园子里面很多DDD方面的文章，也在实际项目中也有意无意的使用DDD的一些思想和方法。但总觉得这些知识太分散，没有给自己思想带来质的升华。观摩了园子里面很多DDD的例子：</p>
 
-<p>　　中国人思维比较教条，教育体制80后最懂的，深受其害，授课老师往往会在开头讲某个模块的所有知识点，讲完了，然后再讲几道例题，然后剩下的就是同学们的家庭作业了，我说的没错吧？</p>
+<ul>
+  <li>[<a href="http://www.cnblogs.com/zhili/p/OnlineStorewithDDD.html">.NET领域驱动设计实战系列]专题二：结合领域驱动设计的面向服务架构来搭建网上书店</a></li>
+  <li><a href="http://www.cnblogs.com/daxnet/archive/2010/11/02/1867392.html">领域驱动设计系列文章汇总</a></li>
+</ul>
 
-<p>　　可是结果如何呢，我们往往会出现老师告诉我们1+2=3，我们却不知道 应用 交换律 得出2+1 = 3，等到老师告诉我们2+1的确等于3，哦，我们才恍然大悟，2+1真的也可以等于3啊。多么滑稽的事情啊 !</p>
+<p>　　等等还有很多，这些例子的质量都很高，图文并茂，一堆让人流口水的代码示例。但每次看完例子后，我的迷茫就会又加深一分。因为我觉得很多博文都只是打着DDD的幌子，还是按自己的原来理解方式写代码而已。并没有给大家深入剖析DDD。别忘了，<strong>DDD是领域驱动设计，而不是领域驱动开发</strong>。在完成这些例子过程中，太重视出成果，出一个实际的代码项目，而忽视了设计，即使有些设计，也只是停留在战术建模的阶段，并没有站在战略建模的高度来对需求进行分析，通常给出一个UML类关系图，一个分层架构图就开始突突突地来一堆代码，最后还不忘贴两个漂亮的UI截图，引起无数粉丝追捧（额～～他们的粉丝中也有我，看来可以把我拉黑了）。用沃恩.弗农大神的话，这样做只能算DDD-Lite，离真正的DDD还有段距离。</p>
 
-<p>　　不止高中以下的应试教育是这样，连大学所谓的素质教育也是这样，笔者记得清楚的一次是，读研究生时为了通过数学考试去从网上找找 线性代数的教学视频来看，当时找的是美国麻省理工学院的Gilbert Strang教授讲的线代视频，有兴趣的可以去网易公开课看看，当你看完前三集，兴许你就会和我一样有着同样的感悟，为什么和我们原来听过的线性代数课程有那么大的不一样，为什么我会越听越想听Gilbert Strang讲的课程，兴许我还会考虑学学他其他的教学视频，兴许我突然间打开了一扇大门，我可以以后多找些外国人的教学视频来看。那么，为什么会这样呢？</p>
+<p>　　于是我有了写这篇文章的想法。</p>
 
-<p>　　笔者认为，出现上溯问题的根源在于，中国人喜欢从上往下向学生灌输知识和思想，而外国人喜欢从下往上引导，辅助学习者塑造自己的思想。被动接受pk主动获取，必然后者完胜。而且，很无奈的是，从上往下教条式的教书理论上讲没有任何毛病，但是似乎冥冥之中感觉到这却让为师者省了很大一部分力气，为师者只要照本宣科的把知识点讲完，然后再让学生做海量的习题即可，老师省事啊，反正作业又不是他写，习题又不是他算，他只要动动嘴唇，便可将本该属于自己分内责任，教书育人的事情，甩了大部分出去。我们经常从网上看到中国小学生作业多的不行，连家长都看不过去，屡屡曝光家长群里老师布置作业的聊天记录，感觉现在的老师们真的做的有些过分！当然，受限于应试教育的弊病，谁分高谁能进好中学，好高中，好大学的现实，当老师的也是无奈，黔驴技穷了，只能苦了孩子。</p>
+<p>　　所谓的战略建模有两点：界限上下文（Bounded Context）、上下文映射图（Context Mapping）。</p>
 
-<p>　　话题拉回来，还是谈谈我们学习编程技术的事情。笔者认为，学习就是在输入，而实际工作编程则是在输出，由输入转化为更多的输出则需要我们真正理解其中的技术思想，而在技术更新迭代超快的今天，恰恰技术思想是我们最能拿来当立身之本的东西。这就像为什么老程序员比新程序员学新技术更快，因为老程序员在之前的实际编程工作中潜移默化的掌握了一些编程思想，只是他们不知道罢了。。</p>
+<p>　　来看一下它们的定义：</p>
 
-<p>　　再把话题拉到设计模式的跟前，我会沿着《Head First 设计模式》的授课思路学习下去，每每理解完一个设计模式，就写篇博客做个记录。在没有将所学设计模式真正应用到实际开发中去之前，记录便是一种最有效的的输出形式，用过的都说好。</p>
+<ul>
+  <li><strong>限界上下文</strong>：它是一个限定边界的环境，在该环境中，每一个模型的概念（包括它的属性和操作）都具有特殊的含义。它是战略建模的核心。</li>
+  <li><strong>上下文映射图</strong>：通用使用框图或代码的方式来展现限界上下文之间的集成关系。</li>
+</ul>
 
-<p>　　文章中我会借用别人博客中的内容和图片，甚至于代码，当然我会在博客的末尾加上引用出处的链接。如果你喜欢我写的博客，甚至有幸被你分享到自己博客中，也希望你能加上我的博客链接，兴许会有朋友联系我，并帮我指正博客中论述的不足之处，那将会是我万分感激的事情^_^</p>
+<p>　　它们为什么重要，我以dax.net大大的一个例子来说明，来看一下他的一篇文章<a href="http://www.cnblogs.com/daxnet/archive/2010/07/07/1772593.html">EntityFramework之领域驱动设计实践（三）</a> ，文中内容大概是这样安排的：</p>
 
-<h1 id="二引用">二、引用</h1>
+<ol>
+  <li>首先介绍他的例子：一个简易的销售系统；</li>
+  <li>给出UML实体框图；</li>
+  <li>然后突突的给出一堆代码；</li>
+</ol>
+
+<p>　　这是一个典型的战术建模的例子。而且该文中有一句极其误导DDD新人的话，我不得不吐槽一下：</p>
+
+<p>　　<code class="highlighter-rouge">上面的模型表述了领域模型中各个实体及其之间的关系。我们先不去讨论整个系统的业务会是什么样的，我们先看看EF是如何支持实体和值对象概念的。</code></p>
+
+<p>　　它直接让我们这些技术狂热爱好者们瞬间偏离了<strong>DDD</strong>以业务为核心，不依赖具体技术实现**的初衷。DDD本来就是引导我们来解决业务上的问题，而不是来让我们炫耀新技能的。如果只是介绍EF，那这篇文章是篇合格的文章。但，如果把它作为DDD的文章，那它就是个反面教程。</p>
+
+<p>　　很不幸，本文开始的几个链接也都被我划到反面教程之列，而且类似的文章园子里面还有很多。这些文章用来教大家写代码可以，但不能作为DDD的教程。</p>
+
+<h1 id="二我的ddd设计之道">二、我的DDD设计之道</h1>
+
+<p>　　就像前面说的，我们进行DDD的第一步，不应该是急着去创建实体模型，而应该站在更高的层面去理解需求，划分领域。这里我就以dax.net这个简易的销售系统为例。首先我们来看看那篇文章中的模型图（注意：这里不是用这个模型图，而仅仅是参考一下用来分析业务，就当这个模型图是会说话的客户吧！）：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd038.png" width="100%" /></center>
+
+<p>　　必须坐下来和客户（就是上面这个模型图）好好谈谈了，以下为谈话内容：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd039.png" width="100%" /></center>
+
+<p>　　把对话内容总结一下，我们可以看出需求业务大概是这样的：</p>
+
+<ul>
+  <li>客户可以在本系统进行支付，并且可以使用多信用卡支付；</li>
+  <li>为客户生成订单；</li>
+  <li>在现有的订单基础上可以进行退订；</li>
+  <li>管理客户信息，主要是信用卡信息管理；</li>
+  <li>管理产品信息；</li>
+  <li>管理产品分类信息；</li>
+</ul>
+
+<p>　　来把这几条业务进行划分，得到原始领域结构图：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd040.png" width="100%" /></center>
+
+<p>　　上图只是对领域进行了划分及确定限界上下文，各限界上下文的关系下面会有介绍。这里共4个限界上下文：客户上下文，订单上下文，支付上下文及产品上下文。这里有以下几点要特别说明：</p>
+
+<ul>
+  <li>通过对领域的划分，优化了原有系统设计中Item实体即表示订单项目，又表示产品的混淆的定义。在订单上下文中，没有产品这个概念，只有订单项，订单项的属性数据（主要是产品名称，单价）会在生<strong>成订单项实体时</strong>从产品上下文中的产品获取；</li>
+  <li>支付上下文中没有”客户”这个概念，只有”帐户”这个概念(图中画成帐号，在此纠正一下)，同订单中的订单项，”帐户”的属性也会在<strong>生成帐户实体时</strong>从其他上下文中获取，这里是从客户上下文中获取，”帐户”是客户的一个子集；</li>
+  <li>随着业务的增长，可以把退订业务从订单管理子域中划分出来，作为一个单独子域，这里暂时先不考虑；</li>
+</ul>
+
+<p>　　可以看出，在确定子域及限界上下文后，一些容易混淆的概念会逐渐得到清晰的描述，这样可以方便开发团队、业务人员及客户之间的交流，而且还为我们开发时划分项目功能提供最直接的依据。</p>
+
+<p>　　我们进一步对该图进行优化。来看一下限界上下文之间的关系，即上下文映射图：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd041.png" width="100%" /></center>
+
+<p>　　图中的实线连接，表示两端的限界上下文之间存在联系。线上标注的U/D表示上游/下游。通常情况下：上游的限界上下文会为下游提供访问接口（或服务），下游使用一个防腐层获取从上游接口传过来的数据，然后转化成本限界中使用的实体。</p>
+
+<p>　　举个例子：产品上下文是订单上下文的上游。当用户进行产品选购时，会向订单里面添加订单项（丫的，这里没设计购物车～～）：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">Order</span>
+    <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">IList</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">_items</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;();</span> 
+        <span class="c1">//支付上下文中的防腐层</span>
+        <span class="kd">private</span> <span class="n">IACLService</span> <span class="n">_iaclService</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Order</span><span class="o">(</span><span class="n">IACLService</span> <span class="n">aclService</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">_iaclService</span> <span class="o">=</span> <span class="n">aclService</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 添加订单项</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="productid"&gt;产品ID&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="count"&gt;产品个数&lt;/param&gt;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">AddItem</span><span class="o">(</span><span class="n">string</span> <span class="n">productid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">count</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">_iaclService</span><span class="o">.</span><span class="na">GetItemFor</span><span class="o">(</span><span class="n">productid</span><span class="o">);</span>
+            <span class="n">item</span><span class="o">.</span><span class="na">Count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
+            <span class="n">_items</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+        <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　在伪实现中，添加订单项的函数AddItem参数用的是产品的id，而不是产品的具体信息，这样就可以实现订单项与产品的解耦。假设我们的产品管理子域是通过WCF用服务的方式实现，防腐层就可以通过访问服务来获取该产品，然后把它转化成一个Item。从而实现订单项的添加。</p>
+
+<h1 id="三后记">三、后记</h1>
+
+<p>　　本文是站在个人理解角度去阐述DDD，在实现过程中也没有涉及CQRS/AES等概念，只是想说明一下，如果使用DDD，请站在业务的角度，而不是技术的角度。</p>
+
+<p>　　关于学习DDD，强烈建议学习netfocus的ENode框架！</p>
+
+<h1 id="四引用">四、引用</h1>
 
 <p>　　<a href="https://www.cnblogs.com/yubaolee/p/4552646.html">领域驱动设计实战–战略建模</a></p>
 
 <p>　　*<a href="/design/2018/08/07/DDD.html">上一章—领域驱动设计概览篇—007—领域模型驱动设计（Domain Driven Design）入门概述</a></p>
 
-<p>　　*<a href="/design/2018/08/09/DDD.html">下一章—领域驱动设计概览篇—009—DDD初学指南)</a></p>
+<p>　　*<a href="/design/2018/08/09/DDD.html">下一章—领域驱动设计概览篇—009—DDD初学指南</a></p>
 
                     <hr>
                     <div class="row">
