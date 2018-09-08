@@ -1,63 +1,39 @@
-（一）
 
-1---前言
-
-Eric Evans 领域驱动设计——软件核心复杂性应对之道
-
-实现领域驱动设计 
-
-张译
-
-视频
-https://www.bilibili.com/video/av17769882?from=search&seid=4845335019842973492
-
-
-
-
-
-怎么学习ddd
-
-张阳，
-
-2---我眼中的领域驱动设计
-http://www.cnblogs.com/richieyang/p/5373250.html
-
-
-3.从零开始的领域驱动设计
-https://www.cnblogs.com/softidea/p/7257910.html
-
-
-4浅谈我对DDD领域驱动设计的理解
-https://www.bbsmax.com/A/qrV57YVzPD/
-
-5---浅析DDD(领域驱动设计)
-https://www.jianshu.com/p/b6ec06d6b594
-
-
-
-6---腾云 --领域驱动设计(DDD)实现之路
-http://www.cnblogs.com/Leo_wl/p/3866629.html
-
-
-7---领域模型驱动设计（Domain Driven Design）入门概述
-
-http://www.uml.org.cn/mxdx/201409034.asp
-
-
-8----领域驱动设计，战略建模
-https://www.cnblogs.com/yubaolee/p/4552646.html
-
-
-9----DDD初学指南
-http://www.cnblogs.com/saaav/p/4548019.html
-
-10---总结
-https://lax.v2ex.com/t/392565#r_4779592
 
 （二）领域驱动设计 田园里的蟋蟀 专栏
 
 田园里的蟋蟀
 https://www.cnblogs.com/xishuai/category/572887.html
+
+
+
+1.我的“第一次”，就这样没了：DDD（领域驱动设计）理论结合实践
+https://www.cnblogs.com/xishuai/p/3762826.html
+
+2.一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？
+https://www.cnblogs.com/xishuai/p/3800656.html
+
+3.死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？
+https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html
+
+4.拨开迷雾，找回自我：DDD 应对具体业务场景，Domain Model 到底如何设计？
+https://www.cnblogs.com/xishuai/p/3820041.html
+
+5.No zuo no die：DDD 应对具体业务场景，Domain Model 重新设计
+https://www.cnblogs.com/xishuai/p/3827216.html
+
+6.设计窘境：来自 Repository 的一丝线索，Domain Model 再重新设计
+https://www.cnblogs.com/xishuai/p/domain_model_repository.html
+
+7.拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计
+https://www.cnblogs.com/xishuai/p/ddd_domain_model_design.html
+
+
+
+
+
+
+
 
 如何ddd
 http://www.cnblogs.com/xishuai/p/how-to-implement-ddd.html
