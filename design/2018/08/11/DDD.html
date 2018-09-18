@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="领域驱动设计田园的蟋蟀专栏篇" name="description">
+  
+  
+    <meta name="keywords" content="ddd,领域驱动设计">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">design</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 11 Aug 2018</span>
+                        <h1>
+                            领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践
+                        </h1>
+                    </div>
+                    	<h1 id="一关于ddd">一、关于DDD</h1>
+
+<p>　　什么是DDD（领域驱动设计）？DDD中最核心的是Domain Model（领域模型），和领域模型相对的是事务脚本，领域模型和事务脚本说到底就是面向对象和面向过程的区别。</p>
+
+<ul>
+  <li>事务脚本：围绕功能，以功能为中心。将所有逻辑组织在一个单一过程，进行数据库直接调用，每笔交易（业务请求）都有自己的事务脚本，并且是一个类的公开方法。</li>
+  <li>领域模型：描述领域类，以类之间的协作完成所需功能。所谓领域模型，是一系列相互关联的对象，每个对象代表一定意义的独立体，既可以一起以一种大规模方式协作；也可以小到以单线方式运行。</li>
+</ul>
+
+<p>　　好像有个报告统计，大约80%的程序员使用事务脚本编程，三层架构（UI、BLL、DAL）对于我们来说太熟悉了，编程的时候代码一般会集中在DAL层，致使数据访问层充斥着大量的业务逻辑，而且很难复用，每个DAL中的类就像一个单元，只为某一功能实现，也就是上面所说的“单一过程”，因为业务逻辑都实现在数据访问层了，这样业务逻辑层就成了一个空架子，有的人就会觉得BLL-业务逻辑层没有存在的必要，然后设计的时候就把业务逻辑层去掉了，就只剩UI和DAL层了，外加一些HelpClass，然后的然后。。。</p>
+
+<p>　　领域驱动设计的概念从提出到现在十年了，现在很少的公司能真正的去应用，而还是采用事务脚本的方式，为什么？其实就是一种思想，或者说方式的转变，就好比你以前习惯用手直接吃饭，现在让你拿筷子吃饭，肯定会不习惯。当然还有一部分原因是领域驱动设计的推行，或者说国内有关这领域的大牛们很少，但我觉得不管怎样，这是个趋势，就像黑夜过后，一定会是清晨一样。</p>
+
+<p>　　上面说到三层架构（UI、BLL、DAL），我们再看一下领域驱动设计的分层：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd042.png" width="100%" /></center>
+
+<h5 id="主要分为四层表现层应用层领域层和基础层">主要分为四层（表现层、应用层、领域层和基础层）：</h5>
+
+<ul>
+  <li>Presentation Layer：表现层，负责显示和接受输入；</li>
+  <li>Application Layer(Service)：应用层，很薄的一层，只包含工作流控制逻辑，不包含业务逻辑；</li>
+  <li>Domain Layer(Domain)：领域层，包含整个应用的所有业务逻辑；</li>
+  <li>Infrastructure Layer：基础层，提供整个应用的基础服务；</li>
+</ul>
+
+<p>　　领域驱动设计主张充血模型，也就是富模型的意思，大多业务逻辑都应该被放在Domain Object里面（包括持久化业务逻辑），而Service层应该是很薄的一层，仅仅封装事务和少量逻辑，不和Dao层打交道。</p>
+
+<h5 id="优点">优点：</h5>
+
+<ol>
+  <li>更加符合OO的原则。</li>
+  <li>Service层很薄，只充当Facade的角色，不和Dao打交道。</li>
+</ol>
+
+<h5 id="缺点">缺点：</h5>
+
+<ol>
+  <li>Dao和Domain Object形成了双向依赖，复杂的双向依赖会导致很多潜在的问题。</li>
+  <li>如何划分Service层逻辑和Domain层逻辑是非常含混的，在实际项目中，由于设计和开发人员的水平差异，可能导致整个结构的混乱无序。 （这个问题在项目实际运作的时候会出现，划分很重要。）</li>
+  <li>考虑到Service层的事务封装特性，Service层必须对所有的Domain Object的逻辑提供相应的事务封装方法，其结果就是Service完全重定义一遍所有的Domain Logic，非常烦琐，而且Service的事务化封装其意义就等于把OO的Domain Logic转换为过程的Service TransactionScript。该充血模型辛辛苦苦在Domain层实现的OO在Service层又变成了过程式，对于Web层程序员的角度来看，和贫血模型没有什么区别了。 （和第二点类似，如何做到Application层不包含业务逻辑，协调领域层和基础层很重要。）</li>
+</ol>
+
+<h1 id="二前期分析">二、前期分析</h1>
+
+<p>　　关于DDD（领域驱动设计）概念有一定了解后，下面开始做一个基于领域驱动设计的项目：MessageManager（短消息系统），至于为什么要拿短消息当小白鼠？是有原因的，当然随便一个业务需求也是可以的，实践是检验理论的唯一标准。</p>
+
+<p>　　MessageManager（后面就这样命名）大概类似于博客园-短消息系统，用户模块暂不考虑，只考虑短消息，大致画了一张功能分析图：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd043.png" width="50%" /></center>
+
+<p>　　可能当你看到这张图的第一反应是：Are you kidding me？？？对，你没看错，MessageManager功能就是这么简单，其实领域驱动设计的项目应用应该是一些包含大型业务逻辑的，这种简单的“CURD”操作很难体现出领域驱动设计的作用，但重点不是去实现，而是一个示例框架，可能设计不是很合理，但是一个完整的流程要走下来，当然领域驱动设计包含很多东西，不只是框架设计这一点，很不幸，本篇就只是讨论的这一点。</p>
+
+<h5 id="messagemanager数据分析图">MessageManager数据分析图：</h5>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd044.png" width="70%" /></center>
+
+<p>　　Are you kidding me again？？？对，你又没看错！！！数据库设计就这么简单，其实不应该说是数据库设计，应该是领域模型设计-数据部分，主要体现在数据库存储，主要是两个表：User（用户表）和Message（消息表），注意我在画图的时候并没有设计字段类型，只是字段名称，类型设计应该在 Infrastructure Layer（基础层）去实现，准确的来说应该是ORM，领域模型只是定义，并不包含实现，有时候我们在做设计的时候，比如ORM使用的是EntityFramework，采用的模式是：Database First，也就是dax.net所说的：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd045.png" width="60%" /></center>
+
+<p>　　EntityFramework中的“从数据库生成模型”功能应该去掉，但只是相对于领域驱动设计而言，如果项目采用事务脚本，你会发现这个功能是多么的方便，凡事都有相对性。后来EntityFramework推出“Code First”模式，这种模式就符合领域驱动设计思想，MessageManager就是采用这种方式。</p>
+
+<h5 id="messagemanager的扩展图">MessageManager的扩展图：</h5>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd046.png" width="70%" /></center>
+
+<p>　　因为不考虑用户模块，所以用户接入暂不考虑，只扩展一个消息接口，实现方式是：ASP.NET WebAPI，采用WebAPI主要原因是支持REST（无状态），这里需要注意的是此接口虽然是服务，但是属于Presentation Layer（表现层）。</p>
+
+<h1 id="三框架搭建">三、框架搭建</h1>
+
+<p>　　MessageManager主要用到概念或技术点：EntityFramework、ASP.NET MVC、ASP.NET WebAPI、AutoMapper、Nunit、Unity、Unit Of Work、Repository、Specification等等。</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd047.png" width="80%" /></center>
+
+<p>　　主要分为四层，可以对比上面的领域驱动设计分层图，当然复杂一点不只分为四层，但是这是最基本的，dax.net在 <a href="http://www.cnblogs.com/daxnet/archive/2011/05/10/2042095.html">http://www.cnblogs.com/daxnet/archive/2011/05/10/2042095.html</a>，一文中就增加了很多东西，示例图：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd048.png" width="100%" /></center>
+
+<p>　　XXXX.Repositories项目dax.net在设计的时候放在了Domain中，也就是命名：XXXX.Domain.Repositories，但我觉得仓储实现应该在Infrastructure（基础层）中实现，Domain中只是定义仓储契约，也就是Infrastructure（基础层）中的MessageManager.Repositories，实现仓储的具体实现，并提供持久化操作。</p>
+
+<p>　　工作流程描述可以用<a href="http://www.cnblogs.com/xishuai/p/3750154.html">Unit Of Work</a>一文中画过一张图表现：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd049.png" width="100%" /></center>
+
+<h1 id="四代码实现">四、代码实现</h1>
+
+<p>　　MessageManager代码编写主要是四个方面：框架底层、功能实现、单元测试、前端页面。</p>
+
+<p>　　框架底层实现可以结合上面那张图和源码去理解，前端页面整理放在MessageManager.WebFiles项目中，页面原始来自博客园-短消息系统，做了一点修改。这边说下单元测试，关于单元测试可以参考：<a href="http://www.cnblogs.com/xishuai/p/3728576.html">http://www.cnblogs.com/xishuai/p/3728576.html</a>，因为我开发工具使用的是VS 2012，使用的是：NUnit Test Adapter，MessageManager项目中进行单元测试最重要的是Infrastructure（基础层）和Application（应用层），Infrastructure（基础层）主要是对MessageManager.Repositories项目进行单元测试，也就是测试项目：MessageManager.Repositories.Tests，测试主要包含仓储持久化操作，如下：</p>
+
+<p>　　功能实现主要是领域模型设计、仓储设计、应用层协调、表现层（MVC、WebAPI）代码编写等，当然还有一些应用程序配置，比如Automapper类型映射、Unity依赖注入配置等。说到领域模型设计，就多说一点，先了解领域模型涉及的概念：实体、值对象、聚合、聚合根。MessageManager项目包含两个实体：User实体和Message（实体），当时设计的时候，我是把User作为实体、Message作为聚合根，也就是下面代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
+
+<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="o">{</span>
+        <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
+        <span class="kd">public</span> <span class="nf">Message</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+        
+        <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="n">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+
+        <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　Message继承IAggregateRoot，User和Message组成一个消息聚合，聚合根为Message，访问消息聚合内的成员，必须通过聚合根（Message）才能访问，但是在做的过程中，有一个需求就是要通过用户名获取User，如果通过Message访问就很不合理，因为这不包含任何的消息操作，所以后面就把User单独作为一个聚合，聚合根为其本身，这边说明的就是，聚合边界划分不一定一成不变，需要根据具体的业务场景去划分，就比如：做User模块的时候，Message就不能设计成聚合了，而应该是User。</p>
+
+<p>　　还有一点就是EntityFramework使用Code First的时候，因为我们“字段”都是设计在Domain层中（并不包含配置），实现却是在Infrastructure层，如何进行数据库字段类型设计？或是表字段关联？实现主要是使用ModelConfigurations，在生成之前添加Model配置，我觉得这是EntityFramework在领域驱动设计开发中优点之一，设计和实现完全区分开，示例代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">ComponentModel</span><span class="o">.</span><span class="na">DataAnnotations</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Data</span><span class="o">.</span><span class="na">Entity</span><span class="o">.</span><span class="na">ModelConfiguration</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+
+<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">.</span><span class="na">ModelConfigurations</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageConfiguration</span> <span class="o">:</span> <span class="n">EntityTypeConfiguration</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span>
+    <span class="o">{</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// Initializes a new instance of &lt;c&gt;MessageConfiguration&lt;/c&gt; class.</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="kd">public</span> <span class="nf">MessageConfiguration</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="n">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
+            <span class="n">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
+
+            <span class="c1">// Relationships</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUser</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WithMany</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">SendMessages</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasForeignKey</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WillCascadeOnDelete</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ToUser</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WithMany</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ReceiveMessages</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasForeignKey</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WillCascadeOnDelete</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　上面代码中的下面部分是添加外键配置，EntityFramework中的模型-添加配置：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="n">override</span> <span class="kt">void</span> <span class="nf">OnModelCreating</span><span class="o">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">modelBuilder</span>
+                <span class="o">.</span><span class="na">Configurations</span>
+                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">UserConfiguration</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">MessageConfiguration</span><span class="o">());</span>
+            <span class="n">base</span><span class="o">.</span><span class="na">OnModelCreating</span><span class="o">(</span><span class="n">modelBuilder</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　下面再说下MessageManager.Application（应用层）的协调配置，先看下面的一张图，注意后面所做的操作都是领域层或是基础层去实现的，并不是应用层实现，应用层只是做协调处理，不要把应用层当做BLL（业务逻辑层）。</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd050.png" width="100%" /></center>
+
+<h1 id="五引用">五、引用</h1>
+
+<p>　　*<a href="/design/2018/08/10/DDD.html">上一章—领域驱动设计概览篇—010—概览篇总结</a></p>
+
+<p>　　*<a href="/design/2018/08/12/DDD.html">下一章—领域驱动设计田园的蟋蟀专栏篇—002—一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</a></p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">ddd</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">领域驱动设计</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/11/DDD.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    
+	
+
+</body>
+</html>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+
+	
+	    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="领域驱动设计田园的蟋蟀专栏篇" name="description">
+  
+  
+    <meta name="keywords" content="ddd,领域驱动设计">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|领域驱动设计田园的蟋蟀专栏篇---002---一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+	
+
+<body id="page-top" class="landing-page">
+	
+		
+			
+		    	<div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/blog/">最近博客</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/java/">JAVA</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/linux/">LINUX</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/database/">数据库</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/boot/">SRPING_BOOT</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/cloud/">微服务</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/container/">容器</a></li>
+                        
+                    
+                        
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/design/">软件设计</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/bigdata/">大数据</a></li>
+                        
+                    
+                        
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+			
+		 
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">design</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 12 Aug 2018</span>
+                        <h1>
+                            领域驱动设计田园的蟋蟀专栏篇---002---一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？
+                        </h1>
+                    </div>
+                    	<h1 id="一写在前面">一、写在前面</h1>
+
+<p>　　在上一篇《<a href="http://www.cnblogs.com/xishuai/p/3762826.html">我的“第一次”，就这样没了：DDD（领域驱动设计）理论结合实践</a>》博文中，简单介绍了领域驱动设计的一些理念，并简单完成基于领域驱动设计的具体项目 <a href="https://github.com/yuezhongxin/MessageManager">MessageManager</a>，本人在设计 MessageManager 项目之前，并没有看过 Eric Evans 的《Domain-Driven Design –Tackling Complexity in the Heart of Software》和 Martin Fowler 的《Patterns of Enterprise Application Architecture》，《企业应用架构模式》这本书正在阅读，关于领域驱动设计，主要学习来源是园中的 netfocus、dax.net、以及清培兄的部分博文（小弟先在此谢过各位大神的无私奉献），还有就是解道中的领域驱动设计专题，当然还有一些来自搜索引擎的部分资料，再加上自己的一些揣摩和理解，也就成为了属于自己的“领域驱动设计”。</p>
+
+<p>　　MessageManager 项目是对自己所理解领域驱动设计的检验，如果你仔细看过上一篇博文，你会发现 MessageManager 其实只是领域驱动设计的“外壳”，就像我们种黄瓜，首先要搭一个架子，以便黄瓜的生长，MessageManager 项目就相当于这个架子，核心的东西“黄瓜”并不存在，当时在设计完 MessageManager 项目的时候，其实已经发现问题的存在，所以在博文最后留下了下面两个问题：</p>
+
+<ul>
+  <li>Domain Model（领域模型）：领域模型到底该怎么设计？你会看到，MessageManager 项目中的 User 和 Message 领域模型是非常贫血的，没有包含任何的业务逻辑，现在网上很多关于 DDD 示例项目多数也存在这种情况，当然项目本身没有业务，只是简单的“CURD”操作，但是如果是一些大型项目的复杂业务逻辑，该怎么去实现？或者说，领域模型完成什么样的业务逻辑？什么才是真正的业务逻辑？这个问题很重要，后续探讨。</li>
+  <li>Application（应用层）：应用层作为协调服务层，当遇到复杂性的业务逻辑时，到底如何实现，而不使其变成 BLL（业务逻辑层）？认清本质很重要，后续探讨。</li>
+</ul>
+
+<p>　　另外再贴一些园友们在上一篇的问题评论：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd051.png" width="100%" /></center>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd052.png" width="100%" /></center>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd053.png" width="100%" /></center>
+
+<p>　　关于以上的问题，本篇博文只是做一些解读，希望可以对那些痴迷于领域驱动设计的朋友们一些启示，写得有不当之处，也欢迎指出。</p>
+
+<h1 id="二问题的根源是什么">二、问题的根源是什么</h1>
+
+<p>　　出现上述问题的原因是什么？需求简单？设计不合理？准确的来说，应该都不是，我觉得问题的根源是没有真正去理解领域驱动设计，或者说没有真正用领域驱动设计的理念去设计或实现，领域驱动设计的概念网上一找一大堆，你看过几篇文章之后也能写出来之类的文章，为什么？因为都是泛泛之谈，诸如：领域模型是领域驱动的核心；领域驱动基本分为四层（用户层、应用层、领域层和基础层）；领域包含实体、值对象和服务；还有一些聚合和聚合根之类的概念等等，文中也会给你列出一些关于这些概念的代码实现，让你瞬间感觉原来领域驱动设计是这么的高大上。</p>
+
+<p>　　但如果拿这些概念去实践呢？却根本不是那么回事，现在使用领域驱动设计去开发的企业实在是太少了，原因有很多种，下面大致列出一些：</p>
+
+<ul>
+  <li>开发成本太高，换句话说，就是如果使用领域驱动设计开发，需要聘请高级程序员、高级架构师和建模专家，一般这种开发人员薪资都比较高，老板真的舍得吗？</li>
+  <li>开发周期长，花在需求分析的时间比较长，甚至比程序实现还要长，这个对老板来说是要命的，开发周期长，一般会意味着公司的利润降低，公司利润降低，老板的钱包就瘪了，老板会愿意吗？（<code class="highlighter-rouge">其实虽然表面看似项目周期延长了，但是软件设计更能反应业务的真实诉求，其生命周期也会大大的延长，</code>  <code class="highlighter-rouge">从长远角度上来考量这是值得坚持下去的，可是你让一个压根不懂软件的人去看，那就是瞎指挥了，而如果按照</code>   <code class="highlighter-rouge">领导的想法去做，那项目最后陷入缝缝补补过日子的风险会非常大</code>）</li>
+  <li>开发思维转变问题，使用领域驱动设计开发，需要公司里的程序员懂得领域驱动设计，要对面向对象（OO）设计有一定的理解，现实情况是，大部分的程序员虽然使用的是面向对象语言（比如 Java、C#），却做着面向过程的事（类似 C 语言函数式的开发）。现在让公司的程序员使用领域驱动设计开发，就好比以前是用手直接吃饭，现在让你使用筷子吃饭，你会习惯吗？这需要一种转变，很多程序员会很不习惯，这也是领域驱动设计推行难的主要原因。</li>
+  <li>关于领域驱动设计实践经验实在太少，大家脑子中只有模模糊糊的概念，却没有实实在在的实践，像 dax.net 这样去完成几个完整基于领域驱动设计项目的大神实在太少了，很多都是像我一样，理解一些概念后，放出一个简单的示例 Demo，然后就没有然后了。</li>
+</ul>
+
+<p>　　Eric Evans 在2004年提出 DDD（领域驱动设计）的理念，距今已经十年了，推广却停滞不前，确实值得我们程序员去反思。</p>
+
+<p>　　扯得有点远了，回到这个副标题：<strong>问题的根源是什么？答案或许会不令你满意，就是没有真正理解领域驱动设计。</strong>那你或许会问：那真正的领域驱动设计是什么？这个我想只有 Eric Evans 可以回答，但也不要把领域驱动设计看得这么绝对，领域驱动设计只是一种指导，具体的实现要用具体的方法，正如有句古话：<strong>师傅领进门，修行在个人。每个人有每个人的具体悟道，但再变化也不要忘了师出同门。</strong></p>
+
+<p>　　还有一点就是，有朋友指出简单的业务逻辑是体现不出领域驱动设计的，关于这一点首先我是比较赞同的，但如果去拿一些大型业务场景去做领域驱动设计的示例，我个人觉得也不太现实，毕竟时间成本太高了。我个人认为小的业务场景和大的业务场景都可以使用领域驱动设计实现，只是业务逻辑的复杂度不同，还有就是适用度也不同，小的业务场景用脚本驱动模式去实现，可能会比领域驱动设计区实现更简单、快速，但是但凡是业务场景（不论大小），必然包含业务逻辑（CRUD 除外），那也就可以使用领域驱动设计去开发，还是那句话，只是不太适合，但做演示示例还是可以的。</p>
+
+<p>　　业务逻辑的复杂度主要体现在领域模型中，复杂性的业务逻辑，领域模型也就越复杂，但与简单性的领域模型实质是一样的。关于如何真正理解领域驱动设计？这一点我个人觉得方式就是“<strong>迭代</strong>”，<strong>只有不断的去实践，不断的去体会，才能真正的去理解领域驱动设计</strong>，就像 MessageManager 项目，每一次有些体会我就会觉得这样做不合理，<strong>那就推倒重建，可能这样做又不合理，那就推倒再重建。。。</strong></p>
+
+<p>　　闲话少说，来看这一次的“迭代”：</p>
+
+<h1 id="三领域驱动设计-软件核心复杂性应对之道分层概念">三、《领域驱动设计-软件核心复杂性应对之道》分层概念</h1>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd054.png" width="60%" /></center>
+
+<p>　　在面向对象的程序中，用户界面（UI）、数据库和其他支持代码，经常被直接写到业务对象中去。在UI和数据库脚本的行为中嵌入额外的业务逻辑。出现这种情况是因为从短期的观点看，它是使系统运行起来的最容易的方式。当与领域相关的代码和大量的其他代码混在一起时，就很难阅读并理解了。对UI的简单改动就会改变业务逻辑。改变业务规则可能需要小心翼翼地跟踪UI代码、数据库代码或者其他的程序元素。实现一致的模型驱动对象变得不切实际，而且自动化测试也难以使用。如果在程序的每个行为中包括了所有的技术和逻辑，那么它必须很简单，否则会难以理解。</p>
+
+<p>　　将一个复杂的程序进行层次划分。为每一层进行设计，每层都是内聚的而且只依赖于它的下层。采用标准的架构模式来完成与上层的松散关联。将所有与领域模型相关的代码都集中在一层，并且将它与用户界面层、应用层和基础结构层的代码分离。<strong>领域对象可以将重点放在表达领域模型上，不需要关心它们自己的显示、存储和管理应用任务等内容。这样使模型发展得足够丰富和清晰，足以抓住本质的业务知识并实现它。</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>用户界面层（表示层）</th>
+      <th>负责向用户显示信息，并且解析用户命令。外部的执行者有时可能会是其他的计算机系统，不一定非是人。</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>应用层</td>
+      <td>定义软件可以完成的工作，并且指挥具有丰富含义的领域对象来解决问题。这个层所负责的任务对业务影响深远，对跟其他系统的应用层进行交互非常必要这个层要保持简练。它不包括处理业务规则或知识，只是给下一层中相互协作的领域对象协调任务、委托工作。在这个层次中不反映业务情况的状态，但反映用户或程序的任务进度的状态</td>
+    </tr>
+    <tr>
+      <td>领域层（模型层）</td>
+      <td>负责表示业务概念、业务状况的信息以及业务规则。尽管保存这些内容的技术细节由基础结构层来完成，反映业务状况的状态在该层中被控制和使用。这一层是业务软件的核心。</td>
+    </tr>
+    <tr>
+      <td>基础结构层</td>
+      <td>为上层提供通用的技术能力：应用的消息发送、领域持久化，为用户界面绘制窗口等。通过架构框架，基础结构层还可以支持这四层之间的交互模式。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>　　一个对象所代表的事物是一个具有连续性和标识的概念（可以跟踪该事物经历的不同的状态，甚至可以让该事物跨越不同的实现），还是只是一个用来描述事物的某种状态的属性？这就是实体与值对象最基本的区别。明确地选用这两种模式中的一种来定义对象，可以使对象的意义更清晰，并可以引导我们构造出一个健壮的设计。</p>
+
+<p>　　另外，领域中还存在很多的方面，如果用行为或操作来描述它们会比用对象来描述更加清晰。尽管与面向对象建模理念稍有抵触，但这些最好是用服务来描述，而不是将这个操作的职责强加到某些实体或值对象身上。服务用来为客户请求提供服务。在软件的技术层中就有许多服务。服务也会在领域中出现，它们用于对软件必须完成的一些活动进行建模，但是与状态无关。有时我们必须在对象模型中釆取一些折衷的措施——这是不可避免的，例如利用关系数据库进行存储时就会出现这种情况。本章将会给出一些规则，当遇到这种复杂情况时，遵守这些规则可以使我们保持正确的方向。</p>
+
+<p>　　最后，我们对模块（Module）的讨论可以帮助理解这样的观点：每个设计决策都应该是根据对领域的正确理解来做出。高内聚、低关联这种思想往往被看成是理想的技术标准，它们对于概念本身也是适用的。在模型驱动的设计中，模块是模型的一部分，它们应该能够反映出领域中的概念。</p>
+
+<h1 id="四repository仓储职责所在">四、Repository（仓储）职责所在？</h1>
+
+<p>　　言归正题。</p>
+
+<p>　　Repository（仓储）的概念可以参考：<a href="http://www.cnblogs.com/dudu/archive/2011/05/25/repository_pattern.html">http://www.cnblogs.com/dudu/archive/2011/05/25/repository_pattern.html</a>，我个人比较赞同 dudu 的理解：Repository 是一个独立的层，<strong>介于领域层与数据映射层（数据访问层）之间</strong>。它的存在让领域层感觉不到数据访问层的存在，它提供一个类似集合的接口提供给领域层进行领域对象的访问。<strong>Repository 是仓库管理员，领域层需要什么东西只需告诉仓库管理员，由仓库管理员把东西拿给它，并不需要知道东西实际放在哪。</strong></p>
+
+<p>　　关于 Repository 的定义，在《企业应用架构模式》书中也有说明：<strong>协调领域和数据映射层，利用类似于集合的接口来访问领域对象。</strong>书中把 Repository 翻译为资源库，其实是和仓储是一个意思，关于 Repository 这一节点的内容，我大概阅读了两三篇才理解了部分内容（这本书比较抽象难理解，需要多读几遍，然后根据自己的理解进行推敲揣摩），文中也给出了一个示例：查找一个人所在的部门（Java），以便于加深对 Repository 的理解。</p>
+
+<p>　　我们先看一下 Repository 的定义前半句：协调领域和数据映射层，也就是 dudu 所说的介于领域层和数据映射层之间，理解这一点很重要，非常重要。然后我们再来看 MessageManager 项目中关于 Repository 的应用（实现没有问题），在哪应用呢？根据定义我们应该要去领域层去找Repository 的应用，但是我们在 MessageManager.Domain 项目中找不到关于 Repository 的半毛应用，却在 MessageManager.Application 项目中找到了：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">AutoMapper</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">DTO</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
+
+<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">Implementation</span>
+<span class="o">{</span>
+    <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">/// Message管理应用层接口实现</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageServiceImpl</span> <span class="o">:</span> <span class="n">ApplicationService</span><span class="o">,</span> <span class="n">IMessageService</span>
+    <span class="o">{</span>
+        <span class="err">#</span><span class="n">region</span> <span class="n">Private</span> <span class="n">Fields</span>
+        <span class="kd">private</span> <span class="n">readonly</span> <span class="n">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">readonly</span> <span class="n">IUserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+        <span class="err">#</span><span class="n">endregion</span>
+
+        <span class="err">#</span><span class="n">region</span> <span class="n">Ctor</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 初始化一个&lt;c&gt;MessageServiceImpl&lt;/c&gt;类型的实例。</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="context"&gt;用来初始化&lt;c&gt;MessageServiceImpl&lt;/c&gt;类型的仓储上下文实例。&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="messageRepository"&gt;“消息”仓储实例。&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="userRepository"&gt;“用户”仓储实例。&lt;/param&gt;</span>
+        <span class="kd">public</span> <span class="nf">MessageServiceImpl</span><span class="o">(</span><span class="n">IRepositoryContext</span> <span class="n">context</span><span class="o">,</span>
+            <span class="n">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">,</span>
+            <span class="n">IUserRepository</span> <span class="n">userRepository</span><span class="o">)</span>
+            <span class="o">:</span><span class="n">base</span><span class="o">(</span><span class="n">context</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">messageRepository</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">userRepository</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+
+        <span class="err">#</span><span class="n">region</span> <span class="n">IMessageService</span> <span class="n">Members</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 通过发送方获取消息列表</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="userDTO"&gt;发送方&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;消息列表&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesBySendUser</span><span class="o">(</span><span class="n">UserDTO</span> <span class="n">sendUserDTO</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="c1">//User user = userRepository.GetUserByName(sendUserDTO.Name);</span>
+            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesBySendUser</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;(</span><span class="n">sendUserDTO</span><span class="o">));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">messages</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;();</span>
+            <span class="n">foreach</span> <span class="o">(</span><span class="kt">var</span> <span class="n">message</span> <span class="n">in</span> <span class="n">messages</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 通过接受方获取消息列表</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="userDTO"&gt;接受方&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;消息列表&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesByReceiveUser</span><span class="o">(</span><span class="n">UserDTO</span> <span class="n">receiveUserDTO</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="c1">//User user = userRepository.GetUserByName(receiveUserDTO.Name);</span>
+            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesByReceiveUser</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;(</span><span class="n">receiveUserDTO</span><span class="o">));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">messages</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;();</span>
+            <span class="n">foreach</span> <span class="o">(</span><span class="kt">var</span> <span class="n">message</span> <span class="n">in</span> <span class="n">messages</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 删除消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">DeleteMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Remove</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">));</span>
+            <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 发送消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">FromUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">ToUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 查看消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　<strong>对，你已经发现了 Repository 的踪迹，Repository 应用在应用层，这样就致使应用层和基础层（我把数据持久化放在基础层了）通信，忽略了最重要的领域层，领域层在其中起到的作用最多也就是传递一个非常贫血的领域模型，然后通过 Repository 进行“CRUD”，这样的结果是，应用层不变成所谓的 BLL（常说的业务逻辑层）才怪，另外，因为业务逻辑都放在应用层了，领域模型也变得更加贫血。</strong></p>
+
+<p>　　以上分析可以回答上一篇中遗留的问题：应用层作为协调服务层，当遇到复杂性的业务逻辑时，到底如何实现，而不使其变成 BLL（业务逻辑层）？其实关于第一个问题（领域模型如何设计不贫血）也是可以进行解答的，这个后一节点有说明，关于这一系列问题的造成我觉得就是 Repository设计，出现了严重和理论偏移，以致于没有把设计重点发在业务逻辑上，在此和大家说声抱歉。</p>
+
+<p>　　关于“应用层中的业务逻辑”，比如下面这段代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 查看消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　对，你已经看出来了，查看消息，要根据阅读人，然后判断是否已读，如果是阅读人是收件人，并且消息是未读状态，要把此消息置为已读状态，业务逻辑没什么问题，但是却放错了位置（应用层），应该放在领域层中（领域模型），其实这都是 Repository 惹的祸，因为应用层根本没有和领域层通信，关于领域模型的设计下面节点有讲解。</p>
+
+<p>　　看了以上的内容，是不是有点：拨开浓雾，见晴天的感觉？不知道你有没有？反正我是有，关于 Repository 我们再理解的深一点，先看一下后半句的定义：<strong>利用类似于集合的接口来访问领域对象。</strong>正如 dudu 理解的这样：Repository 是仓库管理员，领域层需要什么东西只需告诉仓库管理员，由仓库管理员把东西拿给它，并不需要知道东西实际放在哪。可以这样理解为 Repository 就像一个查询集合，只提供查询给领域层，但是我们发现在实际应用中 Repository 也提供了持久化操作，这一点确实让 Repository 有点不伦不类了，关于这一点我觉得 CQRS（Command Query Responsibility Segregation）模式可以很好的解决，翻译为命令查询的职责分离，顾名思义，就是命令（持久化）和查询职责进行分离，因为我没有对 CQRS 进行过研究，也没有看到过具体的示例，所以这边就不多说，但是我觉得这是和领域驱动设计的完美结合，后面有机会可以研究下。</p>
+
+<p>　　说了那么多，那 Repository（仓储）职责到底是什么？可以这样回答：<strong>Repository，请服务好 Domain，而且只限服务于他（防止小三），他要什么你要给什么，为什么？因为他是你大爷，跟着他有肉吃。</strong></p>
+
+<h1 id="五domain-model领域模型重新设计">五、Domain Model（领域模型）重新设计</h1>
+
+<p>　　领域模型是领域驱动设计的核心，这一点是毋容置疑的，那领域模型中的核心是什么？或者说实现的是什么？答案是业务逻辑，那业务逻辑又是什么？或者说什么样的“业务逻辑”才能称为真正意义上的业务逻辑，关于这个问题，在上一篇中遗留如下：</p>
+
+<p>　　<strong>领域模型到底该怎么设计？你会看到，MessageManager 项目中的 User 和 Message 领域模型是非常贫血的，没有包含任何的业务逻辑，现在网上很多关于 DDD 示例项目多数也存在这种情况，当然项目本身没有业务，只是简单的“CRUD”操作，但是如果是一些大型项目的复杂业务逻辑，该怎么去实现？或者说，领域模 型完成什么样的业务逻辑？什么才是真正的业务逻辑？这个问题很重要，后续探讨。</strong></p>
+
+<p>　　什么才是真正的业务逻辑？CRUD ？持久化？还是诸如“GetUserByName、GetMessageByID”之类的查询，我个人感觉这些都不是真正意义上的业务逻辑（注意，是个人感觉），因为每个项目会有“CRUD”、持久化，并不只限于某一种业务场景，像“GetUserByName、GetMessageByID”之类的查询只是查询，了解了上面 Repository 的感觉，你会发现这些查询工作应该是 Repository 做的，他是为领域模型服务的。</p>
+
+<p>　　说了那么多，那什么才是真正意义上的业务逻辑？<strong>我个人感觉改变领域模型状态或行为的业务逻辑，才能称为真正意义上的业务逻辑（注意，是个人感觉）</strong>，比如我在 Repository 节点中说过的一个示例：读取消息，要根据当前阅读人和当前消息的状态来设置当前消息的状态，如果当前阅读人为收件人和当前消息为未读状态，就要把当前消息状态设置为已读，以前这个业务逻辑的实现是在应用层中：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 查看消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+                <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　这种实现方式就会把应用层变为所谓的 BLL（业务逻辑层）了，正确的方式实现应该在 Domain Model（领域模型）中，如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 阅读消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="CurrentUser"&gt;&lt;/param&gt;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ReadMessage</span><span class="o">(</span><span class="n">User</span> <span class="n">CurrentUser</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">&amp;&amp;</span> <span class="n">CurrentUser</span><span class="o">.</span><span class="na">ID</span><span class="o">.</span><span class="na">Equals</span><span class="o">(</span><span class="n">ToUserID</span><span class="o">))</span>
+            <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　因为 MessageManager 这个项目的业务场景非常简单，很多都是简单的 CRUD 操作，可以抽离出真正的业务逻辑实在太少，除了上面阅读消息，还有就是在发送消息的时候，要根据发送用户名和接受用户名，来设置消息的发送用户和接受用户的 ID 值，这个操作以前我们也是在应用层中实现的，如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 发送消息</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">FromUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">ToUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　改善在 Domain Model（领域模型）中的实现，如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 加载用户</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name="sendUser"&gt;&lt;/param&gt;</span>
+        <span class="c1">/// &lt;param name="receiveUser"&gt;&lt;/param&gt;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">LoadUserName</span><span class="o">(</span><span class="n">User</span> <span class="n">sendUser</span><span class="o">,</span><span class="n">User</span> <span class="n">receiveUser</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">sendUser</span><span class="o">.</span><span class="na">ID</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">receiveUser</span><span class="o">.</span><span class="na">ID</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　因为简单的 CRUD 操作不会发生变化，而这些业务逻辑会经常发生变化，比如往消息中加载用户信息，可能现在加载的是 ID 值，以后可能会添加其他的用户值，比如：用户地理位置等等，这样我们只要去修改领域模型就可以了，应用层一点都不需要修改，如果还是之前的实现方式，你会发现我们是必须要修改应用层的，领域模型只是一个空壳。</p>
+
+<h1 id="六domain-service领域服务的加入">六、Domain Service（领域服务）的加入</h1>
+
+<p>　　关于 Domain Service（领域服务）的概念，可以参照：<a href="http://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html#content_15">http://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html#content_15</a>，netfocus 兄关于领域服务讲解的很透彻，以下摘自个人感觉精彩的部分：</p>
+
+<ul>
+  <li>领域中的一些概念不太适合建模为对象，即归类到实体对象或值对象，因为它们本质上就是一些操作，一些动作，而不是事物。这些操作或动作往往会涉及到多个领域对象，并且需要协调这些领域对象共同完成这个操作或动作。如果强行将这些操作职责分配给任何一个对象，则被分配的对象就是承担一些不该承担的职责，从而会导致对象的职责不明确很混乱。但是基于类的面向对象语言规定任何属性或行为都必须放在对象里面。所以我们需要寻找一种新的模式来表示这种跨多个对象的操作，DDD认为服务是一个很自然的范式用来对应这种跨多个对象的操作，所以就有了领域服务这个模式。</li>
+  <li>我觉得模型（实体）与服务（场景）是对领域的一种划分，模型关注领域的个体行为，场景关注领域的群体行为，模型关注领域的静态结构，场景关注领域的动态功能。这也符合了现实中出现的各种现象，有动有静，有独立有协作。</li>
+  <li>领域服务还有一个很重要的功能就是可以避免领域逻辑泄露到应用层。</li>
+</ul>
+
+<p>　　另外还有一个用来说明应用层服务、领域服务、基础服务的职责分配的小示例：</p>
+
+<p>　　<strong>应用层服务</strong></p>
+
+<ol>
+  <li>获取输入（如一个XML请求）；</li>
+  <li>发送消息给领域层服务，要求其实现转帐的业务逻辑；</li>
+  <li>领域层服务处理成功，则调用基础层服务发送Email通知；</li>
+</ol>
+
+<p>　　<strong>领域层服务</strong></p>
+
+<ol>
+  <li>获取源帐号和目标帐号，分别通知源帐号和目标帐号进行扣除金额和增加金额的操作；</li>
+  <li>提供返回结果给应用层；</li>
+</ol>
+
+<p>　　<strong>基础层服务</strong></p>
+
+<ol>
+  <li>按照应用层的请求，发送Email通知；</li>
+</ol>
+
+<p>　　通过上述示例，可以很清晰的理解应用层服务、领域服务、基础服务的职责，关于这些概念的理解，我相信 netfocus 兄是经过很多实践得出的，因为未实践看这些概念和实践过之后再看这些概念，完全是不同的感觉。</p>
+
+<p>　　言归正传，为什么要加入 Domain Service（领域服务）？领域服务在我们之前设计 MessageManager 项目的时候并没有，其实我脑海中一直是有这个概念，因为 Repository 的职责混乱，所以最后领域模型变得如此鸡肋，领域服务也就没有加入，那为什么现在要加入领域服务呢？因为Repository 的职责划分，使得领域模型变成重中之重，因为应用层不和 Repository 通信，应用层又不能直接和领域模型通信，所以才会有领域服务的加入，也必须有领域服务的加入。通过上面概念的理解，你可能会对领域服务的作用有一定的理解，首先领域服务没有状态，只有行为，他和Repository 一样，也是为领域模型服务的，只不过他像一个外交官一样，需要和应用层打交道，用来协调领域模型和应用层，而 Repository 只是一个保姆，只是服务于领域模型。</p>
+
+<p>　　概念理解的差不多了，我们来看一下具体的实现，以下是 MessageDomainService 领域服务中的一段代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Message</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span><span class="n">User</span> <span class="n">CurrentUser</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">ReadMessage</span><span class="o">(</span><span class="n">userRepository</span><span class="o">.</span><span class="na">GetUser</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="n">CurrentUser</span><span class="o">.</span><span class="na">Name</span> <span class="o">}));</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　这段代码表示查看消息，可以看到其实领域服务做的工作就是工作流程的控制，注意是工作流程处理，并不是业务流程，业务流程 ReadMessage 是领域模型去完成的，领域模型的作用只是协调。还有个疑问就是，你会看到在领域服务中使用到了 Repository，在我们之前的讲解中，Repository 不是只服务于领域模型吗？其实换个角度来看，领域服务也可以看做是领域模型的一种表现，Repository 现在主要提供的是查询集合和持久化，领域模型不可以自身操作，那这些工作只有领域服务去完成，关于这一点，就可以看出 Repository 的使用有点不太合理，不知道使用 CQRS 模式会不会是另一种情形。</p>
+
+<p>　　另外，你会看到这一段代码：messageRepository.Context.Commit();，这个是 Unit Of Work（工作单元）的事务提交，这个工作是领域服务要做的吗？关于这一点是有一些疑问，在下面节点中有解读。</p>
+
+<h1 id="七messagemanagerdomaintests-的加入">七、MessageManager.Domain.Tests 的加入</h1>
+
+<p>　　关于单元测试可以参考：<a href="http://www.cnblogs.com/xishuai/p/3728576.html">http://www.cnblogs.com/xishuai/p/3728576.html</a>，MessageManager.Domain.Tests 单元测试在之前的 MessageManager 项目中并没有添加，不是不想添加，而是添加了没什么意义，为什么？因为之前的领域模型那么贫血，只是一些属性和字段，那添加单元测试有什么意思？能测出来什么东西？当把工作聚焦在领域模型上的时候，对领域的单元测试将会非常的有必要。</p>
+
+<p>　　来看 DomainTest 单元测试的部分代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">NUnit</span><span class="o">.</span><span class="na">Framework</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
+<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
+
+<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Tests</span>
+<span class="o">{</span>
+    <span class="o">[</span><span class="n">TestFixture</span><span class="o">]</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DomainTest</span>
+    <span class="o">{</span>
+        <span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">UserDomainService</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;();</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
+            <span class="n">userDomainService</span><span class="o">.</span><span class="na">AddUser</span><span class="o">(</span><span class="n">users</span><span class="o">);</span>
+            <span class="c1">//userDomainService.ExistUser();</span>
+            <span class="c1">//var user = userDomainService.GetUserByName("小菜");</span>
+            <span class="c1">//if (user != null)</span>
+            <span class="c1">//{</span>
+            <span class="c1">//    Console.WriteLine(user.Name);</span>
+            <span class="c1">//}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　其实上面我贴的单元测试的代码有些不合理，你会看到只是测试的持久化操作，这些应该是基础层完成的工作，应该由基础层的单元测试进行测试的，那领域层的单元测试测试的是什么东西？应该是领域模型中的业务逻辑，比如 ReadMessage 内的操作：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">MessageServiceTest</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageDomainService</span><span class="o">.</span><span class="na">ShowMessage</span><span class="o">(</span><span class="s">"ID"</span><span class="o">,</span> <span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="n">Console</span><span class="o">.</span><span class="na">WriteLine</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">IsRead</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="八application-layer应用层的协调">八、Application Layer（应用层）的协调？</h1>
+
+<p>　　<strong>Application Layer（应用层）：定义软件可以完成的工作，并且指挥具有丰富含义的领域对象来解决问题。这个层所负责的任务对业务影响深远，对跟其他系统的应用层进行交互非常必要这个层要保持简练。它不包括处理业务规则或知识，只是给下一层中相互协作的领域对象协调任务、委托工作。在这个层次中不反映业务情况的状态，但反映用户或程序的任务进度的状态。</strong></p>
+
+<p>　　以上是《领域驱动设计-软件核心复杂性应对之道》书中关于应用层给出的定义，应用层是很薄的一层，如果你的应用层很“厚”，那你的应用层设计就肯定出现了问题。关于 Application Layer（应用层）的应用，正如 Eric Evans 所说：不包括处理业务规则或知识，只是给下一层中相互协作的领域对象协调任务、委托工作。重点就是：<strong>不包含业务逻辑，协调任务。</strong></p>
+
+<p>　　如果按照自己的理解去设计应用层，很可能会像我一样把它变成业务逻辑层，所以在设计过程中一定要谨记上面两点。不包含业务逻辑很好理解，前提是要理解什么才是真正的业务逻辑（上面有说明），后面一句协调任务又是什么意思呢？在说明中后面还有一句：在这个层次中不反映业务情况的状态，但反映用户或程序的任务进度的状态。也就是工作流程的控制，比如一个生产流水线，应用层的作用就像是这个生产流水线的控制器，具体生产什么它不需要管理，它只要可以装配零件然后进行组合展示给用户，仅此而已，画了一张示意图，以便大家的理解：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd055.png" width="80%" /></center>
+
+<p>　　另外，应用层因为要对表现层和领域层进行任务协调，这中间会涉及到数据的对象转换，也就是 DTO（数据传输对象），有关 DTO 的概念和 AutoMapper 的使用可以参考：<a href="http://www.cnblogs.com/xishuai/tag/%5B18%5D%E5%B0%8F%E8%8F%9C%E5%AD%A6%E4%B9%A0%E7%BC%96%E7%A8%8B-DTO%2FAutoMapper/">http://www.cnblogs.com/xishuai/tag/DTO_AutoMapper</a>，这些工作是在应用层中进行处理的，就像生产流水线，组装完产品后，需要对其进行包装才能进行展示：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// 对应用层服务进行初始化。</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;remarks&gt;包含的初始化任务有：</span>
+        <span class="c1">/// 1. AutoMapper框架的初始化&lt;/remarks&gt;</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">Initialize</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;();</span>
+            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;();</span>
+            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span> <span class="n">UserDTO</span><span class="o">&gt;();</span>
+            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;()</span>
+                <span class="o">.</span><span class="na">ForMember</span><span class="o">(</span><span class="n">dest</span> <span class="o">=&gt;</span> <span class="n">dest</span><span class="o">.</span><span class="na">Status</span><span class="o">,</span> <span class="n">opt</span> <span class="o">=&gt;</span> <span class="n">opt</span><span class="o">.</span><span class="na">ResolveUsing</span><span class="o">&lt;</span><span class="n">CustomResolver</span><span class="o">&gt;());</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomResolver</span> <span class="o">:</span> <span class="n">ValueResolver</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">string</span><span class="o">&gt;</span>
+        <span class="o">{</span>
+            <span class="kd">protected</span> <span class="n">override</span> <span class="n">string</span> <span class="nf">ResolveCore</span><span class="o">(</span><span class="n">Message</span> <span class="n">source</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
+                <span class="o">{</span>
+                    <span class="k">return</span> <span class="s">"已读"</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">else</span>
+                <span class="o">{</span>
+                    <span class="k">return</span> <span class="s">"未读"</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="九unit-of-work工作单元工作范围及实现">九、Unit Of Work（工作单元）工作范围及实现？</h1>
+
+<p>　　关于 Unit Of Work（工作单元）的概念可以参考：<a href="http://www.cnblogs.com/xishuai/p/3750154.html">http://www.cnblogs.com/xishuai/p/3750154.html</a>。</p>
+
+<p>　　<strong>Unit Of Work：维护受业务事务影响的对象列表，并协调变化的写入和并发问题的解决。即管理对象的 CRUD 操作，以及相应的事务与并发问题等。Unit of Work 是用来解决领域模型存储和变更工作，而这些数据层业务并不属于领域模型本身具有的。</strong></p>
+
+<p>　　工作单元的概念在《企业应用架构模式》中也有说明，定义如下：维护受业务事务影响的对象列表，并协调变化的写入和并发问题的解决。概念的理解并没有什么问题，我想表达的是工作单元的工作范围及如何实现？先说下工作范围，我们看下我曾经画的一张工作单元的流程图：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd056.png" width="100%" /></center>
+
+<p>　　从示意图中可以看出，工作单元的范围是限于 Repository 的，也就是说工作单元是无法跨 Repository 提交事务的，只能在同一个仓储内管理事务的一致性，就像我们使用的 using(MessageManagerDbContext context = new MessageManagerDbContext()) 一样，只是局限于这个 using 块，我曾在领域层的单元测试中做如下测试：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">DomainServiceTest</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="n">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;();</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
+            <span class="n">userDomainService</span><span class="o">.</span><span class="na">AddUser</span><span class="o">(</span><span class="n">users</span><span class="o">);</span>
+            <span class="n">messageDomainService</span><span class="o">.</span><span class="na">DeleteMessage</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　我在 MessageDomainService 中提交事务，因为之前 UserDomainService 已经添加了用户，但是并没有添加用户成功，工作单元中的 Committed 值为 false，其实关于工作单元范围的问题，我现在并没有明确的想法，现在是局限在仓储中，那提交的事务操作就必须放在领域服务中，也就是：messageRepository.Context.Commit();，但是又会觉得这样有些不合理，工作单元应该是贯穿整个项目的，并不一定局限在某一仓储中，而且事务的处理液应该放在应用层中，因为这是他的工作，协调工作流的处理。</p>
+
+<p>　　如果这种思想是正确的话，实现起来确实有些难度，因为现在 ORM（对象关系映射）使用的是 EntityFramework，所以工作单元的实现是很简单的，也就是使用 SaveChanges() 方法来提交事务，我在《企业应用架构模式》中看到工作单元的实现，书中列出了一个简单的例子，还只是集合的管理，如果不使用一些 ORM 工具，实现起来就不仅仅是 SaveChanges() 一段代码的事了，太局限于技术了，确实是个问题。</p>
+
+<p>　　这一节点的内容只是提出一些疑问，并未有解决的方式，希望后面可以探讨下。</p>
+
+<h1 id="十版本发布">十、版本发布</h1>
+
+<p>　　MessageManager 项目解决方案目录：</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd057.png" width="70%" /></center>
+
+<p>　　GitHub开源代码地址 https://github.com/yuezhongxin/MessageManager</p>
+
+<h1 id="十一后记">十一、后记</h1>
+
+<p>　　关于领域模型的设计，我个人感觉是领域驱动设计中最难的部分，你会看到当前我在 MessageManager 项目中只有两个方法，一部分原因是业务场景太简单，另一部分原因可能是我设计的不合理，复杂性业务场景的领域模型是多个类之间协调处理，并会有一部分设计模式的加入，是相当复杂的。</p>
+
+<p>　　需要注意的一点是，本篇以上内容并不是讲述 Domain Model（领域模型）到底如何实现？而是如何聚焦领域模型？只有聚焦在领域模型上，才能把领域模型设计的更合理，这也正是下一步需要探讨的内容。</p>
+
+<p>　　<strong>还是那句话，真正理解和运用 DDD（领域驱动设计）的唯一方式，个人感觉还是“迭代”：不断的去实践，不断的去体会。不合理那就推倒重建，再不合理那就推倒再重建。。。</strong></p>
+
+<h1 id="十二引用">十二、引用</h1>
+
+<p>　　<a href="https://www.cnblogs.com/xishuai/p/3800656.html">DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</a></p>
+
+<p>　　*<a href="/design/2018/08/11/DDD.html">上一章—领域驱动设计田园的蟋蟀专栏篇—001—DDD（领域驱动设计）理论结合实践</a></p>
+
+<p>　　*<a href="/design/2018/08/13/DDD.html">下一章—领域驱动设计田园的蟋蟀专栏篇—003—DDD（领域驱动设计）理论结合实践</a></p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">ddd</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">领域驱动设计</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/12/DDD.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            <br>
+                            <!-- comment -->
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+	
+	    
+	
+
+</body>
+</html>
