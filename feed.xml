@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Sep 2018 18:02:29 +0800</pubDate>
-    <lastBuildDate>Tue, 18 Sep 2018 18:02:29 +0800</lastBuildDate>
+    <pubDate>Tue, 18 Sep 2018 18:03:42 +0800</pubDate>
+    <lastBuildDate>Tue, 18 Sep 2018 18:03:42 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
@@ -1921,7 +1921,7 @@
 
 &lt;p&gt;　　需要注意的一点是，本篇以上内容并不是讲述 Domain Model（领域模型）到底如何实现？而是如何聚焦领域模型？只有聚焦在领域模型上，才能把领域模型设计的更合理，这也正是下一步需要探讨的内容。&lt;/p&gt;
 
-&lt;p&gt;　　&lt;strong&gt;还是那句话，真正理解和运用 DDD（领域驱动设计）的唯一方式，个人感觉还是“迭代”：不断的去实践，不断的去体会。不合理那就推倒重建，再不合理那就推倒再重建。。。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;strong&gt;还是那句话，真正理解和运用 DDD（领域驱动设计）的唯一方式，个人感觉还是“迭代”：不断的去实践，不断的去体会。不合理那就推倒重建，再不合理那就推倒再重建。。。。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;十二引用&quot;&gt;十二、引用&lt;/h1&gt;
 
