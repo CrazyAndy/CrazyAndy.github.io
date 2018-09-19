@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践
+        CrazyAndy|领域驱动设计田园的蟋蟀专栏篇---003---死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？
     
   </title>
   <!-- favicon -->
@@ -224,69 +224,194 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Aug 2018</span>
                         <h1>
-                            领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践
+                            领域驱动设计田园的蟋蟀专栏篇---003---死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？
                         </h1>
                     </div>
-                    	<h1 id="一正文">一、正文</h1>
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+                    	<h1 id="一写在前面">一、写在前面</h1>
+<p>　　在上一篇《<a href="/design/2018/08/12/DDD.html">一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</a>》博文中，探讨的是如何聚焦领域模型（抛开一些干扰因素，才能把精力集中在领域模型的设计上）？需要注意的是，上一篇我讲的并不是如何设计领域模型（本篇也是）？而是如何聚焦领域模型，领域模型的设计是个迭代过程，不能一概而论，还在路上。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　当有一个简单的领域模型用例，完成一个从上而下过程的时候，就需要对领域模型和数据库进行对象关系映射（ORM），首先，在领域驱动设计中，领域模型是活的（具有自己的行为和状态），而映射到数据库中所谓的表是死的（只是一些字段），<strong>如何把活的变成死的？又如何把死的变成活的？更重要的是如何保证在这个“死去活来”的过程中，死的和活的是同一个？</strong></p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　转换过程很简单，使用 ORM（对象关系映射）工具就很方便的完成这个“死去活来”的过程，但是有时候我们在这个转换过程中，可能会失去转换对象的本质，以致活的会变成死的，最后转换过程就只有死的变成死的（反复循环）。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<h2 id="二设计误区">二、设计误区</h2>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　在 MessageManager 项目的上一个版本中，主要存在两个领域模型：Messgae 和 User，他们数据库之间的映射关系是一对多的关系，就是一个用户拥有多个消息，但是一个消息只能对应一个用户（发件人或收件人），我们看下领域模型的设计（暂不包含业务逻辑）。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　Domain Model－Message：</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="o">{</span>
+        <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
+        <span class="kd">public</span> <span class="nf">Message</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+        
+        <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="n">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+        <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　Domain Model－User：</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="o">{</span>
+        <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
+        <span class="kd">public</span> <span class="nf">User</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+        
+        <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">SendMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">ReceiveMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+        <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="err">#</span><span class="n">endregion</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　乍一看，Message 和 User 领域模型并没有什么问题，只是设计的太贫血（只是包含一些属性字段），抛开业务逻辑，我们看下 Message 和 User 之间的关联，Message 模型中拥有 FromUserID,FromUserName,ToUserID,ToUserName 字段，用来表示和 User 模型的关联，Navigation Properties（导航属性）为：FromUser 和 ToUser，类型为 User，再看一下 User 模型的导航属性：SendMessages 和 ReceiveMessages，类型为 ICollection<Message>，我们如果按照平常的开发模式（脚本驱动模式），这样设计没有一点问题，很方便对 ORM 进行配置：</Message></p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// Initializes a new instance of &lt;c&gt;MessageConfiguration&lt;/c&gt; class.</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="kd">public</span> <span class="nf">MessageConfiguration</span><span class="o">()</span>
+        <span class="o">{</span>
+            <span class="n">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="n">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
+            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
+            <span class="n">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+            <span class="c1">// Relationships</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUser</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WithMany</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">SendMessages</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasForeignKey</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WillCascadeOnDelete</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ToUser</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WithMany</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ReceiveMessages</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasForeignKey</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">WillCascadeOnDelete</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　上面代码表示 Message 的映射配置，如果外键可以为 NULL，则使用 HasOptional 方法，多对多则使用 HasMany 和 WithMany，WillCascadeOnDelete 用来级联删除配置，EntityTypeConfiguration 的具体详细配置，请参照：<a href="http://msdn.microsoft.com/zh-cn/data/jj591620.aspx">http://msdn.microsoft.com/zh-cn/data/jj591620.aspx</a>。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　上面的设计到底有没有问题？我们来分析一下，首先 User 领域模型中的 SendMessages 和 ReceiveMessages 属性，如果单独作为导航属性，这是没有什么问题的，因为我们可以使用导航属性很方便的进行映射配置（比如上面代码），但是放在领域模型中就有点不伦不类了，User 是一个用户对象，我们不能在它的身上来挂一些属于它的东西，因为这些并不是用户本身所具有的，这就好像我设计一个用户模型，它拥有手机，电脑，背包，房子，车子等等，然后就必须在这个用户模型中添加这个属性，这样设计就会很不合理，这个应该设计在它所拥有的物品上，因为只有这些物品拥有用户，这些物品相对于用户来说，才有真正的存在意义。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　再来看 Message 领域模型，首先 FromUserID,FromUserName,ToUserID,ToUserName 这四个字段就让我们看得很不顺眼，因为这些都是已死的字段，Message 应该关联的是活的 User，而并不是在它身上打上几个 User 的标签，这个表现应该在数据库中（因为数据库中就是存的这些已死的字段），而并不是在活的 Message 领域模型中，FromUser 和 ToUser 的设计是没有问题的，因为关联的就是活的 User 对象。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　为什么有了 FromUser 和 ToUser 对象，Message 领域模型中还要添加上面那四个字段呢？主要原因还是受思维模式的影响（脚本驱动模式），虽然是基于领域模型设计，但是在设计过程中就会不自觉的往脚本驱动模式上套，为什么？因为我们要使用数据库，不管怎么设计，这些对象都是要存在数据库中的，而数据库存的都是一些已死的对象（只是包含字段），对象死了，那怎么来表示 Message 和 User 对象之间的关联呢？答案就是 FromUserID 和 ToUserID，因为只有通过这两个字段，才能在数据库中体现 Message 和 User 对象之间的关联，数据库存储中确实是这么做的，但是我们把数据库中的关联表现在领域模型中就很不合适了，最后的结果就是 FromUser 和 ToUser 对象的作用只是用来映射配置，Message 领域模型变成和数据库中的 Message 表一样，状态都是已死，转换也就是死的对象转换为死的对象。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　那到底怎么设计？答案就是把 Message 领域模型中的 FromUserID,FromUserName,ToUserID,ToUserName 四个属性去掉，User 领域模型中的 SendMessages 和 ReceiveMessages 属性也去掉，让领域模型变得干净。那有人会问了，你把这些关联字段去掉了，怎么去映射数据库呢？天无绝人之路，使用 EntityFramework（ORM 工具之一）就很方便的进行映射配置，具体配置，可以看下枚举映射和关联映射两个节点。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<h1 id="三数据库已死">三、数据库已死</h1>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　首先，强调一点，数据库已死的概念，并不是说我们项目中不使用数据库（想想应用程序不使用数据库也不可能），只是说应用程序设计的核心不再是基于数据库设计的，而应该是基于面向对象设计，数据库只是存储数据的一种方式，当然也可以配置文件存储或者内存存储。以往我们进行应用程序设计的时候，都是先根据业务需求定义表结构，然后根据表结构用“面向对象”的语言去传递 SQL 放到数据库中执行，这样面向对象语言就成了所谓的 SQL 搬运工，这样造成的问题就是非常难维护，牵一发而动全身，而且性能瓶颈也主要体现在数据库方面，想想应用程序的性能问题（排除代码问题），我们可以使用负载均衡增加服务器，来分担所带来的压力，而应对数据库性能问题呢？从“MySpace”的经历上就可以看出，那是相当的难处理，而且性能问题主要集中在数据库方面，也是设计的不合理所造成的。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　<a href="https://www.jdon.com/34601">myspace数据结构变迁史</a></p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　总结：从 MySpace 看更加验证，数据库是软件系统的瓶颈，而且最不可伸缩，一旦数据库成为系统瓶颈，就得动大手术，实现架构上的变迁，这是伤筋动骨，变迁人员压力巨大的。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　如果我们从软件系统开始之初，就使用对象分析设计，不与数据库沾边，整个流程就完全 OO，分析设计直至代码都摆脱了数据库影响，这个流程如下：</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<ol>
+  <li>分析建模（基于领域驱动设计的业务建模）</li>
+  <li>细化设计（基于领域驱动设计的架构设计）</li>
+  <li>代码实现</li>
+  <li>调试测试</li>
+  <li>部署运行</li>
+</ol>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　那么数据库在什么时候建立呢？数据库表结构的创建可以延缓到部署运行时，这样，整个上游环节就不涉及数据库技术，而是使用更符合自然的表达 OO 方式，软件质量就更高了。现在，很多人已经理解，分析设计要用 OO，但是数据库是运行阶段缺少不了的，确实，这是正确观点，我们夺取数据库的王位，不是将它打倒，只是理性和平移交权力重心而已，数据库退出主角地位，让位于中间件，也预示着过去数据库为王的时代的结束， 但是数据库会和操作系统一样，成为我们现代软件系统一个不可缺少重要的基础环节。</p>
 
-<p>　　————————————————————————————————————————————————————————-hehe</p>
+<p>　　了解了这么多，回到”设计误区“这一节点，你会发现，造成设计误区的主要原因还是，在设计的时候不自觉以数据库为中心了，而并非领域模型。</p>
 
-<h1 id="二引用">二、引用</h1>
+<h1 id="四枚举映射">四、枚举映射</h1>
 
-<p>　　<a href="https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html">Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？</a></p>
+<p>　　在 Message 领域模型中，有个 MessageState 枚举类型，用来表示消息的状态，当然我们也可以使用 Bool 类型的字段来表示，但是消息状态是消息本身的一种状态，用对象来表示更为合适，MessageState 枚举定义如下：</p>
 
-<p>　　*<a href="/design/2018/08/09/DDD.html">上一章—领域驱动设计概览篇—009—DDD初学指南</a></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">enum</span> <span class="n">MessageState</span>
+    <span class="o">{</span>
+        <span class="n">Read</span><span class="o">,</span>
+        <span class="n">NoRead</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="五关联映射">五、关联映射</h1>
+
+<p>　　先看一下，如果我们没有进行任何的 EntityTypeConfiguration 关联设置，生成数据库会是怎样？</p>
+
+<center><img src="/static/assets/img/blog/design/ddd/ddd058.png" width="100%" /></center>
+
+<p>　　可以看到我们虽然没有进行任何的关联设置，Code First 会自动为我们创建外键关联，仅仅是在 Message 领域模型中添加：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">SendUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ReceiveUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>　　以上效果是我们想要的，这也是 EntityFramework 的进步之处，符合领域驱动设计的思想，领域模型中没有数据库中所谓的主外键关联，有的只是对象之间的关联，而数据库只是存储数据的一种表现，这样数据库设计的概念就不存在了，也让我们忘了数据库的存在，而把更多的精力放在领域模型的设计上，这就是领域驱动设计关键所在。</p>
+
+<h1 id="六引用">六、引用</h1>
+
+<p>　　<a href="https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html">死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？</a></p>
+
+<p>　　*<a href="/design/2018/08/12/DDD.html">上一章—领域驱动设计田园的蟋蟀专栏篇—002—一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</a></p>
+
+<p>　　*<a href="/design/2018/08/14/DDD.html">下一章—领域驱动设计田园的蟋蟀专栏篇—004—拨开迷雾，找回自我：DDD 应对具体业务场景，Domain Model 到底如何设计？</a></p>
 
                     <hr>
                     <div class="row">
