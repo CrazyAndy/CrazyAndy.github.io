@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Sep 2018 01:02:12 +0800</pubDate>
-    <lastBuildDate>Mon, 24 Sep 2018 01:02:12 +0800</lastBuildDate>
+    <pubDate>Mon, 24 Sep 2018 14:59:58 +0800</pubDate>
+    <lastBuildDate>Mon, 24 Sep 2018 14:59:58 +0800</lastBuildDate>
     <generator>Jekyll v3.8.1</generator>
     
       <item>
@@ -224,7 +224,7 @@
       </item>
     
       <item>
-        <title>领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践</title>
+        <title>领域驱动设计田园的蟋蟀专栏篇---009---DDD 领域驱动设计－在动手之前，先把你的脑袋清理干净</title>
         <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
 &lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
 
@@ -418,9 +418,11 @@
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html&quot;&gt;Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/Domain-Driven-Design-Clear-Your-Concepts-Before-Yo.html&quot;&gt;DDD 领域驱动设计－在动手之前，先把你的脑袋清理干净&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/18/DDD.html&quot;&gt;上一章—领域驱动设计蟋蟀专栏篇—008—醍醐灌顶：领域驱动设计实现之路&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/20/DDD.html&quot;&gt;下一章—领域驱动设计蟋蟀专栏篇—010—DDD 领域驱动设计－Value Object（值对象）如何使用 EF 进行正确映射&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 19 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/19/DDD.html</link>
@@ -438,203 +440,209 @@
       </item>
     
       <item>
-        <title>领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践</title>
-        <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+        <title>领域驱动设计田园的蟋蟀专栏篇---008---醍醐灌顶：领域驱动设计实现之路</title>
+        <description>&lt;h1 id=&quot;一强烈推荐&quot;&gt;一、强烈推荐&lt;/h1&gt;
+&lt;p&gt;　　原文地址：&lt;a href=&quot;http://www.infoq.com/cn/articles/implementation-road-of-domain-driven-design&quot;&gt;http://www.infoq.com/cn/articles/implementation-road-of-domain-driven-design&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　作者：&lt;a href=&quot;http://www.infoq.com/cn/author/%E6%BB%95%E4%BA%91&quot;&gt;滕云&lt;/a&gt;，《实现领域驱动设计》译者&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　我以前认为学习领域驱动设计，只需要读 Eric Evans 的《领域驱动设计——软件核心复杂性应对之道》这本经典著作就好了，但是阅读了这篇文章之后，看来我要读下《实践领域驱动设计》这本书了（已经购买）。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　很多时候理论学习是一方面，理论实践是另一方面，我们不一定去模仿别人的实践，但是我们可以参考别人所走过的路，学习别人所总结的经验，这些都是宝贵的财富。为什么醍醐灌顶？因为如果你实践过领域驱动设计，你会发现与作者有一些共鸣之处，比如下文中的行为饱满的领域对象、实体与值对象界定、仓储与聚合根等，如果没有实践过领域驱动设计，理解作者的这些内容可能只是表面的了解，不知其所以然，但是如果实践过，你会体会的更加深刻，可能作者无意表达的一个观点，会为你现在所一直困惑的地方带来一丝珍贵的灵感，这也就是分享的真谛。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h1 id=&quot;二前言&quot;&gt;二、前言&lt;/h1&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　我想，多数有经验的程序开发者都应该听说过DDD，并且尝试过将其应用在自己的项目中。不知你是否遇到过这样的场景：你创建了一个资源库（Repository），但一段时间之后发现这个资源库和传统的DAO越来越像了，你开始反思自己的实现方式是正确的吗？或者，你创建了一个聚合，然后发现这个聚合是如此的庞大，它为什么引用了如此多的对象，难道又是我做错了吗？&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　其实你并不孤单，我相信多数同仁都曾遇到过相似的问题。前不久，我一个同事给我展示了他在2007年买的那本已经被他韦编三绝过的《领域驱动设计》，他告诉我，读过好几遍后，他依然不知道如何将DDD付诸实践。Eric那本书固然是好，无可否认，但是我们程序员总希望看到一些实际的例子能够切实将DDD落地以指导我们的日常开发。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　于是，在Eric的书出版将近10年之后，我们有了&lt;a href=&quot;http://book.douban.com/subject/25844633/&quot;&gt;《实现领域驱动设计》&lt;/a&gt;，作为该书的译者，我有幸通读了本书，受益匪浅，得到的结论是：好的软件就应该是DDD的。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　就像在微电子领域有知识产权核（Intellectual Property）一样，DDD将一个软件系统的核心业务功能集中在一个核心域里面，其中包含了实体、值对象、领域服务、资源库和聚合等概念。在此基础上，DDD提出了一套完整的支撑这样的核心领域的基础设施。此时，DDD已经不再是“面向对象进阶”那么简单了，而是演变成了一个系统工程。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　所谓领域，即是一个组织的业务开展方式，业务价值便体现在其中。长久以来，我们程序员都是很好的技术型思考者，我们总是擅长从技术的角度来解决项目问题。但是，一个软件系统是否真正可用是通过它所提供的业务价值体现出来的。因此，与其每天钻在那些永远也学不完的技术中，何不将我们的关注点向软件系统所提供的业务价值方向思考思考，这也正是DDD所试图解决的问题。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在DDD中，代码就是设计本身，你不再需要那些繁文缛节的并且永远也无法得到实时更新的设计文档。编码者与领域专家再也不需要翻译才能理解对方所表达的意思。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　DDD有战略设计和战术设计之分。战略设计主要从高层“俯视”我们的软件系统，帮助我们精准地划分领域以及处理各个领域之间的关系；而战术设计则从技术实现的层面教会我们如何具体地实施DDD。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h1 id=&quot;三ddd之战略设计&quot;&gt;三、DDD之战略设计&lt;/h1&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　需要指出的是，DDD绝非一套单纯的技术工具集，但是我所看到的很多程序员却的确是这么认为的，并且也是怀揣着这样的想法来使用DDD的。过于拘泥于技术上的实现将导致DDD-Lite。简单来讲，DDD-Lite将导致劣质的领域对象，因为我们忽略了DDD战略建模所带来的好处。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　DDD的战略设计主要包括领域/子域、通用语言、限界上下文和架构风格等概念。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;领域和子域domainsubdomain&quot;&gt;领域和子域（Domain/Subdomain）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　既然是领域驱动设计，那么我们主要的关注点理所当然应该放在如何设计领域模型上，以及对领域模型的划分。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　领域并不是多么高深的概念，比如，一个保险公司的领域中包含了保险单、理赔和再保险等概念；一个电商网站的领域包含了产品名录、订单、发票、库存和物流的概念。这里，我主要讲讲对领域的划分，即将一个大的领域划分成若干个子域。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在日常开发中，我们通常会将一个大型的软件系统拆分成若干个子系统。这种划分有可能是基于架构方面的考虑，也有可能是基于基础设施的。但是在DDD中，我们对系统的划分是基于领域的，也即是基于业务的。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　于是，问题也来了：首先，哪些概念应该建模在哪些子系统里面？我们可能会发现一个领域概念建模在子系统A中是可以的，而建模在子系统B中似乎也合乎情理。第二个问题是，各个子系统之间的应该如何集成？有人可能会说，这不简单得就像客户端调用服务端那么简单吗？问题在于，两个系统之间的集成涉及到基础设施和不同领域概念在两个系统之间的翻译，稍不注意，这些概念就会对我们精心创建好的领域模型造成污染。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　如何解决？答案是：限界上下文和上下文映射图。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;限界上下文bounded-context&quot;&gt;限界上下文（Bounded Context）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在一个领域/子域中，我们会创建一个概念上的领域边界，在这个边界中，任何领域对象都只表示特定于该边界内部的确切含义。这样边界便称为限界上下文。限界上下文和领域具有一对一的关系。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　举个例子，同样是一本书，在出版阶段和出售阶段所表达的概念是不同的，出版阶段我们主要关注的是出版日期，字数，出版社和印刷厂等概念，而在出售阶段我们则主要关心价格，物流和发票等概念。我们应该怎么办呢，将所有这些概念放在单个Book对象中吗？这不是DDD的做法，DDD有限界上下文将这两个不同的概念区分开来。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　从物理上讲，一个限界上下文最终可以是一个DLL(.NET)文件或者JAR(Java)文件，甚至可以是一个命名空间（比如Java的package）中的所有对象。但是，技术本身并不应该用来界分限界上下文。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　将一个限界上下文中的所有概念，包括名词、动词和形容词全部集中在一起，我们便为该限界上下文创建了一套通用语言。通用语言是一个团队所有成员交流时所使用的语言，业务分析人员、编码人员和测试人员都应该直接通过通用语言进行交流。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　对于上文中提到的各个子域之间的集成问题，其实也是限界上下文之间的集成问题。在集成时，我们主要关心的是领域模型和集成手段之间的关系。比如需要与一个REST资源集成，你需要提供基础设施（比如 Spring 中的RestTemplate），但是这些设施并不是你核心领域模型的一部分，你应该怎么办呢？答案是防腐层，该层负责与外部服务提供方打交道，还负责将外部概念翻译成自己的核心领域能够理解的概念。当然，防腐层只是限界上下文之间众多集成方式的一种，另外还有共享内核、开放主机服务等，具体细节请参考 《实现领域驱动设计》原书。限界上下文之间的集成关系也可以理解为是领域概念在不同上下文之间的映射关系，因此，限界上下文之间的集成也称为上下文映射图。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;架构风格architecture&quot;&gt;架构风格（Architecture）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　DDD并不要求采用特定的架构风格，因为它是对架构中立的。你可以采用传统的三层式架构，也可以采用REST架构和事件驱动架构等。但是在《实现领域驱动设计》中，作者比较推崇事件驱动架构和六边形（Hexagonal）架构。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　当下，面向接口编程和依赖注入原则已经在颠覆着传统的分层架构，如果再进一步，我们便得到了六边形架构，也称为端口和适配器（Ports and Adapters）。在六边形架构中，已经不存在分层的概念，所有组件都是平等的。这主要得益于软件抽象的好处，即各个组件的之间的交互完全通过接口完成，而不是具体的实现细节。正如Robert C. Martin所说：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;抽象不应该依赖于细节，细节应该依赖于抽象。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　采用六边形架构的系统中存在着很多端口和适配器的组合。端口表示的是一个软件系统的输入和输出，而适配器则是对每一个端口的访问方式。比如，在一个 Web应用程序中，HTTP协议可以作为一个端口，它向用户提供HTML页面并且接受用户的表单提交；而Servlet（对于Java而言）或者 Spring中的Controller则是相对应于HTTP协议的适配器。再比如，要对数据进行持久化，此时的数据库系统则可看成是一个端口，而访问数据库的Driver则是相应于数据库的适配器。如果要为系统增加新的访问方式，你只需要为该访问方式添加一个相应的端口和适配器即可。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　那么，我们的领域模型又如何与端口和适配器进行交互呢？&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　上文已经提到，软件系统的真正价值在于提供业务功能，我们会将所有的业务功能分解为若干个业务用例，每一次业务用例都表示对软件系统的一次原子操作。所以首先，软件系统中应该存在这样的组件，他们的作用即以业务用例为单位向外界暴露该系统的业务功能。在DDD中，这样的组件称为应用层 （Application Layer）。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在有了应用层之后，软件系统和外界的交互便变成了适配器和应用层之间的交互，如图-1所示。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/design/ddd/ddd063.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　图-1 六边形架构&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　从图-1中可以看出，领域模型位于应用程序的核心部分，外界与领域模型的交互都通过应用层完成，应用层是领域模型的直接客户。然而，应用层中不应该包含有业务逻辑，否则就造成了领域逻辑的泄漏，而应该是很薄的一层，主要起到协调的作用，它所做的只是将业务操作代理给我们的领域模型。同时，如果我们的业务操作有事务需求，那么对于事务的管理应该放在应用层上，因为事务也是以业务用例为单位的。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　应用层虽然很薄，但却非常重要，因为软件系统的领域逻辑都是通过它暴露出去的，此时的应用层扮演了系统门面（Facade）的角色。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h1 id=&quot;四ddd之战术设计&quot;&gt;四、DDD之战术设计&lt;/h1&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　战略设计为我们提供一种高层视野来审视我们的软件系统，而战术设计则将战略设计进行具体化和细节化，它主要关注的是技术层面的实施，也是对我们程序员来得最实在的地方。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;行为饱满的领域对象&quot;&gt;行为饱满的领域对象&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　我们希望领域对象能够准确地表达出业务意图，但是多数时候，我们所看到的却是充满getter和setter的领域对象，此时的领域对象已经不是领域对象了，而是Martin Fowler所称之为的&lt;a href=&quot;http://martinfowler.com/bliki/AnemicDomainModel.html&quot;&gt;贫血对象&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　放到Java世界中，多年以来，Java Bean规范都引诱着程序员们以“自然而然又合乎情理”的方式创建着无数的贫血对象，而一些框架也规定对象必须提供getter和setter方法，比如 Hibernate的早期版本。那么，贫血对象到底有什么坏处呢？来看一个例子：要修改一个客户（Customer）的邮箱地址，在使用setter方法时为：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Customer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　虽然以上代码可以完成“修改邮箱地址”的功能，但是当你读到这段代码时，你能否推测出系统中就一定存在着一个“修改邮箱地址”的业务用例呢？&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　你可能会说，可以在另一个Service类里面创建一个changeCustomerEmail()方法，再在该方法中调用Customer的 setEmailAddress()方法，这样业务意图不就明了了吗？问题在于，修改邮箱地址这样的职责本来就应该放在Customer上，而不应该由 Service和Customer共同完成。遵循诸如信息封装这样的基本面向对象原则是在实施DDD时最基本的素养。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　要创建行为饱满的领域对象并不难，我们需要转变一下思维，将领域对象当做是服务的提供方，而不是数据容器，多思考一个领域对象能够提供哪些行为，而不是数据。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　近几年又重新流行起来的函数式编程也能够帮助我们编写更加具有业务表达力的业务代码，比如C#和Java 8都提供了Lambda功能，同时还包括多数动态语言（比如Ruby和Groovy等）。再进一步，我们完全可以通过领域特定语言（DSL）的方式实现领域模型。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　笔者曾经设想过这么一个软件系统：它的核心功能完全由一套DSL暴露给外界，所有业务操作都通过这套DSL进行，这个领域的业务规则可以通过一套规则引擎进行配置，于是这套DSL可以像上文提到的知识产权核一样拿到市面上进行销售。此时，我们的核心域被严严实实地封装在这套DSL之内，不容许外界的任何污染。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;实体vs值对象entity-vs-value-object&quot;&gt;实体vs值对象（Entity vs Value Object）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在一个软件系统中，实体表示那些具有生命周期并且会在其生命周期中发生改变的东西；而值对象则表示起描述性作用的并且可以相互替换的概念。同一个概念，在一个软件系统中被建模成了实体，但是在另一个系统中则有可能是值对象。例如货币，在通常交易中，我们都将它建模成了一个值对象，因为我们花了20元买了一本书，我们只是关心货币的数量而已，而不是关心具体使用了哪一张20元的钞票，也即两张20元的钞票是可以互换的。但是，如果现在中国人民银行需要建立一个系统来管理所有发行的货币，并且希望对每一张货币进行跟踪，那么此时的货币便变成了一个实体，并且具有唯一标识（Identity）。在这个系统中，即便两张钞票都是20元，他们依然表示两个不同的实体。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　具体到实现层面，值对象是没有唯一标识的，他的equals()方法（比如在Java语言中）可以用它所包含的描述性属性字段来实现。但是，对于实体而言，equals()方法便只能通过唯一标识来实现了，因为即便两个实体所拥有的状态是一样的，他们依然是不同的实体，就像两个人的名字都叫张三，但是他们却是两个不同的人的个体。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　我们发现，多数领域概念都可以建模成值对象，而非实体。值对象就像软件系统中的过客一样，具有“创建后不管”的特征，因此，我们不需要像关心实体那样去关心诸如生命周期和持久化等问题。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;聚合aggregate&quot;&gt;聚合（Aggregate）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　聚合可能是DDD中最难理解的概念 ，之所以称之为聚合，是因为聚合中所包含的对象之间具有密不可分的联系，他们是内聚在一起的。比如一辆汽车（Car）包含了引擎（Engine）、车轮 （Wheel）和油箱（Tank）等组件，缺一不可。一个聚合中可以包含多个实体和值对象，因此聚合也被称为根实体。聚合是持久化的基本单位，它和资源库 （请参考下文）具有一一对应的关系。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　既然聚合可以容纳其他领域对象，那么聚合应该设计得多大呢？这也是设计聚合的难点之一。比如在一个博客（Blog）系统中，一个用户（User）可 以创建多个Blog，而一个Blog又可以包含多篇博文（Post）。在建模时，我们通常的做法是在User对象中包含一个Blog的集合，然后在每个 Blog中又包含了一个Post的集合。你真的需要这么做吗？如果你需要修改User的基本信息，在加载User时，所有的Blog和Post也需要加载，这将造成很大的性能损耗。诚然，我们可以通过延迟加载的方式解决问题，但是延迟加载只是技术上的实现方式而已。导致上述问题的深层原因其实在我们的设计上，我们发现，User更多的是和认证授权相关的概念，而与Blog关系并不大，因此完全没有必要在User中维护Blog的集合。在将User和 Blog分离之后，Blog也和User一样成为了一个聚合，它拥有自己的资源库。问题又来了：既然User和Blog分离了，那么如果需要在Blog中引用User又该怎么办呢？在一个聚合中直接引用另外一个聚合并不是DDD所鼓励的，但是我们可以通过ID的方式引用另外的聚合，比如在Blog中可以维护一个userId的实例变量。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　User作为Blog的创建者，可以成为Blog的工厂。放到DDD中，创建Blog的功能也只能由User完成。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　综上，对于“创建Blog”的用例，我们可以通过以下方法完成：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BlogApplicatioinService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Transactional&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createBlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blogName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createBlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blogName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;blogRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在上例中，业务用例通过BlogApplicationService应用服务完成，在用例方法createBlog()中，首先通过User的资源库得到一个User，然后调用User中的工厂方法createBlog()方法创建一个Blog，最后通过BlogRepository对Blog进行持久化。整个过程构成了一次事务，因此createBlog()方法标记有@Transactional作为事务边界。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　使用聚合的首要原则为在一次事务中，最多只能更改一个聚合的状态。如果一次业务操作涉及到了对多个聚合状态的更改，那么应该采用发布领域事件（参考下文）的方式通知相应的聚合。此时的数据一致性便从事务一致性变成了最终一致性（Eventual Consistency）。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;领域服务domain-service&quot;&gt;领域服务（Domain Service）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　你是否遇到过这样的问题：想建模一个领域概念，把它放在实体上不合适，把它放在值对象上也不合适，然后你冥思苦想着自己的建模方式是不是出了问题。 恭喜你，祝贺你，你的建模手法完全没有问题，只是你还没有接触到领域服务（Domain Service）这个概念，因为领域服务本来就是来处理这种场景的。比如，要对密码进行加密，我们便可以创建一个 PasswordEncryptService来专门负责此事。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　值得一提的是，领域服务和上文中提到的应用服务是不同的，领域服务是领域模型的一部分，而应用服务不是。应用服务是领域服务的客户，它将领域模型变成对外界可用的软件系统。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　领域服务不能滥用，因为如果我们将太多的领域逻辑放在领域服务上，实体和值对象上将变成贫血对象。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;资源库repository&quot;&gt;资源库（Repository）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　资源库用于保存和获取聚合对象，在这一点上，资源库与DAO多少有些相似之处。但是，资源库和DAO是存在显著区别的。DAO只是对数据库的一层很薄的封装，而资源库则更加具有领域特征。另外，所有的实体都可以有相应的DAO，但并不是所有的实体都有资源库，只有聚合才有相应的资源库。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　资源库分为两种，一种是基于集合的，一种是基于持久化的。顾名思义，基于集合的资源库具有编程语言中集合的特征。举个例子，Java中的List， 我们从一个List中取出一个元素，在对该元素进行修改之后，我们并不用显式地将该元素重新保存到List里面。因此，面向集合的资源库并不存在save()方法。比如，对于上文中的User，其资源库可以设计为：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CollectionOrientedUserRepository&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;userById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allUsers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　对于面向持久化的资源库来说，在对聚合进行修改之后，我们需要显式地调用sava()方法将其更新到资源库中。依然是User，此时的资源库如下：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PersistenceOrientedUserRepository&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;userById&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allUsers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在以上两种方式所实现的资源库中，虽然只是将add()方法改成了save()方法，但是在使用的时候却是不一样的。在使用面向集合资源库时，add()方法只是用来将新的聚合加入资源库；而在面向持久化的资源库中，save()方法不仅用于添加新的聚合，还用于显式地更新既有聚合。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h3 id=&quot;领域事件domain-event&quot;&gt;领域事件（Domain Event）&lt;/h3&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在Eric的《领域驱动设计》中并没有提到领域事件，领域事件是最近几年才加入DDD生态系统的。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在传统的软件系统中，对数据一致性的处理都是通过事务完成的，其中包括本地事务和全局事务。但是，DDD的一个重要原则便是一次事务只能更新一个聚合实例。然而，的确存在需要修改多个聚合的业务用例，那么此时我们应该怎么办呢？&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　另外，在最近流行起来的微服务（Micro Service）的架构中，整个系统被分成了很多个轻量的程序模块，他们之间的数据一致性并不容易通过事务一致性完成，此时我们又该怎么办呢？&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　在DDD中，领域事件便可以用于处理上述问题，此时最终一致性取代了事务一致性，通过领域事件的方式达到各个组件之间的数据一致性。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　领域事件的命名遵循英语中的“名词+动词过去分词”格式，即表示的是先前发生过的一件事情。比如，购买者提交商品订单之后发布OrderSubmitted事件，用户更改邮箱地址之后发布EmailAddressChanged事件。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　需要注意的是，既然是领域事件，他们便应该从领域模型中发布。领域事件的最终接收者可以是本限界上下文中的组件，也可以是另一个限界上下文。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　领域事件的额外好处在于它可以记录发生在软件系统中所有的重要修改，这样可以很好地支持程序调试和商业智能化。另外，在CQRS架构的软件系统中， 领域事件还用于写模型和读模型之间的数据同步。再进一步发展，事件驱动架构可以演变成事件源（Event Sourcing），即对聚合的获取并不是通过加载数据库中的瞬时状态，而是通过重放发生在聚合生命周期中的所有领域事件完成。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;h1 id=&quot;五总结&quot;&gt;五、总结&lt;/h1&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　DDD存在战略设计和战术设计之分，过度地强调DDD的技术性将使我们错过由战略设计带来的好处。因此，在实现DDD时，我们应该将战略设计也放在一个重要的位置加以对待。战略设计帮助我们从一个宏观的角度观察和审视软件系统，其中的限界上下文和上下文映射图帮助我们正确地界分各个子域（系统）。 DDD的战术设计则更加侧重于技术实现，它向我们提供了一整套技术工具集，包括实体、值对象、领域服务和资源库等。虽然DDD的概念已经提出近10年了， 但是在如何实现DDD上，我们依然有很长的路要走。&lt;/p&gt;
 
 &lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
 
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html&quot;&gt;Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/3844551.html&quot;&gt;醍醐灌顶：领域驱动设计实现之路&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/17/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—007—拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/19/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD 领域驱动设计－在动手之前，先把你的脑袋清理干净&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/18/DDD.html</link>
@@ -652,203 +660,266 @@
       </item>
     
       <item>
-        <title>领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践</title>
-        <description>&lt;h1 id=&quot;一正文&quot;&gt;一、正文&lt;/h1&gt;
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+        <title>领域驱动设计田园的蟋蟀专栏篇---007---拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计</title>
+        <description>&lt;h1 id=&quot;一写在前面&quot;&gt;一、写在前面&lt;/h1&gt;
+&lt;p&gt;　　讲本篇内容之前，先回顾上一篇所讨论的内容，主要是 Repository（仓储）的职责问题，属于领域？还是应用层？其实到头来也没有准确的结论，但是最终比较偏向于仓储定义在领域，实现在基础层，调用在应用层。你可能有些疑问，为什么要讨论仓储的职责问题？看过上一篇的内容你可能会有些答案，这也就是上一篇博文标题，为什么是“设计窘境”的原因。&lt;/p&gt;
+
+&lt;p&gt;　　本篇博文标题定义为：”拨乱反正“，就像战乱纷争的年代，清剿叛军，回归大统，所表达的意思就是，排除一切干扰因素，回归正确的业务场景，然后进行干净的领域模型设计。领域驱动设计这个实践系列已经写了大概六七篇博文了，从领域模型&lt;strong&gt;到底如何设计&lt;/strong&gt;？到领域模型&lt;strong&gt;重新设计&lt;/strong&gt;，到领域模型&lt;strong&gt;再重新设计&lt;/strong&gt;，到现在的领域模型&lt;strong&gt;再再重新设计&lt;/strong&gt;。。。对，被你看出来了，领域驱动设计中最重要的就是领域模型的设计，但是到现在为止，领域模型的设计一直没有完成，而是一次一次的被推翻重建，道路是曲折的，前途是光明的，但是这个过程真是太痛苦了，回顾现有的这个过程，就会发现，为什么领域模型设计这么难？原因就是领域模型中的职责分配问题，谁存在？谁不存在？谁属于谁？谁不属于谁？谁是谁的？谁是谁的谁的谁（好像是一段歌词，不好意思哈，打顺手了）？但这一切的前提都是建立在正确的业务场景之上，那我们这个业务场景究竟是什么？希望你能从本篇博文中找到些许答案。&lt;/p&gt;
+
+&lt;h1 id=&quot;二重申业务场景&quot;&gt;二、重申业务场景&lt;/h1&gt;
+
+&lt;p&gt;　　其实这个项目（MessageManager）一开始设计的时候，定义为短消息系统，也就是类似博客园短消息系统，发送人给接收人发送一个短消息，接收人接收到这个短消息进行查看，发送人和接收人可以查看各自的收发件箱，大概也就是这样的一个业务场景。但是后来才发现真正的业务场景是，短消息系统中的“短”字应该去掉，也就变成了消息系统，不一定只适用于短消息发送，还可能发送邮件、发送短信等，但是这种发送不会像短消息那种需要进行持久化，他们只是一个发送的动作。&lt;/p&gt;
+
+&lt;p&gt;　　有朋友可能看到这可能会有些疑问，发送邮件、发送短信这种信息发送，不应该属于应用层所干的事吗？其实这很容易造成误解，比如一个在线商城应用程序中，业务需求要求每提交一笔订单发送一封邮件给客户，我们一般会在应用层接收来自领域处理完订单的请求后，调用基础层提供的服务完成邮件发送，这种设计是没有什么问题的。需要明确的是现在的业务场景是消息系统，而不是在线商城，聚焦的是消息业务，那所有具体的消息都是业务，也就包含邮件发送和短信发送，因为他们是属于消息的一种。&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
+&lt;p&gt;　　毫无疑问，我们现在的消息系统就必须要抽离出，所有消息的抽象业务逻辑，以适用于所有消息业务场景的具体应用，我觉得这才是《道德经》中“有之以为利，无之以为用”的真谛所在（以前关于这个观点的解读，现在感觉都是在瞎扯），消息领域模型所展现的就是“无”，体现出来的结果就是“有”。说具体点就是，所有消息应用包含什么东西，我觉得就是三个对象：发送人对象、接收人对象和消息对象，这三个对象组成一个完整的消息系统，不管短消息、邮件和短信都是如此，三者缺一不可，缺少任何一种就不是一个完整的消息系统，可能在不同的消息场景中会有些变化，比如短消息系统中，发送人是一个用户对象，但是在邮件和短信系统中，发送人只是一个邮箱和手机号标识，但是它也代表着发送人所表达的意义。&lt;/p&gt;
+
+&lt;p&gt;　　除了抽离出消息系统所存在的对象，还要去了解整个消息业务场景中所表现的过程，在消息系统中最重要的一个用例就是消息发送，因为查看消息或者查看收发件箱只在短消息业务场景下，邮件和短信的查看可以通过电子邮箱和手机查看，在消息系统中只存在发消息这个业务，那发消息的流程是什么？首先必须有发件人（标识），填写一个消息，贴上收件人（标识），然后送给邮递员进行邮递，短消息、邮件和短信发送都是这个过程，那我们再来看看下之前用户实体的设计：&lt;/p&gt;
 
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;p&gt;　　————————————————————————————————————————————————————————-hehe&lt;/p&gt;
-
-&lt;h1 id=&quot;二引用&quot;&gt;二、引用&lt;/h1&gt;
-
-&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/domainmodel_entityframework_database.html&quot;&gt;Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Generic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entity&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IAggregateRoot&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loginName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;IsNullOrEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loginName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;loginName can't be null&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;IsNullOrEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;displayName can't be null&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Guid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NewGuid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ToString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LoginName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loginName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DisplayName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SendMessages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ReceiveMessages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LoginName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DisplayName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ICollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SendMessages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ICollection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ReceiveMessages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SendMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;receiveUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SendMessages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;receiveUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ReceiveMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ReceiveMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sendUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ReceiveMessages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　在之前的设计中，我们把用户设计成一个实体，而且是一个独立于消息的聚合根，因为需要通过其他属性获取到用户，但是在现在的消息业务场景中，用户是不需要存储的，也就是说用户的获取或验证都是通过外部实现的，很显然现在的这种设计就有点不合理了。还有就是用户实体下的 SendMessages 和 ReceiveMessages 属性，用来表示此用户下的发件箱和收件箱，如果存在用户实体，这种设计也是有待商榷的，更何况用户实体并不存在。还有后面加的 SendMessage 和 ReceiveMessage 方法，表示用户发送消息和接收消息的一种行为，为什么要这样设计？主要原因还是来自上一篇的讨论：&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;《领域驱动设计》账户转账示例流程分享（来自 hailants）：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用户发起业务，界面层调用应用层的转账操作&lt;/li&gt;
+  &lt;li&gt;应用层调用 a123 的转账操作，传入对方账户和转账金额&lt;/li&gt;
+  &lt;li&gt;账户 a123 调用 a234 加钱操作&lt;/li&gt;
+  &lt;li&gt;a234 将操作添入事务单元，向账户 a123 返回确认&lt;/li&gt;
+  &lt;li&gt;账户 a123 调用自身减钱操作，添入事务单元，向应用层返回确认&lt;/li&gt;
+  &lt;li&gt;应用层提交事务，向界面层返回确认&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;　　&lt;strong&gt;相应推理出发送消息业务流程：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用户发起发消息业务请求，界面调用应用层转账操作（传入参数为：标题，内容，发件人名称，收件人名称）&lt;/li&gt;
+  &lt;li&gt;应用层首先创建一个发件人对象（通过仓储获得），然后再创建收件人对象和消息对象&lt;/li&gt;
+  &lt;li&gt;发件人对象调用用户实体中的 SendMessage 操作（参数为收件人对象和消息对象）&lt;/li&gt;
+  &lt;li&gt;在发件人对象中的 SendMessage 方法中，收件人对象调用用户实体中的 ReceiveMessage 操作（参数为发件人和消息对象）&lt;/li&gt;
+  &lt;li&gt;在以上操作的完成后添加到事务操作（具体就是往消息仓储中添加消息领域对象）&lt;/li&gt;
+  &lt;li&gt;应用层提交事务，向界面返回确认。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;　　其实这种设计某种意义上也没有什么问题，至少在短消息系统中，因为发消息本身就是用户的一种行为，但是如果仔细一想就会觉得有些别扭，首先账户转账业务流程和发消息业务流程虽然表面上相似，但是其聚合的对象并不相同，比如账户转账示例中，聚合的是账户，发消息业务场景中如果这样分析应该聚合的是用户，但是很显然并不是，聚合的是消息对象，如果聚合用户就会变成用户消息系统了，这就偏离了大方向，并不是我们所想看到的。还有就是现在的这种设计只适用于短消息业务场景，在邮件和短信业务场景中并不适用，为什么？因为邮件发送和短信发送并不存在用户的概念（这个用户概念并不是现实生活中的人，而是系统中的用户，这个观点很容易造成误解），有的只是一个标识（电子邮件或手机号），用来体现出发件人和收件人的概念，也就是说这种标识并不是一个对象（没有行为的对象），准确的来说应该不是一个实体，那是什么？在领域驱动设计中设计为值对象（为什么要设计成值对象，后面领域模型设计中进行说明），一个没有行为的对象中加入行为操作，本身逻辑就存在问题，所以这种设计是有问题的。&lt;/p&gt;
+
+&lt;p&gt;　　回到发消息这个业务用例上，一个消息对象存在意义的前提是拥有标题、内容、发送人（标识）和接收人（标识），当然还存在一些选填元素，但是主要包含这四个元素，缺少任何一种，就不是一个完整的消息对象，也就是说不能用来发送。发送操作不仅仅是一个对象的行为，而应该是消息领域模型提供的一种服务，也就是领域服务，提供各种消息发送的服务，这一点很容易和基础层的消息发送服务搞混，区分他们只需要记住一点：基础层是技术上的实现，领域是业务上的抽象，因为这个业务场景是消息系统，那发消息就是一种业务用例，而并不是一个技术调用方法。&lt;/p&gt;
+
+&lt;p&gt;　　说了这么多，总结一下所描述的消息业务场景：抽象所有消息业务逻辑（包含短消息、邮件和短信等），应用具体的业务场景（比如短消息）。发消息业务用例：发送人（系统用户）填写消息，包含标题、内容、发送人（标识）、接收人（标识），调用（应用层发送请求）服务（领域服务）发送消息，相当于邮递员投递信件，就是这样的一个过程，至少听起来这么简单，实现起来呢？我觉得那是另一方面的问题了，呵呵。&lt;/p&gt;
+
+&lt;h1 id=&quot;三domain-model设计&quot;&gt;三、Domain Model设计&lt;/h1&gt;
+
+&lt;p&gt;　　回顾之前领域模型的设计，你会发现完全是一套一套的，也就是说差别很大，造成这种设计的主要原因是领域模型中的边界和职责问题，这也是领域模型设计中最难的一点，如果边界确定和职责分配和上一版本有细微的差别，那设计出来的领域模型会和上一版本完全不一样，就比如用户的边界确定（是实体？还是值对象？），还有就是仓储的职责问题（领域还是应用层？），如果不确定这些因素，设计出来的领域模型就不是真正的领域模型。&lt;/p&gt;
+
+&lt;p&gt;　　仓储的职责问题在上一篇中有过讨论，开头也给过总结，这边就不多说了，其实现在在设计领域模型的时候就要排除一切干扰因素，比如我现在在设计的时候就把表现层、应用层、仓储中的项目卸载掉了，这个解决方案中的项目就只剩基础层、领域模型和领域中的单元测试项目，这样在设计领域模型的时候才能保证其“纯净度”。&lt;/p&gt;
+
+&lt;p&gt;　　在上面重申业务场景节点中，把发送人（标识）或接收人（标识）设计成值对象，为什么要这样设计？我们稍后解读，先说一下实体和值对象的区别，这两个对象的概念网上有很多资料进行参考，但最好还是看下《领域驱动设计》这本书的定义，作者关于实体的解读，重点强调了实体的唯一性，也就是说实体必须通过唯一标识进行区分，比如消息系统中的消息实体，虽然我和同一个人发送同样内容的消息，但是这两个消息就不能用同一个对象进行标识，而是两个具有同样消息内容的不同消息实体，换句话说，我们不仅需要知道消息是什么，而且还要知道消息是哪个。关于值对象的解读，作者主要强调：“值对象就是那些在设计中我们只关心它们是什么，而不关心它们谁是谁的对象。”这是和实体的最好区分，就是说对于值对象，我们只要知道他们是什么就行了，而并不需要他们是哪个，就比如消息系统中的消息状态值对象，包含两个内容：未读和已读，相对于消息实体而言，我们只需要知道消息状态是什么，它所表达的内容（我们并不关心，它从哪里来，到哪里去）。还有就是值对象是一般相对于实体而言的，就是说值对象一般附属在实体上，如果独立于实体，他们就不存在任何意义，就像消息状态值对象，它如果独立于消息实体，就没有什么意义了，因为消息状态只有相对于消息对象而言才有存在的意义。&lt;/p&gt;
+
+&lt;p&gt;　　那为什么要把发送人（标识）或接收人（标识）设计成值对象？那我们分析一下消息系统中收发件人，首先需要明确一点的就是，我们设计的是消息系统，并非是用户消息系统，也就是说把用户中的行为剔除掉（SendMessage 和 ReceiveMessage），对象除掉行为之后就只有属性了，如果一个实体中只有属性，是不是所必要的呢？对于消息系统而言，用户是不被存储的，也就是说用户只是在消息系统中作为一个标识，所谓标识就是所表现出来的一个值。比如发邮件业务场景中，用户A（123@gmail.com）给用户B（456@gmail.com）发送了一封邮件，对于消息系统，我需要确定用户A和用户B吗？显然不需要，因为我只要知道 123@gmail.com 这个邮箱给 456@gmail.com 这个邮箱发送了一封邮件就行了，至于是哪个用户发的，在消息系统中并不需要考虑。在短消息业务场景中也是类似，因为短消息系统中的用户概念来自于其他系统，那其他系统对于用户而言肯定有一个唯一标识（比如主键值、用户名、显示名等等），对于消息系统而言，我只要知道这个标识就行了，至于这个标识所代表的是哪个用户，并不需要关心。&lt;/p&gt;
+
+&lt;p&gt;　　把发送人（标识）或接收人（标识）设计成值对象，还有一个重要原因是，如果把发送人（标识）或接收人（标识）设计成实体，那他们可以独立于消息实体存在，但是我们所设计的是消息系统，并不是用户消息系统，用户来自于外部，如果在消息系统中单独存在就有点不伦不类了，还有就是如果用户设计成实体，这些用户实体对象是需要存储的，这就违背了我们的业务需求。如果把用户设计成值对象呢？就符合我们现在的消息业务场景了，因为在消息系统中，我们只需要知道用户是什么，而且用户独立于消息，对于消息系统而言将没有任何意义。&lt;/p&gt;
+
+&lt;p&gt;　　概念理清楚，下面就是具体的设计了。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;Sender－发送人：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ValueObject&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IContact&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　&lt;strong&gt;Sender－发送人：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ValueObject&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sender&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IContact&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　&lt;strong&gt;Recipient－接收人：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ValueObject&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Recipient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IContact&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Recipient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　因为发送人和接收人都是联系人的一种，只不过所扮演的角色不同，所以我们可以把他们抽象出来，IContact 接口中只有一个 Name 属性，用来表示我们上面所讨论的标识，用 Name 也更符合现实生活中的名称（发送人和接收人）。&lt;/p&gt;
+
+&lt;p&gt;　　消息领域模型中的对象确定后，下面就是发送消息服务了，因为消息业务场景中，不只包含短消息的发送，还有邮箱发送和短信发送等，所以我们需要把消息领域服务抽象出来。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;ISendMessageService 发送消息领域服务：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DomainService&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ISendMessageService&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SendMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　&lt;strong&gt;SendShortMessageService 短消息领域发送服务实现：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DomainService&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// SendShortMessag领域服务实现-短消息发送&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SendShortMessageService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ISendMessageService&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SendMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　除了短消息发送服务，我们还可以实现邮箱发送服务（业务上的 SendMailMessageService），其内部可以调用基础层的发送邮件服务（技术上的SendMailService），这两个概念容易搞混，需要区分开。通过这个消息领域服务，我们可以在其他的应用程序中进行调用，使用什么消息发送，只需要在调用的时候注入相应的接口实现即可，为什么这么厉害？因为它是所有消息发送的抽象描述，哈哈。&lt;/p&gt;
+
+&lt;p&gt;　　我们再来看下单元测试代码：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+* author:xishuai
+* address:https://www.github.com/yuezhongxin/MessageManager
+**/&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DomainService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ValueObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Xunit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MessageManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Tests&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MessageDomainTest&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;/// 消息发送-短消息&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fact&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DomainTest_SendShortMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;ISendMessageService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sendMessageService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SendShortMessageService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;IContact&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sender&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sender&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;IContact&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recipient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Recipient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;recipient&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;content &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recipient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendMessageService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SendMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;　　从单元测试的代码我们可以很清楚的描述发消息这个业务用例，首先创建一个发送短消息的领域服务对象，然后分别创建发送人和接收人对象，标识分别为：sender 和 recipient，下面创建一个消息对象，然后调用领域服务传入消息对象参数进行发送，完成整个的发消息业务。虽然看起来简单，也很容易造成误解，有人也会怀疑领域模型就是这样？其实就是这样，测试用例代码描述的就是业务用例，它体现出来的就是领域模型，当然，SendMessage 方法中只有一段代码，但是它所表达的就是这个业务场景的具体体现。&lt;/p&gt;
+
+&lt;p&gt;　　有时候领域模型设计不出来，可以先写领域模型测试用例的伪代码，因为领域模型的测试用例反应的就是业务需求，一个完成业务场景的具体过程，这也是一种开发的方式，DDD＋TDD＝？（某一方面的相加）&lt;/p&gt;
+
+&lt;h1 id=&quot;四后记&quot;&gt;四、后记&lt;/h1&gt;
+
+&lt;p&gt;　　有朋友可能会觉得：如此简单的业务场景，使用领域驱动设计开发，会不会太简单了？或者说根本不适合？我只想说：大哥，如果你觉得简单，请收了我，可好？&lt;/p&gt;
+
+&lt;p&gt;　　其实任何存在具体的业务场景，不管简单或不简单，都可以使用领域驱动设计开发，领域驱动设计应对的是复杂度，这个复杂度可以理解为未来的复杂度，如果在前期开发的时候，领域模型设计的好，那么后面改东西就会很方便，当然到现在为止，我还只是道听途说，并没有真正体会它的好处，但是我很期待，我想那种感觉应该会很美妙。&lt;/p&gt;
+
+&lt;h1 id=&quot;五引用&quot;&gt;五、引用&lt;/h1&gt;
+
+&lt;p&gt;　　&lt;a href=&quot;https://www.cnblogs.com/xishuai/p/ddd_domain_model_design.html&quot;&gt;拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/16/DDD.html&quot;&gt;上一章—领域驱动设计专栏篇—006—设计窘境：来自 Repository 的一丝线索，Domain Model 再重新设计&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/18/DDD.html&quot;&gt;下一章—领域驱动设计专栏篇—008—醍醐灌顶：领域驱动设计实现之路&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 17 Aug 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/design/2018/08/17/DDD.html</link>
