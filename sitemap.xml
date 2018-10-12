@@ -2,14 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://localhost:4000/design/2018/08/20/DDD.html</loc>
-    </url>
-
-    <url>
-        <loc>http://localhost:4000/design/2018/08/19/DDD.html</loc>
-    </url>
-
-    <url>
         <loc>http://localhost:4000/design/2018/08/18/DDD.html</loc>
     </url>
 
