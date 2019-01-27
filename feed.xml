@@ -5,12 +5,83 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Jan 2019 21:26:39 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Jan 2019 21:26:39 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Jan 2019 22:05:25 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Jan 2019 22:05:25 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>Dart 以及 Flutter 学习介绍——001</title>
+        <title>Dart基础学习——001</title>
+        <description>&lt;h1 id=&quot;弱类型&quot;&gt;弱类型&lt;/h1&gt;
+
+&lt;h2 id=&quot;var&quot;&gt;var&lt;/h2&gt;
+
+&lt;p&gt;　　如果没有初始值，可以变成任何类型&lt;/p&gt;
+
+&lt;p&gt;　　var a;&lt;/p&gt;
+
+&lt;p&gt;　　a = ‘yo yo qie ke nao’;&lt;/p&gt;
+
+&lt;p&gt;　　a = 123;&lt;/p&gt;
+
+&lt;p&gt;　　a = true;&lt;/p&gt;
+
+&lt;p&gt;　　a = {‘key’:’xiha’};&lt;/p&gt;
+
+&lt;p&gt;　　a = [‘eee’];&lt;/p&gt;
+
+&lt;h2 id=&quot;object&quot;&gt;Object&lt;/h2&gt;
+
+&lt;p&gt;　　动态任意类型，编译阶段检查类型。&lt;/p&gt;
+
+&lt;p&gt;　　Object a = ‘yoyo’;&lt;/p&gt;
+
+&lt;p&gt;　　a = 123;&lt;/p&gt;
+
+&lt;p&gt;　　a = [22];&lt;/p&gt;
+
+&lt;p&gt;　　a.p();&lt;/p&gt;
+
+&lt;h2 id=&quot;dynamic&quot;&gt;dynamic&lt;/h2&gt;
+
+&lt;p&gt;　　动态任意类型，编译阶段不检查类型。&lt;/p&gt;
+
+&lt;p&gt;　　dynamic  a = ‘xiha’;&lt;/p&gt;
+
+&lt;p&gt;　　a = 123;&lt;/p&gt;
+
+&lt;p&gt;　　a.b();&lt;/p&gt;
+
+&lt;h2 id=&quot;比较var--object--dynamic&quot;&gt;比较var , Object , dynamic&lt;/h2&gt;
+
+&lt;p&gt;　　唯一区别是var 如果有初始值，类型被锁定。&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+
+&lt;p&gt;​	 &lt;br /&gt;
+​	
+​&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 Jan 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/01/02/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/02/Dart.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Dart 以及 Flutter 学习介绍</title>
         <description>&lt;p&gt;　　Flutter是谷歌出品的跨安卓和ios双端应用的代码框架，引用该框架编写应用代码需要使用dart语言，dart语言是个特别有意思的面相对象语言，它即支持强类型，又支持若类型，不过如果你初始化一个变量为强类型的其中一种类型，那么你再对此变量赋值则会报错。dart语言不仅可以写app，也可以用来写web后台开发。但是虽然dart语言已经出来好多年，但是却不怎么火热，或许没有背后大公司的背景支撑吧，不过现在由于flutter的出现，我们不得不又重新重视起它。&lt;/p&gt;
 
 &lt;p&gt;　　如果你已经掌握过一门面相对象语言，dart语言的学习对你来说并不是难事。&lt;/p&gt;
@@ -34,9 +105,9 @@
 &lt;p&gt;　　&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/flutter/flutter002.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Sun, 27 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/27/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/27/Dart.html</guid>
+        <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/01/01/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/01/Dart.html</guid>
         
         <category>flutter</category>
         
