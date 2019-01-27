@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 27 Jan 2019 22:20:41 +0800</pubDate>
-    <lastBuildDate>Sun, 27 Jan 2019 22:20:41 +0800</lastBuildDate>
+    <pubDate>Sun, 27 Jan 2019 22:24:24 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Jan 2019 22:24:24 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -82,7 +82,7 @@
     
       <item>
         <title>Dart 以及 Flutter 学习介绍</title>
-        <description>&lt;p&gt;　　Flutter是谷歌出品的跨安卓和ios双端应用的代码框架，引用该框架编写应用代码需要使用dart语言，dart语言是个特别有意思的面相对象语言，它即支持强类型，又支持若类型，不过如果你初始化一个变量为强类型的其中一种类型，那么你再对此变量赋值则会报错。dart语言不仅可以写app，也可以用来写web后台开发。但是虽然dart语言已经出来好多年，但是却不怎么火热，或许没有背后大公司的背景支撑吧，不过现在由于flutter的出现，我们不得不又重新重视起它。&lt;/p&gt;
+        <description>&lt;p&gt;　　Flutter是谷歌出品的跨android和ios双端应用的app开发框架，引用该框架编写应用代码需要使用dart语言，dart语言是个特别有意思的面相对象语言，它即支持强类型，又支持若类型，不过如果你初始化一个变量为强类型的其中一种类型，那么你再对此变量赋值则会报错。dart语言不仅可以写app，也可以用来写web后台开发。但是虽然dart语言已经出来好多年，但是却不怎么火热，或许没有背后大公司的背景支撑吧，不过现在由于flutter的出现，我们不得不又重新重视起它。&lt;/p&gt;
 
 &lt;p&gt;　　如果你已经掌握过一门面相对象语言，dart语言的学习对你来说并不是难事。&lt;/p&gt;
 
