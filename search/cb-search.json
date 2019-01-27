@@ -3,6 +3,22 @@
 	"data" : [
 	 
 	{
+		"title" : "Dart 以及 Flutter 学习介绍——001 - 2019-01-27",
+		"url" : "/flutter/2019/01/27/Dart.html"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "一起来学习Mina(一)前言篇-001 - 2018-10-01",
+		"url" : "/java/2018/10/01/Mina.html"
+	}
+	
+	,
+	
+    
+	{
 		"title" : "领域驱动设计田园的蟋蟀专栏篇---008---醍醐灌顶：领域驱动设计实现之路 - 2018-08-18",
 		"url" : "/design/2018/08/18/DDD.html"
 	}
@@ -476,7 +492,7 @@
     
 	{
 		"title" : "使用Spring Boot构建web框架(一) - 2017-01-01",
-		"url" : "/boot/2017/01/01/SpringBoot.html"
+		"url" : "/springboot/2017/01/01/SpringBoot.html"
 	}
 	
 	,

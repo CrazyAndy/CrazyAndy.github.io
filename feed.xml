@@ -5,9 +5,115 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Oct 2018 14:58:04 +0800</pubDate>
-    <lastBuildDate>Fri, 12 Oct 2018 14:58:04 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.3</generator>
+    <pubDate>Sun, 27 Jan 2019 21:26:39 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Jan 2019 21:26:39 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Dart 以及 Flutter 学习介绍——001</title>
+        <description>&lt;p&gt;　　Flutter是谷歌出品的跨安卓和ios双端应用的代码框架，引用该框架编写应用代码需要使用dart语言，dart语言是个特别有意思的面相对象语言，它即支持强类型，又支持若类型，不过如果你初始化一个变量为强类型的其中一种类型，那么你再对此变量赋值则会报错。dart语言不仅可以写app，也可以用来写web后台开发。但是虽然dart语言已经出来好多年，但是却不怎么火热，或许没有背后大公司的背景支撑吧，不过现在由于flutter的出现，我们不得不又重新重视起它。&lt;/p&gt;
+
+&lt;p&gt;　　如果你已经掌握过一门面相对象语言，dart语言的学习对你来说并不是难事。&lt;/p&gt;
+
+&lt;p&gt;　　看过很多dart资料和视频，我觉得还是youtube上猫哥（ducafecat）讲dart讲的最好，他关于dart语言学习的笔记博客为 &lt;a href=&quot;https://ducafecat.tech&quot;&gt;https://ducafecat.tech&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;　　而关于flutter，我则推荐宁浩网讲的flutter视频教程，不过王皓老师一次性讲的太详细，我想基于我自己的学习节奏对其重新整理。&lt;/p&gt;
+
+&lt;p&gt;　　flutter基础学习完了之后，需要实战了，从youtube上还没有看到很好的实战视频，github倒是有一些开源的，我想找些简单的开源项目逐步深入学习。&lt;/p&gt;
+
+&lt;p&gt;　　最后，我从youtube上看了 kkbox的技术负责人 关于flutter的演讲，他说flutter还是有很多坑的，当然如果做简单画面渲染，不涉及太多的和硬件交互，比如gps，蓝牙，相机等，还是可以拿来尝试的。对于这点我还是比较认可的，flutter还是比较新的，到本文编写日期为止，现在也只是除了1.0，以后还有很多的路要走。&lt;/p&gt;
+
+&lt;p&gt;　　纵观这几年app的技术演技历史，感觉也挺有意思，由原来的原生开发，到后来的h5，再到后来的RN，以及这两年抬头的flutter。特别有意思的是，缩短开发工期，降低人员成本这些刚性需求倒逼技术的演进。大家就是想，哎呀，如果能有种语言既能一次开发，双端部署，又能达到原生的那种渲染程度和流畅度该多好。&lt;/p&gt;
+
+&lt;p&gt;　　我们无法预测flutter以后的路该怎么走，是能一直完善下去，逐步为广大开发者所接受，还是被抛弃，或者被其他秉承这种思想的新框架所替代，但是我们不妨做一个技术前沿探路者。对新技术始终保持旺盛的好奇心还是不错的。&lt;/p&gt;
+
+&lt;p&gt;　　以下这个图是从网上找的，反映的是flutter和reactive的对比。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/flutter/flutter001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/flutter/flutter002.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 27 Jan 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/01/27/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/27/Dart.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>一起来学习Mina(一)前言篇-001</title>
+        <description>&lt;h1 id=&quot;一前言&quot;&gt;一、前言&lt;/h1&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;　　笔者在多次工作项目中都用到了Mina，当时只是拿来使用，并没有深入追究其中原理。随着工作的深入，不得不从头开始好好研究Mina框架，从源码分析了解其原理，从而更好的使用Mina，让上线程序更加稳定高效。&lt;/p&gt;
+
+&lt;p&gt;　　我们百度简单了解到，Mina是一个使用Nio的socket的框架，所以我准备按照先后顺序，从以下几个方面来做一下学习笔记。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Nio
+    &lt;ul&gt;
+      &lt;li&gt;缓冲区&lt;/li&gt;
+      &lt;li&gt;通道&lt;/li&gt;
+      &lt;li&gt;socket&lt;/li&gt;
+      &lt;li&gt;选择器&lt;/li&gt;
+      &lt;li&gt;AIO&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Java多线程学习&lt;/li&gt;
+  &lt;li&gt;Mina学习
+    &lt;ul&gt;
+      &lt;li&gt;Mina入门
+        &lt;ul&gt;
+          &lt;li&gt;服务端程序&lt;/li&gt;
+          &lt;li&gt;客户端程序&lt;/li&gt;
+          &lt;li&gt;自定义通讯协议&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Mina源码解析
+        &lt;ul&gt;
+          &lt;li&gt;整体解读&lt;/li&gt;
+          &lt;li&gt;IoBuffer封装&lt;/li&gt;
+          &lt;li&gt;IoAcceptor&lt;/li&gt;
+          &lt;li&gt;IoConnector&lt;/li&gt;
+          &lt;li&gt;IoSession&lt;/li&gt;
+          &lt;li&gt;IoFuture&lt;/li&gt;
+          &lt;li&gt;FilterChain&lt;/li&gt;
+          &lt;li&gt;IoHandler&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Mina项目实战&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;　　从上面的目录看来，深入学习并使用Mina，我们需要相对比较长的技术栈支持，我会在业余时间逐个整理笔记。关于Nio和Java多线程我会另立单独的篇幅去整理，这里我只是讲解Mina入门，源码解析和项目实战三块内容。&lt;/p&gt;
+
+&lt;p&gt;　　期间会参考很多博客文章和书籍，我会在相应笔记注明出处，在这里顺便感激他们的知识分享，当然也要感激Mina框架编写的组织成员，是你们的努力帮助百万的程序员更加专注于业务逻辑，进而快速创造生产价值。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 01 Oct 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/java/2018/10/01/Mina.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2018/10/01/Mina.html</guid>
+        
+        <category>java</category>
+        
+        <category>mna</category>
+        
+        <category>blog</category>
+        
+        
+        <category>java</category>
+        
+      </item>
     
       <item>
         <title>领域驱动设计田园的蟋蟀专栏篇---008---醍醐灌顶：领域驱动设计实现之路</title>
@@ -8335,8 +8441,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/boot/2017/01/01/SpringBoot.html</link>
-        <guid isPermaLink="true">http://localhost:4000/boot/2017/01/01/SpringBoot.html</guid>
+        <link>http://localhost:4000/springboot/2017/01/01/SpringBoot.html</link>
+        <guid isPermaLink="true">http://localhost:4000/springboot/2017/01/01/SpringBoot.html</guid>
         
         <category>java</category>
         
@@ -8345,7 +8451,7 @@ f(key)=random(key)&lt;/p&gt;
         <category>blog</category>
         
         
-        <category>boot</category>
+        <category>SpringBoot</category>
         
       </item>
     
