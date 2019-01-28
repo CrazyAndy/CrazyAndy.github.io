@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="变量" name="description">
+    <meta content="字符串" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——变量-001
+        CrazyAndy|Dart基础学习——字符串—004
     
   </title>
   <!-- favicon -->
@@ -252,143 +252,89 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Jan 2019</span>
                         <h1>
-                            Dart基础学习——变量-001
+                            Dart基础学习——字符串—004
                         </h1>
                     </div>
-                    	<h1 id="一弱类型">一、弱类型</h1>
+                    	<h2 id="单引号或者双引号都能用">单引号或者双引号都能用</h2>
 
-<h2 id="var">var</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'ducafecat'</span><span class="p">;</span>
 
-<p>　　如果没有初始值，可以变成任何类型</p>
+<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="s2">"ducafecat"</span><span class="p">;</span>
 
-<p>　　var a;</p>
+<span class="c1">//有点类似js</span>
+</code></pre></div></div>
 
-<p>　　a = ‘yo yo qie ke nao’;</p>
+<h2 id="字符串模版">字符串模版</h2>
 
-<p>　　a = 123;</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="s1">'ducafecat : ${a}'</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+</code></pre></div></div>
 
-<p>　　a = true;</p>
+<h2 id="字符串连接">字符串连接</h2>
 
-<p>　　a = {‘key’:’xiha’};</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="s1">'ducafecat'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'' ''ducafecat'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span>   <span class="s1">' '</span>     <span class="s1">'ducafecat'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span>
+<span class="s1">' '</span>
+<span class="s1">'ducafecat'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'''
+hello word
+this is multi line
+'''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"""
+hello word
+this is multi line
+"""</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</code></pre></div></div>
 
-<p>　　a = [‘eee’];</p>
+<h2 id="搜索">搜索</h2>
 
-<h2 id="object">Object</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'web site ducafecat.tech'</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'ducafecat'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'web'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'tech'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'site'</span><span class="p">));</span>
+</code></pre></div></div>
 
-<p>　　动态任意类型，编译阶段检查类型。</p>
+<h2 id="提取数据">提取数据</h2>
 
-<p>　　Object a = ‘yoyo’;</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</code></pre></div></div>
 
-<p>　　a = 123;</p>
+<h2 id="大小写转换">大小写转换</h2>
 
-<p>　　a = [22];</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">());</span>
+</code></pre></div></div>
 
-<p>　　a.p();</p>
+<h2 id="裁剪判断空字符串">裁剪，判断空字符串</h2>
 
-<h2 id="dynamic">dynamic</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="s1">'    hello word     '</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">''</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">);</span>
+</code></pre></div></div>
 
-<p>　　动态任意类型，编译阶段不检查类型。</p>
+<h2 id="替换部分字符">替换部分字符</h2>
 
-<p>　　dynamic  a = ‘xiha’;</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="s1">'hello word word!'</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s1">'word'</span><span class="p">,</span> <span class="s1">'ducafecat'</span><span class="p">));</span>
+</code></pre></div></div>
 
-<p>　　a = 123;</p>
+<h2 id="字符串创建">字符串创建</h2>
 
-<p>　　a.b();</p>
-
-<h2 id="比较var--object--dynamic">比较var , Object , dynamic</h2>
-
-<p>　　唯一区别是var 如果有初始值，类型被锁定。</p>
-
-<h1 id="二强类型">二、强类型</h1>
-
-<h2 id="声明类型">声明类型</h2>
-
-<p>声明类型之后，类型被锁定</p>
-
-<p>String a;</p>
-
-<p>a = ‘ducalcat’;</p>
-
-<p>a = 123;//这样会导致错误</p>
-
-<h2 id="常见类型">常见类型</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>名称</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>num</td>
-      <td>数字</td>
-    </tr>
-    <tr>
-      <td>int</td>
-      <td>整型</td>
-    </tr>
-    <tr>
-      <td>double</td>
-      <td>浮点</td>
-    </tr>
-    <tr>
-      <td>bool</td>
-      <td>布尔</td>
-    </tr>
-    <tr>
-      <td>String</td>
-      <td>字符串</td>
-    </tr>
-    <tr>
-      <td>StringBuffer</td>
-      <td>字符串 buffer</td>
-    </tr>
-    <tr>
-      <td>DateTime</td>
-      <td>时间日期</td>
-    </tr>
-    <tr>
-      <td>Duration</td>
-      <td>时间区间</td>
-    </tr>
-    <tr>
-      <td>List</td>
-      <td>列表</td>
-    </tr>
-    <tr>
-      <td>Sets</td>
-      <td>无重复队列</td>
-    </tr>
-    <tr>
-      <td>Maps</td>
-      <td>kv 容器</td>
-    </tr>
-    <tr>
-      <td>enum</td>
-      <td>枚举</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="默认值">默认值</h2>
-
-<p>一切都是Object，默认为null</p>
-
-<h2 id="如何使用">如何使用</h2>
-
-<ul>
-  <li>在写api接口的时候，请用 强类型 ，一旦不符合约定，接受数据时能方便排查故障</li>
-  <li>在写小工具时，可以用 弱类型 ，这样代码写起来比较快，类型自动适应</li>
-</ul>
-
-<p>​	
-​</p>
-
-<p>​</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var sb = StringBuffer();
+sb..write('hello word!')
+..write('my')
+..write(' ')
+..writeAll(['web', 'site', 'https://ducafecat.tech']);
+print(sb.toString());
+</code></pre></div></div>
 
 <p>​</p>
 
@@ -410,7 +356,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/02/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/05/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

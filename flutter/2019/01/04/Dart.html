@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="变量" name="description">
+    <meta content="数值" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——变量-001
+        CrazyAndy|Dart基础学习——数值—003
     
   </title>
   <!-- favicon -->
@@ -252,138 +252,43 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Jan 2019</span>
                         <h1>
-                            Dart基础学习——变量-001
+                            Dart基础学习——数值—003
                         </h1>
                     </div>
-                    	<h1 id="一弱类型">一、弱类型</h1>
+                    	<h1 id="一数值类型">一、数值类型</h1>
 
-<h2 id="var">var</h2>
+<h2 id="int">Int</h2>
 
-<p>　　如果没有初始值，可以变成任何类型</p>
+<p>　　整数值，其取值通常位于 -253 和253之间//不敢相信，需要测试</p>
 
-<p>　　var a;</p>
+<h2 id="double">Double</h2>
 
-<p>　　a = ‘yo yo qie ke nao’;</p>
+<p>64-bit（双精度）浮点数</p>
 
-<p>　　a = 123;</p>
+<h2 id="num">num</h2>
 
-<p>　　a = true;</p>
+<p>int 和double 都是num的子类</p>
 
-<p>　　a = {‘key’:’xiha’};</p>
+<h1 id="二数值转换">二、数值转换</h1>
 
-<p>　　a = [‘eee’];</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// string -&gt; int</span>
+<span class="c1">// string -&gt; double</span>
+<span class="kr">int</span> <span class="nx">a</span> <span class="o">=</span> <span class="kr">int</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'123'</span><span class="p">);</span>
+<span class="kr">double</span> <span class="nx">b</span> <span class="o">=</span> <span class="kr">double</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'1.223'</span><span class="p">);</span>
 
-<h2 id="object">Object</h2>
+<span class="c1">// int -&gt; string</span>
+<span class="c1">// double -&gt; string</span>
+<span class="nb">String</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">123</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="mf">1.223</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="nx">print</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
 
-<p>　　动态任意类型，编译阶段检查类型。</p>
-
-<p>　　Object a = ‘yoyo’;</p>
-
-<p>　　a = 123;</p>
-
-<p>　　a = [22];</p>
-
-<p>　　a.p();</p>
-
-<h2 id="dynamic">dynamic</h2>
-
-<p>　　动态任意类型，编译阶段不检查类型。</p>
-
-<p>　　dynamic  a = ‘xiha’;</p>
-
-<p>　　a = 123;</p>
-
-<p>　　a.b();</p>
-
-<h2 id="比较var--object--dynamic">比较var , Object , dynamic</h2>
-
-<p>　　唯一区别是var 如果有初始值，类型被锁定。</p>
-
-<h1 id="二强类型">二、强类型</h1>
-
-<h2 id="声明类型">声明类型</h2>
-
-<p>声明类型之后，类型被锁定</p>
-
-<p>String a;</p>
-
-<p>a = ‘ducalcat’;</p>
-
-<p>a = 123;//这样会导致错误</p>
-
-<h2 id="常见类型">常见类型</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>名称</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>num</td>
-      <td>数字</td>
-    </tr>
-    <tr>
-      <td>int</td>
-      <td>整型</td>
-    </tr>
-    <tr>
-      <td>double</td>
-      <td>浮点</td>
-    </tr>
-    <tr>
-      <td>bool</td>
-      <td>布尔</td>
-    </tr>
-    <tr>
-      <td>String</td>
-      <td>字符串</td>
-    </tr>
-    <tr>
-      <td>StringBuffer</td>
-      <td>字符串 buffer</td>
-    </tr>
-    <tr>
-      <td>DateTime</td>
-      <td>时间日期</td>
-    </tr>
-    <tr>
-      <td>Duration</td>
-      <td>时间区间</td>
-    </tr>
-    <tr>
-      <td>List</td>
-      <td>列表</td>
-    </tr>
-    <tr>
-      <td>Sets</td>
-      <td>无重复队列</td>
-    </tr>
-    <tr>
-      <td>Maps</td>
-      <td>kv 容器</td>
-    </tr>
-    <tr>
-      <td>enum</td>
-      <td>枚举</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="默认值">默认值</h2>
-
-<p>一切都是Object，默认为null</p>
-
-<h2 id="如何使用">如何使用</h2>
-
-<ul>
-  <li>在写api接口的时候，请用 强类型 ，一旦不符合约定，接受数据时能方便排查故障</li>
-  <li>在写小工具时，可以用 弱类型 ，这样代码写起来比较快，类型自动适应</li>
-</ul>
+<span class="c1">// double -&gt; int</span>
+<span class="kr">double</span> <span class="nx">a</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">;</span>
+<span class="kr">int</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">toInt</span><span class="p">();</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+</code></pre></div></div>
 
 <p>​	
 ​</p>
@@ -410,7 +315,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/02/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/04/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

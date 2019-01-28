@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="变量" name="description">
+    <meta content="常量" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——变量-001
+        CrazyAndy|Dart基础学习——常量-002
     
   </title>
   <!-- favicon -->
@@ -252,138 +252,34 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Jan 2019</span>
                         <h1>
-                            Dart基础学习——变量-001
+                            Dart基础学习——常量-002
                         </h1>
                     </div>
-                    	<h1 id="一弱类型">一、弱类型</h1>
+                    	<h1 id="一定义方式">一、定义方式</h1>
 
-<h2 id="var">var</h2>
+<h2 id="类型声明可以省略">类型声明可以省略</h2>
 
-<p>　　如果没有初始值，可以变成任何类型</p>
+<p>　　final String a = ‘xiha’;</p>
 
-<p>　　var a;</p>
+<p>　　final b=123;</p>
 
-<p>　　a = ‘yo yo qie ke nao’;</p>
+<p>​	const String c = ‘xiaomi’;</p>
 
-<p>　　a = 123;</p>
+<p>　　const  d = ‘yo yo qie ke nao’;</p>
 
-<p>　　a = true;</p>
+<h2 id="初始后不能再赋值">初始后不能再赋值</h2>
 
-<p>　　a = {‘key’:’xiha’};</p>
+<h2 id="不能和var-同时使用">不能和var 同时使用</h2>
 
-<p>　　a = [‘eee’];</p>
+<p>final var a = 123; //这是错误的</p>
 
-<h2 id="object">Object</h2>
+<p>cont var b =0;//这也是不对的</p>
 
-<p>　　动态任意类型，编译阶段检查类型。</p>
+<h2 id="二区别">二、区别</h2>
 
-<p>　　Object a = ‘yoyo’;</p>
-
-<p>　　a = 123;</p>
-
-<p>　　a = [22];</p>
-
-<p>　　a.p();</p>
-
-<h2 id="dynamic">dynamic</h2>
-
-<p>　　动态任意类型，编译阶段不检查类型。</p>
-
-<p>　　dynamic  a = ‘xiha’;</p>
-
-<p>　　a = 123;</p>
-
-<p>　　a.b();</p>
-
-<h2 id="比较var--object--dynamic">比较var , Object , dynamic</h2>
-
-<p>　　唯一区别是var 如果有初始值，类型被锁定。</p>
-
-<h1 id="二强类型">二、强类型</h1>
-
-<h2 id="声明类型">声明类型</h2>
-
-<p>声明类型之后，类型被锁定</p>
-
-<p>String a;</p>
-
-<p>a = ‘ducalcat’;</p>
-
-<p>a = 123;//这样会导致错误</p>
-
-<h2 id="常见类型">常见类型</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>名称</th>
-      <th>说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>num</td>
-      <td>数字</td>
-    </tr>
-    <tr>
-      <td>int</td>
-      <td>整型</td>
-    </tr>
-    <tr>
-      <td>double</td>
-      <td>浮点</td>
-    </tr>
-    <tr>
-      <td>bool</td>
-      <td>布尔</td>
-    </tr>
-    <tr>
-      <td>String</td>
-      <td>字符串</td>
-    </tr>
-    <tr>
-      <td>StringBuffer</td>
-      <td>字符串 buffer</td>
-    </tr>
-    <tr>
-      <td>DateTime</td>
-      <td>时间日期</td>
-    </tr>
-    <tr>
-      <td>Duration</td>
-      <td>时间区间</td>
-    </tr>
-    <tr>
-      <td>List</td>
-      <td>列表</td>
-    </tr>
-    <tr>
-      <td>Sets</td>
-      <td>无重复队列</td>
-    </tr>
-    <tr>
-      <td>Maps</td>
-      <td>kv 容器</td>
-    </tr>
-    <tr>
-      <td>enum</td>
-      <td>枚举</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="默认值">默认值</h2>
-
-<p>一切都是Object，默认为null</p>
-
-<h2 id="如何使用">如何使用</h2>
-
-<ul>
-  <li>在写api接口的时候，请用 强类型 ，一旦不符合约定，接受数据时能方便排查故障</li>
-  <li>在写小工具时，可以用 弱类型 ，这样代码写起来比较快，类型自动适应</li>
-</ul>
+<p>　　这个再讨论</p>
 
 <p>​	
 ​</p>
@@ -410,7 +306,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/02/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/03/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>
