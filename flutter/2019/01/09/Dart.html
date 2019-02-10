@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="Set" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——Set—008
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,120 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——Set—008
                         </h1>
                     </div>
                     	<h2 id="声明">声明</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-</code></pre></div></div>
+<p><code class="highlighter-rouge">Set</code> 是一个元素唯一的有序队列（这和java不一样啊，java中的set是元素唯一的无序集合）</p>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<h2 id="属性">属性</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-</code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>isEmpty</td>
+      <td>是否为空</td>
+    </tr>
+    <tr>
+      <td>isNotEmpty</td>
+      <td>是否不为空</td>
+    </tr>
+    <tr>
+      <td>first</td>
+      <td>第一个</td>
+    </tr>
+    <tr>
+      <td>last</td>
+      <td>最后一个</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td>个数</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="比较时间">比较时间</h2>
+<h2 id="方法">方法</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-</code></pre></div></div>
-
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>addAll</td>
+      <td>添加</td>
+    </tr>
+    <tr>
+      <td>contains</td>
+      <td>查询单个</td>
+    </tr>
+    <tr>
+      <td>containsAll</td>
+      <td>查询多个</td>
+    </tr>
+    <tr>
+      <td>difference</td>
+      <td>集合不同</td>
+    </tr>
+    <tr>
+      <td>intersection</td>
+      <td>交集</td>
+    </tr>
+    <tr>
+      <td>union</td>
+      <td>联合</td>
+    </tr>
+    <tr>
+      <td>lookup</td>
+      <td>按对象查询到返回对象</td>
+    </tr>
+    <tr>
+      <td>remove</td>
+      <td>删除单个</td>
+    </tr>
+    <tr>
+      <td>removeAll</td>
+      <td>删除多个</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>清空</td>
+    </tr>
+    <tr>
+      <td>firstWhere</td>
+      <td>按条件正向查询</td>
+    </tr>
+    <tr>
+      <td>lastWhere</td>
+      <td>按条件反向查询</td>
+    </tr>
+    <tr>
+      <td>removeWhere</td>
+      <td>按条件删除</td>
+    </tr>
+    <tr>
+      <td>retainAll</td>
+      <td>只保留几个</td>
+    </tr>
+    <tr>
+      <td>retainWhere</td>
+      <td>按条件只保留几个</td>
+    </tr>
+  </tbody>
+</table>
 
                     <hr>
                     <div class="row">
@@ -301,7 +385,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/09/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

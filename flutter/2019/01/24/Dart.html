@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="泛型" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——泛型—023
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,89 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 24 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——泛型—023
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="泛型使用">泛型使用</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main(List&lt;String&gt; args) {
+  var l = List&lt;String&gt;();
+  l.add('aaa');
+  l.add('bbb');
+  l.add('ccc');
+  print(l);
+
+  var m = Map&lt;int, String&gt;();
+  m[1] = 'aaaa';
+  m[2] = 'bbbb';
+  m[3] = 'cccc';
+  print(m);
+}
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<blockquote>
+  <p>很多的容器对象，在创建对象时都可以定义泛型类型。</p>
+</blockquote>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<h1 id="泛型函数">泛型函数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main(List&lt;String&gt; args) {
+  var key = addCache('a00001', 'val.....');
+  print(key);
+}
+
+K addCache&lt;K, V&gt;(K key, V val) {
+  print('${key} ${val}');
+  return key;
+}
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<blockquote>
+  <p>泛型可以用在一个函数的定义</p>
+</blockquote>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<h1 id="构造函数泛型">构造函数泛型</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main(List&lt;String&gt; args) {
+  var p = Phone&lt;String&gt;('abc00000011111');
+  print(p.mobileNumber);
+}
+
+class Phone&lt;T&gt; {
+  final T mobileNumber;
+  Phone(this.mobileNumber);
+}
 </code></pre></div></div>
 
+<blockquote>
+  <p>这是大多数情况下使用泛型的场景，在一个类的构造函数中</p>
+</blockquote>
+
+<h1 id="泛型限制">泛型限制</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main(List&lt;String&gt; args) {
+  var ad = AndroidPhone();
+  var p = Phone&lt;AndroidPhone&gt;(ad);
+  p.mobile.startup();
+}
+
+class Phone&lt;T extends AndroidPhone &gt; {
+  final T mobile;
+  Phone(this.mobile);
+}
+
+class AndroidPhone {
+  void startup() {
+    print('Android Phone 开机');
+  }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>通过 extends 关键字 可以限定你可以泛型使用的类型</p>
+</blockquote>
 
                     <hr>
                     <div class="row">
@@ -301,7 +354,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/24/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

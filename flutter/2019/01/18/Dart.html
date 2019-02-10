@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="静态成员" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——静态成员—017
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,86 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 18 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——静态成员—017
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="静态变量">静态变量</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<h2 id="static-定义">static 定义</h2>
+
+<p>声明</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class People {
+  static String name = 'ducafecat';
+}
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<p>调用</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<p>静态变量可以通过外部直接访问,不需要将类实例化</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(People.name);
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<h2 id="函数内部访问">函数内部访问</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<p>实例化后的类也可以访问该静态变量</p>
+
+<p>声明</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class People {
+  static String name = 'ducafecat';
+  void show() {
+    print(name);
+  }
+}
 </code></pre></div></div>
 
+<p>调用</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var p = new People();
+p.show();
+</code></pre></div></div>
+
+<h2 id="不能用-this">不能用 this</h2>
+
+<p>因为静态变量实际上存在于类中,而不是实例本身</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class People {
+  static String name = 'ducafecat';
+  void show() {
+    print(this.name);
+  }
+}
+</code></pre></div></div>
+
+<h1 id="静态方法">静态方法</h1>
+
+<p>静态方法可以通过外部直接访问</p>
+
+<p>声明</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class People {
+  static String name = 'ducafecat';
+  static void printName() {
+    print(name);
+  }
+}
+</code></pre></div></div>
+
+<p>调用</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>People.printName();
+</code></pre></div></div>
+
+<h1 id="总结">总结</h1>
+
+<ul>
+  <li>实例化后将无法通过外部直接调用 static 成员</li>
+  <li>静态成员与实例成员是分开的, 静态成员处于类的定义体中, 实例成员处于类的实例中</li>
+</ul>
 
                     <hr>
                     <div class="row">
@@ -301,7 +351,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/18/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="线程隔离isolate" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——线程隔离isolate—027
     
   </title>
   <!-- favicon -->
@@ -252,34 +252,68 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 28 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——线程隔离isolate—027
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="isolate">isolate</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-</code></pre></div></div>
+<p>在Dart中实现并发可以用Isolate，它是类似于线程(thread)但不共享内存的独立运行的worker，是一个独立的Dart程序执行环境。其实默认环境就是一个main isolate。</p>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<p>在Dart语言中，所有的Dart代码都运行在某个isolate中，代码只能使用所属isolate的类和值。不同的isolate可以通过port发送message进行交流。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
-</code></pre></div></div>
+<h1 id="示意图">示意图</h1>
 
-<h2 id="比较时间">比较时间</h2>
+<center><img src="/static/assets/img/blog/flutter/flutter003.png" width="100%" /></center>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<ul>
+  <li><code class="highlighter-rouge">ReceivePort</code> 创建入口点</li>
+  <li><code class="highlighter-rouge">Isolate.spawn</code> 连接进程</li>
+  <li><code class="highlighter-rouge">SendPort.send</code> 发送消息</li>
+</ul>
+
+<h1 id="echo-例子">echo 例子</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'dart:async'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'dart:isolate'</span><span class="p">;</span>
+
+<span class="nx">main</span><span class="p">()</span> <span class="k">async</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">receivePort</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReceivePort</span><span class="p">();</span>
+  <span class="kr">await</span> <span class="nx">Isolate</span><span class="p">.</span><span class="nx">spawn</span><span class="p">(</span><span class="nx">echo</span><span class="p">,</span> <span class="nx">receivePort</span><span class="p">.</span><span class="nx">sendPort</span><span class="p">);</span>
+
+  <span class="c1">// first 是 echo 线程的消息入口</span>
+  <span class="kd">var</span> <span class="nx">sendPort</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">receivePort</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">msg</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">sendReceive</span><span class="p">(</span><span class="nx">sendPort</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">);</span>
+  <span class="nx">print</span><span class="p">(</span><span class="s1">'received $msg'</span><span class="p">);</span>
+  <span class="nx">msg</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">sendReceive</span><span class="p">(</span><span class="nx">sendPort</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">);</span>
+  <span class="nx">print</span><span class="p">(</span><span class="s1">'received $msg'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 隔离的入口点</span>
+<span class="nx">echo</span><span class="p">(</span><span class="nx">SendPort</span> <span class="nx">sendPort</span><span class="p">)</span> <span class="k">async</span> <span class="p">{</span>
+  <span class="c1">// 打开接收端口接收传入的消息。</span>
+  <span class="kd">var</span> <span class="nx">port</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReceivePort</span><span class="p">();</span>
+
+  <span class="c1">// 通知任何其他隔离此隔离侦听的端</span>
+  <span class="nx">sendPort</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">port</span><span class="p">.</span><span class="nx">sendPort</span><span class="p">);</span>
+
+  <span class="c1">// 循环接收消息</span>
+  <span class="kr">await</span> <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">msg</span> <span class="k">in</span> <span class="nx">port</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">SendPort</span> <span class="nx">replyTo</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="nx">replyTo</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span> <span class="o">==</span> <span class="s2">"bar"</span><span class="p">)</span> <span class="nx">port</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 发送并接收消息</span>
+<span class="nx">Future</span> <span class="nx">sendReceive</span><span class="p">(</span><span class="nx">SendPort</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ReceivePort</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReceivePort</span><span class="p">();</span>
+  <span class="nx">port</span><span class="p">.</span><span class="nx">send</span><span class="p">([</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">response</span><span class="p">.</span><span class="nx">sendPort</span><span class="p">]);</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 
@@ -301,7 +335,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/28/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

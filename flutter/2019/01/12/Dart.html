@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="函数Function" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——函数Function—011
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,77 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 12 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——函数Function—011
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="函数定义">函数定义</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="err">调用</span>
+<span class="n">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<h1 id="可选参数">可选参数</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="o">[</span><span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">z</span><span class="o">])</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">z</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="err">调用</span>
+<span class="kt">int</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<h1 id="可选参数-默认值">可选参数 默认值</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="o">[</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span><span class="o">])</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="err">调用</span>
+<span class="kt">int</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 </code></pre></div></div>
 
+<h1 id="命名参数-默认值">命名参数 默认值</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int add({int x = 1, int y = 1, int z = 1}) {
+  return x + y + z;
+}
+
+调用
+int(x: 1, y: 2);
+</code></pre></div></div>
+
+<h1 id="函数内定义">函数内定义</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="o">(){</span>
+  <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="n">print</span><span class="o">(</span><span class="n">add</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="function-返回函数对象">Function 返回函数对象</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Function</span> <span class="nf">makeAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="err">调用</span>
+<span class="kt">var</span> <span class="n">add</span> <span class="o">=</span> <span class="n">makeAdd</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">print</span><span class="o">(</span><span class="n">add</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+</code></pre></div></div>
 
                     <hr>
                     <div class="row">
@@ -301,7 +342,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/12/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

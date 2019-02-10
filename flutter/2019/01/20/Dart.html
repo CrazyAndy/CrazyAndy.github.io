@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="interface接口" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——interface接口—019
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,106 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 20 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——interface接口—019
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="dart-中没有-interface-关键字"><em>Dart 中没有 interface 关键字</em></h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<h1 id="实现接口">实现接口</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+  p.shutdown();
+}
+
+abstract class IPhone {
+  void startup();
+  void shutdown();
+}
+
+class AndroidPhone implements IPhone {
+  void startup() {
+    print('AndroidPhone 开机');
+  }
+  void shutdown() {
+    print('AndroidPhone 关机');
+  }
+}
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<blockquote>
+  <p>接口用途的抽象类 请用字母 <code class="highlighter-rouge">I</code> 开头 , 如 <code class="highlighter-rouge">IPhone</code></p>
+</blockquote>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<h1 id="从一个普通类履行接口">从一个普通类履行接口</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+  p.shutdown();
+}
+
+class Phone {
+  void startup() {
+    print('开机');
+  }
+  void shutdown() {
+    print('关机');
+  }
+}
+
+class AndroidPhone implements Phone {
+  void startup() {
+    print('AndroidPhone 开机');
+  }
+  void shutdown() {
+    print('AndroidPhone 关机');
+  }
+}
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<blockquote>
+  <p>Dart 可以从一个普通的类履行接口</p>
+</blockquote>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<h1 id="履行多接口">履行多接口</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+  p.shutdown();
+}
+
+class Phone {
+  void startup() {
+    print('开机');
+  }
+  void shutdown() {
+    print('关机');
+  }
+}
+
+class Mobile {
+  int signal;
+}
+
+class AndroidPhone implements Phone, Mobile {
+  int signal;
+  void startup() {
+    print('AndroidPhone 开机');
+  }
+  void shutdown() {
+    print('AndroidPhone 关机');
+  }
+}
 </code></pre></div></div>
 
+<blockquote>
+  <p>Dart 可以履行多个接口</p>
+</blockquote>
 
                     <hr>
                     <div class="row">
@@ -301,7 +371,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/20/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="extends继承" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——extends继承—020
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,137 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 21 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——extends继承—020
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="实现继承">实现继承</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+  p.shutdown();
+}
+
+class Phone {
+  void startup() {
+    print('开机');
+  }
+  void shutdown() {
+    print('关机');
+  }
+}
+
+class AndroidPhone extends Phone {
+}
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<h1 id="继承抽象类的问题">继承抽象类的问题</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+  p.shutdown();
+}
+
+abstract class Phone {
+  void startup();
+  void shutdown();
+}
+
+class AndroidPhone extends Phone {
+}
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<blockquote>
+  <p>抽象类中只定义抽象函数，实例化访问会报错</p>
+</blockquote>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<h1 id="父类调用">父类调用</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone();
+  p.startup();
+}
+
+class Phone {
+  void startup() {
+    print('开机');
+  }
+  void shutdown() {
+    print('关机');
+  }
+}
+
+class AndroidPhone extends Phone {
+  void startup() {
+    super.startup();
+    print('AndroidPhone 开机');
+  }
+}
 </code></pre></div></div>
 
+<blockquote>
+  <p>super 对象可以访问父类</p>
+</blockquote>
+
+<h1 id="调用父类构造">调用父类构造</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  var p = AndroidPhone(12345678);
+  p.showNumber();
+}
+
+class Mobile {
+  int number;
+  int signal;
+  Mobile(this.number);
+  void showNumber() {
+    print('010-${number}');
+  }
+}
+
+class AndroidPhone extends Mobile {
+  AndroidPhone(int number) : super(number);
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>可调用父类的 构造函数</p>
+</blockquote>
+
+<h1 id="重写超类函数">重写超类函数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void main() {
+  dynamic p = AndroidPhone(12345678);
+  p.showNumber111();
+}
+
+class Mobile {
+  int number;
+  int signal;
+  Mobile(this.number);
+  void showNumber() {
+    print('010-${number}');
+  }
+}
+
+class AndroidPhone extends Mobile {
+  AndroidPhone(int number) : super(number);
+
+  @override
+  void noSuchMethod(Invocation mirror) {
+    print('被重写 noSuchMethod');
+  }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>在重写的函数上加修饰符 <code class="highlighter-rouge">@override</code></p>
+
+  <p>noSuchMethod是dart里面特有的一个函数，例如你叫用AndroidPhone的a()方法，因为没有此方法，则会调用 noSuchMethod方法</p>
+</blockquote>
 
                     <hr>
                     <div class="row">
@@ -301,7 +402,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/21/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

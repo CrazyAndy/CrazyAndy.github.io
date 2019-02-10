@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="日期时间" name="description">
+    <meta content="异常" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——时间—005
+        CrazyAndy|Dart基础学习——异常—014
     
   </title>
   <!-- favicon -->
@@ -252,36 +252,184 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 15 Jan 2019</span>
                         <h1>
-                            Dart基础学习——时间—005
+                            Dart基础学习——异常—014
                         </h1>
                     </div>
-                    	<h2 id="声明">声明</h2>
+                    	<h1 id="错误的两种类型">错误的两种类型</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<h2 id="exception-类">Exception 类</h2>
+
+<p><a href="https://api.dartlang.org/stable/2.1.0/dart-core/Exception-class.html">Exception class</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DeferredLoadException</td>
+      <td>延迟加载错误</td>
+    </tr>
+    <tr>
+      <td>FormatException</td>
+      <td>格式错误</td>
+    </tr>
+    <tr>
+      <td>IntegerDivisionByZeroException</td>
+      <td>整数除零错误</td>
+    </tr>
+    <tr>
+      <td>IOException</td>
+      <td>IO 错误</td>
+    </tr>
+    <tr>
+      <td>IsolateSpawnException</td>
+      <td>隔离产生错误</td>
+    </tr>
+    <tr>
+      <td>TimeoutException</td>
+      <td>超时错误</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="error-类">Error 类</h2>
+
+<p><a href="https://api.dartlang.org/stable/2.1.0/dart-core/Error-class.html">Error class</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AbstractClassInstantiationError</td>
+      <td>抽象类实例化错误</td>
+    </tr>
+    <tr>
+      <td>ArgumentError</td>
+      <td>参数错误</td>
+    </tr>
+    <tr>
+      <td>AssertionError</td>
+      <td>断言错误</td>
+    </tr>
+    <tr>
+      <td>AsyncError</td>
+      <td>异步错误</td>
+    </tr>
+    <tr>
+      <td>CastError</td>
+      <td>Cast 错误</td>
+    </tr>
+    <tr>
+      <td>ConcurrentModificationError</td>
+      <td>并发修改错误</td>
+    </tr>
+    <tr>
+      <td>CyclicInitializationError</td>
+      <td>周期初始错误</td>
+    </tr>
+    <tr>
+      <td>FallThroughError</td>
+      <td>Fall Through 错误</td>
+    </tr>
+    <tr>
+      <td>JsonUnsupportedObjectError</td>
+      <td>json 不支持错误</td>
+    </tr>
+    <tr>
+      <td>NoSuchMethodError</td>
+      <td>没有这个方法错误</td>
+    </tr>
+    <tr>
+      <td>NullThrownError</td>
+      <td>Null 错误错误</td>
+    </tr>
+    <tr>
+      <td>OutOfMemoryError</td>
+      <td>内存溢出错误</td>
+    </tr>
+    <tr>
+      <td>RemoteError</td>
+      <td>远程错误</td>
+    </tr>
+    <tr>
+      <td>StackOverflowError</td>
+      <td>堆栈溢出错误</td>
+    </tr>
+    <tr>
+      <td>StateError</td>
+      <td>状态错误</td>
+    </tr>
+    <tr>
+      <td>UnimplementedError</td>
+      <td>未实现的错误</td>
+    </tr>
+    <tr>
+      <td>UnsupportedError</td>
+      <td>不支持错误</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="抛出错误">抛出错误</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Exception 对象
+// throw new FormatException('这是一个格式错误提示');
+
+// Error 对象
+// throw new OutOfMemoryError();
+
+// 任意对象
+// throw '这是一个异常';
 </code></pre></div></div>
 
-<h2 id="创建时间utc">创建时间UTC</h2>
+<h1 id="捕获错误">捕获错误</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">utc</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// try {
+//   // throw new FormatException('这是一个格式错误提示');
+//   throw new OutOfMemoryError();
+// } on OutOfMemoryError {
+//   print('没有内存了');
+// } catch (e) {
+//   print(e);
+// }
 </code></pre></div></div>
 
-<h2 id="比较时间">比较时间</h2>
+<h1 id="重新抛出错误">重新抛出错误</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAfter</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">d1</span> <span class="o">=</span> <span class="nx">DateTime</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">d1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">Duration</span><span class="p">(</span><span class="nx">milliseconds</span><span class="p">:</span> <span class="mi">30</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">d1</span><span class="p">.</span><span class="nx">isAtSameMomentAs</span><span class="p">(</span><span class="nx">d2</span><span class="p">));</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// try {
+//   throw new OutOfMemoryError();
+// } on OutOfMemoryError {
+//   print('没有内存了');
+//   rethrow;
+// } catch (e) {
+//   print(e);
+// }
 </code></pre></div></div>
 
+<h1 id="finally-执行">Finally 执行</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// try {
+//   throw new OutOfMemoryError();
+// } on OutOfMemoryError {
+//   print('没有内存了');
+//   rethrow;
+// } catch (e) {
+//   print(e);
+// } finally {
+//   print('end');
+// }
+</code></pre></div></div>
 
                     <hr>
                     <div class="row">
@@ -301,7 +449,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/06/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/15/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>
