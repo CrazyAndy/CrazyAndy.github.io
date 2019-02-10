@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000/flutter/2019/02/03/Dart.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/flutter/2019/02/02/Dart.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/flutter/2019/02/01/Dart.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/flutter/2019/01/31/Dart.html</loc>
     </url>
 

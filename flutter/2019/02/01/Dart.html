@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="代码风格effective style" name="description">
+    <meta content="代码风格effective document" name="description">
   
   
     <meta name="keywords" content="flutter,dart">
@@ -16,7 +16,7 @@
 
   <title>
     
-        CrazyAndy|Dart基础学习——代码风格effective style—030
+        CrazyAndy|Dart基础学习——代码风格effective document—031
     
   </title>
   <!-- favicon -->
@@ -252,260 +252,109 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 31 Jan 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Feb 2019</span>
                         <h1>
-                            Dart基础学习——代码风格effective style—030
+                            Dart基础学习——代码风格effective document—031
                         </h1>
                     </div>
-                    	<h1 id="使用-uppercamelcase-风格来命名类型名称">使用 UpperCamelCase 风格来命名类型名称</h1>
+                    	<h1 id="按照句子的格式来格式化评论">按照句子的格式来格式化评论</h1>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class SliderMenu { ... }
-
-class HttpRequest { ... }
-
-typedef bool Predicate&lt;T&gt;(T value);
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Not if there is nothing before it.
+if (_chunks.isEmpty) return false;
 </code></pre></div></div>
 
-<h1 id="使用-lowercase_with_underscores-风格来命名库和文件名名字">使用 lowercase_with_underscores 风格来命名库和文件名名字</h1>
+<p>如果第一个单词不是大小写相关的标识符，则首字母要大写。使用标点符号结尾 （句号、感叹号、问号）。对于所有的注释都是这样要求的：文档注释、 行内注释、甚至 TODO 注释。即使是一句话的一半也需要如此。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library peg_parser.source_scanner;
+<h1 id="使用块注释作为解释说明">使用块注释作为解释说明</h1>
 
-import 'file_system.dart';
-import 'slider_menu.dart';
-</code></pre></div></div>
-
-<h1 id="使用-lowercase_with_underscores-风格命名导入的前缀">使用 lowercase_with_underscores 风格命名导入的前缀</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:json' as json;
-import 'dart:math' as math;
-import 'package:javascript_utils/javascript_utils.dart' as js_utils;
-import 'package:js/js.dart' as js;
-</code></pre></div></div>
-
-<h1 id="使用-lowercamelcase-风格来命名其他的标识符">使用 lowerCamelCase 风格来命名其他的标识符</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var item;
-
-HttpRequest httpRequest;
-
-align(clearItems) {
-  // ...
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>greet(name) {
+  // Assume we have a valid name.
+  print('Hi, $name!');
 }
 </code></pre></div></div>
 
-<h1 id="使用-lowercamelcase-来命名常量">使用 lowerCamelCase 来命名常量</h1>
+<h1 id="使用--文档注释来注释成员和类型">使用 /// 文档注释来注释成员和类型</h1>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const pi = 3.14;
-const defaultTimeout = 1000;
-final urlScheme = new RegExp('^([a-z]+):');
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// The number of characters in this chunk when unsplit.
+int get length =&gt; ...
+</code></pre></div></div>
 
-class Dice {
-  static final numberGenerator = new Random();
+<h1 id="把第一个语句定义为一个段落">把第一个语句定义为一个段落</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// Defines a flag.
+///
+/// Throws an [ArgumentError] if there is already an option named [name] or
+/// there is already an option using abbreviation [abbr]. Returns the new flag.
+Flag addFlag(String name, String abbr) { ... }
+</code></pre></div></div>
+
+<p>注释文档中的第一个段落应该是简洁的、面向用户的注释。例如下面的示例， 通常不是一个完成的语句。</p>
+
+<h1 id="用第三人称来开始函数或者方法的文档注释">用第三人称来开始函数或者方法的文档注释</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// Returns `true` if every element satisfies the [predicate].
+bool all(bool predicate(T element)) { ... }
+
+/// Starts the stopwatch if not already running.
+void start() { ... }
+</code></pre></div></div>
+
+<h1 id="使用名词短语来开始变量gettersetter-的注释">使用名词短语来开始变量、getter、setter 的注释</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// The current day of the week, where `0` is Sunday.
+int weekday;
+
+/// The number of checked buttons on the page.
+int get checkedCount { ... }
+</code></pre></div></div>
+
+<p>注释文档应该表述这个属性是什么。虽然 getter 函数会做些计算， 但是也要求这样，调用者关心的是其结果而 不是如何计算的</p>
+
+<h1 id="使用名词短语来开始库和类型注释">使用名词短语来开始库和类型注释</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// A chunk of non-breaking output text terminated by a hard or soft newline.
+///
+/// ...
+class Chunk { ... }
+</code></pre></div></div>
+
+<p>在程序中，类的注释通常是最重要的文档。 类的注释描述了类型的不变性、介绍其使用的术语、 提供类成员使用的上下文信息。为类提供一些注释可以让 其他类成员的注释更易于理解和编写。</p>
+
+<h1 id="在文档注释中添加示例代码">在文档注释中添加示例代码</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// Returns the lesser of two numbers.
+///
+///     min(5, 3); // 3.
+num min(num a, num b) { ... }
+</code></pre></div></div>
+
+<p>人类非常擅长从示例中抽象出实质内容，所以即使提供 一行最简单的示例代码都可以让 API 更易于理解。</p>
+
+<h1 id="而-dart-把参数返回值等描述放到文档注释中并使用方括号来引用-以及高亮这些参数和返回值">而 Dart 把参数、返回值等描述放到文档注释中，并使用方括号来引用 以及高亮这些参数和返回值</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// Defines a flag.
+///
+/// Throws an [ArgumentError] if there is already an option named [name] or
+/// there is already an option using abbreviation [abbr]. Returns the new flag.
+Flag addFlag(String name, String abbr) { ... }
+</code></pre></div></div>
+
+<h1 id="把注释文档放到注解之前">把注释文档放到注解之前</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// _Deprecated: Use [newMethod] instead._
+@deprecated
+oldMethod();
+</code></pre></div></div>
+
+<h1 id="使用-this-而不是-the-来引用实例成员">使用 “this” 而不是 “the” 来引用实例成员</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Box {
+  /// The value this wraps.
+  var _value;
+
+  /// True if this box contains a value.
+  bool get hasValue =&gt; _value != null;
 }
-</code></pre></div></div>
-
-<h1 id="把-dart-导入语句放到其他导入语句之前">把 “dart:” 导入语句放到其他导入语句之前</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'dart:async';
-import 'dart:html';
-
-import 'package:bar/bar.dart';
-import 'package:foo/foo.dart';
-</code></pre></div></div>
-
-<h1 id="把-package-导入语句放到相对导入语句之前">把 “package:” 导入语句放到相对导入语句之前</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'package:bar/bar.dart';
-import 'package:foo/foo.dart';
-
-import 'a.dart';
-</code></pre></div></div>
-
-<h1 id="把第三方-package-导入语句放到其他语句之前">把”第三方” “package:” 导入语句放到其他语句之前。</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'package:bar/bar.dart';
-import 'package:foo/foo.dart';
-
-import 'package:myapp/io.dart';
-import 'package:myapp/util.dart';
-</code></pre></div></div>
-
-<h1 id="把导出export语句放到所有导入语句之后的部分">把导出（export）语句放到所有导入语句之后的部分</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'src/error.dart';
-import 'src/string_source.dart';
-
-export 'src/error.dart';
-</code></pre></div></div>
-
-<h1 id="按照字母顺序来排序每个部分中的语句">按照字母顺序来排序每个部分中的语句</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'package:bar/bar.dart';
-import 'package:foo/bar.dart';
-
-import 'a.dart';
-import 'a/b.dart';
-</code></pre></div></div>
-
-<h1 id="在所有的控制结构上使用大括号">在所有的控制结构上使用大括号</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (true) {
-  print('sanity');
-} else {
-  print('opposite day!');
-}
-</code></pre></div></div>
-
-<h1 id="当只有-if-语句没有-else-语句并且-所有语句可以放到一行的时候可以省略大括号">当只有 if 语句没有 else 语句并且 所有语句可以放到一行的时候，可以省略大括号</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (arg == null) return defaultValue;
-</code></pre></div></div>
-
-<h1 id="通常用于当条件满足的时候就跳出-if-或者-返回的情况-但是对于其他表达式如果可以放到一行中-也可以这样使用">通常用于当条件满足的时候就跳出 if 或者 返回的情况。 但是对于其他表达式，如果可以放到一行中， 也可以这样使用</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (parameter == null) parameter = defaultValue;
-</code></pre></div></div>
-
-<h1 id="在每个语句或者声明后面添加一个空行">在每个语句或者声明后面添加一个空行</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main() {
-  first(statement);
-  second(statement);
-}
-
-anotherDeclaration() { ... }
-</code></pre></div></div>
-
-<h1 id="在关键字-operator-后面添加一个空格">在关键字 operator 后面添加一个空格</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bool operator ==(other) =&gt; ...;
-</code></pre></div></div>
-
-<h1 id="在二元和三元操作符之间添加空格">在二元和三元操作符之间添加空格</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>average = (a + b) / 2;
-largest = a &gt; b ? a : b;
-if (obj is! SomeType) print('not SomeType');
-optional([parameter = defaultValue]) { ... }
-</code></pre></div></div>
-
-<h1 id="不要-在一元操作符前后添加空格">不要 在一元操作符前后添加空格</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!condition
-index++
-</code></pre></div></div>
-
-<h1 id="把开始的大括号--放到同一行上">把开始的大括号 ({) 放到同一行上</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Foo {
-  method() {
-    if (true) {
-      // ...
-    } else {
-      // ...
-    }
-  }
-}
-</code></pre></div></div>
-
-<h1 id="在函数和方法体的--之前添加一个空格">在函数和方法体的 { 之前添加一个空格</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getEmptyFn(a) {
-  return () {};
-}
-</code></pre></div></div>
-
-<h1 id="把三元操作符放到多个表达式的下一行开始位置">把三元操作符放到多个表达式的下一行开始位置</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>return someCondition
-    ? whenTrue
-    : whenFalse;
-</code></pre></div></div>
-
-<h1 id="把--放到下一行开头当表达式换行的时候">把 . 放到下一行开头当表达式换行的时候</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>someVeryLongVariable.withAVeryLongProperty
-    .aMethodOnThatObject();
-</code></pre></div></div>
-
-<h1 id="把构造函数初始化列表中的每个参数和值都放到同一行">把构造函数初始化列表中的每个参数和值都放到同一行</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyClass()
-    : firstField = 'some value',
-      secondField = 'another',
-      thirdField = 'last' {
-  // ...
-}
-</code></pre></div></div>
-
-<h1 id="当无法在一行写完集合的时候把每个元素都用集合定义的方式来表达">当无法在一行写完集合的时候，把每个元素都用集合定义的方式来表达</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mapInsideList([
-  {
-    'a': 'b',
-    'c': 'd'
-  },
-  {
-    'a': 'b',
-    'c': 'd'
-  },
-]);
-</code></pre></div></div>
-
-<h1 id="用两个空格来缩进代码块和集合体">用两个空格来缩进代码块和集合体</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (condition) {
-  print('hi');
-
-  [
-    long,
-    list,
-    literal
-  ];
-}
-</code></pre></div></div>
-
-<h1 id="缩进-switch-case-两个空格-case-体四个空格">缩进 switch case 两个空格， case 体四个空格</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>switch (fruit) {
-  case 'apple':
-    print('delish');
-    break;
-
-  case 'durian':
-    print('stinky');
-    break;
-}
-</code></pre></div></div>
-
-<h1 id="只少使用两个空格来缩进多行函数级联调用">只少使用两个空格来缩进多行函数级联调用</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>buffer
-  ..write('Hello, ')
-  ..write(name)
-  ..write('!');
-</code></pre></div></div>
-
-<h1 id="使用四个空格来缩进同一行的换行">使用四个空格来缩进同一行的换行</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>someLongObject.aReallyLongMethodName(longArg, anotherLongArg,
-    wrappedToNextLine);
-
-bobLikes() =&gt;
-    isDeepFried || (hasPieCrust &amp;&amp; !vegan) || containsBacon;
-</code></pre></div></div>
-
-<h1 id="当表达式包含多行函数或者-集合声明定义的时候除外">当表达式包含多行函数或者 集合声明定义的时候除外</h1>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new Future.delayed(const Duration(seconds: 1), () {
-  print('I am a callback');
-});
-
-args.addAll([
-  '--mode',
-  'release',
-  '--checked'
-]);
 </code></pre></div></div>
 
                     <hr>
@@ -526,7 +375,7 @@ args.addAll([
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/01/31/Dart.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/01/Dart.html">0</span> comments
                                 
                                 </div>
                             </div>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="代码风格effective design" name="description">
+  
+  
+    <meta name="keywords" content="flutter,dart">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Dart基础学习——代码风格effective design—033
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+    <!-- Main scripts -->
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    $(function(){
+        $("pre").css('display','block');
+    });
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page">
+
+    
+        
+        
+            <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+        
+    
+
+
+<div class="wrapper wrapper-content  animated fadeInRight article">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">Flutter</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Feb 2019</span>
+                        <h1>
+                            Dart基础学习——代码风格effective design—033
+                        </h1>
+                    </div>
+                    	<h1 id="要-使用一致的术语">要 使用一致的术语</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pageCount         // 一个成员变量
+updatePageCount() // 和 pageCount 名字一致。
+toSomething()     // 和 Iterable 的 toList() 一致。
+asSomething()     // 和 List 的 asMap() 一致。
+Point             // 广为人知的概念。
+</code></pre></div></div>
+
+<h1 id="避免-缩写">避免 缩写</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pageCount
+buildRectangles
+IOStream
+HttpRequest
+</code></pre></div></div>
+
+<h1 id="推荐-把最具描述性的名词放到最后">推荐 把最具描述性的名词放到最后</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pageCount             // A count (of pages).
+ConversionSink        // A sink for doing conversions.
+ChunkedConversionSink // A ConversionSink that's chunked.
+CssFontFaceRule       // A rule for font faces in CSS.
+</code></pre></div></div>
+
+<h1 id="考虑-尽量让代码看起来像普通的句子">考虑 尽量让代码看起来像普通的句子</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// "If errors is empty..."
+if (errors.isEmpty) ...
+
+// "Hey, _subscription, cancel!"
+_subscription.cancel();
+
+// "Get the monsters where the monster has claws."
+monsters.where((monster) =&gt; monster.hasClaws);
+</code></pre></div></div>
+
+<h1 id="推荐-使用非命令式动词短语命名布尔类型的变量和属性">推荐 使用非命令式动词短语命名布尔类型的变量和属性</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>isEmpty
+hasElements
+canClose
+closesWindow
+canShowPopup
+hasShownPopup
+</code></pre></div></div>
+
+<h1 id="考虑-省略命名布尔参数的动词">考虑 省略命名布尔参数的动词</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Isolate.spawn(entryPoint, message, paused: false)
+new List.from(elements, growable: true)
+new RegExp(pattern, caseSensitive: false)
+</code></pre></div></div>
+
+<h1 id="推荐-使用命令式动词短语来命名带有副作用的函数或者方法">推荐 使用命令式动词短语来命名带有副作用的函数或者方法</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.add()
+queue.removeFirst()
+window.refresh()
+connection.downloadData()
+</code></pre></div></div>
+
+<h1 id="考虑-使用名词短语或者非命令式动词短语命名返回数据为主要功能的方法或者函数">考虑 使用名词短语或者非命令式动词短语命名返回数据为主要功能的方法或者函数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.elementAt(3)
+string.codeUnitAt(4)
+</code></pre></div></div>
+
+<h1 id="推荐-使用-to___-来命名把对象的状态转换到一个新的对象的函数">推荐 使用 to___() 来命名把对象的状态转换到一个新的对象的函数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.toSet()
+stackTrace.toString()
+dateTime.toLocal()
+</code></pre></div></div>
+
+<h1 id="使用-as___-来命名把原来对象转换为另外一种表现形式的函数">使用 as___() 来命名把原来对象转换为另外一种表现形式的函数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.asMap()
+bytes.asFloat32List()
+subscription.asFuture()
+</code></pre></div></div>
+
+<h1 id="避免-在方法或者函数名称中描述参数">避免 在方法或者函数名称中描述参数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>list.add(element)
+map.remove(key)
+</code></pre></div></div>
+
+<h1 id="避免-定义使用简单的方法可以替代的只有一个成员的抽象类">避免 定义使用简单的方法可以替代的只有一个成员的抽象类</h1>
+
+<p>和 Java 不同的是， Dart 支持一等方法（first-class functions）、闭包和优雅的语法来使用它们。 如果你需要的只是一个回调函数，使用方法即可。 如果你定义了一个类，里面只有一个名字无意义的函数， 例如 call 或者 invoke， 这种情况最好用方法替代</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef bool Predicate(item);
+</code></pre></div></div>
+
+<h1 id="避免-定义只包含静态成员的类">避免 定义只包含静态成员的类</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DateTime mostRecent(List&lt;DateTime&gt; dates) {
+  return dates.reduce((a, b) =&gt; a.isAfter(b) ? a : b);
+}
+
+const _favoriteMammal = 'weasel';
+</code></pre></div></div>
+
+<h1 id="然后这条规则并不是强制的对于一些常量或者枚举型的类型-使用类来把相关的成员组织到一起可能也是合理的当然-使用库也是同样合理的">然后，这条规则并不是强制的。对于一些常量或者枚举型的类型， 使用类来把相关的成员组织到一起可能也是合理的。当然， 使用库也是同样合理的。</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Color {
+  static const red = '#f00';
+  static const green = '#0f0';
+  static const blue = '#00f';
+  static const black = '#000';
+  static const white = '#fff';
+}
+</code></pre></div></div>
+
+<h1 id="推荐-使用构造函数而不是静态函数来创建对象">推荐 使用构造函数而不是静态函数来创建对象</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Point {
+  num x, y;
+  Point(this.x, this.y);
+  Point.polar(num theta, num radius)
+      : x = radius * math.cos(theta),
+        y = radius * math.sin(theta);
+}
+</code></pre></div></div>
+
+<h1 id="要-使用-getter-来定义访问属性的操作">要 使用 getter 来定义访问属性的操作</h1>
+
+<p>如果函数的名字带有 get 前缀，或者是一个像 length 或者 size 这样 的名称，这种情况通常最好定义该函数为一个 getter。 当全部满足下面的条件的时候，你应该使用一个 getter：</p>
+
+<p>没有参数。
+返回一个值
+没有副作用 调用一个 getter 不应该改变对象外部可见的状态 (内部缓存和延时初始化的状态可以发生变化) 如果对象的状态在多次调用同一个 getter 之间没有发生变化，则 多次调用同一个 getter 应该返回同一个值</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rectangle.width
+collection.isEmpty
+button.canShow
+</code></pre></div></div>
+
+<h1 id="要-对于本质上为修改对象属性的函数要使用-setter">要 对于本质上为修改对象属性的函数要使用 setter</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rectangle.width = 3;
+button.visible = false;
+</code></pre></div></div>
+
+<h1 id="不要-为-setter-指定返回类型">不要 为 setter 指定返回类型</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set foo(Foo value) {...}
+</code></pre></div></div>
+
+<h1 id="推荐-为私有成员提供类型">推荐 为私有成员提供类型</h1>
+
+<p>在公开的 API 上使用类型可以帮助使用你的库的用户。同样， 是私有代码上使用类型，可以帮助你的你的同事或者代码维护者。 另外，在私有成员上使用类型，对于将来自己查看代码 也有帮助。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class CallChainVisitor {
+  final SourceVisitor _visitor;
+  final Expression _target;
+
+  void _writeCall(Expression call) { ... }
+
+  ...
+}
+</code></pre></div></div>
+
+<h1 id="避免-在方法表达式上使用类型">避免 在方法表达式上使用类型</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var names = people.map((person) =&gt; person.name);
+</code></pre></div></div>
+
+<h1 id="避免-在没必要的地方使用-dynamic-类型">避免 在没必要的地方使用 dynamic 类型</h1>
+
+<p>在大部分 Dart 代码中，类型可以忽略，这样该参数类型会自动设置为 dynamic。 所以没必要手动指定类型为 dynamic 的， 只需要省略类型即可。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lookUpOrDefault(String name, Map map, defaultValue) {
+  var value = map[name];
+  if (value != null) return value;
+  return defaultValue;
+}
+</code></pre></div></div>
+
+<h1 id="避免-使用-function-类型">避免 使用 Function 类型</h1>
+
+<ul>
+  <li>正确</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bool isValidString(String value, bool predicate(String string)) { ... }
+</code></pre></div></div>
+
+<ul>
+  <li>错误</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bool isValidString(String value, Function predicate) { ... }
+</code></pre></div></div>
+
+<h1 id="要-使用-object-来替代-dynamic-来表示可以接受任意对象">要 使用 Object 来替代 dynamic 来表示可以接受任意对象</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Accepts any object.
+void log(Object object) {
+  print(object.toString());
+}
+
+// Only accepts bool or String, which can't be expressed in a type annotation.
+bool convertToBool(arg) {
+  if (arg is bool) return arg;
+  if (arg is String) return arg == 'true';
+  throw new ArgumentError('Cannot convert $arg to a bool.');
+}
+</code></pre></div></div>
+
+<h1 id="考虑使用命名参数或者命名构造函数以及命名常量来清晰-的表明您的意图">考虑使用命名参数或者命名构造函数以及命名常量来清晰 的表明您的意图：</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new Task.oneShot();
+new Task.repeating();
+new ListBox(scroll: true, showScrollbars: true);
+new Button(ButtonState.enabled);
+</code></pre></div></div>
+
+<h1 id="对于-setter-则没有这个要求应为-setter-的名字已经明确的-表明了值所代表的意义">对于 setter 则没有这个要求，应为 setter 的名字已经明确的 表明了值所代表的意义</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>listBox.canScroll = true;
+button.isEnabled = false;
+</code></pre></div></div>
+
+<h1 id="避免-把用户想要忽略的参数放到位置可选参数的前列">避免 把用户想要忽略的参数放到位置可选参数的前列</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>String.fromCharCodes(Iterable&lt;int&gt; charCodes, [int start = 0, int end])
+
+DateTime(int year,
+    [int month = 1,
+    int day = 1,
+    int hour = 0,
+    int minute = 0,
+    int second = 0,
+    int millisecond = 0,
+    int microsecond = 0])
+
+Duration(
+    {int days: 0,
+    int hours: 0,
+    int minutes: 0,
+    int seconds: 0,
+    int milliseconds: 0,
+    int microseconds: 0})
+</code></pre></div></div>
+
+<h1 id="避免-使用强制无意义的参数">避免 使用强制无意义的参数</h1>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string.substring(start)
+</code></pre></div></div>
+
+<h1 id="要-使用包含开始位置并且不包含结束位置的范围参数">要 使用包含开始位置并且不包含结束位置的范围参数</h1>
+
+<p>如果你定义一个函数或者方法让用户从基于位置排序的集合中 选择一些元素，需要一个开始位置索引和结束位置索引分别制定开始 元素的位置以及结束元素的位置。结束位置通常是指 大于最后一个元素的位置的值。</p>
+
+<p>核心库就是这样定义的，所以最好和核心库保持一致</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0, 1, 2, 3].sublist(1, 3) // [1, 2].
+'abcd'.substring(1, 3)     // "bc".
+</code></pre></div></div>
+
+<h1 id="不要-在自定义--操作符中判断-null">不要 在自定义 == 操作符中判断 null</h1>
+
+<p>语言规范表明了这种判断已经自动执行了，你的 == 自定义操作符只有当 右侧对象不为 null 的时候才会执行。</p>
+
+<ul>
+  <li>正确</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Person {
+  final String name;
+
+  operator ==(other) =&gt;
+      other is Person &amp;&amp; name == other.name;
+}
+</code></pre></div></div>
+
+<ul>
+  <li>错误</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Person {
+  final String name;
+
+  operator ==(other) =&gt;
+      other != null &amp;&amp;
+      other is Person &amp;&amp;
+      name == other.name;
+}
+</code></pre></div></div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">flutter</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">dart</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/03/Dart.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+    
+
+
+</body>
+</html>

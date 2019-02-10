@@ -5,13 +5,902 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Feb 2019 21:46:56 +0800</pubDate>
-    <lastBuildDate>Sun, 10 Feb 2019 21:46:56 +0800</lastBuildDate>
+    <pubDate>Sun, 10 Feb 2019 22:28:32 +0800</pubDate>
+    <lastBuildDate>Sun, 10 Feb 2019 22:28:32 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
+        <title>Dart基础学习——代码风格effective design—033</title>
+        <description>&lt;h1 id=&quot;要-使用一致的术语&quot;&gt;要 使用一致的术语&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pageCount         // 一个成员变量
+updatePageCount() // 和 pageCount 名字一致。
+toSomething()     // 和 Iterable 的 toList() 一致。
+asSomething()     // 和 List 的 asMap() 一致。
+Point             // 广为人知的概念。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-缩写&quot;&gt;避免 缩写&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pageCount
+buildRectangles
+IOStream
+HttpRequest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-把最具描述性的名词放到最后&quot;&gt;推荐 把最具描述性的名词放到最后&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pageCount             // A count (of pages).
+ConversionSink        // A sink for doing conversions.
+ChunkedConversionSink // A ConversionSink that's chunked.
+CssFontFaceRule       // A rule for font faces in CSS.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;考虑-尽量让代码看起来像普通的句子&quot;&gt;考虑 尽量让代码看起来像普通的句子&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// &quot;If errors is empty...&quot;
+if (errors.isEmpty) ...
+
+// &quot;Hey, _subscription, cancel!&quot;
+_subscription.cancel();
+
+// &quot;Get the monsters where the monster has claws.&quot;
+monsters.where((monster) =&amp;gt; monster.hasClaws);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用非命令式动词短语命名布尔类型的变量和属性&quot;&gt;推荐 使用非命令式动词短语命名布尔类型的变量和属性&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;isEmpty
+hasElements
+canClose
+closesWindow
+canShowPopup
+hasShownPopup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;考虑-省略命名布尔参数的动词&quot;&gt;考虑 省略命名布尔参数的动词&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Isolate.spawn(entryPoint, message, paused: false)
+new List.from(elements, growable: true)
+new RegExp(pattern, caseSensitive: false)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用命令式动词短语来命名带有副作用的函数或者方法&quot;&gt;推荐 使用命令式动词短语来命名带有副作用的函数或者方法&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;list.add()
+queue.removeFirst()
+window.refresh()
+connection.downloadData()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;考虑-使用名词短语或者非命令式动词短语命名返回数据为主要功能的方法或者函数&quot;&gt;考虑 使用名词短语或者非命令式动词短语命名返回数据为主要功能的方法或者函数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;list.elementAt(3)
+string.codeUnitAt(4)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用-to___-来命名把对象的状态转换到一个新的对象的函数&quot;&gt;推荐 使用 to___() 来命名把对象的状态转换到一个新的对象的函数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;list.toSet()
+stackTrace.toString()
+dateTime.toLocal()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-as___-来命名把原来对象转换为另外一种表现形式的函数&quot;&gt;使用 as___() 来命名把原来对象转换为另外一种表现形式的函数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;list.asMap()
+bytes.asFloat32List()
+subscription.asFuture()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-在方法或者函数名称中描述参数&quot;&gt;避免 在方法或者函数名称中描述参数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;list.add(element)
+map.remove(key)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-定义使用简单的方法可以替代的只有一个成员的抽象类&quot;&gt;避免 定义使用简单的方法可以替代的只有一个成员的抽象类&lt;/h1&gt;
+
+&lt;p&gt;和 Java 不同的是， Dart 支持一等方法（first-class functions）、闭包和优雅的语法来使用它们。 如果你需要的只是一个回调函数，使用方法即可。 如果你定义了一个类，里面只有一个名字无意义的函数， 例如 call 或者 invoke， 这种情况最好用方法替代&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;typedef bool Predicate(item);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-定义只包含静态成员的类&quot;&gt;避免 定义只包含静态成员的类&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DateTime mostRecent(List&amp;lt;DateTime&amp;gt; dates) {
+  return dates.reduce((a, b) =&amp;gt; a.isAfter(b) ? a : b);
+}
+
+const _favoriteMammal = 'weasel';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;然后这条规则并不是强制的对于一些常量或者枚举型的类型-使用类来把相关的成员组织到一起可能也是合理的当然-使用库也是同样合理的&quot;&gt;然后，这条规则并不是强制的。对于一些常量或者枚举型的类型， 使用类来把相关的成员组织到一起可能也是合理的。当然， 使用库也是同样合理的。&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Color {
+  static const red = '#f00';
+  static const green = '#0f0';
+  static const blue = '#00f';
+  static const black = '#000';
+  static const white = '#fff';
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用构造函数而不是静态函数来创建对象&quot;&gt;推荐 使用构造函数而不是静态函数来创建对象&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Point {
+  num x, y;
+  Point(this.x, this.y);
+  Point.polar(num theta, num radius)
+      : x = radius * math.cos(theta),
+        y = radius * math.sin(theta);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-使用-getter-来定义访问属性的操作&quot;&gt;要 使用 getter 来定义访问属性的操作&lt;/h1&gt;
+
+&lt;p&gt;如果函数的名字带有 get 前缀，或者是一个像 length 或者 size 这样 的名称，这种情况通常最好定义该函数为一个 getter。 当全部满足下面的条件的时候，你应该使用一个 getter：&lt;/p&gt;
+
+&lt;p&gt;没有参数。
+返回一个值
+没有副作用 调用一个 getter 不应该改变对象外部可见的状态 (内部缓存和延时初始化的状态可以发生变化) 如果对象的状态在多次调用同一个 getter 之间没有发生变化，则 多次调用同一个 getter 应该返回同一个值&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rectangle.width
+collection.isEmpty
+button.canShow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-对于本质上为修改对象属性的函数要使用-setter&quot;&gt;要 对于本质上为修改对象属性的函数要使用 setter&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rectangle.width = 3;
+button.visible = false;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-为-setter-指定返回类型&quot;&gt;不要 为 setter 指定返回类型&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set foo(Foo value) {...}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-为私有成员提供类型&quot;&gt;推荐 为私有成员提供类型&lt;/h1&gt;
+
+&lt;p&gt;在公开的 API 上使用类型可以帮助使用你的库的用户。同样， 是私有代码上使用类型，可以帮助你的你的同事或者代码维护者。 另外，在私有成员上使用类型，对于将来自己查看代码 也有帮助。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class CallChainVisitor {
+  final SourceVisitor _visitor;
+  final Expression _target;
+
+  void _writeCall(Expression call) { ... }
+
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-在方法表达式上使用类型&quot;&gt;避免 在方法表达式上使用类型&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var names = people.map((person) =&amp;gt; person.name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-在没必要的地方使用-dynamic-类型&quot;&gt;避免 在没必要的地方使用 dynamic 类型&lt;/h1&gt;
+
+&lt;p&gt;在大部分 Dart 代码中，类型可以忽略，这样该参数类型会自动设置为 dynamic。 所以没必要手动指定类型为 dynamic 的， 只需要省略类型即可。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lookUpOrDefault(String name, Map map, defaultValue) {
+  var value = map[name];
+  if (value != null) return value;
+  return defaultValue;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-使用-function-类型&quot;&gt;避免 使用 Function 类型&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;正确&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bool isValidString(String value, bool predicate(String string)) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;错误&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bool isValidString(String value, Function predicate) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-使用-object-来替代-dynamic-来表示可以接受任意对象&quot;&gt;要 使用 Object 来替代 dynamic 来表示可以接受任意对象&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Accepts any object.
+void log(Object object) {
+  print(object.toString());
+}
+
+// Only accepts bool or String, which can't be expressed in a type annotation.
+bool convertToBool(arg) {
+  if (arg is bool) return arg;
+  if (arg is String) return arg == 'true';
+  throw new ArgumentError('Cannot convert $arg to a bool.');
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;考虑使用命名参数或者命名构造函数以及命名常量来清晰-的表明您的意图&quot;&gt;考虑使用命名参数或者命名构造函数以及命名常量来清晰 的表明您的意图：&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new Task.oneShot();
+new Task.repeating();
+new ListBox(scroll: true, showScrollbars: true);
+new Button(ButtonState.enabled);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;对于-setter-则没有这个要求应为-setter-的名字已经明确的-表明了值所代表的意义&quot;&gt;对于 setter 则没有这个要求，应为 setter 的名字已经明确的 表明了值所代表的意义&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;listBox.canScroll = true;
+button.isEnabled = false;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-把用户想要忽略的参数放到位置可选参数的前列&quot;&gt;避免 把用户想要忽略的参数放到位置可选参数的前列&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;String.fromCharCodes(Iterable&amp;lt;int&amp;gt; charCodes, [int start = 0, int end])
+
+DateTime(int year,
+    [int month = 1,
+    int day = 1,
+    int hour = 0,
+    int minute = 0,
+    int second = 0,
+    int millisecond = 0,
+    int microsecond = 0])
+
+Duration(
+    {int days: 0,
+    int hours: 0,
+    int minutes: 0,
+    int seconds: 0,
+    int milliseconds: 0,
+    int microseconds: 0})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-使用强制无意义的参数&quot;&gt;避免 使用强制无意义的参数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;string.substring(start)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-使用包含开始位置并且不包含结束位置的范围参数&quot;&gt;要 使用包含开始位置并且不包含结束位置的范围参数&lt;/h1&gt;
+
+&lt;p&gt;如果你定义一个函数或者方法让用户从基于位置排序的集合中 选择一些元素，需要一个开始位置索引和结束位置索引分别制定开始 元素的位置以及结束元素的位置。结束位置通常是指 大于最后一个元素的位置的值。&lt;/p&gt;
+
+&lt;p&gt;核心库就是这样定义的，所以最好和核心库保持一致&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[0, 1, 2, 3].sublist(1, 3) // [1, 2].
+'abcd'.substring(1, 3)     // &quot;bc&quot;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-在自定义--操作符中判断-null&quot;&gt;不要 在自定义 == 操作符中判断 null&lt;/h1&gt;
+
+&lt;p&gt;语言规范表明了这种判断已经自动执行了，你的 == 自定义操作符只有当 右侧对象不为 null 的时候才会执行。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;正确&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Person {
+  final String name;
+
+  operator ==(other) =&amp;gt;
+      other is Person &amp;amp;&amp;amp; name == other.name;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;错误&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Person {
+  final String name;
+
+  operator ==(other) =&amp;gt;
+      other != null &amp;amp;&amp;amp;
+      other is Person &amp;amp;&amp;amp;
+      name == other.name;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 03 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/03/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/03/Dart.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Dart基础学习——代码风格effective usage—032</title>
+        <description>&lt;h1 id=&quot;使用相邻的字符串字面量定义来链接字符串&quot;&gt;使用相邻的字符串字面量定义来链接字符串&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;raiseAlarm(
+    'ERROR: Parts of the spaceship are on fire. Other '
+    'parts are overrun by martians. Unclear which are which.');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用插值的形式来组合字符串和值&quot;&gt;使用插值的形式来组合字符串和值&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'Hello, $name! You are ${year - birth} years old.';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免在字符串插值中使用多余的大括号&quot;&gt;避免在字符串插值中使用多余的大括号&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'Hi, $name!'
+&quot;Wear your wildest $decade's outfit.&quot;
+'Wear your wildest ${decade}s outfit.'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;尽可能的使用集合字面量来定义集合&quot;&gt;尽可能的使用集合字面量来定义集合&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var points = [];
+var addresses = {};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;如果有必要还可以提供泛型类型&quot;&gt;如果有必要还可以提供泛型类型&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var points = &amp;lt;Point&amp;gt;[];
+var addresses = &amp;lt;String, Address&amp;gt;{};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-使用-length-来判断集合是否为空&quot;&gt;不要 使用 .length 来判断集合是否为空&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (lunchBox.isEmpty) return 'so hungry...';
+if (words.isNotEmpty) return words.join(' ');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用高阶higher-order函数来转换集合数据&quot;&gt;使用高阶（higher-order）函数来转换集合数据&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var aquaticNames = animals
+    .where((animal) =&amp;gt; animal.isAquatic)
+    .map((animal) =&amp;gt; animal.name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;避免-在-iterableforeach-中使用函数声明形式&quot;&gt;避免 在 Iterable.forEach() 中使用函数声明形式&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for (var person in people) {
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;forEach() 方法通常在 JavaScript 中使用，原因是系统内置的 for-in 循环并不能提供期望的结果。 相反，在 Dart 中如果需要遍历一个集合，通常使用循环语句&lt;/p&gt;
+
+&lt;h1 id=&quot;如果你只想在每个集合元素上调用一个已经定义好的函数则可以使用-foreach-函数&quot;&gt;如果你只想在每个集合元素上调用一个已经定义好的函数，则可以使用 forEach() 函数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;people.forEach(print);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-用方法声明的形式来给方法起个名字&quot;&gt;要 用方法声明的形式来给方法起个名字&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;正确&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void main() {
+  localFunction() {
+    ...
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;错误示范&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void main() {
+  var localFunction = () {
+    ...
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-显式的把变量初始化为-null&quot;&gt;不要 显式的把变量初始化为 null&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int _nextId;
+
+class LazyId {
+  int _id;
+
+  int get id {
+    if (_nextId == null) _nextId = 0;
+    if (_id == null) _id = _nextId++;
+
+    return _id;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在 Dart 中没有初始化的变量和域会自动的 初始化为 null。在语言基本就保证了该行为的可靠性。 在 Dart 中没有 “未初始化的内存”这个概念。所以添加 = null 是多余的。&lt;/p&gt;
+
+&lt;h1 id=&quot;不要-创建没必要的-getter-和-setter&quot;&gt;不要 创建没必要的 getter 和 setter&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;​```
+
+# 段落 1
+
+- 正确
+
+​```dart
+class Box {
+  var contents;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;错误&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Box {
+  var _contents;
+  get contents =&amp;gt; _contents;
+  set contents(value) {
+    _contents = value;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用-final-关键字来限定只读属性&quot;&gt;推荐 使用 final 关键字来限定只读属性&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Box {
+  final contents = [];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;考虑-用--来实现只有一个单一返回语句的函数&quot;&gt;考虑 用 =&amp;gt; 来实现只有一个单一返回语句的函数&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;get width =&amp;gt; right - left;
+bool ready(num time) =&amp;gt; minTime == null || minTime &amp;lt;= time;
+containsValue(String value) =&amp;gt; getValues().contains(value);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-尽可能的在定义变量的时候初始化其值&quot;&gt;要 尽可能的在定义变量的时候初始化其值&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Folder {
+  final String name;
+  final List&amp;lt;Document&amp;gt; contents = [];
+
+  Folder(this.name);
+  Folder.temp() : name = 'temporary';
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-尽可能的使用初始化形式&quot;&gt;要 尽可能的使用初始化形式&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Point {
+  num x, y;
+  Point(this.x, this.y);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-把-super-调用放到构造函数初始化列表之后调用&quot;&gt;要 把 super() 调用放到构造函数初始化列表之后调用&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;View(Style style, List children)
+    : _children = children,
+      super(style) {
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;要-使用-rethrow-来重新抛出捕获的异常&quot;&gt;要 使用 rethrow 来重新抛出捕获的异常&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;try {
+  somethingRisky();
+} catch(e) {
+  if (!canHandle(e)) rethrow;
+  handle(e);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;推荐-使用-asyncawait-而不是直接使用底层的特性&quot;&gt;推荐 使用 async/await 而不是直接使用底层的特性&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Future&amp;lt;bool&amp;gt; doAsyncComputation() async {
+  try {
+    var result = await longRunningCalculation();
+    return verifyResult(result.summary);
+  } catch(e) {
+    log.error(e);
+    return false;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-在没有有用效果的情况下使用-async&quot;&gt;不要 在没有有用效果的情况下使用 async&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Future afterTwoThings(Future first, second) {
+  return Future.wait([first, second]);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 02 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/02/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/02/Dart.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Dart基础学习——代码风格effective document—031</title>
+        <description>&lt;h1 id=&quot;按照句子的格式来格式化评论&quot;&gt;按照句子的格式来格式化评论&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Not if there is nothing before it.
+if (_chunks.isEmpty) return false;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果第一个单词不是大小写相关的标识符，则首字母要大写。使用标点符号结尾 （句号、感叹号、问号）。对于所有的注释都是这样要求的：文档注释、 行内注释、甚至 TODO 注释。即使是一句话的一半也需要如此。&lt;/p&gt;
+
+&lt;h1 id=&quot;使用块注释作为解释说明&quot;&gt;使用块注释作为解释说明&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;greet(name) {
+  // Assume we have a valid name.
+  print('Hi, $name!');
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用--文档注释来注释成员和类型&quot;&gt;使用 /// 文档注释来注释成员和类型&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// The number of characters in this chunk when unsplit.
+int get length =&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把第一个语句定义为一个段落&quot;&gt;把第一个语句定义为一个段落&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// Defines a flag.
+///
+/// Throws an [ArgumentError] if there is already an option named [name] or
+/// there is already an option using abbreviation [abbr]. Returns the new flag.
+Flag addFlag(String name, String abbr) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;注释文档中的第一个段落应该是简洁的、面向用户的注释。例如下面的示例， 通常不是一个完成的语句。&lt;/p&gt;
+
+&lt;h1 id=&quot;用第三人称来开始函数或者方法的文档注释&quot;&gt;用第三人称来开始函数或者方法的文档注释&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// Returns `true` if every element satisfies the [predicate].
+bool all(bool predicate(T element)) { ... }
+
+/// Starts the stopwatch if not already running.
+void start() { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用名词短语来开始变量gettersetter-的注释&quot;&gt;使用名词短语来开始变量、getter、setter 的注释&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// The current day of the week, where `0` is Sunday.
+int weekday;
+
+/// The number of checked buttons on the page.
+int get checkedCount { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;注释文档应该表述这个属性是什么。虽然 getter 函数会做些计算， 但是也要求这样，调用者关心的是其结果而 不是如何计算的&lt;/p&gt;
+
+&lt;h1 id=&quot;使用名词短语来开始库和类型注释&quot;&gt;使用名词短语来开始库和类型注释&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// A chunk of non-breaking output text terminated by a hard or soft newline.
+///
+/// ...
+class Chunk { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在程序中，类的注释通常是最重要的文档。 类的注释描述了类型的不变性、介绍其使用的术语、 提供类成员使用的上下文信息。为类提供一些注释可以让 其他类成员的注释更易于理解和编写。&lt;/p&gt;
+
+&lt;h1 id=&quot;在文档注释中添加示例代码&quot;&gt;在文档注释中添加示例代码&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// Returns the lesser of two numbers.
+///
+///     min(5, 3); // 3.
+num min(num a, num b) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;人类非常擅长从示例中抽象出实质内容，所以即使提供 一行最简单的示例代码都可以让 API 更易于理解。&lt;/p&gt;
+
+&lt;h1 id=&quot;而-dart-把参数返回值等描述放到文档注释中并使用方括号来引用-以及高亮这些参数和返回值&quot;&gt;而 Dart 把参数、返回值等描述放到文档注释中，并使用方括号来引用 以及高亮这些参数和返回值&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// Defines a flag.
+///
+/// Throws an [ArgumentError] if there is already an option named [name] or
+/// there is already an option using abbreviation [abbr]. Returns the new flag.
+Flag addFlag(String name, String abbr) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把注释文档放到注解之前&quot;&gt;把注释文档放到注解之前&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/// _Deprecated: Use [newMethod] instead._
+@deprecated
+oldMethod();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-this-而不是-the-来引用实例成员&quot;&gt;使用 “this” 而不是 “the” 来引用实例成员&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Box {
+  /// The value this wraps.
+  var _value;
+
+  /// True if this box contains a value.
+  bool get hasValue =&amp;gt; _value != null;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 01 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/01/Dart.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/01/Dart.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
         <title>Dart基础学习——代码风格effective style—030</title>
-        <description>
+        <description>&lt;h1 id=&quot;使用-uppercamelcase-风格来命名类型名称&quot;&gt;使用 UpperCamelCase 风格来命名类型名称&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class SliderMenu { ... }
+
+class HttpRequest { ... }
+
+typedef bool Predicate&amp;lt;T&amp;gt;(T value);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-lowercase_with_underscores-风格来命名库和文件名名字&quot;&gt;使用 lowercase_with_underscores 风格来命名库和文件名名字&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;library peg_parser.source_scanner;
+
+import 'file_system.dart';
+import 'slider_menu.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-lowercase_with_underscores-风格命名导入的前缀&quot;&gt;使用 lowercase_with_underscores 风格命名导入的前缀&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'dart:json' as json;
+import 'dart:math' as math;
+import 'package:javascript_utils/javascript_utils.dart' as js_utils;
+import 'package:js/js.dart' as js;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-lowercamelcase-风格来命名其他的标识符&quot;&gt;使用 lowerCamelCase 风格来命名其他的标识符&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var item;
+
+HttpRequest httpRequest;
+
+align(clearItems) {
+  // ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用-lowercamelcase-来命名常量&quot;&gt;使用 lowerCamelCase 来命名常量&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const pi = 3.14;
+const defaultTimeout = 1000;
+final urlScheme = new RegExp('^([a-z]+):');
+
+class Dice {
+  static final numberGenerator = new Random();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把-dart-导入语句放到其他导入语句之前&quot;&gt;把 “dart:” 导入语句放到其他导入语句之前&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'dart:async';
+import 'dart:html';
+
+import 'package:bar/bar.dart';
+import 'package:foo/foo.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把-package-导入语句放到相对导入语句之前&quot;&gt;把 “package:” 导入语句放到相对导入语句之前&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'package:bar/bar.dart';
+import 'package:foo/foo.dart';
+
+import 'a.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把第三方-package-导入语句放到其他语句之前&quot;&gt;把”第三方” “package:” 导入语句放到其他语句之前。&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'package:bar/bar.dart';
+import 'package:foo/foo.dart';
+
+import 'package:myapp/io.dart';
+import 'package:myapp/util.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把导出export语句放到所有导入语句之后的部分&quot;&gt;把导出（export）语句放到所有导入语句之后的部分&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'src/error.dart';
+import 'src/string_source.dart';
+
+export 'src/error.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;按照字母顺序来排序每个部分中的语句&quot;&gt;按照字母顺序来排序每个部分中的语句&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import 'package:bar/bar.dart';
+import 'package:foo/bar.dart';
+
+import 'a.dart';
+import 'a/b.dart';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;在所有的控制结构上使用大括号&quot;&gt;在所有的控制结构上使用大括号&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (true) {
+  print('sanity');
+} else {
+  print('opposite day!');
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;当只有-if-语句没有-else-语句并且-所有语句可以放到一行的时候可以省略大括号&quot;&gt;当只有 if 语句没有 else 语句并且 所有语句可以放到一行的时候，可以省略大括号&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (arg == null) return defaultValue;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;通常用于当条件满足的时候就跳出-if-或者-返回的情况-但是对于其他表达式如果可以放到一行中-也可以这样使用&quot;&gt;通常用于当条件满足的时候就跳出 if 或者 返回的情况。 但是对于其他表达式，如果可以放到一行中， 也可以这样使用&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (parameter == null) parameter = defaultValue;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;在每个语句或者声明后面添加一个空行&quot;&gt;在每个语句或者声明后面添加一个空行&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;main() {
+  first(statement);
+  second(statement);
+}
+
+anotherDeclaration() { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;在关键字-operator-后面添加一个空格&quot;&gt;在关键字 operator 后面添加一个空格&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bool operator ==(other) =&amp;gt; ...;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;在二元和三元操作符之间添加空格&quot;&gt;在二元和三元操作符之间添加空格&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;average = (a + b) / 2;
+largest = a &amp;gt; b ? a : b;
+if (obj is! SomeType) print('not SomeType');
+optional([parameter = defaultValue]) { ... }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;不要-在一元操作符前后添加空格&quot;&gt;不要 在一元操作符前后添加空格&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;!condition
+index++
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把开始的大括号--放到同一行上&quot;&gt;把开始的大括号 ({) 放到同一行上&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Foo {
+  method() {
+    if (true) {
+      // ...
+    } else {
+      // ...
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;在函数和方法体的--之前添加一个空格&quot;&gt;在函数和方法体的 { 之前添加一个空格&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;getEmptyFn(a) {
+  return () {};
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把三元操作符放到多个表达式的下一行开始位置&quot;&gt;把三元操作符放到多个表达式的下一行开始位置&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;return someCondition
+    ? whenTrue
+    : whenFalse;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把--放到下一行开头当表达式换行的时候&quot;&gt;把 . 放到下一行开头当表达式换行的时候&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;someVeryLongVariable.withAVeryLongProperty
+    .aMethodOnThatObject();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;把构造函数初始化列表中的每个参数和值都放到同一行&quot;&gt;把构造函数初始化列表中的每个参数和值都放到同一行&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MyClass()
+    : firstField = 'some value',
+      secondField = 'another',
+      thirdField = 'last' {
+  // ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;当无法在一行写完集合的时候把每个元素都用集合定义的方式来表达&quot;&gt;当无法在一行写完集合的时候，把每个元素都用集合定义的方式来表达&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mapInsideList([
+  {
+    'a': 'b',
+    'c': 'd'
+  },
+  {
+    'a': 'b',
+    'c': 'd'
+  },
+]);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;用两个空格来缩进代码块和集合体&quot;&gt;用两个空格来缩进代码块和集合体&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (condition) {
+  print('hi');
+
+  [
+    long,
+    list,
+    literal
+  ];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;缩进-switch-case-两个空格-case-体四个空格&quot;&gt;缩进 switch case 两个空格， case 体四个空格&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;switch (fruit) {
+  case 'apple':
+    print('delish');
+    break;
+
+  case 'durian':
+    print('stinky');
+    break;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;只少使用两个空格来缩进多行函数级联调用&quot;&gt;只少使用两个空格来缩进多行函数级联调用&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;buffer
+  ..write('Hello, ')
+  ..write(name)
+  ..write('!');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;使用四个空格来缩进同一行的换行&quot;&gt;使用四个空格来缩进同一行的换行&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;someLongObject.aReallyLongMethodName(longArg, anotherLongArg,
+    wrappedToNextLine);
+
+bobLikes() =&amp;gt;
+    isDeepFried || (hasPieCrust &amp;amp;&amp;amp; !vegan) || containsBacon;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;当表达式包含多行函数或者-集合声明定义的时候除外&quot;&gt;当表达式包含多行函数或者 集合声明定义的时候除外&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new Future.delayed(const Duration(seconds: 1), () {
+  print('I am a callback');
+});
+
+args.addAll([
+  '--mode',
+  'release',
+  '--checked'
+]);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 31 Jan 2019 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/flutter/2019/01/31/Dart.html</link>
