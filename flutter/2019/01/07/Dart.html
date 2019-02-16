@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             Dart基础学习——列表—006
                         </h1>
                     </div>
-                    	<h2 id="初始化">初始化</h2>
+                    <div id="post_content">
+                        <h2 id="初始化">初始化</h2>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
@@ -426,6 +496,8 @@
 <span class="n">print</span><span class="o">(</span><span class="n">l1</span><span class="o">[</span><span class="mi">2</span><span class="o">]);</span>
 </code></pre></div></div>
 
+                    </div>
+
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -503,6 +575,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

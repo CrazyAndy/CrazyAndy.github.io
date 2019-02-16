@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             Spring Cloud整体概括篇004_进程间通讯
                         </h1>
                     </div>
-                    	<h1 id="一概述">一、概述</h1>
+                    <div id="post_content">
+                        <h1 id="一概述">一、概述</h1>
 <p>　　之前说的是api网关调用后端微服务，现在说的是后端微服务之间的互相调用。
 　　比如说有个人定了一张电影票，订票服务需要先调用用户服务的余额查询，然后再处理自身的业务处理。订票服务调用余额查询就是进程间通讯，其实刚才说的api网关转发请求也是进程间通讯。</p>
 <h1 id="二通讯模式">二、通讯模式</h1>
@@ -291,6 +361,8 @@
 <center><img src="/static/assets/img/blog/cloud/cloud003.png" width="75%" /></center>
 <p>　　该打车流程使用了多种 IPC 机制的服务交互方式。
 　　服务使用了通知、请求/响应和发布/订阅组合。例如，乘客的智能手机向 Trip Management 微服务发送一条通知以请求一辆车。Trip Management 服务通过使用请求/响应来调用 Passenger Management 服务以验证乘客的帐户是否可用。之后，Trip Management 服务创建路线，并使用发布/订阅通知其他服务，包括用于定位可用司机的 Dispatcher。</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -367,6 +439,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

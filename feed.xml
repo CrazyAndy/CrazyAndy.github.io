@@ -5,19 +5,265 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Feb 2019 22:56:58 +0800</pubDate>
-    <lastBuildDate>Sun, 10 Feb 2019 22:56:58 +0800</lastBuildDate>
+    <pubDate>Sat, 16 Feb 2019 23:39:26 +0800</pubDate>
+    <lastBuildDate>Sat, 16 Feb 2019 23:39:26 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Thu, 14 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/14/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/14/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Wed, 13 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/13/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/13/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Tue, 12 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/12/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/12/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Mon, 11 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/11/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/11/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sun, 10 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/10/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/10/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sat, 09 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/09/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/09/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Fri, 08 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/08/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/08/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Thu, 07 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/07/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/07/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步002</title>
+        <description>&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Wed, 06 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/06/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/06/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
+        <title>Flutter基础学习——快速起步001</title>
+        <description>&lt;h1 id=&quot;abc&quot;&gt;abc&lt;/h1&gt;
+
+&lt;h2 id=&quot;在屏幕中间显示hello&quot;&gt;在屏幕中间显示“hello”&lt;/h2&gt;
+
+&lt;p&gt;我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目a项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf&lt;/p&gt;
+
+&lt;h2 id=&quot;自定义小部件&quot;&gt;自定义小部件&lt;/h2&gt;
+
+&lt;p&gt;自定义小部件&lt;/p&gt;
+
+&lt;h2 id=&quot;文字的样式textstyle&quot;&gt;文字的样式：TextStyle&lt;/h2&gt;
+
+&lt;h2 id=&quot;materialapp使用界面组件于定制界面主题&quot;&gt;MaterialApp:使用界面组件于定制界面主题&lt;/h2&gt;
+
+&lt;h1 id=&quot;列表&quot;&gt;列表&lt;/h1&gt;
+
+&lt;h2 id=&quot;列表准备数据&quot;&gt;列表：准备数据&lt;/h2&gt;
+
+&lt;h2 id=&quot;列表视图listviewbuilder&quot;&gt;列表视图：ListView.builder&lt;/h2&gt;
+
+&lt;h2 id=&quot;ee&quot;&gt;ee&lt;/h2&gt;
+</description>
+        <pubDate>Tue, 05 Feb 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/flutter/2019/02/05/Flutter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/05/Flutter.html</guid>
+        
+        <category>flutter</category>
+        
+        <category>dart</category>
+        
+        <category>blog</category>
+        
+        
+        <category>Flutter</category>
+        
+      </item>
+    
+      <item>
         <title>Flutter基础学习——前言</title>
-        <description>&lt;p&gt;flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的笔记记录，然后再结合其他的视频查缺补漏，以此来完成flutter基础的学习。&lt;/p&gt;
+        <description>&lt;p&gt;　　flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的笔记记录，然后再结合其他的视频查缺补漏，以此来完成flutter基础的学习。&lt;/p&gt;
 
-&lt;p&gt;等到基础学习完了，我再针对难点做一些研究，比如http，通道等，以此来作为高级篇的学习内容。期间肯定会借鉴很多资料来进行总结。&lt;/p&gt;
+&lt;p&gt;　　等到基础学习完了，我再针对难点做一些研究，比如http，通道等，以此来作为高级篇的学习内容。期间肯定会借鉴很多资料来进行总结。&lt;/p&gt;
 
-&lt;p&gt;最后，我想找找网上开源项目，看看人家怎么写的，先跑起来，如果觉得还不错的话，我想对其进行分析，然后整理成博客。这里我会多选几个自己看的上眼的项目，同学学习人家的项目，来达到实战的效果。&lt;/p&gt;
+&lt;p&gt;　　最后，我想找找网上开源项目，看看人家怎么写的，先跑起来，如果觉得还不错的话，我想对其进行分析，然后整理成博客。这里我会多选几个自己看的上眼的项目，同学学习人家的项目，来达到实战的效果。&lt;/p&gt;
 
-&lt;p&gt;终结，我还是会总结一下之前学习的经验教训，自己学习的亲身体会。&lt;/p&gt;
+&lt;p&gt;　　终结，我还是会总结一下之前学习的经验教训，自己学习的亲身体会。&lt;/p&gt;
 </description>
         <pubDate>Mon, 04 Feb 2019 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/flutter/2019/02/04/Flutter.html</link>

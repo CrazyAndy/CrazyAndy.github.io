@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             领域驱动设计田园的蟋蟀专栏篇---002---一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？
                         </h1>
                     </div>
-                    	<h1 id="一写在前面">一、写在前面</h1>
+                    <div id="post_content">
+                        <h1 id="一写在前面">一、写在前面</h1>
 
 <p>　　在上一篇《<a href="http://www.cnblogs.com/xishuai/p/3762826.html">我的“第一次”，就这样没了：DDD（领域驱动设计）理论结合实践</a>》博文中，简单介绍了领域驱动设计的一些理念，并简单完成基于领域驱动设计的具体项目 <a href="https://github.com/yuezhongxin/MessageManager">MessageManager</a>，本人在设计 MessageManager 项目之前，并没有看过 Eric Evans 的《Domain-Driven Design –Tackling Complexity in the Heart of Software》和 Martin Fowler 的《Patterns of Enterprise Application Architecture》，《企业应用架构模式》这本书正在阅读，关于领域驱动设计，主要学习来源是园中的 netfocus、dax.net、以及清培兄的部分博文（小弟先在此谢过各位大神的无私奉献），还有就是解道中的领域驱动设计专题，当然还有一些来自搜索引擎的部分资料，再加上自己的一些揣摩和理解，也就成为了属于自己的“领域驱动设计”。</p>
 
@@ -777,6 +847,8 @@
 
 <p>　　*<a href="/design/2018/08/13/DDD.html">下一章—领域驱动设计田园的蟋蟀专栏篇—003—DDD（领域驱动设计）理论结合实践</a></p>
 
+                    </div>
+
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -854,6 +926,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

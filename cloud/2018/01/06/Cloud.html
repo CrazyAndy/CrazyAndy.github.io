@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,13 +326,16 @@
                             Spring Cloud整体概括篇006_断路器
                         </h1>
                     </div>
-                    	<h1 id="一综述">一、综述</h1>
+                    <div id="post_content">
+                        <h1 id="一综述">一、综述</h1>
 <p>　　断路器主要是针对某服务出现故障不能响应，而将访问请求转发到其他能正常工作的服务实例上去，当然也可以做一些降级策略，比如所有同类型服务都出现故障，可降级返回客户端能理解的错误编码等方式，避免客户端看到500服务器错误，避免影响用户使用体验。断路器模式如下图所示：
 <!-- ![edit](/static/assets/img/blog/cloud/cloud003.png) --></p>
 <center><img src="/static/assets/img/blog/cloud/cloud003.png" width="75%" /></center>
 
 <p>　　低水平的服务的服务失败会导致级联故障一直给到用户。当调用一个特定的服务达到一定阈值(默认5秒失败20次),打开断路器。在错误的情况下和一个开启的断路回滚fallback应可以由开发人员提供。 
 如上图，b服务依然挂掉，不能再提供正常服务，这时候如果还将前端请求转发到b，显然是不合适的，我们会为b服务实现回滚逻辑，也就是降级处理。这样，在下次请求b服务的时候，断路器会直接执行回滚逻辑，告知前端通知，比如该服务不能正常运行，或者提供该服务的一个“应付”数据等等。</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -340,6 +412,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

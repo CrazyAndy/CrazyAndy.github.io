@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             Spring Cloud 最快上手篇002_服务治理
                         </h1>
                     </div>
-                    	<h1 id="一概述">一、概述</h1>
+                    <div id="post_content">
+                        <h1 id="一概述">一、概述</h1>
 <p>　　服务治理是微服务架构中最核心和基础的模块，因为它的存在才会能实现服务的负载均衡，也就是微服务相比单体应用存在的意义。服务治理主要是分成服务注册和服务发现两块内容。
 　　1. 服务注册：我们建立一个服务注册中心，每个服务单元都会向注册中心登记自己提供的服务，将主机与端口号、版本号、通信协议等一些附加信息告知注册中心，注册中心按照服务名为主键分类组织服务清单。另外，服务注册中心还会以心跳的方式去监测清单中的服务是否可用，如果不可用需要从服务清单中剔除。
 　　2. 服务发现：由于在服务治理框架下运作，服务间的调用不再通过指定具体的实例地址来实现，而是通过向服务名发起请求调用实现。所以，服务调用方在服务注册中心咨询服务，并获取所有服务的实例清单，以实现对具体服务实例的访问。当服务消费者a调用服务生产者b，而以服务名b注册的服务单元有多个实例在运行，那么a会从服务注册中心下载拉取的清单中以某种轮询策略去出一个位置来进行服务调用，</p>
@@ -291,6 +361,8 @@
     eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka/
 </code></pre></div></div>
 
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -367,6 +439,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

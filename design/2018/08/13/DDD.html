@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             领域驱动设计田园的蟋蟀专栏篇---003---死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？
                         </h1>
                     </div>
-                    	<h1 id="一写在前面">一、写在前面</h1>
+                    <div id="post_content">
+                        <h1 id="一写在前面">一、写在前面</h1>
 <p>　　在上一篇《<a href="/design/2018/08/12/DDD.html">一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</a>》博文中，探讨的是如何聚焦领域模型（抛开一些干扰因素，才能把精力集中在领域模型的设计上）？需要注意的是，上一篇我讲的并不是如何设计领域模型（本篇也是）？而是如何聚焦领域模型，领域模型的设计是个迭代过程，不能一概而论，还在路上。</p>
 
 <p>　　当有一个简单的领域模型用例，完成一个从上而下过程的时候，就需要对领域模型和数据库进行对象关系映射（ORM），首先，在领域驱动设计中，领域模型是活的（具有自己的行为和状态），而映射到数据库中所谓的表是死的（只是一些字段），<strong>如何把活的变成死的？又如何把死的变成活的？更重要的是如何保证在这个“死去活来”的过程中，死的和活的是同一个？</strong></p>
@@ -443,6 +513,8 @@
 
 <p>　　*<a href="/design/2018/08/14/DDD.html">下一章—领域驱动设计田园的蟋蟀专栏篇—004—拨开迷雾，找回自我：DDD 应对具体业务场景，Domain Model 到底如何设计？</a></p>
 
+                    </div>
+
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -520,6 +592,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

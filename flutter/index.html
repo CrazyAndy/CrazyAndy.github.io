@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -16,15 +17,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -86,13 +90,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -270,6 +336,475 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
+                            <a href="/flutter/2019/02/14/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 14 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/14/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/13/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/13/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/12/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 12 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/12/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/11/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 11 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/11/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/10/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 10 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/10/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/09/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/09/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/08/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/08/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/07/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/07/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/06/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步002</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Feb 2019</span>
+                            </div>
+                            <p>
+                                
+
+
+
+
+
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/06/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/flutter/2019/02/05/Flutter.html" class="btn-link">
+                                <h2>Flutter基础学习——快速起步001</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Feb 2019</span>
+                            </div>
+                            <p>
+                                abc
+
+在屏幕中间显示“hello”
+
+我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdffasdasdf我们来做第一个项目asdf...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">flutter</button>
+                                    
+                                    <button class="btn btn-white btn-xs">dart</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/flutter/2019/02/05/Flutter.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
                             <a href="/flutter/2019/02/04/Flutter.html" class="btn-link">
                                 <h2>Flutter基础学习——前言</h2>
                             </a>
@@ -277,7 +812,7 @@ $(function(){
                                 <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Feb 2019</span>
                             </div>
                             <p>
-                                flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的笔记...
+                                　　flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -2043,6 +2578,9 @@ var
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

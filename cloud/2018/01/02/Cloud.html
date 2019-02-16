@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             Spring Cloud整体概括篇002_微服务简介
                         </h1>
                     </div>
-                    	<h1 id="一微服务简介">一、微服务简介</h1>
+                    <div id="post_content">
+                        <h1 id="一微服务简介">一、微服务简介</h1>
 <p>　　微服务一词来源于Martin Fowler的名为Microservices的博文，它和我们常用的Restful api 一样，都是一种设计风格，它的主旨是将巨石应用拆分成多个小型服务，各个小型服务独立运行，他们之间可以因为业务需求进行互相友好访问，也可单独或者多个集成到一块对外提供服务。高内聚，低耦合是软件工程经常运用的架构思想，旨在更方便的拆分开发任务，以及为将来升级维护做更好的铺垫(可单独修改单个小型服务而不影响其他服务运行)。而在拆分的同时，我们可以单独对某项小型服务部署多个实例，从而对该小型服务提供的服务进行负载处理。</p>
 <h1 id="二应用场景">二、应用场景</h1>
 <p>下图是摘自Martin Flower博文中插图，横轴表示复杂度，纵轴表示生产率；绿线表示巨石单体应用，蓝线表示微服务：
@@ -270,6 +340,8 @@
 <h3 id="三高复杂三">（三）高复杂三：</h3>
 <p>　　这时候已经不能阻止微服务的优势了。。。
 　　微服务因为其服务拆分的特点有着很多独特的优势，也正因为其特点也会产生很多新的问题，各种网友们真可谓是仁者见仁、智者见智，活脱脱的一千个人的心中有一千个哈姆雷特，谨劝各位，与其听别人白活还不如自己投入实战亲身体会比较好。</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -346,6 +418,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

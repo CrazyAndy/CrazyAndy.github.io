@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             领域驱动设计田园的蟋蟀专栏篇---007---拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计
                         </h1>
                     </div>
-                    	<h1 id="一写在前面">一、写在前面</h1>
+                    <div id="post_content">
+                        <h1 id="一写在前面">一、写在前面</h1>
 <p>　　讲本篇内容之前，先回顾上一篇所讨论的内容，主要是 Repository（仓储）的职责问题，属于领域？还是应用层？其实到头来也没有准确的结论，但是最终比较偏向于仓储定义在领域，实现在基础层，调用在应用层。你可能有些疑问，为什么要讨论仓储的职责问题？看过上一篇的内容你可能会有些答案，这也就是上一篇博文标题，为什么是“设计窘境”的原因。</p>
 
 <p>　　本篇博文标题定义为：”拨乱反正“，就像战乱纷争的年代，清剿叛军，回归大统，所表达的意思就是，排除一切干扰因素，回归正确的业务场景，然后进行干净的领域模型设计。领域驱动设计这个实践系列已经写了大概六七篇博文了，从领域模型<strong>到底如何设计</strong>？到领域模型<strong>重新设计</strong>，到领域模型<strong>再重新设计</strong>，到现在的领域模型<strong>再再重新设计</strong>。。。对，被你看出来了，领域驱动设计中最重要的就是领域模型的设计，但是到现在为止，领域模型的设计一直没有完成，而是一次一次的被推翻重建，道路是曲折的，前途是光明的，但是这个过程真是太痛苦了，回顾现有的这个过程，就会发现，为什么领域模型设计这么难？原因就是领域模型中的职责分配问题，谁存在？谁不存在？谁属于谁？谁不属于谁？谁是谁的？谁是谁的谁的谁（好像是一段歌词，不好意思哈，打顺手了）？但这一切的前提都是建立在正确的业务场景之上，那我们这个业务场景究竟是什么？希望你能从本篇博文中找到些许答案。</p>
@@ -517,6 +587,8 @@
 
 <p>　　*<a href="/design/2018/08/18/DDD.html">下一章—领域驱动设计专栏篇—008—醍醐灌顶：领域驱动设计实现之路</a></p>
 
+                    </div>
+
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -594,6 +666,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

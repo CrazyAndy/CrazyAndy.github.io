@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             presto讲解001
                         </h1>
                     </div>
-                    	<h1 id="一内容概述">一、内容概述</h1>
+                    <div id="post_content">
+                        <h1 id="一内容概述">一、内容概述</h1>
 <p>　　Presto 是 Facebook 推出的一个基于Java开发的大数据分布式 SQL 查询引擎，可对从数 G 到数 P 的大数据进行交互式的查询，查询的速度达到商业数据仓库的级别
 　　Presto是一个运行在多台服务器上的分布式系统。 完整安装包括一个coordinator和多个worker。 由客户端提交查询，从Presto命令行CLI提交到coordinator。 coordinator进行解析，分析并执行查询计划，然后分发处理队列到worker。</p>
 <h3 id="一硬件架构图">（一）硬件架构图</h3>
@@ -287,6 +357,8 @@
 <p>　　当然，如果指定特定业务场景的话，presto并不是最快的查询方式，kylin则在特定应用场景下具有更快的查询效率，简单来说，kylin使用预计算方式，它会根据你预先指定的数据模型查询出你想要的数据集合，默认存储大hbase上，你在执行真正的sql查询时，并不是查询真正的hdfs文件中的数据，而是查询它已经预先统计出来的结果，这就比方说，你需要在100亿条行车记录里面查询想要的最近1星期某路口每天通过车辆次数，他已经使用你给它提前设定的数据模型计算生成最近一个月的该路口通过车辆次数，并以每天多少车次统计成一条数据，假如说有100个路口，也就是说你只需要在100*365条数据里面查找该路口最近一个星期，也就是7条数据，那你就可以想象这种查询效率比直接从那100亿条数据中查询要快多少，而且在商用生产中，我们更倾向于使用便宜的低性能机器的条件下。</p>
 
 <p>　　《人月神话》里说过，技术永远没有银弹，我们可以理解成在现实某种状况下，某种技术更加适合，是结合当前条件的最优妥协罢了。在笔者看来，presto适合数据建模并不十分明朗的数据查询，相对于直接查询hive更快，却又和kylin相比在特定建模下性能有所差距。而且，presto倡议只是用来查询分析，你非要拿兰博基尼当拖拉机去耕地，这不大热天喝热茶，越喝越热么 ^_^</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -365,6 +437,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

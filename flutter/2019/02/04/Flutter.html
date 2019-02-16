@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,13 +326,16 @@
                             Flutter基础学习——前言
                         </h1>
                     </div>
-                    	<p>flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的笔记记录，然后再结合其他的视频查缺补漏，以此来完成flutter基础的学习。</p>
+                    <div id="post_content">
+                        <p>　　flutter视频教程网上有很多，笔者也看了不少，感觉宁浩网的视频还不错，掘金技术胖我还没来的及看，udemy已经购买了一份视频，还没来的及看。我想先根据宁浩网视频做flutter基础学习的笔记记录，然后再结合其他的视频查缺补漏，以此来完成flutter基础的学习。</p>
 
-<p>等到基础学习完了，我再针对难点做一些研究，比如http，通道等，以此来作为高级篇的学习内容。期间肯定会借鉴很多资料来进行总结。</p>
+<p>　　等到基础学习完了，我再针对难点做一些研究，比如http，通道等，以此来作为高级篇的学习内容。期间肯定会借鉴很多资料来进行总结。</p>
 
-<p>最后，我想找找网上开源项目，看看人家怎么写的，先跑起来，如果觉得还不错的话，我想对其进行分析，然后整理成博客。这里我会多选几个自己看的上眼的项目，同学学习人家的项目，来达到实战的效果。</p>
+<p>　　最后，我想找找网上开源项目，看看人家怎么写的，先跑起来，如果觉得还不错的话，我想对其进行分析，然后整理成博客。这里我会多选几个自己看的上眼的项目，同学学习人家的项目，来达到实战的效果。</p>
 
-<p>终结，我还是会总结一下之前学习的经验教训，自己学习的亲身体会。</p>
+<p>　　终结，我还是会总结一下之前学习的经验教训，自己学习的亲身体会。</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -342,6 +414,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

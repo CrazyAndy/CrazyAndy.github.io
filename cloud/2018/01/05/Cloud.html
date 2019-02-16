@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             Spring Cloud整体概括篇005_服务发现
                         </h1>
                     </div>
-                    	<h1 id="一概述">一、概述</h1>
+                    <div id="post_content">
+                        <h1 id="一概述">一、概述</h1>
 <p>　　服务注册与发现，其实就是对服务列表的维护。
 　　比如我们写一个user-service 的微服务，我们需要将 该服务运行所在的ip和port还有其他一些信息配置到一个配置中心去，如果其他服务需要使用user-service所提供的服务的时候，它们可以自然而然的从配置中心获取关于user-service的ip，port等信息，然后用http client的方式去请求user-service 提供的服务。
 　　上面所说的配置中心，就是我们要将的服务注册中心，微服务在启动时会将自身信息提交给注册中心，我们称之为注册；其他微服务根据注册中心配置的服务信息列表，访问具体的微服务，我们称之为发现。
@@ -276,6 +346,8 @@
 <h3 id="二发现方式也有两种">（二）发现方式也有两种：</h3>
 <p>　　一种是服务端发现，比如前端访问请求到nginx ，nginx根据配置的策略转发请求到具体的一台主机上去，前端请求到这台主机上，由不得前端选择，是服务器端帮助前端选择的，所以称之为服务端发现模式；
 　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。</p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -352,6 +424,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -16,15 +17,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -86,13 +90,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -255,16 +321,16 @@
                         <div class="col-md-10">
                             <div class="vote-actions">
                             </div>
-                            <a href="/flutter/2019/02/04/Flutter.html" class="vote-title">
-                                Flutter基础学习——前言
+                            <a href="/flutter/2019/02/14/Flutter.html" class="vote-title">
+                                Flutter基础学习——快速起步001
                             </a>
                             <div class="vote-info">
                             
                             
                                 <i class="fa fa-comments-o"> </i> <a>Comments (<span class='disqus-comment-count' data-disqus-url="
-                                    http://localhost:4000/flutter/2019/02/04/Flutter.html">0</span>)</a>
+                                    http://localhost:4000/flutter/2019/02/14/Flutter.html">0</span>)</a>
                             
-                                <i class="fa fa-clock-o"></i> <a>4 Feb 2019</a>
+                                <i class="fa fa-clock-o"></i> <a>14 Feb 2019</a>
                                 <i class="fa fa-user"></i> <a>CrazyAndy</a>
                             </div>
                         </div>
@@ -282,16 +348,16 @@
                         <div class="col-md-10">
                             <div class="vote-actions">
                             </div>
-                            <a href="/flutter/2019/02/03/Dart.html" class="vote-title">
-                                Dart基础学习——代码风格effective design—033
+                            <a href="/flutter/2019/02/13/Flutter.html" class="vote-title">
+                                Flutter基础学习——快速起步001
                             </a>
                             <div class="vote-info">
                             
                             
                                 <i class="fa fa-comments-o"> </i> <a>Comments (<span class='disqus-comment-count' data-disqus-url="
-                                    http://localhost:4000/flutter/2019/02/03/Dart.html">0</span>)</a>
+                                    http://localhost:4000/flutter/2019/02/13/Flutter.html">0</span>)</a>
                             
-                                <i class="fa fa-clock-o"></i> <a>3 Feb 2019</a>
+                                <i class="fa fa-clock-o"></i> <a>13 Feb 2019</a>
                                 <i class="fa fa-user"></i> <a>CrazyAndy</a>
                             </div>
                         </div>
@@ -309,16 +375,16 @@
                         <div class="col-md-10">
                             <div class="vote-actions">
                             </div>
-                            <a href="/flutter/2019/02/02/Dart.html" class="vote-title">
-                                Dart基础学习——代码风格effective usage—032
+                            <a href="/flutter/2019/02/12/Flutter.html" class="vote-title">
+                                Flutter基础学习——快速起步001
                             </a>
                             <div class="vote-info">
                             
                             
                                 <i class="fa fa-comments-o"> </i> <a>Comments (<span class='disqus-comment-count' data-disqus-url="
-                                    http://localhost:4000/flutter/2019/02/02/Dart.html">0</span>)</a>
+                                    http://localhost:4000/flutter/2019/02/12/Flutter.html">0</span>)</a>
                             
-                                <i class="fa fa-clock-o"></i> <a>2 Feb 2019</a>
+                                <i class="fa fa-clock-o"></i> <a>12 Feb 2019</a>
                                 <i class="fa fa-user"></i> <a>CrazyAndy</a>
                             </div>
                         </div>
@@ -336,16 +402,16 @@
                         <div class="col-md-10">
                             <div class="vote-actions">
                             </div>
-                            <a href="/flutter/2019/02/01/Dart.html" class="vote-title">
-                                Dart基础学习——代码风格effective document—031
+                            <a href="/flutter/2019/02/11/Flutter.html" class="vote-title">
+                                Flutter基础学习——快速起步001
                             </a>
                             <div class="vote-info">
                             
                             
                                 <i class="fa fa-comments-o"> </i> <a>Comments (<span class='disqus-comment-count' data-disqus-url="
-                                    http://localhost:4000/flutter/2019/02/01/Dart.html">0</span>)</a>
+                                    http://localhost:4000/flutter/2019/02/11/Flutter.html">0</span>)</a>
                             
-                                <i class="fa fa-clock-o"></i> <a>1 Feb 2019</a>
+                                <i class="fa fa-clock-o"></i> <a>11 Feb 2019</a>
                                 <i class="fa fa-user"></i> <a>CrazyAndy</a>
                             </div>
                         </div>
@@ -363,16 +429,16 @@
                         <div class="col-md-10">
                             <div class="vote-actions">
                             </div>
-                            <a href="/flutter/2019/01/31/Dart.html" class="vote-title">
-                                Dart基础学习——代码风格effective style—030
+                            <a href="/flutter/2019/02/10/Flutter.html" class="vote-title">
+                                Flutter基础学习——快速起步001
                             </a>
                             <div class="vote-info">
                             
                             
                                 <i class="fa fa-comments-o"> </i> <a>Comments (<span class='disqus-comment-count' data-disqus-url="
-                                    http://localhost:4000/flutter/2019/01/31/Dart.html">0</span>)</a>
+                                    http://localhost:4000/flutter/2019/02/10/Flutter.html">0</span>)</a>
                             
-                                <i class="fa fa-clock-o"></i> <a>31 Jan 2019</a>
+                                <i class="fa fa-clock-o"></i> <a>10 Feb 2019</a>
                                 <i class="fa fa-user"></i> <a>CrazyAndy</a>
                             </div>
                         </div>
@@ -413,6 +479,9 @@
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>

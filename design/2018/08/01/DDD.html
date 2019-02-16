@@ -2,8 +2,9 @@
 <html>
 
 
-    <head>
+    
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
@@ -20,15 +21,18 @@
     
   </title>
   <!-- favicon -->
-  <link rel="shortcut icon" href="/static/assets/img/favicon.ico">
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
 
   <!-- Main CSS -->
   <link href="/static/assets/index.min.css" rel="stylesheet"/>
 
-    <!-- Main scripts -->
+
  <script src="/static/assets/app-20180101.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/adam/main.css">
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
   <script type="text/javascript">
     $(document).ready(function () {
       var initial = 0;
@@ -90,13 +94,75 @@
     });
     $(function(){
         $("pre").css('display','block');
+
+        
+
+        $('#renderIn').toc();
+
+
+
+        $("#renderIn h2").each(function(index) {
+            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+                $(this).attr("id") +
+                ">" +
+                $(this).text() +
+                "</a></dt>");
+
+            var children = $(this).nextUntil("h2", "h3")
+
+            children.each(function(index) {
+                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+                    $(this).attr("id") +
+                    ">" +
+                    "&nbsp;&nbsp;- " + $(this).text() +
+                    "</a></dd>");
+            });
+        });
+
+        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+
+        $(window).scroll(function() { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#renderIn').css({ // scroll to that element or below it
+                    top: '75px',
+                    position: 'fixed',
+                    width: '212px'
+                });
+            } else { // apply position: static
+                $('#renderIn').css({ // if you scroll above it
+                    position: 'inherit',
+                    width: '212px'
+                });
+            }
+
+        });
+
+        $("#renderIn a").on("click", function(e)  {
+
+            e.preventDefault();
+
+            $("body, html").animate({
+                scrollTop: ($($(this).attr('href')).offset().top - 100)
+            }, 600);
+        });
+
+
+
+
+        
+
+
     });
   </script>
 </head>
 
 
 
-<body id="page-top" class="landing-page">
+<body id="page-top" class="landing-page" style="position: relative;">
 
     
         
@@ -241,9 +307,12 @@
     
 
 
-<div class="wrapper wrapper-content  animated fadeInRight article">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
@@ -257,7 +326,8 @@
                             领域驱动设计概览篇---001---前言
                         </h1>
                     </div>
-                    	<h1 id="一正文">一、正文</h1>
+                    <div id="post_content">
+                        <h1 id="一正文">一、正文</h1>
 <p>　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容，感觉打开了一扇门，看到了一个新奇的世界。</p>
 
 <p>　　我刚开始看的是Eric Evans 《领域驱动设计——软件核心复杂性应对之道》，也不知道是翻译的原因还是自身项目经验还不足以看懂它，看了几章就看不下去了，果断从尚学堂，尚硅谷，甚至淘宝找视频教程来看，找了半天也没有找到合适的。后来还是想换本书来看吧，于是又买了一本《实现领域驱动设计》，这本书感觉更加容易懂一些，但是感觉还是有很多地方不明白，想跳过去以后再看，哪知道看到一半发现越来越不懂了，估计是之前的好多没理解，导致后面更难以消化。好吧，翻墙求助谷歌，发现网上还是有一些人写过一个博客的，其关于ddd的论点准确与否暂且搁置一边，分享精神还是很值的赞赏的。v站有个关于ddd的讨论有点意思，着重看一下<strong>WispZhan</strong>和<strong>hantsy</strong>的讨论。我想边看边整理博客，当然会标注使用博客的链接地址。这里要感谢张逸，张阳，netfocus，王德水，腾云，田园里的蟋蟀等前辈大神，是他们引领了我学习ddd的道路。</p>
@@ -277,6 +347,8 @@
 <h1 id="二引用">二、引用</h1>
 
 <p>　　*<a href="/design/2018/08/02/DDD.html">下一章—领域驱动设计概览篇—002—我眼中的领域驱动设计</a></p>
+
+                    </div>
 
                     <hr>
                     <div class="row">
@@ -355,6 +427,9 @@ a2a_config.color_link_text_hover = "333333";
 
     
 
+
+
+    <script src="/static/js/toc.js"></script>
 
 </body>
 </html>
