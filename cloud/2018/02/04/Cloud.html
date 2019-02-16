@@ -101,23 +101,23 @@
 
 
 
-        $("#renderIn h2").each(function(index) {
-            $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
-                $(this).attr("id") +
-                ">" +
-                $(this).text() +
-                "</a></dt>");
-
-            var children = $(this).nextUntil("h2", "h3")
-
-            children.each(function(index) {
-                $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
-                    $(this).attr("id") +
-                    ">" +
-                    "&nbsp;&nbsp;- " + $(this).text() +
-                    "</a></dd>");
-            });
-        });
+        // $("#renderIn h2").each(function(index) {
+        //     $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
+        //         $(this).attr("id") +
+        //         ">" +
+        //         $(this).text() +
+        //         "</a></dt>");
+        //
+        //     var children = $(this).nextUntil("h2", "h3")
+        //
+        //     children.each(function(index) {
+        //         $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
+        //             $(this).attr("id") +
+        //             ">" +
+        //             "&nbsp;&nbsp;- " + $(this).text() +
+        //             "</a></dd>");
+        //     });
+        // });
 
         var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
 
@@ -130,12 +130,12 @@
                 $('#renderIn').css({ // scroll to that element or below it
                     top: '75px',
                     position: 'fixed',
-                    width: '212px'
+                    width: '232px'
                 });
             } else { // apply position: static
                 $('#renderIn').css({ // if you scroll above it
                     position: 'inherit',
-                    width: '212px'
+                    width: '232px'
                 });
             }
 
