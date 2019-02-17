@@ -2,7 +2,7 @@
 <html>
 
 
-    
+
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -100,11 +100,11 @@
 
 
 <body id="page-top" class="landing-page" style="position: relative;">
-
     
-        
-        
-            <div class="search-tool"
+    
+    
+    
+    <div class="search-tool"
       style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
 
@@ -240,80 +240,12 @@
 <div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
 </div>
 
-<script type="text/javascript">
-$(function(){
-        $("pre").css('display','block');
 
-        
-
-        $('#renderIn').toc();
-
-
-
-        // $("#renderIn h2").each(function(index) {
-        //     $(".post-directory dl").append("<dt><a class=\"jumper\" hre=#" +
-        //         $(this).attr("id") +
-        //         ">" +
-        //         $(this).text() +
-        //         "</a></dt>");
-        //
-        //     var children = $(this).nextUntil("h2", "h3")
-        //
-        //     children.each(function(index) {
-        //         $(".post-directory dl").append("<dd><a class=\"jumper\" hre=#" +
-        //             $(this).attr("id") +
-        //             ">" +
-        //             "&nbsp;&nbsp;- " + $(this).text() +
-        //             "</a></dd>");
-        //     });
-        // });
-        // $("#renderIn h1").each(function(index) {});
-
-        var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
-
-
-        $(window).scroll(function() { // assign scroll event listener
-
-            var currentScroll = $(window).scrollTop(); // get current position
-
-            if (currentScroll >= fixmeTop) { // apply position: fixed if you
-                $('#renderIn').css({ // scroll to that element or below it
-                    top: '75px',
-                    position: 'fixed',
-                    width: '232px'
-                });
-            } else { // apply position: static
-                $('#renderIn').css({ // if you scroll above it
-                    position: 'inherit',
-                    width: '232px'
-                });
-            }
-
-        });
-
-        $("#renderIn a").on("click", function(e)  {
-
-            e.preventDefault();
-
-            $("body, html").animate({
-                scrollTop: ($($(this).attr('href')).offset().top - 100)
-            }, 600);
-        });
-
-
-
-
-        
-
-
-    });
-</script>
-
-        
+    
+    
     
 
-
-<div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
     <div class="row" >
         <div class="col-lg-3">
             <div id="renderIn"></div>
@@ -457,12 +389,60 @@ a2a_config.color_link_text_hover = "333333";
 </div>
 
 
-
+    
+    
     
 
-
-
+    
+    
     <script src="/static/js/toc.js"></script>
 
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
 </body>
+
 </html>
