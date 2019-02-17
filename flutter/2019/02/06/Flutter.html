@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|Flutter基础学习——快速起步002
+        CrazyAndy|Flutter基础学习——界面结构002
     
   </title>
   <!-- favicon -->
@@ -261,15 +261,119 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Feb 2019</span>
                         <h1>
-                            Flutter基础学习——快速起步002
+                            Flutter基础学习——界面结构002
                         </h1>
                     </div>
                     <div id="post_content">
-                        <hr />
+                        <h1 id="标签栏">标签栏</h1>
 
-<hr />
+<h2 id="material应用">Material应用</h2>
 
-<hr />
+<p>以下代码我们将 listview内容单独抽出一个类来，然后再让main.dart去引用它</p>
+
+<p>ListView_demo.dart代码如下</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">ListViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span><span class="p">{</span>
+  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span>
+      <span class="nx">margin</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">),</span>
+          <span class="nx">SizedBox</span><span class="p">(</span><span class="nx">height</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,),</span>
+          <span class="nx">Text</span><span class="p">(</span>
+            <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span><span class="p">,</span>
+            <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">Text</span><span class="p">(</span>
+            <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">author</span><span class="p">,</span>
+            <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">subhead</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">SizedBox</span><span class="p">(</span><span class="nx">height</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="p">@</span><span class="nd">override</span>
+    <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// TODO: implement build</span>
+      <span class="k">return</span> <span class="nx">ListView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>
+          <span class="nx">itemCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+          <span class="nx">itemBuilder</span><span class="p">:</span> <span class="nx">_listItemBuilder</span><span class="p">,</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>main.dart代码如下</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/ListView_demo.dart'</span><span class="p">;</span>
+
+
+<span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">MaterialApp</span><span class="p">(</span>
+      <span class="nx">debugShowCheckedModeBanner</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">//去掉右上角debug显示标志</span>
+      <span class="nx">home</span><span class="p">:</span> <span class="nx">Home</span><span class="p">(),</span>
+      <span class="nx">theme</span><span class="p">:</span> <span class="nx">ThemeData</span><span class="p">(</span><span class="nx">primarySwatch</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">yellow</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Home</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">backgroundColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="c1">//顶部工具栏</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">ListViewDemo</span><span class="p">(),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="appbar工具栏上的图标按钮iconbutton">AppBar:工具栏上的图标按钮(IconButton)</h2>
+
+<h2 id="tabbar用标签形式展示内容">TabBar:用标签形式展示内容</h2>
+
+<h2 id="tabbar自定义标签栏的样式">TabBar:自定义标签栏的样式</h2>
+
+<h2 id="material自定义按钮水波纹样式">Material:自定义按钮水波纹样式</h2>
+
+<h1 id="抽屉">抽屉</h1>
+
+<h2 id="drawer抽屉边栏">Drawer：抽屉(边栏)</h2>
+
+<h2 id="drawer在抽屉里使用listviewdrawerheaderlisttile">Drawer:在抽屉里使用ListView,DrawerHeader,ListTile</h2>
+
+<h2 id="drawer抽屉的打开与关闭">Drawer:抽屉的打开与关闭</h2>
+
+<h2 id="useraccountdrawerheader抽屉里的用户账号信息">UserAccountDrawerHeader:抽屉里的用户账号信息</h2>
+
+<h2 id="用户账户头部的背景图像">用户账户头部的背景图像</h2>
+
+<h2 id="创建drawerdemo小部件">创建DrawerDemo小部件</h2>
+
+<h1 id="底部导航栏">底部导航栏</h1>
+
+<h2 id="bottomnavigationbar底部导航栏">BottomNavigationBar:底部导航栏</h2>
+
+<h2 id="bottomnavigationbar底部导航栏的激活状态">BottomNavigationBar:底部导航栏的激活状态</h2>
+
+<h2 id="statefulwidget有状态的小部件">StatefulWidget:有状态的小部件</h2>
 
                     </div>
 
