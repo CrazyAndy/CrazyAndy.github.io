@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|Flutter基础学习——快速起步001
+        CrazyAndy|Flutter基础学习——视图005
     
   </title>
   <!-- favicon -->
@@ -261,15 +261,230 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Feb 2019</span>
                         <h1>
-                            Flutter基础学习——快速起步001
+                            Flutter基础学习——视图005
                         </h1>
                     </div>
                     <div id="post_content">
-                        <hr />
+                        <h1 id="介绍">介绍</h1>
 
-<hr />
+<p>单独创建demo/view_demo.dart文件，并在main.dart文件中加入对 该标签的配置</p>
 
-<hr />
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/draw_demo.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/bottom_navigation_bar_demo.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/basic_demo.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/ListView_demo.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/LayoutDemo.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'demo/view_demo.dart'</span><span class="p">;</span>
+
+
+<span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">MaterialApp</span><span class="p">(</span>
+      <span class="nx">debugShowCheckedModeBanner</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">//去掉右上角debug显示标志</span>
+      <span class="nx">home</span><span class="p">:</span> <span class="nx">Home</span><span class="p">(),</span>
+      <span class="nx">theme</span><span class="p">:</span> <span class="nx">ThemeData</span><span class="p">(</span>
+        <span class="nx">primarySwatch</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurple</span><span class="p">,</span><span class="c1">//主题颜色</span>
+        <span class="nx">highlightColor</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span><span class="c1">//高亮颜色,点击按钮立即显示的颜色</span>
+        <span class="nx">splashColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white70</span><span class="c1">//水波纹颜色</span>
+      <span class="p">),</span>
+      
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Home</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">DefaultTabController</span><span class="p">(</span>
+      <span class="nx">length</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span><span class="c1">//设置标签数量</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Scaffold</span><span class="p">(</span>
+        <span class="nx">backgroundColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
+        <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+          <span class="c1">// leading: IconButton(//图标按钮</span>
+          <span class="c1">//   icon: Icon(Icons.menu),//图标</span>
+          <span class="c1">//   tooltip: 'Navigation',</span>
+          <span class="c1">//   onPressed: ()=&gt;debugPrint('Navigation button is pressed'),</span>
+          <span class="c1">// ),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">actions</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
+              <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">search</span><span class="p">),</span><span class="c1">//图标</span>
+              <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Search'</span><span class="p">,</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Search button is pressed'</span><span class="p">),</span>
+            <span class="p">)</span>
+          <span class="p">],</span>
+          <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
+          <span class="nx">bottom</span><span class="p">:</span> <span class="nx">TabBar</span><span class="p">(</span><span class="c1">//我们可以在appbar的底部设置tabbar</span>
+            <span class="nx">unselectedLabelColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">black38</span><span class="p">,</span><span class="c1">//设置为选中标签栏颜色</span>
+            <span class="nx">indicatorColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">black54</span><span class="p">,</span><span class="c1">//设置当前激活标签栏底部的指示器显示线</span>
+            <span class="nx">indicatorSize</span><span class="p">:</span> <span class="nx">TabBarIndicatorSize</span><span class="p">.</span><span class="nx">label</span><span class="p">,</span><span class="c1">//指示器显示线的长度和label一致</span>
+            <span class="nx">indicatorWeight</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="nx">tabs</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">Tab</span><span class="p">(</span><span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">local_florist</span><span class="p">),),</span>
+              <span class="nx">Tab</span><span class="p">(</span><span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">change_history</span><span class="p">),),</span>
+              <span class="nx">Tab</span><span class="p">(</span><span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">directions_bike</span><span class="p">),),</span>
+              <span class="nx">Tab</span><span class="p">(</span><span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">view_quilt</span><span class="p">),)</span>
+            <span class="p">],</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="nx">body</span><span class="p">:</span> <span class="nx">TabBarView</span><span class="p">(</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="nx">ListViewDemo</span><span class="p">(),</span>
+            <span class="nx">BasicDemo</span><span class="p">(),</span>
+            <span class="nx">LayoutDemo</span><span class="p">(),</span>
+            <span class="nx">ViewDemo</span><span class="p">()</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+        <span class="c1">// drawer: Text('this is drawer'),//左边显示,如果右边显示则用endDrawer</span>
+        <span class="nx">drawer</span><span class="p">:</span> <span class="nx">DrawDemo</span><span class="p">(),</span>
+        <span class="nx">bottomNavigationBar</span><span class="p">:</span> <span class="nx">BottomNavigationBarDemo</span><span class="p">(),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="页面视图">页面视图</h1>
+
+<h2 id="pageview页面视图">PageView：页面视图</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">ViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">PageView</span><span class="p">(</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">brown</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'ONE'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'TWO'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">blueGrey</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'THREE'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="pageview页面视图的属性">PageView：页面视图的属性</h2>
+
+<p>1，按住屏幕然后左右拖动，如果不到一半的话，就会缩回去，否则翻过去，这个效果叫pageSnapping，默认是true；</p>
+
+<p>2，属性reverse 表示倒置;</p>
+
+<p>3，scrollDirection 滚动方向，默认是横向;</p>
+
+<p>4，滚动回调，onPageChanged 接受 变化后页面的索引值作为参数，索引值从0开始</p>
+
+<h2 id="pageview用pagecontroller调整页面的显示">PageView：用PageController调整页面的显示</h2>
+
+<p>PageController是控制pageview小部件显示页面的对象</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">PageView</span><span class="p">(</span>
+      <span class="c1">// pageSnapping: false,//滚动效果设置</span>
+      <span class="c1">// reverse: true,//排序默认正向</span>
+      <span class="nx">scrollDirection</span><span class="p">:</span> <span class="nx">Axis</span><span class="p">.</span><span class="nx">vertical</span><span class="p">,</span><span class="c1">//方向</span>
+      <span class="nx">onPageChanged</span><span class="p">:</span> <span class="p">(</span><span class="nx">currentPage</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Page:$currentPage'</span><span class="p">),</span>
+      <span class="nx">controller</span><span class="p">:</span> <span class="nx">PageController</span><span class="p">(</span>
+        <span class="nx">initialPage</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="c1">//默认当前显示值</span>
+        <span class="nx">keepPage</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span><span class="c1">//默认pageview会记住用户滚动到哪个页面</span>
+        <span class="nx">viewportFraction</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span><span class="c1">//页面占用可视口比例,默认是1</span>
+      <span class="p">),</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">brown</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'ONE'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'TWO'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">blueGrey</span><span class="p">[</span><span class="mi">900</span><span class="p">],</span>
+          <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'THREE'</span><span class="p">,</span>
+              <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">)),</span>
+        <span class="p">),</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="pageviewbuilder按需生成页面">PageView.builder按需生成页面</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="nx">Widget</span> <span class="nx">_pageItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Stack</span><span class="p">(</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="nx">SizedBox</span><span class="p">.</span><span class="nx">expand</span><span class="p">(</span>
+          <span class="c1">//expand会占满整个空间</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span>
+            <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span>
+            <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span>
+          <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="nx">Positioned</span><span class="p">(</span>
+          <span class="nx">bottom</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+          <span class="nx">left</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+            <span class="nx">crossAxisAlignment</span><span class="p">:</span> <span class="nx">CrossAxisAlignment</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span>
+            <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">Text</span><span class="p">(</span>
+                <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span><span class="p">,</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">Text</span><span class="p">(</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">author</span><span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">),</span>
+        <span class="p">)</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">PageView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>
+      <span class="nx">itemCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      <span class="nx">itemBuilder</span><span class="p">:</span> <span class="nx">_pageItemBuilder</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="网格视图">网格视图</h1>
+
+<h2 id="gridview网格视图gridviewcount">GridView：网格视图(GridView.count)</h2>
+
+<h2 id="gridviewextent">GridView.extent</h2>
+
+<h2 id="gridviewbuilder按需生成视图项目">GridView.builder按需生成视图项目</h2>
+
 
                     </div>
 

@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|Flutter基础学习——快速起步001
+        CrazyAndy|Flutter基础学习——基础部件003
     
   </title>
   <!-- favicon -->
@@ -261,15 +261,281 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Feb 2019</span>
                         <h1>
-                            Flutter基础学习——快速起步001
+                            Flutter基础学习——基础部件003
                         </h1>
                     </div>
                     <div id="post_content">
-                        <hr />
+                        <h1 id="基础部件">基础部件</h1>
 
-<hr />
+<h2 id="查看小部件的定义">查看小部件的定义</h2>
 
-<hr />
+<h2 id="text文字与文字样式">Text：文字与文字样式</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">BasicDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">TextDemo</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">TextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
+
+  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="s1">'CrazyAndy'</span><span class="p">;</span>
+  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="s1">'早点口头语'</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">Text</span><span class="p">(</span>
+      <span class="s1">'《$_title》 -- $_author 煎饼果子来一套'</span><span class="p">,</span>
+      <span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
+      <span class="nx">style</span><span class="p">:</span> <span class="nx">_textStyle</span><span class="p">,</span>
+      <span class="nx">maxLines</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nx">overflow</span><span class="p">:</span> <span class="nx">TextOverflow</span><span class="p">.</span><span class="nx">ellipsis</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="richtext行内多样式的文字">RichText：行内多样式的文字</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">RichTextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">RichText</span><span class="p">(</span>
+      <span class="nx">text</span><span class="p">:</span> <span class="nx">TextSpan</span><span class="p">(</span>
+          <span class="nx">text</span><span class="p">:</span> <span class="s1">'CrazyAndy'</span><span class="p">,</span>
+          <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
+            <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurpleAccent</span><span class="p">,</span>
+            <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span>
+            <span class="nx">fontStyle</span><span class="p">:</span> <span class="nx">FontStyle</span><span class="p">.</span><span class="nx">italic</span><span class="p">,</span>
+            <span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">w100</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nx">TextSpan</span><span class="p">(</span>
+                <span class="nx">text</span><span class="p">:</span> <span class="s1">'.net'</span><span class="p">,</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
+                  <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">17.0</span><span class="p">,</span>
+                  <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span>
+                <span class="p">))</span>
+          <span class="p">]),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="容器与装饰">容器与装饰</h1>
+
+<h2 id="container容器">Container：容器</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ContainerDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Row</span><span class="p">(</span>
+            <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+            <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">Container</span><span class="p">(</span>
+                <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="c1">//背景颜色</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Row</span><span class="p">(</span>
+                  <span class="c1">//row 里面可以添加一组横排显示的部件</span>
+                  <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                    <span class="nx">Container</span><span class="p">(</span>
+                      <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">pool</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+                      <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="c1">//背景颜色,最后一个是不透明度</span>
+                      <span class="c1">// padding: EdgeInsets.only(left: 24,right: 8),</span>
+                      <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">16.0</span><span class="p">),</span> <span class="c1">//内边距</span>
+                      <span class="nx">margin</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span> <span class="c1">//外边距</span>
+                      <span class="nx">width</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                      <span class="nx">height</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                    <span class="p">)</span>
+                  <span class="p">],</span>
+                <span class="p">),</span>
+              <span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="boxdecoration装饰盒子">BoxDecoration：装饰盒子</h2>
+
+<p>我们装饰盒子 在 container中用 decoration属性</p>
+
+<h2 id="boxdecoration边框border">BoxDecoration：边框（border）</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span><span class="c1">//装饰盒子</span>
+                        <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span><span class="c1">//如果这里设置了背景颜色，就要把Container里面的color属性给注释掉</span>
+                        <span class="nx">border</span><span class="p">:</span> <span class="nx">Border</span><span class="p">(</span><span class="c1">//边框设置</span>
+                          <span class="nx">top</span><span class="p">:</span> <span class="nx">BorderSide</span><span class="p">(</span>
+                            <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">indigoAccent</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
+                            <span class="nx">width</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+                            <span class="nx">style</span><span class="p">:</span> <span class="nx">BorderStyle</span><span class="p">.</span><span class="nx">solid</span>
+                          <span class="p">)</span>
+                        <span class="p">)</span>
+                      <span class="p">),</span>
+</code></pre></div></div>
+
+<h2 id="boxdecoration圆角borderradius">BoxDecoration：圆角（borderRadius）</h2>
+
+<h2 id="boxdecoration阴影bordershadow">BoxDecoration：阴影（borderShadow）</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">26.0</span><span class="p">),</span> <span class="c1">//圆角效果</span>
+                          <span class="nx">boxShadow</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="nx">BoxShadow</span><span class="p">(</span>
+                              <span class="nx">offset</span><span class="p">:</span> <span class="nx">Offset</span><span class="p">(</span>
+                                  <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">),</span> <span class="c1">//控制阴影的偏移，第一个参数为x轴偏移量，第二个是y轴偏移量</span>
+                              <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span>
+                                  <span class="mi">16</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="c1">//默认阴影颜色是黑色，这里可以做修改</span>
+                              <span class="nx">blurRadius</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//阴影的模糊程度，值越大，效果越明显</span>
+                              <span class="nx">spreadRadius</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="c1">//正数是扩大阴影面积，负数是缩小</span>
+                            <span class="p">)</span>
+                          <span class="p">]),</span>
+</code></pre></div></div>
+
+<h2 id="boxdecoration形状shape">BoxDecoration：形状（shape）</h2>
+
+<h2 id="boxdecoration渐变gradient">BoxDecoration：渐变（gradient）</h2>
+
+<h2 id="boxdecoration背景图像image">BoxDecoration：背景图像（image）</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">BasicDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">ContainerDemo</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">ContainerDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+          <span class="nx">image</span><span class="p">:</span> <span class="nx">DecorationImage</span><span class="p">(</span><span class="c1">//这里设置背景图像</span>
+            <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=e8ce788890510fb367197197e933c893/b999a9014c086e061396097a0c087bf40ad1cbc0.jpg'</span><span class="p">),</span>
+            <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">.</span><span class="nx">topCenter</span><span class="p">,</span>
+            <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span> <span class="c1">//扩充</span>
+        <span class="p">)),</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Row</span><span class="p">(</span>
+            <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+            <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">Container</span><span class="p">(</span>
+                <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="c1">//背景颜色</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Row</span><span class="p">(</span>
+                  <span class="c1">//row 里面可以添加一组横排显示的部件</span>
+                  <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                    <span class="nx">Container</span><span class="p">(</span>
+                      <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">pool</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+                      <span class="c1">// color: Color.fromRGBO(3, 54, 255, 1.0), //背景颜色,最后一个是不透明度</span>
+                      <span class="c1">// padding: EdgeInsets.only(left: 24,right: 8),</span>
+                      <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">16.0</span><span class="p">),</span> <span class="c1">//内边距</span>
+                      <span class="nx">margin</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span> <span class="c1">//外边距</span>
+                      <span class="nx">width</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                      <span class="nx">height</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                      <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+                        <span class="c1">//装饰盒子</span>
+                        <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+                            <span class="mf">1.0</span><span class="p">),</span> <span class="c1">//如果这里设置了背景颜色，就要把Container里面的color属性给注释掉</span>
+                        <span class="nx">border</span><span class="p">:</span> <span class="nx">Border</span><span class="p">(</span><span class="c1">//边框设置</span>
+                            <span class="c1">// top: BorderSide(</span>
+                            <span class="c1">//   color: Colors.indigoAccent[100],</span>
+                            <span class="c1">//   width: 1.0,</span>
+                            <span class="c1">//   style: BorderStyle.solid</span>
+                            <span class="c1">// )</span>
+                            <span class="p">),</span>
+                        <span class="c1">// borderRadius: BorderRadius.circular(26.0), //圆角效果</span>
+                        <span class="nx">boxShadow</span><span class="p">:</span> <span class="p">[</span>
+                          <span class="nx">BoxShadow</span><span class="p">(</span>
+                            <span class="nx">offset</span><span class="p">:</span> <span class="nx">Offset</span><span class="p">(</span>
+                                <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">),</span> <span class="c1">//控制阴影的偏移，第一个参数为x轴偏移量，第二个是y轴偏移量</span>
+                            <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span>
+                                <span class="mi">16</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="c1">//默认阴影颜色是黑色，这里可以做修改</span>
+                            <span class="nx">blurRadius</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//阴影的模糊程度，值越大，效果越明显</span>
+                            <span class="nx">spreadRadius</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="c1">//正数是扩大阴影面积，负数是缩小</span>
+                          <span class="p">)</span>
+                        <span class="p">],</span>
+                        <span class="nx">shape</span><span class="p">:</span> <span class="nx">BoxShape</span>
+                            <span class="p">.</span><span class="nx">circle</span><span class="p">,</span> <span class="c1">//如果这里使用圆形 形状，那么就不能使用 圆角效果，需要将上面 borderRadius给注释掉</span>
+                        <span class="c1">// gradient: RadialGradient(//渐变效果，有三种，自己探究</span>
+                        <span class="c1">//     colors: [</span>
+                        <span class="c1">//   Color.fromRGBO(7, 102, 255, 1.0),</span>
+                        <span class="c1">//   Color.fromRGBO(3, 28, 128, 1.0),</span>
+                        <span class="c1">// ])</span>
+                      <span class="p">),</span>
+                    <span class="p">)</span>
+                  <span class="p">],</span>
+                <span class="p">),</span>
+              <span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">RichTextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">RichText</span><span class="p">(</span>
+      <span class="nx">text</span><span class="p">:</span> <span class="nx">TextSpan</span><span class="p">(</span>
+          <span class="nx">text</span><span class="p">:</span> <span class="s1">'CrazyAndy'</span><span class="p">,</span>
+          <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
+            <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurpleAccent</span><span class="p">,</span>
+            <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span>
+            <span class="nx">fontStyle</span><span class="p">:</span> <span class="nx">FontStyle</span><span class="p">.</span><span class="nx">italic</span><span class="p">,</span>
+            <span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">w100</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nx">TextSpan</span><span class="p">(</span>
+                <span class="nx">text</span><span class="p">:</span> <span class="s1">'.net'</span><span class="p">,</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
+                  <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">17.0</span><span class="p">,</span>
+                  <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span>
+                <span class="p">))</span>
+          <span class="p">]),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">TextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
+
+  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="s1">'CrazyAndy'</span><span class="p">;</span>
+  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="s1">'早点口头语'</span><span class="p">;</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">Text</span><span class="p">(</span>
+      <span class="s1">'《$_title》 -- $_author 煎饼果子来一套'</span><span class="p">,</span>
+      <span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
+      <span class="nx">style</span><span class="p">:</span> <span class="nx">_textStyle</span><span class="p">,</span>
+      <span class="nx">maxLines</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nx">overflow</span><span class="p">:</span> <span class="nx">TextOverflow</span><span class="p">.</span><span class="nx">ellipsis</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 
                     </div>
 

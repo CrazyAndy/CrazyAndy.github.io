@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|Flutter基础学习——快速起步001
+        CrazyAndy|Flutter基础学习——布局004
     
   </title>
   <!-- favicon -->
@@ -261,15 +261,292 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Feb 2019</span>
                         <h1>
-                            Flutter基础学习——快速起步001
+                            Flutter基础学习——布局004
                         </h1>
                     </div>
                     <div id="post_content">
-                        <hr />
+                        <h1 id="准备">准备</h1>
 
-<hr />
+<h2 id="创建layoutdemo小部件">创建LayoutDemo小部件</h2>
 
-<hr />
+<h2 id="创建可配置的图标徽章iconbadge小部件">创建可配置的图标徽章(IconBadge)小部件</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+
+<span class="kd">class</span> <span class="nx">LayoutDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Column</span><span class="p">(</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="nx">IconBadge</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">pool</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span> <span class="mi">64</span><span class="p">,),</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+  
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">IconBadge</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+
+  <span class="kr">final</span> <span class="nx">IconData</span> <span class="nx">icon</span><span class="p">;</span>
+  <span class="kr">final</span> <span class="kr">double</span> <span class="nx">size</span><span class="p">;</span>
+
+  <span class="nx">IconBadge</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">icon</span><span class="p">,{</span><span class="k">this</span><span class="p">.</span><span class="nx">size</span><span class="o">=</span><span class="mf">32.0</span><span class="p">});</span>
+  
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">icon</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="nx">size</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+      <span class="nx">width</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">height</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="布局">布局</h1>
+
+<h2 id="row横排与column竖排">Row(横排)与Column(竖排)</h2>
+
+<p>row为横着排，column 是竖着排，借用bootstrap css样式中 flexable 布局概念。</p>
+
+<h2 id="mainaxis主轴">mainAxis：主轴</h2>
+
+<p>Row 的主轴是横着的，Column主轴是竖着的。</p>
+
+<p>mainAxisAlignment: MainAxisAlignment.start</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="c1">// mainAxisAlignment: MainAxisAlignment.start,//从主轴开始往后排</span>
+        <span class="c1">// mainAxisAlignment: MainAxisAlignment.end,//从主轴结束往前排</span>
+        <span class="c1">// mainAxisAlignment: MainAxisAlignment.center,//主轴中间</span>
+        <span class="c1">// mainAxisAlignment: MainAxisAlignment.spaceAround,//将主轴剩下空间分配到小部件的周围</span>
+        <span class="c1">// mainAxisAlignment: MainAxisAlignment.spaceBetween,//将主轴剩下空间分配到小部件之间</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">spaceEvenly</span><span class="p">,</span> <span class="c1">//将主轴剩下的空间平均分配到小部件之间</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">IconBadge</span><span class="p">(</span>
+            <span class="nx">Icons</span><span class="p">.</span><span class="nx">pool</span><span class="p">,</span>
+            <span class="nx">size</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">IconBadge</span><span class="p">(</span>
+            <span class="nx">Icons</span><span class="p">.</span><span class="nx">beach_access</span><span class="p">,</span>
+            <span class="nx">size</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="p">),</span>
+          <span class="nx">IconBadge</span><span class="p">(</span>
+            <span class="nx">Icons</span><span class="p">.</span><span class="nx">airplanemode_active</span><span class="p">,</span>
+            <span class="nx">size</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="p">),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="crossaxis交叉轴">crossAxis：交叉轴</h2>
+
+<p>crossAxisAlignment: CrossAxisAlignment.start</p>
+
+<p>交叉轴即为主轴的垂直轴，比方说 Row的小部件中，主轴是 横轴，那么交叉轴就是竖zhou</p>
+
+<h2 id="sizedbox固定尺寸的盒子">SizedBox：固定尺寸的盒子</h2>
+
+<p>SizeBox我们可以用来包裹 widget，然后用sizebox的宽高来定义区域块的宽高，相当于在widget外的container 定义 padding；当然可以使用一个只有高度或宽度的 SizeBox来隔开两个小部件。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">LayoutDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">SizedBox</span><span class="p">(</span>
+            <span class="nx">width</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+            <span class="nx">height</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+              <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+                <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span>
+                <span class="nx">Icons</span><span class="p">.</span><span class="nx">ac_unit</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">32.0</span>
+              <span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+          <span class="nx">SizedBox</span><span class="p">(</span><span class="nx">height</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,),</span>
+          <span class="nx">SizedBox</span><span class="p">(</span>
+            <span class="nx">width</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+            <span class="nx">height</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+              <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+                <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span>
+                <span class="nx">Icons</span><span class="p">.</span><span class="nx">brightness_2</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">32.0</span>
+              <span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">IconBadge</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nx">IconData</span> <span class="nx">icon</span><span class="p">;</span>
+  <span class="kr">final</span> <span class="kr">double</span> <span class="nx">size</span><span class="p">;</span>
+
+  <span class="nx">IconBadge</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">icon</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="mf">32.0</span><span class="p">});</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">icon</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+      <span class="nx">width</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">height</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="alignment对齐">Alignment：对齐</h2>
+
+<p>Container 有个属性是 alignment: Alignment(0, 1.0),我们可以根据这个设置子部件在container中的百分比位置，</p>
+
+<p>Alignment（x,y） 两个参数代表 横竖方向的比例，如果-1&lt;x&lt;0,那么部件应该在横向的左半部某个位置。</p>
+
+<h2 id="stack一摞小部件">Stack：一摞小部件</h2>
+
+<p>statck会将子部件都叠加到一块，也可在stack的子部件添加 Positioned小部件(包含left, right,top,bottom属性,相对于父部件内部位置)</p>
+
+<h2 id="aspectratio宽高比">AspectRatio：宽高比</h2>
+
+<p>设置子部件宽高 比例</p>
+
+<h2 id="constrainedbox带限制的盒子">ConstrainedBox：带限制的盒子</h2>
+
+<p>ConstrainedBox 可是设置最小 最大 宽高</p>
+
+<p>本章所有代码整理如下：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">LayoutDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Stack</span><span class="p">(</span>
+            <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">.</span><span class="nx">topLeft</span><span class="p">,</span>
+            <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">SizedBox</span><span class="p">(</span>
+                <span class="nx">width</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+                <span class="nx">height</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+                  <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                  <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+                    <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                    <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+                  <span class="p">),</span>
+                  <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">ac_unit</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">),</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">SizedBox</span><span class="p">(</span>
+                <span class="nx">height</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="nx">SizedBox</span><span class="p">(</span>
+                <span class="nx">width</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+                <span class="nx">height</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+                  <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
+                      <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                      <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+                      <span class="nx">gradient</span><span class="p">:</span> <span class="nx">RadialGradient</span><span class="p">(</span><span class="nx">colors</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                        <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+                      <span class="p">])),</span>
+                  <span class="nx">child</span><span class="p">:</span>
+                      <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">brightness_2</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">),</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">Positioned</span><span class="p">(</span>
+                <span class="nx">right</span><span class="p">:</span> <span class="mf">20.0</span><span class="p">,</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">ac_unit</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">),</span>
+              <span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">AspectRatioDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">AspectRatio</span><span class="p">(</span>
+            <span class="nx">aspectRatio</span><span class="p">:</span> <span class="mi">16</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+              <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">ConstraintDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">ConstrainedBox</span><span class="p">(</span>
+            <span class="nx">constraints</span><span class="p">:</span> <span class="nx">BoxConstraints</span><span class="p">(</span>
+              <span class="nx">minHeight</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+              <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">IconBadge</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nx">IconData</span> <span class="nx">icon</span><span class="p">;</span>
+  <span class="kr">final</span> <span class="kr">double</span> <span class="nx">size</span><span class="p">;</span>
+
+  <span class="nx">IconBadge</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">icon</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="mf">32.0</span><span class="p">});</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">icon</span><span class="p">,</span> <span class="nx">size</span><span class="p">:</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+      <span class="nx">width</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">height</span><span class="p">:</span> <span class="nx">size</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span>
+      <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 
                     </div>
 
