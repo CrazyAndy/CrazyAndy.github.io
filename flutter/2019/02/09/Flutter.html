@@ -481,10 +481,65 @@
 
 <h2 id="gridview网格视图gridviewcount">GridView：网格视图(GridView.count)</h2>
 
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="nx">List</span><span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span> <span class="nx">_buildTiles</span><span class="p">(</span><span class="kr">int</span> <span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">List</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">length</span><span class="p">,</span> <span class="p">(</span><span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+        <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">300</span><span class="p">],</span>
+        <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="nx">child</span><span class="p">:</span>
+            <span class="nx">Text</span><span class="p">(</span><span class="s1">'Item $index'</span><span class="p">,</span> <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">18.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">)),</span>
+      <span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">GridView</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span>
+      <span class="nx">crossAxisCount</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1">//交叉轴显示的数量</span>
+      <span class="nx">crossAxisSpacing</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,</span> <span class="c1">//交叉轴方向边距</span>
+      <span class="nx">mainAxisSpacing</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,</span> <span class="c1">//主轴方向边距</span>
+      <span class="nx">scrollDirection</span><span class="p">:</span> <span class="nx">Axis</span><span class="p">.</span><span class="nx">horizontal</span><span class="p">,</span><span class="c1">//滚动方向，默认为纵向</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="nx">_buildTiles</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h2 id="gridviewextent">GridView.extent</h2>
+
+<p>GridView.extent和GridView.count差不多，唯一的区别就是extent是你需要自定义交叉轴方向的单个title的尺寸，而count是根据你count值进行交叉轴方向 布局的分配。</p>
 
 <h2 id="gridviewbuilder按需生成视图项目">GridView.builder按需生成视图项目</h2>
 
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">GridViewBuilderDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  
+  <span class="nx">Widget</span> <span class="nx">_gridItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="kr">int</span> <span class="nx">index</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span>
+          <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span>
+          <span class="nx">fit</span><span class="p">:</span><span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">GridView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>
+      <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+      <span class="nx">itemCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      <span class="nx">itemBuilder</span><span class="p">:</span> <span class="nx">_gridItemBuilder</span><span class="p">,</span>
+      <span class="nx">gridDelegate</span><span class="p">:</span> <span class="nx">SliverGridDelegateWithFixedCrossAxisCount</span><span class="p">(</span>
+        <span class="nx">crossAxisCount</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">crossAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+        <span class="nx">mainAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
                     </div>
 
