@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Feb 2019 22:35:37 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Feb 2019 22:35:37 +0800</lastBuildDate>
+    <pubDate>Tue, 26 Feb 2019 22:40:01 +0800</pubDate>
+    <lastBuildDate>Tue, 26 Feb 2019 22:40:01 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -102,7 +102,7 @@
       </item>
     
       <item>
-        <title>Flutter基础学习——快速起步001</title>
+        <title>Flutter基础学习——Sliver 006</title>
         <description>&lt;h1 id=&quot;介绍&quot;&gt;介绍&lt;/h1&gt;
 
 &lt;h2 id=&quot;创建sliverdemo小部件&quot;&gt;创建SliverDemo小部件&lt;/h2&gt;
