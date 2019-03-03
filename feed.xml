@@ -5,8 +5,8 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Mar 2019 00:01:49 +0800</pubDate>
-    <lastBuildDate>Mon, 04 Mar 2019 00:01:49 +0800</lastBuildDate>
+    <pubDate>Mon, 04 Mar 2019 00:09:43 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Mar 2019 00:09:43 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -56,12 +56,34 @@
       </item>
     
       <item>
-        <title>Flutter基础学习——快速起步001</title>
-        <description>&lt;hr /&gt;
+        <title>Flutter基础学习——表单008</title>
+        <description>&lt;h1 id=&quot;介绍与准备&quot;&gt;介绍与准备&lt;/h1&gt;
 
-&lt;hr /&gt;
+&lt;h2 id=&quot;创建formdemo小部件&quot;&gt;创建FormDemo小部件&lt;/h2&gt;
 
-&lt;hr /&gt;
+&lt;h2 id=&quot;theme定制使用重置覆盖主题&quot;&gt;Theme：定制、使用、重置、覆盖主题&lt;/h2&gt;
+
+&lt;h1 id=&quot;文本字段&quot;&gt;文本字段&lt;/h1&gt;
+
+&lt;h2 id=&quot;textfield文本字段&quot;&gt;TextField：文本字段&lt;/h2&gt;
+
+&lt;h2 id=&quot;textfield文本字段样式inputdecoration&quot;&gt;TextField：文本字段样式（InputDecoration）&lt;/h2&gt;
+
+&lt;h2 id=&quot;textfield监视文本字段的值的变化与提交&quot;&gt;TextField：监视文本字段的值的变化与提交&lt;/h2&gt;
+
+&lt;h2 id=&quot;textfield使用texteditingcontroller监听文本字段变化&quot;&gt;TextField：使用TextEditingController监听文本字段变化&lt;/h2&gt;
+
+&lt;h1 id=&quot;表单&quot;&gt;表单&lt;/h1&gt;
+
+&lt;h2 id=&quot;form表单&quot;&gt;Form：表单&lt;/h2&gt;
+
+&lt;h2 id=&quot;form保存与获取表单里的数据&quot;&gt;Form：保存与获取表单里的数据&lt;/h2&gt;
+
+&lt;h2 id=&quot;form验证表单里的数据&quot;&gt;Form：验证表单里的数据&lt;/h2&gt;
+
+&lt;h2 id=&quot;form自动验证&quot;&gt;Form：自动验证&lt;/h2&gt;
+
+&lt;h2 id=&quot;snackbar在屏幕底部动画弹出提示栏&quot;&gt;SnackBar：在屏幕底部动画弹出提示栏&lt;/h2&gt;
 </description>
         <pubDate>Tue, 12 Feb 2019 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/flutter/2019/02/12/Flutter.html</link>
@@ -79,7 +101,7 @@
       </item>
     
       <item>
-        <title>Flutter基础学习——快速起步007</title>
+        <title>Flutter基础学习——路由007</title>
         <description>&lt;h1 id=&quot;介绍&quot;&gt;介绍&lt;/h1&gt;
 
 &lt;h2 id=&quot;vs-codeflutter-代码片段&quot;&gt;VS Code：Flutter 代码片段&lt;/h2&gt;
