@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|Flutter基础学习——快速起步001
+        CrazyAndy|Flutter基础学习——快速起步007
     
   </title>
   <!-- favicon -->
@@ -261,15 +261,253 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 11 Feb 2019</span>
                         <h1>
-                            Flutter基础学习——快速起步001
+                            Flutter基础学习——快速起步007
                         </h1>
                     </div>
                     <div id="post_content">
-                        <hr />
+                        <h1 id="介绍">介绍</h1>
 
-<hr />
+<h2 id="vs-codeflutter-代码片段">VS Code：Flutter 代码片段</h2>
 
-<hr />
+<p>我们可以在vs code上安装代码片段插件，Awesome Flutter Snippets，以便我们可是使用缩写方式快速建立 代码片段。</p>
+
+<h1 id="路由">路由</h1>
+
+<h2 id="一堆路由">一堆路由</h2>
+
+<p>在flutter里面展示内容的屏幕或页面叫Route（路由），Navigator这个小部件提供了方法可以管理这些路由，比如Navigator.push 和Navigator.pop，路由对象会放在一个堆Stack里面，先进后出，我们可以自己创建一个Navigator来处理路由堆，也开始使用WidgetsApp或MaterialApp小部件给我创建好的，一般引用给我们创建好的Navigator，可是去使用Navigator.off这个方法，把Context交给它就可以了，这样我们就可以把新的路由push到这个路由堆的上面，或者是pop掉路由堆上的路由。</p>
+
+<h2 id="打开新页面并返回push与pop准备">打开新页面并返回（push与pop）：准备</h2>
+
+<h2 id="打开新页面并返回push与pop实施">打开新页面并返回（push与pop）：实施</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">NavigatorDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">Center</span><span class="p">(</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Row</span><span class="p">(</span>
+          <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="nx">FlatButton</span><span class="p">(</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Home'</span><span class="p">),</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="nx">FlatButton</span><span class="p">(</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'About'</span><span class="p">),</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="nx">Navigator</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">push</span><span class="p">(</span>
+                  <span class="c1">//push 会将这个新的路由push到路由堆里面</span>
+                  <span class="nx">MaterialPageRoute</span><span class="p">(</span>
+                      <span class="nx">builder</span><span class="p">:</span> <span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Page</span><span class="p">(</span>
+                            <span class="nx">title</span><span class="p">:</span> <span class="s1">'About'</span><span class="p">,</span>
+                          <span class="p">)),</span>
+                <span class="p">);</span>
+              <span class="p">},</span>
+            <span class="p">)</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Page</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">title</span><span class="p">;</span>
+  <span class="nx">Page</span><span class="p">({</span><span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">});</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="nx">title</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">floatingActionButton</span><span class="p">:</span> <span class="nx">FloatingActionButton</span><span class="p">(</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">arrow_back</span><span class="p">),</span>
+        <span class="nx">onPressed</span><span class="p">:</span> <span class="p">(){</span>
+          <span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span><span class="c1">//返回到上一个路由页面上</span>
+        <span class="p">},</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="带名字的路由navigatorpushnamed">带名字的路由（Navigator.pushNamed）</h2>
+
+<p>在MaterialApp小部件里面，我们可以使用routes属性去实现定义好带名字的路由，然后想在push他们的时候使用Navigator.pushNamed的这个方法去把这个名字交给他就可以了。</p>
+
+<h2 id="初始路由initialroute">初始路由：initialRoute</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">MaterialApp</span><span class="p">(</span>
+      <span class="nx">debugShowCheckedModeBanner</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">//去掉右上角debug显示标志</span>
+      <span class="c1">// home: Home(),</span>
+      <span class="c1">// home: SliverDemo(),</span>
+      <span class="nx">home</span><span class="p">:</span> <span class="nx">NavigatorDemo</span><span class="p">(),</span>
+      <span class="nx">routes</span><span class="p">:</span> <span class="p">{</span><span class="c1">//这里面是map，key是路由名字，value是打开路由要显示的东西，也就是要显示的小部件所使用的build方法(Widget builder)</span>
+        <span class="s1">'/about'</span><span class="p">:(</span><span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">Page</span><span class="p">(</span><span class="nx">title</span><span class="p">:</span> <span class="s1">'About'</span><span class="p">,)</span>
+      <span class="p">},</span>
+      <span class="nx">theme</span><span class="p">:</span> <span class="nx">ThemeData</span><span class="p">(</span>
+          <span class="nx">primarySwatch</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurple</span><span class="p">,</span> <span class="c1">//主题颜色</span>
+          <span class="nx">highlightColor</span><span class="p">:</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">fromRGBO</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="c1">//高亮颜色,点击按钮立即显示的颜色</span>
+          <span class="nx">splashColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white70</span> <span class="c1">//水波纹颜色</span>
+          <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>NavigatorDemo中关于按钮 about的写法是</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            <span class="nx">FlatButton</span><span class="p">(</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'About'</span><span class="p">),</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="c1">// Navigator.of(context).push(</span>
+                <span class="c1">//   //push 会将这个新的路由push到路由堆里面</span>
+                <span class="c1">//   MaterialPageRoute(</span>
+                <span class="c1">//       builder: (BuildContext context) =&gt; Page(</span>
+                <span class="c1">//             title: 'About',</span>
+                <span class="c1">//           )),</span>
+                <span class="c1">// );</span>
+                <span class="nx">Navigator</span><span class="p">.</span><span class="nx">pushNamed</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span> <span class="s1">'/about'</span><span class="p">);</span>
+              <span class="p">},</span>
+            <span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="详情页">详情页</h1>
+
+<h2 id="inkwell添加溅墨动画效果">InkWell：添加溅墨动画效果</h2>
+
+<p>我们现在拿ListViewDemo来改造，让用户点击下拉列表的每一项时，都会出现溅墨效果。</p>
+
+<h2 id="在内容详情页上显示内容">在内容详情页上显示内容</h2>
+
+<p>ListViewDemo最终修改如下</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'./post_show.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">ListViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+      <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span>
+      <span class="nx">margin</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Stack</span><span class="p">(</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Column</span><span class="p">(</span>
+            <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+              <span class="nx">AspectRatio</span><span class="p">(</span>
+                <span class="nx">aspectRatio</span><span class="p">:</span> <span class="mi">16</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span>
+                  <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span>
+                  <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">SizedBox</span><span class="p">(</span>
+                <span class="nx">height</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="nx">Text</span><span class="p">(</span>
+                <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span><span class="p">,</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="nx">Text</span><span class="p">(</span>
+                <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">author</span><span class="p">,</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">subhead</span><span class="p">,</span>
+              <span class="p">),</span>
+              <span class="nx">SizedBox</span><span class="p">(</span>
+                <span class="nx">height</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">,</span>
+              <span class="p">)</span>
+            <span class="p">],</span>
+          <span class="p">),</span>
+          <span class="nx">Positioned</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Material</span><span class="p">(</span>
+              <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">transparent</span><span class="p">,</span> <span class="c1">//背景颜色透明</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">InkWell</span><span class="p">(</span>
+                <span class="c1">//这会给我们一块带溅墨效果的区域</span>
+                <span class="nx">splashColor</span><span class="p">:</span>
+                    <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">.</span><span class="nx">withOpacity</span><span class="p">(</span><span class="mf">0.3</span><span class="p">),</span> <span class="c1">//溅墨的颜色为白色，并设置不透明度,慢慢散开的颜色</span>
+                <span class="nx">highlightColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">red</span><span class="p">.</span><span class="nx">withOpacity</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span> <span class="c1">//高亮颜色，最开始显示高亮颜色</span>
+                <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span> <span class="p">{</span>
+                  <span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'tap'</span><span class="p">);</span>
+                  <span class="nx">Navigator</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">push</span><span class="p">(</span><span class="nx">MaterialPageRoute</span><span class="p">(</span>
+                      <span class="nx">builder</span><span class="p">:</span> <span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">PostShow</span><span class="p">(</span><span class="nx">post</span><span class="p">:</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">])));</span>
+                <span class="p">},</span>
+              <span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: implement build</span>
+    <span class="k">return</span> <span class="nx">ListView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>
+      <span class="nx">itemCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+      <span class="nx">itemBuilder</span><span class="p">:</span> <span class="nx">_listItemBuilder</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>我们会使用post_show.dart来显示详情</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">PostShow</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="kr">final</span> <span class="nx">Post</span> <span class="nx">post</span><span class="p">;</span>
+
+  <span class="nx">PostShow</span><span class="p">({@</span><span class="nd">required</span> <span class="k">this</span><span class="p">.</span><span class="nx">post</span><span class="p">});</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'${post.title}'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">imageUrl</span><span class="p">),</span>
+          <span class="nx">Container</span><span class="p">(</span>
+            <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">32.0</span><span class="p">),</span>
+            <span class="nx">width</span><span class="p">:</span> <span class="kr">double</span><span class="p">.</span><span class="nx">infinity</span><span class="p">,</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+              <span class="nx">crossAxisAlignment</span><span class="p">:</span> <span class="nx">CrossAxisAlignment</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span>
+              <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                <span class="nx">Text</span><span class="p">(</span>
+                  <span class="s1">'${post.title}'</span><span class="p">,</span>
+                  <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="nx">Text</span><span class="p">(</span>
+                  <span class="s1">'${post.author}'</span><span class="p">,</span>
+                  <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">subhead</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="nx">SizedBox</span><span class="p">(</span>
+                  <span class="nx">height</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="nx">Text</span><span class="p">(</span>
+                  <span class="s1">'${post.description}'</span><span class="p">,</span>
+                  <span class="nx">style</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">textTheme</span><span class="p">.</span><span class="nx">body1</span><span class="p">,</span>
+                <span class="p">),</span>
+              <span class="p">],</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 
                     </div>
 

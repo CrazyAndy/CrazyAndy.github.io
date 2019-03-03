@@ -273,7 +273,7 @@
 
 <p>在main.dart中，我们先将home:Home()替换成home:SliverDemo()</p>
 
-<h2 id="slivers">Slivers</h2>
+<h1 id="slivers">Slivers</h1>
 
 <h2 id="slivers-1">Slivers</h2>
 
@@ -285,13 +285,188 @@
 
 <h2 id="slivergrid网格视图">SliverGrid：网格视图</h2>
 
+<p>SliverGrid和之前的GridView类似，一个GridView相当于一个CustomScrollView的sliver属性里面加了一个SliverGrid，如果觉得GridView不能满足需求，可以用一下SliverGrid。查看SliverGrid类定义，我们可以看到它也有count和extent两种方式，构建SliverGrid我们需要提供两个参数，gridDelegate和delegate，前者用来构建网格视图相关的东西，后者主要是构建网格视图里面的项目用的。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">SliverDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">CustomScrollView</span><span class="p">(</span>
+        <span class="nx">slivers</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">SliverGrid</span><span class="p">(</span>
+            <span class="nx">gridDelegate</span><span class="p">:</span> <span class="nx">SliverGridDelegateWithFixedCrossAxisCount</span><span class="p">(</span>
+                <span class="c1">//主要是可以设置交叉轴上的网格数量</span>
+                <span class="nx">crossAxisCount</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="nx">crossAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+                <span class="nx">mainAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+                <span class="nx">childAspectRatio</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span><span class="c1">//显示比例</span>
+                <span class="p">),</span>
+            <span class="nx">delegate</span><span class="p">:</span> <span class="nx">SliverChildBuilderDelegate</span><span class="p">(</span>
+              <span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+                  <span class="nx">child</span><span class="p">:</span>
+                      <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span> <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">),</span>
+                <span class="p">);</span>
+              <span class="p">},</span>
+              <span class="nx">childCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="c1">//网格视图项目数量),</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h2 id="sliverpadding内边距与-sliversafearea安全区">SliverPadding（内边距）与 SliverSafeArea（安全区）</h2>
+
+<p>SliverGrid没有padding属性，想要添加内边距，需要去用一个SliverPadding 的小部件。安全区值指的是苹果10以上抬头不能显示全部，只能显示时间，电量，信号，下面显示全部的地方才叫做安全区。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">SliverDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">CustomScrollView</span><span class="p">(</span>
+        <span class="nx">slivers</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="c1">// SliverPadding(</span>
+          <span class="c1">//   padding: EdgeInsets.all(8.0),</span>
+          <span class="c1">//   sliver: SliverGridDemo(),</span>
+          <span class="c1">// ),</span>
+          <span class="nx">SliverSafeArea</span><span class="p">(</span><span class="c1">//这样就放在了苹果安全区内</span>
+            <span class="nx">sliver</span><span class="p">:</span> <span class="nx">SliverPadding</span><span class="p">(</span>
+              <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+              <span class="nx">sliver</span><span class="p">:</span> <span class="nx">SliverGridDemo</span><span class="p">(),</span>
+            <span class="p">),</span>
+          <span class="p">)</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">SliverGridDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">SliverGrid</span><span class="p">(</span>
+      <span class="nx">gridDelegate</span><span class="p">:</span> <span class="nx">SliverGridDelegateWithFixedCrossAxisCount</span><span class="p">(</span>
+        <span class="c1">//主要是可以设置交叉轴上的网格数量</span>
+        <span class="nx">crossAxisCount</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">crossAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+        <span class="nx">mainAxisSpacing</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span>
+        <span class="nx">childAspectRatio</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="c1">//显示比例</span>
+      <span class="p">),</span>
+      <span class="nx">delegate</span><span class="p">:</span> <span class="nx">SliverChildBuilderDelegate</span><span class="p">(</span>
+        <span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span> <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">),</span>
+          <span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">childCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="c1">//网格视图项目数量),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h2 id="sliverlist列表视图">SliverList：列表视图</h2>
 
+<p>我们将上面的SliverGridDemo()替换成SliverListDemo()</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">SliverListDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">SliverList</span><span class="p">(</span>
+      <span class="nx">delegate</span><span class="p">:</span> <span class="nx">SliverChildBuilderDelegate</span><span class="p">(</span>
+        <span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span> <span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">Padding</span><span class="p">(</span>
+            <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">only</span><span class="p">(</span><span class="nx">bottom</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">),</span>
+            <span class="nx">child</span><span class="p">:</span> <span class="nx">Material</span><span class="p">(</span>
+              <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">12.0</span><span class="p">),</span> <span class="c1">//圆角效果</span>
+              <span class="nx">elevation</span><span class="p">:</span> <span class="mf">14.0</span><span class="p">,</span> <span class="c1">//阴影效果</span>
+              <span class="nx">shadowColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">.</span><span class="nx">withOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span> <span class="c1">//阴影颜色</span>
+              <span class="nx">child</span><span class="p">:</span> <span class="nx">Stack</span><span class="p">(</span>
+                <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                  <span class="nx">AspectRatio</span><span class="p">(</span>
+                    <span class="c1">//设置特定比例</span>
+                    <span class="nx">aspectRatio</span><span class="p">:</span> <span class="mi">16</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="c1">//设置比例</span>
+                    <span class="nx">child</span><span class="p">:</span>
+                        <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span><span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">imageUrl</span><span class="p">,</span> <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">),</span>
+                  <span class="p">),</span>
+                  <span class="nx">Positioned</span><span class="p">(</span>
+                    <span class="nx">top</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span>
+                    <span class="nx">left</span><span class="p">:</span> <span class="mf">32.0</span><span class="p">,</span>
+                    <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+                      <span class="nx">crossAxisAlignment</span><span class="p">:</span> <span class="nx">CrossAxisAlignment</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span>
+                      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                        <span class="nx">Text</span><span class="p">(</span>
+                          <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span><span class="p">,</span>
+                          <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">20.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+                        <span class="p">),</span>
+                        <span class="nx">Text</span><span class="p">(</span>
+                          <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">author</span><span class="p">,</span>
+                          <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">13.0</span><span class="p">,</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">),</span>
+                        <span class="p">),</span>
+                      <span class="p">],</span>
+                    <span class="p">),</span>
+                  <span class="p">)</span>
+                <span class="p">],</span>
+              <span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">childCount</span><span class="p">:</span> <span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="c1">//网格视图项目数量),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h2 id="sliverappbar应用工具栏">SliverAppBar：应用工具栏</h2>
 
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SliverAppBar</span><span class="p">(</span>
+            <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+            <span class="c1">// pinned: true,//固定住顶部栏，默认为false</span>
+            <span class="nx">floating</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span><span class="c1">//顶部栏滚动渐进效果，默认为false</span>
+          <span class="p">),</span>
+          <span class="nx">SliverSafeArea</span><span class="p">(</span>
+            <span class="c1">//这样就放在了苹果安全区内</span>
+            <span class="nx">sliver</span><span class="p">:</span> <span class="nx">SliverPadding</span><span class="p">(</span>
+              <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
+              <span class="c1">// sliver: SliverGridDemo(),</span>
+              <span class="nx">sliver</span><span class="p">:</span> <span class="nx">SliverListDemo</span><span class="p">(),</span>
+            <span class="p">),</span>
+          <span class="p">)</span>
+</code></pre></div></div>
+
 <h2 id="带渐进动画的可伸缩空间">带渐进动画的可伸缩空间</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">SliverAppBar</span><span class="p">(</span>
+            <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+            <span class="c1">// pinned: true,//固定住顶部栏，默认为false</span>
+            <span class="nx">floating</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//顶部栏滚动渐进效果，默认为false</span>
+            <span class="nx">expandedHeight</span><span class="p">:</span> <span class="mf">178.0</span><span class="p">,</span> <span class="c1">//设置伸展高度</span>
+            <span class="nx">flexibleSpace</span><span class="p">:</span> <span class="nx">FlexibleSpaceBar</span><span class="p">(</span>
+              <span class="c1">//弹性空间</span>
+              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span>
+                <span class="s1">'How Are You'</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+                <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
+                  <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span>
+                  <span class="nx">letterSpacing</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+                  <span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">w400</span><span class="p">,</span>
+                <span class="p">),</span>
+              <span class="p">),</span>
+              <span class="nx">background</span><span class="p">:</span> <span class="nx">Image</span><span class="p">.</span><span class="nx">network</span><span class="p">(</span>
+                  <span class="s1">'http://b.hiphotos.baidu.com/image/h%3D300/sign=c8a9d4e2841363270aedc433a18fa056/11385343fbf2b2114a65cd70c48065380cd78e41.jpg'</span><span class="p">,</span>
+                  <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">),</span>
+            <span class="p">),</span>
+          <span class="p">),</span>
+</code></pre></div></div>
 
                     </div>
 
