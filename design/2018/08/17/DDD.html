@@ -285,12 +285,12 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">:</span> <span class="nc">IAggregateRoot</span>
     <span class="o">{</span>
         <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">string</span> <span class="n">loginName</span><span class="o">,</span> <span class="n">string</span> <span class="n">displayName</span><span class="o">)</span>
         <span class="o">{</span>
@@ -302,25 +302,25 @@
             <span class="o">{</span>
                 <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentException</span><span class="o">(</span><span class="s">"displayName can't be null"</span><span class="o">);</span>
             <span class="o">}</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="nc">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
             <span class="k">this</span><span class="o">.</span><span class="na">LoginName</span> <span class="o">=</span> <span class="n">loginName</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">DisplayName</span> <span class="o">=</span> <span class="n">displayName</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">SendMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;();</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">ReceiveMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">SendMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ReceiveMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;();</span>
         <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">LoginName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">DisplayName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">SendMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">ReceiveMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="no">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">LoginName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">DisplayName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">ICollection</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="nc">SendMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">ICollection</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="nc">ReceiveMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
 
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">User</span> <span class="n">receiveUser</span><span class="o">,</span> <span class="n">Message</span> <span class="n">message</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="nc">User</span> <span class="n">receiveUser</span><span class="o">,</span> <span class="nc">Message</span> <span class="n">message</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">SendMessages</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
             <span class="n">receiveUser</span><span class="o">.</span><span class="na">ReceiveMessage</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
         <span class="o">}</span>
-        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ReceiveMessage</span><span class="o">(</span><span class="n">User</span> <span class="n">sendUser</span><span class="o">,</span> <span class="n">Message</span> <span class="n">message</span><span class="o">)</span>
+        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ReceiveMessage</span><span class="o">(</span><span class="nc">User</span> <span class="n">sendUser</span><span class="o">,</span> <span class="nc">Message</span> <span class="n">message</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">ReceiveMessages</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
         <span class="o">}</span>
@@ -379,11 +379,11 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
 <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IContact</span>
     <span class="o">{</span>
-        <span class="n">string</span> <span class="n">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="n">string</span> <span class="nc">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -395,15 +395,15 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sender</span> <span class="o">:</span> <span class="n">IContact</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sender</span> <span class="o">:</span> <span class="nc">IContact</span>
     <span class="o">{</span>
         <span class="kd">public</span> <span class="nf">Sender</span><span class="o">(</span><span class="n">string</span> <span class="n">name</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">Name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -415,15 +415,15 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Recipient</span> <span class="o">:</span> <span class="n">IContact</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Recipient</span> <span class="o">:</span> <span class="nc">IContact</span>
     <span class="o">{</span>
         <span class="kd">public</span> <span class="nf">Recipient</span><span class="o">(</span><span class="n">string</span> <span class="n">name</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">Name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -439,12 +439,12 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span>
 <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISendMessageService</span>
     <span class="o">{</span>
-        <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">message</span><span class="o">);</span>
+        <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="nc">Message</span> <span class="n">message</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -456,15 +456,15 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span>
 <span class="o">{</span>
     <span class="c1">/// &lt;summary&gt;</span>
     <span class="c1">/// SendShortMessag领域服务实现-短消息发送</span>
     <span class="c1">/// &lt;/summary&gt;</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SendShortMessageService</span> <span class="o">:</span> <span class="n">ISendMessageService</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SendShortMessageService</span> <span class="o">:</span> <span class="nc">ISendMessageService</span>
     <span class="o">{</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">message</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="nc">Message</span> <span class="n">message</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
         <span class="o">}</span>
@@ -481,27 +481,27 @@
 * address:https://www.github.com/yuezhongxin/MessageManager
 **/</span>
 
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">Xunit</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Entity</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">ValueObject</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">Xunit</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Tests</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Tests</span>
 <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageDomainTest</span>
     <span class="o">{</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 消息发送-短消息</span>
         <span class="c1">/// &lt;/summary&gt;</span>
-        <span class="o">[</span><span class="n">Fact</span><span class="o">]</span>
+        <span class="o">[</span><span class="nc">Fact</span><span class="o">]</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">DomainTest_SendShortMessage</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">ISendMessageService</span> <span class="n">sendMessageService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SendShortMessageService</span><span class="o">();</span>
-            <span class="n">IContact</span> <span class="n">sender</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sender</span><span class="o">(</span><span class="s">"sender"</span><span class="o">);</span>
-            <span class="n">IContact</span> <span class="n">recipient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Recipient</span><span class="o">(</span><span class="s">"recipient"</span><span class="o">);</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Message</span><span class="o">(</span><span class="s">"title"</span><span class="o">,</span> <span class="s">"content "</span><span class="o">,</span> <span class="n">sender</span><span class="o">,</span> <span class="n">recipient</span><span class="o">);</span>
-            <span class="n">Assert</span><span class="o">.</span><span class="na">True</span><span class="o">(</span><span class="n">sendMessageService</span><span class="o">.</span><span class="na">SendMessage</span><span class="o">(</span><span class="n">message</span><span class="o">));</span>
+            <span class="nc">ISendMessageService</span> <span class="n">sendMessageService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SendShortMessageService</span><span class="o">();</span>
+            <span class="nc">IContact</span> <span class="n">sender</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sender</span><span class="o">(</span><span class="s">"sender"</span><span class="o">);</span>
+            <span class="nc">IContact</span> <span class="n">recipient</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Recipient</span><span class="o">(</span><span class="s">"recipient"</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Message</span><span class="o">(</span><span class="s">"title"</span><span class="o">,</span> <span class="s">"content "</span><span class="o">,</span> <span class="n">sender</span><span class="o">,</span> <span class="n">recipient</span><span class="o">);</span>
+            <span class="nc">Assert</span><span class="o">.</span><span class="na">True</span><span class="o">(</span><span class="n">sendMessageService</span><span class="o">.</span><span class="na">SendMessage</span><span class="o">(</span><span class="n">message</span><span class="o">));</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>

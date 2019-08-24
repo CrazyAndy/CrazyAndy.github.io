@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="Netty入门到实战" name="description">
+  
+  
+    <meta name="keywords" content="java,netty,socket">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Netty入门到实战--001
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+    
+    
+    
+    <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+
+    
+    
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">java</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 24 Aug 2019</span>
+                        <h1>
+                            Netty入门到实战--001
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="一概述">一、概述</h1>
+<p>　　Socket 目前市面上java语言有两种框架帮助我们快速构建，Mina和Netty，之前我一直用的是Mina，但是构建于小应用还可以，构建高并发应用我还是倾向于使用Netty。以下，我会一边学习，一边整理笔记。主要参考网上一些视频教程还有 《Netty in action》这本书。</p>
+
+<h1 id="二hash算法">二、hash算法</h1>
+<h3 id="一-简单介绍">（一） 简单介绍</h3>
+
+<p>　　hash有人叫哈希，有人叫散列，都是一个东西。hash算法有人给出的定义是：</p>
+
+<p>　　这类算法接受「任意长度的二进制输入值」，对输入值做换算（切碎），最终给出「固定长度的二进制输出值」。</p>
+
+<p>　　以更好理解的方式来说，Hash算法 是摘要算法 ：它从不同的输入中，通过一些计算摘取 出来一段输出数据，且这个值可以用以区分输入数据。</p>
+<h3 id="二-使用场景">（二） 使用场景</h3>
+<h4 id="1-信息安全领域">1. 「信息安全」领域</h4>
+
+<p>　　Hash算法 可用作加密算法。
+　　如文件校验：通过对文件摘要，可以得到文件的「数字指纹」。你从网络上下载的任何副本的「数字指纹」只要和官方给出的「数字指纹」一致，那么就可以知道这是未经篡改的文件。例如著名的MD5 。</p>
+
+<h4 id="2-数据结构领域">2. 「数据结构」领域</h4>
+
+<p>　　Hash算法 通常还可用作快速查找。</p>
+
+<p>　　这是今天我想说的部分，根据Hash函数 我们可以实现一种叫做哈希表(Hash Table) 的数据结构。这种结构可以使得我们可以实现对数据进行快速的「存」和「取」。而我们在应用中，主要是使用hashmap，redis数据库也使用hash算法去存储数据。</p>
+<h1 id="三哈希表">三、哈希表</h1>
+<h3 id="一-什么是哈希表">（一） 什么是哈希表</h3>
+<p>　　首先想一个问题：我们之前是如何在「数据结构」中做「查找」的呢？</p>
+
+<p>　　「线性表、树」： 在线性表、树 这些结构中，记录 在结构 中的相对位置是随机的，和记录的关键字之间不存在确定关系。因此，在结构中查找时需要进行一系列和关键字的「比较」，即这一类查找方法建立在「比较」的基础上。在顺序查找时，比较的结果为”=”与”≠”2种可能；在折半查找、二叉排序树查找和B-树查找时，比较的结果为”&lt;”, “=”, “&gt;”3种可能。此时，查找的效率依赖于查找过程中所进行的「比较次数」。</p>
+
+<p>　　「引出Hash表」：理想的情况是希望不经过任何比较，一次存取便能得到所查记录，那就必须在记录的存储位置和它的关键字之间建立一个确定的关系f，使每个关键字和结构中一个唯一的存储位置相对应。因而在查找时，只要根据这个对应关系f找到给定值K的像f(K)。若结构中存在关键字和K相等的记录，则必定在f(K)的存储位置上，反之在这个位置上没有记录。由此，「不需要比较」便可直接取得所查记录。在此，我们称这个对应关系f为：哈希(Hash)函数，按这个思想建立的映射关系表为：哈希表。</p>
+
+<p>　　（插播：记得「理想情况」这几个字~~ 这会在后文给出解释）</p>
+
+<p>　　这是《数据结构（C语言版）》[1]中引出哈希表的一段描述，通俗易懂。至此，我们知道了什么是哈希函数和哈希表，下面再继续扩充描述如下：</p>
+
+<p>　　「哈希函数」的特点：</p>
+
+<h4 id="1-灵活">1. 灵活</h4>
+
+<p>　　哈希函数是一个映像，因此哈希函数的设定很灵活，只要使得任何关键字由此所得的哈希函数值都落在表长允许的范围之内即可。</p>
+
+<h4 id="2-冲突">2. 冲突</h4>
+
+<p>　　对不同的关键字可能得到同一哈希地址，即key1≠key2，而f(key1)=f(key2) ，这种现象称为「冲突(collision)」。</p>
+
+<p>　　冲突只能尽量地少，而不能完全避免。因为，哈希函数是从关键字集合到地址集合的映像。而通常关键字集合比较大，它的元素包括所有可能的关键字，而地址集合的元素仅为哈希表中的地址值。因此，在实现哈希表这种数据结构的时候不仅要设定一个“好”的哈希函数，而且要设定一种“处理冲突的方法”。</p>
+
+<p>　　「哈希表」的正式定义：</p>
+<pre><code class="language-w">　　根据设定的Hash函数 - H(key) 和处理冲突的方法，将一组关键字映象 到一个有限的连续的地址集（区间）上，并以关键字在地址集中的象 作为记录在表中的存储位置，这样的映射表便称为Hash表。
+</code></pre>
+<h3 id="二-哈希函数详细描述">（二） 哈希函数详细描述</h3>
+<p>　　上面我们已经引出了并解释了哈希函数，即「哈希函数」是支撑「哈希表」的「一类函数」。实际工作中，需要视不同的情况采用不同的Hash函数，通常要考虑的因素有：</p>
+<pre><code class="language-w">Hash函数 执行的时间。
+关键字 的长度。
+Hash表 的大小。
+关键字 的分布情况。
+记录 的查找频率。
+</code></pre>
+<p>有如下一些常用的Hash函数 构造方法：</p>
+<h4 id="1-直接寻址法">1. 直接寻址法：</h4>
+
+<p>　　f(k)=k 或者f(k)=a∗k+b</p>
+
+<p>　　取k 或k 的某个线性函数为Hash地址 。</p>
+
+<p>　　特点：由于直接地址法相当于有多少个关键字就必须有多少个相应地址去对应，所以不会产生冲突，也正因为此，所以实际中很少使用这种构造方法。</p>
+
+<h4 id="2-数字分析法">2. 数字分析法：</h4>
+
+<p>　　首先分析待存的一组关键字，比如是一个班级学生的出生年月日，我们发现他们的出生年 大体相同，那么我们肯定不能用他们的年 来作为存储地址 ，这样出现冲突 的几率很大；但是，我们发现月日 的具体数字差别很大，如果我们用月日 来作为Hash地址，则会明显降低冲突几率。因此，数字分析法就是找出关键字 的规律，尽可能用差异数据来构造Hash地址 ；</p>
+
+<p>　　特点：需要提前知道所有可能的关键字，才能分析运用此种方法，所以不太常用。</p>
+
+<h4 id="3-平方取中法">3. 平方取中法：</h4>
+
+<p>　　先求出关键字的平方值，然后按需要取平方值的中间几位作为哈希地址。这是因为：平方后中间几位和关键字中每一位都相关，故不同关键字会以较高的概率产生不同的哈希地址。</p>
+
+<p>　　例：我们把英文字母在字母表中的位置序号作为该英文字母的内部编码。例如K的内部编码为11，E的内部编码为05，Y的内部编码为25，A的内部编码为01, B的内部编码为02。由此组成关键字“KEYA”的内部代码为11052501，同理我们可以得到关键字“KYAB”、“AKEY”、“BKEY”的内部编码。之后对关键字进行平方运算后，取出第7到第9位作为该关键字哈希地址，如下图所示：
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap001.png) --></p>
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap001.png" width="100%" /></center>
+<p>　　特点：较常用。</p>
+<h4 id="4-折叠法">4. 折叠法：</h4>
+
+<p>　　将关键字分割成位数相同的几部分（最后一部分位数可以不同），然后取这几部分的叠加和（去除进位）作为散列地址。数位叠加可以有移位叠加和间界叠加两种方法。移位叠加是将分割后的每一部分的最低位对齐，然后相加；间界叠加是从一端向另一端沿分割界来回折叠，然后对齐相加。</p>
+
+<h4 id="5-随机数法">5. 随机数法：</h4>
+
+<p>　　选择一个随机函数，取关键字的随机函数值作为Hash地址，通常用于关键字长度不同的场合。即 
+f(key)=random(key)</p>
+
+<p>　　特点：通常，关键字长度不相等时，采用此法构建Hash函数 较为合适。</p>
+
+<h4 id="6-除留取余法">6. 除留取余法：</h4>
+
+<p>　　f(k)=k mod p ， p&lt;=m</p>
+
+<p>　　取关键字被某个不大于Hash表 长m 的数p 除后所得的余数为Hash地址 。</p>
+
+<p>　　特点：这是最简单也是最常用的Hash函数构造方法。可以直接取模，也可以在平法法、折叠法之后再取模。</p>
+
+<p>　　值得注意的是，在使用除留取余法 时，对p 的选择很重要，如果p 选的不好会容易产生同义词。由经验得知：p 最好选择不大于表长m 的一个质数、或者不包含小于20的质因数的合数。</p>
+<h3 id="三-处理冲突">（三） 处理冲突</h3>
+<p>　　如何处理冲突是哈希造表不可缺少的一个方面。现在描述一下处理冲突：</p>
+
+<p>　　假设哈希表的地址集为 : 0−(n−1)，那么「冲突」是指 : 由关键字得到的哈希地址为j(0≤j≤n−1)的位置上已存有记录，而「处理冲突」: 就是为该关键字的记录找到另一个「空的哈希地址」。</p>
+
+<p>　　在处理冲突的过程中可能得到一个地址序列 Hi,i=1,2,…,k(Hi∈[0,n−1])。处理时，若得到的另一个哈希地址Hi 仍然发生冲突，则再求下一个地址H2，若H2 仍然冲突，再求H3，依次类推，直至Hk 不发生冲突为止，则Hk 为记录在表中的地址。（注意，此定义不适合链地址法）</p>
+
+<p>　　冲突处理通常有以下4种方法：</p>
+<h4 id="1-开放定址法">1. 开放定址法：</h4>
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap002.png) -->
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap002.png" width="100%" /></center>
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap006.png) -->
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap006.png" width="100%" /></center>
+<h4 id="2-再哈希法">2. 再哈希法：</h4>
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap003.png) -->
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap003.png" width="100%" /></center>
+<h4 id="3-链地址法">3. 链地址法：</h4>
+<p>　　上面所说的开发定址法的原理是遇到冲突的时候查找顺着原来哈希地址查找下一个空闲地址然后插入，但是也有一个问题就是如果空间不足，那他无法处理冲突也无法插入数据，因此需要装填因子(空间/插入数据)&gt;=1。</p>
+
+<p>　　那有没有一种方法可以解决这种问题呢？链地址法可以，链地址法的原理时如果遇到冲突，他就会在原地址新建一个空间，然后以链表结点的形式插入到该空间。我感觉业界上用的最多的就是链地址法。下面从百度上截取来一张图片，可以很清晰明了反应下面的结构。比如说我有一堆数据{1,12,26,337,353…}，而我的哈希算法是H(key)=key mod 16，第一个数据1的哈希值f(1)=1，插入到1结点的后面，第二个数据12的哈希值f(12)=12，插入到12结点，第三个数据26的哈希值f(26)=10，插入到10结点后面，第4个数据337，计算得到哈希值是1，遇到冲突，但是依然只需要找到该1结点的最后链结点插入即可，同理353。</p>
+
+<p>　　将所有关键字为同义词的记录存储在同一线性表中。即在Hash 出来的哈希地址中不直接存Key ，而是存储一个Key 的链表 ，当发生冲突 时，将同义的Key 加入链表。
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap004.png) --></p>
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap004.png" width="100%" /></center>
+<p>　　在使用链地址法的情况下，由于哈希表高效的特性，查找或者插入的情况在大多数情况下可以达到O(1)，时间主要花在计算hash上，当然也有最坏的情况就是hash值全都映射到同一个地址上，这样哈希表就会退化成链表，查找的时间复杂度变成O(n)，但是这种情况比较少，只要不要把hash计算的公式外漏出去并且有人故意攻击（用兴趣的人可以搜一下基于哈希冲突的拒绝服务攻击），一般也不会出现这种情况。
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap007.png) --></p>
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap007.png" width="100%" /></center>
+<center>哈希冲突攻击导致退化成链表</center>
+<h4 id="4-公共溢出区">4. 公共溢出区：</h4>
+<p>　　可以建立一个公共溢出区，用来存放有冲突的Key。比如设立另一个哈希表，专门用来存放出现冲突的同义词。</p>
+<h3 id="四-查找及分析">（四） 查找及分析</h3>
+<p>　　在哈希表上进行查找的过程和哈希造表的过程基本是一致的，在此不再赘述。</p>
+
+<p>　　接下来我们来分析一下哈希表的「查找长度」。</p>
+
+<h4 id="1-平均查找长度">1. 平均查找长度</h4>
+
+<p>　　虽然哈希表在关键字与记录的存储位置之间建立了直接映像，但由于“冲突”的存在，使得哈希表的查找过程仍然是一个“给定值和关键字进行比较”的过程。因此，仍需以平均查找长度作为衡量哈希表的查找效率的量度。</p>
+
+<p>　　（还记得上面我们说的“理想情况下”吗？~~ 现实告诉我们，一般情况下，还是不得不需要“比较”！）</p>
+
+<p>　　查找过程中，需要“和给定值进行比较的关键字的个数”取决于下列三个因素：</p>
+<pre><code class="language-w">	哈希函数的好坏。
+	处理冲突的方法。
+	哈希表的装填因子。
+</code></pre>
+<h4 id="2-装填因子">2. 装填因子</h4>
+
+<p>　　在一般情况下，我们设计的哈希函数肯定是尽量均匀的，没有提升空间了，所以可以不考虑它对平均查找长度的影响。那么，对于「处理冲突方法相同」的哈希表，其平均查找长度就依赖于哈希表的「装填因子」了。其定义如下：
+<!-- ![edit](/static/assets/img/blog/java/hashmap/hashmap005.png) --></p>
+<center><img src="/static/assets/img/blog/java/hashmap/hashmap005.png" width="100%" /></center>
+<p>　　所以，对于「平均查找长度」我们的结论如下：</p>
+<pre><code class="language-w">哈希表的「平均查找长度」是装填因子α 的函数，而不是n 的函数。因此，不管n 多大，我们总是可以选择一个合适的装填因子以便将平均查找长度限定在一个范围内。（Java 中HashMap 的默认装填因子是0.75）
+</code></pre>
+<h1 id="四引用">四、引用</h1>
+
+<p>　　<a href="https://blog.csdn.net/u010297957/article/details/51974340">哈希表、Java中HashMap</a></p>
+
+<p>　　<a href="https://www.cnblogs.com/s-b-b/p/6208565.html">数据结构之哈希表</a></p>
+
+<p>​	 <br />
+​	
+​</p>
+
+<p>​</p>
+
+<p>​</p>
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">java</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">netty</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">socket</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/java/2019/08/24/Netty.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>

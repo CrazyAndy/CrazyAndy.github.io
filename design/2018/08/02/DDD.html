@@ -294,9 +294,9 @@
 <p>　　初期学习DDD的朋友一定不会错过Eric Evans写的《领域驱动设计：软件核心复杂性应对之道》，这本书名气很大，也是很多人入门领域驱动设计的首选读物，这本书提到了领域驱动设计中的一些概念：Repository，Domain，ValueObject等。但是初学者有可能得出一个错误的结论：有人误认为项目架构中加入<strong><em>Repository，</em></strong>Domain，***ValueObject就变成了DDD架构。如果没有悟出其精髓就在项目中加入这些概念，那充其量也不过是个三层架构；反之对于一个面向对象分析的高手而言，不使用这些概念也可以实现领域驱动设计。</p>
 
 <p>　　以IUserRepository这样一个接口定义为例：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IUserRepository</span> <span class="o">:</span> <span class="n">IRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IUserRepository</span> <span class="o">:</span> <span class="nc">IRepository</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span>
 <span class="o">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
     <span class="c1">//....</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -304,14 +304,14 @@
 <p>　　一个IUserRepository是一个Repository，他只能以User聚合根为单位进行操作。方法List<Rule> GetRules(int id)将此Repository打回了原形，这不再是一个Repository，这是一个DAL。</Rule></p>
 
 <p>　　正确的实现方式：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span><span class="o">:</span><span class="n">AggregateRoot</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span><span class="o">:</span><span class="nc">AggregateRoot</span>
 <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">()</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Rule</span><span class="o">&gt;</span> <span class="nf">GetRules</span><span class="o">()</span>
     <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
      
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ApproveRequest</span><span class="o">(</span><span class="n">Request</span> <span class="n">request</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ApproveRequest</span><span class="o">(</span><span class="nc">Request</span> <span class="n">request</span><span class="o">)</span>
     <span class="o">{</span>
         <span class="kt">var</span> <span class="n">rules</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">GetRules</span><span class="o">();</span>
         <span class="c1">//......</span>
@@ -329,26 +329,26 @@
 <p>　　我们不妨以大家都比较熟悉的医院门诊看病流程举个例子，看看如何开始实践领域驱动设计：</p>
 
 <p>　　我们暂且认为一个门诊看病流程就是一个完整的领域模型，此时你要忘掉数据库，不要再想表结构如何设计，而是就这一领域模型进行抽象：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutPatientProcess</span><span class="o">:</span><span class="n">AggregateRoot</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OutPatientProcess</span><span class="o">:</span><span class="nc">AggregateRoot</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Registration</span> <span class="n">_registration</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//挂号单</span>
+    <span class="kd">public</span> <span class="nc">Registration</span> <span class="n">_registration</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//挂号单</span>
  
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Examination</span><span class="o">&gt;</span> <span class="n">_examinations</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">Examination</span><span class="o">&gt;</span> <span class="n">Examinations</span> <span class="o">=&gt;</span> <span class="n">_examinations</span><span class="o">.</span><span class="na">AsReadOnly</span><span class="o">();</span><span class="c1">//化验单</span>
-    <span class="kd">public</span> <span class="n">Prescription</span> <span class="n">Prescription</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//处方</span>
-    <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">ConsultaionTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊时间</span>
-    <span class="kd">public</span> <span class="n">Doctor</span> <span class="n">Doctor</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊医师</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Examination</span><span class="o">&gt;</span> <span class="n">_examinations</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">IReadOnlyList</span><span class="o">&lt;</span><span class="nc">Examination</span><span class="o">&gt;</span> <span class="nc">Examinations</span> <span class="o">=&gt;</span> <span class="n">_examinations</span><span class="o">.</span><span class="na">AsReadOnly</span><span class="o">();</span><span class="c1">//化验单</span>
+    <span class="kd">public</span> <span class="nc">Prescription</span> <span class="nc">Prescription</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//处方</span>
+    <span class="kd">public</span> <span class="nc">DateTime</span> <span class="nc">ConsultaionTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊时间</span>
+    <span class="kd">public</span> <span class="nc">Doctor</span> <span class="nc">Doctor</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="kd">private</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span><span class="c1">//接诊医师</span>
  
     <span class="c1">//开始一个门诊治疗过程</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">StartProcess</span><span class="o">(</span><span class="n">Registration</span> <span class="n">registration</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">StartProcess</span><span class="o">(</span><span class="nc">Registration</span> <span class="n">registration</span><span class="o">)</span>
     <span class="o">{</span>
         <span class="n">_registration</span> <span class="o">=</span> <span class="n">registration</span><span class="o">;</span>
  
-        <span class="n">InquireSymptoms</span><span class="o">();</span>
+        <span class="nc">InquireSymptoms</span><span class="o">();</span>
  
-        <span class="n">WriteOutExamination</span><span class="o">();</span>
+        <span class="nc">WriteOutExamination</span><span class="o">();</span>
  
-        <span class="n">WritePrescription</span><span class="o">();</span>
+        <span class="nc">WritePrescription</span><span class="o">();</span>
     <span class="o">}</span>
     <span class="c1">//询问病人病情</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">InquireSymptoms</span><span class="o">()</span>
@@ -357,7 +357,7 @@
     <span class="c1">//开立化验单</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">WriteOutExamination</span><span class="o">()</span>
     <span class="o">{</span>
-        <span class="n">_examinations</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">Examination</span><span class="o">());</span>
+        <span class="n">_examinations</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Examination</span><span class="o">());</span>
     <span class="o">}</span>
     <span class="c1">//填写处方</span>
     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">WritePrescription</span><span class="o">()</span>

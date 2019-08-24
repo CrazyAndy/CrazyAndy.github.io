@@ -356,36 +356,36 @@
 
 <p>　　我们先看一下 Repository 的定义前半句：协调领域和数据映射层，也就是 dudu 所说的介于领域层和数据映射层之间，理解这一点很重要，非常重要。然后我们再来看 MessageManager 项目中关于 Repository 的应用（实现没有问题），在哪应用呢？根据定义我们应该要去领域层去找Repository 的应用，但是我们在 MessageManager.Domain 项目中找不到关于 Repository 的半毛应用，却在 MessageManager.Application 项目中找到了：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">AutoMapper</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">DTO</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="nc">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">AutoMapper</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">DTO</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">Implementation</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Application</span><span class="o">.</span><span class="na">Implementation</span>
 <span class="o">{</span>
     <span class="c1">/// &lt;summary&gt;</span>
     <span class="c1">/// Message管理应用层接口实现</span>
     <span class="c1">/// &lt;/summary&gt;</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageServiceImpl</span> <span class="o">:</span> <span class="n">ApplicationService</span><span class="o">,</span> <span class="n">IMessageService</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageServiceImpl</span> <span class="o">:</span> <span class="nc">ApplicationService</span><span class="o">,</span> <span class="nc">IMessageService</span>
     <span class="o">{</span>
-        <span class="err">#</span><span class="n">region</span> <span class="n">Private</span> <span class="n">Fields</span>
-        <span class="kd">private</span> <span class="n">readonly</span> <span class="n">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="n">readonly</span> <span class="n">IUserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+        <span class="err">#</span><span class="n">region</span> <span class="nc">Private</span> <span class="nc">Fields</span>
+        <span class="kd">private</span> <span class="n">readonly</span> <span class="nc">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">readonly</span> <span class="nc">IUserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
         <span class="err">#</span><span class="n">endregion</span>
 
-        <span class="err">#</span><span class="n">region</span> <span class="n">Ctor</span>
+        <span class="err">#</span><span class="n">region</span> <span class="nc">Ctor</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 初始化一个&lt;c&gt;MessageServiceImpl&lt;/c&gt;类型的实例。</span>
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="context"&gt;用来初始化&lt;c&gt;MessageServiceImpl&lt;/c&gt;类型的仓储上下文实例。&lt;/param&gt;</span>
         <span class="c1">/// &lt;param name="messageRepository"&gt;“消息”仓储实例。&lt;/param&gt;</span>
         <span class="c1">/// &lt;param name="userRepository"&gt;“用户”仓储实例。&lt;/param&gt;</span>
-        <span class="kd">public</span> <span class="nf">MessageServiceImpl</span><span class="o">(</span><span class="n">IRepositoryContext</span> <span class="n">context</span><span class="o">,</span>
-            <span class="n">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">,</span>
-            <span class="n">IUserRepository</span> <span class="n">userRepository</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nf">MessageServiceImpl</span><span class="o">(</span><span class="nc">IRepositoryContext</span> <span class="n">context</span><span class="o">,</span>
+            <span class="nc">IMessageRepository</span> <span class="n">messageRepository</span><span class="o">,</span>
+            <span class="nc">IUserRepository</span> <span class="n">userRepository</span><span class="o">)</span>
             <span class="o">:</span><span class="n">base</span><span class="o">(</span><span class="n">context</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">messageRepository</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">;</span>
@@ -393,22 +393,22 @@
         <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
 
-        <span class="err">#</span><span class="n">region</span> <span class="n">IMessageService</span> <span class="n">Members</span>
+        <span class="err">#</span><span class="n">region</span> <span class="nc">IMessageService</span> <span class="nc">Members</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 通过发送方获取消息列表</span>
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="userDTO"&gt;发送方&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;消息列表&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesBySendUser</span><span class="o">(</span><span class="n">UserDTO</span> <span class="n">sendUserDTO</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">IEnumerable</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesBySendUser</span><span class="o">(</span><span class="nc">UserDTO</span> <span class="n">sendUserDTO</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="c1">//User user = userRepository.GetUserByName(sendUserDTO.Name);</span>
-            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesBySendUser</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;(</span><span class="n">sendUserDTO</span><span class="o">));</span>
+            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesBySendUser</span><span class="o">(</span><span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">UserDTO</span><span class="o">,</span> <span class="nc">User</span><span class="o">&gt;(</span><span class="n">sendUserDTO</span><span class="o">));</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">messages</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
                 <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;();</span>
+            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">&gt;();</span>
             <span class="n">foreach</span> <span class="o">(</span><span class="kt">var</span> <span class="n">message</span> <span class="n">in</span> <span class="n">messages</span><span class="o">)</span>
             <span class="o">{</span>
-                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
+                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
             <span class="o">}</span>
             <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
         <span class="o">}</span>
@@ -417,16 +417,16 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="userDTO"&gt;接受方&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;消息列表&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesByReceiveUser</span><span class="o">(</span><span class="n">UserDTO</span> <span class="n">receiveUserDTO</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">IEnumerable</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">&gt;</span> <span class="nf">GetMessagesByReceiveUser</span><span class="o">(</span><span class="nc">UserDTO</span> <span class="n">receiveUserDTO</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="c1">//User user = userRepository.GetUserByName(receiveUserDTO.Name);</span>
-            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesByReceiveUser</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;(</span><span class="n">receiveUserDTO</span><span class="o">));</span>
+            <span class="kt">var</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetMessagesByReceiveUser</span><span class="o">(</span><span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">UserDTO</span><span class="o">,</span> <span class="nc">User</span><span class="o">&gt;(</span><span class="n">receiveUserDTO</span><span class="o">));</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">messages</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
                 <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">&gt;();</span>
+            <span class="kt">var</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">&gt;();</span>
             <span class="n">foreach</span> <span class="o">(</span><span class="kt">var</span> <span class="n">message</span> <span class="n">in</span> <span class="n">messages</span><span class="o">)</span>
             <span class="o">{</span>
-                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
+                <span class="n">ret</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">));</span>
             <span class="o">}</span>
             <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
         <span class="o">}</span>
@@ -435,9 +435,9 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">DeleteMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">DeleteMessage</span><span class="o">(</span><span class="nc">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Remove</span><span class="o">(</span><span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">));</span>
+            <span class="n">messageRepository</span><span class="o">.</span><span class="na">Remove</span><span class="o">(</span><span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">));</span>
             <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
         <span class="o">}</span>
         <span class="c1">/// &lt;summary&gt;</span>
@@ -445,9 +445,9 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="nc">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
             <span class="n">message</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">FromUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
             <span class="n">message</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">ToUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
             <span class="n">messageRepository</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
@@ -458,16 +458,16 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="no">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="no">ID</span><span class="o">);</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
             <span class="o">{</span>
                 <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
             <span class="o">}</span>
-            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
         <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
     <span class="o">}</span>
@@ -485,16 +485,16 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="no">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="no">ID</span><span class="o">);</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
             <span class="o">{</span>
                 <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
             <span class="o">}</span>
-            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
         <span class="o">}</span>
 </code></pre></div></div>
 
@@ -519,16 +519,16 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="ID"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">MessageDTO</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="no">ID</span><span class="o">,</span> <span class="n">string</span> <span class="n">isRead</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="no">ID</span><span class="o">);</span>
             <span class="k">if</span> <span class="o">(</span><span class="n">isRead</span> <span class="o">==</span> <span class="s">"1"</span><span class="o">)</span>
             <span class="o">{</span>
                 <span class="n">message</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
                 <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
             <span class="o">}</span>
-            <span class="k">return</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;(</span><span class="n">message</span><span class="o">);</span>
         <span class="o">}</span>
 </code></pre></div></div>
 
@@ -538,9 +538,9 @@
         <span class="c1">/// 阅读消息</span>
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="CurrentUser"&gt;&lt;/param&gt;</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ReadMessage</span><span class="o">(</span><span class="n">User</span> <span class="n">CurrentUser</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ReadMessage</span><span class="o">(</span><span class="nc">User</span> <span class="nc">CurrentUser</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">&amp;&amp;</span> <span class="n">CurrentUser</span><span class="o">.</span><span class="na">ID</span><span class="o">.</span><span class="na">Equals</span><span class="o">(</span><span class="n">ToUserID</span><span class="o">))</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">&amp;&amp;</span> <span class="nc">CurrentUser</span><span class="o">.</span><span class="na">ID</span><span class="o">.</span><span class="na">Equals</span><span class="o">(</span><span class="nc">ToUserID</span><span class="o">))</span>
             <span class="o">{</span>
                 <span class="k">this</span><span class="o">.</span><span class="na">IsRead</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
             <span class="o">}</span>
@@ -554,9 +554,9 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="messageDTO"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="n">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nf">SendMessage</span><span class="o">(</span><span class="nc">MessageDTO</span> <span class="n">messageDTO</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="nc">Mapper</span><span class="o">.</span><span class="na">Map</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;(</span><span class="n">messageDTO</span><span class="o">);</span>
             <span class="n">message</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">FromUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
             <span class="n">message</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">GetUserByName</span><span class="o">(</span><span class="n">messageDTO</span><span class="o">.</span><span class="na">ToUserName</span><span class="o">).</span><span class="na">ID</span><span class="o">;</span>
             <span class="n">messageRepository</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
@@ -571,7 +571,7 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="c1">/// &lt;param name="sendUser"&gt;&lt;/param&gt;</span>
         <span class="c1">/// &lt;param name="receiveUser"&gt;&lt;/param&gt;</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">LoadUserName</span><span class="o">(</span><span class="n">User</span> <span class="n">sendUser</span><span class="o">,</span><span class="n">User</span> <span class="n">receiveUser</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">LoadUserName</span><span class="o">(</span><span class="nc">User</span> <span class="n">sendUser</span><span class="o">,</span><span class="nc">User</span> <span class="n">receiveUser</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="k">this</span><span class="o">.</span><span class="na">FromUserID</span> <span class="o">=</span> <span class="n">sendUser</span><span class="o">.</span><span class="na">ID</span><span class="o">;</span>
             <span class="k">this</span><span class="o">.</span><span class="na">ToUserID</span> <span class="o">=</span> <span class="n">receiveUser</span><span class="o">.</span><span class="na">ID</span><span class="o">;</span>
@@ -619,10 +619,10 @@
 
 <p>　　概念理解的差不多了，我们来看一下具体的实现，以下是 MessageDomainService 领域服务中的一段代码：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Message</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="n">ID</span><span class="o">,</span><span class="n">User</span> <span class="n">CurrentUser</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Message</span> <span class="nf">ShowMessage</span><span class="o">(</span><span class="n">string</span> <span class="no">ID</span><span class="o">,</span><span class="nc">User</span> <span class="nc">CurrentUser</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="n">ID</span><span class="o">);</span>
-            <span class="n">message</span><span class="o">.</span><span class="na">ReadMessage</span><span class="o">(</span><span class="n">userRepository</span><span class="o">.</span><span class="na">GetUser</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="n">CurrentUser</span><span class="o">.</span><span class="na">Name</span> <span class="o">}));</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">GetByKey</span><span class="o">(</span><span class="no">ID</span><span class="o">);</span>
+            <span class="n">message</span><span class="o">.</span><span class="na">ReadMessage</span><span class="o">(</span><span class="n">userRepository</span><span class="o">.</span><span class="na">GetUser</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="nc">CurrentUser</span><span class="o">.</span><span class="na">Name</span> <span class="o">}));</span>
             <span class="n">messageRepository</span><span class="o">.</span><span class="na">Update</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
             <span class="n">messageRepository</span><span class="o">.</span><span class="na">Context</span><span class="o">.</span><span class="na">Commit</span><span class="o">();</span>
             <span class="k">return</span> <span class="n">message</span><span class="o">;</span>
@@ -639,29 +639,29 @@
 
 <p>　　来看 DomainTest 单元测试的部分代码：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">NUnit</span><span class="o">.</span><span class="na">Framework</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainService</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">NUnit</span><span class="o">.</span><span class="na">Framework</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Tests</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">Tests</span>
 <span class="o">{</span>
-    <span class="o">[</span><span class="n">TestFixture</span><span class="o">]</span>
+    <span class="o">[</span><span class="nc">TestFixture</span><span class="o">]</span>
     <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DomainTest</span>
     <span class="o">{</span>
-        <span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+        <span class="o">[</span><span class="nc">Test</span><span class="o">]</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">UserDomainService</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserDomainService</span><span class="o">(</span>
-                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;();</span>
-            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
-            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
+            <span class="nc">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;();</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
             <span class="n">userDomainService</span><span class="o">.</span><span class="na">AddUser</span><span class="o">(</span><span class="n">users</span><span class="o">);</span>
             <span class="c1">//userDomainService.ExistUser();</span>
             <span class="c1">//var user = userDomainService.GetUserByName("小菜");</span>
@@ -676,14 +676,14 @@
 
 <p>　　其实上面我贴的单元测试的代码有些不合理，你会看到只是测试的持久化操作，这些应该是基础层完成的工作，应该由基础层的单元测试进行测试的，那领域层的单元测试测试的是什么东西？应该是领域模型中的业务逻辑，比如 ReadMessage 内的操作：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">Test</span><span class="o">]</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">MessageServiceTest</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageDomainService</span><span class="o">(</span>
-                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
-                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
-            <span class="n">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageDomainService</span><span class="o">.</span><span class="na">ShowMessage</span><span class="o">(</span><span class="s">"ID"</span><span class="o">,</span> <span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
-            <span class="n">Console</span><span class="o">.</span><span class="na">WriteLine</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">IsRead</span><span class="o">);</span>
+            <span class="nc">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">messageDomainService</span><span class="o">.</span><span class="na">ShowMessage</span><span class="o">(</span><span class="s">"ID"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="nc">Console</span><span class="o">.</span><span class="na">WriteLine</span><span class="o">(</span><span class="n">message</span><span class="o">.</span><span class="na">IsRead</span><span class="o">);</span>
         <span class="o">}</span>
 </code></pre></div></div>
 
@@ -705,15 +705,15 @@
         <span class="c1">/// 1. AutoMapper框架的初始化&lt;/remarks&gt;</span>
         <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">Initialize</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">UserDTO</span><span class="o">,</span> <span class="n">User</span><span class="o">&gt;();</span>
-            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">MessageDTO</span><span class="o">,</span> <span class="n">Message</span><span class="o">&gt;();</span>
-            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span> <span class="n">UserDTO</span><span class="o">&gt;();</span>
-            <span class="n">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">MessageDTO</span><span class="o">&gt;()</span>
-                <span class="o">.</span><span class="na">ForMember</span><span class="o">(</span><span class="n">dest</span> <span class="o">=&gt;</span> <span class="n">dest</span><span class="o">.</span><span class="na">Status</span><span class="o">,</span> <span class="n">opt</span> <span class="o">=&gt;</span> <span class="n">opt</span><span class="o">.</span><span class="na">ResolveUsing</span><span class="o">&lt;</span><span class="n">CustomResolver</span><span class="o">&gt;());</span>
+            <span class="nc">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="nc">UserDTO</span><span class="o">,</span> <span class="nc">User</span><span class="o">&gt;();</span>
+            <span class="nc">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="nc">MessageDTO</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;();</span>
+            <span class="nc">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">,</span> <span class="nc">UserDTO</span><span class="o">&gt;();</span>
+            <span class="nc">Mapper</span><span class="o">.</span><span class="na">CreateMap</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="nc">MessageDTO</span><span class="o">&gt;()</span>
+                <span class="o">.</span><span class="na">ForMember</span><span class="o">(</span><span class="n">dest</span> <span class="o">=&gt;</span> <span class="n">dest</span><span class="o">.</span><span class="na">Status</span><span class="o">,</span> <span class="n">opt</span> <span class="o">=&gt;</span> <span class="n">opt</span><span class="o">.</span><span class="na">ResolveUsing</span><span class="o">&lt;</span><span class="nc">CustomResolver</span><span class="o">&gt;());</span>
         <span class="o">}</span>
-        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomResolver</span> <span class="o">:</span> <span class="n">ValueResolver</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">,</span> <span class="n">string</span><span class="o">&gt;</span>
+        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomResolver</span> <span class="o">:</span> <span class="nc">ValueResolver</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">,</span> <span class="n">string</span><span class="o">&gt;</span>
         <span class="o">{</span>
-            <span class="kd">protected</span> <span class="n">override</span> <span class="n">string</span> <span class="nf">ResolveCore</span><span class="o">(</span><span class="n">Message</span> <span class="n">source</span><span class="o">)</span>
+            <span class="kd">protected</span> <span class="n">override</span> <span class="n">string</span> <span class="nf">ResolveCore</span><span class="o">(</span><span class="nc">Message</span> <span class="n">source</span><span class="o">)</span>
             <span class="o">{</span>
                 <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
                 <span class="o">{</span>
@@ -739,17 +739,17 @@
 
 <p>　　从示意图中可以看出，工作单元的范围是限于 Repository 的，也就是说工作单元是无法跨 Repository 提交事务的，只能在同一个仓储内管理事务的一致性，就像我们使用的 using(MessageManagerDbContext context = new MessageManagerDbContext()) 一样，只是局限于这个 using 块，我曾在领域层的单元测试中做如下测试：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">Test</span><span class="o">]</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nc">Test</span><span class="o">]</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">DomainServiceTest</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserDomainService</span><span class="o">(</span>
-                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
-            <span class="n">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageDomainService</span><span class="o">(</span>
-                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
-                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="n">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;();</span>
-            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
-            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">User</span> <span class="o">{</span> <span class="n">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
+            <span class="nc">IUserDomainService</span> <span class="n">userDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="nc">IMessageDomainService</span> <span class="n">messageDomainService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageDomainService</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">MessageRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()),</span>
+                <span class="k">new</span> <span class="nf">UserRepository</span><span class="o">(</span><span class="k">new</span> <span class="nc">EntityFrameworkRepositoryContext</span><span class="o">()));</span>
+            <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">users</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;();</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="s">"小菜"</span> <span class="o">});</span>
+            <span class="n">users</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span> <span class="o">{</span> <span class="nc">Name</span> <span class="o">=</span> <span class="s">"大神"</span> <span class="o">});</span>
             <span class="n">userDomainService</span><span class="o">.</span><span class="na">AddUser</span><span class="o">(</span><span class="n">users</span><span class="o">);</span>
             <span class="n">messageDomainService</span><span class="o">.</span><span class="na">DeleteMessage</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
         <span class="o">}</span>

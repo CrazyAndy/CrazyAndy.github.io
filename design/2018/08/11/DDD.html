@@ -358,40 +358,40 @@
 
 <p>　　功能实现主要是领域模型设计、仓储设计、应用层协调、表现层（MVC、WebAPI）代码编写等，当然还有一些应用程序配置，比如Automapper类型映射、Unity依赖注入配置等。说到领域模型设计，就多说一点，先了解领域模型涉及的概念：实体、值对象、聚合、聚合根。MessageManager项目包含两个实体：User实体和Message（实体），当时设计的时候，我是把User作为实体、Message作为聚合根，也就是下面代码：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="nc">System</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Collections</span><span class="o">.</span><span class="na">Generic</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Linq</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Text</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="nc">IAggregateRoot</span>
     <span class="o">{</span>
         <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
         <span class="kd">public</span> <span class="nf">Message</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="nc">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
         <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
         
         <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="n">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">DateTime</span> <span class="nc">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nc">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
 
         <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
         <span class="c1">/// &lt;/summary&gt;</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="no">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -401,41 +401,41 @@
 
 <p>　　还有一点就是EntityFramework使用Code First的时候，因为我们“字段”都是设计在Domain层中（并不包含配置），实现却是在Infrastructure层，如何进行数据库字段类型设计？或是表字段关联？实现主要是使用ModelConfigurations，在生成之前添加Model配置，我觉得这是EntityFramework在领域驱动设计开发中优点之一，设计和实现完全区分开，示例代码：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">ComponentModel</span><span class="o">.</span><span class="na">DataAnnotations</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="na">Data</span><span class="o">.</span><span class="na">Entity</span><span class="o">.</span><span class="na">ModelConfiguration</span><span class="o">;</span>
-<span class="n">using</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">ComponentModel</span><span class="o">.</span><span class="na">DataAnnotations</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">System</span><span class="o">.</span><span class="na">Data</span><span class="o">.</span><span class="na">Entity</span><span class="o">.</span><span class="na">ModelConfiguration</span><span class="o">;</span>
+<span class="n">using</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span><span class="o">;</span>
 
-<span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">.</span><span class="na">ModelConfigurations</span>
+<span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Repositories</span><span class="o">.</span><span class="na">EntityFramework</span><span class="o">.</span><span class="na">ModelConfigurations</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageConfiguration</span> <span class="o">:</span> <span class="n">EntityTypeConfiguration</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageConfiguration</span> <span class="o">:</span> <span class="nc">EntityTypeConfiguration</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span>
     <span class="o">{</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// Initializes a new instance of &lt;c&gt;MessageConfiguration&lt;/c&gt; class.</span>
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="kd">public</span> <span class="nf">MessageConfiguration</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
+            <span class="nc">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="n">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="nc">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
-            <span class="n">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
+            <span class="nc">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
 
             <span class="c1">// Relationships</span>
             <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUser</span><span class="o">)</span>
@@ -453,12 +453,12 @@
 
 <p>　　上面代码中的下面部分是添加外键配置，EntityFramework中的模型-添加配置：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="n">override</span> <span class="kt">void</span> <span class="nf">OnModelCreating</span><span class="o">(</span><span class="n">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="n">override</span> <span class="kt">void</span> <span class="nf">OnModelCreating</span><span class="o">(</span><span class="nc">DbModelBuilder</span> <span class="n">modelBuilder</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="n">modelBuilder</span>
                 <span class="o">.</span><span class="na">Configurations</span>
-                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">UserConfiguration</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="n">MessageConfiguration</span><span class="o">());</span>
+                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">UserConfiguration</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="k">new</span> <span class="nc">MessageConfiguration</span><span class="o">());</span>
             <span class="n">base</span><span class="o">.</span><span class="na">OnModelCreating</span><span class="o">(</span><span class="n">modelBuilder</span><span class="o">);</span>
         <span class="o">}</span>
 </code></pre></div></div>

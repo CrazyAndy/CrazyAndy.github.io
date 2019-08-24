@@ -355,9 +355,9 @@
 <p>　　放到Java世界中，多年以来，Java Bean规范都引诱着程序员们以“自然而然又合乎情理”的方式创建着无数的贫血对象，而一些框架也规定对象必须提供getter和setter方法，比如 Hibernate的早期版本。那么，贫血对象到底有什么坏处呢？来看一个例子：要修改一个客户（Customer）的邮箱地址，在使用setter方法时为：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">email</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -394,9 +394,9 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BlogApplicatioinService</span> <span class="o">{</span>
 
     <span class="nd">@Transactional</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createBlog</span><span class="o">(</span><span class="n">String</span> <span class="n">blogName</span><span class="o">,</span> <span class="n">String</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">userById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
-        <span class="n">Blog</span> <span class="n">blog</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">createBlog</span><span class="o">(</span><span class="n">blogName</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createBlog</span><span class="o">(</span><span class="nc">String</span> <span class="n">blogName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">userId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">userById</span><span class="o">(</span><span class="n">userId</span><span class="o">);</span>
+        <span class="nc">Blog</span> <span class="n">blog</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">createBlog</span><span class="o">(</span><span class="n">blogName</span><span class="o">);</span>
         <span class="n">blogRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">blog</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -421,20 +421,20 @@
 <p>　　资源库分为两种，一种是基于集合的，一种是基于持久化的。顾名思义，基于集合的资源库具有编程语言中集合的特征。举个例子，Java中的List， 我们从一个List中取出一个元素，在对该元素进行修改之后，我们并不用显式地将该元素重新保存到List里面。因此，面向集合的资源库并不存在save()方法。比如，对于上文中的User，其资源库可以设计为：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CollectionOrientedUserRepository</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">User</span> <span class="nf">userById</span><span class="o">(</span><span class="n">String</span> <span class="n">userId</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">List</span> <span class="nf">allUsers</span><span class="o">();</span>    
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">);</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="nc">User</span> <span class="n">user</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nc">User</span> <span class="nf">userById</span><span class="o">(</span><span class="nc">String</span> <span class="n">userId</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nc">List</span> <span class="nf">allUsers</span><span class="o">();</span>    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nc">User</span> <span class="n">user</span><span class="o">);</span> 
 <span class="o">}</span>
 </code></pre></div></div>
 
 <p>　　对于面向持久化的资源库来说，在对聚合进行修改之后，我们需要显式地调用sava()方法将其更新到资源库中。依然是User，此时的资源库如下：</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersistenceOrientedUserRepository</span> <span class="o">{</span>
-<span class="err">　　　　</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">);</span>
-<span class="err">　　　　</span><span class="kd">public</span> <span class="n">User</span> <span class="nf">userById</span><span class="o">(</span><span class="n">String</span> <span class="n">userId</span><span class="o">);</span>
-<span class="err">　　　　</span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">allUsers</span><span class="o">();</span>
-<span class="err">　　　　</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">);</span>
+<span class="err">　　　　</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">(</span><span class="nc">User</span> <span class="n">user</span><span class="o">);</span>
+<span class="err">　　　　</span><span class="kd">public</span> <span class="nc">User</span> <span class="nf">userById</span><span class="o">(</span><span class="nc">String</span> <span class="n">userId</span><span class="o">);</span>
+<span class="err">　　　　</span><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">allUsers</span><span class="o">();</span>
+<span class="err">　　　　</span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nc">User</span> <span class="n">user</span><span class="o">);</span>
 <span class="err">　　</span><span class="o">}</span>
 </code></pre></div></div>
 

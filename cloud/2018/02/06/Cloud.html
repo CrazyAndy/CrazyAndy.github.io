@@ -298,9 +298,9 @@
 <h4 id="三请求过滤">(三)请求过滤</h4>
 <ol>
   <li>定义zuul过滤器
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span><span class="o">{</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccessFilter</span> <span class="kd">extends</span> <span class="nc">ZuulFilter</span><span class="o">{</span>
  <span class="nd">@Override</span>
- <span class="kd">public</span> <span class="n">String</span> <span class="nf">filterType</span><span class="o">(){</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">filterType</span><span class="o">(){</span>
  <span class="c1">//过滤器类型，它决定过滤器在哪个生命周期执行</span>
  <span class="o">}</span>
  <span class="nd">@Override</span>
@@ -312,7 +312,7 @@
  <span class="c1">//判断该过滤器是否需要被执行。实际运用中我们可以利用该函数来指定过滤器的有效范围</span>
  <span class="o">}</span>
  <span class="nd">@Override</span>
- <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">(){</span>
+ <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">run</span><span class="o">(){</span>
  <span class="c1">//过滤器具体逻辑</span>
  <span class="c1">//如果验证失败，我们需要通过ctx.setSendZuulResponse(false)令zuul过滤该请求，不对其路由</span>
  <span class="c1">//然后通过ctx.setResponseStatusCode(401)设置了其返回的错误码</span>
@@ -324,7 +324,7 @@
 </ol>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">(){</span>
+    <span class="kd">public</span> <span class="nc">AccessFilter</span> <span class="nf">accessFilter</span><span class="o">(){</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">AccessFilter</span><span class="o">();</span>
     <span class="o">}</span>
 </code></pre></div></div>

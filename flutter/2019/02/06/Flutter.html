@@ -273,11 +273,11 @@
 
 <p>ListView_demo.dart代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'../model/post.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">../model/post.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">ListViewDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span><span class="p">{</span>
-  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="kr">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="nx">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
       <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span>
       <span class="nx">margin</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">8.0</span><span class="p">),</span>
@@ -312,8 +312,8 @@
 
 <p>main.dart代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'demo/ListView_demo.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">demo/ListView_demo.dart</span><span class="dl">'</span><span class="p">;</span>
 
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
@@ -336,7 +336,7 @@
       <span class="nx">backgroundColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
       <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
         <span class="c1">//顶部工具栏</span>
-        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
         <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
       <span class="p">),</span>
       <span class="nx">body</span><span class="p">:</span> <span class="nx">ListViewDemo</span><span class="p">(),</span>
@@ -355,15 +355,15 @@
       <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span><span class="c1">//AppBar一般放在Scaffold的appBar属性，用来设置顶部工具栏</span>
         <span class="nx">leading</span><span class="p">:</span> <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
           <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">menu</span><span class="p">),</span><span class="c1">//图标</span>
-          <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Navigation'</span><span class="p">,</span>
-          <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Navigation button is pressed'</span><span class="p">),</span>
+          <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Navigation</span><span class="dl">'</span><span class="p">,</span>
+          <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Navigation button is pressed</span><span class="dl">'</span><span class="p">),</span>
         <span class="p">),</span>
-        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
         <span class="nx">actions</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
           <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
             <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">search</span><span class="p">),</span><span class="c1">//图标</span>
-            <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Search'</span><span class="p">,</span>
-            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Search button is pressed'</span><span class="p">),</span>
+            <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Search</span><span class="dl">'</span><span class="p">,</span>
+            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Search button is pressed</span><span class="dl">'</span><span class="p">),</span>
           <span class="p">)</span>
         <span class="p">],</span>
         <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
@@ -388,15 +388,15 @@
         <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
           <span class="nx">leading</span><span class="p">:</span> <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
             <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">menu</span><span class="p">),</span><span class="c1">//图标</span>
-            <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Navigation'</span><span class="p">,</span>
-            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Navigation button is pressed'</span><span class="p">),</span>
+            <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Navigation</span><span class="dl">'</span><span class="p">,</span>
+            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Navigation button is pressed</span><span class="dl">'</span><span class="p">),</span>
           <span class="p">),</span>
-          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
           <span class="nx">actions</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
             <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">search</span><span class="p">),</span><span class="c1">//图标</span>
-              <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Search'</span><span class="p">,</span>
-              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Search button is pressed'</span><span class="p">),</span>
+              <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Search</span><span class="dl">'</span><span class="p">,</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Search button is pressed</span><span class="dl">'</span><span class="p">),</span>
             <span class="p">)</span>
           <span class="p">],</span>
           <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
@@ -470,7 +470,7 @@
           <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
             <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span><span class="c1">//主轴的对齐</span>
             <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
-              <span class="nx">Text</span><span class="p">(</span><span class="s1">'this is drawer'</span><span class="p">)</span>
+              <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">this is drawer</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">],</span>
           <span class="p">),</span>
         <span class="p">),</span>
@@ -483,21 +483,21 @@
             <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">zero</span><span class="p">,</span>
             <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
               <span class="nx">DrawerHeader</span><span class="p">(</span>
-                <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'header'</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()),</span><span class="c1">//设置显示文字</span>
+                <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">header</span><span class="dl">'</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()),</span><span class="c1">//设置显示文字</span>
                 <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span><span class="c1">//设置背景颜色</span>
                   <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
                 <span class="p">),</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Message'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span><span class="c1">//在标题后面设置内容用trailing,如果左边就用leading</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Favorite'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Favorite</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">favorite</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Settings'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Settings</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
               <span class="p">),</span>
             <span class="p">],</span>
@@ -511,8 +511,8 @@
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">leading</span><span class="p">:</span> <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
             <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">menu</span><span class="p">),</span><span class="c1">//图标</span>
-            <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Navigation'</span><span class="p">,</span>
-            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Navigation button is pressed'</span><span class="p">),</span>
+            <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Navigation</span><span class="dl">'</span><span class="p">,</span>
+            <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Navigation button is pressed</span><span class="dl">'</span><span class="p">),</span>
           <span class="p">),</span>
 </code></pre></div></div>
 
@@ -521,7 +521,7 @@
 <p>如果我们想实现抽屉的关闭，我们可以在任意 组件的 点按事件添加如下代码，举例如下</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Message'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span><span class="c1">//在标题后面设置内容用trailing,如果左边就用leading</span>
                 <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">),</span>
               <span class="p">),</span>
@@ -532,10 +532,10 @@
 <p>flutter 为app开发者做了个 专门显示 用户账户信息的小组件 ,实现代码如下</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">UserAccountsDrawerHeader</span><span class="p">(</span>
-                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
-                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'auden.sh@163.com'</span><span class="p">),</span>
+                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
+                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">auden.sh@163.com</span><span class="dl">'</span><span class="p">),</span>
                 <span class="nx">currentAccountPicture</span><span class="p">:</span> <span class="nx">CircleAvatar</span><span class="p">(</span>
-                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg'</span><span class="p">),</span>
+                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg</span><span class="dl">'</span><span class="p">),</span>
                 <span class="p">),</span>
               <span class="p">),</span>
 </code></pre></div></div>
@@ -543,15 +543,15 @@
 <h2 id="用户账户头部的背景图像">用户账户头部的背景图像</h2>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">UserAccountsDrawerHeader</span><span class="p">(</span>
-                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
-                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'auden.sh@163.com'</span><span class="p">),</span>
+                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
+                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">auden.sh@163.com</span><span class="dl">'</span><span class="p">),</span>
                 <span class="nx">currentAccountPicture</span><span class="p">:</span> <span class="nx">CircleAvatar</span><span class="p">(</span>
-                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg'</span><span class="p">),</span>
+                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg</span><span class="dl">'</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
                   <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">blue</span><span class="p">[</span><span class="mi">400</span><span class="p">],</span><span class="c1">//背景颜色</span>
                   <span class="nx">image</span><span class="p">:</span> <span class="nx">DecorationImage</span><span class="p">(</span><span class="c1">//背景图片</span>
-                    <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'http://pic.jinrishoufa.com/wp-content/uploads/2012/05/a2012059815.jpg'</span><span class="p">),</span>
+                    <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://pic.jinrishoufa.com/wp-content/uploads/2012/05/a2012059815.jpg</span><span class="dl">'</span><span class="p">),</span>
                     <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span><span class="c1">//自适应全局</span>
                     <span class="nx">colorFilter</span><span class="p">:</span> <span class="nx">ColorFilter</span><span class="p">.</span><span class="nx">mode</span><span class="p">(</span><span class="c1">//滤镜</span>
                       <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">.</span><span class="nx">withOpacity</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span> 
@@ -565,7 +565,7 @@
 
 <p>我们将 Drawr 所有代码封装到 一个dart文件里面，代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">DrawDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span><span class="p">{</span>
   <span class="p">@</span><span class="nd">override</span>
@@ -581,15 +581,15 @@
               <span class="c1">//   ),</span>
               <span class="c1">// ),</span>
               <span class="nx">UserAccountsDrawerHeader</span><span class="p">(</span>
-                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
-                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'auden.sh@163.com'</span><span class="p">),</span>
+                <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">),),</span>
+                <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">auden.sh@163.com</span><span class="dl">'</span><span class="p">),</span>
                 <span class="nx">currentAccountPicture</span><span class="p">:</span> <span class="nx">CircleAvatar</span><span class="p">(</span>
-                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg'</span><span class="p">),</span>
+                  <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://imgsrc.baidu.com/baike/pic/item/3bf33a87e950352a4549c05a5f43fbf2b2118bbc.jpg</span><span class="dl">'</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
                   <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">blue</span><span class="p">[</span><span class="mi">400</span><span class="p">],</span><span class="c1">//背景颜色</span>
                   <span class="nx">image</span><span class="p">:</span> <span class="nx">DecorationImage</span><span class="p">(</span><span class="c1">//背景图片</span>
-                    <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'http://pic.jinrishoufa.com/wp-content/uploads/2012/05/a2012059815.jpg'</span><span class="p">),</span>
+                    <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://pic.jinrishoufa.com/wp-content/uploads/2012/05/a2012059815.jpg</span><span class="dl">'</span><span class="p">),</span>
                     <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span><span class="c1">//自适应全局</span>
                     <span class="nx">colorFilter</span><span class="p">:</span> <span class="nx">ColorFilter</span><span class="p">.</span><span class="nx">mode</span><span class="p">(</span><span class="c1">//滤镜</span>
                       <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">.</span><span class="nx">withOpacity</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span> 
@@ -598,16 +598,16 @@
                 <span class="p">),</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Message'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Message</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span><span class="c1">//在标题后面设置内容用trailing,如果左边就用leading</span>
                 <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">),</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Favorite'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Favorite</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">favorite</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
               <span class="p">),</span>
               <span class="nx">ListTile</span><span class="p">(</span>
-                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Settings'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
+                <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Settings</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">,),</span>
                 <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
               <span class="p">),</span>
             <span class="p">],</span>
@@ -627,19 +627,19 @@
           <span class="nx">items</span><span class="p">:</span> <span class="p">[</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">explore</span><span class="p">),</span>
-              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'explore'</span><span class="p">)</span>
+              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">explore</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">history</span><span class="p">),</span>
-              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'history'</span><span class="p">)</span>
+              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">history</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">list</span><span class="p">),</span>
-              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'list'</span><span class="p">)</span>
+              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">person</span><span class="p">),</span>
-              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'person'</span><span class="p">)</span>
+              <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">person</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">)</span>
           <span class="p">],</span>
         <span class="p">),</span>
@@ -655,7 +655,7 @@
 
 <p>新创建的 bottom_navigation_bar_demo.dar代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">BottomNavigationBarDemo</span> <span class="kd">extends</span> <span class="nx">StatefulWidget</span><span class="p">{</span>
   <span class="p">@</span><span class="nd">override</span>
@@ -666,8 +666,8 @@
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nx">_BottomNavigationBarDemoState</span> <span class="kd">extends</span> <span class="nx">State</span><span class="o">&lt;</span><span class="nx">BottomNavigationBarDemo</span><span class="o">&gt;</span><span class="p">{</span>
-  <span class="kr">int</span> <span class="nx">_currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">void</span> <span class="nx">_onTapHandler</span><span class="p">(</span><span class="kr">int</span> <span class="nx">index</span><span class="p">){</span>
+  <span class="nx">int</span> <span class="nx">_currentIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">void</span> <span class="nx">_onTapHandler</span><span class="p">(</span><span class="nx">int</span> <span class="nx">index</span><span class="p">){</span>
     <span class="nx">setState</span><span class="p">((){</span>
       <span class="nx">_currentIndex</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
     <span class="p">});</span>
@@ -683,19 +683,19 @@
           <span class="na">items</span><span class="p">:</span> <span class="p">[</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="na">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">explore</span><span class="p">),</span>
-              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'explore'</span><span class="p">)</span>
+              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">explore</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="na">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">history</span><span class="p">),</span>
-              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'history'</span><span class="p">)</span>
+              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">history</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="na">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">list</span><span class="p">),</span>
-              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'list'</span><span class="p">)</span>
+              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">list</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">),</span>
             <span class="nx">BottomNavigationBarItem</span><span class="p">(</span>
               <span class="na">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">person</span><span class="p">),</span>
-              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'person'</span><span class="p">)</span>
+              <span class="na">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">person</span><span class="dl">'</span><span class="p">)</span>
             <span class="p">)</span>
           <span class="p">],</span>
         <span class="p">);</span>
@@ -705,10 +705,10 @@
 
 <p>Main.dart代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'demo/ListView_demo.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'demo/draw_demo.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'demo/bottom_navigation_bar_demo.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">demo/ListView_demo.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">demo/draw_demo.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">demo/bottom_navigation_bar_demo.dart</span><span class="dl">'</span><span class="p">;</span>
 
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
@@ -742,12 +742,12 @@
           <span class="c1">//   tooltip: 'Navigation',</span>
           <span class="c1">//   onPressed: ()=&gt;debugPrint('Navigation button is pressed'),</span>
           <span class="c1">// ),</span>
-          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
           <span class="nx">actions</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
             <span class="nx">IconButton</span><span class="p">(</span><span class="c1">//图标按钮</span>
               <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">search</span><span class="p">),</span><span class="c1">//图标</span>
-              <span class="nx">tooltip</span><span class="p">:</span> <span class="s1">'Search'</span><span class="p">,</span>
-              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="s1">'Search button is pressed'</span><span class="p">),</span>
+              <span class="nx">tooltip</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Search</span><span class="dl">'</span><span class="p">,</span>
+              <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">debugPrint</span><span class="p">(</span><span class="dl">'</span><span class="s1">Search button is pressed</span><span class="dl">'</span><span class="p">),</span>
             <span class="p">)</span>
           <span class="p">],</span>
           <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
@@ -781,7 +781,7 @@
 
 <p>Drawer_demo.dart代码如下</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">DrawerDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span><span class="p">{</span>
   <span class="p">@</span><span class="nd">override</span>
@@ -798,17 +798,17 @@
                 <span class="c1">//   ),</span>
                 <span class="c1">// ),</span>
                 <span class="nx">UserAccountsDrawerHeader</span><span class="p">(</span>
-                  <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span><span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span><span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">)),</span>
-                  <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'crazyandy.github.io'</span><span class="p">),</span>
+                  <span class="nx">accountName</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span><span class="nx">style</span><span class="p">:</span><span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontWeight</span><span class="p">:</span><span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">)),</span>
+                  <span class="nx">accountEmail</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">crazyandy.github.io</span><span class="dl">'</span><span class="p">),</span>
                   <span class="nx">currentAccountPicture</span><span class="p">:</span> <span class="nx">CircleAvatar</span><span class="p">(</span>
                     <span class="nx">backgroundImage</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span>
-                      <span class="s1">'https://resources.ninghao.org/images/wanghao.jpg'</span><span class="p">),</span>
+                      <span class="dl">'</span><span class="s1">https://resources.ninghao.org/images/wanghao.jpg</span><span class="dl">'</span><span class="p">),</span>
                   <span class="p">),</span>
                   <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
                     <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">yellow</span><span class="p">[</span><span class="mi">400</span><span class="p">],</span>
                     <span class="nx">image</span><span class="p">:</span> <span class="nx">DecorationImage</span><span class="p">(</span>
                       <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span>
-                        <span class="s1">'https://resources.ninghao.org/images/childhood-in-a-picture.jpg'</span><span class="p">,</span>                    
+                        <span class="dl">'</span><span class="s1">https://resources.ninghao.org/images/childhood-in-a-picture.jpg</span><span class="dl">'</span><span class="p">,</span>                    
                       <span class="p">),</span>
                       <span class="nx">fit</span><span class="p">:</span><span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span>
                       <span class="nx">colorFilter</span><span class="p">:</span> <span class="nx">ColorFilter</span><span class="p">.</span><span class="nx">mode</span><span class="p">(</span>
@@ -818,17 +818,17 @@
                   <span class="p">),</span>
                 <span class="p">),</span>
                 <span class="nx">ListTile</span><span class="p">(</span>
-                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Messages'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
+                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Messages</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
                   <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
                   <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="nx">ListTile</span><span class="p">(</span>
-                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Favorite'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
+                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Favorite</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
                   <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">favorite</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
                   <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="nx">ListTile</span><span class="p">(</span>
-                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'Settings'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
+                  <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Settings</span><span class="dl">'</span><span class="p">,</span><span class="nx">textAlign</span><span class="p">:</span><span class="nx">TextAlign</span><span class="p">.</span><span class="nx">right</span><span class="p">),</span>
                   <span class="nx">trailing</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">settings</span><span class="p">,</span><span class="nx">color</span><span class="p">:</span><span class="nx">Colors</span><span class="p">.</span><span class="nx">black12</span><span class="p">,</span><span class="nx">size</span><span class="p">:</span><span class="mf">22.0</span><span class="p">),</span>
                   <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="nx">Navigator</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">context</span><span class="p">),</span>
                 <span class="p">),</span>

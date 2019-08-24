@@ -269,7 +269,7 @@
 
 <h2 id="在屏幕中间显示hello">在屏幕中间显示“hello”</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 <span class="c1">//flutter 是基于dart语言编写的</span>
 <span class="c1">//material是google公司推行的一套设计风格规范，颜色，文字排版，动画等</span>
 
@@ -279,7 +279,7 @@
   <span class="nx">runApp</span><span class="p">(</span>
     <span class="nx">Center</span><span class="p">(</span>
       <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span>
-        <span class="s1">'hello'</span><span class="p">,</span>
+        <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span>
         <span class="nx">textDirection</span><span class="p">:</span><span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span>
       <span class="p">),</span>
     <span class="p">)</span>
@@ -289,7 +289,7 @@
 
 <h2 id="自定义小部件widget">自定义小部件(Widget)</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span><span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
 
@@ -299,7 +299,7 @@
   <span class="p">@</span><span class="nd">override</span>
   <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Center</span><span class="p">(</span>
-      <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="nx">textDirection</span><span class="p">:</span> <span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span><span class="p">),</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="nx">textDirection</span><span class="p">:</span> <span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span><span class="p">),</span>
     <span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -307,7 +307,7 @@
 
 <h2 id="文字的样式textstyle">文字的样式：TextStyle</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span><span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
 
@@ -315,7 +315,7 @@
   <span class="p">@</span><span class="nd">override</span>
   <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Center</span><span class="p">(</span>
-      <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="nx">textDirection</span><span class="p">:</span> <span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span><span class="p">,</span>
+      <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="nx">textDirection</span><span class="p">:</span> <span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span><span class="p">,</span>
       <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
         <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span>
         <span class="nx">fontWeight</span><span class="p">:</span> <span class="nx">FontWeight</span><span class="p">.</span><span class="nx">bold</span><span class="p">,</span>
@@ -328,7 +328,7 @@
 
 <h2 id="materialapp使用界面组件于定制界面主题">MaterialApp:使用界面组件于定制界面主题</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span><span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
 
@@ -339,7 +339,7 @@
     <span class="k">return</span> <span class="nx">MaterialApp</span><span class="p">(</span>
       <span class="nx">home</span><span class="p">:</span> <span class="nx">Scaffold</span><span class="p">(</span><span class="c1">//它是material自带的小部件，包含material风格常用的一些界面组件，比如页面顶部或底部工具栏</span>
         <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
-          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
           <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span><span class="c1">//阴影，0.0就是没有，默认是4.0</span>
         <span class="p">),</span>
         <span class="nx">body</span><span class="p">:</span> <span class="nx">Hello</span><span class="p">(),</span>
@@ -356,7 +356,7 @@
   <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Center</span><span class="p">(</span>
       <span class="nx">child</span><span class="p">:</span> 
-      <span class="nx">Text</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> 
+      <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> 
         <span class="nx">textDirection</span><span class="p">:</span> <span class="nx">TextDirection</span><span class="p">.</span><span class="nx">ltr</span><span class="p">,</span>
         <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
           <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span>
@@ -381,40 +381,40 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">,</span>
   <span class="p">});</span>
 
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">title</span><span class="p">;</span><span class="c1">//final表示一旦赋值，不能再改变</span>
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">author</span><span class="p">;</span>
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">imageUrl</span><span class="p">;</span>
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">description</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">title</span><span class="p">;</span><span class="c1">//final表示一旦赋值，不能再改变</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">author</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">imageUrl</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">description</span><span class="p">;</span>
 
   <span class="nx">bool</span> <span class="nx">selected</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kr">final</span> <span class="nx">List</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="nx">posts</span> <span class="o">=</span> <span class="p">[</span>
+<span class="nx">final</span> <span class="nx">List</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="nx">posts</span> <span class="o">=</span> <span class="p">[</span>
   <span class="nx">Post</span><span class="p">(</span>
-    <span class="nx">title</span><span class="p">:</span> <span class="s1">'Candy Shop'</span><span class="p">,</span>
-    <span class="nx">author</span><span class="p">:</span> <span class="s1">'Mohamed Chahin'</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.'</span><span class="p">,</span>
-    <span class="nx">imageUrl</span><span class="p">:</span> <span class="s1">'https://resources.ninghao.org/images/candy-shop.jpg'</span><span class="p">,</span>
+    <span class="nx">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Candy Shop</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">author</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Mohamed Chahin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">imageUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://resources.ninghao.org/images/candy-shop.jpg</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">),</span>
   <span class="nx">Post</span><span class="p">(</span>
-    <span class="nx">title</span><span class="p">:</span> <span class="s1">'Childhood in a picture'</span><span class="p">,</span>
-    <span class="nx">author</span><span class="p">:</span> <span class="s1">'Mohamed Chahin'</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.'</span><span class="p">,</span>    
-    <span class="nx">imageUrl</span><span class="p">:</span> <span class="s1">'https://resources.ninghao.org/images/childhood-in-a-picture.jpg'</span><span class="p">,</span>
+    <span class="nx">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Childhood in a picture</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">author</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Mohamed Chahin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.</span><span class="dl">'</span><span class="p">,</span>    
+    <span class="nx">imageUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://resources.ninghao.org/images/childhood-in-a-picture.jpg</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">),</span>
   <span class="nx">Post</span><span class="p">(</span>
-    <span class="nx">title</span><span class="p">:</span> <span class="s1">'Contained'</span><span class="p">,</span>
-    <span class="nx">author</span><span class="p">:</span> <span class="s1">'Mohamed Chahin'</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.'</span><span class="p">,</span>    
-    <span class="nx">imageUrl</span><span class="p">:</span> <span class="s1">'https://resources.ninghao.org/images/contained.jpg'</span><span class="p">,</span>
+    <span class="nx">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Contained</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">author</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Mohamed Chahin</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">description</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Esse ut nulla velit reprehenderit veniam sint nostrud nulla exercitation ipsum. Officia deserunt aliquip aliquip excepteur eiusmod dolor. Elit amet ipsum labore sint occaecat dolore tempor officia irure voluptate ad. Veniam laboris deserunt aute excepteur sit deserunt dolor esse dolor velit sint nulla anim ut. Reprehenderit voluptate adipisicing culpa magna ea nulla ullamco consectetur. Cupidatat adipisicing consequat adipisicing sit consectetur dolor occaecat.</span><span class="dl">'</span><span class="p">,</span>    
+    <span class="nx">imageUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://resources.ninghao.org/images/contained.jpg</span><span class="dl">'</span><span class="p">,</span>
   <span class="p">)</span>
 <span class="p">];</span>
 </code></pre></div></div>
 
 <h2 id="列表视图listviewbuilder">列表视图：ListView.builder</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'model/post.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">model/post.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span><span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
 
@@ -433,7 +433,7 @@
 
 <span class="kd">class</span> <span class="nx">Home</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
 
-  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="kr">int</span> <span class="nx">index</span><span class="p">){</span>
+  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="nx">int</span> <span class="nx">index</span><span class="p">){</span>
     <span class="c1">//index是列表项目索引值</span>
     <span class="k">return</span> <span class="nx">Text</span><span class="p">(</span>
       <span class="nx">posts</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">title</span>
@@ -444,7 +444,7 @@
     <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
         <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
-          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
           <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="nx">body</span><span class="p">:</span> <span class="nx">ListView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>
@@ -458,8 +458,8 @@
 
 <h2 id="列表项目">列表项目</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">'model/post.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">model/post.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">void</span> <span class="nx">main</span><span class="p">()</span> <span class="o">=&gt;</span><span class="nx">runApp</span><span class="p">(</span><span class="nx">App</span><span class="p">());</span>
 
@@ -478,7 +478,7 @@
 
 <span class="kd">class</span> <span class="nx">Home</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
 
-  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="kr">int</span> <span class="nx">index</span><span class="p">){</span>
+  <span class="nx">Widget</span> <span class="nx">_listItemBuilder</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">,</span><span class="nx">int</span> <span class="nx">index</span><span class="p">){</span>
     <span class="c1">//index是列表项目索引值</span>
     <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
       <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">white</span><span class="p">,</span>
@@ -506,7 +506,7 @@
       <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
         <span class="nx">backgroundColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
         <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
-          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="s1">'CrazyAndy'</span><span class="p">),</span>
+          <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">),</span>
           <span class="nx">elevation</span><span class="p">:</span> <span class="mf">30.0</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="nx">body</span><span class="p">:</span> <span class="nx">ListView</span><span class="p">.</span><span class="nx">builder</span><span class="p">(</span>

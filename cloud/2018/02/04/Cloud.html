@@ -283,15 +283,15 @@
 
 <p>　　3. 更改调用方式</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">　　</span>		<span class="nd">@Autowired</span>
-		<span class="n">RestTemplate</span> <span class="n">restTemplate</span><span class="o">;</span>
+		<span class="nc">RestTemplate</span> <span class="n">restTemplate</span><span class="o">;</span>
 
 		<span class="nd">@HystrixCommand</span><span class="o">(</span><span class="n">fallbackMethod</span><span class="o">=</span><span class="s">"helloFallback"</span><span class="o">)</span>
-		<span class="kd">public</span> <span class="n">String</span> <span class="nf">helloService</span><span class="o">(){</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">helloService</span><span class="o">(){</span>
 			<span class="k">return</span> <span class="n">restTemplate</span><span class="o">.</span>
-				<span class="nf">getForEntity</span><span class="o">(</span><span class="s">"http://HELLO-SERVICE/hello"</span><span class="o">,</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">).</span>
+				<span class="nf">getForEntity</span><span class="o">(</span><span class="s">"http://HELLO-SERVICE/hello"</span><span class="o">,</span><span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">).</span>
 				<span class="n">getBody</span><span class="o">();</span>
 		<span class="o">}</span>
-		<span class="kd">public</span> <span class="n">String</span> <span class="nf">helloFallback</span><span class="o">(){</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">helloFallback</span><span class="o">(){</span>
 			<span class="k">return</span> <span class="s">"error"</span><span class="o">;</span>
 		<span class="o">}</span>
 </code></pre></div></div>

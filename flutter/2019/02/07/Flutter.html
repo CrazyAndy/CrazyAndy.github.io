@@ -271,7 +271,7 @@
 
 <h2 id="text文字与文字样式">Text：文字与文字样式</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">BasicDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
   <span class="p">@</span><span class="nd">override</span>
@@ -282,16 +282,16 @@
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nx">TextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
-  <span class="kr">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
+  <span class="nx">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
 
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="s1">'CrazyAndy'</span><span class="p">;</span>
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="s1">'早点口头语'</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">早点口头语</span><span class="dl">'</span><span class="p">;</span>
 
   <span class="p">@</span><span class="nd">override</span>
   <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// TODO: implement build</span>
     <span class="k">return</span> <span class="nx">Text</span><span class="p">(</span>
-      <span class="s1">'《$_title》 -- $_author 煎饼果子来一套'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">《$_title》 -- $_author 煎饼果子来一套</span><span class="dl">'</span><span class="p">,</span>
       <span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
       <span class="nx">style</span><span class="p">:</span> <span class="nx">_textStyle</span><span class="p">,</span>
       <span class="nx">maxLines</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -309,7 +309,7 @@
     <span class="c1">// TODO: implement build</span>
     <span class="k">return</span> <span class="nx">RichText</span><span class="p">(</span>
       <span class="nx">text</span><span class="p">:</span> <span class="nx">TextSpan</span><span class="p">(</span>
-          <span class="nx">text</span><span class="p">:</span> <span class="s1">'CrazyAndy'</span><span class="p">,</span>
+          <span class="nx">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span>
           <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
             <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurpleAccent</span><span class="p">,</span>
             <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span>
@@ -318,7 +318,7 @@
           <span class="p">),</span>
           <span class="nx">children</span><span class="p">:</span> <span class="p">[</span>
             <span class="nx">TextSpan</span><span class="p">(</span>
-                <span class="nx">text</span><span class="p">:</span> <span class="s1">'.net'</span><span class="p">,</span>
+                <span class="nx">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.net</span><span class="dl">'</span><span class="p">,</span>
                 <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
                   <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">17.0</span><span class="p">,</span>
                   <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span>
@@ -410,7 +410,7 @@
 
 <h2 id="boxdecoration背景图像image">BoxDecoration：背景图像（image）</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="s1">'package:flutter/material.dart'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">BasicDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
   <span class="p">@</span><span class="nd">override</span>
@@ -426,7 +426,7 @@
     <span class="k">return</span> <span class="nx">Container</span><span class="p">(</span>
       <span class="nx">decoration</span><span class="p">:</span> <span class="nx">BoxDecoration</span><span class="p">(</span>
           <span class="nx">image</span><span class="p">:</span> <span class="nx">DecorationImage</span><span class="p">(</span><span class="c1">//这里设置背景图像</span>
-            <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="s1">'https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=e8ce788890510fb367197197e933c893/b999a9014c086e061396097a0c087bf40ad1cbc0.jpg'</span><span class="p">),</span>
+            <span class="nx">image</span><span class="p">:</span> <span class="nx">NetworkImage</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://ss3.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=e8ce788890510fb367197197e933c893/b999a9014c086e061396097a0c087bf40ad1cbc0.jpg</span><span class="dl">'</span><span class="p">),</span>
             <span class="nx">alignment</span><span class="p">:</span> <span class="nx">Alignment</span><span class="p">.</span><span class="nx">topCenter</span><span class="p">,</span>
             <span class="nx">fit</span><span class="p">:</span> <span class="nx">BoxFit</span><span class="p">.</span><span class="nx">cover</span><span class="p">,</span> <span class="c1">//扩充</span>
         <span class="p">)),</span>
@@ -497,7 +497,7 @@
     <span class="c1">// TODO: implement build</span>
     <span class="k">return</span> <span class="nx">RichText</span><span class="p">(</span>
       <span class="nx">text</span><span class="p">:</span> <span class="nx">TextSpan</span><span class="p">(</span>
-          <span class="nx">text</span><span class="p">:</span> <span class="s1">'CrazyAndy'</span><span class="p">,</span>
+          <span class="nx">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">,</span>
           <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
             <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">deepPurpleAccent</span><span class="p">,</span>
             <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span>
@@ -506,7 +506,7 @@
           <span class="p">),</span>
           <span class="nx">children</span><span class="p">:</span> <span class="p">[</span>
             <span class="nx">TextSpan</span><span class="p">(</span>
-                <span class="nx">text</span><span class="p">:</span> <span class="s1">'.net'</span><span class="p">,</span>
+                <span class="nx">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.net</span><span class="dl">'</span><span class="p">,</span>
                 <span class="nx">style</span><span class="p">:</span> <span class="nx">TextStyle</span><span class="p">(</span>
                   <span class="nx">fontSize</span><span class="p">:</span> <span class="mf">17.0</span><span class="p">,</span>
                   <span class="nx">color</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span>
@@ -517,16 +517,16 @@
 <span class="p">}</span>
 
 <span class="kd">class</span> <span class="nx">TextDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
-  <span class="kr">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
+  <span class="nx">final</span> <span class="nx">TextStyle</span> <span class="nx">_textStyle</span> <span class="o">=</span> <span class="nx">TextStyle</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">:</span> <span class="mf">16.0</span><span class="p">);</span>
 
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="s1">'CrazyAndy'</span><span class="p">;</span>
-  <span class="kr">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="s1">'早点口头语'</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">_author</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">CrazyAndy</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">_title</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">早点口头语</span><span class="dl">'</span><span class="p">;</span>
 
   <span class="p">@</span><span class="nd">override</span>
   <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// TODO: implement build</span>
     <span class="k">return</span> <span class="nx">Text</span><span class="p">(</span>
-      <span class="s1">'《$_title》 -- $_author 煎饼果子来一套'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">《$_title》 -- $_author 煎饼果子来一套</span><span class="dl">'</span><span class="p">,</span>
       <span class="nx">textAlign</span><span class="p">:</span> <span class="nx">TextAlign</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>
       <span class="nx">style</span><span class="p">:</span> <span class="nx">_textStyle</span><span class="p">,</span>
       <span class="nx">maxLines</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>

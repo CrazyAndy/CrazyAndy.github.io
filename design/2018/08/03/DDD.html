@@ -297,25 +297,25 @@
 <h3 id="一例1以电商微服务系统中的商品模块订单模块为例">（一）例1：以电商微服务系统中的商品模块，订单模块为例。</h3>
 <p>　　将整个电商系统划分出商品和订单两个限界上下文（Bound Context）应该是没有争议的。如果是传统的单体应用，我们可以如何设计这两个模块的实体类呢？ 会不会是这样？</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Product</span><span class="o">{</span>
-    <span class="n">String</span> <span class="n">id</span><span class="o">;</span><span class="c1">//主键</span>
-    <span class="n">String</span> <span class="n">skuId</span><span class="o">;</span><span class="c1">//唯一识别号</span>
-    <span class="n">String</span> <span class="n">productName</span><span class="o">;</span>
-    <span class="n">Bigdecimal</span> <span class="n">price</span><span class="o">;</span>
-    <span class="n">Category</span> <span class="n">category</span><span class="o">;</span><span class="c1">//分类</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Specification</span><span class="o">&gt;</span> <span class="n">specifications</span><span class="o">;</span><span class="c1">//规格 </span>
+    <span class="nc">String</span> <span class="n">id</span><span class="o">;</span><span class="c1">//主键</span>
+    <span class="nc">String</span> <span class="n">skuId</span><span class="o">;</span><span class="c1">//唯一识别号</span>
+    <span class="nc">String</span> <span class="n">productName</span><span class="o">;</span>
+    <span class="nc">Bigdecimal</span> <span class="n">price</span><span class="o">;</span>
+    <span class="nc">Category</span> <span class="n">category</span><span class="o">;</span><span class="c1">//分类</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Specification</span><span class="o">&gt;</span> <span class="n">specifications</span><span class="o">;</span><span class="c1">//规格 </span>
     <span class="o">...</span> 
 <span class="o">}</span>
 <span class="kd">class</span> <span class="nc">Order</span><span class="o">{</span>
-    <span class="n">String</span> <span class="n">id</span><span class="o">;</span><span class="c1">//主键</span>
-    <span class="n">String</span> <span class="n">orderNo</span><span class="o">;</span><span class="c1">//订单号</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">OrderItem</span><span class="o">&gt;</span> <span class="n">orderItems</span><span class="o">;</span><span class="c1">//订单明细</span>
-    <span class="n">BigDecimal</span> <span class="n">orderAmount</span><span class="o">;</span><span class="c1">//总金额</span>
+    <span class="nc">String</span> <span class="n">id</span><span class="o">;</span><span class="c1">//主键</span>
+    <span class="nc">String</span> <span class="n">orderNo</span><span class="o">;</span><span class="c1">//订单号</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderItem</span><span class="o">&gt;</span> <span class="n">orderItems</span><span class="o">;</span><span class="c1">//订单明细</span>
+    <span class="nc">BigDecimal</span> <span class="n">orderAmount</span><span class="o">;</span><span class="c1">//总金额</span>
     <span class="o">...</span>
 <span class="o">}</span>
 <span class="kd">class</span> <span class="nc">OrderItem</span><span class="o">{</span>
-    <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
-    <span class="n">Product</span> <span class="n">product</span><span class="o">;</span><span class="c1">//关联商品</span>
-    <span class="n">BigDecimal</span> <span class="n">snapshotPrice</span><span class="o">;</span><span class="c1">//下单时的价格</span>
+    <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="nc">Product</span> <span class="n">product</span><span class="o">;</span><span class="c1">//关联商品</span>
+    <span class="nc">BigDecimal</span> <span class="n">snapshotPrice</span><span class="o">;</span><span class="c1">//下单时的价格</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>　　看似好像没问题，考虑到了订单要保存下单时候的价格（当然，这是常识）但这么设计却存在诸多的问题。</p>
@@ -328,12 +328,12 @@
 
 <p>　　如何改造就变得明了了。</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">OrderItem</span><span class="o">{</span>
-    <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">productId</span><span class="o">;</span><span class="c1">//只记录一个id用于必要的时候发起command操作</span>
-    <span class="n">String</span> <span class="n">skuId</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">productName</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">productId</span><span class="o">;</span><span class="c1">//只记录一个id用于必要的时候发起command操作</span>
+    <span class="nc">String</span> <span class="n">skuId</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">productName</span><span class="o">;</span>
     <span class="o">...</span>
-    <span class="n">BigDecimal</span> <span class="n">snapshotPrice</span><span class="o">;</span><span class="c1">//下单时的价格</span>
+    <span class="nc">BigDecimal</span> <span class="n">snapshotPrice</span><span class="o">;</span><span class="c1">//下单时的价格</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>　　是的，我们做了一定的冗余，这使得即使商品模块的商品，名称发生了微调，也不会被订单模块知晓。这么做也有它的业务含义，用户会声称：我买的时候他的确就叫这个名字。记录productId和skuId的用意不是为了查询操作，而是方便申请售后一类的命令操作（command）。</p>
@@ -362,9 +362,9 @@
 
 <p>　　详细的概念区别不赘述了，可以参见专门讲解4种模型的博客。他们在数据库开发中分别有不同的实现，用一个修改用户名的例子来分析。</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span><span class="o">{</span>
-    <span class="n">String</span> <span class="n">id</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="n">Integer</span> <span class="n">age</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="nc">Integer</span> <span class="n">age</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <h3 id="一失血模型">（一）失血模型：</h3>
@@ -372,17 +372,17 @@
 <h3 id="二贫血模型">（二）贫血模型</h3>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserDao</span> <span class="o">{</span>
     <span class="nd">@Autowired</span>
-    <span class="n">JdbcTemplate</span> <span class="n">jdbcTemplate</span><span class="o">;</span>
+    <span class="nc">JdbcTemplate</span> <span class="n">jdbcTemplate</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">id</span><span class="o">){</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">id</span><span class="o">){</span>
         <span class="n">jdbcTemplate</span><span class="o">.</span><span class="na">excute</span><span class="o">(</span><span class="s">"update user u set u.name = ? where id=?"</span><span class="o">,</span><span class="n">name</span><span class="o">,</span><span class="n">id</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="kd">class</span> <span class="nc">UserService</span><span class="o">{</span>
     <span class="nd">@Autowired</span>
-    <span class="n">UserDao</span> <span class="n">userDao</span><span class="o">;</span>
+    <span class="nc">UserDao</span> <span class="n">userDao</span><span class="o">;</span>
 
-    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">id</span><span class="o">){</span>
+    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">id</span><span class="o">){</span>
         <span class="n">userDao</span><span class="o">.</span><span class="na">updateName</span><span class="o">(</span><span class="n">name</span><span class="o">,</span><span class="n">id</span><span class="o">);</span>
     <span class="o">}</span> 
 <span class="o">}</span>
@@ -392,16 +392,16 @@
 
 <p>　　观察仔细的话，会发现整个过程中user对象都没出现过。</p>
 <h3 id="三充血模型">（三）充血模型</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;{</span>
     <span class="c1">//springdata-jpa自动扩展出save findOne findAll方法</span>
 <span class="o">}</span>
 
 <span class="kd">class</span> <span class="nc">UserService</span><span class="o">{</span>
     <span class="nd">@Autowoird</span>
-    <span class="n">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+    <span class="nc">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
 
-    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">id</span><span class="o">){</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findOne</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">id</span><span class="o">){</span>
+        <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findOne</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
         <span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
         <span class="n">userRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
     <span class="o">}</span>
@@ -410,8 +410,8 @@
 <p>　　充血模型中，整个修改操作是“隐性”的，对内存中user对象的修改直接影响到了数据库最终的结果，不需要关心数据库操作，只需要关注领域对象user本身。Repository模式就是在于此，屏蔽了数据库的实现。与贫血模型中user对象恰恰相反，整个流程没有出现sql语句。</p>
 <h3 id="四胀血模型">（四）胀血模型</h3>
 <p>　　没有具体的实现，可以这么理解：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">id</span><span class="o">){</span>
-    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">id</span><span class="o">){</span>
+    <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
     <span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
     <span class="n">user</span><span class="o">.</span><span class="na">save</span><span class="o">();</span>
 <span class="o">}</span>
@@ -421,21 +421,21 @@
 <p>　　为什么前面说：如果你遵循正确的使用方式的话，springdata才是对DDD的最佳实践呢？</p>
 
 <p>　　因为有的使用者会写出下面的代码：</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;{</span>
 
     <span class="nd">@Query</span><span class="o">(</span><span class="s">"update user set name=? where id=?"</span><span class="o">)</span>
     <span class="nd">@Modifying</span><span class="o">(</span><span class="n">clearAutomatically</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
     <span class="nd">@Transactional</span>
-    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span><span class="n">String</span> <span class="n">id</span><span class="o">);</span>
+    <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span><span class="nc">String</span> <span class="n">id</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>　　历史的车轮在滚滚倒退。本节只关注模型本身，不讨论使用中的一些并发问题，再来聊聊其他的一些最佳实践。</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;{</span>
 
-    <span class="n">User</span> <span class="nf">findById</span><span class="o">();</span><span class="c1">//√  然后已经存在findOne了，只是为了做个对比</span>
-    <span class="n">User</span> <span class="n">findBy</span><span class="err">身份证号</span><span class="o">();</span><span class="c1">//可以接受</span>
-    <span class="n">User</span> <span class="n">findBy</span><span class="err">名称</span><span class="o">();</span><span class="c1">//×</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="err">权限</span><span class="o">&gt;</span> <span class="n">find</span><span class="err">权限</span><span class="n">ByUserId</span><span class="o">();</span><span class="c1">//×</span>
+    <span class="nc">User</span> <span class="nf">findById</span><span class="o">();</span><span class="c1">//√  然后已经存在findOne了，只是为了做个对比</span>
+    <span class="nc">User</span> <span class="n">findBy</span><span class="err">身份证号</span><span class="o">();</span><span class="c1">//可以接受</span>
+    <span class="nc">User</span> <span class="n">findBy</span><span class="err">名称</span><span class="o">();</span><span class="c1">//×</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="err">权限</span><span class="o">&gt;</span> <span class="n">find</span><span class="err">权限</span><span class="nc">ByUserId</span><span class="o">();</span><span class="c1">//×</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>　　理论上，一个Repository需要且仅需要包含三类方法loadBy标识，findAll，save（一般findAll（）就包含了分页，排序等多个方法，算作一类方法）。</p>
@@ -490,53 +490,53 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//不够好的分层</span>
 <span class="n">sinosoftgz</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">admin</span>
     <span class="n">config</span>
-        <span class="n">CommonConfig</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonConfig</span><span class="o">.</span><span class="na">java</span>
     <span class="n">service</span>
-        <span class="n">CommonService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonService</span><span class="o">.</span><span class="na">java</span>
         <span class="n">mail</span>
-            <span class="n">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">MailMessageService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailMessageService</span><span class="o">.</span><span class="na">java</span>
         <span class="n">sms</span>
-            <span class="n">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
     <span class="n">web</span>
-        <span class="n">IndexController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">IndexController</span><span class="o">.</span><span class="na">java</span>
         <span class="n">mail</span>
-            <span class="n">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">MailMessageController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailMessageController</span><span class="o">.</span><span class="na">java</span>
         <span class="n">sms</span>
-            <span class="n">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">SmsMessageController</span><span class="o">.</span><span class="na">java</span>
-    <span class="n">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsMessageController</span><span class="o">.</span><span class="na">java</span>
+    <span class="nc">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
 </code></pre></div></div>
 <h3 id="二业务分层包含mvc">（二）业务分层包含mvc</h3>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//高内聚的分层</span>
 <span class="n">sinosoftgz</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">admin</span>
     <span class="n">config</span>
-        <span class="n">CommonConfig</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonConfig</span><span class="o">.</span><span class="na">java</span>
     <span class="n">service</span>
-        <span class="n">CommonService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonService</span><span class="o">.</span><span class="na">java</span>
     <span class="n">web</span>
-        <span class="n">IndexController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">IndexController</span><span class="o">.</span><span class="na">java</span>
     <span class="n">mail</span>
         <span class="n">config</span>
-            <span class="n">MailConfig</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailConfig</span><span class="o">.</span><span class="na">java</span>
         <span class="n">service</span>
-            <span class="n">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">MailMessageService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailMessageService</span><span class="o">.</span><span class="na">java</span>
         <span class="n">web</span>
-            <span class="n">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">MailMessageController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">MailMessageController</span><span class="o">.</span><span class="na">java</span>
     <span class="n">sms</span>
         <span class="n">config</span>
-            <span class="n">Smsconfig</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">Smsconfig</span><span class="o">.</span><span class="na">java</span>
         <span class="n">service</span>
-            <span class="n">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
         <span class="n">web</span>
-            <span class="n">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
-            <span class="n">SmsMessageController</span><span class="o">.</span><span class="na">java</span>
-    <span class="n">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
+            <span class="nc">SmsMessageController</span><span class="o">.</span><span class="na">java</span>
+    <span class="nc">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
 </code></pre></div></div>
 <p>　　业务并不是特别复杂，但应该可以发现第二种（业务分层包含mvc）的包结构，才是一种高内聚的包结构。</p>
 
@@ -546,22 +546,22 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//反例</span>
 <span class="n">sinosoftgz</span><span class="o">.</span><span class="na">message</span><span class="o">.</span><span class="na">admin</span>
     <span class="n">config</span>
-        <span class="n">CommonConfig</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">MailConfig</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">Smsconfig</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonConfig</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">MailConfig</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">Smsconfig</span><span class="o">.</span><span class="na">java</span>
     <span class="n">service</span>
-        <span class="n">CommonService</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">MailMessageService</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">CommonService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">MailTemplateService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">MailMessageService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">SmsTemplateService</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">SmsMessageService</span><span class="o">.</span><span class="na">java</span>
     <span class="n">web</span>
-        <span class="n">IndexController</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">MailMessageController</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
-        <span class="n">SmsMessageController</span><span class="o">.</span><span class="na">java</span>     
-    <span class="n">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">IndexController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">MailTemplateController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">MailMessageController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">SmsTemplateController</span><span class="o">.</span><span class="na">java</span>
+        <span class="nc">SmsMessageController</span><span class="o">.</span><span class="na">java</span>     
+    <span class="nc">MessageAdminApp</span><span class="o">.</span><span class="na">java</span>
 
 </code></pre></div></div>
 <p>　　这样的设计会导致web包越来越庞大，逐渐变得臃肿，使项目僵化，项目经理为何一看到代码就头疼，规范的高内聚的包结构，遵循业务&gt;mvc的原则，可以知道我们的项目庞大却有条理。</p>

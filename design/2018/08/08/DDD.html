@@ -347,11 +347,11 @@
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nc">Order</span>
     <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">IList</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">_items</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;();</span> 
+        <span class="kd">private</span> <span class="nc">IList</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="n">_items</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;();</span> 
         <span class="c1">//支付上下文中的防腐层</span>
-        <span class="kd">private</span> <span class="n">IACLService</span> <span class="n">_iaclService</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">IACLService</span> <span class="n">_iaclService</span><span class="o">;</span>
 
-        <span class="kd">public</span> <span class="nf">Order</span><span class="o">(</span><span class="n">IACLService</span> <span class="n">aclService</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nf">Order</span><span class="o">(</span><span class="nc">IACLService</span> <span class="n">aclService</span><span class="o">)</span>
         <span class="o">{</span>
             <span class="n">_iaclService</span> <span class="o">=</span> <span class="n">aclService</span><span class="o">;</span>
         <span class="o">}</span>
@@ -363,7 +363,7 @@
         <span class="c1">/// &lt;param name="count"&gt;产品个数&lt;/param&gt;</span>
         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">AddItem</span><span class="o">(</span><span class="n">string</span> <span class="n">productid</span><span class="o">,</span> <span class="kt">int</span> <span class="n">count</span><span class="o">)</span>
         <span class="o">{</span>
-            <span class="n">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">_iaclService</span><span class="o">.</span><span class="na">GetItemFor</span><span class="o">(</span><span class="n">productid</span><span class="o">);</span>
+            <span class="nc">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">_iaclService</span><span class="o">.</span><span class="na">GetItemFor</span><span class="o">(</span><span class="n">productid</span><span class="o">);</span>
             <span class="n">item</span><span class="o">.</span><span class="na">Count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
             <span class="n">_items</span><span class="o">.</span><span class="na">Add</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
         <span class="o">}</span>

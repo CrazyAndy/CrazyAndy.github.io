@@ -278,35 +278,35 @@
 
 <p>　　Domain Model－Message：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="o">:</span> <span class="nc">IAggregateRoot</span>
     <span class="o">{</span>
         <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
         <span class="kd">public</span> <span class="nf">Message</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="nc">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
         <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
         
         <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">bool</span> <span class="n">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">FromUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">FromUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">ToUserID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">ToUserName</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Title</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Content</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">DateTime</span> <span class="nc">SendTime</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">bool</span> <span class="nc">IsRead</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">FromUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">ToUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
 
         <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
         <span class="c1">/// &lt;/summary&gt;</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="no">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -314,28 +314,28 @@
 
 <p>　　Domain Model－User：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">:</span> <span class="n">IAggregateRoot</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">:</span> <span class="nc">IAggregateRoot</span>
     <span class="o">{</span>
         <span class="err">#</span><span class="n">region</span> <span class="err">构造方法</span>
         <span class="kd">public</span> <span class="nf">User</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="n">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">ID</span> <span class="o">=</span> <span class="nc">Guid</span><span class="o">.</span><span class="na">NewGuid</span><span class="o">().</span><span class="na">ToString</span><span class="o">();</span>
         <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
         
         <span class="err">#</span><span class="n">region</span> <span class="err">实体成员</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">SendMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">virtual</span> <span class="n">ICollection</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span> <span class="n">ReceiveMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="nc">Name</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">ICollection</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="nc">SendMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">virtual</span> <span class="nc">ICollection</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="nc">ReceiveMessages</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
 
         <span class="err">#</span><span class="n">region</span> <span class="n">IEntity</span><span class="err">成员</span>
         <span class="c1">/// &lt;summary&gt;</span>
         <span class="c1">/// 获取或设置当前实体对象的全局唯一标识。</span>
         <span class="c1">/// &lt;/summary&gt;</span>
-        <span class="kd">public</span> <span class="n">string</span> <span class="n">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+        <span class="kd">public</span> <span class="n">string</span> <span class="no">ID</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
         <span class="err">#</span><span class="n">endregion</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -348,28 +348,28 @@
         <span class="c1">/// &lt;/summary&gt;</span>
         <span class="kd">public</span> <span class="nf">MessageConfiguration</span><span class="o">()</span>
         <span class="o">{</span>
-            <span class="n">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
+            <span class="nc">HasKey</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="n">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">HasDatabaseGeneratedOption</span><span class="o">(</span><span class="nc">DatabaseGeneratedOption</span><span class="o">.</span><span class="na">None</span><span class="o">);</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">FromUserID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">ToUserID</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">36</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Title</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">Content</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">HasMaxLength</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">SendTime</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
-            <span class="n">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
+            <span class="nc">Property</span><span class="o">(</span><span class="n">c</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">IsRead</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">IsRequired</span><span class="o">();</span>
-            <span class="n">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
+            <span class="nc">ToTable</span><span class="o">(</span><span class="s">"Messages"</span><span class="o">);</span>
 
             <span class="c1">// Relationships</span>
             <span class="k">this</span><span class="o">.</span><span class="na">HasRequired</span><span class="o">(</span><span class="n">t</span> <span class="o">=&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">FromUser</span><span class="o">)</span>
@@ -419,12 +419,12 @@
 
 <p>　　在 Message 领域模型中，有个 MessageState 枚举类型，用来表示消息的状态，当然我们也可以使用 Bool 类型的字段来表示，但是消息状态是消息本身的一种状态，用对象来表示更为合适，MessageState 枚举定义如下：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="n">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">namespace</span> <span class="nc">MessageManager</span><span class="o">.</span><span class="na">Domain</span><span class="o">.</span><span class="na">DomainModel</span>
 <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">enum</span> <span class="n">MessageState</span>
+    <span class="kd">public</span> <span class="kd">enum</span> <span class="nc">MessageState</span>
     <span class="o">{</span>
-        <span class="n">Read</span><span class="o">,</span>
-        <span class="n">NoRead</span>
+        <span class="nc">Read</span><span class="o">,</span>
+        <span class="nc">NoRead</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -437,8 +437,8 @@
 
 <p>　　可以看到我们虽然没有进行任何的关联设置，Code First 会自动为我们创建外键关联，仅仅是在 Message 领域模型中添加：</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">SendUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
-<span class="kd">public</span> <span class="n">virtual</span> <span class="n">User</span> <span class="n">ReceiveUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">SendUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="n">virtual</span> <span class="nc">User</span> <span class="nc">ReceiveUser</span> <span class="o">{</span> <span class="n">get</span><span class="o">;</span> <span class="n">set</span><span class="o">;</span> <span class="o">}</span>
 </code></pre></div></div>
 
 <p>　　以上效果是我们想要的，这也是 EntityFramework 的进步之处，符合领域驱动设计的思想，领域模型中没有数据库中所谓的主外键关联，有的只是对象之间的关联，而数据库只是存储数据的一种表现，这样数据库设计的概念就不存在了，也让我们忘了数据库的存在，而把更多的精力放在领域模型的设计上，这就是领域驱动设计关键所在。</p>

@@ -267,9 +267,9 @@
                     <div id="post_content">
                         <h2 id="单引号或者双引号都能用">单引号或者双引号都能用</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'ducafecat'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="s2">"ducafecat"</span><span class="p">;</span>
+<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">ducafecat</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="c1">//有点类似js</span>
 </code></pre></div></div>
@@ -277,42 +277,42 @@
 <h2 id="字符串模版">字符串模版</h2>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
-<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="s1">'ducafecat : ${a}'</span><span class="p">;</span>
+<span class="nb">String</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ducafecat : ${a}</span><span class="dl">'</span><span class="p">;</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h2 id="字符串连接">字符串连接</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="s1">'ducafecat'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'' ''ducafecat'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span>   <span class="s1">' '</span>     <span class="s1">'ducafecat'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'hello'</span>
-<span class="s1">' '</span>
-<span class="s1">'ducafecat'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'''
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">''</span><span class="s1"> </span><span class="dl">''</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>   <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span>     <span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
+<span class="dl">'</span><span class="s1"> </span><span class="dl">'</span>
+<span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'''</span><span class="s1">
 hello word
 this is multi line
-'''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"""
+</span><span class="dl">'''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">"""</span><span class="s2">
 hello word
 this is multi line
-"""</span><span class="p">;</span>
+</span><span class="dl">"""</span><span class="p">;</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h2 id="搜索">搜索</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">'web site ducafecat.tech'</span><span class="p">;</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'ducafecat'</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'web'</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'tech'</span><span class="p">));</span>
-<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'site'</span><span class="p">));</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">web site ducafecat.tech</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">web</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="dl">'</span><span class="s1">tech</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">'</span><span class="s1">site</span><span class="dl">'</span><span class="p">));</span>
 </code></pre></div></div>
 
 <h2 id="提取数据">提取数据</h2>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
-<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 </code></pre></div></div>
@@ -325,13 +325,13 @@ this is multi line
 
 <h2 id="裁剪判断空字符串">裁剪，判断空字符串</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="s1">'    hello word     '</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span>
-<span class="nx">print</span><span class="p">(</span><span class="s1">''</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="dl">'</span><span class="s1">    hello word     </span><span class="dl">'</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="dl">''</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h2 id="替换部分字符">替换部分字符</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="s1">'hello word word!'</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="s1">'word'</span><span class="p">,</span> <span class="s1">'ducafecat'</span><span class="p">));</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">print</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello word word!</span><span class="dl">'</span><span class="p">.</span><span class="nx">replaceAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">word</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ducafecat</span><span class="dl">'</span><span class="p">));</span>
 </code></pre></div></div>
 
 <h2 id="字符串创建">字符串创建</h2>
