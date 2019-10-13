@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="docker 镜像与容器" name="description">
+  
+  
+    <meta name="keywords" content="container,docker">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|docker学习笔记002
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+    
+    
+    
+    <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+
+    
+    
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">container</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Oct 2019</span>
+                        <h1>
+                            docker学习笔记002
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="准备">准备</h1>
+
+<h2 id="下载docker-toolbox">下载Docker Toolbox</h2>
+
+<p>docker toolbox 是个软件包，我们现在安装的都是 docker desktop</p>
+
+<h1 id="下载镜像">下载镜像</h1>
+
+<h2 id="搜索镜像">搜索镜像</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">dockr</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">dev</span><span class="p">.</span><span class="nx">aliyum</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">docker</span> <span class="nx">search</span> <span class="nx">centos</span> 
+<span class="err">镜像名称有可能有两部分组成</span>  <span class="err">人或团队名称</span><span class="o">/</span><span class="err">镜像名字</span>
+</code></pre></div></div>
+
+<h2 id="下载镜像-1">下载镜像</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">images</span>
+<span class="nx">docker</span> <span class="nx">pull</span>
+</code></pre></div></div>
+
+<h2 id="使用阿里云镜像加速">使用阿里云镜像加速</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dev</span><span class="p">.</span><span class="nx">aliyun</span><span class="p">.</span><span class="nx">com</span>
+<span class="err">加速器</span> 
+</code></pre></div></div>
+
+<h1 id="容器">容器</h1>
+
+<h2 id="创建容器">创建容器</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
+<span class="err">查看正在运行的容器</span> <span class="nx">docker</span> <span class="nx">ps</span> 
+<span class="err">查看所有容器</span>  <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span>
+</code></pre></div></div>
+
+<h2 id="管理容器">管理容器</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于一个镜像我们可以创建多个容器。</span>
+<span class="err">我们执行</span> <span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="nx">ls</span> <span class="err">这样可以看到</span> <span class="err">该容器里面的目录和文件列表</span>
+<span class="nx">docker</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">all</span><span class="p">(</span><span class="err">简写成</span> <span class="o">-</span><span class="nx">a</span><span class="p">)</span>
+<span class="nx">docker</span> <span class="nx">rm</span> <span class="nx">dockerid</span> <span class="nx">or</span> <span class="nx">dockername</span> <span class="err">可以删除</span>
+<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="nx">cnetos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> 
+<span class="err">查看最新的</span> <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span> <span class="o">--</span><span class="nx">latest</span>
+<span class="err">查看容器日志</span> <span class="nx">docker</span> <span class="nx">logs</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+<span class="err">停止容器</span> <span class="nx">docker</span> <span class="nx">stop</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+<span class="err">重启</span> <span class="nx">docker</span> <span class="nx">restart</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+<span class="err">启动</span> <span class="nx">docker</span> <span class="nx">start</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+</code></pre></div></div>
+
+<h2 id="带互动的容器">带互动的容器</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">interactive</span> <span class="p">(</span><span class="err">简写为</span><span class="nx">i</span><span class="p">)</span>  <span class="err">表示使用一个可以交互的容器</span>
+<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="p">(</span><span class="err">去给容器附加一个终端</span><span class="p">)</span>
+<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>
+</code></pre></div></div>
+
+<h2 id="在后台运行的容器">在后台运行的容器</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">我们让容器在后台运行，作为一个</span><span class="nx">deamon</span><span class="err">运行</span>
+<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">detach</span> <span class="nx">centos</span> <span class="nx">ping</span> <span class="nx">www</span><span class="p">.</span><span class="nx">baidu</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">docker</span> <span class="nx">logs</span> <span class="o">--</span><span class="nx">follow</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">查看正在运行的</span><span class="nx">docker</span><span class="err">日志</span>
+</code></pre></div></div>
+
+<h1 id="创建镜像">创建镜像</h1>
+
+<h2 id="创建镜像-1">创建镜像</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">cnetos</span> <span class="nx">bash</span>
+<span class="nx">vi</span> <span class="nx">abc</span> 
+<span class="err">随便添加一点内容保存</span>
+<span class="nx">docker</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="dl">'</span><span class="s1">first commit</span><span class="dl">'</span> <span class="o">-</span><span class="nx">a</span> <span class="dl">'</span><span class="s1">作者</span><span class="dl">'</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">镜像名字</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="p">:</span><span class="nx">latest</span>
+<span class="err">删除镜像</span> <span class="nx">docker</span> <span class="nx">rmi</span> <span class="err">镜像名称</span>
+<span class="err">查看镜像</span> <span class="nx">docker</span> <span class="nx">images</span>
+</code></pre></div></div>
+
+<h2 id="用dockerfile创建镜像">用Dockerfile创建镜像</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">使用文本文件创建镜像</span>
+<span class="mi">1</span><span class="p">,</span><span class="err">先在创建一个文件夹，在该文件夹下创建一个</span> <span class="nx">Dockerfile</span>
+
+<span class="nx">FROM</span> <span class="nx">centos</span>
+<span class="nx">MAINTAINER</span> <span class="nx">andy</span> <span class="o">&lt;</span><span class="nx">auden</span><span class="p">.</span><span class="nx">sh</span><span class="p">@</span><span class="nd">163</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
+<span class="nx">RUN</span> <span class="nx">touch</span> <span class="nx">abc</span>
+
+<span class="err">保存文件编辑</span> 
+<span class="nx">docker</span> <span class="nx">build</span> <span class="o">--</span><span class="nx">tag</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="o">-</span><span class="nx">demo</span><span class="p">:</span><span class="nx">lastest</span> <span class="p">.</span>
+<span class="err">这样</span><span class="nx">docker</span><span class="err">会根据</span><span class="nx">Dockerfile</span><span class="err">里面的描述创建镜像</span>
+</code></pre></div></div>
+
+<h2 id="把镜像推送到">把镜像推送到</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">docker</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">docker</span> <span class="nx">login</span>
+<span class="nx">docker</span> <span class="nx">push</span> <span class="err">镜像名称</span>
+</code></pre></div></div>
+
+<h2 id="把镜像推送到阿里云">把镜像推送到阿里云</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">先创建命名空间，再创建镜像仓库，然后就可以将镜像推送到镜像仓库上去了</span>
+<span class="nx">docker</span> <span class="nx">login</span> <span class="o">--</span><span class="nx">username</span><span class="o">=</span>
+<span class="nx">docker</span> <span class="nx">tag</span> <span class="p">[</span><span class="nx">ImageId</span><span class="p">]</span>
+<span class="nx">docker</span> <span class="nx">push</span>
+</code></pre></div></div>
+
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">docker</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/02/Docker.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="docker 学习笔记" name="description">
+  
+  
+    <meta name="keywords" content="container,docker">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|docker学习笔记001
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+    
+    
+    
+    <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+
+    
+    
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">container</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
+                        <h1>
+                            docker学习笔记001
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="docker了解">Docker了解</h1>
+
+<h2 id="vs-code-自定义代码片段">VS Code :自定义代码片段</h2>
+
+<p>我们在vs code中先点击f1，然后 执行命令snippets， 会提示 选择不同语言的代码片段，我们选择dart.json文件。我们自定义的dart.json文件内容为.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+	<span class="dl">"</span><span class="s2">StatelessWidget</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sl</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">class ${1:WidgetName} extends StatelessWidget {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">Widget build(BuildContext context) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">return ${2:Container}();</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">StatelessWidget</span><span class="dl">"</span>
+	<span class="p">},</span>
+	<span class="dl">"</span><span class="s2">StatefulWidget</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sf</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">class ${1:WidgetName} extends StatefulWidget {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">_${1:WidgetName}State createState() =&gt; _${1:WidgetName}State();</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">class _${1:WidgetName}State extends State&lt;${1:WidgetName}&gt; {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">Widget build(BuildContext context) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">return ${2:Container}();</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">StatefulWidget</span><span class="dl">"</span>
+	<span class="p">},</span>
+	<span class="dl">"</span><span class="s2">StatelessWidget with Scaffold</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sls</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">class ${1:WidgetName} extends StatelessWidget {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">Widget build(BuildContext context) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">return ${Scaffold}(</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t</span><span class="s2">appBar: AppBar(</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t\t</span><span class="s2">title: Text('${1:WidgetName}'),</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t\t</span><span class="s2">elevation: 0.0,</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t</span><span class="s2">),${2}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">);</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">StatelessWidget with Scaffold</span><span class="dl">"</span>
+	<span class="p">},</span>  
+	<span class="dl">"</span><span class="s2">StatefulWidget with Scaffold</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sfs</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">class ${1:WidgetName} extends StatefulWidget {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">_${1:WidgetName}State createState() =&gt; _${1:WidgetName}State();</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">class _${1:WidgetName}State extends State&lt;${1:WidgetName}&gt; {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">Widget build(BuildContext context) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">return ${Scaffold}(</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t</span><span class="s2">appBar: AppBar(</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t\t</span><span class="s2">title: Text('${1:WidgetName}'),</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t\t</span><span class="s2">elevation: 0.0,</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t</span><span class="s2">),${2}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">);</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">StatefulWidget with Scaffold</span><span class="dl">"</span>
+	<span class="p">},</span>
+	<span class="dl">"</span><span class="s2">InheritedWidget</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ih</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">class ${1:WidgetName} extends InheritedWidget {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">final Widget child;</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">${2}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">${1:WidgetName}({</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">this.child,</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">${2}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}) : super(child: child);</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">static ${1:WidgetName} of(BuildContext context) =&gt;</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t\t</span><span class="s2">context.inheritFromWidgetOfExactType(${1:WidgetName});</span><span class="se">\n</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">bool updateShouldNotify(${1:WidgetName} oldWidget) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t\t</span><span class="s2">return true;</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">InheritedWidget</span><span class="dl">"</span>
+	<span class="p">},</span>
+	<span class="dl">"</span><span class="s2">setState</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ss</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">setState(() {${1}});</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">setState</span><span class="dl">"</span>
+	<span class="p">},</span>
+	<span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+	  <span class="dl">"</span><span class="s2">prefix</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="dl">"</span><span class="s2">body</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+		<span class="dl">"</span><span class="s2">@override</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">Widget build(BuildContext context) {</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="se">\t</span><span class="s2">return ${1:Container}(${2});</span><span class="dl">"</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">}</span><span class="dl">"</span><span class="p">,</span>
+	  <span class="p">],</span>
+	  <span class="dl">"</span><span class="s2">description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Build Method</span><span class="dl">"</span>
+	<span class="p">},</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="准备material-components演示页面">准备Material Components演示页面</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">package:flutter/material.dart</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">MaterialComponents</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">MaterialComponents</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">ListView</span><span class="p">(</span>
+        <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+          <span class="nx">ListItem</span><span class="p">(</span><span class="nx">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">FloatingActionButton</span><span class="dl">'</span><span class="p">,</span>
+          <span class="nx">page</span><span class="p">:</span> <span class="nx">FloatingActionButtonDemo</span><span class="p">(),),</span>
+        <span class="p">],</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">FloatingActionButtonDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">FloatingActionButtonDemo</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">ListItem</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="nx">final</span> <span class="nb">String</span> <span class="nx">title</span><span class="p">;</span>
+  <span class="nx">final</span> <span class="nx">Widget</span> <span class="nx">page</span><span class="p">;</span>
+
+  <span class="nx">ListItem</span><span class="p">({</span><span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">});</span>
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">ListTile</span><span class="p">(</span>
+      <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="nx">title</span><span class="p">),</span>
+      <span class="nx">onTap</span><span class="p">:</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">Navigator</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">MaterialPageRoute</span><span class="p">(</span><span class="nx">builder</span><span class="p">:</span> <span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">page</span><span class="p">));</span>
+      <span class="p">},</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="漂浮按钮">漂浮按钮</h1>
+
+<h2 id="floatingactionbutton漂浮动作按钮">FloatingActionButton：漂浮动作按钮</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">FloatingActionButtonDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+
+  <span class="nx">final</span> <span class="nx">Widget</span> <span class="nx">_floatingActionButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FloatingActionButton</span><span class="p">(</span>
+    <span class="nx">onPressed</span><span class="p">:</span> <span class="p">(){},</span>
+    <span class="nx">child</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">add</span><span class="p">),</span> 
+    <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span><span class="c1">//阴影效果，控制的和下一层的高度 ，这里设置0表示和下一层贴合到一块</span>
+    <span class="nx">backgroundColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">black87</span><span class="p">,</span><span class="c1">//默认按钮的颜色是在主题里面设置的</span>
+    <span class="nx">shape</span><span class="p">:</span> <span class="nx">BeveledRectangleBorder</span><span class="p">(</span>
+      <span class="nx">borderRadius</span><span class="p">:</span> <span class="nx">BorderRadius</span><span class="p">.</span><span class="nx">circular</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span><span class="c1">//斜角矩形按钮，设置成30就是菱形</span>
+    <span class="p">),</span><span class="c1">//按钮形状</span>
+  <span class="p">);</span>
+
+  <span class="nx">final</span> <span class="nx">Widget</span> <span class="nx">_floatingActionButtonExtend</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FloatingActionButton</span><span class="p">.</span><span class="nx">extended</span><span class="p">(</span>
+    <span class="c1">//可以添加标签文字</span>
+    <span class="nx">onPressed</span><span class="p">:</span> <span class="p">(){},</span>
+    <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">add</span><span class="p">),</span>
+    <span class="nx">label</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Add</span><span class="dl">'</span><span class="p">),</span>
+  <span class="p">);</span>
+
+
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">FloatingActionButtonDemo</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="c1">// floatingActionButton: _floatingActionButton,</span>
+      <span class="nx">floatingActionButton</span><span class="p">:</span> <span class="nx">_floatingActionButtonExtend</span><span class="p">,</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="bottomappbar底部工具栏">BottomAppBar：底部工具栏</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">FloatingActionButtonDemo</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">floatingActionButton</span><span class="p">:</span> <span class="nx">_floatingActionButton</span><span class="p">,</span>
+      <span class="c1">// floatingActionButton: _floatingActionButtonExtend,</span>
+      <span class="nx">floatingActionButtonLocation</span><span class="p">:</span> <span class="nx">FloatingActionButtonLocation</span><span class="p">.</span><span class="nx">centerDocked</span><span class="p">,</span><span class="c1">//用来调整漂浮按钮的位置</span>
+      <span class="nx">bottomNavigationBar</span><span class="p">:</span> <span class="nx">BottomAppBar</span><span class="p">(</span><span class="c1">//底部工具栏</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+          <span class="nx">height</span><span class="p">:</span> <span class="mf">80.0</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="nx">shape</span><span class="p">:</span> <span class="nx">CircularNotchedRectangle</span><span class="p">(),</span><span class="c1">//切除一个和按钮形状相符的缺口</span>
+      <span class="p">),</span>
+
+    <span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="按钮">按钮</h1>
+
+<h2 id="创建演示小部件用的页面">创建演示小部件用的页面</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ButtonDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">ButtonDemo</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+        <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">15.0</span><span class="p">),</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+          <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="nx">Row</span><span class="p">(</span>
+              <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+              <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+                
+              <span class="p">],</span>
+            <span class="p">),</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="flatbutton文字按钮">FlatButton：文字按钮</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ButtonDemo</span> <span class="kd">extends</span> <span class="nx">StatelessWidget</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">override</span>
+  <span class="nx">Widget</span> <span class="nx">build</span><span class="p">(</span><span class="nx">BuildContext</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">final</span> <span class="nx">Widget</span> <span class="nx">flatButtonDemo</span> <span class="o">=</span> <span class="nx">Row</span><span class="p">(</span>
+      <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+      <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+        <span class="nx">FlatButton</span><span class="p">(</span>
+          <span class="nx">child</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">Button</span><span class="dl">'</span><span class="p">),</span>
+          <span class="c1">// onPressed: null,)//onPressed :null时 页面显示按钮禁止状态</span>
+          <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span> <span class="p">{},</span>
+          <span class="nx">splashColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span> <span class="c1">//溅墨效果</span>
+          <span class="nx">textColor</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">accentColor</span><span class="p">,</span> <span class="c1">//按钮文字颜色</span>
+        <span class="p">),</span>
+        <span class="nx">FlatButton</span><span class="p">.</span><span class="nx">icon</span><span class="p">(</span>
+          <span class="nx">icon</span><span class="p">:</span> <span class="nx">Icon</span><span class="p">(</span><span class="nx">Icons</span><span class="p">.</span><span class="nx">add</span><span class="p">),</span>
+          <span class="c1">// onPressed: null,)//onPressed :null时 页面显示按钮禁止状态</span>
+          <span class="nx">onPressed</span><span class="p">:</span> <span class="p">()</span> <span class="p">{},</span>
+          <span class="nx">splashColor</span><span class="p">:</span> <span class="nx">Colors</span><span class="p">.</span><span class="nx">grey</span><span class="p">,</span> <span class="c1">//溅墨效果</span>
+          <span class="nx">textColor</span><span class="p">:</span> <span class="nx">Theme</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="nx">context</span><span class="p">).</span><span class="nx">accentColor</span><span class="p">,</span> <span class="c1">//按钮文字颜色</span>
+        <span class="p">),</span>
+      <span class="p">],</span>
+    <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nx">Scaffold</span><span class="p">(</span>
+      <span class="nx">appBar</span><span class="p">:</span> <span class="nx">AppBar</span><span class="p">(</span>
+        <span class="nx">title</span><span class="p">:</span> <span class="nx">Text</span><span class="p">(</span><span class="dl">'</span><span class="s1">ButtonDemo</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">elevation</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="nx">body</span><span class="p">:</span> <span class="nx">Container</span><span class="p">(</span>
+        <span class="nx">padding</span><span class="p">:</span> <span class="nx">EdgeInsets</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="mf">15.0</span><span class="p">),</span>
+        <span class="nx">child</span><span class="p">:</span> <span class="nx">Column</span><span class="p">(</span>
+          <span class="nx">mainAxisAlignment</span><span class="p">:</span> <span class="nx">MainAxisAlignment</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+          <span class="nx">children</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Widget</span><span class="o">&gt;</span><span class="p">[</span>
+            <span class="nx">flatButtonDemo</span><span class="p">,</span>
+          <span class="p">],</span>
+        <span class="p">),</span>
+      <span class="p">),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="raisedbutton按钮">RaisedButton：按钮</h2>
+
+<h2 id="按钮主题颜色形状">按钮主题：颜色、形状</h2>
+
+<h2 id="outlinebutton描边按钮">OutlineButton：描边按钮</h2>
+
+<p>outlinebutton 有一个描边效果。</p>
+
+<h2 id="按钮容器container有固定宽度的按钮">按钮容器Container：有固定宽度的按钮</h2>
+
+<h2 id="按钮容器expanded沾满可用宽度的按钮">按钮容器Expanded：沾满可用宽度的按钮</h2>
+
+<h2 id="按钮容器buttonbar一组带边距的横排显示按钮">按钮容器ButtonBar：一组带边距的横排显示按钮</h2>
+
+<h2 id="整理把演示放在单独的文件里">整理：把演示放在单独的文件里</h2>
+
+<h1 id="弹出菜单">弹出菜单</h1>
+
+<h2 id="准备popupmenubuttondemo">准备PopupMenuButtonDemo</h2>
+
+<h2 id="popupmenubutton弹出式菜单按钮">PopupMenuButton：弹出式菜单按钮</h2>
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">docker</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/01/Docker.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>
