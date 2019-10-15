@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="docker 镜像与容器" name="description">
+    <meta content="docker 存储" name="description">
   
   
     <meta name="keywords" content="container,docker">
@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|docker学习笔记002
+        CrazyAndy|docker-2-存储
     
   </title>
   <!-- favicon -->
@@ -261,116 +261,46 @@
                     <div class="text-center article-title">
                     <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Oct 2019</span>
                         <h1>
-                            docker学习笔记002
+                            docker-2-存储
                         </h1>
                     </div>
                     <div id="post_content">
-                        <h1 id="准备">准备</h1>
+                        <h1 id="存储">存储</h1>
 
-<h2 id="下载docker-toolbox">下载Docker Toolbox</h2>
+<p>数据盘可以被多个docker容器共享使用，我们需要将docker容器中应用程序产生的日志文件，数据库管理系统中的数据这些需要长期保存的内容放到数据盘里面。</p>
 
-<p>docker toolbox 是个软件包，我们现在安装的都是 docker desktop</p>
+<h2 id="数据卷data-volumes">数据卷：Data Volumes</h2>
 
-<h1 id="下载镜像">下载镜像</h1>
-
-<h2 id="搜索镜像">搜索镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">dockr</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">dev</span><span class="p">.</span><span class="nx">aliyum</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">search</span> <span class="nx">centos</span> 
-<span class="err">镜像名称有可能有两部分组成</span>  <span class="err">人或团队名称</span><span class="o">/</span><span class="err">镜像名字</span>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">创建容器的时候可以指定数据盘，也就是特定目录</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="err">数据盘目录绝对路径</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="err">容器名字</span> <span class="err">镜像名字</span> <span class="err">命令</span>
+<span class="err">查看容器信息</span> <span class="n">docker</span> <span class="n">inspect</span> <span class="err">容器名字</span>
+<span class="err">找到</span><span class="n">Mounts</span> 
+<span class="n">Source</span> <span class="err">是给容器指定的数据盘在主机上的位置</span>
+<span class="n">Destination</span> <span class="err">是数据盘在容器上的位置</span> 
+<span class="n">docker</span><span class="o">-</span><span class="n">machine</span> <span class="n">ls</span>
 </code></pre></div></div>
 
-<h2 id="下载镜像-1">下载镜像</h2>
+<h2 id="指定主机目录作为数据盘">指定主机目录作为数据盘</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">images</span>
-<span class="nx">docker</span> <span class="nx">pull</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">v</span> <span class="o">/</span><span class="nx">opt</span><span class="o">/</span><span class="nx">home</span><span class="p">:</span><span class="o">/</span><span class="nx">abc</span> <span class="o">-</span><span class="nx">it</span> <span class="o">--</span><span class="nx">name</span><span class="o">=</span><span class="nx">db</span> <span class="nx">centos</span> <span class="nx">bash</span>
 </code></pre></div></div>
 
-<h2 id="使用阿里云镜像加速">使用阿里云镜像加速</h2>
+<h2 id="数据容器">数据容器</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dev</span><span class="p">.</span><span class="nx">aliyun</span><span class="p">.</span><span class="nx">com</span>
-<span class="err">加速器</span> 
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">create</span> <span class="o">-</span><span class="nx">v</span> <span class="o">/</span><span class="nx">mnt</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">dbcenter</span> <span class="nx">centos</span>
+<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">volumes</span><span class="o">-</span><span class="k">from</span> <span class="nx">dbcenter</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">db2</span> <span class="o">-</span><span class="nx">it</span> <span class="nx">centos</span> <span class="nx">bash</span>
 </code></pre></div></div>
 
-<h1 id="容器">容器</h1>
+<h2 id="管理数据盘">管理数据盘</h2>
 
-<h2 id="创建容器">创建容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-<span class="err">查看正在运行的容器</span> <span class="nx">docker</span> <span class="nx">ps</span> 
-<span class="err">查看所有容器</span>  <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">volume</span> <span class="nx">ls</span>
+<span class="err">查看已经没有容器使用的数据盘</span>
+<span class="nx">docker</span> <span class="nx">volume</span> <span class="nx">ls</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">dangling</span><span class="o">=</span><span class="kc">true</span>
+<span class="err">删除没用的数据盘</span>
+<span class="nx">docker</span> <span class="nx">volume</span> <span class="nx">rm</span> <span class="nx">volumename</span>
+<span class="err">检查数据盘</span>
+<span class="nx">docker</span> <span class="nx">volume</span> <span class="nx">inspect</span> <span class="nx">volumename</span>
 </code></pre></div></div>
-
-<h2 id="管理容器">管理容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于一个镜像我们可以创建多个容器。</span>
-<span class="err">我们执行</span> <span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="nx">ls</span> <span class="err">这样可以看到</span> <span class="err">该容器里面的目录和文件列表</span>
-<span class="nx">docker</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">all</span><span class="p">(</span><span class="err">简写成</span> <span class="o">-</span><span class="nx">a</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">rm</span> <span class="nx">dockerid</span> <span class="nx">or</span> <span class="nx">dockername</span> <span class="err">可以删除</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="nx">cnetos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> 
-<span class="err">查看最新的</span> <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span> <span class="o">--</span><span class="nx">latest</span>
-<span class="err">查看容器日志</span> <span class="nx">docker</span> <span class="nx">logs</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">停止容器</span> <span class="nx">docker</span> <span class="nx">stop</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">重启</span> <span class="nx">docker</span> <span class="nx">restart</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">启动</span> <span class="nx">docker</span> <span class="nx">start</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-</code></pre></div></div>
-
-<h2 id="带互动的容器">带互动的容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">interactive</span> <span class="p">(</span><span class="err">简写为</span><span class="nx">i</span><span class="p">)</span>  <span class="err">表示使用一个可以交互的容器</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="p">(</span><span class="err">去给容器附加一个终端</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>
-</code></pre></div></div>
-
-<h2 id="在后台运行的容器">在后台运行的容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">我们让容器在后台运行，作为一个</span><span class="nx">deamon</span><span class="err">运行</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">detach</span> <span class="nx">centos</span> <span class="nx">ping</span> <span class="nx">www</span><span class="p">.</span><span class="nx">baidu</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">logs</span> <span class="o">--</span><span class="nx">follow</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">查看正在运行的</span><span class="nx">docker</span><span class="err">日志</span>
-</code></pre></div></div>
-
-<h1 id="创建镜像">创建镜像</h1>
-
-<h2 id="创建镜像-1">创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">cnetos</span> <span class="nx">bash</span>
-<span class="nx">vi</span> <span class="nx">abc</span> 
-<span class="err">随便添加一点内容保存</span>
-<span class="nx">docker</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="dl">'</span><span class="s1">first commit</span><span class="dl">'</span> <span class="o">-</span><span class="nx">a</span> <span class="dl">'</span><span class="s1">作者</span><span class="dl">'</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">镜像名字</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="p">:</span><span class="nx">latest</span>
-<span class="err">删除镜像</span> <span class="nx">docker</span> <span class="nx">rmi</span> <span class="err">镜像名称</span>
-<span class="err">查看镜像</span> <span class="nx">docker</span> <span class="nx">images</span>
-</code></pre></div></div>
-
-<h2 id="用dockerfile创建镜像">用Dockerfile创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">使用文本文件创建镜像</span>
-<span class="mi">1</span><span class="p">,</span><span class="err">先在创建一个文件夹，在该文件夹下创建一个</span> <span class="nx">Dockerfile</span>
-
-<span class="nx">FROM</span> <span class="nx">centos</span>
-<span class="nx">MAINTAINER</span> <span class="nx">andy</span> <span class="o">&lt;</span><span class="nx">auden</span><span class="p">.</span><span class="nx">sh</span><span class="p">@</span><span class="nd">163</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
-<span class="nx">RUN</span> <span class="nx">touch</span> <span class="nx">abc</span>
-
-<span class="err">保存文件编辑</span> 
-<span class="nx">docker</span> <span class="nx">build</span> <span class="o">--</span><span class="nx">tag</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="o">-</span><span class="nx">demo</span><span class="p">:</span><span class="nx">lastest</span> <span class="p">.</span>
-<span class="err">这样</span><span class="nx">docker</span><span class="err">会根据</span><span class="nx">Dockerfile</span><span class="err">里面的描述创建镜像</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到">把镜像推送到</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">docker</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">login</span>
-<span class="nx">docker</span> <span class="nx">push</span> <span class="err">镜像名称</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到阿里云">把镜像推送到阿里云</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">先创建命名空间，再创建镜像仓库，然后就可以将镜像推送到镜像仓库上去了</span>
-<span class="nx">docker</span> <span class="nx">login</span> <span class="o">--</span><span class="nx">username</span><span class="o">=</span>
-<span class="nx">docker</span> <span class="nx">tag</span> <span class="p">[</span><span class="nx">ImageId</span><span class="p">]</span>
-<span class="nx">docker</span> <span class="nx">push</span>
-</code></pre></div></div>
-
 
                     </div>
 

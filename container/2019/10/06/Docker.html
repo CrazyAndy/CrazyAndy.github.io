@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="docker 镜像与容器" name="description">
+    <meta content="docker集群" name="description">
   
   
     <meta name="keywords" content="container,docker">
@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|docker-1-镜像与容器
+        CrazyAndy|docker-6-集群
     
   </title>
   <!-- favicon -->
@@ -259,120 +259,69 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Oct 2019</span>
                         <h1>
-                            docker-1-镜像与容器
+                            docker-6-集群
                         </h1>
                     </div>
                     <div id="post_content">
-                        <h1 id="准备">准备</h1>
+                        <h1 id="介绍">介绍</h1>
 
-<h2 id="下载docker-toolbox">下载Docker Toolbox</h2>
+<h2 id="docker-swarm">docker swarm</h2>
 
-<p>docker toolbox 是个软件包，我们现在安装的都是 docker desktop</p>
+<p>docker swarm是创建服务器集群用的工具，现在只需要几条命令就可以创建服务器的集群，它内置一些服务器集群所需要的工具，比如说查找，网络负载均衡等等。</p>
 
-<h1 id="下载镜像">下载镜像</h1>
+<p>先初始化集群 docker swarm init ；</p>
 
-<h2 id="搜索镜像">搜索镜像</h2>
+<p>然后让服务器加入到这个集群里 docker swarm join ;</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">dockr</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">dev</span><span class="p">.</span><span class="nx">aliyum</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">search</span> <span class="nx">centos</span> 
-<span class="err">镜像名称有可能有两部分组成</span>  <span class="err">人或团队名称</span><span class="o">/</span><span class="err">镜像名字</span>
-</code></pre></div></div>
+<p>这样我们就可以在这个集群服务器里运行服务了 docker service create</p>
 
-<h2 id="下载镜像-1">下载镜像</h2>
+<p>服务可以用一个或多个容器来支持，容器之间可以通过overlay的网络进行相互沟通，每一个服务器节点都知道这个集群节点里面其他的服务器，如果有服务器出了问题之后，docker会把这些有问题的服务器运行的容器转移到集群的其他服务器上面。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">images</span>
-<span class="nx">docker</span> <span class="nx">pull</span>
-</code></pre></div></div>
+<h1 id="集群">集群</h1>
 
-<h2 id="使用阿里云镜像加速">使用阿里云镜像加速</h2>
+<h2 id="创建集群---swarm-init">创建集群 - swarm init</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dev</span><span class="p">.</span><span class="nx">aliyun</span><span class="p">.</span><span class="nx">com</span>
-<span class="err">加速器</span> 
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">ls</span>
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">rm</span> 
-</code></pre></div></div>
+<p>docker swarm init –listen-addr 192.168.0.1:2387</p>
 
-<h1 id="容器">容器</h1>
+<p>docker node ls</p>
 
-<h2 id="创建容器">创建容器</h2>
+<h2 id="添加服务器到集群里---swarm-join">添加服务器到集群里 - swarm join</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-<span class="err">查看正在运行的容器</span> <span class="nx">docker</span> <span class="nx">ps</span> 
-<span class="err">查看所有容器</span>  <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span>
-</code></pre></div></div>
+<p>docker swarm join –listen-addr 192.168.0.2:2388 192.168.0.1.2377</p>
 
-<h2 id="管理容器">管理容器</h2>
+<p>会显示 this node joined a Swarm as a worker.</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于一个镜像我们可以创建多个容器。</span>
-<span class="err">我们执行</span> <span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="nx">ls</span> <span class="err">这样可以看到</span> <span class="err">该容器里面的目录和文件列表</span>
-<span class="nx">docker</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">all</span><span class="p">(</span><span class="err">简写成</span> <span class="o">-</span><span class="nx">a</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">rm</span> <span class="nx">dockerid</span> <span class="nx">or</span> <span class="nx">dockername</span> <span class="err">可以删除</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="nx">cnetos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> 
-<span class="err">查看最新的</span> <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span> <span class="o">--</span><span class="nx">latest</span>
-<span class="err">查看容器日志</span> <span class="nx">docker</span> <span class="nx">logs</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">停止容器</span> <span class="nx">docker</span> <span class="nx">stop</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">重启</span> <span class="nx">docker</span> <span class="nx">restart</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">启动</span> <span class="nx">docker</span> <span class="nx">start</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-</code></pre></div></div>
+<p>docker node ls 这样会显示集群下的所有服务器节点</p>
 
-<h2 id="带互动的容器">带互动的容器</h2>
+<h2 id="创建集群网络---overlay">创建集群网络 - overlay</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">interactive</span> <span class="p">(</span><span class="err">简写为</span><span class="nx">i</span><span class="p">)</span>  <span class="err">表示使用一个可以交互的容器</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="p">(</span><span class="err">去给容器附加一个终端</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>
-</code></pre></div></div>
+<p>docker network create –driver overlay skynet</p>
 
-<h2 id="在后台运行的容器">在后台运行的容器</h2>
+<h2 id="swarm-状态的图形界面">Swarm 状态的图形界面</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">我们让容器在后台运行，作为一个</span><span class="nx">deamon</span><span class="err">运行</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">detach</span> <span class="nx">centos</span> <span class="nx">ping</span> <span class="nx">www</span><span class="p">.</span><span class="nx">baidu</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">logs</span> <span class="o">--</span><span class="nx">follow</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">查看正在运行的</span><span class="nx">docker</span><span class="err">日志</span>
-</code></pre></div></div>
+<p>docker run -itd -p 5000:5000 -e HOST=192.168.0.11 -e PORT=5000 -v /var/run/docker.sock:/var/run/docker.sock:/var/run/docker.sock manomarks/visualizer</p>
 
-<h1 id="创建镜像">创建镜像</h1>
+<h1 id="服务">服务</h1>
 
-<h2 id="创建镜像-1">创建镜像</h2>
+<h2 id="创建服务">创建服务</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">cnetos</span> <span class="nx">bash</span>
-<span class="nx">vi</span> <span class="nx">abc</span> 
-<span class="err">随便添加一点内容保存</span>
-<span class="nx">docker</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="dl">'</span><span class="s1">first commit</span><span class="dl">'</span> <span class="o">-</span><span class="nx">a</span> <span class="dl">'</span><span class="s1">作者</span><span class="dl">'</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">镜像名字</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="p">:</span><span class="nx">latest</span>
-<span class="err">删除镜像</span> <span class="nx">docker</span> <span class="nx">rmi</span> <span class="err">镜像名称</span>
-<span class="err">查看镜像</span> <span class="nx">docker</span> <span class="nx">images</span>
-</code></pre></div></div>
+<p>docker service create –name web –network skynet –publish 3000:3000 –replicas 1 Bingham/node</p>
 
-<h2 id="用dockerfile创建镜像">用Dockerfile创建镜像</h2>
+<p>docker service tasks web</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">使用文本文件创建镜像</span>
-<span class="mi">1</span><span class="p">,</span><span class="err">先在创建一个文件夹，在该文件夹下创建一个</span> <span class="nx">Dockerfile</span>
+<h2 id="负载均衡">负载均衡</h2>
 
-<span class="nx">FROM</span> <span class="nx">centos</span>
-<span class="nx">MAINTAINER</span> <span class="nx">andy</span> <span class="o">&lt;</span><span class="nx">auden</span><span class="p">.</span><span class="nx">sh</span><span class="p">@</span><span class="nd">163</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
-<span class="nx">RUN</span> <span class="nx">touch</span> <span class="nx">abc</span>
+<p>我们在集群的第一个节点上创建了一个web服务，当使用浏览器访问web服务页面时，如果web在node1上，访问node2，node3依然能访问到web服务，这是因为swarm集群里面的每一台机器都会知道运行在该集群里面的所有服务在哪台服务器上，如果访问的服务器上没有指定的服务，docker会重定向到有这个服务的服务器上。</p>
 
-<span class="err">保存文件编辑</span> 
-<span class="nx">docker</span> <span class="nx">build</span> <span class="o">--</span><span class="nx">tag</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="o">-</span><span class="nx">demo</span><span class="p">:</span><span class="nx">lastest</span> <span class="p">.</span>
-<span class="err">这样</span><span class="nx">docker</span><span class="err">会根据</span><span class="nx">Dockerfile</span><span class="err">里面的描述创建镜像</span>
-</code></pre></div></div>
+<h2 id="扩展服务">扩展服务</h2>
 
-<h2 id="把镜像推送到">把镜像推送到</h2>
+<p>docker service scale web=6</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">docker</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">login</span>
-<span class="nx">docker</span> <span class="nx">push</span> <span class="err">镜像名称</span>
-</code></pre></div></div>
+<h2 id="更新服务">更新服务</h2>
 
-<h2 id="把镜像推送到阿里云">把镜像推送到阿里云</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">先创建命名空间，再创建镜像仓库，然后就可以将镜像推送到镜像仓库上去了</span>
-<span class="nx">docker</span> <span class="nx">login</span> <span class="o">--</span><span class="nx">username</span><span class="o">=</span>
-<span class="nx">docker</span> <span class="nx">tag</span> <span class="p">[</span><span class="nx">ImageId</span><span class="p">]</span>
-<span class="nx">docker</span> <span class="nx">push</span>
-</code></pre></div></div>
-
+<p>docker service update web –image andy/centos:abc</p>
 
                     </div>
 
@@ -392,7 +341,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/01/Docker.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/06/Docker.html">0</span> comments
                                 
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="docker 镜像与容器" name="description">
+    <meta content="docker组合" name="description">
   
   
     <meta name="keywords" content="container,docker">
@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|docker-1-镜像与容器
+        CrazyAndy|docker-4-组合
     
   </title>
   <!-- favicon -->
@@ -259,118 +259,171 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Oct 2019</span>
                         <h1>
-                            docker-1-镜像与容器
+                            docker-4-组合
                         </h1>
                     </div>
                     <div id="post_content">
-                        <h1 id="准备">准备</h1>
+                        <h1 id="组合">组合</h1>
 
-<h2 id="下载docker-toolbox">下载Docker Toolbox</h2>
+<h2 id="compose">Compose</h2>
 
-<p>docker toolbox 是个软件包，我们现在安装的都是 docker desktop</p>
+<p>应用可以需要多个服务，比如web服务，数据库服务等，我们倡议每个服务对应一个docker容器，那么问题就是维持多个服务的容器会比较麻烦，我们可以使用docker compose 来解决这个问题。我们可以创建一个compose文件，在这个文件的上面我们可以描述我们的应用需要哪些服务，这些服务使用的镜像，数据卷和网络等等，再用一条命令启动和管理这些服务。</p>
 
-<h1 id="下载镜像">下载镜像</h1>
+<h2 id="compose文件">Compose文件</h2>
 
-<h2 id="搜索镜像">搜索镜像</h2>
+<p>在compose这个文件里面我们可以定义应用需要的服务，网络和数据卷，这个文件用的yaml格式，docker规定的一些指令，使用他们可以设置对应的东西，比如它主要分成3个区域，sevices就是服务，在它的下面你可以定义需要的服务，每个服务都有自己的名字，使用的镜像，挂载的数据卷，所属的网络依赖的其他服务等等。networks可以定义应用使用的网路名字，类型和其他东西。volumes可以定义数据卷，然后挂载到不同的服务上去使用。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">dockr</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">dev</span><span class="p">.</span><span class="nx">aliyum</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">search</span> <span class="nx">centos</span> 
-<span class="err">镜像名称有可能有两部分组成</span>  <span class="err">人或团队名称</span><span class="o">/</span><span class="err">镜像名字</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">atom</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="na">yml</span>
+<span class="nl">version:</span><span class="sc">'2'</span>
 </code></pre></div></div>
 
-<h2 id="下载镜像-1">下载镜像</h2>
+<h2 id="services">Services</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">images</span>
-<span class="nx">docker</span> <span class="nx">pull</span>
+<h2 id="定义服务">定义服务</h2>
+
+<p>Docker-compose.yml</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">version</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span>
+<span class="nx">services</span><span class="p">:</span>
+	<span class="nx">phoenix</span><span class="p">:</span>
+		<span class="nx">image</span><span class="p">:</span> <span class="nx">nginx</span>
+    <span class="nx">ports</span><span class="p">:</span>
+			<span class="o">-</span> <span class="dl">"</span><span class="s2">8080:80</span><span class="dl">"</span>
+	<span class="nx">dragon</span><span class="p">:</span>
+		<span class="nx">image</span><span class="p">:</span> <span class="nx">nginx</span>
+    <span class="nx">ports</span><span class="p">:</span>
+			<span class="o">-</span>	<span class="dl">"</span><span class="s2">8081:80</span><span class="dl">"</span>
 </code></pre></div></div>
 
-<h2 id="使用阿里云镜像加速">使用阿里云镜像加速</h2>
+<p>：和后面value值之间要空一格</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dev</span><span class="p">.</span><span class="nx">aliyun</span><span class="p">.</span><span class="nx">com</span>
-<span class="err">加速器</span> 
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">ls</span>
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">rm</span> 
+<p>然后执行 docker-compose up</p>
+
+<h2 id="启动服务">启动服务</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">在</span><span class="nx">docker</span><span class="o">-</span><span class="nx">compose</span><span class="p">.</span><span class="nx">yml</span><span class="err">文件所在目录下执行</span> <span class="nx">docker</span><span class="o">-</span><span class="nx">compose</span> <span class="nx">up</span>
+<span class="err">后台运行</span> <span class="err">则加上</span> <span class="o">-</span><span class="nx">d</span> <span class="err">参数</span>
 </code></pre></div></div>
 
-<h1 id="容器">容器</h1>
+<h2 id="服务的生命周期">服务的生命周期</h2>
 
-<h2 id="创建容器">创建容器</h2>
+<p>查看服务可以使用 docker-compose ps</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-<span class="err">查看正在运行的容器</span> <span class="nx">docker</span> <span class="nx">ps</span> 
-<span class="err">查看所有容器</span>  <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span>
+<p>停止服务可以使用 docker-compose stop 服务名称</p>
+
+<p>重新启动可以使用 docker-compose start</p>
+
+<p>查看日志可以使用 docker-compose log 服务名称，如果加 -f 则可持续跟踪</p>
+
+<p>登陆到某个服务容器里面可以使用 docker-compose exec phoenix bash</p>
+
+<p>删除使用 docker-compose rm ，但是rm不会删除创建的网络和数据卷</p>
+
+<p>如果删除掉所有东西，可以使用 docker-compose down</p>
+
+<h1 id="networks">Networks</h1>
+
+<h2 id="网络">网络</h2>
+
+<p>网络决定了服务之间还有外界和服务之间怎么样进行沟通，在执行 docker-compose up 的时候，docker会给我们创建默认的网络，所有的服务也会默认属于这个默认的网络，服务之间可以使用服务名字进行相互通信，我们可以创建自己的网络，让后让指定的服务加入到我们自己创建的网络里面，这样的话属于这网络的服务之间可以相互通信，不属于这网络的服务就无法通信了，这样的话会对服务有隔离作用，也更安全一些。</p>
+
+<h2 id="定义网络">定义网络</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">phoenix:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+ <span class="nl">dragon:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8081:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+ <span class="nl">monkey:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8082:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"default"</span>      
+<span class="nl">networks:</span>
+ <span class="nl">fairyland:</span> 
+  <span class="nl">driver:</span> <span class="n">bridge</span>
 </code></pre></div></div>
+<h1 id="volumes">Volumes</h1>
 
-<h2 id="管理容器">管理容器</h2>
+<h2 id="命名的数据卷">命名的数据卷</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于一个镜像我们可以创建多个容器。</span>
-<span class="err">我们执行</span> <span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="nx">ls</span> <span class="err">这样可以看到</span> <span class="err">该容器里面的目录和文件列表</span>
-<span class="nx">docker</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">all</span><span class="p">(</span><span class="err">简写成</span> <span class="o">-</span><span class="nx">a</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">rm</span> <span class="nx">dockerid</span> <span class="nx">or</span> <span class="nx">dockername</span> <span class="err">可以删除</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="nx">cnetos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> 
-<span class="err">查看最新的</span> <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span> <span class="o">--</span><span class="nx">latest</span>
-<span class="err">查看容器日志</span> <span class="nx">docker</span> <span class="nx">logs</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">停止容器</span> <span class="nx">docker</span> <span class="nx">stop</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">重启</span> <span class="nx">docker</span> <span class="nx">restart</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">启动</span> <span class="nx">docker</span> <span class="nx">start</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">phoenix:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+  <span class="nl">volumes:</span>
+	 <span class="o">-</span> <span class="nl">nest:</span><span class="o">/</span><span class="n">mnt</span>
+ <span class="nl">dragon:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8081:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+  <span class="nl">volumes:</span>
+	 <span class="o">-</span> <span class="nl">nest:</span><span class="o">/</span><span class="n">mnt</span>
+ <span class="nl">monkey:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8082:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"default"</span>      
+<span class="nl">networks:</span>
+ <span class="nl">fairyland:</span> 
+  <span class="nl">driver:</span> <span class="n">bridge</span>
+<span class="nl">volumes:</span>
+	<span class="nl">nest:</span>
+		<span class="nl">driver:</span> <span class="n">local</span>
 </code></pre></div></div>
+<h2 id="指定位置的数据卷">指定位置的数据卷</h2>
 
-<h2 id="带互动的容器">带互动的容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">interactive</span> <span class="p">(</span><span class="err">简写为</span><span class="nx">i</span><span class="p">)</span>  <span class="err">表示使用一个可以交互的容器</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="p">(</span><span class="err">去给容器附加一个终端</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>
-</code></pre></div></div>
-
-<h2 id="在后台运行的容器">在后台运行的容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">我们让容器在后台运行，作为一个</span><span class="nx">deamon</span><span class="err">运行</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">detach</span> <span class="nx">centos</span> <span class="nx">ping</span> <span class="nx">www</span><span class="p">.</span><span class="nx">baidu</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">logs</span> <span class="o">--</span><span class="nx">follow</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">查看正在运行的</span><span class="nx">docker</span><span class="err">日志</span>
-</code></pre></div></div>
-
-<h1 id="创建镜像">创建镜像</h1>
-
-<h2 id="创建镜像-1">创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">cnetos</span> <span class="nx">bash</span>
-<span class="nx">vi</span> <span class="nx">abc</span> 
-<span class="err">随便添加一点内容保存</span>
-<span class="nx">docker</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="dl">'</span><span class="s1">first commit</span><span class="dl">'</span> <span class="o">-</span><span class="nx">a</span> <span class="dl">'</span><span class="s1">作者</span><span class="dl">'</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">镜像名字</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="p">:</span><span class="nx">latest</span>
-<span class="err">删除镜像</span> <span class="nx">docker</span> <span class="nx">rmi</span> <span class="err">镜像名称</span>
-<span class="err">查看镜像</span> <span class="nx">docker</span> <span class="nx">images</span>
-</code></pre></div></div>
-
-<h2 id="用dockerfile创建镜像">用Dockerfile创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">使用文本文件创建镜像</span>
-<span class="mi">1</span><span class="p">,</span><span class="err">先在创建一个文件夹，在该文件夹下创建一个</span> <span class="nx">Dockerfile</span>
-
-<span class="nx">FROM</span> <span class="nx">centos</span>
-<span class="nx">MAINTAINER</span> <span class="nx">andy</span> <span class="o">&lt;</span><span class="nx">auden</span><span class="p">.</span><span class="nx">sh</span><span class="p">@</span><span class="nd">163</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
-<span class="nx">RUN</span> <span class="nx">touch</span> <span class="nx">abc</span>
-
-<span class="err">保存文件编辑</span> 
-<span class="nx">docker</span> <span class="nx">build</span> <span class="o">--</span><span class="nx">tag</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="o">-</span><span class="nx">demo</span><span class="p">:</span><span class="nx">lastest</span> <span class="p">.</span>
-<span class="err">这样</span><span class="nx">docker</span><span class="err">会根据</span><span class="nx">Dockerfile</span><span class="err">里面的描述创建镜像</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到">把镜像推送到</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">docker</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">login</span>
-<span class="nx">docker</span> <span class="nx">push</span> <span class="err">镜像名称</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到阿里云">把镜像推送到阿里云</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">先创建命名空间，再创建镜像仓库，然后就可以将镜像推送到镜像仓库上去了</span>
-<span class="nx">docker</span> <span class="nx">login</span> <span class="o">--</span><span class="nx">username</span><span class="o">=</span>
-<span class="nx">docker</span> <span class="nx">tag</span> <span class="p">[</span><span class="nx">ImageId</span><span class="p">]</span>
-<span class="nx">docker</span> <span class="nx">push</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">phoenix:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">nest:</span><span class="o">/</span><span class="n">mnt</span>
+   <span class="o">-</span> <span class="o">./</span><span class="nl">web:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span>
+ <span class="nl">dragon:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8081:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"fairyland"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">nest:</span><span class="o">/</span><span class="n">mnt</span>
+   <span class="o">-</span> <span class="o">./</span><span class="nl">web:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">html</span>
+ <span class="nl">monkey:</span>
+  <span class="nl">image:</span> <span class="n">nginx</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8082:80"</span>
+  <span class="nl">networks:</span>
+   <span class="o">-</span> <span class="s">"default"</span>      
+<span class="nl">networks:</span>
+ <span class="nl">fairyland:</span> 
+  <span class="nl">driver:</span> <span class="n">bridge</span>
+<span class="nl">volumes:</span>
+ <span class="nl">nest:</span>
+  <span class="nl">driver:</span> <span class="n">local</span>
 </code></pre></div></div>
 
 
@@ -392,7 +445,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/01/Docker.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/04/Docker.html">0</span> comments
                                 
                                 </div>
                             </div>

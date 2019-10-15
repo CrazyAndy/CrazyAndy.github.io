@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="docker 镜像与容器" name="description">
+    <meta content="docker 网络" name="description">
   
   
     <meta name="keywords" content="container,docker">
@@ -17,7 +17,7 @@
 
   <title>
     
-        CrazyAndy|docker-1-镜像与容器
+        CrazyAndy|docker-3-网络
     
   </title>
   <!-- favicon -->
@@ -259,118 +259,89 @@
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Oct 2019</span>
                         <h1>
-                            docker-1-镜像与容器
+                            docker-3-网络
                         </h1>
                     </div>
                     <div id="post_content">
-                        <h1 id="准备">准备</h1>
+                        <h1 id="网络">网络</h1>
 
-<h2 id="下载docker-toolbox">下载Docker Toolbox</h2>
+<h2 id="网络-1">网络</h2>
 
-<p>docker toolbox 是个软件包，我们现在安装的都是 docker desktop</p>
+<p>docker提供了几种网络类型，它决定了容器之间，容器和外界之间 怎么样相互通信。</p>
 
-<h1 id="下载镜像">下载镜像</h1>
-
-<h2 id="搜索镜像">搜索镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">dockr</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">dev</span><span class="p">.</span><span class="nx">aliyum</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">search</span> <span class="nx">centos</span> 
-<span class="err">镜像名称有可能有两部分组成</span>  <span class="err">人或团队名称</span><span class="o">/</span><span class="err">镜像名字</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">network</span> <span class="n">ls</span>
+<span class="n">bridge</span> <span class="err">桥接网络，属于这个网络的容器相互之间可以通信，但是外界需要访问到容器需要使用这个桥接网络。我们可以使用绑定端口的方法让外界跟容器使用指定的端口进行通信</span>
+<span class="n">none</span> <span class="err">无网络，使用这种容器网络会完全隔离</span>
+<span class="n">host</span> <span class="err">主机网路，使用这种网络会和主机使用同样的网络，容器对外界是完全开放的</span>
 </code></pre></div></div>
 
-<h2 id="下载镜像-1">下载镜像</h2>
+<h2 id="理解bridge网络">理解bridge网络</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">images</span>
-<span class="nx">docker</span> <span class="nx">pull</span>
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">network</span> <span class="n">inspect</span> <span class="n">bridge</span>
+<span class="n">Containers</span> <span class="err">字段对应的值是</span> <span class="err">使用该网络的容器列表</span>
+<span class="err">创建容器的时候为其指定网络类型</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">abc</span> <span class="o">--</span><span class="n">net</span> <span class="err">网络名称</span> <span class="err">镜像名称</span>
+<span class="err">如果不使用</span><span class="o">--</span><span class="n">net</span><span class="err">则默认是</span><span class="n">bridge</span><span class="err">网路</span>
+<span class="err">我们可以先建立两个容器，然后使用一个容器去</span><span class="n">ping</span><span class="err">另外一个容器的</span><span class="n">ip</span><span class="err">和</span><span class="n">port</span>
+<span class="n">ip</span> <span class="n">addr</span>
 </code></pre></div></div>
 
-<h2 id="使用阿里云镜像加速">使用阿里云镜像加速</h2>
+<h2 id="理解none网络">理解none网络</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dev</span><span class="p">.</span><span class="nx">aliyun</span><span class="p">.</span><span class="nx">com</span>
-<span class="err">加速器</span> 
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">ls</span>
-<span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">rm</span> 
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">d</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="o">--</span><span class="nx">net</span> <span class="nx">none</span> <span class="nx">nginx</span> 
 </code></pre></div></div>
 
-<h1 id="容器">容器</h1>
+<h2 id="理解host网络">理解host网络</h2>
 
-<h2 id="创建容器">创建容器</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-<span class="err">查看正在运行的容器</span> <span class="nx">docker</span> <span class="nx">ps</span> 
-<span class="err">查看所有容器</span>  <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">d</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="o">--</span><span class="nx">net</span> <span class="nx">host</span> <span class="nx">nginx</span> 
+<span class="err">我们可以通过</span> <span class="nx">docker</span> <span class="nx">network</span> <span class="nx">inspect</span> <span class="nx">host</span> <span class="err">查看</span><span class="nx">ip</span><span class="err">，发现它也没有</span><span class="nx">ip</span><span class="err">，因为它和主机是一样的</span>
+<span class="err">进入容器之后</span> <span class="nx">ip</span> <span class="nx">addr</span> <span class="err">记录下</span><span class="nx">ip</span><span class="err">地址</span>
+<span class="err">然后退出，</span> <span class="nx">docker</span><span class="o">-</span><span class="nx">machine</span> <span class="nx">ssh</span> <span class="k">default</span> <span class="err">使用</span> <span class="nx">ifconfig</span> <span class="err">发现和刚才</span><span class="nx">ip</span><span class="err">一致</span>
+<span class="err">所以这个容器对于外界是开放的</span>
 </code></pre></div></div>
 
-<h2 id="管理容器">管理容器</h2>
+<h1 id="端口">端口</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于一个镜像我们可以创建多个容器。</span>
-<span class="err">我们执行</span> <span class="nx">docker</span> <span class="nx">run</span> <span class="nx">centos</span> <span class="nx">ls</span> <span class="err">这样可以看到</span> <span class="err">该容器里面的目录和文件列表</span>
-<span class="nx">docker</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">all</span><span class="p">(</span><span class="err">简写成</span> <span class="o">-</span><span class="nx">a</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">rm</span> <span class="nx">dockerid</span> <span class="nx">or</span> <span class="nx">dockername</span> <span class="err">可以删除</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">name</span> <span class="nx">abc</span> <span class="nx">cnetos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">echo</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span> 
-<span class="err">查看最新的</span> <span class="nx">docker</span> <span class="nx">ps</span> <span class="o">--</span><span class="nx">all</span> <span class="o">--</span><span class="nx">latest</span>
-<span class="err">查看容器日志</span> <span class="nx">docker</span> <span class="nx">logs</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">停止容器</span> <span class="nx">docker</span> <span class="nx">stop</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">重启</span> <span class="nx">docker</span> <span class="nx">restart</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
-<span class="err">启动</span> <span class="nx">docker</span> <span class="nx">start</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span>
+<h2 id="端口-1">端口</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">inspect</span> <span class="err">镜像名字</span>
+<span class="err">在</span><span class="n">Config</span><span class="err">下面</span> <span class="nc">ExposedPorts</span> <span class="err">里面会告诉你对外开放的端口</span>
+<span class="err">在创建容器的时候，我们可是指定主机和容器端口的映射关系</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web3</span> <span class="o">--</span><span class="n">publish</span> <span class="o">(</span><span class="err">简写为</span><span class="o">-</span><span class="n">p</span><span class="o">)</span>  <span class="err">主机端口号</span><span class="o">:</span><span class="err">容器端口号</span> <span class="err">容器镜像</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web3</span> <span class="o">-</span><span class="n">p</span> <span class="mi">80</span><span class="o">:</span><span class="mi">80</span> <span class="n">nginx</span>
 </code></pre></div></div>
 
-<h2 id="带互动的容器">带互动的容器</h2>
+<h2 id="端口绑定">端口绑定</h2>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">interactive</span> <span class="p">(</span><span class="err">简写为</span><span class="nx">i</span><span class="p">)</span>  <span class="err">表示使用一个可以交互的容器</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="p">(</span><span class="err">去给容器附加一个终端</span><span class="p">)</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">--</span><span class="nx">tty</span> <span class="nx">centos</span> <span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">bash</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">查看容器和主机绑定的端口</span>
+<span class="n">docker</span> <span class="n">inspect</span> <span class="err">容器名称</span>
+<span class="err">在</span><span class="n">NetworkSettings</span><span class="err">下面</span><span class="n">Ports</span><span class="err">下面，查看绑定情况</span>
+<span class="n">docker</span> <span class="n">port</span> <span class="err">容器名字</span> <span class="err">依然可以查看绑定情况</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web1</span> <span class="o">--</span><span class="n">publish</span> <span class="mi">80</span> <span class="n">nginx</span> <span class="err">容器端口是</span><span class="mi">80</span><span class="err">，主机对应端口则是随机的</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web1</span> <span class="o">--</span><span class="n">publish</span><span class="o">-</span><span class="n">all</span> <span class="n">nginx</span>
+<span class="err">或者</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web1</span> <span class="o">-</span><span class="no">P</span> <span class="mi">80</span> <span class="n">nginx</span>
+<span class="err">以上这两个命令会自动公布镜像需要对外公布的端口。</span>
 </code></pre></div></div>
 
-<h2 id="在后台运行的容器">在后台运行的容器</h2>
+<h1 id="自定义网络">自定义网络</h1>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">我们让容器在后台运行，作为一个</span><span class="nx">deamon</span><span class="err">运行</span>
-<span class="nx">docker</span> <span class="nx">run</span> <span class="o">--</span><span class="nx">detach</span> <span class="nx">centos</span> <span class="nx">ping</span> <span class="nx">www</span><span class="p">.</span><span class="nx">baidu</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">logs</span> <span class="o">--</span><span class="nx">follow</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">查看正在运行的</span><span class="nx">docker</span><span class="err">日志</span>
+<h2 id="自定义网络-1">自定义网络</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">基于某个网络创建自定义的网络</span><span class="o">,</span><span class="err">这样属于这个网络的容器就可以单独隔离出来，他们之间可以相互通信。</span>
+<span class="err">但是其他的不在这些自定义网络上的容器不可以访问他们。一个容器可以属于多个网络。</span> <span class="err">在用户自定义网络上的容器他们之间可以使用各自容器的名字访问到对方，因为会用到</span><span class="n">docker</span><span class="err">内嵌的</span><span class="n">dns</span><span class="err">功能，创建新的网络我们可以使用如下命令。</span>
+<span class="n">docker</span> <span class="n">network</span> <span class="n">create</span> <span class="o">--</span><span class="n">driver</span><span class="o">(</span><span class="err">指定网络类型</span><span class="o">)</span> <span class="n">bridge</span> <span class="n">web</span><span class="err">（网路名字）</span>
+<span class="n">docker</span> <span class="n">network</span> <span class="n">inspect</span> <span class="n">web</span> <span class="err">可以查看这个网络信息</span>
 </code></pre></div></div>
 
-<h1 id="创建镜像">创建镜像</h1>
+<h2 id="把容器放到自定义网络里">把容器放到自定义网络里</h2>
 
-<h2 id="创建镜像-1">创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">docker</span> <span class="nx">run</span> <span class="o">-</span><span class="nx">i</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">cnetos</span> <span class="nx">bash</span>
-<span class="nx">vi</span> <span class="nx">abc</span> 
-<span class="err">随便添加一点内容保存</span>
-<span class="nx">docker</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">m</span> <span class="dl">'</span><span class="s1">first commit</span><span class="dl">'</span> <span class="o">-</span><span class="nx">a</span> <span class="dl">'</span><span class="s1">作者</span><span class="dl">'</span> <span class="nx">id</span><span class="o">/</span><span class="nx">name</span> <span class="err">镜像名字</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="p">:</span><span class="nx">latest</span>
-<span class="err">删除镜像</span> <span class="nx">docker</span> <span class="nx">rmi</span> <span class="err">镜像名称</span>
-<span class="err">查看镜像</span> <span class="nx">docker</span> <span class="nx">images</span>
-</code></pre></div></div>
-
-<h2 id="用dockerfile创建镜像">用Dockerfile创建镜像</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">使用文本文件创建镜像</span>
-<span class="mi">1</span><span class="p">,</span><span class="err">先在创建一个文件夹，在该文件夹下创建一个</span> <span class="nx">Dockerfile</span>
-
-<span class="nx">FROM</span> <span class="nx">centos</span>
-<span class="nx">MAINTAINER</span> <span class="nx">andy</span> <span class="o">&lt;</span><span class="nx">auden</span><span class="p">.</span><span class="nx">sh</span><span class="p">@</span><span class="nd">163</span><span class="p">.</span><span class="nx">com</span><span class="o">&gt;</span>
-<span class="nx">RUN</span> <span class="nx">touch</span> <span class="nx">abc</span>
-
-<span class="err">保存文件编辑</span> 
-<span class="nx">docker</span> <span class="nx">build</span> <span class="o">--</span><span class="nx">tag</span> <span class="nx">andy</span><span class="o">/</span><span class="nx">abc</span><span class="o">-</span><span class="nx">demo</span><span class="p">:</span><span class="nx">lastest</span> <span class="p">.</span>
-<span class="err">这样</span><span class="nx">docker</span><span class="err">会根据</span><span class="nx">Dockerfile</span><span class="err">里面的描述创建镜像</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到">把镜像推送到</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hub</span><span class="p">.</span><span class="nx">docker</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">docker</span> <span class="nx">login</span>
-<span class="nx">docker</span> <span class="nx">push</span> <span class="err">镜像名称</span>
-</code></pre></div></div>
-
-<h2 id="把镜像推送到阿里云">把镜像推送到阿里云</h2>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">先创建命名空间，再创建镜像仓库，然后就可以将镜像推送到镜像仓库上去了</span>
-<span class="nx">docker</span> <span class="nx">login</span> <span class="o">--</span><span class="nx">username</span><span class="o">=</span>
-<span class="nx">docker</span> <span class="nx">tag</span> <span class="p">[</span><span class="nx">ImageId</span><span class="p">]</span>
-<span class="nx">docker</span> <span class="nx">push</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">在创建容器的时候，我们可以把容器放到指定的网络里面。</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">name</span> <span class="n">web5</span> <span class="o">--</span><span class="n">net</span> <span class="n">web</span> <span class="n">nginx</span>
+<span class="err">也可以把其他容器手动放到</span><span class="n">web</span><span class="err">这个网路里面</span>
+<span class="n">docker</span> <span class="n">network</span> <span class="n">connect</span> <span class="nf">web</span><span class="o">(</span><span class="err">网路名字</span><span class="o">)</span> <span class="n">web3</span><span class="err">（要放到这个网络里的容器的名字）</span>
+<span class="n">docker</span> <span class="n">network</span> <span class="n">disconnnect</span>
 </code></pre></div></div>
 
 
@@ -392,7 +363,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/01/Docker.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/03/Docker.html">0</span> comments
                                 
                                 </div>
                             </div>

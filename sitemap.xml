@@ -2,6 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000/container/2019/10/06/Docker.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/container/2019/10/05/Docker.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/container/2019/10/04/Docker.html</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000/container/2019/10/03/Docker.html</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000/container/2019/10/02/Docker.html</loc>
     </url>
 

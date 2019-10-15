@@ -273,25 +273,203 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
+                            <a href="/container/2019/10/06/Docker.html" class="btn-link">
+                                <h2>docker-6-集群</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Oct 2019</span>
+                            </div>
+                            <p>
+                                介绍
+
+docker swarm
+
+docker swarm是创建服务器集群用的工具，现在只需要几条命令就可以创建服务器的集群，它内置一些服务器集群所需要的工具，比如说查找，网络负载均衡等等。
+...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/06/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/05/Docker.html" class="btn-link">
+                                <h2>docker-5-容器化应用</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Oct 2019</span>
+                            </div>
+                            <p>
+                                定义服务
+
+db - 定义数据库服务
+
+version: '2'
+services:
+ db:
+  image: mariadb:10.1
+  environment:
+   MYSQL_ROO...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/05/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/04/Docker.html" class="btn-link">
+                                <h2>docker-4-组合</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Oct 2019</span>
+                            </div>
+                            <p>
+                                组合
+
+Compose
+
+应用可以需要多个服务，比如web服务，数据库服务等，我们倡议每个服务对应一个docker容器，那么问题就是维持多个服务的容器会比较麻烦，我们可以使用docker com...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/04/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/03/Docker.html" class="btn-link">
+                                <h2>docker-3-网络</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Oct 2019</span>
+                            </div>
+                            <p>
+                                网络
+
+网络
+
+docker提供了几种网络类型，它决定了容器之间，容器和外界之间 怎么样相互通信。
+
+docker network ls
+bridge 桥接网络，属于这个网络的容器相互之间可以通...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/03/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
                             <a href="/container/2019/10/02/Docker.html" class="btn-link">
-                                <h2>docker学习笔记002</h2>
+                                <h2>docker-2-存储</h2>
                             </a>
                             <div class="small m-b-xs">
                                 <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Oct 2019</span>
                             </div>
                             <p>
-                                准备
+                                存储
 
-下载Docker Toolbox
+数据盘可以被多个docker容器共享使用，我们需要将docker容器中应用程序产生的日志文件，数据库管理系统中的数据这些需要长期保存的内容放到数据盘里面。
 
-docker toolbox 是个软件包，我们现在安装的都是 docker desktop
-
-下载镜像
-
-搜索镜像
-
-hub.dockr.com
-de...
+数据卷：Data Volum...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -325,17 +503,24 @@ de...
                     <div class="ibox">
                         <div class="ibox-content">
                             <a href="/container/2019/10/01/Docker.html" class="btn-link">
-                                <h2>docker学习笔记001</h2>
+                                <h2>docker-1-镜像与容器</h2>
                             </a>
                             <div class="small m-b-xs">
                                 <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
                             </div>
                             <p>
-                                Docker了解
+                                准备
 
-VS Code :自定义代码片段
+下载Docker Toolbox
 
-我们在vs code中先点击f1，然后 执行命令snippets， 会提示 选择不同语言的代码片段，我们选择dart.json文件。我们自...
+docker toolbox 是个软件包，我们现在安装的都是 docker desktop
+
+下载镜像
+
+搜索镜像
+
+hub.dockr.com
+de...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -365,6 +550,10 @@ VS Code :自定义代码片段
             
         </ul>
         
+    <div class="col-lg-6 col-lg-offset-6">
+		<div class="pag-holder"></div>
+	</div>
+
 
 
     </div>

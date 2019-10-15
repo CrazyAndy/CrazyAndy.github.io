@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="docker容器化应用" name="description">
+  
+  
+    <meta name="keywords" content="container,docker">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|docker-5-容器化应用
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+    
+    
+    
+    <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+
+
+    
+    
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">container</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Oct 2019</span>
+                        <h1>
+                            docker-5-容器化应用
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="定义服务">定义服务</h1>
+
+<h2 id="db---定义数据库服务">db - 定义数据库服务</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">db:</span>
+  <span class="nl">image:</span> <span class="nl">mariadb:</span><span class="mf">10.1</span>
+  <span class="nl">environment:</span>
+   <span class="nl">MYSQL_ROOT_PASSWORD:</span> <span class="s">"root"</span>
+   <span class="nl">MYSQL_DATABASE:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_USER:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_PASSWORD:</span> <span class="s">"123123"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">db:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="nl">volumes:</span>
+ <span class="nl">db:</span>
+  <span class="nl">driver:</span> <span class="n">local</span>
+</code></pre></div></div>
+
+<h2 id="db---测试数据库服务">db - 测试数据库服务</h2>
+
+<p>我们在db 服务里面创建一个test数据库，然后删除该服务，然后再启动该服务，发现还有test数据，说明就是夹在数据卷造成的。</p>
+
+<h2 id="php---定义-php--服务">php - 定义 php  服务</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nl">php:</span>
+  <span class="nl">image:</span> <span class="nl">php:</span><span class="mf">7.0</span><span class="o">-</span><span class="n">fpm</span>
+  <span class="nl">volumes:</span> 
+   <span class="o">-</span> <span class="o">./</span><span class="nl">app:</span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">app</span>
+</code></pre></div></div>
+
+<h2 id="web---定义-nginx-服务">web - 定义 nginx 服务</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">web:</span>
+  <span class="nl">image:</span> <span class="nl">nginx:</span><span class="mf">1.11</span><span class="o">.</span><span class="mi">1</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">depends_on:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes_from:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="nl">config:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span>
+ <span class="nl">php:</span>
+  <span class="nl">image:</span> <span class="nl">php:</span><span class="mf">7.0</span><span class="o">-</span><span class="n">fpm</span>
+  <span class="nl">volumes:</span> 
+   <span class="o">-</span> <span class="o">./</span><span class="nl">app:</span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">app</span>
+ <span class="nl">db:</span>
+  <span class="nl">image:</span> <span class="nl">mariadb:</span><span class="mf">10.1</span>
+  <span class="nl">environment:</span>
+   <span class="nl">MYSQL_ROOT_PASSWORD:</span> <span class="s">"root"</span>
+   <span class="nl">MYSQL_DATABASE:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_USER:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_PASSWORD:</span> <span class="s">"123123"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">db:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="nl">volumes:</span>
+ <span class="nl">db:</span>
+  <span class="nl">driver:</span> <span class="n">local</span>
+</code></pre></div></div>
+
+<p>nginx配置文件为 /images/nginx/config/default.conf</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span><span class="o">{</span>
+ <span class="n">listen</span> <span class="mi">80</span><span class="o">;</span>
+ <span class="n">server_name</span> <span class="n">localhost</span><span class="o">;</span>
+ <span class="n">root</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">app</span><span class="o">;</span>
+ <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="na">php</span> <span class="n">index</span><span class="o">.</span><span class="na">html</span> <span class="n">index</span><span class="o">.</span><span class="na">htm</span><span class="o">;</span>
+ <span class="n">location</span> <span class="o">/</span> <span class="o">{</span>
+  <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="na">php</span> <span class="n">index</span><span class="o">.</span><span class="na">html</span> <span class="n">index</span><span class="o">.</span><span class="na">htm</span><span class="o">;</span>
+  <span class="n">try_files</span> <span class="n">$uri</span> <span class="n">$uri</span><span class="o">/</span> <span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="na">php</span><span class="o">?</span><span class="n">$query_string</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="n">location</span> <span class="o">~</span> <span class="err">\</span><span class="o">.</span><span class="na">php</span><span class="err">$</span> <span class="o">{</span>
+  <span class="n">fastcgi_pass</span> <span class="nl">php:</span><span class="mi">9000</span><span class="o">;</span>
+  <span class="n">fastcgi_index</span> <span class="n">index</span><span class="o">.</span><span class="na">php</span><span class="o">;</span>
+  <span class="n">fastcgi_param</span> <span class="no">SCRIPT_FILENAME</span> <span class="n">$document_root$fastcgi_script_name</span><span class="o">;</span>
+  <span class="n">include</span> <span class="n">fastcgi_params</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>php文件为 /app/phpinfo.php</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;?</span><span class="n">php</span> <span class="nf">phpinfo</span><span class="o">();</span> <span class="o">?&gt;</span>
+</code></pre></div></div>
+
+<h1 id="build">Build</h1>
+
+<h2 id="创建自己的服务">创建自己的服务</h2>
+
+<p>以上我们再compose里面都是用的现成的镜像，但是大多时候我们需要定制自己的镜像。</p>
+
+<p>我们先创建一个基于php自定义配置的镜像，放在 /images/php/Dockerfile</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">web:</span>
+  <span class="nl">image:</span> <span class="nl">nginx:</span><span class="mf">1.11</span><span class="o">.</span><span class="mi">1</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">depends_on:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes_from:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="nl">config:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span>
+ <span class="nl">php:</span>
+  <span class="nl">build:</span>
+   <span class="nl">context:</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">php</span>
+   <span class="nl">dockerfile:</span> <span class="nc">Dockerfile</span>
+  <span class="nl">volumes:</span> 
+   <span class="o">-</span> <span class="o">./</span><span class="nl">app:</span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">app</span>
+ <span class="nl">db:</span>
+  <span class="nl">image:</span> <span class="nl">mariadb:</span><span class="mf">10.1</span>
+  <span class="nl">environment:</span>
+   <span class="nl">MYSQL_ROOT_PASSWORD:</span> <span class="s">"root"</span>
+   <span class="nl">MYSQL_DATABASE:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_USER:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_PASSWORD:</span> <span class="s">"123123"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">db:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="nl">volumes:</span>
+ <span class="nl">db:</span>
+  <span class="nl">driver:</span> <span class="n">local</span>
+</code></pre></div></div>
+
+<p>php自定义配置文件放在 /images/php/config/php.ini</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">memory_limt</span> <span class="o">=</span> <span class="mi">256</span><span class="no">M</span>
+<span class="n">post_max_size</span> <span class="o">=</span> <span class="mi">100</span><span class="no">M</span>
+<span class="n">upload_max_filesize</span> <span class="o">=</span> <span class="mi">100</span><span class="no">M</span>
+</code></pre></div></div>
+
+<p>Dockerfile放在 /images/php/Dockerfile</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">FROM</span> <span class="nl">php:</span><span class="mf">7.0</span><span class="o">-</span><span class="n">fpm</span>
+<span class="no">MAINTAINER</span> <span class="n">andy</span> <span class="o">&lt;</span><span class="n">auden</span><span class="o">.</span><span class="na">sh</span><span class="err">@</span><span class="mi">163</span><span class="o">.</span><span class="na">com</span><span class="o">&gt;</span>
+
+<span class="no">COPY</span> <span class="o">./</span><span class="n">config</span><span class="o">/</span><span class="n">php</span><span class="o">.</span><span class="na">ini</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span><span class="o">/</span>
+</code></pre></div></div>
+
+<p>先docker-compose build ,再 docker-compose up -d</p>
+
+<h2 id="安装php-模块">安装php 模块</h2>
+
+<p>我们修改Dockerfile文件内容如下</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">FROM</span> <span class="nl">php:</span><span class="mf">7.0</span><span class="o">-</span><span class="n">fpm</span>
+<span class="no">MAINTAINER</span> <span class="n">andy</span> <span class="o">&lt;</span><span class="n">auden</span><span class="o">.</span><span class="na">sh</span><span class="err">@</span><span class="mi">163</span><span class="o">.</span><span class="na">com</span><span class="o">&gt;</span>
+
+<span class="no">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">libpng</span><span class="o">-</span><span class="n">dev</span> <span class="n">libjpeg</span><span class="o">-</span><span class="n">dev</span> <span class="err">\</span> 
+  <span class="o">&amp;&amp;</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">lists</span><span class="o">/*</span> <span class="err">\</span>
+  <span class="o">&amp;&amp;</span> <span class="n">docker</span><span class="o">-</span><span class="n">php</span><span class="o">-</span><span class="n">ext</span><span class="o">-</span><span class="n">configure</span> <span class="n">gd</span> <span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">png</span><span class="o">-</span><span class="n">dir</span><span class="o">=/</span><span class="n">usr</span> <span class="o">--</span><span class="n">with</span><span class="o">-</span><span class="n">jpeg</span><span class="o">-</span><span class="n">dir</span><span class="o">=/</span><span class="n">usr</span> <span class="err">\</span>
+  <span class="o">&amp;&amp;</span> <span class="n">docker</span><span class="o">-</span><span class="n">php</span><span class="o">-</span><span class="n">ext</span><span class="o">-</span><span class="n">install</span> <span class="n">gd</span> <span class="n">pdo_mysql</span> <span class="n">zip</span> <span class="n">opcache</span>
+
+<span class="no">COPY</span> <span class="o">./</span><span class="n">config</span><span class="o">/</span><span class="n">php</span><span class="o">.</span><span class="na">ini</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span><span class="o">/</span>
+<span class="no">COPY</span> <span class="o">./</span><span class="n">config</span><span class="o">/</span><span class="n">opcache</span><span class="o">-</span><span class="n">recommended</span><span class="o">.</span><span class="na">ini</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span><span class="o">/</span>
+
+</code></pre></div></div>
+
+<p>我们修改配置文件 opcache-recommended.ini 如下</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opcache</span><span class="o">.</span><span class="na">memory_consumption</span><span class="o">=</span><span class="mi">128</span>
+<span class="n">opcache</span><span class="o">.</span><span class="na">interned_strings_buffer</span><span class="o">=</span><span class="mi">8</span>
+<span class="n">opcache</span><span class="o">.</span><span class="na">max_accelerated_files</span><span class="o">=</span><span class="mi">4000</span>
+<span class="n">opcache</span><span class="o">.</span><span class="na">revalidate_freq</span><span class="o">=</span><span class="mi">60</span>
+<span class="n">opcache</span><span class="o">.</span><span class="na">fast_shutdown</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">opcache</span><span class="o">.</span><span class="na">enable_cli</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<h1 id="工具容器">工具容器</h1>
+
+<h2 id="创建工具包容器">创建工具包容器</h2>
+
+<p>在开发应用的时候，我们可能会遇到一些工具，比如说php的包管理工具composer,管理nodejs的工具npm，这些工具我们可以单独的放在一个容器里面，要使用他们的时候我们可以进入到带这些工具的容器里面，然后执行一些任务。</p>
+
+<p>我们修改根目录下的docker-compose.yml文件内容，增加console服务</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">version:</span> <span class="sc">'2'</span>
+<span class="nl">services:</span>
+ <span class="nl">console:</span>
+  <span class="nl">build:</span>
+   <span class="nl">context:</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">console</span>
+   <span class="nl">dockerfile:</span> <span class="nc">Dockerfile</span>
+  <span class="nl">volumes_from:</span>
+   <span class="o">-</span> <span class="n">php</span> 
+  <span class="nl">tty:</span> <span class="kc">true</span>
+ <span class="nl">web:</span>
+  <span class="nl">image:</span> <span class="nl">nginx:</span><span class="mf">1.11</span><span class="o">.</span><span class="mi">1</span>
+  <span class="nl">ports:</span>
+   <span class="o">-</span> <span class="s">"8080:80"</span>
+  <span class="nl">depends_on:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes_from:</span>
+   <span class="o">-</span> <span class="n">php</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="nl">config:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="na">d</span>
+ <span class="nl">php:</span>
+  <span class="nl">build:</span>
+   <span class="nl">context:</span> <span class="o">./</span><span class="n">images</span><span class="o">/</span><span class="n">php</span>
+   <span class="nl">dockerfile:</span> <span class="nc">Dockerfile</span>
+  <span class="nl">volumes:</span> 
+   <span class="o">-</span> <span class="o">./</span><span class="nl">app:</span><span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">app</span>
+ <span class="nl">db:</span>
+  <span class="nl">image:</span> <span class="nl">mariadb:</span><span class="mf">10.1</span>
+  <span class="nl">environment:</span>
+   <span class="nl">MYSQL_ROOT_PASSWORD:</span> <span class="s">"root"</span>
+   <span class="nl">MYSQL_DATABASE:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_USER:</span> <span class="s">"app"</span>
+   <span class="nl">MYSQL_PASSWORD:</span> <span class="s">"123123"</span>
+  <span class="nl">volumes:</span>
+   <span class="o">-</span> <span class="nl">db:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="nl">volumes:</span>
+ <span class="nl">db:</span>
+  <span class="nl">driver:</span> <span class="n">local</span>
+</code></pre></div></div>
+
+<p>console服务的dockerfile放在/images/console目录下</p>
+
+<h2 id="安装配置gitcomposer">安装配置git，composer</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">git</span> <span class="n">curl</span> <span class="n">libfreetype</span><span class="o">-</span><span class="n">dev</span> <span class="err">\</span>
+  <span class="o">&amp;&amp;</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">lists</span><span class="o">/*</span> <span class="err">\</span>
+  <span class="o">&amp;&amp;</span> <span class="n">pecl</span> <span class="n">install</span> <span class="n">zip</span> <span class="err">\</span> 
+  <span class="o">&amp;&amp;</span> <span class="n">docker</span><span class="o">-</span><span class="n">php</span><span class="o">-</span><span class="n">ext</span><span class="o">-</span><span class="n">enable</span> <span class="n">zip</span>
+  
+<span class="err">剩余的不再描述</span>
+</code></pre></div></div>
+
+<p>docker会按照console再dockerfile里面的配置生成新的镜像，在这个镜像里面可以安装并且配置我们需要使用的工具</p>
+
+<h1 id="运行">运行</h1>
+
+<h2 id="安装运行laravel项目">安装运行Laravel项目</h2>
+
+<p>没啥好介绍的</p>
+
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">docker</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/container/2019/10/05/Docker.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>
