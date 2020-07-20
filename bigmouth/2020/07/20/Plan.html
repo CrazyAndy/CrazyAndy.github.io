@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="BigMouth英语角策划" name="description">
+  
+  
+    <meta name="keywords" content="bigmouth">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|BigMouth英语角策划
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+        
+        
+            <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" href="/english/english">English Index</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" href="/english/bigmouth/">BigMouth</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk3.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+        
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">bigmouth</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 20 Jul 2020</span>
+                        <h1>
+                            BigMouth英语角策划
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="创建英语角bigmouth初衷">创建英语角BigMouth初衷　　</h1>
+
+<p>大家好，我是孙虎，电桩组高级JAVA工程师，负责咱们软件开发的工作。</p>
+
+<p>　　由于偶尔会和外国客户交流，不可避免的会使用英语。但是自己总感觉书到用时方恨少，向客户表达自己想法时总会有些磕磕绊绊，听取对方意见时又总会有点模棱两可，场面少许尴尬，几分不适。</p>
+
+<p>　　学习这么多年哑巴英语，通过最近一两年实战才发现自己学习英语的方式不对，英语作为一门语言，本身只是一个沟通想法的工具而已。其实我们在实际使用过程中，不会要求你懂太多的语法，太多的词汇量，只要能在日常场景中正常交流即可。</p>
+
+<p>　　其实使用英语正常交流就是我们模拟一个个的对话场景而已，我们把各种场景下常用的句子给掌握了，也就可以了，我们不要对自己定很高的目标就行。就像某次我出差，惊奇的发现在车上发现旁边10多岁的小女孩和旁边的大人沟通很流利快速，不自卑的讲，她掌握的词汇未必有我的多，可又不得不承认的事情是，她掌握的恰好是她在日常表达自己想法能用到的，转而切换到我们自身来讲，我们为什么不那么去学习呢？</p>
+
+<p>　　所以我们就要本着这个原则和思想去重新学习英语，相信能很轻松达到我们正常和客户交流沟通，为其更迅速的答疑解惑的目的。并且我认为学习本身就是一件不能只输入，不输出的过程，尤其对学习语言来说我们要用嘴去说出来，所以我想创建英语角，并起名为BigMouth，希望能和大家一起学习进步，共同成长。</p>
+
+<h1 id="英语角活动内容大致如下">英语角活动内容大致如下：</h1>
+
+<ol>
+  <li>每次找一个topic，我们事先围绕这个topic去准备对话资料，然后分发给组员。</li>
+  <li>组员私下学习拿到的资料，尽量在该topic下掌握资料中的对话，在组内聚会时能够自由交流使用。</li>
+  <li>没两周开一次会，约在周五下班5:10分开始，5:30结束。三人一组，两人对话，第三人作为监督人对着资料校对，并随时提出修正，按照此模式轮换监督人，直至每个人都当一次监督人，也就是每人都会训练对话两次。</li>
+  <li>至此，对话结束，大家总结，讨论，并讨论制定下一次会议topic以及资料负责人。</li>
+</ol>
+
+<p>　　目前，这个只是我的一个提议，希望耐心阅读完此文章的您能多多给我一些反馈，如果有兴趣就请您加入进来，大家一起进步成长。</p>
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">bigmouth</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">english</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/bigmouth/2020/07/20/Plan.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>

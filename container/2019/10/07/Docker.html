@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta content="docker私服" name="description">
+  
+  
+    <meta name="keywords" content="container,docker">
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|docker-7-私服
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+        
+        
+            <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/blog">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/database/">Database</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/boot/">Springboot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/bigdata/">Bigdata</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/it/">It</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+        
+    
+
+    <div class="wrapper wrapper-content  animated fadeInRight article" >
+    <div class="row" >
+        <div class="col-lg-3">
+            <div id="renderIn"></div>
+        </div>
+        <div class="col-lg-9">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                    	
+                        	<button class="btn btn-white btn-xs" type="button">container</button>
+                        
+                    </div>
+                    <div class="text-center article-title">
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Oct 2019</span>
+                        <h1>
+                            docker-7-私服
+                        </h1>
+                    </div>
+                    <div id="post_content">
+                        <h1 id="registry20">Registry2.0</h1>
+
+<h2 id="docker-私服">docker 私服</h2>
+
+<p>我先使用的是registry2.0，这个界面也没有，以后准备换成其他的</p>
+
+<h2 id="安装私服">安装私服</h2>
+
+<p>docker pull registry</p>
+
+<h2 id="本地添加私服">本地添加私服</h2>
+
+<p>我们需要创建/etc/docker/daemon.json文件</p>
+
+<p>内容如下</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"registry-mirrors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://registry.docker-cn.com"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"insecure-registries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"192.168.111.133:5000"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>然后重新docker</p>
+
+<p>service docker restart</p>
+
+<h2 id="查看是否配置成功">查看是否配置成功</h2>
+
+<p>docker info</p>
+
+<h2 id="上传下载镜像">上传下载镜像</h2>
+
+<p>由于没有配置ssl，我们不得不使用 ip:port/name:tag 来上传下载镜像</p>
+
+<h1 id="harbor">Harbor</h1>
+
+<h2 id="介绍">介绍</h2>
+
+<p>我们推荐Harbor来取代Registry2.0的原因是，harbor自带管理系统页面，能很直观的看到你所有的仓库内容。甚至还有用户管理等内容。
+安装harbor也很简单，主要是下载tgz压缩包，修改配置文件，编译运行。</p>
+
+<p>https://www.cnblogs.com/guyeshanrenshiwoshifu/p/9166195.html</p>
+
+<p>https://blog.csdn.net/qq_43309149/article/details/88608726</p>
+
+<p>还是做下笔记吧</p>
+
+<h2 id="1下载目录">1，下载目录</h2>
+
+<p>https://github.com/goharbor/harbor/releases</p>
+
+<h2 id="2修改harboryml-配置文件修改域名mysql和redis-数据库可以改成自己的">2，修改harbor.yml 配置文件，修改域名，mysql和redis 数据库（可以改成自己的）</h2>
+
+<h2 id="3运行-prepare-执行脚本">3,运行 prepare 执行脚本</h2>
+
+<p>这时候可能会提示</p>
+
+<p>expected <block end="">, but found '<block mapping="" start="">'
+  in "/input/harbor.yml", line 102, column 2</block></block></p>
+
+<p>之类的问题，主要是配置文件 ，要：后面有一个空格，而且 层级结构要对。</p>
+
+<h2 id="4执行-installsh-脚本">4，执行 ./install.sh 脚本</h2>
+
+<p>需要docker-compose 版本在 1.18.0以上</p>
+
+<h2 id="5升级docker-compse">5，升级docker-compse</h2>
+
+<p>https://docs.docker.com/compose/install/</p>
+
+<h2 id="6修改-harboryml">6,修改 harbor.yml</h2>
+
+<p>修改域名，端口号，外置数据库，关系型职能只支持 POSTGRES，可以配置redis，但是必须用0的索引，恶心。</p>
+
+
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                                <h5 style="display: inline;">Tags:</h5>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">docker</button>
+                                
+                                    <button class="btn btn-white btn-xs" type="button">blog</button>
+                                
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Stats:</h5>
+                                <div>
+                                
+                                
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/07/Docker.html">0</span> comments
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- donate -->
+                            
+                            <br>
+                            <!-- share -->
+							<!--
+                            <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_button_email"></a>
+<a class="a2a_button_wechat"></a>
+<a class="a2a_button_sina_weibo"></a>
+</div>
+<script>
+var a2a_config = a2a_config || {};
+a2a_config.color_main = "D7E5ED";
+a2a_config.color_border = "AECADB";
+a2a_config.color_link_text = "333333";
+a2a_config.color_link_text_hover = "333333";
+</script>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
+                            -->
+							<br>
+                            <!-- comment -->
+							<!--
+                            
+<div id="disqus_thread"></div>
+<script>
+/** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+	/*
+	var disqus_config = function () { this.page.url = PAGE_URL;
+	// Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER;
+	// Replace PAGE_IDENTIFIER with your page's unique identifier variable };
+	*/
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+							-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+    
+    
+
+    
+    
+    <script src="/static/js/toc.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("pre").css('display', 'block');
+
+            $('#renderIn').toc();
+
+            var fixmeTop = $('#renderIn').offset().top - 75; // get initial position of the element
+
+            $(window).scroll(function () { // assign scroll event listener
+
+                var currentScroll = $(window).scrollTop(); // get current position
+
+                if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                    $('#renderIn').css({ // scroll to that element or below it
+                        top: '75px',
+                        position: 'fixed',
+                        width: '232px'
+                    });
+                } else { // apply position: static
+                    $('#renderIn').css({ // if you scroll above it
+                        position: 'inherit',
+                        width: '232px'
+                    });
+                }
+
+            });
+
+            $("#renderIn a").on("click", function (e) {
+
+                e.preventDefault();
+
+                $("body, html").animate({
+                    scrollTop: ($($(this).attr('href')).offset().top - 100)
+                }, 600);
+            });
+
+            // $('body').scrollspy({
+            //     target: '#renderIn',
+            //     offset: 80
+            // });
+
+
+        });
+    </script>
+    
+    
+</body>
+
+</html>

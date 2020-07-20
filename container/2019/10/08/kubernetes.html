@@ -8,16 +8,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    <meta content="使用Spring Boot构建web框架" name="description">
+    <meta content="kubernetes" name="description">
   
   
-    <meta name="keywords" content="java,spring boot,boot">
+    <meta name="keywords" content="container,docker,k8s">
   
   <meta name="author" content="CrazyAndy">
 
   <title>
     
-        CrazyAndy|使用Spring Boot构建web框架(一)
+        CrazyAndy|kubernetes-1-介绍
     
   </title>
   <!-- favicon -->
@@ -101,10 +101,9 @@
 
 <body id="page-top" class="landing-page" style="position: relative;">
     
-    
-    
-    
-    <div class="search-tool"
+        
+        
+            <div class="search-tool"
       style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
 
@@ -138,7 +137,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/blog/">Latest</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/blog">Latest</a></li>
                         
                     
                         
@@ -147,7 +146,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/java/">Java</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/java/">Java</a></li>
                         
                     
                         
@@ -156,7 +155,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/flutter/">Flutter</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/flutter/">Flutter</a></li>
                         
                     
                         
@@ -165,7 +164,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/linux/">Linux</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/linux/">Linux</a></li>
                         
                     
                         
@@ -174,7 +173,25 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/database/">DataBase</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/database/">Database</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/boot/">Springboot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/cloud/">Cloud</a></li>
                         
                     
                         
@@ -183,7 +200,7 @@
                             
                                 <li class="active">
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/boot/">SpringBoot</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/container/">Container</a></li>
                         
                     
                         
@@ -192,7 +209,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/cloud/">Cloud</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/design/">Design</a></li>
                         
                     
                         
@@ -201,7 +218,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/container/">Container</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/bigdata/">Bigdata</a></li>
                         
                     
                         
@@ -210,25 +227,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize"  href="/design/">Design</a></li>
-                        
-                    
-                        
-                            
-                            
-                            
-                                <li>
-                            
-                            <a class="tagname" style="text-transform: capitalize"  href="/bigdata/">BigData</a></li>
-                        
-                    
-                        
-                            
-                            
-                            
-                                <li>
-                            
-                            <a class="tagname" style="text-transform: capitalize"  href="/it/">IT</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/it/">It</a></li>
                         
                     
                 </ul>
@@ -239,10 +238,7 @@
 <div class="page-image">
 <div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
 </div>
-
-
-    
-    
+        
     
 
     <div class="wrapper wrapper-content  animated fadeInRight article" >
@@ -255,19 +251,151 @@
                 <div class="ibox-content">
                     <div class="pull-right">
                     	
-                        	<button class="btn btn-white btn-xs" type="button">SpringBoot</button>
+                        	<button class="btn btn-white btn-xs" type="button">container</button>
                         
                     </div>
                     <div class="text-center article-title">
-                    <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jan 2017</span>
+                    <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Oct 2019</span>
                         <h1>
-                            使用Spring Boot构建web框架(一)
+                            kubernetes-1-介绍
                         </h1>
                     </div>
                     <div id="post_content">
-                        <p>　　本节以及接下来的几章将会陆续介绍我根据Spring Boot搭建的web框架。</p>
+                        <h1 id="介绍">介绍</h1>
 
-<p>　　</p>
+<p>kubernetes 核心目标是为了 应用部署，扩所容自动化，可以管理容器化应用。</p>
+
+<h2 id="主要特征">主要特征</h2>
+
+<p>1，一切以服务为中心</p>
+
+<p>2，自动化，自动扩容，升级，更新，部署。</p>
+
+<h1 id="核心概念">核心概念</h1>
+
+<h2 id="container">Container</h2>
+<p>一个容器是由镜像起来的，容器外面一层就是pod。</p>
+
+<h2 id="pod">Pod</h2>
+<p>它里面可以有一个或多个容器，里面所有的容器都运行在一台机器上，而且都共享一个网络 ，有唯一的ip，每个pod里面都会有个 Pause容器</p>
+
+<h2 id="pause">Pause</h2>
+<p>它的作用就是作为根容器， 它会link该pod内其他的容器，把大家关联在一起，还会负责整个pod的健康检查，汇报给kubernetes，它的上一层叫做 副本集 ReplicaSet (RS)</p>
+
+<h2 id="rs-副本集">RS 副本集</h2>
+<p>同一个应用运行两个pod，rs则会管理这两个pod，如果运行过程中有某一个pod出现异常或者退出，rs就回去保证这个副本始终为2，在另一台机器重新调度起一个。</p>
+
+<h2 id="deployment">Deployment</h2>
+<p>Rs上一级是 Deployment 部署，如果我们想更新应用。我们更新的是deployment，我们会制造新的rs，新的rs会先启动一个pod，启动完成后会把旧rs里面的一个pod给停掉；然后新rs再创建一个pod，启动之后会把旧的rs里面的剩余pod给停掉，然后把就rs给清理掉，然后整个服务更新的过程就完成了，这就是一个滚动更新的过程。真正使用的时候，rs和pod都不是我们管理的，我们只需要管理deployment。</p>
+
+<h2 id="label">Label</h2>
+
+<p>标签起到标识作用，depolyment ,pod ,node 都可以打标签。</p>
+
+<h2 id="service">Service</h2>
+
+<p>Service 我们配置 selector 使用标签，它会自动找到打上该标签的pod，Service对外会有一个clusterIP,其他客户端可以通过clusterIp访问到service</p>
+
+<h1 id="架构设计">架构设计</h1>
+
+<h2 id="master">Master</h2>
+
+<p>k8s需要很多的服务器节点，这些服务器分成两种角色，一种叫做master,一种叫做worker.
+worker 节点负责运行服务，master节点负责管理worker节点。
+一般的应用都会有文件，数据库等存储，k8s使用etcd组件将信息持久化</p>
+
+<h2 id="apiserver">ApiServer</h2>
+
+<p>存在master节点中， 它是用来操作k8s的唯一入口，对外提供api, apiserver 收到创建deployment的请求之后，首先使用scheduler选择一个节点。</p>
+
+<h2 id="scheduler">Scheduler</h2>
+
+<p>master中还有一个组件叫做调度器，在api收到创建deployment请求之后，调度器会收集每个worker的详细信息，资源，cpu，运行的服务等。通过预选，优选策略，最终会选择最优节点，把这节点和pod建立关系，告诉apiserver，说这个pod可以运行在某个节点上，apiserver会把这个消息存在etcd上做持久化，pod和node做了一个绑定之后，我们需要使用ControllerManager 来启动。</p>
+
+<h2 id="controllermanager">ControllerManager</h2>
+
+<p>集群内部控制中心它分为 ServiceController ,PodController, RsController ,ResourceController ，它会时刻关注这些内容的状态，并且时刻会保证他们处于正确的状态。ControllerManager 会通过apiserver获取一些节点的变化。</p>
+
+<h2 id="kubelet">Kubelet</h2>
+
+<p>我们需要在每个worker节点上装好服务kubelet,主要负责维护pod生命周期，包括容器的volume,网络等管理。最终kubelet会调用本地的docker，去实现运行起容器，去运行起一个个pod</p>
+
+<h1 id="认证的密码学原理">认证的密码学原理</h1>
+
+<p>k8s所有的资源控制都是通过 ApiServer 来控制的。</p>
+
+<h2 id="对称和非对称加密">对称和非对称加密</h2>
+
+<p>对称加密，加密解密都是一个密钥。
+非对称加密，加密用公钥，解密用私钥，公钥和私钥构成一对。</p>
+
+<h2 id="服务间通讯">服务间通讯</h2>
+
+<p>1，明文传送
+2，对称加密 密钥传送有风险
+3，非对称机密<br />
+b 公开公钥，a通过公钥加密，但是b可以根据私钥解密
+但是非对称加密算法非常复杂，计算量太大。
+4，结合两种算法
+a 第一次通讯，使用公钥加密 密钥，然后把 信息发送给b，这样就把密钥安全的发送到了b
+b保存密钥，那么a以后使用密钥加密消息，和b通讯，这样b就可以解开。
+这样a，b就可以通过对称加密的方式进行通讯，保证性能和安全。
+这就是 ssl/tls 协议，这就是 https的底层协议。</p>
+
+<p>5，4也会有问题，所以采用ca认证。a向b所要公钥的时候，它会去ca认证该公钥是否合法。</p>
+
+<h1 id="认证与授权">认证与授权</h1>
+
+<h2 id="客户端证书认证tls双向认证">客户端证书认证（TLS双向认证）</h2>
+
+<p>kubectl 访问 ApiServer的时候，第一步就是要去认证。
+k8s 有一个 自己的认证中心 CA，它会为为每个组件办法证书。所有的组件互相通讯的时候都会把自己的证书发送给对方，然后对方去ca做认证，验证没问题则继续通讯。</p>
+
+<h2 id="beartoken">BearToken</h2>
+
+<p>我们把token预先定义在ApiServer里面，并预先告诉 kubectl ，kubectl和apiserver通讯的时候带上该token。</p>
+
+<h2 id="serviceaccount">ServiceAccount</h2>
+
+<p>前两种方式都是在集群的外部访问apiServer的时候使用的认证方式。
+ServiceAccount是用于 k8s内部运行的pod下的容器要跟apiserver通讯的时候使用的方式。它包含，namespace ,token , ca 。这些信息都会通过目录挂载的方式挂载pod文件系统里，应用可以读取指定目录的文件，去获取这些信息，使用这些信息和apiserver交互</p>
+
+<h2 id="授权">授权</h2>
+
+<p>鉴权机制 ，ABAC, WebHook ,RBAC（Role Based Access Control）</p>
+
+<p>RBAC 基于角色鉴权。</p>
+
+<p>user role authority</p>
+
+<p>user 分了两种用户，普通用户，ServiceAccount（专门用户集群内部方位apiserver）</p>
+
+<p>authority resource ,verbs（curd）</p>
+
+<p>Role 包含 name ,resource ,verbs</p>
+
+<p>k8s没有数据库，使用 RoleBinding 来描述这种关系。</p>
+
+<p>namespace</p>
+
+<p>把角色放到了 namespace 下面。角色只能属于是namespace下的角色</p>
+
+<p>ClusterRole</p>
+
+<p>ClusterRoleBing</p>
+
+<p>node 不属于namespace ,应该 把node 绑架到 ClusterRole里面去。</p>
+
+<h2 id="admisioncontrol">AdmisionControl</h2>
+
+<p>准入控制，一个个小插件，独立存在，没有联系</p>
+
+<p>配置apiserver可以指令，类似java中的filter。</p>
+
+<p>AlwaysAdmit 
+AlwaysDeny
+ServiceAccount(把serviceaccout提供自动化，辅助service account 做一些事情，比如说某些pod没有serviceaccount，它会自动添加当前默认命名空间，确保serviceaccount在每个pod里面都存在)
+DenyEscolatingExec 拒绝所有的exec touch 到pod里面</p>
 
 
                     </div>
@@ -277,9 +405,7 @@
                         <div class="col-md-6">
                                 <h5 style="display: inline;">Tags:</h5>
                                 
-                                    <button class="btn btn-white btn-xs" type="button">java</button>
-                                
-                                    <button class="btn btn-white btn-xs" type="button">Crawler</button>
+                                    <button class="btn btn-white btn-xs" type="button">docker</button>
                                 
                                     <button class="btn btn-white btn-xs" type="button">blog</button>
                                 
@@ -290,7 +416,7 @@
                                 <div>
                                 
                                 
-                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/springboot/2017/01/01/SpringBoot.html">0</span> comments
+                                <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/08/kubernetes.html">0</span> comments
                                 
                                 </div>
                             </div>
@@ -342,8 +468,8 @@ a2a_config.color_link_text_hover = "333333";
             </div>
         </div>
     </div>
-
 </div>
+
 
 
     

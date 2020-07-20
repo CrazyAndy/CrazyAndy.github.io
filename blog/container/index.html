@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <meta name="author" content="CrazyAndy">
+
+  <title>
+    
+        CrazyAndy|Container
+    
+  </title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/assets/img/favicon.ico"/>
+
+  <!-- Main CSS -->
+  <link href="/static/assets/index.min.css" rel="stylesheet"/>
+
+  <script src="/static/js/jquery-2.1.1.min.js"></script>
+
+ <script src="/static/assets/app-20180101.min.js"></script>
+
+  <link rel="stylesheet" href="/static/css/adam/main.css"/>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var initial = 0;
+      var show = true;
+
+      var toggleSearch = function (visible) {
+        initial = 0;
+        show = !visible;
+        var visibility = visible ? 'block' : 'none';
+
+        $("#search-content").val("");
+        $(".search-tool").css("display", visibility);
+      };
+
+      var shouldToggle = function (time) {
+        var gap = time - initial;
+        initial = time;
+        return gap < 500;
+      };
+
+      $(document).keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        } else if (e.keyCode == 27) {
+          toggleSearch(false);
+        }
+      });
+
+      $("#search-content").keyup(function (e) {
+        var now = new Date().getTime();
+        if (e.keyCode == 17 && shouldToggle(now)) {
+          toggleSearch(show);
+        }
+      });
+
+      $("#close-btn").click(function () {
+        toggleSearch(false);
+      });
+
+      $("#search-btn").click(function() {
+        toggleSearch(true);
+      });
+
+      $.getJSON("/search/cb-search.json")
+        .done(function (data) {
+          if (data.code == 0) {
+            $("#search-content").typeahead({
+              source: data.data,
+              displayText: function (item) {
+                return item.title;
+              },
+              afterSelect: function (item) {
+                window.location.href = item.url;
+              }
+            });
+          }
+        });
+    });
+    
+  </script>
+</head>
+
+
+
+<body id="page-top" class="landing-page" style="position: relative;">
+    
+        
+        
+            <div class="search-tool"
+      style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
+
+    <div style="position: fixed; top: 16px; right: 16px; z-index: 9999;">
+        <img src="/search/img/cb-close.png" id="close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px; z-index: 9999;">
+    <img src="/search/img/cb-search.png"  id="search-btn"  title="Double click Ctrl"/>
+</div>
+
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">CrazyAndy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/blog">Latest</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/java/">Java</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/flutter/">Flutter</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/linux/">Linux</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/database/">Database</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/boot/">Springboot</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/cloud/">Cloud</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li class="active">
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/container/">Container</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/bigdata/">Bigdata</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/it/">It</a></li>
+                        
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-image">
+<div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
+</div>
+        
+    
+
+        <!-- jPages -->
+<script src="/static/assets/jPage-20170307.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  /* initiate the plugin */
+  $("div.pag-holder").jPages({
+      containerID  : "pag-itemContainer",
+      perPage      : 5,  /* num of items per page */
+      startPage    : 1,
+      startRange   : 1,
+      midRange     : 3,
+      endRange     : 1
+  });
+});
+</script>
+
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        
+		
+        <h1>Container</h1>
+    </div>
+</div>
+<div class="wrapper wrapper-content  animated fadeInRight blog">
+    <div class="row">
+        <ul id="pag-itemContainer" style="list-style:none;">
+            
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/10/kubernetes.html" class="btn-link">
+                                <h2>kubernetes-3-kubernetes</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 10 Oct 2019</span>
+                            </div>
+                            <p>
+                                Kubeadm
+
+社区方
+
+网上各种方案
+
+Kubeadm
+
+官方推荐的方案，非常优雅，所有的组件运行容器中，并且都是运行在k8s的pod里面。安装过程比较简单，支持高可用和非高可用。升级比较方...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/10/kubernetes.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/09/kubernetes.html" class="btn-link">
+                                <h2>kubernetes-2-集群搭建方案</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Oct 2019</span>
+                            </div>
+                            <p>
+                                介绍
+
+社区方案
+
+网上各种方案
+
+Kubeadm
+
+官方推荐的方案，非常优雅，所有的组件运行容器中，并且都是运行在k8s的pod里面。安装过程比较简单，支持高可用和非高可用。升级比较方便。
+缺...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/09/kubernetes.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/08/kubernetes.html" class="btn-link">
+                                <h2>kubernetes-1-介绍</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Oct 2019</span>
+                            </div>
+                            <p>
+                                介绍
+
+kubernetes 核心目标是为了 应用部署，扩所容自动化，可以管理容器化应用。
+
+主要特征
+
+1，一切以服务为中心
+
+2，自动化，自动扩容，升级，更新，部署。
+
+核心概念
+
+Cont...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/08/kubernetes.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/07/Docker.html" class="btn-link">
+                                <h2>docker-7-私服</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Oct 2019</span>
+                            </div>
+                            <p>
+                                Registry2.0
+
+docker 私服
+
+我先使用的是registry2.0，这个界面也没有，以后准备换成其他的
+
+安装私服
+
+docker pull registry
+
+本地添加私服
+
+...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/07/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/06/Docker.html" class="btn-link">
+                                <h2>docker-6-集群</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Oct 2019</span>
+                            </div>
+                            <p>
+                                介绍
+
+docker 集群
+
+docker swarm是创建服务器集群用的工具，现在只需要几条命令就可以创建服务器的集群，它内置一些服务器集群所需要的工具，比如说查找，网络负载均衡等等。
+
+先初...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/06/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/05/Docker.html" class="btn-link">
+                                <h2>docker-5-容器化应用</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Oct 2019</span>
+                            </div>
+                            <p>
+                                定义服务
+
+db - 定义数据库服务
+
+version: '2'
+services:
+ db:
+  image: mariadb:10.1
+  environment:
+   MYSQL_ROO...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/05/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/04/Docker.html" class="btn-link">
+                                <h2>docker-4-组合</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Oct 2019</span>
+                            </div>
+                            <p>
+                                组合
+
+Compose
+
+应用可以需要多个服务，比如web服务，数据库服务等，我们倡议每个服务对应一个docker容器，那么问题就是维持多个服务的容器会比较麻烦，我们可以使用docker com...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/04/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/03/Docker.html" class="btn-link">
+                                <h2>docker-3-网络</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Oct 2019</span>
+                            </div>
+                            <p>
+                                网络
+
+网络
+
+docker提供了几种网络类型，它决定了容器之间，容器和外界之间 怎么样相互通信。
+
+docker network ls
+bridge 桥接网络，属于这个网络的容器相互之间可以通...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/03/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/02/Docker.html" class="btn-link">
+                                <h2>docker-2-存储</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Oct 2019</span>
+                            </div>
+                            <p>
+                                存储
+
+数据盘可以被多个docker容器共享使用，我们需要将docker容器中应用程序产生的日志文件，数据库管理系统中的数据这些需要长期保存的内容放到数据盘里面。
+
+数据卷：Data Volum...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/02/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/container/2019/10/01/Docker.html" class="btn-link">
+                                <h2>docker-1-镜像与容器</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Oct 2019</span>
+                            </div>
+                            <p>
+                                准备
+
+下载Docker Toolbox
+
+docker toolbox 是个软件包，我们现在安装的都是 docker desktop
+
+下载镜像
+
+搜索镜像
+
+hub.dockr.com
+de...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">docker</button>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/container/2019/10/01/Docker.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+        </ul>
+        
+    <div class="col-lg-6 col-lg-offset-6">
+		<div class="pag-holder"></div>
+	</div>
+
+
+
+    </div>
+</div>
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+</body>
+
+</html>

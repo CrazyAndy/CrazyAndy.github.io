@@ -13,7 +13,7 @@
 
   <title>
     
-        CrazyAndy|Design
+        CrazyAndy|Cloud
     
   </title>
   <!-- favicon -->
@@ -97,10 +97,9 @@
 
 <body id="page-top" class="landing-page" style="position: relative;">
     
-    
-    
-    
-    <div class="search-tool"
+        
+        
+            <div class="search-tool"
       style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px; opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="form-control search-content" id="search-content" style="position: fixed; top: 60px" placeholder="Search Blog">
 
@@ -134,7 +133,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/blog/">Latest</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/blog">Latest</a></li>
                         
                     
                         
@@ -143,7 +142,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/java/">Java</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/java/">Java</a></li>
                         
                     
                         
@@ -152,7 +151,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/flutter/">Flutter</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/flutter/">Flutter</a></li>
                         
                     
                         
@@ -161,7 +160,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/linux/">Linux</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/linux/">Linux</a></li>
                         
                     
                         
@@ -170,7 +169,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/database/">Database</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/database/">Database</a></li>
                         
                     
                         
@@ -179,25 +178,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/boot/">Springboot</a></li>
-                        
-                    
-                        
-                            
-                            
-                            
-                                <li>
-                            
-                            <a class="tagname" style="text-transform: capitalize" href="/cloud/">Cloud</a></li>
-                        
-                    
-                        
-                            
-                            
-                            
-                                <li>
-                            
-                            <a class="tagname" style="text-transform: capitalize" href="/container/">Container</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/boot/">Springboot</a></li>
                         
                     
                         
@@ -206,7 +187,7 @@
                             
                                 <li class="active">
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/design/">Design</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/cloud/">Cloud</a></li>
                         
                     
                         
@@ -215,7 +196,7 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/bigdata/">Bigdata</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/container/">Container</a></li>
                         
                     
                         
@@ -224,7 +205,25 @@
                             
                                 <li>
                             
-                            <a class="tagname" style="text-transform: capitalize" href="/it/">It</a></li>
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/design/">Design</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/bigdata/">Bigdata</a></li>
+                        
+                    
+                        
+                            
+                            
+                            
+                                <li>
+                            
+                            <a class="tagname" style="text-transform: capitalize" href="/blog/it/">It</a></li>
                         
                     
                 </ul>
@@ -235,8 +234,7 @@
 <div class="page-image">
 <div class="cover-image" style="background: url('/static/assets/img/adam/bk2.jpg') center no-repeat; background-size: cover;"></div>
 </div>
-    
-    
+        
     
 
         <!-- jPages -->
@@ -260,7 +258,7 @@ $(function(){
         <div class="navy-line"></div>
         
 		
-        <h1>Design</h1>
+        <h1>Cloud</h1>
     </div>
 </div>
 <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -273,27 +271,200 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/18/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---008---醍醐灌顶：领域驱动设计实现之路</h2>
+                            <a href="/cloud/2018/05/08/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇008_feign bean not found</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 18 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 8 May 2018</span>
                             </div>
                             <p>
-                                一、强烈推荐
-　　原文地址：http://www.infoq.com/cn/articles/implementation-road-of-domain-driven-design
+                                一、问题描述
+　　feign在配置@FeignClient的时候，如果启动主程序，有可能报错 bean not found。
+二、解决思路
+　　我们的服务消费者，也就是feign客户端，如果需要...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/08/Cloud.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/cloud/2018/05/07/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇007_网关过滤option</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 May 2018</span>
+                            </div>
+                            <p>
+                                一、问题描述
+　　网关层过滤器代码中，如果判断请求的时候，需要将option试探放过，否则会出问题。
+二、解决思路
+　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/07/Cloud.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/cloud/2018/05/06/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇006_zuul转发超时</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 May 2018</span>
+                            </div>
+                            <p>
+                                一、问题描述
+　　作为网关api的zuul转发超时该怎么处理
+二、解决思路
+　　是这样的，今天碰到了微服务响应超时问题，而且超时时间特别短，2秒就超时，zuul就走熔断了。 
+我采用zuul作为...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/06/Cloud.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/cloud/2018/05/05/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇005_跨域</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 May 2018</span>
+                            </div>
+                            <p>
+                                一、问题描述
+　　api网关有时候需要设置跨域访问。网关 zuul 和 底下的服务都设置 跨域 CorsFilter 导致 前段跨域失败 。
+二、解决思路
+　　只要网关配置就好 ， 底下的服务不...
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 style="display: inline;">Tags:</h5>
+                                    
+                                    <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-right">
+                                        <h5>Stats:</h5>
+                                        <div>
+                                            
+                                            
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/05/Cloud.html">0</span> comments
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            
+            <li>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <a href="/cloud/2018/05/04/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇004_透传</h2>
+                            </a>
+                            <div class="small m-b-xs">
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 May 2018</span>
+                            </div>
+                            <p>
+                                一、问题描述
+　　api网关有时候需要将token内容传入转发目的地的服务中去，所以在网关api层需要做一些相应的配置。
+二、解决思路
+　　全局设置：
 
-　　作者：...
+　　zuul.sensitive-hea...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -302,7 +473,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/18/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/04/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -318,25 +489,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/17/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---007---拨乱反正：DDD 回归具体的业务场景，Domain Model 再再重新设计</h2>
+                            <a href="/cloud/2018/05/03/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇003_服务间调用规范</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 17 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 May 2018</span>
                             </div>
                             <p>
-                                一、写在前面
-　　讲本篇内容之前，先回顾上一篇所讨论的内容，主要是 Repository（仓储）的职责问题，属于领域？还是应用层？其实到头来也没有准确的结论，但是最终比较偏向于仓储定义在领域，实...
+                                一、问题描述
+　　Spring cloud 体系中，为服务间调用是用FeignClient（ribbon 和hystrix的功能合集）的。
+　　两个微服务，一个消费者，一个生产者，他们之间通讯最...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -345,7 +515,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/17/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/03/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -361,25 +531,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/16/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---006---设计窘境：来自 Repository 的一丝线索，Domain Model 再重新设计</h2>
+                            <a href="/cloud/2018/05/02/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇002_跨主机访问</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 16 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 May 2018</span>
                             </div>
                             <p>
-                                一、疑惑解读
-　　先回顾一下，在上一篇博文中，主要阐述的是领域模型的重新设计，包含：真正的去理解领域模型和领域服务的加入（感兴趣的朋友可以看下前几篇来了解一下前因后果。）。凡事都有修改的理由，为...
+                                一、问题描述
+　　我当时在写demo的时候都是在一台机子上访问的，用的都是localhost，微服务注册到注册中心的时候，默认将主机名注册上去，微服务间调用其实是先解析注册上来的主机名，更换成i...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -388,7 +556,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/16/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/02/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -404,27 +572,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/15/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---005---No zuo no die：DDD 应对具体业务场景，Domain Model 重新设计</h2>
+                            <a href="/cloud/2018/05/01/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud问题解决篇001_请求上下文配置</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 15 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 May 2018</span>
                             </div>
                             <p>
-                                一、写在前面
-　　上联：no zuo no die why you try 下联：no try no high give me five 横批： let it go
-
-　　上联：no zuo n...
+                                一、问题描述
+　　Spring Cloud 默认应用是在根目录下运行，估计是顺承Spring boot 内置tomcat ,直接通过 jar -jar 启动服务实例的思想。但是实际业务应用中，我...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -433,7 +597,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/15/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/05/01/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -449,25 +613,25 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/14/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---004---拨开迷雾，找回自我：DDD 应对具体业务场景，Domain Model 到底如何设计？</h2>
+                            <a href="/cloud/2018/02/07/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇007_分布式配置中心</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 14 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Feb 2018</span>
                             </div>
                             <p>
-                                一、写在前面
-　　毫无疑问，领域驱动设计的核心是领域模型，领域模型的核心是实现业务逻辑，也就是说，在应对具体的业务场景的时候，实现业务逻辑是领域驱动设计最重要的一环，在写这篇博文之前，先总结下之...
+                                一、应用场景
+　　spring cloud config分为服务端于客户端两个部分，服务端也成微分布式配置中心，他是一个独立的微服务应用，用来连接配置仓库并未客户端提供获取配置信息，加密/解密信...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
+                                    
+                                    <button class="btn btn-white btn-xs">config</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -476,7 +640,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/14/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/07/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -492,25 +656,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/13/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---003---死去活来，而不变质：Domain Model（领域模型） 和 EntityFramework 如何正确进行对象关系映射？</h2>
+                            <a href="/cloud/2018/02/06/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇006_网关API</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 13 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Feb 2018</span>
                             </div>
                             <p>
-                                一、写在前面
-　　在上一篇《一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？》博文中，探讨的是如何聚焦领域模型（抛开一些干扰因素，才能把精力集中...
+                                一、应用场景
+　　对外服务我们称之为边缘服务。我们需要在所有服务的前面挡一层网关服务，让所有外部客户端访问都经过它来进行调度和过滤。我们可以在网关层实现请求路由，软件负载均衡(相对于F5等硬件负...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -519,7 +681,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/13/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/06/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -535,26 +697,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/12/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---002---一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？</h2>
+                            <a href="/cloud/2018/02/05/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇005_声明式服务调用</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 12 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Feb 2018</span>
                             </div>
                             <p>
-                                一、写在前面
-
-　　在上一篇《我的“第一次”，就这样没了：DDD（领域驱动设计）理论结合实践》博文中，简单介绍了领域驱动设计的一些理念，并简单完成基于领域驱动设计的具体项目 MessageMan...
+                                一、应用场景
+　　Spring Cloud Feign整合了Spring Cloud Ribbon与Spring Cloud Hystrix，除了提供这两者的强大功能之外，它还提供给了一种声明式...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -563,7 +722,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/12/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/05/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -579,28 +738,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/11/DDD.html" class="btn-link">
-                                <h2>领域驱动设计田园的蟋蟀专栏篇---001---DDD（领域驱动设计）理论结合实践</h2>
+                            <a href="/cloud/2018/02/04/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇004_服务容错保护</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 11 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Feb 2018</span>
                             </div>
                             <p>
-                                一、关于DDD
-
-　　什么是DDD（领域驱动设计）？DDD中最核心的是Domain Model（领域模型），和领域模型相对的是事务脚本，领域模型和事务脚本说到底就是面向对象和面向过程的区别。
-
-...
+                                一、应用场景
+　　假如有这样一个应用场景，用户创建一个订单的时候，客户端将调用订单服务的创建订单接口，此时创建订单接口又会向库存服务来请求出货，此时，若库存服务因自身处理逻辑等原因造成响应缓慢，...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -609,7 +763,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/11/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/04/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -625,29 +779,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/10/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---010---概览篇总结</h2>
+                            <a href="/cloud/2018/02/03/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇003_客户端负载均衡</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 10 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Feb 2018</span>
                             </div>
                             <p>
-                                一、正文
-　　看了这么多关于领域驱动设计的总结概括文章，想必大家都对ddd有了一定的认识了。
-
-　　我们了解了 ddd 是一种软件设计思想，分成战略设计和战术设计两方面。
-
-　　战略设计在整体软...
+                                一、概述
+　　Spring Cloud Ribbon是一个基于Http和Tcp的客户端负载均衡工具，它基于Netflix Ribbon实现。通过Spring Cloud的封装，可以让我们轻松的将...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -656,7 +804,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/10/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/03/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -672,25 +820,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/09/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---009---DDD初学指南</h2>
+                            <a href="/cloud/2018/02/02/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇002_服务治理</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Feb 2018</span>
                             </div>
                             <p>
-                                一、前言
-　　因为不想对原文进行修改了，所以直接把评论贴上来了，现在看来，当年的认识确实有些问题，不只评论提到的，当年只是按部就班，其实真的做好应该是于无声处听惊雷，不过既然是给初学者看的，还是...
+                                一、概述
+　　服务治理是微服务架构中最核心和基础的模块，因为它的存在才会能实现服务的负载均衡，也就是微服务相比单体应用存在的意义。服务治理主要是分成服务注册和服务发现两块内容。
+　　1. 服务注...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -699,7 +846,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/09/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/02/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -715,25 +862,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/08/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---008---领域驱动设计实战--战略建模</h2>
+                            <a href="/cloud/2018/02/01/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 最快上手篇001_前言</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Feb 2018</span>
                             </div>
                             <p>
-                                一、引子
-　　自从去年接触DDD以来，阅读了大量的相关书籍，看了园子里面很多DDD方面的文章，也在实际项目中也有意无意的使用DDD的一些思想和方法。但总觉得这些知识太分散，没有给自己思想带来质的...
+                                一、概述
+　　本篇的这几个章节，我会参考翟永超的 《Spring Cloud微服务实战》的源代码，搭建一套最简单版本的spring cloud实战。它包括 网关api，服务注册中心eureka，...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -742,7 +887,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/08/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/02/01/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -758,36 +903,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/07/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---007---领域模型驱动设计（Domain Driven Design）入门概述</h2>
+                            <a href="/cloud/2018/01/09/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇009_devops</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 9 Jan 2018</span>
                             </div>
                             <p>
-                                一、前言
-　　软件开发要干什么：
-
-
-  反映真实世界要自动化的业务流程
-  解决现实问题
-
-
-　　领域Domain
-
-
-  Domain特指软件关注的领域
-  在不能充分了解业务领域的情况下是...
+                                一、综述
+　　应用jenkins自动化集成部署至 多个 dev,test,prod 多个环境，甚至又可细分多个版本环境，只要提供svn地址，这一切便可根据预先编写好的脚本，实现自动化编译，部署，...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -796,7 +928,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/07/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/09/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -812,25 +944,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/06/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---006---腾云之领域驱动设计(DDD)</h2>
+                            <a href="/cloud/2018/01/08/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇008_监控中心</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 8 Jan 2018</span>
                             </div>
                             <p>
-                                一、前言
-　　2004年，当Eric Evans的那本《领域驱动设计——软件核心复杂性应对之道》（后文简称《领域驱动设计》）出版时，我还在念高中，接触到领域驱动设计（DDD）已经是8年后的事情了...
+                                一、综述
+　　监控中心可监控微服务实例被请求次数，时间，断路次数等,也可以进行全链路跟踪。
+　　大众点评技术中心开源了cat系统用来配置服务监控，并提供ui显示各服务运行情况，在以后章节会在进行...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -839,7 +970,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/06/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/08/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -855,25 +986,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/05/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---005---浅析DDD(领域驱动设计)</h2>
+                            <a href="/cloud/2018/01/07/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇007_配置中心</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 7 Jan 2018</span>
                             </div>
                             <p>
-                                前言
-　　最近在做一些微服务相关的设计，内容包括服务的划分，Restful API的设计等。其中比较棘手的就是Service的职责划分：如何抽象具有统一业务范畴的Model，使其模块化，又如何高...
+                                一、综述
+　　Spring boot 配置文件管理在 application.properties里面 ，如果有需要还要根据dev,test,prod 做分别的配置，在部署时不好管理，配置信息更...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -882,7 +1011,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/05/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/07/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -898,27 +1027,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/04/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---004---浅谈我对DDD领域驱动设计的理解</h2>
+                            <a href="/cloud/2018/01/06/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇006_断路器</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Jan 2018</span>
                             </div>
                             <p>
-                                一、从遇到问题开始
-　　当人们要做一个软件系统时，一般总是因为遇到了什么问题，然后希望通过一个软件系统来解决。
-
-　　比如，我是一家企业，然后我觉得我现在线下销售自己的产品还不够，我希望能够在线...
+                                一、综述
+　　断路器主要是针对某服务出现故障不能响应，而将访问请求转发到其他能正常工作的服务实例上去，当然也可以做一些降级策略，比如所有同类型服务都出现故障，可降级返回客户端能理解的错误编码等方...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -927,7 +1052,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/04/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/06/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -943,25 +1068,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/03/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---003---从零开始的领域驱动设计</h2>
+                            <a href="/cloud/2018/01/05/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇005_服务发现</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 5 Jan 2018</span>
                             </div>
                             <p>
-                                一、前言
-　　领域驱动的火爆程度不用我赘述，但是即便其如此得耳熟能详，但大多数人对其的认识，还只是停留在知道它的缩写是DDD，知道它是一种软件思想，或者知道它和微服务有千丝万缕的关系。Eric ...
+                                一、概述
+　　服务注册与发现，其实就是对服务列表的维护。
+　　比如我们写一个user-service 的微服务，我们需要将 该服务运行所在的ip和port还有其他一些信息配置到一个配置中心去，如...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -970,7 +1094,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/03/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/05/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -986,25 +1110,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/02/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---002---我眼中的领域驱动设计</h2>
+                            <a href="/cloud/2018/01/04/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇004_进程间通讯</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Jan 2018</span>
                             </div>
                             <p>
-                                一、为什么要使用领域驱动设计
-　　从Eric Evans的《领域驱动设计：软件核心复杂性应对之道》一书的书名就可以看出这一方法论是为了解决软件核心复杂性的。也就是说软件业务越来越复杂了，领域驱动...
+                                一、概述
+　　之前说的是api网关调用后端微服务，现在说的是后端微服务之间的互相调用。
+　　比如说有个人定了一张电影票，订票服务需要先调用用户服务的余额查询，然后再处理自身的业务处理。订票服务调...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -1013,7 +1136,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/02/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/04/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -1029,27 +1152,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2018/08/01/DDD.html" class="btn-link">
-                                <h2>领域驱动设计概览篇---001---前言</h2>
+                            <a href="/cloud/2018/01/03/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇003_API网关</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Aug 2018</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Jan 2018</span>
                             </div>
                             <p>
-                                一、正文
-　　笔者在学习与实践微服务的时候，偶然接触到领域驱动设计的思想，当时的感受着实可以用脑洞大开来形容，感觉打开了一扇门，看到了一个新奇的世界。
-
-　　我刚开始看的是Eric Evans ...
+                                一、概述
+　　API网关是干什么用的呢，它就是所有微服务的“大门看守员”，它可以实现请求路由，负载均衡，校验过滤，请求失败熔断，服务聚合，监控，缓存，静态响应处理等一大堆功能。其中以一大部分功能...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">ddd</button>
-                                    
-                                    <button class="btn btn-white btn-xs">领域驱动设计</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -1058,7 +1177,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2018/08/01/DDD.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/03/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -1074,27 +1193,23 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2012/04/04/DecoratorPattern.html" class="btn-link">
-                                <h2>关于Java设计模式的肤浅看法--装饰者模式（四）</h2>
+                            <a href="/cloud/2018/01/02/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud整体概括篇002_微服务简介</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 4 Apr 2012</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Jan 2018</span>
                             </div>
                             <p>
-                                以下内容为观察者模式内容，还未修改成装饰者模式，敬请期待。
-一、内容概述
-
-　　观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/Vi...
+                                一、微服务简介
+　　微服务一词来源于Martin Fowler的名为Microservices的博文，它和我们常用的Restful api 一样，都是一种设计风格，它的主旨是将巨石应用拆分成多个...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">java</button>
-                                    
-                                    <button class="btn btn-white btn-xs">装饰者模式</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -1103,7 +1218,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2012/04/04/DecoratorPattern.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/02/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
@@ -1119,26 +1234,24 @@ $(function(){
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <a href="/design/2012/04/03/ObserverPattern.html" class="btn-link">
-                                <h2>关于Java设计模式的肤浅看法--观察者模式（三）</h2>
+                            <a href="/cloud/2018/01/01/Cloud.html" class="btn-link">
+                                <h2>Spring Cloud 整体概括篇001_前言</h2>
                             </a>
                             <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 3 Apr 2012</span>
+                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Jan 2018</span>
                             </div>
                             <p>
-                                一、内容概述
-
-　　观察者模式是对象的行为模式，又叫发布-订阅(Publish/Subscribe)模式、模型-视图(Model/View)模式、源-监听器(Source/Listener)模式...
+                                一、参考资料
+　　接触Spring Cloud比较晚，身边一些朋友已经用它项目超过一年。从头学习，资料有
+翟永超的 《Spring Cloud微服务实战》 ，Oopsguy翻译 Chris Ri...
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 style="display: inline;">Tags:</h5>
                                     
-                                    <button class="btn btn-white btn-xs">java</button>
-                                    
-                                    <button class="btn btn-white btn-xs">观察者模式</button>
-                                    
                                     <button class="btn btn-white btn-xs">blog</button>
+                                    
+                                    <button class="btn btn-white btn-xs">cloud</button>
                                     
                                 </div>
                                 <div class="col-md-6">
@@ -1147,96 +1260,7 @@ $(function(){
                                         <div>
                                             
                                             
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2012/04/03/ObserverPattern.html">0</span> comments
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            
-            
-            <li>
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <a href="/design/2012/04/02/StrategyPattern.html" class="btn-link">
-                                <h2>关于Java设计模式的肤浅看法--策略模式（二）</h2>
-                            </a>
-                            <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Apr 2012</span>
-                            </div>
-                            <p>
-                                一、内容概述
-
-　　策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。...
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="display: inline;">Tags:</h5>
-                                    
-                                    <button class="btn btn-white btn-xs">java</button>
-                                    
-                                    <button class="btn btn-white btn-xs">策略模式</button>
-                                    
-                                    <button class="btn btn-white btn-xs">blog</button>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div>
-                                            
-                                            
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2012/04/02/StrategyPattern.html">0</span> comments
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            
-            
-            <li>
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="ibox">
-                        <div class="ibox-content">
-                            <a href="/design/2012/04/01/PatternBefore.html" class="btn-link">
-                                <h2>关于Java设计模式的肤浅看法--前言（一）</h2>
-                            </a>
-                            <div class="small m-b-xs">
-                                <strong>CrazyAndy</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 1 Apr 2012</span>
-                            </div>
-                            <p>
-                                一、正文
-　　笔者看过好多版本的书籍介绍的设计模式，最近又看了看《Head First 设计模式》，感觉中国人和外国人写书写的真的不一样。
-
-　　中国人思维比较教条，教育体制80后最懂的，深受其...
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 style="display: inline;">Tags:</h5>
-                                    
-                                    <button class="btn btn-white btn-xs">java</button>
-                                    
-                                    <button class="btn btn-white btn-xs">设计模式</button>
-                                    
-                                    <button class="btn btn-white btn-xs">blog</button>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small text-right">
-                                        <h5>Stats:</h5>
-                                        <div>
-                                            
-                                            
-                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://localhost:4000/design/2012/04/01/PatternBefore.html">0</span> comments
+                                            <i class="fa fa-comments-o"> </i> <span class='disqus-comment-count' data-disqus-url="http://CrazyAndy.github.io/cloud/2018/01/01/Cloud.html">0</span> comments
                                             
                                         </div>
                                     </div>
