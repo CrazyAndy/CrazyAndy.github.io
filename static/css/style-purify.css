@@ -1781,11 +1781,9 @@ ul.clear-list:first-child {
   color: #2F4050;
 }
 
-.article p {
-  font-size: 30px;
-  line-height: 50px;
-}
-.article li{font-size:30px;line-height:50px}
+.article p {font-size: 20px;line-height: 30px;}
+.article li{font-size:20px;line-height:30px}
+
 .article-title {
   text-align: center;
   margin: 40px 0 100px;
