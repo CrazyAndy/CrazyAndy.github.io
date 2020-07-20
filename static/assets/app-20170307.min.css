@@ -16378,6 +16378,7 @@ ul.clear-list:first-child {
     font-size: 30px;
     line-height: 50px;
 }
+.article li{font-size:30px;line-height:50px}
 
 .article-title {
     text-align: center;
