@@ -3,21 +3,21 @@
   <channel>
     <title>CrazyAndy</title>
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Jul 2020 22:17:23 +0800</pubDate>
-    <lastBuildDate>Mon, 20 Jul 2020 22:17:23 +0800</lastBuildDate>
+    <link>http://CrazyAndy.github.io/</link>
+    <atom:link href="http://CrazyAndy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 21 Jul 2020 08:00:50 +0800</pubDate>
+    <lastBuildDate>Tue, 21 Jul 2020 08:00:50 +0800</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>BigMouth英语角策划</title>
         <description>&lt;h1 id=&quot;创建英语角bigmouth初衷&quot;&gt;创建英语角BigMouth初衷　　&lt;/h1&gt;
 
-&lt;p&gt;大家好，我是孙虎，电桩组高级JAVA工程师，负责咱们软件开发的工作。&lt;/p&gt;
+&lt;p&gt;　　大家好，我是孙虎，电桩组高级JAVA工程师，负责咱们软件开发的工作。&lt;/p&gt;
 
-&lt;p&gt;　　由于偶尔会和外国客户交流，不可避免的会使用英语。但是自己总感觉书到用时方恨少，向客户表达自己想法时总会有些磕磕绊绊，听取对方意见时又总会有点模棱两可，场面少许尴尬，几分不适。&lt;/p&gt;
+&lt;p&gt;　　由于偶尔会和外国客户交流，不可避免的会使用到英语。但是自己每每向客户表达自己想法时都会有一些磕磕绊绊，而理解对方表述时又会有点模棱两可，场面稍许尴尬，几分不适。&lt;/p&gt;
 
-&lt;p&gt;　　学习这么多年哑巴英语，通过最近一两年实战才发现自己学习英语的方式不对，英语作为一门语言，本身只是一个沟通想法的工具而已。其实我们在实际使用过程中，不会要求你懂太多的语法，太多的词汇量，只要能在日常场景中正常交流即可。&lt;/p&gt;
+&lt;p&gt;　　学习这么多年哑巴英语，通过最近一两年实战才发现其实是应试教育下的学习方式不适合交流沟通而已。任何一门语言包括英语在内，本身只是一个沟通想法的工具而已。其实我们在实际使用过程中，不会要求你懂太多的语法，太多的词汇量，只要能在日常场景中正常交流即可。&lt;/p&gt;
 
 &lt;p&gt;　　其实使用英语正常交流就是我们模拟一个个的对话场景而已，我们把各种场景下常用的句子给掌握了，也就可以了，我们不要对自己定很高的目标就行。就像某次我出差，惊奇的发现在车上发现旁边10多岁的小女孩和旁边的大人沟通很流利快速，不自卑的讲，她掌握的词汇未必有我的多，可又不得不承认的事情是，她掌握的恰好是她在日常表达自己想法能用到的，转而切换到我们自身来讲，我们为什么不那么去学习呢？&lt;/p&gt;
 
@@ -27,16 +27,16 @@
 
 &lt;ol&gt;
   &lt;li&gt;每次找一个topic，我们事先围绕这个topic去准备对话资料，然后分发给组员。&lt;/li&gt;
-  &lt;li&gt;组员私下学习拿到的资料，尽量在该topic下掌握资料中的对话，在组内聚会时能够自由交流使用。&lt;/li&gt;
-  &lt;li&gt;没两周开一次会，约在周五下班5:10分开始，5:30结束。三人一组，两人对话，第三人作为监督人对着资料校对，并随时提出修正，按照此模式轮换监督人，直至每个人都当一次监督人，也就是每人都会训练对话两次。&lt;/li&gt;
-  &lt;li&gt;至此，对话结束，大家总结，讨论，并讨论制定下一次会议topic以及资料负责人。&lt;/li&gt;
+  &lt;li&gt;组员私下学习拿到的资料，尽量掌握资料中的对话内容，在聚会时能够自由交流使用。&lt;/li&gt;
+  &lt;li&gt;每两周举办一次聚会，约在周五下班5:10分开始，最晚6点前结束。三人一组，两人对话，第三人作为监督人对着资料校对，并随时提出修正，按照此模式轮换监督人，直至每个人都当一次监督人，也就是每人都会训练对话两次。&lt;/li&gt;
+  &lt;li&gt;至此，对话部分就结束了。大家最后做一下总结，并讨论制定下一次会议topic以及资料负责人。&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;　　目前，这个只是我的一个提议，希望耐心阅读完此文章的您能多多给我一些反馈，如果有兴趣就请您加入进来，大家一起进步成长。&lt;/p&gt;
 </description>
         <pubDate>Mon, 20 Jul 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigmouth/2020/07/20/Plan.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigmouth/2020/07/20/Plan.html</guid>
+        <link>http://CrazyAndy.github.io/bigmouth/2020/07/20/Plan.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/bigmouth/2020/07/20/Plan.html</guid>
         
         <category>bigmouth</category>
         
@@ -67,8 +67,8 @@
 
 </description>
         <pubDate>Thu, 10 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/10/kubernetes.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/10/kubernetes.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/10/kubernetes.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/10/kubernetes.html</guid>
         
         <category>docker</category>
         
@@ -99,8 +99,8 @@
 
 </description>
         <pubDate>Wed, 09 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/09/kubernetes.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/09/kubernetes.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/09/kubernetes.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/09/kubernetes.html</guid>
         
         <category>docker</category>
         
@@ -251,8 +251,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 08 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/08/kubernetes.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/08/kubernetes.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/08/kubernetes.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/08/kubernetes.html</guid>
         
         <category>docker</category>
         
@@ -345,8 +345,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 07 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/07/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/07/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/07/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/07/Docker.html</guid>
         
         <category>docker</category>
         
@@ -418,8 +418,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 &lt;p&gt;docker service update web –image andy/centos:abc&lt;/p&gt;
 </description>
         <pubDate>Sun, 06 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/06/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/06/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/06/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/06/Docker.html</guid>
         
         <category>docker</category>
         
@@ -674,8 +674,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 05 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/05/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/05/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/05/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/05/Docker.html</guid>
         
         <category>docker</category>
         
@@ -851,8 +851,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 04 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/04/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/04/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/04/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/04/Docker.html</guid>
         
         <category>docker</category>
         
@@ -946,8 +946,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 03 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/03/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/03/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/03/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/03/Docker.html</guid>
         
         <category>docker</category>
         
@@ -998,8 +998,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 02 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/02/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/02/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/02/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/02/Docker.html</guid>
         
         <category>docker</category>
         
@@ -1122,8 +1122,8 @@ DenyEscolatingExec 拒绝所有的exec touch 到pod里面&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 01 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/container/2019/10/01/Docker.html</link>
-        <guid isPermaLink="true">http://localhost:4000/container/2019/10/01/Docker.html</guid>
+        <link>http://CrazyAndy.github.io/container/2019/10/01/Docker.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/container/2019/10/01/Docker.html</guid>
         
         <category>docker</category>
         
@@ -1305,8 +1305,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Sat, 24 Aug 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2019/08/24/Netty.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2019/08/24/Netty.html</guid>
+        <link>http://CrazyAndy.github.io/java/2019/08/24/Netty.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2019/08/24/Netty.html</guid>
         
         <category>java</category>
         
@@ -1330,8 +1330,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;hr /&gt;
 </description>
         <pubDate>Thu, 14 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/14/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/14/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/14/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/14/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -1671,8 +1671,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;h2 id=&quot;popupmenubutton弹出式菜单按钮&quot;&gt;PopupMenuButton：弹出式菜单按钮&lt;/h2&gt;
 </description>
         <pubDate>Wed, 13 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/13/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/13/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/13/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/13/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -2155,8 +2155,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 12 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/12/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/12/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/12/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/12/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -2416,8 +2416,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 11 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/11/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/11/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/11/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/11/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -2636,8 +2636,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 10 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/10/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/10/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/10/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/10/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -2929,8 +2929,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 09 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/09/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/09/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/09/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/09/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -3229,8 +3229,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 08 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/08/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/08/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/08/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/08/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -3518,8 +3518,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 07 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/07/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/07/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/07/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/07/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -4110,8 +4110,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 06 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/06/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/06/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/06/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/06/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -4380,8 +4380,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 05 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/05/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/05/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/05/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/05/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -4405,8 +4405,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;　　终结，我还是会总结一下之前学习的经验教训，自己学习的亲身体会。&lt;/p&gt;
 </description>
         <pubDate>Mon, 04 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/04/Flutter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/04/Flutter.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/04/Flutter.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/04/Flutter.html</guid>
         
         <category>flutter</category>
         
@@ -4714,8 +4714,8 @@ Duration(
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 03 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/03/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/03/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/03/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/03/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -4928,8 +4928,8 @@ containsValue(String value) =&amp;gt; getValues().contains(value);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 02 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/02/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/02/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/02/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/02/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5045,8 +5045,8 @@ oldMethod();
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Fri, 01 Feb 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/02/01/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/02/01/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/02/01/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/02/01/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5313,8 +5313,8 @@ args.addAll([
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 31 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/31/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/31/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/31/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/31/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5439,8 +5439,8 @@ class Todo {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 30 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/30/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/30/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/30/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/30/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5509,8 +5509,8 @@ main() {
 &lt;p&gt;区别就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;typedef&lt;/code&gt; 编辑器会提示函数信息&lt;/p&gt;
 </description>
         <pubDate>Tue, 29 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/29/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/29/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/29/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/29/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5586,8 +5586,8 @@ main() {
 
 </description>
         <pubDate>Mon, 28 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/28/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/28/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/28/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/28/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5619,8 +5619,8 @@ class IOSPhone {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 27 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/27/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/27/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/27/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/27/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5714,8 +5714,8 @@ Iterable&amp;lt;int&amp;gt; naturalsDownFrom(int n) sync* {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Sat, 26 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/26/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/26/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/26/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/26/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5783,8 +5783,8 @@ Future&amp;lt;String&amp;gt; getUrl(String url) async {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Fri, 25 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/25/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/25/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/25/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/25/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5879,8 +5879,8 @@ class AndroidPhone {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Thu, 24 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/24/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/24/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/24/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/24/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -5997,8 +5997,8 @@ void main() async {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Wed, 23 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/23/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/23/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/23/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/23/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6099,8 +6099,8 @@ class IOSPhone implements Phone {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 22 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/22/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/22/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/22/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/22/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6243,8 +6243,8 @@ class AndroidPhone extends Mobile {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Mon, 21 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/21/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/21/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/21/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/21/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6356,8 +6356,8 @@ class AndroidPhone implements Phone, Mobile {
 &lt;/blockquote&gt;
 </description>
         <pubDate>Sun, 20 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/20/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/20/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/20/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/20/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6434,8 +6434,8 @@ user.printName();
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 19 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/19/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/19/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/19/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/19/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6527,8 +6527,8 @@ p.show();
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 18 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/18/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/18/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/18/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/18/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6581,8 +6581,8 @@ print(p.pName);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 17 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/17/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/17/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/17/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/17/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6704,8 +6704,8 @@ print([p.x, p.y]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 16 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/16/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/16/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/16/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/16/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -6895,8 +6895,8 @@ print([p.x, p.y]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 15 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/15/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/15/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/15/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/15/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7000,8 +7000,8 @@ print([p.x, p.y]);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Mon, 14 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/14/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/14/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/14/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/14/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7378,8 +7378,8 @@ print(5 % 2);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 13 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/13/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/13/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/13/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/13/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7462,8 +7462,8 @@ int(x: 1, y: 2);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 12 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/12/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/12/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/12/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/12/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7533,8 +7533,8 @@ void main() {
 &lt;p&gt;可参考 &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; 类中的注释使用&lt;/p&gt;
 </description>
         <pubDate>Fri, 11 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/11/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/11/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/11/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/11/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7652,8 +7652,8 @@ print(a.runes);
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 10 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/10/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/10/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/10/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/10/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7779,8 +7779,8 @@ print(a.runes);
 &lt;/table&gt;
 </description>
         <pubDate>Wed, 09 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/09/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/09/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/09/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/09/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -7927,8 +7927,8 @@ print(a.runes);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 08 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/08/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/08/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/08/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/08/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8113,8 +8113,8 @@ print(a.runes);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Mon, 07 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/07/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/07/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/07/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/07/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8156,8 +8156,8 @@ print(a.runes);
 
 </description>
         <pubDate>Sun, 06 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/06/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/06/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/06/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/06/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8254,8 +8254,8 @@ print(sb.toString());
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Sat, 05 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/05/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/05/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/05/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/05/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8311,8 +8311,8 @@ print(sb.toString());
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/04/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/04/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/04/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/04/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8359,8 +8359,8 @@ print(sb.toString());
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/03/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/03/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/03/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/03/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8511,8 +8511,8 @@ print(sb.toString());
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Wed, 02 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/02/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/02/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/02/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/02/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8558,8 +8558,8 @@ print(sb.toString());
 &lt;p&gt;​&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/flutter/2019/01/01/Dart.html</link>
-        <guid isPermaLink="true">http://localhost:4000/flutter/2019/01/01/Dart.html</guid>
+        <link>http://CrazyAndy.github.io/flutter/2019/01/01/Dart.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/flutter/2019/01/01/Dart.html</guid>
         
         <category>flutter</category>
         
@@ -8624,8 +8624,8 @@ print(sb.toString());
 
 </description>
         <pubDate>Mon, 01 Oct 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/10/01/Mina.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/10/01/Mina.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/10/01/Mina.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/10/01/Mina.html</guid>
         
         <category>java</category>
         
@@ -8844,8 +8844,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/19/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD 领域驱动设计－在动手之前，先把你的脑袋清理干净&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/18/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/18/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/18/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/18/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -9121,8 +9121,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/18/DDD.html&quot;&gt;下一章—领域驱动设计专栏篇—008—醍醐灌顶：领域驱动设计实现之路&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 17 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/17/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/17/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/17/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/17/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -9375,8 +9375,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/17/DDD.html&quot;&gt;下一章—领域驱动设计蟋蟀专栏篇—007—No zuo no die：DDD 应对具体业务场景，Domain Model 重新设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 16 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/16/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/16/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/16/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/16/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -9918,8 +9918,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/16/DDD.html&quot;&gt;下一章—领域驱动设计专栏篇—006—设计窘境：来自 Repository 的一丝线索，Domain Model 再重新设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 15 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/15/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/15/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/15/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/15/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -10618,8 +10618,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/15/DDD.html&quot;&gt;下一章—领域驱动设计专栏篇—005—No zuo no die：DDD 应对具体业务场景，Domain Model 重新设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/14/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/14/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/14/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/14/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -10821,8 +10821,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/14/DDD.html&quot;&gt;下一章—领域驱动设计田园的蟋蟀专栏篇—004—拨开迷雾，找回自我：DDD 应对具体业务场景，Domain Model 到底如何设计？&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 13 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/13/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/13/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/13/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/13/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -11358,8 +11358,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/13/DDD.html&quot;&gt;下一章—领域驱动设计田园的蟋蟀专栏篇—003—DDD（领域驱动设计）理论结合实践&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 12 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/12/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/12/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/12/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/12/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -11583,8 +11583,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/12/DDD.html&quot;&gt;下一章—领域驱动设计田园的蟋蟀专栏篇—002—一缕阳光：DDD（领域驱动设计）应对具体业务场景，如何聚焦 Domain Model（领域模型）？&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 11 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/11/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/11/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/11/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/11/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -11619,8 +11619,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;上一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/10/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/10/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/10/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/10/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -11717,8 +11717,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/10/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—010—概览篇总结)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 09 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/09/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/09/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/09/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/09/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -11855,8 +11855,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/09/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—009—DDD初学指南&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 08 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/08/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/08/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/08/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/08/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -12132,8 +12132,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/08/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—008—领域驱动设计，战略建模)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 07 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/07/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/07/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/07/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/07/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -12340,8 +12340,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/07/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—007—领域模型驱动设计（Domain Driven Design）入门概述)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 06 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/06/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/06/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/06/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/06/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -12544,8 +12544,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/06/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—006—腾云 –领域驱动设计(DDD)实现之路)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 05 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/05/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/05/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/05/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/05/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -12721,8 +12721,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/05/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—005—浅析DDD(领域驱动设计)&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 04 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/04/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/04/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/04/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/04/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -13050,8 +13050,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/04/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—004—浅谈我对DDD领域驱动设计的理解&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 03 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/03/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/03/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/03/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/03/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -13184,8 +13184,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/03/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—003—从零开始的领域驱动设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 02 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/02/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/02/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/02/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/02/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -13222,8 +13222,8 @@ print(sb.toString());
 &lt;p&gt;　　*&lt;a href=&quot;/design/2018/08/02/DDD.html&quot;&gt;下一章—领域驱动设计概览篇—002—我眼中的领域驱动设计&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2018/08/01/DDD.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2018/08/01/DDD.html</guid>
+        <link>http://CrazyAndy.github.io/design/2018/08/01/DDD.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2018/08/01/DDD.html</guid>
         
         <category>ddd</category>
         
@@ -13249,8 +13249,8 @@ print(sb.toString());
 &lt;p&gt;　　流星虽然消逝，也在最后证明了自己。我们总有一天也会消逝，正如我们的前辈一样，但是我想让自己更亮眼一些，我想证明自己，我会的，我会和我的伙伴一起努力来证明我们自己，我们一定可以。&lt;/p&gt;
 </description>
         <pubDate>Wed, 13 Jun 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/reading/2018/06/13/soso.html</link>
-        <guid isPermaLink="true">http://localhost:4000/reading/2018/06/13/soso.html</guid>
+        <link>http://CrazyAndy.github.io/reading/2018/06/13/soso.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/reading/2018/06/13/soso.html</guid>
         
         <category>狄更斯</category>
         
@@ -13301,8 +13301,8 @@ print(sb.toString());
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Tue, 08 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/08/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/08/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/08/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/08/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13321,8 +13321,8 @@ print(sb.toString());
 &lt;p&gt;　　Ajax 在请求后台时，需要先使用option请求，这时候网关zuul过滤器中需要做判断，如果接收到了之后，需要放过，下次才是正式请求，这时候才会时get,post,put,delete等请求方式。&lt;/p&gt;
 </description>
         <pubDate>Mon, 07 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/07/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/07/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/07/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/07/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13435,8 +13435,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 　　&lt;a href=&quot;https://blog.csdn.net/tianyaleixiaowu/article/details/78772269&quot;&gt;https://blog.csdn.net/tianyaleixiaowu/article/details/78772269&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 06 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/06/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/06/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/06/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/06/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13482,8 +13482,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sat, 05 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/05/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/05/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/05/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/05/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13510,8 +13510,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　zuul.routes.&lt;routeName&gt;.custom-sensitive-headers=true&lt;/routeName&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/04/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/04/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/04/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/04/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13575,8 +13575,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 
 </description>
         <pubDate>Thu, 03 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/03/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/03/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/03/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/03/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13596,8 +13596,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 当时解决这个问题，参照了网上很多建议，各种不一，他们都没有将真正原理给说清楚，或许只是自己运行了能用就说这样好使，当时我的demo因为还有个其他的设置干扰了 这种解决方案的测试，后来是在给源代码打断点一步步调试，才了解到eureka-client 运行机制，所以说调错这东西，真心能反应一个人技术功底，原来有个大哥说，有些问题是百度解决不了的，我越来越信了，越来越相信读源代码的重要性。&lt;/p&gt;
 </description>
         <pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/02/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/02/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/02/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/02/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13622,8 +13622,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 　　这是告诉zuul，在转发请求致此微服务的时候，不需要将前缀进行剥离；或者也可以加入自定义路由设置(这个我没实践，如果上溯方案没有解决你的问题，你可以试试这种方式，祝你好运)&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/05/01/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/05/01/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/05/01/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/05/01/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -13806,8 +13806,8 @@ default代表默认，如果你想为某个特定的service配熔断超时策略
 &lt;p&gt;　　相信当你操作到此步的时候，这一步骤对你来说已经不是问题了，所以这里不再详细截图展示。&lt;/p&gt;
 </description>
         <pubDate>Fri, 02 Mar 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigdata/2018/03/02/ambari.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/03/02/ambari.html</guid>
+        <link>http://CrazyAndy.github.io/bigdata/2018/03/02/ambari.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/bigdata/2018/03/02/ambari.html</guid>
         
         <category>blog</category>
         
@@ -14023,8 +14023,8 @@ server.jdbc.driver.path=[path/to/custom_jdbc_driver]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigdata/2018/03/01/ambari.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/03/01/ambari.html</guid>
+        <link>http://CrazyAndy.github.io/bigdata/2018/03/01/ambari.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/bigdata/2018/03/01/ambari.html</guid>
         
         <category>blog</category>
         
@@ -14054,8 +14054,8 @@ server.jdbc.driver.path=[path/to/custom_jdbc_driver]
 &lt;p&gt;本章内容待完善，因为我想先把git搞明白再说。&lt;/p&gt;
 </description>
         <pubDate>Wed, 07 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/07/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/07/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/07/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/07/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14210,8 +14210,8 @@ api转发请求开始，直至连接到具体服务的时间限制最大为Conne
 &lt;p&gt;　　网关路由时依靠于配置文件，可借助config实现动态路由很方便，但是过滤器则是通过编码实现，我们则需要基于jvm实现的动态语言的帮助，比如groovy。我们项目中一般用不到，所以这里也不再叙述。&lt;/p&gt;
 </description>
         <pubDate>Tue, 06 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/06/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/06/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/06/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/06/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14351,8 +14351,8 @@ ribbon.ReadTimeout=5000
 &lt;p&gt;　　feign在构建被@FeignClient注解修饰的服务客户端时，会为每一个客户端都创建一个feign.Logger实例，我们可以通过配置开启，也可以在应用主类中加入Logger.Level的bean创建，还可以在具体的feign客户端指定配置类以实现是否要调整不同的日志级别。&lt;/p&gt;
 </description>
         <pubDate>Mon, 05 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/05/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/05/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/05/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/05/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14399,8 +14399,8 @@ ribbon.ReadTimeout=5000
 &lt;p&gt;　　&lt;/p&gt;
 </description>
         <pubDate>Sun, 04 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/04/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/04/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/04/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/04/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14445,8 +14445,8 @@ ribbon.ReadTimeout=5000
 
 </description>
         <pubDate>Sat, 03 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/03/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/03/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/03/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/03/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14495,8 +14495,8 @@ ribbon.ReadTimeout=5000
 
 </description>
         <pubDate>Fri, 02 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/02/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/02/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/02/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/02/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14516,8 +14516,8 @@ ribbon.ReadTimeout=5000
 &lt;p&gt;　　本篇细分成 前言，服务治理，客户端负载均衡，声明式服务调用，API网关服务，这几个章节，在这些章节里面，我会简单描述一下各部分内容，并用代码示例具体说明。这些内容算是spring cloud的精简版，我是想遵循学习由简到难的思路，尽可能让学习曲线变得平滑，更容易让大家理解和接受，这也是我当时学习的节奏，事实证明这种学习方法很有效。&lt;/p&gt;
 </description>
         <pubDate>Thu, 01 Feb 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/02/01/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/02/01/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/02/01/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/02/01/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14535,8 +14535,8 @@ ribbon.ReadTimeout=5000
 　　使用docker容器化技术，可实现应用环境隔离，配合jenkins和k8s可实现自动化发布到开发，测试，生产多个环境。而且不用和原来石器时代式的每次向新生产服务器上重新安装配置环境，向已有生产服务器上需要根据生产环境做出一些配置文件的修改。尤其在某服务实例需求量短时间内猛增的时候，疲于挨个服务器调试部署，极大的提高了部署效率，而且还能极大降低部署出错概率。&lt;/p&gt;
 </description>
         <pubDate>Tue, 09 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/09/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/09/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/09/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/09/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14554,8 +14554,8 @@ ribbon.ReadTimeout=5000
 　　大众点评技术中心开源了cat系统用来配置服务监控，并提供ui显示各服务运行情况，在以后章节会在进行深入详细讲解。&lt;/p&gt;
 </description>
         <pubDate>Mon, 08 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/08/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/08/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/08/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/08/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -14882,8 +14882,8 @@ map is empty
 
 </description>
         <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/07/HashMap.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/07/HashMap.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/07/HashMap.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/07/HashMap.html</guid>
         
         <category>java</category>
         
@@ -14906,8 +14906,8 @@ map is empty
 　　　　2. 客户端通过请求服务端为其提供的服务接口，查询具体配置并应用到客户端所在的服务中去。&lt;/p&gt;
 </description>
         <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/07/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/07/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/07/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/07/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -15401,8 +15401,8 @@ final Entry&amp;lt;K,V&amp;gt; removeEntryForKey(Object key) {
 
 </description>
         <pubDate>Sat, 06 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/06/HashMap.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/06/HashMap.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/06/HashMap.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/06/HashMap.html</guid>
         
         <category>java</category>
         
@@ -15426,8 +15426,8 @@ final Entry&amp;lt;K,V&amp;gt; removeEntryForKey(Object key) {
 如上图，b服务依然挂掉，不能再提供正常服务，这时候如果还将前端请求转发到b，显然是不合适的，我们会为b服务实现回滚逻辑，也就是降级处理。这样，在下次请求b服务的时候，断路器会直接执行回滚逻辑，告知前端通知，比如该服务不能正常运行，或者提供该服务的一个“应付”数据等等。&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/06/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/06/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/06/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/06/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -15544,8 +15544,8 @@ modCount是用来实现fail-fast机制的。
 
 </description>
         <pubDate>Fri, 05 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/05/HashMap.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/05/HashMap.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/05/HashMap.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/05/HashMap.html</guid>
         
         <category>java</category>
         
@@ -15581,8 +15581,8 @@ modCount是用来实现fail-fast机制的。
 　　另外一种是客户端发现模式，服务之间互相调用时，消费者通过某种策略选择生产者的一个实例，然后请求到该实例，消费者最终请求到具体实例是由该消费者主动选择的，所以我们称之为客户端发现模式。&lt;/p&gt;
 </description>
         <pubDate>Fri, 05 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/05/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/05/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/05/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/05/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -15757,8 +15757,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 04 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/04/HashMap.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/04/HashMap.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/04/HashMap.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/04/HashMap.html</guid>
         
         <category>java</category>
         
@@ -15809,8 +15809,8 @@ f(key)=random(key)&lt;/p&gt;
 　　服务使用了通知、请求/响应和发布/订阅组合。例如，乘客的智能手机向 Trip Management 微服务发送一条通知以请求一辆车。Trip Management 服务通过使用请求/响应来调用 Passenger Management 服务以验证乘客的帐户是否可用。之后，Trip Management 服务创建路线，并使用发布/订阅通知其他服务，包括用于定位可用司机的 Dispatcher。&lt;/p&gt;
 </description>
         <pubDate>Thu, 04 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/04/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/04/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/04/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/04/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -16156,8 +16156,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 03 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/03/OAuth2.0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/03/OAuth2.0.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/03/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/03/OAuth2.0.html</guid>
         
         <category>java</category>
         
@@ -16193,8 +16193,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;　　静态资源，比如图片，js，css文件等等，都可以直接在网关层就返回，不需要再转发到靠后的微服务。&lt;/p&gt;
 </description>
         <pubDate>Wed, 03 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/03/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/03/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/03/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/03/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -16262,8 +16262,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/02/OAuth2.0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/02/OAuth2.0.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/02/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/02/OAuth2.0.html</guid>
         
         <category>java</category>
         
@@ -16293,8 +16293,8 @@ f(key)=random(key)&lt;/p&gt;
 　　微服务因为其服务拆分的特点有着很多独特的优势，也正因为其特点也会产生很多新的问题，各种网友们真可谓是仁者见仁、智者见智，活脱脱的一千个人的心中有一千个哈姆雷特，谨劝各位，与其听别人白活还不如自己投入实战亲身体会比较好。&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/02/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/02/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/02/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/02/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -16326,8 +16326,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;　　如果想查看程序运行流程，那么就需要使用java ide工具运行presto源码，我们当时是在界面版linux上，使用idea软件跑起来的，debug调试以查看presto执行流程。&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigdata/2018/01/02/Presto.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/02/Presto.html</guid>
+        <link>http://CrazyAndy.github.io/bigdata/2018/01/02/Presto.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/bigdata/2018/01/02/Presto.html</guid>
         
         <category>blog</category>
         
@@ -16388,8 +16388,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2018/01/01/OAuth2.0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2018/01/01/OAuth2.0.html</guid>
+        <link>http://CrazyAndy.github.io/java/2018/01/01/OAuth2.0.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2018/01/01/OAuth2.0.html</guid>
         
         <category>java</category>
         
@@ -16415,8 +16415,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;　　本篇细分成 前言，微服务简介，Api网关，进程间通讯，服务发现，断路器，配置中心，监控器，devops，这几个章节，在这些章节里面，我会简单描述一下各部分内容，你只需要了解到各个部分都是干什么的即可，不必深究。在以后的篇幅中我会以代码，官方文档，以及源代码的形式详细帮你分析各部分内容细节。&lt;/p&gt;
 </description>
         <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/cloud/2018/01/01/Cloud.html</link>
-        <guid isPermaLink="true">http://localhost:4000/cloud/2018/01/01/Cloud.html</guid>
+        <link>http://CrazyAndy.github.io/cloud/2018/01/01/Cloud.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/cloud/2018/01/01/Cloud.html</guid>
         
         <category>blog</category>
         
@@ -16461,8 +16461,8 @@ f(key)=random(key)&lt;/p&gt;
 &lt;p&gt;　　《人月神话》里说过，技术永远没有银弹，我们可以理解成在现实某种状况下，某种技术更加适合，是结合当前条件的最优妥协罢了。在笔者看来，presto适合数据建模并不十分明朗的数据查询，相对于直接查询hive更快，却又和kylin相比在特定建模下性能有所差距。而且，presto倡议只是用来查询分析，你非要拿兰博基尼当拖拉机去耕地，这不大热天喝热茶，越喝越热么 ^_^&lt;/p&gt;
 </description>
         <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/bigdata/2018/01/01/Presto.html</link>
-        <guid isPermaLink="true">http://localhost:4000/bigdata/2018/01/01/Presto.html</guid>
+        <link>http://CrazyAndy.github.io/bigdata/2018/01/01/Presto.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/bigdata/2018/01/01/Presto.html</guid>
         
         <category>blog</category>
         
@@ -16500,8 +16500,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 03 Oct 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2017/10/03/CAS.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2017/10/03/CAS.html</guid>
+        <link>http://CrazyAndy.github.io/java/2017/10/03/CAS.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2017/10/03/CAS.html</guid>
         
         <category>java</category>
         
@@ -16609,8 +16609,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 02 Oct 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2017/10/02/CAS.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2017/10/02/CAS.html</guid>
+        <link>http://CrazyAndy.github.io/java/2017/10/02/CAS.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2017/10/02/CAS.html</guid>
         
         <category>java</category>
         
@@ -16777,8 +16777,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 Oct 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2017/10/01/CAS.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2017/10/01/CAS.html</guid>
+        <link>http://CrazyAndy.github.io/java/2017/10/01/CAS.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2017/10/01/CAS.html</guid>
         
         <category>java</category>
         
@@ -16826,8 +16826,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 05 Apr 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/reading/2017/04/05/PaperPlane.html</link>
-        <guid isPermaLink="true">http://localhost:4000/reading/2017/04/05/PaperPlane.html</guid>
+        <link>http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/reading/2017/04/05/PaperPlane.html</guid>
         
         <category>大时代</category>
         
@@ -16940,8 +16940,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/it/2017/01/01/JekyllBlog.html</link>
-        <guid isPermaLink="true">http://localhost:4000/it/2017/01/01/JekyllBlog.html</guid>
+        <link>http://CrazyAndy.github.io/it/2017/01/01/JekyllBlog.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/it/2017/01/01/JekyllBlog.html</guid>
         
         <category>it</category>
         
@@ -16964,8 +16964,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/boot/2017/01/01/SpringBoot.html</link>
-        <guid isPermaLink="true">http://localhost:4000/boot/2017/01/01/SpringBoot.html</guid>
+        <link>http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/boot/2017/01/01/SpringBoot.html</guid>
         
         <category>java</category>
         
@@ -16990,8 +16990,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/SmartFrame.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/SmartFrame.html</guid>
+        <link>http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/SmartFrame.html</guid>
         
         <category>java</category>
         
@@ -17032,8 +17032,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 01 Aug 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/java/2016/08/01/Java-Crawler.html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2016/08/01/Java-Crawler.html</guid>
+        <link>http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/java/2016/08/01/Java-Crawler.html</guid>
         
         <category>java</category>
         
@@ -17185,8 +17185,8 @@ f(key)=random(key)&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 13 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/13/LinuxConfig.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/13/LinuxConfig.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/13/LinuxConfig.html</guid>
         
         <category>linux</category>
         
@@ -17245,8 +17245,8 @@ f(key)=random(key)&lt;/p&gt;
 　　/var/www/html ,这个，还有端口都可以在 /etc/httpd/conf/httpd.conf 配置文件里面配置，端口默认是80&lt;/p&gt;
 </description>
         <pubDate>Sun, 03 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/03/LinuxHttpd.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/03/LinuxHttpd.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/03/LinuxHttpd.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/03/LinuxHttpd.html</guid>
         
         <category>linux</category>
         
@@ -17324,8 +17324,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Sat, 02 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/02/LinuxSSH.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/02/LinuxSSH.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/02/LinuxSSH.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/02/LinuxSSH.html</guid>
         
         <category>linux</category>
         
@@ -17375,8 +17375,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Fri, 01 Mar 2013 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/2013/03/01/LinuxSetUp.html</guid>
+        <link>http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/linux/2013/03/01/LinuxSetUp.html</guid>
         
         <category>linux</category>
         
@@ -17878,8 +17878,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Wed, 04 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2012/04/04/DecoratorPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2012/04/04/DecoratorPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/04/DecoratorPattern.html</guid>
         
         <category>java</category>
         
@@ -18382,8 +18382,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Tue, 03 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2012/04/03/ObserverPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2012/04/03/ObserverPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/03/ObserverPattern.html</guid>
         
         <category>java</category>
         
@@ -18708,8 +18708,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Mon, 02 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2012/04/02/StrategyPattern.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2012/04/02/StrategyPattern.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/02/StrategyPattern.html</guid>
         
         <category>java</category>
         
@@ -18747,8 +18747,8 @@ IP_PW &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
 
 </description>
         <pubDate>Sun, 01 Apr 2012 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/design/2012/04/01/PatternBefore.html</link>
-        <guid isPermaLink="true">http://localhost:4000/design/2012/04/01/PatternBefore.html</guid>
+        <link>http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</link>
+        <guid isPermaLink="true">http://CrazyAndy.github.io/design/2012/04/01/PatternBefore.html</guid>
         
         <category>java</category>
         
