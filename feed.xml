@@ -5,13 +5,16 @@
     <description>CrazyAndy's blog,use Jekyll and github pages.</description>
     <link>http://CrazyAndy.github.io/</link>
     <atom:link href="http://CrazyAndy.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Jul 2020 08:00:50 +0800</pubDate>
-    <lastBuildDate>Tue, 21 Jul 2020 08:00:50 +0800</lastBuildDate>
+    <pubDate>Tue, 21 Jul 2020 08:27:24 +0800</pubDate>
+    <lastBuildDate>Tue, 21 Jul 2020 08:27:24 +0800</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>BigMouth英语角策划</title>
-        <description>&lt;h1 id=&quot;创建英语角bigmouth初衷&quot;&gt;创建英语角BigMouth初衷　　&lt;/h1&gt;
+        <description>&lt;!-- ![edit](/static/assets/img/blog/english/cloud001.png) --&gt;
+&lt;center&gt;&lt;img src=&quot;/static/assets/img/blog/english/EnglisthCorner.jpg&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;h1 id=&quot;创建英语角bigmouth初衷&quot;&gt;创建英语角BigMouth初衷　　&lt;/h1&gt;
 
 &lt;p&gt;　　大家好，我是孙虎，电桩组高级JAVA工程师，负责咱们软件开发的工作。&lt;/p&gt;
 
