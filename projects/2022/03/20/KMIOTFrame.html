@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<head>
+    <title>KM  IOT  Socket  Framework | Andy Sun's World</title>
+    <link rel="alternate" type="application/rss+xml" href="http://localhost:4000/feed.xml" title="Andy Sun's World">
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <!-- Ionicons -->
+    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link active-link" href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Frontend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/frontend/react.html">React</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/rn.html">ReactNative</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/flutter.html">Flutter</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/es6.html">Es6</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Backend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/backend/java.html">Java</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/python.html">Python</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/ruby.html">Ruby</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/rails.html">Rails</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/embedded/c.html">C</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/digit.html">DigitCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Idea <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/idea/strategy.html">DesignStrategy</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/ddd.html">DDD</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/cloud.html">Cloud</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/it/tcpip.html">TCP/IP</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/socket.html">Socket</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mqtt.html">mqtt</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/jvm.html">jvm</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/linux.html">linux</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/docker.html">docker</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/k8s.html">k8s</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mq.html">mq</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/memorycache.html">memorycache</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/elk.html">elk</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/zookeeper.html">zookeeper</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/git.html">git</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>KM  IOT  Socket  Framework</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">13 Nov 2018</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="the-underlying-framework-of-the-server-corresponding-to-the-new-version-of-the-charging-pile">The underlying framework of the server corresponding to the new version of the charging pile</h1>
+
+<h2 id="iintroduction">I.Introduction</h2>
+
+<h3 id="1research-background-and-significance">1.Research Background and Significance</h3>
+
+<p>  After years of developing technology, our company has organized a number of technical engineers to continuously improve and optimize electric bicycle charging pile products step by step. In the process of technical assistance and cooperation with various customer companies, we have taken many detours and summed up a lot of valuable experience. To this end, we have specially developed a server communication framework for the new version of the charging pile (with OTA upgrade function), which is convenient for the customer technical team to seamlessly connect our charging pile products.</p>
+
+<h2 id="iisystem-related-technologies">II.System Related Technologies</h2>
+<h3 id="1netty">1.Netty</h3>
+
+<p>  Since the communication between the charging pile wifimaster and the server uses the socket protocol, we use the mature netty framework in the java system on the server side to handle the functions of receiving messages and issuing instructions.</p>
+
+<h3 id="2spring-boot">2.Spring Boot</h3>
+
+<p>  Spring Boot realizes automatic configuration, reduces the complexity of project construction, and it can integrate tomcat to provide external web services. It is the most popular web framework technology in java web.</p>
+
+<h3 id="3elk">3.ELK</h3>
+
+<p>  We used logback in the project to add log anchors for each logical key position, especially the content of hardware and server communication, which were recorded in different categories; then stored in elasticsearch through logstash, and finally viewed by using kibana. Then we will attach the log parsing configuration file for the customer convenience.</p>
+
+<h2 id="iiisystem-design">III.System Design</h2>
+<h3 id="1architecture-design">1.Architecture design</h3>
+
+<p>  We divide the system into three subsystems :</p>
+
+<center><img src="/assets/images/posts/project/frame1.png" width="100%" /></center>
+
+<p>​</p>
+
+<h3 id="2single-charging-client">2.single-charging-client</h3>
+
+<p>  Simulate charging pile hardware to realize all protocol contents.</p>
+
+<center><img src="/assets/images/posts/project/frame2.png" width="100%" /></center>
+
+<p>​</p>
+
+<p>  This system is directly built on the kingmeter-socket-framework, loaded with socket client and web server, and the user requests the http interface provided by postman to simulate the operation of the physical hardware of the charging pile, such as scanning the code to rent a bicycle, the bicycle enters the pile, and fault reporting, etc. This module is designed to test the connectivity and logical correctness of single-charging-server and single-charging-business.</p>
+
+<h3 id="3single-charging-server">3.single-charging-server</h3>
+
+<center><img src="/assets/images/posts/project/frame3.png" width="100%" /></center>
+
+<p>  The server program for docking the charging pile hardware includes socket server and web server. The socket server is mainly for docking the charging pile system, and the web server is mainly for docking the business system. The integrated web server here is mainly used to receive the instructions of the business system. Of course, we can use Message Queue, grpc and other technologies to achieve this communication, which can be modified according to customer ideas.</p>
+
+<p>  We mainly explain single-charging-server, and the other two systems are auxiliary systems. In actual operation, they are replaced by the real charging pile wifimaster and the customer’s real business operation system.</p>
+
+<p>  The single-charging-server is based on netty and spring boot, and it provides both socket services and web services. We split it into kingmeter-dto, kingmeter-dto-charging, kingmeter-utils, kingmeter-socket-framework, kingmeter-socket-charging, and single-charging-server. Modules have forward and backward dependencies.</p>
+
+<p>  Based on the principle of kiss (keep it stupid simple), we try to make the server’s communication module light and thin without participating in any business logic, but as a tool for transparent data transmission to increase its robustness and stability.</p>
+
+<h3 id="4single-charging-business">4.single-charging-business</h3>
+
+<p>  Simulate the business system (user,money,order,trip and other business logic), and it sends commands such as rental order to the single-charging-server</p>
+
+<center><img src="/assets/images/posts/project/frame4.png" width="100%" /></center>
+
+<h2 id="ivsystem-implementation">IV.System Implementation</h2>
+
+<h3 id="1kingmeter-common">1.kingmeter-common</h3>
+
+<p>  Error, log anchor, http return, code collection, application context management</p>
+
+<h3 id="2kingmeter-dto-charging">2.kingmeter-dto-charging</h3>
+
+<p>  This module mainly encapsulates the data model of the round-trip communication between the charging pile and the server.</p>
+
+<p>com.kingmeter.dto.charging.latest:</p>
+
+<p>  it is the new version of the charging pile (with ota) communication data model package</p>
+
+<p>com.kingmeter.dto.charging.old:</p>
+
+<p>  it is the old version of the charging pile (without ota) communication data model package</p>
+
+<h3 id="3kingmeter-utils">3.kingmeter-utils</h3>
+
+<p>  enumeration type, utility class</p>
+
+<h3 id="4kingmeter-socket-framework">4.kingmeter-socket-framework</h3>
+
+<p>  The socket core tool “module” encapsulates the server program as the underlying code of the server side and the simulated test client side, including encoding and decoding, device information management, etc. The contents of the package are explained in turn as follows:</p>
+
+<p>application :</p>
+
+<p>  The socket command is sent, and the information reported by the charging pile is obtained by polling.</p>
+
+<p>business :</p>
+
+<p>  Process the information reported by the iot device, and dispatch the information to the business processing class RequestStrategy (kingmeter-socket-charging will implement the RequestStrategy interface, and the strategy mode is used here).</p>
+
+<p>codec :</p>
+
+<p>  The communication between the iot device and the server is based on a set of custom codec protocols in the form of fixed-length messages. When decoding, the received byte stream is unpacked, and the byte array corresponding to a complete message is passed to the ClientHandler or ServerHandler under the role package for processing. When encoding, the ResponseBody is encoded into the byte stream required for communication and sent out by the SocketChannel.</p>
+
+<p>config :</p>
+
+<p>  According to the custom codec protocol, the content at the beginning of the message, the content at the end, and the length of the message are obtained from the configuration file, so that it can be configured flexibly, because our company not only has charging piles, but also intelligent horseshoe locks. Front mortise lock and single iron stake are all built on this module, and kingmeter-socket-charging is just one of them.</p>
+
+<p>dto:</p>
+
+<p>  It is mainly the base class that encapsulates the interaction data model between iot devices and servers. Based on this module, the upper-level modules such as kingmeter-socket-charging will be parsed into different data model implementations according to different function codes.</p>
+
+<p>idletrigger :</p>
+
+<p>  The netty server or client will monitor the message sent by the other end, and every time a message is received, it will restart the timing. If the other party’s information is not received in particular period, it is considered that the other party is disconnected and will force the communication of the other party to be disconnected.</p>
+
+<p>role :</p>
+
+<p>  It is divided into two roles: client and server. Client is mainly used by the underlying framework package used when the upper layer is implemented as the client side, and server is used by the server side. The respective ChannelInitializer will be configured with idleTiger, codec, and business handler implementation. .</p>
+
+<p>strategy :</p>
+
+<p>  Strategy pattern parent class which is mainly used to forward the message to the specific business layer after receiving it.</p>
+
+<p>util :</p>
+
+<p>  CacheUtil mainly caches the hardware information that has been connected, because these hardware information will only have meaning when the connection between the two parties is successful, and in order to ensure the speed of reading and writing, it can only be stored in memory, no need to persist into a hard disk or database. Of course, the business system can back up a copy of the corresponding information at the same time, which is convenient for the business management system to query and use.</p>
+
+<h3 id="5kingmeter-socket-charging">5.kingmeter-socket-charging</h3>
+
+<p>  Based on kingmeter-socket-framework, it is implemented for charging piles. Parallel to this module and modules similar to kingmeter-socket-smartlock, kingmeter-socket-frontlock, etc. can be implemented.</p>
+
+<p>acl :</p>
+
+<p>  acl is the abbreviation of Anticorruption Layer. It borrows the concept of domain driven design and is mainly used to isolate the underlying communication and business logic, so that all parties do not interfere with each other and achieve isolation and decoupling.</p>
+
+<p>usiness:</p>
+
+<p>  code :</p>
+
+<p>  Established according to the function code calibrated on the charging pile tcp communication protocol document.</p>
+
+<p>  stragegy :</p>
+
+<p>  All classes in this package implement RequestStrategy, and each function code has 	a corresponding specific implementation. This is the embodiment of the strategy pattern.</p>
+
+<p>  tracker :</p>
+
+<p>  This is used for ota remote upgrade. We implement ota remote upgrade.</p>
+
+<p>  The steps are as follows:</p>
+
+<p>  A. The server sends an instruction to query the bicycle information to the charging pile</p>
+
+<p>  B. The server receives the pile bicycle information reported by the charging pile and triggers C</p>
+
+<p>  C. The server sends remote upgrade instructions</p>
+
+<p>  D. The server receives the charging upgrade confirmation message</p>
+
+<p>  E. After the charging pile self-upgrades, it will automatically power off and restart, and will report the login request</p>
+
+<p>  F. The server receives the login request and checks whether there is an upgrade command for the charging pile before, and if so, it will actively trigger G</p>
+
+<p>  G. The server sends the command to query the bicycle information to the charging pile again</p>
+
+<p>  H.The server receives the bicycle information reported by the charging pile , compares it with the information received by B, and finally notifies the business management system of the comparison result.</p>
+
+<p>utils :</p>
+
+<p>  The worker is mainly responsible for forwarding messages received by the server to 	specific business implementations (classes in the stragey package).</p>
+
+<p>rest:</p>
+
+<p>  The encapsulation server sends instructions to shield the details of the byte stream. The upper-layer logic only needs to send the model data, and it also includes synchronously waiting for the return result of the charging pile within the set timeout period.</p>
+
+<h3 id="6single-charging-server">6.single-charging-server</h3>
+
+<p>  This project is built on kingmeter-socket-charging, loaded with socket server and web server, and can also determine whether it is a stand-alone test mode or a connection business system mode according to kingmeter.requestBusiness in the configuration file. BusinessServiceImpl communicates with the business system through http. In order to simplify, this project does not add permission control for the http service. If necessary, it can be extended by itself. However, when requesting the business system, we can add a mutually agreed token to the request message header.</p>
+
+<p>  In practical applications, the operator can rewrite the project according to its own architectural characteristics, and use in-process communication in the business system to access the underlying framework provided by the kingmeter-socket-charging. Of course, the project can also be improved, combining the business system with this method. The project is isolated and the inter-process communication method is used to achieve the purpose of high cohesion and low coupling.</p>
+
+<h3 id="7communication-between-subsystems">7.Communication between subsystems</h3>
+
+<p>  The existence of the two subsystems single-charging-client and single-charging-business is only to verify the feasibility and stability of the single-charging-server system and the underlying socket server. In actual production, these two subsystems must be replaced, and the single-charging-server can also choose whether to improve or cancel it according to the specific situation of the autonomous software system and directly connect to kingmeter-socket-charging.</p>
+
+<p>  During the test, the communication between the three subsystems uses the http protocol, and the specific communication content can be found in the relevant code. Moreover, if they are all deployed on the same server or different servers in the same LAN, the http performance will not become the bottleneck of data flow.</p>
+
+<p>  Obviously, in order to pursue the ultimate performance in the actual operating environment, it is the best for the business system to directly access kingmeter-socket-charging, but this will also slightly increase the system complexity. It is recommended not to do this in the early stage of system access. To achieve the purpose of system decoupling, it is acceptable to lose a little performance, especially when the site equipment does not reach the level of more than 10,000.</p>
+
+<h2 id="vsystem-test">V.System Test</h2>
+<p>  When we connect the hardware system and the business system, we divide the process into many stages to ensure that each step goes smoothly, and the current step is the guarantee prerequisite for the next step. Please try to follow the steps as much as possible. Although the process will be a little tedious, it is still necessary for troubleshooting. Otherwise, if you start debugging as a whole, once a fault occurs, troubleshooting will be a headache.</p>
+<center><img src="/assets/images/posts/project/frame5.png" width="100%" /></center>
+
+<p>  Regarding the stress test, single-charging-client can configure the number of simulated devices in the configuration, and users can configure the number of charging pile sites by themselves.</p>
+<h2 id="viconclusion-and-outlook">VI.Conclusion and Outlook</h2>
+<p>  We can use a variety of programming languages to build a socket server. In the java system, Netty provides an asynchronous, event-driven network application framework and tools to rapidly develop high-performance, high-reliability network servers and client programs. Of course, customer can also use python’s tornado for socket server development.</p>
+
+<p>  Anyway, they are all communication development based on tcp/ip protocol. Please pay carefully attention to the following points:</p>
+
+<p>  A. Sticky packet unpacking processing. The instability of the network may cause the packet information to be incomplete or extra. We use the sequence of tcp messages to achieve unpacking processing.</p>
+
+<p>  B. Modify the number of file handles in the linux system. By default, the linux system accepts a maximum of 1024 socket connections for a process. Obviously, this needs to be adjusted.</p>
+
+<p>  C.Select and Epoll selection, using Epoll when the device connection increases a lot, the performance will not decrease much.</p>
+
+<p>  D. For example, a sudden power failure, or when the network signal quality is poor for a long time, the iot device is likely to be passively disconnected from the network. At this time, the server does not know that the device is disconnected, so it can only be connected by attaching a timer to each connection. When there is a message communication, it will be reset to 0, and then the time will be accumulated. After the timeout, it is determined that the iot device has been disconnected, and the connection here is actively disconnected, and then the business system is notified.</p>
+
+<p>  E. When running a socket server, it is necessary to monitor the memory and cpu usage of the server to ensure that the server can run normally and stably.</p>
+
+<p>  F. Flow Control</p>
+
+<h2 id="viisource-code">VII.Source Code</h2>
+
+<p>  I created two github organizations , all of the repositories are private except documents. Please email to me (crazyandyisfine@gmail.com) with your github account , then I can invite you into these two organizations.</p>
+
+<p>  https://github.com/KM-IOT-BaseFrameWork</p>
+
+<p>    kingmeter-common</p>
+
+<p>    kingmeter-utils</p>
+
+<p>    kingmeter-mvc</p>
+
+<p>    kingmeter-socket-framework</p>
+
+<p>  https://github.com/KM-IOT-ChargingStation</p>
+
+<p>    documents</p>
+
+<p>    single-charging-client</p>
+
+<p>    single-charging-server</p>
+
+<p>    single-charging-business</p>
+
+<p>    kingmeter-socket-charging</p>
+
+<p>    kingmeter-dto-charging</p>
+
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2015 © <a href="/">Andy Sun</a>. Template by <a href="https://cloudcannon.com/">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

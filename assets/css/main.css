@@ -3286,7 +3286,8 @@
     }
 
     .post-tags {
-        display: flex
+        /*display: flex*/
+        text-align: center
     }
 
     .post-tags .post-tags__tag {
@@ -3332,7 +3333,8 @@
     .page__title, .post__title {
         margin: 20px 0;
         font-size: 58px;
-        line-height: 1.2
+        line-height: 1.2;
+        text-align: center
     }
 }
 
@@ -3350,7 +3352,7 @@
 
 @media only all and (max-width: 576px) {
     .page__title, .post__title {
-        font-size: 32px
+        font-size: 32px;
     }
 }
 
@@ -3362,7 +3364,8 @@
     .post__meta {
         display: flex;
         align-items: center;
-        flex-wrap: wrap
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .post__meta .post__author-image {
@@ -3372,7 +3375,7 @@
         margin-right: 8px;
         border-radius: 50%;
         overflow: hidden;
-        background-color: #d5dce3
+        background-color: #d5dce3;
     }
 
     .post__meta .post__author-image img {
