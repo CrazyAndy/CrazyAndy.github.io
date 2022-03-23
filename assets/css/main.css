@@ -3952,6 +3952,11 @@
         color: #fff !important
     }
 
+    .c-button--secondary {
+        color: #110e38;
+        background: #fff;
+    }
+
     .c-button--primary:hover:before {
         opacity: 1
     }
@@ -3969,11 +3974,6 @@
         will-change: transform;
         transition: opacity .35s;
         background: linear-gradient(90deg, #1495a7 0, #003687 107%)
-    }
-
-    .c-button--secondary {
-        color: #110e38;
-        background: #fff
     }
 
     .c-button--secondary:hover {
@@ -4268,8 +4268,31 @@
         transition: all .2s cubic-bezier(.215, .61, .355, 1)
     }
 
+    .c-hero__btn .cta-button:hover .circle-bg {
+        transition: all .2s cubic-bezier(.215, .61, .355, 1);
+        transform: scale(.94)
+    }
+
+    .c-hero__btn .cta-button .circle-bg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        font-size: 14px;
+        border-radius: 50%;
+        will-change: transform;
+        background: linear-gradient(90deg, white 0, white 167%);
+        transition: all .2s cubic-bezier(.215, .61, .355, 1)
+    }
+
     .c-hero__btn .works-button .button-arrow {
         color: #fff
+    }
+
+    .c-hero__btn .cta-button .button-arrow {
+        color: #003687
     }
 }
 
