@@ -1,8 +1,8 @@
 ﻿/*!  Ionicons, v4.5.0-3  Created by Ben Sperry for the Ionic Framework, http://ionicons.com/  https://twitter.com/benjsperry  https://twitter.com/ionicframework  MIT License: https://github.com/driftyco/ionicons  Android-style icons originally built by Google’s  Material Design Icons: https://github.com/google/material-design-icons  used under CC BY http://creativecommons.org/licenses/by/4.0/  Modified icons to fit ionicon’s grid from original.*/
 @font-face {
     font-family: "Ionicons";
-    src: url("../images/ionicons.eot");
-    src: url("../images/ionicons.eot#iefix") format("embedded-opentype"), url("../images/ionicons.woff2") format("woff2"), url("../images/ionicons.woff") format("woff"), url("../images/ionicons.ttf") format("truetype"), url("../images/default/ionicons.svg") format("svg");
+    src: url("../font/ionicons.eot");
+    src: url("../font/ionicons.eot#iefix") format("embedded-opentype"), url("../font/ionicons.woff2") format("woff2"), url("../font/ionicons.woff") format("woff"), url("../font/ionicons.ttf") format("truetype"), url("../images/default/ionicons.svg") format("svg");
     font-weight: normal;
     font-style: normal
 }

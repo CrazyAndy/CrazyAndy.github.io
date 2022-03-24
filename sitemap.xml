@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Thu, 24 Mar 2022 00:02:34 +0800</lastBuildDate>
+        <lastBuildDate>Thu, 24 Mar 2022 10:24:06 +0800</lastBuildDate>
         
         <item>
             <title>KM  IOT  Socket  Framework</title>
@@ -65,14 +65,28 @@
         <item>
             <title>17</title>
             <link>
-                http://localhost:4000/reactnative/2022/03/17/RN.html
+                http://localhost:4000/reactnative/index/2022/03/17/RN.html
             </link>
             <description>
                 &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
             </description>
             <pubDate>Thu, 17 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/reactnative/2022/03/17/RN.html
+                http://localhost:4000/reactnative/index/2022/03/17/RN.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>c-learning</title>
+            <link>
+                http://localhost:4000/c/index/2022/03/17/C.html
+            </link>
+            <description>
+                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+            </description>
+            <pubDate>Thu, 17 Mar 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/c/index/2022/03/17/C.html
             </guid>
         </item>
         
