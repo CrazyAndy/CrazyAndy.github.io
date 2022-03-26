@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Linux | Andy Sun's World</title>
+    <title>c-learning-001 | Andy Sun's World</title>
     <link rel="alternate" type="application/rss+xml" href="http://localhost:4000/feed.xml" title="Andy Sun's World">
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -99,7 +99,7 @@
                                 
                                 
                                 
-                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Embedded <i
                                             class="ion ion-ios-arrow-down arrow-down"></i></span>
                                         <div class="dropdown-menu">
                                             
@@ -157,7 +157,7 @@
                                 
                                 
                                 
-                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">IT <i
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
                                             class="ion ion-ios-arrow-down arrow-down"></i></span>
                                         <div class="dropdown-menu">
                                             
@@ -229,40 +229,52 @@
 </header>
 <!-- end header -->
 
-<script src="/assets/js/jquery-2.1.1.min.js"></script>
-<script src="/assets/js/jPages.js"></script>
-<script type="text/javascript">
-    $(function () {
-        /* initiate the plugin */
-        $("div.pag-holder").jPages({
-            containerID: "pag-itemContainer",
-        });
-    });
-</script>
-<div class="c-page">
-    <!--bookshop-live name(page-heading/page-heading.jekyll.html) params(bind=block) context(block=content_blocks[0]) -->
+<div class="post-top">
     <div class="container">
-        <div class="c-page-heading">
-            
-            <h1 class="c-page-heading__title">Linux</h1>
-            <p class="c-page-heading__description"></p>
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>c-learning-001</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">01 Jan 2019</time>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!--bookshop-live end-->
-    <!--bookshop-live name(posts-list/posts-list.jekyll.html) params(bind=block) context(block=content_blocks[1]) -->
-    <div class="container animate">
-        <div id="pag-itemContainer" class="row">
-            
-            
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="1hello-world">1,Hello world</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">print</span><span class="p">(</span><span class="s">"hello world!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="2-gcc-helloworldc--o-hello">2, gcc helloworld.c -o hello</h1>
+
+<p>gcc helloworld.c     ==&gt;  a.out</p>
+
+<p>if we set output file , like -o hello , we will get hello</p>
+
+<h1 id="3-d--s--placeholder-of-printf">3, %d , %s  placeholder of printf</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="p">(</span><span class="s">"12+34=%d"</span><span class="p">,</span><span class="mi">12</span><span class="o">+</span><span class="mi">34</span><span class="p">);</span>
+</code></pre></div></div>
+
+
         </div>
-    </div>
-    
-
-    <div class="col-lg-8 col-lg-offset-2">
-		<p></p>
-    </div>
-
-
+    </article>
 </div>
 
 <!--bookshop-live end-->

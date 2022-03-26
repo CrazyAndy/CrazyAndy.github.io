@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 25 Mar 2022 09:25:13 +0800</lastBuildDate>
+        <lastBuildDate>Sat, 26 Mar 2022 21:38:17 +0800</lastBuildDate>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -93,20 +93,6 @@
             <pubDate>Thu, 17 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
                 http://localhost:4000/reactnative/2022/03/17/RN.html
-            </guid>
-        </item>
-        
-        <item>
-            <title>c-learning</title>
-            <link>
-                http://localhost:4000/c/2022/03/17/C.html
-            </link>
-            <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
-            </description>
-            <pubDate>Thu, 17 Mar 2022 00:00:00 +0800</pubDate>
-            <guid>
-                http://localhost:4000/c/2022/03/17/C.html
             </guid>
         </item>
         
@@ -443,6 +429,84 @@
             <pubDate>Tue, 01 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
                 http://localhost:4000/reactnative/2022/03/01/RN.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>c-learning-002</title>
+            <link>
+                http://localhost:4000/c/2019/01/02/C.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;1&quot;&gt;1,&lt;/h1&gt;
+
+            </description>
+            <pubDate>Wed, 02 Jan 2019 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/c/2019/01/02/C.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>c-learning-001</title>
+            <link>
+                http://localhost:4000/c/2019/01/01/C.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;1hello-world&quot;&gt;1,Hello world&lt;/h1&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;sp...
+            </description>
+            <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/c/2019/01/01/C.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>002_定语从句</title>
+            <link>
+                http://localhost:4000/grammar/2018/01/02/Grammar.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;定语从句&quot;&gt;定语从句&lt;/h1&gt;
+
+&lt;p&gt;定义：定语是用来修饰、限定、说明名词或代词的品质与特征的。定语的位置一般有两种：用在所修饰词之前的叫前置定语，用在所修饰词之后的叫后置定语。&lt;/p&gt;
+
+&lt;p&gt;后置定语英文示例：&lt;/p&gt;
+
+&lt;p&gt;1.A man of his word&lt;/p&gt;
+
+&lt;p&gt;2.The way to heaven&lt;/p&gt;
+
+&lt;p&gt;3.The guy you love&lt;/p&gt;
+
+&lt;h1 id=&quot;后置定语类型&quot;&gt;后置定语类型：&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;N + adj 短语       A man &lt;strong&g...
+            </description>
+            <pubDate>Tue, 02 Jan 2018 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/grammar/2018/01/02/Grammar.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>001_句子结构</title>
+            <link>
+                http://localhost:4000/grammar/2018/01/01/Grammar.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;句子结构&quot;&gt;句子结构&lt;/h1&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/english/grammar/grammar001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+            </description>
+            <pubDate>Mon, 01 Jan 2018 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/grammar/2018/01/01/Grammar.html
             </guid>
         </item>
         
