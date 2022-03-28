@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sat, 26 Mar 2022 21:38:17 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 28 Mar 2022 10:10:39 +0800</lastBuildDate>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -438,8 +438,9 @@
                 http://localhost:4000/c/2019/01/02/C.html
             </link>
             <description>
-                &lt;h1 id=&quot;1&quot;&gt;1,&lt;/h1&gt;
+                &lt;h1 id=&quot;1保留字&quot;&gt;1，保留字&lt;/h1&gt;
 
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span...
             </description>
             <pubDate>Wed, 02 Jan 2019 00:00:00 +0800</pubDate>
             <guid>

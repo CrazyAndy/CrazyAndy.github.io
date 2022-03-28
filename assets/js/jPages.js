@@ -8,24 +8,22 @@
  * https://github.com/luis-almeida
  */
 
-;(function ($, window, document, undefined) {
+;(function($, window, document, undefined) {
 
     var name = "jPages",
         instance = null,
         defaults = {
             containerID: "",
             first: false,
-            // previous: "← Previous",
-            previous: false,
-            // next: "Next →",
-            next: false,
+            previous: "Prev",
+            next: "Next",
             last: false,
             links: "numeric", // blank || title
             startPage: 1,
             perPage: 6,
-            midRange: 5,
+            midRange: 3,
             startRange: 1,
-            endRange: 5,
+            endRange: 1,
             keyBrowse: false,
             scrollBrowse: false,
             pause: 0,
@@ -50,7 +48,6 @@
 
         this._holder = $(element);
         this._nav = {};
-        // this._nav = {"  <ul class="pagination">"};
 
         this._first = $(this.options.first);
         this._previous = $(this.options.previous);
@@ -73,9 +70,9 @@
 
     Plugin.prototype = {
 
-        constructor: Plugin,
+        constructor : Plugin,
 
-        getCSSAnimationSupport: function () {
+        getCSSAnimationSupport : function() {
             var animation = false,
                 animationstring = 'animation',
                 keyframeprefix = '',
@@ -100,14 +97,14 @@
             return animation;
         },
 
-        init: function () {
+        init : function() {
             this.setStyles();
             this.setNav();
             this.paginate(this._currentPageNum);
             this.setMinHeight();
         },
 
-        setStyles: function () {
+        setStyles : function() {
             var requiredStyles = "<style>" +
                 ".jp-invisible { visibility: hidden !important; } " +
                 ".jp-hidden { display: none !important; }" +
@@ -121,10 +118,10 @@
 
         },
 
-        setNav: function () {
+        setNav : function() {
             var navhtml = this.writeNav();
 
-            this._holder.each(this.bind(function (index, element) {
+            this._holder.each(this.bind(function(index, element) {
                 var holder = $(element);
                 holder.html(navhtml);
                 this.cacheNavElements(holder, index);
@@ -138,7 +135,7 @@
 
         writeNav: function () {
             var i = 1, navhtml;
-            navhtml = '<nav class="pagination"><div class="container"><div class="pagination__inner"><div class="pagination__list">';
+            navhtml = '<nav class="pagination holder"><div class="container"><div class="pagination__inner"><div class="pagination__list">';
             navhtml += this.writeBtn("first") + this.writeBtn("previous");
             // navhtml = "<ul class="pagination">" + this.writeBtn("first") + this.writeBtn("previous");
 
@@ -147,13 +144,12 @@
                 // if (i === 1 && this.options.startRange === 0) navhtml += "<li><span>...</span></li>";
                 if (i > this.options.startRange && i <= this._numPages - this.options.endRange){
                     // navhtml += "<a href='#' class='jp-hidden'>";
-                    console.log(i)
                     navhtml += "<a href='#' class='pagination__count jp-hidden'>";
-                // navhtml += "<a type="button" class="btn btn-white jp-hidden" href="#" >"
+                    // navhtml += "<a type="button" class="btn btn-white jp-hidden" href="#" >"
                 }else{
                     // navhtml += "<a>";
-                    navhtml += "<a href='#' class='pagination__count'>";
-                // navhtml += "<a type="button" class="btn btn-white">";
+                    navhtml += "<a href='#' class='pagination__count' >";
+                    // navhtml += "<a type="button" class="btn btn-white">";
                 }
                 switch (this.options.links) {
                     case "numeric":
@@ -179,13 +175,13 @@
             return navhtml;
         },
 
-        writeBtn: function (which) {
+        writeBtn : function(which) {
             return this.options[which] !== false && !$(this["_" + which]).length ?
                 // "<a class='jp-" + which + "'>" + this.options[which] + "</a>" : "";
-                "<a class='pagination__count jp-" + which + "'>" + this.options[which] + "</a>":"";
+            "<a class='pagination__count jp-" + which + "'>" + this.options[which] + "</a>":"";
         },
 
-        cacheNavElements: function (holder, index) {
+        cacheNavElements : function(holder, index) {
             this._nav[index] = {};
             this._nav[index].holder = holder;
             this._nav[index].first = this._first.length ? this._first : this._nav[index].holder.find("a.jp-first");
@@ -202,11 +198,11 @@
             this._nav[index].currentPage = $([]);
         },
 
-        bindNavHandlers: function (index) {
+        bindNavHandlers : function(index) {
             var nav = this._nav[index];
 
             // default nav
-            nav.holder.bind("click.jPages", this.bind(function (evt) {
+            nav.holder.bind("click.jPages", this.bind(function(evt) {
                 var newPage = this.getNewPage(nav, $(evt.target));
                 if (this.validNewPage(newPage)) {
                     this._clicked = true;
@@ -217,7 +213,7 @@
 
             // custom first
             if (this._first.length) {
-                this._first.bind("click.jPages", this.bind(function () {
+                this._first.bind("click.jPages", this.bind(function() {
                     if (this.validNewPage(1)) {
                         this._clicked = true;
                         this.paginate(1);
@@ -227,7 +223,7 @@
 
             // custom previous
             if (this._previous.length) {
-                this._previous.bind("click.jPages", this.bind(function () {
+                this._previous.bind("click.jPages", this.bind(function() {
                     var newPage = this._currentPageNum - 1;
                     if (this.validNewPage(newPage)) {
                         this._clicked = true;
@@ -238,7 +234,7 @@
 
             // custom next
             if (this._next.length) {
-                this._next.bind("click.jPages", this.bind(function () {
+                this._next.bind("click.jPages", this.bind(function() {
                     var newPage = this._currentPageNum + 1;
                     if (this.validNewPage(newPage)) {
                         this._clicked = true;
@@ -249,7 +245,7 @@
 
             // custom last
             if (this._last.length) {
-                this._last.bind("click.jPages", this.bind(function () {
+                this._last.bind("click.jPages", this.bind(function() {
                     if (this.validNewPage(this._numPages)) {
                         this._clicked = true;
                         this.paginate(this._numPages);
@@ -259,21 +255,21 @@
 
         },
 
-        disableNavSelection: function (element) {
+        disableNavSelection : function(element) {
             if (typeof element.onselectstart != "undefined")
-                element.onselectstart = function () {
+                element.onselectstart = function() {
                     return false;
                 };
             else if (typeof element.style.MozUserSelect != "undefined")
                 element.style.MozUserSelect = "none";
             else
-                element.onmousedown = function () {
+                element.onmousedown = function() {
                     return false;
                 };
         },
 
-        bindNavKeyBrowse: function () {
-            this.jQdocument.bind("keydown.jPages", this.bind(function (evt) {
+        bindNavKeyBrowse : function() {
+            this.jQdocument.bind("keydown.jPages", this.bind(function(evt) {
                 var target = evt.target.nodeName.toLowerCase();
                 if (this.elemScrolledIntoView() && target !== "input" && target != "textarea") {
                     var newPage = this._currentPageNum;
@@ -289,7 +285,7 @@
             }, this));
         },
 
-        elemScrolledIntoView: function () {
+        elemScrolledIntoView : function() {
             var docViewTop, docViewBottom, elemTop, elemBottom;
             docViewTop = this.jQwindow.scrollTop();
             docViewBottom = docViewTop + this.jQwindow.height();
@@ -303,8 +299,8 @@
                       (elemBottom <= docViewBottom) &&  (elemTop >= docViewTop) );*/
         },
 
-        bindNavScrollBrowse: function () {
-            this._container.bind("mousewheel.jPages DOMMouseScroll.jPages", this.bind(function (evt) {
+        bindNavScrollBrowse : function() {
+            this._container.bind("mousewheel.jPages DOMMouseScroll.jPages", this.bind(function(evt) {
                 var newPage = (evt.originalEvent.wheelDelta || -evt.originalEvent.detail) > 0 ?
                     (this._currentPageNum - 1) : (this._currentPageNum + 1);
                 if (this.validNewPage(newPage)) {
@@ -316,7 +312,7 @@
             }, this));
         },
 
-        getNewPage: function (nav, target) {
+        getNewPage : function(nav, target) {
             if (target.is(nav.currentPage)) return this._currentPageNum;
             if (target.is(nav.pages)) return nav.pages.index(target) + 1;
             if (target.is(nav.first)) return 1;
@@ -325,11 +321,11 @@
             if (target.is(nav.next)) return nav.pages.index(nav.currentPage) + 2;
         },
 
-        validNewPage: function (newPage) {
+        validNewPage : function(newPage) {
             return newPage !== this._currentPageNum && newPage > 0 && newPage <= this._numPages;
         },
 
-        paginate: function (page) {
+        paginate : function(page) {
             var itemRange, pageInterval;
             itemRange = this.updateItems(page);
             pageInterval = this.updatePages(page);
@@ -340,7 +336,7 @@
             this.updatePause();
         },
 
-        updateItems: function (page) {
+        updateItems : function(page) {
             var range = this.getItemRange(page);
             this._itemsHiding = this._itemsShowing;
             this._itemsShowing = this._items.slice(range.start, range.end);
@@ -349,7 +345,7 @@
             return range;
         },
 
-        getItemRange: function (page) {
+        getItemRange : function(page) {
             var range = {};
             range.start = (page - 1) * this.options.perPage;
             range.end = range.start + this.options.perPage;
@@ -357,7 +353,7 @@
             return range;
         },
 
-        cssAnimations: function (page) {
+        cssAnimations : function(page) {
             clearInterval(this._delay);
 
             this._itemsHiding
@@ -371,7 +367,7 @@
             this._itemsOriented = this.getDirectedItems(page);
             this._index = 0;
 
-            this._delay = setInterval(this.bind(function () {
+            this._delay = setInterval(this.bind(function() {
                 if (this._index === this._itemsOriented.length) clearInterval(this._delay);
                 else {
                     this._itemsOriented
@@ -383,13 +379,13 @@
             }, this), this.options.delay);
         },
 
-        jQAnimations: function (page) {
+        jQAnimations : function(page) {
             clearInterval(this._delay);
             this._itemsHiding.addClass("jp-hidden");
             this._itemsShowing.fadeTo(0, 0).removeClass("jp-hidden");
             this._itemsOriented = this.getDirectedItems(page);
             this._index = 0;
-            this._delay = setInterval(this.bind(function () {
+            this._delay = setInterval(this.bind(function() {
                 if (this._index === this._itemsOriented.length) clearInterval(this._delay);
                 else {
                     this._itemsOriented
@@ -400,7 +396,7 @@
             }, this), this.options.delay);
         },
 
-        getDirectedItems: function (page) {
+        getDirectedItems : function(page) {
             var itemsToShow;
 
             switch (this.options.direction) {
@@ -408,7 +404,7 @@
                     itemsToShow = $(this._itemsShowing.get().reverse());
                     break;
                 case "random":
-                    itemsToShow = $(this._itemsShowing.get().sort(function () {
+                    itemsToShow = $(this._itemsShowing.get().sort(function() {
                         return (Math.round(Math.random()) - 0.5);
                     }));
                     break;
@@ -423,7 +419,7 @@
             return itemsToShow;
         },
 
-        updatePages: function (page) {
+        updatePages : function(page) {
             var interval, index, nav;
             interval = this.getInterval(page);
             for (index in this._nav) {
@@ -438,7 +434,7 @@
             return interval;
         },
 
-        getInterval: function (page) {
+        getInterval : function(page) {
             var neHalf, upperLimit, start, end;
             neHalf = Math.ceil(this.options.midRange / 2);
             upperLimit = this._numPages - this.options.midRange;
@@ -446,41 +442,41 @@
             end = page > neHalf ?
                 Math.min(page + neHalf - (this.options.midRange % 2 > 0 ? 1 : 0), this._numPages) :
                 Math.min(this.options.midRange, this._numPages);
-            return {start: start, end: end};
+            return {start: start,end: end};
         },
 
-        updateBtns: function (nav, page) {
+        updateBtns : function(nav, page) {
             if (page === 1) {
-                nav.first.parent().addClass("active");
-                nav.previous.parent().addClass("active");
+                nav.first.addClass("jp-disabled");
+                nav.previous.addClass("jp-disabled");
             }
             if (page === this._numPages) {
-                nav.next.parent().addClass("active");
-                nav.last.parent().addClass("active");
+                nav.next.addClass("jp-disabled");
+                nav.last.addClass("jp-disabled");
             }
             if (this._currentPageNum === 1 && page > 1) {
-                nav.first.parent().removeClass("active");
-                nav.previous.parent().removeClass("active");
+                nav.first.removeClass("jp-disabled");
+                nav.previous.removeClass("jp-disabled");
             }
             if (this._currentPageNum === this._numPages && page < this._numPages) {
-                nav.next.parent().removeClass("active");
-                nav.last.parent().removeClass("active");
+                nav.next.removeClass("jp-disabled");
+                nav.last.removeClass("jp-disabled");
             }
         },
 
-        updateCurrentPage: function (nav, page) {
-            nav.currentPage.removeClass("active");
-            nav.currentPage = nav.pages.eq(page - 1).parent().addClass("active");
+        updateCurrentPage : function(nav, page) {
+            nav.currentPage.removeClass("jp-current");
+            nav.currentPage = nav.pages.eq(page - 1).addClass("jp-current");
         },
 
-        updatePagesShowing: function (nav, interval) {
+        updatePagesShowing : function(nav, interval) {
             var newRange = nav.pages.slice(interval.start, interval.end).not(nav.permPages);
             nav.pagesShowing.not(newRange).addClass("jp-hidden");
             newRange.not(nav.pagesShowing).removeClass("jp-hidden");
             nav.pagesShowing = newRange;
         },
 
-        updateBreaks: function (nav, interval) {
+        updateBreaks : function(nav, interval) {
             if (
                 interval.start > this.options.startRange ||
                 (this.options.startRange === 0 && interval.start > 0)
@@ -491,7 +487,7 @@
             else nav.lstBreak.addClass("jp-hidden");
         },
 
-        callback: function (page, itemRange, pageInterval) {
+        callback : function(page, itemRange, pageInterval) {
             var pages = {
                     current: page,
                     interval: pageInterval,
@@ -509,33 +505,33 @@
             this.options.callback(pages, items);
         },
 
-        updatePause: function () {
+        updatePause : function() {
             if (this.options.pause && this._numPages > 1) {
                 clearTimeout(this._pause);
                 if (this.options.clickStop && this._clicked) return;
                 else {
-                    this._pause = setTimeout(this.bind(function () {
+                    this._pause = setTimeout(this.bind(function() {
                         this.paginate(this._currentPageNum !== this._numPages ? this._currentPageNum + 1 : 1);
                     }, this), this.options.pause);
                 }
             }
         },
 
-        setMinHeight: function () {
+        setMinHeight : function() {
             if (this.options.minHeight && !this._container.is("table, tbody")) {
-                setTimeout(this.bind(function () {
-                    this._container.css({"min-height": this._container.css("height")});
+                setTimeout(this.bind(function() {
+                    this._container.css({ "min-height": this._container.css("height") });
                 }, this), 1000);
             }
         },
 
-        bind: function (fn, me) {
-            return function () {
+        bind : function(fn, me) {
+            return function() {
                 return fn.apply(me, arguments);
             };
         },
 
-        destroy: function () {
+        destroy : function() {
             this.jQdocument.unbind("keydown.jPages");
             this._container.unbind("mousewheel.jPages DOMMouseScroll.jPages");
 
@@ -548,13 +544,13 @@
 
     };
 
-    $.fn[name] = function (arg) {
+    $.fn[name] = function(arg) {
         var type = $.type(arg);
 
         if (type === "object") {
             if (this.length && !$.data(this, name)) {
                 instance = new Plugin(this, arg);
-                this.each(function () {
+                this.each(function() {
                     $.data(this, name, instance);
                 });
             }
@@ -563,7 +559,7 @@
 
         if (type === "string" && arg === "destroy") {
             instance.destroy();
-            this.each(function () {
+            this.each(function() {
                 $.removeData(this, name);
             });
             return this;
