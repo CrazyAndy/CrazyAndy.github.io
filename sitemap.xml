@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 28 Mar 2022 11:37:11 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 28 Mar 2022 21:40:09 +0800</lastBuildDate>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -54,13 +54,15 @@
             <description>
                 &lt;h1 id=&quot;description&quot;&gt;Description&lt;/h1&gt;
 
-&lt;h1 id=&quot;related-technologies&quot;&gt;Related Technologies&lt;/h1&gt;
+&lt;p&gt;I developed two apps for our smart shoes which are able to heat the foot at cold day .&lt;/p&gt;
 
-&lt;h1 id=&quot;kmiot&quot;&gt;KMIOT&lt;/h1&gt;
+&lt;h2 id=&quot;kmiot&quot;&gt;kmiot：&lt;/h2&gt;
 
-&lt;h1 id=&quot;booteyes&quot;&gt;BootEyes&lt;/h1&gt;
+&lt;p&gt;developed for operators , shop keepers to test these shoes before selling to the customer.&lt;/p&gt;
 
+&lt;h2 id=&quot;booteyes&quot;&gt;booteyes:&lt;/h2&gt;
 
+&lt;p&gt;dev...
             </description>
             <pubDate>Sat, 19 Mar 2022 00:00:00 +0800</pubDate>
             <guid>

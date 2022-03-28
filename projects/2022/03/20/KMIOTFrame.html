@@ -278,7 +278,7 @@
 
 <p>  We divide the system into three subsystems :</p>
 
-<center><img src="/assets/images/posts/project/frame1.png" width="100%" /></center>
+<center><img src="/assets/images/posts/project/kmiotsocketframework/frame1.png" width="100%" /></center>
 
 <p>​</p>
 
@@ -286,7 +286,7 @@
 
 <p>  Simulate charging pile hardware to realize all protocol contents.</p>
 
-<center><img src="/assets/images/posts/project/frame2.png" width="100%" /></center>
+<center><img src="/assets/images/posts/project/kmiotsocketframework/frame2.png" width="100%" /></center>
 
 <p>​</p>
 
@@ -294,7 +294,7 @@
 
 <h3 id="3single-charging-server">3.single-charging-server</h3>
 
-<center><img src="/assets/images/posts/project/frame3.png" width="100%" /></center>
+<center><img src="/assets/images/posts/project/kmiotsocketframework/frame3.png" width="100%" /></center>
 
 <p>  The server program for docking the charging pile hardware includes socket server and web server. The socket server is mainly for docking the charging pile system, and the web server is mainly for docking the business system. The integrated web server here is mainly used to receive the instructions of the business system. Of course, we can use Message Queue, grpc and other technologies to achieve this communication, which can be modified according to customer ideas.</p>
 
@@ -308,7 +308,7 @@
 
 <p>  Simulate the business system (user,money,order,trip and other business logic), and it sends commands such as rental order to the single-charging-server</p>
 
-<center><img src="/assets/images/posts/project/frame4.png" width="100%" /></center>
+<center><img src="/assets/images/posts/project/kmiotsocketframework/frame4.png" width="100%" /></center>
 
 <h2 id="ivsystem-implementation">IV.System Implementation</h2>
 
@@ -436,7 +436,7 @@
 
 <h2 id="vsystem-test">V.System Test</h2>
 <p>  When we connect the hardware system and the business system, we divide the process into many stages to ensure that each step goes smoothly, and the current step is the guarantee prerequisite for the next step. Please try to follow the steps as much as possible. Although the process will be a little tedious, it is still necessary for troubleshooting. Otherwise, if you start debugging as a whole, once a fault occurs, troubleshooting will be a headache.</p>
-<center><img src="/assets/images/posts/project/frame5.png" width="100%" /></center>
+<center><img src="/assets/images/posts/project/kmiotsocketframework/frame5.png" width="100%" /></center>
 
 <p>  Regarding the stress test, single-charging-client can configure the number of simulated devices in the configuration, and users can configure the number of charging pile sites by themselves.</p>
 <h2 id="viconclusion-and-outlook">VI.Conclusion and Outlook</h2>
