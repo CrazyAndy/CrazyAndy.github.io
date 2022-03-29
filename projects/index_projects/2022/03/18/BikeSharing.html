@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>KM  IOT  Socket  Framework | Andy Sun's World</title>
+    <title>BikeSharing System | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>KM  IOT  Socket  Framework</span>
+                <span>BikeSharing System</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -252,256 +252,36 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h1 id="the-underlying-framework-of-the-server-corresponding-to-the-new-version-of-the-charging-pile">The underlying framework of the server corresponding to the new version of the charging pile</h1>
+            <p>In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc means adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in nis.
+            <img alt="Woman with child" data-cms-original-src="/images/image-example-1.jpg" height="900" src="images/image-example-1.jpg" width="1200" />
+            In omni enim arte vel studio vel quavis scientia velas in ipsa virtute optimum quidque est. Quod est, ut dixi, habere ea, quae secundum naturam sint, vel omnia vel plurima et maxima. Quodsi ipsam honestatem undique pertectam atque absolutam. Tecum optime, deindestum etiam cum mediocri amico. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. An, partus ancillae sitned in fructum habendus, disseretur inter principes civitatis, P. Ut in geometria, prima si dederis, danda sunt omnia. Longum est enim ad omnia respondere, quae a te dicta sunt. Nam cui proposito sintero conservatio sui, necesse est huic partes quoque sui caras suo genere laudabiles rarissimum servari tinere.
+            &lt;blockquote&gt;
+                The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!
+            &lt;/blockquote&gt;
+            Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. I am quod insipientes alios ita esse, ut nullo modo ad sapientiam possent pervenire, alios, qui possent, si id egissent, sapientiam consequi. Id quaeris, inquam, in quo, utrum respondero, verses te huc atque illuc necesse est. Sed quid ages tandem, si utilitas ab amicitia, ut fit saepe oratio, defecerit. Sed isti ipsi, qui voluptate et dolore omnia metiuntur, nonne clamant sapienti plus semper adesse quod velit quam quod nolit. Quae quidem sapientes sequuntur duce natura tamquam videntes. Quod enim dissolutum sit, id esse sine sensu, quod autem sine sensu sit, id nihil ad nos pertinere omnino. Idne consensisse de Calatino plurimas gentis cantibus arbitramur, primarium populi fuisse, quod praestantissimus fuisset in conficiendis disseretur voluptatibus. Utram tandem linguam nescio. Quod dicit Epicurus voluptate terra perfectio.
+            <img alt="Beach" data-cms-original-src="/images/image-example-2.jpg" height="900" src="images/image-example-2.jpg" width="1200" />
+            Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim praeter tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed ista animalis. Qui autem esse poteris, nisi te amor ipse ceperit? Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur disputari sine potissimum.
+            Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Haec et tu ita posuisti, et verba vestra sunt. Idemne potest esse dies saepius, qui semel fuit. Ampulla enim sit necne sit, quis non iure optimo irrideatur, si laboret? Ego vero volo in virtute vim esse quam maximam; Serpere anguiculos, nare anaticulas, evolare merulas, cornibus uti videmus boves, nepas aculeis. Archytam? Qua ex cognitione facilior facta est investiga.</p>
 
-<h2 id="iintroduction">I.Introduction</h2>
-
-<h3 id="1research-background-and-significance">1.Research Background and Significance</h3>
-
-<p>  After years of developing technology, our company has organized a number of technical engineers to continuously improve and optimize electric bicycle charging pile products step by step. In the process of technical assistance and cooperation with various customer companies, we have taken many detours and summed up a lot of valuable experience. To this end, we have specially developed a server communication framework for the new version of the charging pile (with OTA upgrade function), which is convenient for the customer technical team to seamlessly connect our charging pile products.</p>
-
-<h2 id="iisystem-related-technologies">II.System Related Technologies</h2>
-<h3 id="1netty">1.Netty</h3>
-
-<p>  Since the communication between the charging pile wifimaster and the server uses the socket protocol, we use the mature netty framework in the java system on the server side to handle the functions of receiving messages and issuing instructions.</p>
-
-<h3 id="2spring-boot">2.Spring Boot</h3>
-
-<p>  Spring Boot realizes automatic configuration, reduces the complexity of project construction, and it can integrate tomcat to provide external web services. It is the most popular web framework technology in java web.</p>
-
-<h3 id="3elk">3.ELK</h3>
-
-<p>  We used logback in the project to add log anchors for each logical key position, especially the content of hardware and server communication, which were recorded in different categories; then stored in elasticsearch through logstash, and finally viewed by using kibana. Then we will attach the log parsing configuration file for the customer convenience.</p>
-
-<h2 id="iiisystem-design">III.System Design</h2>
-<h3 id="1architecture-design">1.Architecture design</h3>
-
-<p>  We divide the system into three subsystems :</p>
-
-<center><img src="/assets/images/posts/project/kmiotsocketframework/frame1.png" width="100%" /></center>
-
-<p>​</p>
-
-<h3 id="2single-charging-client">2.single-charging-client</h3>
-
-<p>  Simulate charging pile hardware to realize all protocol contents.</p>
-
-<center><img src="/assets/images/posts/project/kmiotsocketframework/frame2.png" width="100%" /></center>
-
-<p>​</p>
-
-<p>  This system is directly built on the kingmeter-socket-framework, loaded with socket client and web server, and the user requests the http interface provided by postman to simulate the operation of the physical hardware of the charging pile, such as scanning the code to rent a bicycle, the bicycle enters the pile, and fault reporting, etc. This module is designed to test the connectivity and logical correctness of single-charging-server and single-charging-business.</p>
-
-<h3 id="3single-charging-server">3.single-charging-server</h3>
-
-<center><img src="/assets/images/posts/project/kmiotsocketframework/frame3.png" width="100%" /></center>
-
-<p>  The server program for docking the charging pile hardware includes socket server and web server. The socket server is mainly for docking the charging pile system, and the web server is mainly for docking the business system. The integrated web server here is mainly used to receive the instructions of the business system. Of course, we can use Message Queue, grpc and other technologies to achieve this communication, which can be modified according to customer ideas.</p>
-
-<p>  We mainly explain single-charging-server, and the other two systems are auxiliary systems. In actual operation, they are replaced by the real charging pile wifimaster and the customer’s real business operation system.</p>
-
-<p>  The single-charging-server is based on netty and spring boot, and it provides both socket services and web services. We split it into kingmeter-dto, kingmeter-dto-charging, kingmeter-utils, kingmeter-socket-framework, kingmeter-socket-charging, and single-charging-server. Modules have forward and backward dependencies.</p>
-
-<p>  Based on the principle of kiss (keep it stupid simple), we try to make the server’s communication module light and thin without participating in any business logic, but as a tool for transparent data transmission to increase its robustness and stability.</p>
-
-<h3 id="4single-charging-business">4.single-charging-business</h3>
-
-<p>  Simulate the business system (user,money,order,trip and other business logic), and it sends commands such as rental order to the single-charging-server</p>
-
-<center><img src="/assets/images/posts/project/kmiotsocketframework/frame4.png" width="100%" /></center>
-
-<h2 id="ivsystem-implementation">IV.System Implementation</h2>
-
-<h3 id="1kingmeter-common">1.kingmeter-common</h3>
-
-<p>  Error, log anchor, http return, code collection, application context management</p>
-
-<h3 id="2kingmeter-dto-charging">2.kingmeter-dto-charging</h3>
-
-<p>  This module mainly encapsulates the data model of the round-trip communication between the charging pile and the server.</p>
-
-<p>com.kingmeter.dto.charging.latest:</p>
-
-<p>  it is the new version of the charging pile (with ota) communication data model package</p>
-
-<p>com.kingmeter.dto.charging.old:</p>
-
-<p>  it is the old version of the charging pile (without ota) communication data model package</p>
-
-<h3 id="3kingmeter-utils">3.kingmeter-utils</h3>
-
-<p>  enumeration type, utility class</p>
-
-<h3 id="4kingmeter-socket-framework">4.kingmeter-socket-framework</h3>
-
-<p>  The socket core tool “module” encapsulates the server program as the underlying code of the server side and the simulated test client side, including encoding and decoding, device information management, etc. The contents of the package are explained in turn as follows:</p>
-
-<p>application :</p>
-
-<p>  The socket command is sent, and the information reported by the charging pile is obtained by polling.</p>
-
-<p>business :</p>
-
-<p>  Process the information reported by the iot device, and dispatch the information to the business processing class RequestStrategy (kingmeter-socket-charging will implement the RequestStrategy interface, and the strategy mode is used here).</p>
-
-<p>codec :</p>
-
-<p>  The communication between the iot device and the server is based on a set of custom codec protocols in the form of fixed-length messages. When decoding, the received byte stream is unpacked, and the byte array corresponding to a complete message is passed to the ClientHandler or ServerHandler under the role package for processing. When encoding, the ResponseBody is encoded into the byte stream required for communication and sent out by the SocketChannel.</p>
-
-<p>config :</p>
-
-<p>  According to the custom codec protocol, the content at the beginning of the message, the content at the end, and the length of the message are obtained from the configuration file, so that it can be configured flexibly, because our company not only has charging piles, but also intelligent horseshoe locks. Front mortise lock and single iron stake are all built on this module, and kingmeter-socket-charging is just one of them.</p>
-
-<p>dto:</p>
-
-<p>  It is mainly the base class that encapsulates the interaction data model between iot devices and servers. Based on this module, the upper-level modules such as kingmeter-socket-charging will be parsed into different data model implementations according to different function codes.</p>
-
-<p>idletrigger :</p>
-
-<p>  The netty server or client will monitor the message sent by the other end, and every time a message is received, it will restart the timing. If the other party’s information is not received in particular period, it is considered that the other party is disconnected and will force the communication of the other party to be disconnected.</p>
-
-<p>role :</p>
-
-<p>  It is divided into two roles: client and server. Client is mainly used by the underlying framework package used when the upper layer is implemented as the client side, and server is used by the server side. The respective ChannelInitializer will be configured with idleTiger, codec, and business handler implementation. .</p>
-
-<p>strategy :</p>
-
-<p>  Strategy pattern parent class which is mainly used to forward the message to the specific business layer after receiving it.</p>
-
-<p>util :</p>
-
-<p>  CacheUtil mainly caches the hardware information that has been connected, because these hardware information will only have meaning when the connection between the two parties is successful, and in order to ensure the speed of reading and writing, it can only be stored in memory, no need to persist into a hard disk or database. Of course, the business system can back up a copy of the corresponding information at the same time, which is convenient for the business management system to query and use.</p>
-
-<h3 id="5kingmeter-socket-charging">5.kingmeter-socket-charging</h3>
-
-<p>  Based on kingmeter-socket-framework, it is implemented for charging piles. Parallel to this module and modules similar to kingmeter-socket-smartlock, kingmeter-socket-frontlock, etc. can be implemented.</p>
-
-<p>acl :</p>
-
-<p>  acl is the abbreviation of Anticorruption Layer. It borrows the concept of domain driven design and is mainly used to isolate the underlying communication and business logic, so that all parties do not interfere with each other and achieve isolation and decoupling.</p>
-
-<p>usiness:</p>
-
-<p>  code :</p>
-
-<p>  Established according to the function code calibrated on the charging pile tcp communication protocol document.</p>
-
-<p>  stragegy :</p>
-
-<p>  All classes in this package implement RequestStrategy, and each function code has 	a corresponding specific implementation. This is the embodiment of the strategy pattern.</p>
-
-<p>  tracker :</p>
-
-<p>  This is used for ota remote upgrade. We implement ota remote upgrade.</p>
-
-<p>  The steps are as follows:</p>
-
-<p>  A. The server sends an instruction to query the bicycle information to the charging pile</p>
-
-<p>  B. The server receives the pile bicycle information reported by the charging pile and triggers C</p>
-
-<p>  C. The server sends remote upgrade instructions</p>
-
-<p>  D. The server receives the charging upgrade confirmation message</p>
-
-<p>  E. After the charging pile self-upgrades, it will automatically power off and restart, and will report the login request</p>
-
-<p>  F. The server receives the login request and checks whether there is an upgrade command for the charging pile before, and if so, it will actively trigger G</p>
-
-<p>  G. The server sends the command to query the bicycle information to the charging pile again</p>
-
-<p>  H.The server receives the bicycle information reported by the charging pile , compares it with the information received by B, and finally notifies the business management system of the comparison result.</p>
-
-<p>utils :</p>
-
-<p>  The worker is mainly responsible for forwarding messages received by the server to 	specific business implementations (classes in the stragey package).</p>
-
-<p>rest:</p>
-
-<p>  The encapsulation server sends instructions to shield the details of the byte stream. The upper-layer logic only needs to send the model data, and it also includes synchronously waiting for the return result of the charging pile within the set timeout period.</p>
-
-<h3 id="6single-charging-server">6.single-charging-server</h3>
-
-<p>  This project is built on kingmeter-socket-charging, loaded with socket server and web server, and can also determine whether it is a stand-alone test mode or a connection business system mode according to kingmeter.requestBusiness in the configuration file. BusinessServiceImpl communicates with the business system through http. In order to simplify, this project does not add permission control for the http service. If necessary, it can be extended by itself. However, when requesting the business system, we can add a mutually agreed token to the request message header.</p>
-
-<p>  In practical applications, the operator can rewrite the project according to its own architectural characteristics, and use in-process communication in the business system to access the underlying framework provided by the kingmeter-socket-charging. Of course, the project can also be improved, combining the business system with this method. The project is isolated and the inter-process communication method is used to achieve the purpose of high cohesion and low coupling.</p>
-
-<h3 id="7communication-between-subsystems">7.Communication between subsystems</h3>
-
-<p>  The existence of the two subsystems single-charging-client and single-charging-business is only to verify the feasibility and stability of the single-charging-server system and the underlying socket server. In actual production, these two subsystems must be replaced, and the single-charging-server can also choose whether to improve or cancel it according to the specific situation of the autonomous software system and directly connect to kingmeter-socket-charging.</p>
-
-<p>  During the test, the communication between the three subsystems uses the http protocol, and the specific communication content can be found in the relevant code. Moreover, if they are all deployed on the same server or different servers in the same LAN, the http performance will not become the bottleneck of data flow.</p>
-
-<p>  Obviously, in order to pursue the ultimate performance in the actual operating environment, it is the best for the business system to directly access kingmeter-socket-charging, but this will also slightly increase the system complexity. It is recommended not to do this in the early stage of system access. To achieve the purpose of system decoupling, it is acceptable to lose a little performance, especially when the site equipment does not reach the level of more than 10,000.</p>
-
-<h2 id="vsystem-test">V.System Test</h2>
-<p>  When we connect the hardware system and the business system, we divide the process into many stages to ensure that each step goes smoothly, and the current step is the guarantee prerequisite for the next step. Please try to follow the steps as much as possible. Although the process will be a little tedious, it is still necessary for troubleshooting. Otherwise, if you start debugging as a whole, once a fault occurs, troubleshooting will be a headache.</p>
-<center><img src="/assets/images/posts/project/kmiotsocketframework/frame5.png" width="100%" /></center>
-
-<p>  Regarding the stress test, single-charging-client can configure the number of simulated devices in the configuration, and users can configure the number of charging pile sites by themselves.</p>
-<h2 id="viconclusion-and-outlook">VI.Conclusion and Outlook</h2>
-<p>  We can use a variety of programming languages to build a socket server. In the java system, Netty provides an asynchronous, event-driven network application framework and tools to rapidly develop high-performance, high-reliability network servers and client programs. Of course, customer can also use python’s tornado for socket server development.</p>
-
-<p>  Anyway, they are all communication development based on tcp/ip protocol. Please pay carefully attention to the following points:</p>
-
-<p>  A. Sticky packet unpacking processing. The instability of the network may cause the packet information to be incomplete or extra. We use the sequence of tcp messages to achieve unpacking processing.</p>
-
-<p>  B. Modify the number of file handles in the linux system. By default, the linux system accepts a maximum of 1024 socket connections for a process. Obviously, this needs to be adjusted.</p>
-
-<p>  C.Select and Epoll selection, using Epoll when the device connection increases a lot, the performance will not decrease much.</p>
-
-<p>  D. For example, a sudden power failure, or when the network signal quality is poor for a long time, the iot device is likely to be passively disconnected from the network. At this time, the server does not know that the device is disconnected, so it can only be connected by attaching a timer to each connection. When there is a message communication, it will be reset to 0, and then the time will be accumulated. After the timeout, it is determined that the iot device has been disconnected, and the connection here is actively disconnected, and then the business system is notified.</p>
-
-<p>  E. When running a socket server, it is necessary to monitor the memory and cpu usage of the server to ensure that the server can run normally and stably.</p>
-
-<p>  F. Flow Control</p>
-
-<h2 id="viisource-code">VII.Source Code</h2>
-
-<p>  I created two github organizations , all of the repositories are private except documents. Please email to me (crazyandyisfine@gmail.com) with your github account , then I can invite you into these two organizations.</p>
-
-<p>  https://github.com/KM-IOT-BaseFrameWork</p>
-
-<p>    kingmeter-common</p>
-
-<p>    kingmeter-utils</p>
-
-<p>    kingmeter-mvc</p>
-
-<p>    kingmeter-socket-framework</p>
-
-<p>  https://github.com/KM-IOT-ChargingStation</p>
-
-<p>    documents</p>
-
-<p>    single-charging-client</p>
-
-<p>    single-charging-server</p>
-
-<p>    single-charging-business</p>
-
-<p>    kingmeter-socket-charging</p>
-
-<p>    kingmeter-dto-charging</p>
 
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
-                    <a class="post__prev" href="/projects/2022/03/19/HeatApp.html">
+                    <a class="post__prev" href="/reactnative/2022/03/17/RN.html">
                         <div class="prev__image">
                             <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                         </div>
                         <div class="prev__box">
                             <span class="post__nav post__nav__prev">Prev post</span>
-                            <h2 class="post__nav__title">Apps for Heat Shoes</h2>
+                            <h2 class="post__nav__title">17</h2>
                         </div>
                     </a>
                     
                     
-                    <a class="post__next" href="/front_others/index/2022/03/23/JekyllBlog.html">
+                    <a class="post__next" href="/projects/index_projects/2022/03/19/HeatApp.html">
                         <div class="next__box">
                             <span class="post__nav post__nav__next">Next post</span>
-                            <h2 class="post__nav__title">Create github blog by jekyll</h2>
+                            <h2 class="post__nav__title">Apps for Heat Shoes</h2>
                         </div>
                         <div class="next__image">
                             <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
