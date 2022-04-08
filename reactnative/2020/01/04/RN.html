@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>c-learning-002 | Andy Sun's World</title>
+    <title>04_reactnative布局1 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -57,7 +57,7 @@
                                 
                                 
                                 
-                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Frontend <i
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Frontend <i
                                             class="ion ion-ios-arrow-down arrow-down"></i></span>
                                         <div class="dropdown-menu">
                                             
@@ -99,7 +99,7 @@
                                 
                                 
                                 
-                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Embedded <i
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
                                             class="ion ion-ios-arrow-down arrow-down"></i></span>
                                         <div class="dropdown-menu">
                                             
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>c-learning-002</span>
+                <span>04_reactnative布局1</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -241,7 +241,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">02 Jan 2019</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">04 Jan 2020</time>
                     </div>
                 </div>
             </div>
@@ -252,85 +252,35 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h1 id="1保留字">1，保留字</h1>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">auto</span><span class="p">,</span> <span class="k">break</span><span class="p">,</span> <span class="k">case</span><span class="p">,</span> <span class="kt">char</span><span class="p">,</span> <span class="k">const</span><span class="p">,</span> <span class="k">continue</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="k">do</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="k">else</span><span class="p">,</span>
-<span class="k">enum</span><span class="p">,</span> <span class="k">extern</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="k">for</span> <span class="p">,</span><span class="k">goto</span> <span class="p">,</span> <span class="k">if</span> <span class="p">,</span> <span class="kt">int</span> <span class="p">,</span><span class="kt">long</span><span class="p">,</span><span class="k">register</span><span class="p">,</span><span class="k">return</span><span class="p">,</span>
-<span class="kt">short</span><span class="p">,</span> <span class="kt">signed</span><span class="p">,</span><span class="k">sizeof</span> <span class="p">,</span><span class="k">static</span><span class="p">,</span>
-<span class="k">struct</span> <span class="p">,</span><span class="k">switch</span><span class="p">,</span> <span class="k">typedef</span><span class="p">,</span><span class="k">union</span><span class="p">,</span><span class="kt">unsigned</span> <span class="p">,</span><span class="kt">void</span><span class="p">,</span><span class="k">volatile</span><span class="p">,</span><span class="k">while</span><span class="p">,</span><span class="kr">inline</span><span class="p">,</span><span class="kr">restrict</span> 
-</code></pre></div></div>
-
-<h1 id="2初始化">2,初始化</h1>
-
-<p>c语言不像java一样，数据类型都有默认初始值，所以c语言中，需要在程序开头，先将变量初始化。</p>
-
-<h2 id="c99-和-ansi-c-区别">C99 和 ANSI C 区别</h2>
-
-<ol>
-  <li>
-    <p>C99中可在任意地方定义变量；而传统的ANSI C 只能在代码开头的地方定义变量。</p>
-  </li>
-  <li>
-    <p>变量是可变的量，常量是固定不变的量，直接写在程序里的，我们称作直接量（literal），在程序中多次出现的直接量，是magic number不利于阅读与维护；</p>
-  </li>
-</ol>
-
-<p>C99允许直接定义常量 ，在类型前边加修饰符 const，这个值不能被修改，read-only variable is not assignable。</p>
-
-<p>ex: const int A=100; （注意与宏定义相区别）</p>
-
-<ol>
-  <li>
-    <p>单行注释 // 是C99独有的，ANSI C不支持；而多行注释 /* */是传统ANSI C就有的</p>
-  </li>
-  <li>
-    <p>for(int i=0;i&lt;n;i++)这种在for循环里定义变量是C99独有的</p>
-  </li>
-  <li>
-    <p>C99在定义数组时，数组的个数可以是变量</p>
-  </li>
-</ol>
-
-<p>6.C99进行数组的集成初始化时，可定位赋值。</p>
-
-<p>ex: int a[10]={[0]=20,[5]=,5,6};</p>
-
-<p>输出：20，0,0,0,0,5,6,0,0,0</p>
-
-<h1 id="3读整数">3,读整数</h1>
-
-<p>int price = 0;</p>
-
-<p>scanf(“%d”, &amp;price);</p>
-
-<p>要求scanf 这个函数读入下一个整数，读到的结果赋值给变量price</p>
-
-<h1 id="4常量">4,常量</h1>
-
-<p>const int AMOUNT = 100;</p>
-
-<p>常量 建议 都大写</p>
-
-<p>const是修饰符，表示这个变量的值一旦初始化之后，就不能再修改。</p>
-
+            
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/c/2019/01/01/C.html">
+                            <a class="post__prev" href="/reactnative/2020/01/03/RN.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">c-learning-001</h2>
+                                    <h2 class="post__nav__title">03_ReactNative基础知识</h2>
                                 </div>
                             </a>
                         
                     
                     
+                        
+                            <a class="post__next" href="/reactnative/2020/01/05/RN.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">5</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
                         
                     
                 </div>

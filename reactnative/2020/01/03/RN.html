@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<head>
+    <title>03_ReactNative基础知识 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Frontend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/frontend/react.html">React</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/reactnative.html">ReactNative</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/flutter.html">Flutter</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/es6.html">Es6</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/front_others.html">Others</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Backend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/backend/java.html">Java</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/python.html">Python</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/ruby.html">Ruby</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/rails.html">Rails</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/embedded/c.html">C</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/digit.html">DigitCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Idea <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/idea/strategy.html">DesignStrategy</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/ddd.html">DDD</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/cloud.html">Cloud</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/it/tcpip.html">TCP/IP</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/socket.html">Socket</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mqtt.html">mqtt</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/jvm.html">jvm</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/linux.html">linux</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/docker.html">docker</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/k8s.html">k8s</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mq.html">mq</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/memorycache.html">memorycache</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/elk.html">elk</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/zookeeper.html">zookeeper</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/git.html">git</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>03_ReactNative基础知识</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">03 Jan 2020</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <p>React 是facebook推出的开源JavaScript Library，它是一个用户组建用户界面的JavaScript库，让你以更简单的方式来创建交互式用户界面，它的出现让许多革新性的web观念开始流行起来，例如：Virtual DOM , Component , 声明式渲染等。</p>
+
+<p>命令式编程：命令“机器”如何去做事情（how），这样不管你想要的是什么（what），它都会按照你的命令实现。</p>
+
+<p>声明式编程：告诉“机器”你想要的是什么（what），让机器想出如何去做（how）。</p>
+
+<h1 id="jsx">JSX</h1>
+
+<p>jax能定义简洁且我们熟知的包含属性的树状结构语法。</p>
+
+<h1 id="html标签与react组件对比">HTML标签与React组件对比</h1>
+
+<p>React可以渲染HTML标签或React组件，要渲染HTML标签，只需要在JSX里使用小写字母开头的标签名。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myDivElement</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"foo"</span><span class="p">/&gt;;</span>
+<span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">myDivElement</span> <span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">root</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>要渲染React组件，只需要创建一个大写字母开头的本地变量。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nc">MyComponent</span> <span class="na">someProperty</span><span class="p">=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span><span class="p">/&gt;;</span>
+<span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">myElement</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="延展属性">延展属性</h1>
+
+<p>你可以使用JSX的新特性。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">props</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">props</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">component</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>传入对象的属性会被复制到组件内。</p>
+
+<p>他能多次使用，也可以和其他属性一起用，注意顺序很重要，后面的会覆盖掉前面的。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">props</span> <span class="o">=</span> <span class="p">{</span><span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default</span><span class="dl">'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">component</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nc">Component</span> <span class="si">{</span><span class="p">...</span><span class="nx">props</span><span class="si">}</span> <span class="na">foo</span><span class="p">=</span><span class="si">{</span><span class="dl">'</span><span class="s1">override</span><span class="dl">'</span><span class="si">}</span><span class="p">/&gt;;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">component</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">foo</span><span class="p">);</span><span class="c1">// 'override'</span>
+</code></pre></div></div>
+
+<p>上文出现的 … 标记被叫延展操作符 (spread operator) 已经被es6数组支持。</p>
+
+<h1 id="component">Component</h1>
+
+<p>React允许将代码封装成组件（component）,然后像插入普通HTML标签一样，在网页插入这个组件。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Class</span> <span class="nx">Hello</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+	<span class="p">&lt;</span><span class="nc">Hello</span> <span class="na">name</span><span class="p">=</span><span class="s">"John"</span><span class="p">&gt;&lt;/</span><span class="nc">Hello</span><span class="p">&gt;,</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">example</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>上面代码中，变量HelloMessage就是一个组件类。模板插入<Hello></Hello>时，会自动生成  Hello 的一个实例。所有组件类都必须有自己的render方法，用于输出组件。</p>
+
+<p>注意</p>
+
+<ul>
+  <li>组件类的第一个字母必须大写</li>
+  <li>组件类只能包含一个顶层标签</li>
+</ul>
+
+<h1 id="组件的属性props">组件的属性(props)</h1>
+
+<p>我们可以通过 this.props.xx 的形式获取组件对象的属性，对象的属性可以任意定义，但要避免与JavaScript关键字冲突。</p>
+
+<h2 id="遍历对象的属性">遍历对象的属性</h2>
+
+<p>this.props.children 会返回组件对象的所有属性。React提供一个工具方法 React.Children来处理 this.props.children 。我们可以用 React.Children.map或React.Children.forEach来遍历子节点。</p>
+
+<h1 id="proptypes">PropTypes</h1>
+
+<p>组件的属性可以接受任意值，字符串、对象、函数等等都可以。有时候，我们需要一种机制，验证别人使用组件时，提供的参数是否符合要求。组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">PropTypes</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">prop-types</span><span class="dl">'</span>
+<span class="kd">class</span> <span class="nx">MyTitle</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="kd">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">title</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+  <span class="p">}</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>title: <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nc">MyTitle</span> <span class="p">/&gt;,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>上面的MyTitle组件有一个title属性，PropTypes告诉React， 这个title属性是必须的，而且它的值必须是字符串。</p>
+
+<h1 id="默认属性">默认属性</h1>
+
+<p>此外，可以通过defaultProps用来设置组件属性的默认值。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">MyTitle</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="kd">static</span> <span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">shortName</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">MyTitle</span><span class="dl">'</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">shortName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nc">MyTitle</span> <span class="p">/&gt;,</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>上面代码会输出 “MyTitle”</p>
+
+<h1 id="ref属性获取真实的dom节点">ref属性（获取真实的DOM节点)</h1>
+
+<p>组件并不是真实的DOM节点，而是存在于内存之中的一种数据结构，叫做虚拟DOM（virtual DOM）。只有当它插入文档以后，才会变成真实的DOM。根据React的设计，所有的DOM变动，都先在虚拟DOM上发生，然后再将实际发生变动的部分，反应在真实DOM上，这种算法叫做DOM diff，它可以极大的提高网页的性能表现。</p>
+
+<p>但是，有时需要从组件获取真实DOM的节点，这时就要用到ref属性。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Alert</span> <span class="nx">entends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">showAlert</span><span class="p">(</span><span class="nx">message</span><span class="p">){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">debug : ${message}</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">redenr</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">MyTitle</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">onClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">alert</span><span class="p">.</span><span class="nx">showAlert</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyTitle</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    	<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">onClick</span><span class="si">}</span><span class="p">&gt;</span>Click me<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ALert</span> <span class="na">ref</span><span class="p">=</span><span class="s">'alert'</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>上面代码中，组件MyTitle的子节点有一个Alert组件，为了调用这个组件提供的方法，这时候就必须获取真实的DOM节点，虚拟DOM是拿不到用户输入的。为了做到这一点，我们在使用这个组件的时候必须为其设置一个ref属性，然后this.refs.[refName]机会返回这个真实的DOM节点。</p>
+
+<p>需要注意的是，由于this.refs.[refName]属性获取的是真实的DOM，所以必须等到虚拟DOM插入文档以后，才能使用这个属性，否则会报错。上面代码中，通过为组件指定Click事件的回调函数，确保了只有等到真实DOM发生click事件之后，才会读取this.refs.[refName]属性。</p>
+
+<p>ref属性在开发中使用频率很高，使用它你可以获取到任何你想要获取的组件的对象，有了这个对象你就可以灵活地做很多事情，比如：读写对象的变量，甚至调用对象的函数。</p>
+
+<h1 id="state">state</h1>
+
+<p>上文讲到了props，组件会根据props的变化来进行渲染，但组件无法改变自身的props，那么组件为了实现交互，可以使用组件的state。state是组件私有的，可以通过state={}方式初始化，通过调用this.setState()来改变它。当state更新之后，组件就会重新渲染自己。</p>
+
+<p>render()方法依赖于this.props和this.state，框架会确保渲染出来的UI界面总是与输入(this.props和this.state)保持一致。</p>
+
+<h2 id="初始化state">初始化state</h2>
+
+<p>可以通过以下两种方式来初始化state，在组件的生命周期中仅执行一次，用于设置组件的初始化state。</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+  <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span> <span class="p">:</span> <span class="dl">''</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">state</span><span class="o">=</span><span class="p">{</span>
+  <span class="nx">name</span> <span class="o">=</span> <span class="dl">''</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="更新state">更新state</h2>
+
+<p>通过this.setState()方法来更新state，调用该方法后，React会重新渲染相关的ui。this.setState({favorite:!this.state.favorite});</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">FavoriteButton</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+  <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">favorite</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">};</span>
+  <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">favorite</span><span class="p">:</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">favorite</span><span class="p">});</span>
+  <span class="p">}</span>
+	<span class="nx">render</span><span class="p">(){</span>
+    <span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">favorite</span><span class="p">?</span> <span class="dl">'</span><span class="s1">favorite</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">not favorite</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(&lt;</span><span class="nt">h1</span> <span class="na">onclick</span><span class="p">=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>
+            You <span class="si">{</span><span class="nx">text</span><span class="si">}</span> this click to toggle.
+            <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>上面代码是一个FavoriteButton组件，它的通过state={}初始状态，也就是一个对象，这个对象可以通过this.state属性读取。当用户点击组件，导致状态变化，this.setState方法就修改状态值，每次修改以后，自动调用this.render方法，再次渲染组件。</p>
+
+<p>由于this.props和this.state都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props表示那些本组件无法改变的特性，而this.state是随着用户互动而产生变化的特性。</p>
+
+<h1 id="组件的生命周期">组件的生命周期</h1>
+
+<p>在ios中UIViewController提供了 viewWillAppera , viewDidLoad , viewWillDisappear 等生命周期方法，在anroid中activy则提供了onCreate,onStart,onResume,onPause,onStop,onDestroy等生命周期方法，这些生命周期方法描述了一个界面从创建到销毁的一生。</p>
+
+<p>那么在React中组件(Component)也是有自己的生命周期方法的。</p>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn001.png" width="80%" /></center>
+
+<h2 id="render">render</h2>
+
+<p>ReactComponent render()</p>
+
+<p>render()方法是必须的。</p>
+
+<p>当被调用时，其会检查this.props和this.state并返回以下类型中的一个：</p>
+
+<ul>
+  <li>React元素。通常由JSX创建。该元素可能是一个原生的DOM组件的表示，如&lt;div/&gt; ，或者是一个你定义的符合组件。</li>
+  <li>字符串和数字。这些将被渲染为DOM中的text node</li>
+  <li>Portals 。 由 ReactDOM.createPortal创建</li>
+  <li>null 。什么都不渲染。</li>
+  <li>布尔值。什么都不渲染。（通常存在于return test &amp;&amp; 写法，其中test是布尔值）</li>
+</ul>
+
+<p>返回null或false时，ReactDOM.findDOMNode(this)将返回null。</p>
+
+<p>render() 函数应该是纯粹的，也就是说该函数不修改组件的state，每次调用都返回相同的结果，不读写DOM信息，也不和浏览器交互(例如通过setTimeout)。如果需要和浏览器交互，在componentDidMount()中或者其他生命周期方法中做这件事。保持render()纯粹，可以使服务器端渲染更加切实可行，也使用组件更容易被理解。</p>
+
+<p>若shouldComponentUpdate()返回false，render()函数将不会被调用。</p>
+
+<h2 id="componentdidmount">componentDidMount()</h2>
+
+<p>componentDidMount()在组件被装配后立即调用，通常在该方法中进行一些初始化操作。初始化时需要DOM节点的操作可以放到这里进行。若你要从远端加载数据，这是一个适合实现网络请求的地方。在该方法里设置状态将会触发重新渲染。</p>
+
+<p>这一方法是一个发起任何订阅的好地方，如果你这么做了，别忘了在componentWillUnmount()退订</p>
+
+<p>另外，在这个方法中调用setState()将会触发一次额外的渲染，但是它在浏览器刷新屏幕之前发生。这保证了即使render()将会调用两次，但用户不会看到中间状态。</p>
+
+<h2 id="shouldcomponentupdate">shouldComponentUpdate</h2>
+
+<p>在接收到新的props或者state，将要渲染之前调用，以让react知道当前状态或属性的改变是否不影响组件的输出。</p>
+
+<p>该方法在初始化渲染的时候不会调用，在使用forceUpdate方法的时候也不会。如果确定新的props和state不需要重新渲染，则此处应该返回false。</p>
+
+<p>重写此方法你可以根据实际情况，来灵活的控制组件当props和state发生变化时是否需要重新渲染组件。</p>
+
+<h2 id="getsnapshotbeforeupdate">getSnapshotBeforeUpdate</h2>
+
+<p>getSnapshotBeforeUpdate()在最新的渲染输出提交给DOM前将被立即调用。它让你的组件能在当前的值可能要改变前获得它们。这一生命周期返回的任何值将会作为参数被传递给componentDidUpdate()</p>
+
+<h2 id="componentdidupdate">componentDidUpdate</h2>
+
+<p>在组件的更新已经同步到DOM中之后立即被调用。</p>
+
+<h2 id="unmountting移除">Unmountting(移除)</h2>
+
+<p>componentWillUnmount</p>
+
+<p>在组件从DOM中移除的时候立即被调用。</p>
+
+<p>在该方法中执行任何必要的清理，比如无效的定时器，或者清除在componentDidMount中创建的DOM元素。</p>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/reactnative/2020/01/02/RN.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">02_ES语法</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/reactnative/2020/01/04/RN.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">04_reactnative布局1</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

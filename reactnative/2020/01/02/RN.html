@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<head>
+    <title>02_ES语法 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Frontend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/frontend/react.html">React</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/reactnative.html">ReactNative</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/flutter.html">Flutter</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/es6.html">Es6</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/front_others.html">Others</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Backend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/backend/java.html">Java</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/python.html">Python</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/ruby.html">Ruby</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/rails.html">Rails</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/embedded/c.html">C</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/digit.html">DigitCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Idea <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/idea/strategy.html">DesignStrategy</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/ddd.html">DDD</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/cloud.html">Cloud</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/it/tcpip.html">TCP/IP</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/socket.html">Socket</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mqtt.html">mqtt</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/jvm.html">jvm</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/linux.html">linux</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/docker.html">docker</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/k8s.html">k8s</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mq.html">mq</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/memorycache.html">memorycache</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/elk.html">elk</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/zookeeper.html">zookeeper</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/git.html">git</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>02_ES语法</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">02 Jan 2020</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="1类">1.类</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+   <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">color</span><span class="p">){</span>
+   	 <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+   	 <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="nx">toString</span><span class="p">(){</span>
+     <span class="k">return</span> <span class="dl">'</span><span class="s1">name:</span><span class="dl">'</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="dl">'</span><span class="s1">,color:</span><span class="dl">'</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nx">Cat</span> <span class="kd">extends</span> <span class="nx">Animal</span><span class="p">{</span>
+   <span class="kd">constructor</span><span class="p">(</span><span class="nx">action</span><span class="p">){</span>
+   	 <span class="k">super</span><span class="p">(</span><span class="dl">'</span><span class="s1">cat</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">);</span>
+   	 <span class="k">this</span><span class="p">.</span><span class="nx">action</span> <span class="o">=</span> <span class="nx">action</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="nx">toString</span><span class="p">(){</span>
+     <span class="k">return</span> <span class="k">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h1 id="2模块化module">2.模块化(Module)</h1>
+
+<p>​	   模块的功能主要是有export和import组成。每一个模块都有自己单独的作用域，模块之间的相互调用关系是通过export来固定模块对外暴露的接口，通过import来引用其他模块提供的接口。同时还为模块创造了命名空间，防止函数的命名冲突。</p>
+
+<p>​	  es6 支持 变量，常量的导出，一个模块可以同时输出多个变量。es6将一个文件视为一个模块。</p>
+
+<h1 id="3箭头arrow函数">3.箭头(Arrow)函数</h1>
+
+<p>​    箭头函数与包围它的代码共同享用同一个this，能帮你很好的解决this的指向问题。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>()=&gt;1;
+v=&gt;v+1;
+(a,b)=&gt;a+b;
+()=&gt;{alert('foo')}
+e=&gt;{return e+1}
+</code></pre></div></div>
+
+<p>​    不论是箭头函数还是bind，每次被执行都返回的是一个新的函数引用，因此如果你还需要函数的引用去做一些别的事情(譬如卸载监听器)，那么你必须自己保存这个引用</p>
+
+<h2 id="卸载监听器时的陷阱">卸载监听器时的陷阱。</h2>
+
+<p>​		错误做法如下:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">PauseMenu</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+		<span class="nx">componentWillMount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+		<span class="p">}</span>
+		<span class="nx">componentWillUnmount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+		<span class="p">}</span>
+		<span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>​		正确做法如下：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">PauseMenu</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+      <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+		<span class="nx">componentWillMount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">componentWillUnmount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>​		除了上述做法，我们还可以这样做：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">PauseMenu</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+		<span class="nx">componentWillMount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">componentWillUnmount</span><span class="p">(){</span>
+				<span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="nx">onAppPaused</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+		  <span class="c1">//把函数直接作为一个arrow function的属性来定义，初始化的时候就绑定了this指针</span>
+		<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="4函数参数默认值">4.函数参数默认值</h1>
+
+<p>​</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">height</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="nx">color</span><span class="o">=</span><span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">){</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="5模板字符串">5.模板字符串</h1>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//不使用模板字符串</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">your name is </span><span class="dl">'</span><span class="o">+</span> <span class="nx">first</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">last</span> <span class="o">+</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span>
+<span class="c1">//使用模板字符串</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">you name is ${first} ${last}</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<h1 id="6解构赋值">6.解构赋值</h1>
+
+<p>解构赋值语法是javascript的一种表达式，可以方便的从数组或者对象中快速提取取值赋值给定义的变量</p>
+
+<h2 id="获取数组中的值">获取数组中的值</h2>
+
+<p>从数组中获取值并赋值到变量中，变量的顺序与数组中对象顺序对应</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">one</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">two</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">three</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">four</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">one</span><span class="p">,</span><span class="nx">two</span><span class="p">,</span><span class="nx">three</span><span class="p">]</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+
+<span class="c1">//如果需要忽略某些值，你可以按照下面的写法获取你想要的值</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">first</span><span class="p">,,,</span><span class="nx">last</span><span class="p">]</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">;</span>
+
+<span class="c1">//你也可以这样写</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="p">,</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">//先生命变量</span>
+<span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="c1">//如果没有从数组中的获取到值，你可以为变量设置一个默认值</span>
+<span class="kd">var</span> <span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">;</span>
+<span class="p">[</span><span class="nx">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="nx">b</span><span class="o">=</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">];</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span><span class="c1">//7</span>
+
+<span class="c1">//通过解构赋值可以方便的交换两个变量的值</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span><span class="nx">a</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="获取对象中的值">获取对象中的值</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Ming</span><span class="dl">'</span><span class="p">,</span><span class="na">age</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="na">city</span><span class="p">:</span><span class="dl">'</span><span class="s1">ShangHai</span><span class="dl">'</span><span class="p">}</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span><span class="nx">age</span><span class="p">,</span><span class="nx">city</span><span class="p">}</span> <span class="o">=</span> <span class="nx">student</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h1 id="7延展操作符spread-operator">7.延展操作符(Spread operator)</h1>
+
+<p>延展操作符… 可以在函数调用/数组构造时，将数组表达式或者string在语法层面展开；还可以在构造对象时，将对象表达式按key-value的方式展开</p>
+
+<h2 id="语法">语法</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//函数调用，可以将该对象展开，展开的属性作为函数的入参</span>
+<span class="nx">myFunction</span><span class="p">(...</span><span class="nx">iterableObj</span><span class="p">);</span>
+
+<span class="c1">//数组构造或字符串</span>
+<span class="p">[...</span><span class="nx">iterableObj</span><span class="p">,</span> <span class="dl">'</span><span class="s1">4</span><span class="dl">'</span><span class="p">,</span> <span class="p">...</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="mi">6</span><span class="p">];</span>
+
+<span class="c1">//构造对象时，进行克隆或者属性拷贝 (es9特性)</span>
+<span class="kd">let</span> <span class="nx">objClone</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">obj</span><span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="应用">应用</h2>
+
+<p>在函数调用时使用延展操作符</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">,</span><span class="nx">z</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="o">+</span><span class="nx">z</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+<span class="c1">//不使用延展操作符</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sum</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="nx">numbers</span><span class="p">))</span>
+<span class="c1">//使用延展操作符</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sum</span><span class="p">(...</span><span class="nx">nubmers</span><span class="p">));</span><span class="c1">//6</span>
+</code></pre></div></div>
+
+<p>构造数组</p>
+
+<p>没有展开语法的时候，只能组合使用push,splice,concat 等方法，来讲已有数组元素变成新数组的一部分。有了展开语法，构造新数组会变得更简单，更优雅:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">students</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">Tom</span><span class="dl">'</span><span class="p">]</span>
+<span class="kd">const</span> <span class="nx">persons</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Tony</span><span class="dl">'</span><span class="p">,</span> <span class="p">...</span><span class="nx">students</span> <span class="p">,</span> <span class="dl">'</span><span class="s1">Aron</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Anna</span><span class="dl">'</span><span class="p">]</span> <span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">persons</span><span class="p">)</span> <span class="c1">// ['Toney','Jane','Tom',  'Aron', 'Anna']</span>
+</code></pre></div></div>
+
+<p>和参数列表的展开类似， … 在构造数组时，可以在任意位置多次使用.</p>
+
+<p>数组拷贝</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">arr</span><span class="p">];</span><span class="c1">//等同于arr.slice()</span>
+<span class="nx">arr2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span><span class="c1">//[1,2,3,4]</span>
+</code></pre></div></div>
+
+<p>展开语法和Object.assign()行为一致，执行的都是浅拷贝(只遍历一层)</p>
+
+<p>连接多个数组</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arr3</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">arr1</span><span class="p">,</span> <span class="p">...</span><span class="nx">arr2</span><span class="p">];</span><span class="c1">// 将arr2中所有元素附加到arr1后面并返回</span>
+<span class="c1">//等同于</span>
+<span class="kd">var</span> <span class="nx">arr4</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>在ECMAScript 2018 ,也就是es9 中延展操作符增加了对对象的支持</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span><span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">,</span> <span class="na">x</span><span class="p">:</span><span class="mi">42</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="na">foo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">baz</span><span class="dl">'</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span><span class="mi">13</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">cloneObj</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">obj1</span><span class="p">}</span> <span class="c1">// 克隆后的对象为{foo: 'bar', x:42}</span>
+<span class="kd">var</span> <span class="nx">mergedObj</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">obj1</span><span class="p">,</span> <span class="p">...</span><span class="nx">obj2</span><span class="p">};</span> <span class="c1">//合并后的对象为 {foo: 'baz',x:42,y:13}</span>
+</code></pre></div></div>
+
+<h2 id="在react中的应用">在react中的应用</h2>
+
+<p>通常我们在封装一个组件时，会对外公开一些props用于实现功能。大部分情况下在外部使用都应显示的传递props。 但是当传递大量的props时，会非常繁琐，这时我们可以使用 …（延展操作符，用户取出参数对象的所有可遍历属性）来进行传递。</p>
+
+<p>一般情况下，我们这样写</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">CustomComponent</span> <span class="na">name</span><span class="p">=</span><span class="s">'Jane'</span> <span class="na">age</span><span class="p">=</span><span class="si">{</span><span class="mi">21</span><span class="si">}</span> <span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<p>使用… , 等同于上面的写法</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span><span class="mi">21</span><span class="p">}</span>
+<span class="p">&lt;</span><span class="nc">CustomComponent</span> <span class="si">{</span><span class="p">...</span><span class="nx">params</span><span class="si">}</span> <span class="p">/&gt;</span>	
+</code></pre></div></div>
+
+<p>配合结构赋值避免传入一些不需要的参数</p>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span><span class="mi">21</span> <span class="p">,</span> <span class="na">type</span><span class="p">:</span><span class="dl">'</span><span class="s1">aaa</span><span class="dl">'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="p">{</span><span class="nx">type</span><span class="p">,</span> <span class="p">...</span><span class="nx">other</span><span class="p">}</span> <span class="o">=</span> <span class="nx">params</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">CustomComponent</span> <span class="na">type</span><span class="p">=</span><span class="s">'normal'</span> <span class="na">number</span><span class="p">=</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span> <span class="si">{</span><span class="p">...</span><span class="nx">other</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="c1">//等同于</span>
+<span class="p">&lt;</span><span class="nc">CustomComponent</span> <span class="na">type</span><span class="p">=</span><span class="s">'normal'</span> <span class="na">number</span><span class="p">=</span><span class="si">{</span><span class="mi">2</span><span class="si">}</span> <span class="na">name</span><span class="p">=</span><span class="s">'Jane'</span> <span class="na">age</span><span class="err">:</span><span class="na">21</span> <span class="p">/&gt;</span> <span class="c1">//这样就屏蔽了 type:'aaa'这种情况</span>
+</code></pre></div></div>
+
+<h1 id="8对象属性简写">8.对象属性简写</h1>
+
+<p>在es6中允许我们在设置一个对象的属性的时候不指定属性名.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Ming</span><span class="dl">'</span> <span class="p">,</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span> <span class="nx">city</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ShangHai</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">//原来写法是</span>
+<span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span><span class="nx">name</span><span class="p">,</span><span class="na">age</span><span class="p">:</span><span class="nx">age</span><span class="p">,</span><span class="na">city</span><span class="p">:</span><span class="nx">city</span><span class="p">};</span>
+<span class="c1">//现在可以这么写</span>
+<span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span><span class="nx">age</span><span class="p">,</span><span class="nx">city</span><span class="p">};</span>
+</code></pre></div></div>
+
+<h1 id="9promise">9.Promise</h1>
+
+<p>Promise 是异步编程的一种解决方案，比传统的callback更加的优雅。</p>
+
+<p>不使用es6时，嵌套两个setTimeout回调函数：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span><span class="c1">//1秒后输出hello</span>
+		<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">hi</span><span class="dl">'</span><span class="p">);</span><span class="c1">//2秒后输出hi</span>
+    <span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>使用es6之后</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">waitSecond</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span>
+	 <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">waitSecond</span>
+	<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span><span class="c1">//1秒后输出hello</span>
+     <span class="k">return</span> <span class="nx">waitSecond</span><span class="p">;</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">);</span><span class="c1">//2秒后输出hi</span>
+  <span class="p">})</span>
+</code></pre></div></div>
+
+<p>上面的代码使用两个then 来进行异步编程串行化，避免了回调地狱.</p>
+
+<h1 id="10支持let和const">10.支持let和const</h1>
+
+<p>在之前js是没有块级作用域的，const与let填补了这方面的空白，const与let都是块级作用域。</p>
+
+<p>使用var定义的变量为函数级作用域 :</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="c1">//输出10</span>
+</code></pre></div></div>
+
+<p>使用let与const定义的变量为块级作用域:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="c1">//-1 or Error "ReferenceError: a is not defined"</span>
+</code></pre></div></div>
+
+<h1 id="es8-特性">ES8 特性</h1>
+
+<h2 id="asyncawait">async/await</h2>
+
+<p>在es8中加入了对async/await的支持，也就是我们所说的异步函数，只是一个很实用的功能。</p>
+
+<p>async/await将我们从头痛的回调地狱中解脱了出来，是整个代码看起来很整洁 。</p>
+
+<p>使用async/await与不使用async/await的差别：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">},</span><span class="mi">600</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">getData</span><span class="p">(</span><span class="nx">userId</span><span class="p">){</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">userId</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">1001</span><span class="dl">'</span><span class="p">){</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">Success</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="dl">'</span><span class="s1">Fail</span><span class="dl">'</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span><span class="mi">600</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">//不使用 async/await </span>
+<span class="nx">doLogin</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span>
+  	<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getData</span><span class="p">)</span>
+  	<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span><span class="o">=&gt;</span><span class="p">{</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">//使用 asycn/await</span>
+<span class="k">async</span> <span class="nx">doLogin2</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="asyncawait-的几种应用场景">async/await 的几种应用场景</h2>
+
+<p>获取异步函数的返回值</p>
+
+<p>异步函数本身会返回一个Promise,  所以我们可以通过then来获取异步函数的返回值</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">charCountAdd</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span> <span class="nx">data2</span><span class="p">){</span>
+  <span class="kd">const</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data2</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">d1</span> <span class="o">+</span> <span class="nx">d2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">charCountAdd</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span><span class="c1">//通过then获取异步函数的返回值</span>
+<span class="kd">function</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span><span class="p">{</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="p">},</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>async/await 在并发场景中的应用</p>
+
+<p>对于上述的例子，我们调用await两次，每次都是等待1秒，一共是2秒，效率比较低，而且两次await的调用并没有依赖关系，那能不能让其并发执行呢，答案是可以的，接下来我们通过Promise.all来实现await的并发调用.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">charCountAdd</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span> <span class="nx">data2</span><span class="p">){</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">charCount</span><span class="p">(</span><span class="nx">data1</span><span class="p">),</span><span class="nx">charCount</span><span class="p">(</span><span class="nx">data2</span><span class="p">)]);</span>
+  <span class="k">return</span> <span class="nx">d1</span> <span class="o">+</span> <span class="nx">d2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">charCountAdd</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>上述代码我们实现了两次chartCount的并发调用，Promise,all接受的是一个数组，他可以将数组中的promise对象并发执行。</p>
+
+<p>async/await 的几种异常处理方式</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//第一种，捕捉整个异常</span>
+<span class="nx">charCountAdd</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+	<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span><span class="c1">//捕捉整个async/await函数的错误</span>
+<span class="c1">//第二种，捕捉单个异常</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">charCountAdd</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span> <span class="nx">data2</span><span class="p">){</span>
+  <span class="kd">const</span> <span class="nx">d1</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data1</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">d1 is null</span><span class="dl">'</span><span class="p">));</span>
+  <span class="kd">const</span> <span class="nx">d2</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data2</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="o">=&gt;</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">d2 is null</span><span class="dl">'</span><span class="p">));</span>
+  <span class="k">return</span> <span class="nx">d1</span> <span class="o">+</span> <span class="nx">d2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">charCountAdd</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+<span class="c1">//第三种，同时捕捉多个await表达式的错误</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">charCountAdd</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span> <span class="nx">data2</span><span class="p">){</span>
+   <span class="kd">let</span> <span class="nx">d1</span><span class="p">,</span><span class="nx">d2</span><span class="p">;</span>
+   <span class="k">try</span><span class="p">{</span>
+      <span class="nx">d1</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
+      <span class="nx">d2</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">charCount</span><span class="p">(</span><span class="nx">data2</span><span class="p">);</span>
+   <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+   <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">d1</span> <span class="o">+</span> <span class="nx">d2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>es8还有其他特性,比如 Object.values(), Object.entries()</p>
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/reactnative/2020/01/01/RN.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">01_ReactNative实战学习</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/reactnative/2020/01/03/RN.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">03_ReactNative基础知识</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>
