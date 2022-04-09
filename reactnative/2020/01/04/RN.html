@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>04_reactnative布局1 | Andy Sun's World</title>
+    <title>04_reactnative布局 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>04_reactnative布局1</span>
+                <span>04_reactnative布局</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -252,7 +252,213 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <p>React Native 中布局采用的是FlexBox(弹性框)进行布局。</p>
+
+<p>FlexBox提供了在不同尺寸设备上都能保持一致的布局方式。FlexBox是CSS3弹性框布局规范，目前还处于最终征求意见稿阶段，并不是所有的浏览器都支持FlexBox。</p>
+
+<h1 id="宽和高">宽和高</h1>
+
+<p>一个组件的高度和宽度决定了它在屏幕上的尺寸，也就是大小。</p>
+
+<h1 id="像素无关">像素无关</h1>
+
+<p>在rn中尺寸是没有单位的，它代表了设备独立像素。</p>
+
+<div style="color:red;font-size:20px">
+  这里要注意reactnative中组件样式style，应该是双括号的形式，但是这个和jekyll中liquid语法冲突，liquid使用双括号来引用变量使用的，所以从此以后，文档中关于style后内容都用单括号表示。
+</div>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">width</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="nx">height</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">40</span><span class="si">}</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">fontSize</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">20</span><span class="si">}</span><span class="p">&gt;&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>上述代码中，运行在android上时，View的长和宽被解释成：100dp 、 100dp，单位是dp，字体被解释成16sp，单位是sp 。</p>
+
+<p>运行在ios上尺寸单位被解释成pt，这些单位确保了布局在不同dpi的手机屏幕上显示不会发生改变。</p>
+
+<h1 id="和而不同">和而不同</h1>
+
+<p>rn中FlexBox和web css中的FlexBox工作方式一样，但是有细微区别，如：</p>
+
+<ul>
+  <li>flexDirection：rn中默认 column, web中默认row</li>
+  <li>alignItems: rn默认 stretch(拉伸) ,web默认 flex-start</li>
+  <li>flex： rn 只接受一个参数，web中可接受多个 ，如 flex: 2 2 10%</li>
+  <li>rn不支持 align-content, flex-basis, order, flex-basis ,flex-flow , flex-grow , flex-shrink</li>
+</ul>
+
+<h1 id="layout-props">Layout Props</h1>
+
+<p>以下属性是rn所支持的flex属性</p>
+
+<h2 id="父视图属性容器属性">父视图属性(容器属性):</h2>
+
+<ul>
+  <li>flexDirection enum (‘row’,’column’,’row-reverse’,’column-reverse’)</li>
+  <li>flexWrap enum(‘wrap’,’nowrap’)</li>
+  <li>justifyContent enum (‘flex-start’,’flex-end’,’center’,’space-between’,’space-around’)</li>
+  <li>alignItems enum(‘flex-start’,’flex-end’,’center’,’stretch’)</li>
+</ul>
+
+<p>主轴和侧轴（横轴和竖轴）</p>
+
+<p>在学习上述属性之前，让我们先了解一个概念： 主轴和侧轴</p>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn002.png" width="100%" /></center>
+
+<p>主轴即水平方向的轴线，可以理解成横轴，侧轴垂直于主轴，可以理解为竖轴。</p>
+
+<h3 id="flexdirection">flexDirection</h3>
+
+<p>enum (‘row’,’column’,’row-reverse’,’column-reverse’)</p>
+
+<p>flexDirection 属性定义了父视图中的子元素沿横轴或竖轴方向的排列方式。</p>
+
+<ul>
+  <li>row： 从左向右依次排列</li>
+  <li>row-reverse: 从右向左依次排列</li>
+  <li>column(default)：默认的排列方式，从上向下排列</li>
+  <li>column-reverse:  从下向上排列</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">flexDirection</span><span class="p">:</span> <span class="dl">'</span><span class="s1">row-reverse</span><span class="dl">'</span><span class="p">,</span><span class="nx">backgroundColor</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkgrey</span><span class="dl">'</span><span class="p">,</span><span class="nx">marginTop</span><span class="p">:</span><span class="mi">20</span><span class="si">}</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">width</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">height</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">backgroundColor</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkcyan</span><span class="dl">'</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">5</span><span class="si">}</span><span class="p">&gt;</span>
+  	<span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">fontSize</span><span class="p">:</span><span class="mi">16</span><span class="si">}</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">width</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">height</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">backgroundColor</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkcyan</span><span class="dl">'</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">5</span><span class="si">}</span><span class="p">&gt;</span>
+  	<span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">fontSize</span><span class="p">:</span><span class="mi">16</span><span class="si">}</span><span class="p">&gt;</span>2<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">width</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">height</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">backgroundColor</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkcyan</span><span class="dl">'</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">5</span><span class="si">}</span><span class="p">&gt;</span>
+  	<span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">fontSize</span><span class="p">:</span><span class="mi">16</span><span class="si">}</span><span class="p">&gt;</span>3<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">width</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">height</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nx">backgroundColor</span><span class="p">:</span><span class="dl">'</span><span class="s1">darkcyan</span><span class="dl">'</span><span class="p">,</span><span class="nx">margin</span><span class="p">:</span><span class="mi">5</span><span class="si">}</span><span class="p">&gt;</span>
+  	<span class="p">&lt;</span><span class="nc">Text</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">fontSize</span><span class="p">:</span><span class="mi">16</span><span class="si">}</span><span class="p">&gt;</span>4<span class="p">&lt;/</span><span class="nc">Text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="flexwrap">flexWrap</h3>
+
+<p>enum(‘wrap’,’nowrap’)</p>
+
+<p>flexWrap属性定义了子元素在父视图内是否允许多行排列，默认为nowrap</p>
+
+<ul>
+  <li>nowrap flex的元素值排列在一行上，可能导致溢出。</li>
+  <li>Wrap flex的元素在一行排列不开的时候，就进行多行排列</li>
+</ul>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">View</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="nx">flexWrap</span><span class="p">:</span><span class="dl">'</span><span class="s1">wrap</span><span class="dl">'</span><span class="p">,</span><span class="nx">flexDirection</span><span class="p">:</span><span class="dl">'</span><span class="s1">row</span><span class="dl">'</span><span class="si">}</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="justifycontent">justifyContent</h3>
+
+<p>enum (‘flex-start’,’flex-end’,’center’,’space-between’,’space-around’)</p>
+
+<p>justifyContent属性定义了浏览器如何分配顺着父容器主轴的弹性(flex)元素之间及其周围的空间，默认为flex-start</p>
+
+<ul>
+  <li>flex-start(default) 从行首开始排列，每行第一个弹性元素与行首对齐，同时所有后续的弹性元素与前一个对齐</li>
+  <li>flex-end 从行尾开始排列。</li>
+  <li>center 伸缩元素向每行中点排列。每行第一个元素到行首的距离与最后一个元素到行尾的距离相同。</li>
+  <li>space-between 在每行上均匀分配弹性元素。相邻元素距离相同。每行第一个元素与行首对齐，最后一个与行尾对齐。</li>
+  <li>space-around 在每行上均匀分配弹性元素，相邻元素间距离相同。每行第一个元素到行首的距离和每行最后一元素到行尾的距离将会是相邻元素之间距离的一半。</li>
+</ul>
+
+<h3 id="alignitems">alignItems</h3>
+
+<p>enum(‘flex-start’,’flex-end’,’center’,’stretch’)</p>
+
+<p>alignItems属性与justifyContent相同的方式在侧轴方向上将当前行上的弹性元素对齐，默认为stretch.</p>
+
+<ul>
+  <li>flex-start 元素向侧轴起点对齐</li>
+  <li>flex-end 终点对齐</li>
+  <li>center 元素在侧轴居中。如果元素在侧轴上的高度高于其容器，那么再两个方向上溢出距离相同</li>
+  <li>stretch 弹性元素被在侧轴方向上被拉伸到与容器相同的高度或宽度。</li>
+</ul>
+
+<h2 id="子视图属性">子视图属性</h2>
+
+<ul>
+  <li>alignSelf enum(‘auto’, ‘flex-start’, ‘flex-end’, ‘center’, ‘stretch’)</li>
+  <li>flex number</li>
+</ul>
+
+<h3 id="alignself">alignSelf</h3>
+
+<p>alignSelf属性定义了flex容器内被选中项目的对齐方式。注意：alignSelf属性可重写灵活容器的alignItems属性。</p>
+
+<ul>
+  <li>auto(default)  元素继承了它的父容器的alignItems属性，如果没有父容器则为 stretch</li>
+  <li>stretch 元素被拉伸以适应容器</li>
+  <li>center 元素位于容器的中心</li>
+  <li>flex-start 元素位于容器的开头</li>
+  <li>flex-end 元素位于容器的末尾</li>
+</ul>
+
+<h3 id="flex">flex</h3>
+
+<p>flex 属性定义了一个可伸缩元素的能力，默认为0，可以视为兄弟节点的权重比</p>
+
+<h2 id="其他布局-in-rn">其他布局 in rn</h2>
+
+<h3 id="视图边框">视图边框</h3>
+
+<ul>
+  <li>borderBottomWidth number 底部边框宽度</li>
+  <li>borderLeftWidth 左边框</li>
+  <li>borderRightWidth 右边框</li>
+  <li>borderTopWidth  顶部边框</li>
+  <li>borderWidth 边框宽度</li>
+</ul>
+
+<h3 id="尺寸">尺寸</h3>
+
+<ul>
+  <li>width</li>
+  <li>height</li>
+</ul>
+
+<h3 id="外边距">外边距</h3>
+
+<ul>
+  <li>margin 外边距</li>
+  <li>marginBottom 底部外边距</li>
+  <li>marginHorizontal 左右外边距</li>
+  <li>marginLeft 左外边距</li>
+  <li>marginRight</li>
+  <li>marginTop</li>
+  <li>marginVertical 上下外边距</li>
+</ul>
+
+<h3 id="内边距">内边距</h3>
+
+<ul>
+  <li>padding</li>
+  <li>paddingBottom</li>
+  <li>paddingHorizontal</li>
+  <li>..</li>
+</ul>
+
+<h3 id="边缘">边缘</h3>
+
+<ul>
+  <li>left 规定元素的左边缘。该属性定义了定位元素做外边距边界与父模块左边界之间的偏移</li>
+  <li>right</li>
+  <li>top</li>
+  <li>bottom</li>
+</ul>
+
+<h3 id="定位position">定位(position)</h3>
+
+<p>enum(‘absolute’,’relative’) 设置元素的定位方式，为将要定位的元素定义定位规则</p>
+
+<ul>
+  <li>absolute 生成绝对定位的元素，元素的位置通过 left,right,top,bottom属性进行规定</li>
+  <li>relative 生成相对定位的元素，相对于其正常位置进行定位.因此，”left:20”会向元素的left位置添加20像素</li>
+</ul>
 
             
             
@@ -275,7 +481,7 @@
                             <a class="post__next" href="/reactnative/2020/01/05/RN.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">5</h2>
+                                    <h2 class="post__nav__title">05_react-navigation</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

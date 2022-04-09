@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 08 Apr 2022 18:00:11 +0800</lastBuildDate>
+        <lastBuildDate>Sat, 09 Apr 2022 11:57:11 +0800</lastBuildDate>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -365,12 +365,14 @@
         </item>
         
         <item>
-            <title>5</title>
+            <title>05_react-navigation</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/05/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;react-navigation不仅有Navigator全部功能，另外还支持底部导航类似于ios中UITabBarController，另外它也支持侧拉效果方式的导航类似于android中的抽屉效果。&lt;/p&gt;
+
+
             </description>
             <pubDate>Sun, 05 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -379,13 +381,24 @@
         </item>
         
         <item>
-            <title>04_reactnative布局1</title>
+            <title>04_reactnative布局</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/04/RN.html
             </link>
             <description>
-                
+                &lt;p&gt;React Native 中布局采用的是FlexBox(弹性框)进行布局。&lt;/p&gt;
 
+&lt;p&gt;FlexBox提供了在不同尺寸设备上都能保持一致的布局方式。FlexBox是CSS3弹性框布局规范，目前还处于最终征求意见稿阶段，并不是所有的浏览器都支持FlexBox。&lt;/p&gt;
+
+&lt;h1 id=&quot;宽和高&quot;&gt;宽和高&lt;/h1&gt;
+
+&lt;p&gt;一个组件的高度和宽度决定了它在屏幕上的尺寸，也就是大小。&lt;/p&gt;
+
+&lt;h1 id=&quot;像素无关&quot;&gt;像素无关&lt;/h1&gt;
+
+&lt;p&gt;在rn中尺寸是没有单位的，它代表了设备独立像素。&lt;/p&gt;
+
+&lt;div style=&quot;color:red;font-size:20px&qu...
             </description>
             <pubDate>Sat, 04 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
