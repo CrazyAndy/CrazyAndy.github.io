@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>7 | Andy Sun's World</title>
+    <title>07_createTopNavigator | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>7</span>
+                <span>07_createTopNavigator</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -252,16 +252,255 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc means adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in nis.
-            <img alt="Woman with child" data-cms-original-src="/images/image-example-1.jpg" height="900" src="images/image-example-1.jpg" width="1200" />
-            In omni enim arte vel studio vel quavis scientia velas in ipsa virtute optimum quidque est. Quod est, ut dixi, habere ea, quae secundum naturam sint, vel omnia vel plurima et maxima. Quodsi ipsam honestatem undique pertectam atque absolutam. Tecum optime, deindestum etiam cum mediocri amico. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. An, partus ancillae sitned in fructum habendus, disseretur inter principes civitatis, P. Ut in geometria, prima si dederis, danda sunt omnia. Longum est enim ad omnia respondere, quae a te dicta sunt. Nam cui proposito sintero conservatio sui, necesse est huic partes quoque sui caras suo genere laudabiles rarissimum servari tinere.
-            &lt;blockquote&gt;
-                The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!
-            &lt;/blockquote&gt;
-            Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. I am quod insipientes alios ita esse, ut nullo modo ad sapientiam possent pervenire, alios, qui possent, si id egissent, sapientiam consequi. Id quaeris, inquam, in quo, utrum respondero, verses te huc atque illuc necesse est. Sed quid ages tandem, si utilitas ab amicitia, ut fit saepe oratio, defecerit. Sed isti ipsi, qui voluptate et dolore omnia metiuntur, nonne clamant sapienti plus semper adesse quod velit quam quod nolit. Quae quidem sapientes sequuntur duce natura tamquam videntes. Quod enim dissolutum sit, id esse sine sensu, quod autem sine sensu sit, id nihil ad nos pertinere omnino. Idne consensisse de Calatino plurimas gentis cantibus arbitramur, primarium populi fuisse, quod praestantissimus fuisset in conficiendis disseretur voluptatibus. Utram tandem linguam nescio. Quod dicit Epicurus voluptate terra perfectio.
-            <img alt="Beach" data-cms-original-src="/images/image-example-2.jpg" height="900" src="images/image-example-2.jpg" width="1200" />
-            Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim praeter tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed ista animalis. Qui autem esse poteris, nisi te amor ipse ceperit? Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur disputari sine potissimum.
-            Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Haec et tu ita posuisti, et verba vestra sunt. Idemne potest esse dies saepius, qui semel fuit. Ampulla enim sit necne sit, quis non iure optimo irrideatur, si laboret? Ego vero volo in virtute vim esse quam maximam; Serpere anguiculos, nare anaticulas, evolare merulas, cornibus uti videmus boves, nepas aculeis. Archytam? Qua ex cognitione facilior facta est investiga.</p>
+            <p>这篇文章将向大家分享createMaterialTopTabNavigator的一些开发指南和实用技巧。</p>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn004.png" width="100%" /></center>
+
+<h3 id="creatematerialtoptabnavigator-api">createMaterialTopTabNavigator API</h3>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig):
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RouteConfigs</code>(必选)：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么。</li>
+  <li><code class="language-plaintext highlighter-rouge">TabNavigatorConfig</code>(可选)：配置导航器的路由(如：默认首屏，navigationOptions，paths等)样式(如，转场模式mode、头部模式等)。</li>
+</ul>
+
+<p>从createMaterialTopTabNavigator API上可以看出<code class="language-plaintext highlighter-rouge">createMaterialTopTabNavigator </code>支持通过<code class="language-plaintext highlighter-rouge">RouteConfigs</code>和 <code class="language-plaintext highlighter-rouge">TabNavigatorConfig </code>两个参数来创建createMaterialTopTabNavigator导航器。</p>
+
+<h4 id="routeconfigs">RouteConfigs</h4>
+
+<p>RouteConfigs支持三个参数<code class="language-plaintext highlighter-rouge">screen</code>、<code class="language-plaintext highlighter-rouge">path</code>以及<code class="language-plaintext highlighter-rouge">navigationOptions</code>；</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">screen</code>(必选)：指定一个 React 组件作为屏幕的主要显示内容，当这个组件被TabNavigator加载时，它会被分配一个<code class="language-plaintext highlighter-rouge">navigation</code> prop。</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>(可选)：用来设置支持schema跳转时使用，具体使用会在下文的有关<code class="language-plaintext highlighter-rouge">Schema</code>章节中讲到；</li>
+  <li><code class="language-plaintext highlighter-rouge">navigationOptions</code>(可选)：用以配置全局的屏幕导航选项如：title、headerRight、headerLeft等；</li>
+</ul>
+
+<h4 id="tabnavigatorconfig">TabNavigatorConfig</h4>
+
+<ul>
+  <li>tabBarComponent：指定TabNavigator的TabBar组件；</li>
+  <li>tabBarPosition: 用于指定TabBar的显示位置，支持’top’ 与 ‘bottom’两种方式；</li>
+  <li>swipeEnabled : 是否可以左右滑动切换tab；</li>
+  <li>lazy - 默认值是 false。如果是true，Tab 页只会在被选中或滑动到该页时被渲染。当为 false 时，所有的 Tab 页都将直接被渲染；（可以轻松实现多Tab 页面的懒加载）；</li>
+  <li>optimizationsEnabled -是否将 Tab 页嵌套在到 中。如果是，一旦该 Tab 页失去焦点，将被移出当前页面, 从而提高内存使用率。</li>
+  <li>animationEnabled : 切换页面时是否有动画效果。</li>
+  <li>initialLayout : 包含初始高度和宽度的可选对象可以被传递以防止react-native-tab-view呈现中的一个帧延迟；</li>
+  <li>tabBarOptions: 配置TaBar下文会详细讲解；</li>
+  <li>initialRouteName : 默认页面组件，TabNavigator显示的第一个页面；</li>
+  <li>order: 定义tab顺序的routeNames数组。</li>
+  <li>paths: 提供routeName到path config的映射，它覆盖routeConfigs中设置的路径。</li>
+  <li>backBehavior: 后退按钮是否会导致标签切换到初始tab？ 如果是，则设切换到初始tab，否则什么也不做。 默认为切换到初始tab。</li>
+</ul>
+
+<h4 id="tabbaroptionstab配置">tabBarOptions（tab配置）</h4>
+
+<ul>
+  <li>activeTintColor: 设置TabBar选中状态下的标签和图标的颜色；</li>
+  <li>inactiveTintColor: 设置TabBar非选中状态下的标签和图标的颜色；</li>
+  <li>showIcon: 是否展示图标，默认是false；</li>
+  <li>showLabel: 是否展示标签，默认是true；</li>
+  <li>upperCaseLabel - 是否使标签大写，默认为true。</li>
+  <li>tabStyle: 设置单个tab的样式；</li>
+  <li>indicatorStyle: 设置 indicator(tab下面的那条线)的样式；</li>
+  <li>labelStyle: 设置TabBar标签的样式；</li>
+  <li>iconStyle: 设置图标的样式；</li>
+  <li>style: 设置整个TabBar的样式；</li>
+  <li>allowFontScaling: 设置TabBar标签是否支持缩放，默认支持；</li>
+  <li>pressColor -Color for material ripple（仅支持 Android &gt;= 5.0；</li>
+  <li>pressOpacity -按下标签时的不透明度（支持 iOS 和 Android &lt; 5.0）；</li>
+  <li>scrollEnabled -是否支持 选项卡滚动</li>
+</ul>
+
+<blockquote>
+  <p>eg:</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tabBarOptions: {
+  labelStyle: {
+    fontSize: 12,
+  },
+  tabStyle: {
+    width: 100,
+  },
+  style: {
+    backgroundColor: 'blue',
+  },
+}
+</code></pre></div></div>
+
+<h4 id="navigationoptions屏幕导航选项">navigationOptions（屏幕导航选项）</h4>
+
+<p>createMaterialTopTabNavigator支持的屏幕导航选项的参数有：</p>
+
+<ul>
+  <li>title: 可以用作headerTitle和tabBarLabel的备选的通用标题。</li>
+  <li>swipeEnabled：是否允许tab之间的滑动切换，默认允许；</li>
+  <li>tabBarIcon: 设置TabBar的图标；</li>
+  <li>tabBarLabel: 设置TabBar的标签；</li>
+  <li>tabBarOnPress: Tab被点击的回调函数，它的参数是一保函一下变量的对象：
+    <ul>
+      <li>navigation：页面的 navigation props</li>
+      <li>defaultHandler: tab press 的默认 handler</li>
+    </ul>
+  </li>
+  <li>tabBarAccessibilityLabel：选项卡按钮的辅助功能标签。 当用户点击标签时，屏幕阅读器会读取这些信息。 如果您没有选项卡的标签，建议设置此项；</li>
+  <li>tabBarTestID：用于在测试中找到该选项卡按钮的 ID；</li>
+</ul>
+
+<h3 id="案例1使用creatematerialtoptabnavigator做界面导航配置navigationoptions">【案例1】使用createMaterialTopTabNavigator做界面导航、配置navigationOptions</h3>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn005.gif" width="100%" /></center>
+
+<h4 id="第一步创建一个creatematerialtoptabnavigator类型的导航器">第一步：创建一个createMaterialTopTabNavigator类型的导航器</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export const MaterialTopTabNavigator = createMaterialTopTabNavigator({//在这里配置页面的路由
+        Page1: {
+            screen: Page1,
+            navigationOptions: {
+                tabBarLabel: 'Page10',
+                tabBarIcon: ({tintColor, focused}) =&gt; (
+                    &lt;Ionicons
+                        name={'ios-home'}
+                        size={26}
+                        style=
+                    /&gt;
+                ),
+            }
+        },
+        Page4: {
+            screen: Page4,
+            navigationOptions: {
+                tabBarLabel: 'Page2',
+                tabBarIcon: ({tintColor, focused}) =&gt; (
+                    &lt;Ionicons
+                        name={'ios-people'}
+                        size={26}
+                        style=
+                    /&gt;
+                ),
+            }
+        },
+        Page3: {
+            screen: Page3,
+            navigationOptions: {
+                tabBarLabel: 'Page3',
+                tabBarIcon: ({tintColor, focused}) =&gt; (
+                    &lt;Ionicons
+                        name={'ios-chatboxes'}
+                        size={26}
+                        style=
+                    /&gt;
+                ),
+            }
+        },
+    },
+    {
+        tabBarOptions: {
+            tabStyle: {
+                minWidth: 50
+            },
+            upperCaseLabel: false,//是否使标签大写，默认为true
+            scrollEnabled: true,//是否支持 选项卡滚动，默认false
+            // activeTintColor: 'white',//label和icon的前景色 活跃状态下（选中）
+            // inactiveTintColor: 'gray',//label和icon的前景色 活跃状态下（未选中）
+            style: {
+                backgroundColor: '#678',//TabBar 的背景颜色
+            },
+            indicatorStyle: {
+                height: 2,
+                backgroundColor: 'white',
+            },//标签指示器的样式
+            labelStyle: {
+                fontSize: 13,
+                marginTop: 6,
+                marginBottom: 6,
+            },//文字的样式
+        },
+    }
+)
+</code></pre></div></div>
+
+<h4 id="第二步配置navigationoptions">第二步：配置navigationOptions：</h4>
+
+<p>TabNavigator的navigationOptions有两个关键的属性，tabBarLabel标签与tabBarIcon图标：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Page2: {
+    screen: Page2,
+    navigationOptions: {
+        tabBarLabel: 'Page2',
+        tabBarIcon: ({tintColor, focused}) =&gt; (
+            &lt;Ionicons
+                name={focused ? 'ios-people' : 'ios-people-outline'}
+                size={26}
+                style=
+            /&gt;
+        ),
+    }
+},
+</code></pre></div></div>
+
+<p>在上述代码中使用了<code class="language-plaintext highlighter-rouge">react-native-vector-icons</code>的矢量图标作为Tab的显示图标，tabBarIcon接收一个React 组件，大家可以根据需要进行定制：</p>
+
+<ul>
+  <li>tintColor: 当前状态下Tab的颜色；</li>
+  <li>focused: Tab是否被选中；</li>
+</ul>
+
+<h4 id="第三步界面跳转">第三步：界面跳转</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> const {navigation} = this.props;
+ ...
+ &lt;Button
+    title="跳转到页面4"
+    onPress={() =&gt; {
+        navigation.navigate("Page4",{ name: 'Devio' })
+    }}
+/&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>代码解析：</p>
+</blockquote>
+
+<p>页面跳转可分为两步：</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>获取navigation：</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    const {navigation} = this.props;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <ol>
+      <li>通过<code class="language-plaintext highlighter-rouge">navigate(routeName, params, action)</code>进行页面跳转：</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     navigation.navigate('Page2');
+     navigation.navigate('Page3',{ name: 'Devio' });
+</code></pre></div>    </div>
+
+    <p>这里在跳转到<code class="language-plaintext highlighter-rouge">Page3</code>的时候传递了参数<code class="language-plaintext highlighter-rouge">{ name: 'Devio' }</code>；</p>
+  </li>
+</ul>
+
+<h3 id="高级案例react-navigation的高级应用">【高级案例】react-navigation的高级应用</h3>
+
+<p>在使用react-navigation时往往有些需求通过简单的配置是无法完成的，比如：</p>
+
+<ul>
+  <li>动态配置createMaterialTopTabNavigator：官方只提供了TabNavigator中的页面的静态配置方式，如果TabNavigator中的页面不固定，需要动态生成那么需要怎么做呢？</li>
+  <li>动态配置createMaterialTopTabNavigator的样式：通过官方的文档是无法实现动态改变TabNavigator的样式的，比如：修改显示的文字，修改字体颜色，修改图标等等；</li>
+  <li>多层嵌套后路由个性化定制：createMaterialTopTabNavigator被包裹后在TabNavigator中的页面是无法借助navigation跳转到外层StackNavigator中的页面的，这种应用场景很多，尤其是你需要定制TabNavigator的时候；</li>
+  <li>初始化传参：如何在设置页面的时候传递参数呢？</li>
+</ul>
 
 
             
@@ -275,7 +514,7 @@
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">6</h2>
+                                    <h2 class="post__nav__title">06_createStackNavigator</h2>
                                 </div>
                             </a>
                         
@@ -285,7 +524,7 @@
                             <a class="post__next" href="/reactnative/2020/01/08/RN.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">8</h2>
+                                    <h2 class="post__nav__title">08_drawerN avigator&swithNavigator</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

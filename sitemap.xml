@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sat, 09 Apr 2022 11:57:11 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 15 Apr 2022 16:28:25 +0800</lastBuildDate>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -281,12 +281,13 @@
         </item>
         
         <item>
-            <title>11</title>
+            <title>11_网络通讯</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/11/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                
+
             </description>
             <pubDate>Sat, 11 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -295,12 +296,20 @@
         </item>
         
         <item>
-            <title>10</title>
+            <title>10_Redux</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/10/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;为了帮助大家快速上手什么是Redux开发，在这本节中将向大家介绍什么是Redux开发所需要的[一些什么是Redux必备基础以及高级知识。&lt;/p&gt;
+
+&lt;h2 id=&quot;什么是redux&quot;&gt;什么是Redux？&lt;/h2&gt;
+
+&lt;p&gt;Redux 是 JavaScript 状态容器，提供可预测化的状态管理，可以让你构建一致化的应用，运行于不同的环境（客户端、服务器、原生应用），并且易于测试。&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/frontend/reactnative/rn010.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;blockquote&gt...
             </description>
             <pubDate>Fri, 10 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -309,12 +318,18 @@
         </item>
         
         <item>
-            <title>9</title>
+            <title>09_Flatlist</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/09/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;在APP开发过程中，列表可谓是页面最重要的一种展现形式了，几乎每一个APP都离不了列表，那么在这篇文章中将向大家分享在React Native中该如何实现列表，以及FlatList的原理和实用指南。&lt;/p&gt;
+
+&lt;p&gt;在React Native的早期版本中列表通常使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ListView&lt;/code&gt;来实现，新版React Native推荐我们使用FlatList来实现列表，那么为什么推荐使用FlatList列表呢？接下来就让我从FlatList的由来说起：&lt;/p&gt;
+
+&lt;h2 id=&quot;flatlist的由来&quot;&gt;FlatList的由来？&lt;/h2&gt;
+
+&...
             </description>
             <pubDate>Thu, 09 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -323,12 +338,19 @@
         </item>
         
         <item>
-            <title>8</title>
+            <title>08_drawerN avigator&swithNavigator</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/08/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;h2 id=&quot;createswitchnavigator&quot;&gt;createSwitchNavigator&lt;/h2&gt;
+
+&lt;p&gt;SwitchNavigator 的用途是一次只显示一个页面。 默认情况下，它不处理返回操作，并在你切换时将路由重置为默认状态。&lt;/p&gt;
+
+&lt;h3 id=&quot;createswitchnavigator-api&quot;&gt;createSwitchNavigator API&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&qu...
             </description>
             <pubDate>Wed, 08 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -337,12 +359,19 @@
         </item>
         
         <item>
-            <title>7</title>
+            <title>07_createTopNavigator</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/07/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;这篇文章将向大家分享createMaterialTopTabNavigator的一些开发指南和实用技巧。&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/frontend/reactnative/rn004.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;h3 id=&quot;creatematerialtoptabnavigator-api&quot;&gt;createMaterialTopTabNavigator API&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&...
             </description>
             <pubDate>Tue, 07 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -351,12 +380,20 @@
         </item>
         
         <item>
-            <title>6</title>
+            <title>06_createStackNavigator</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/06/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;h1 id=&quot;createstacknavigator&quot;&gt;createStackNavigator&lt;/h1&gt;
+
+&lt;p&gt;createStackNavigator提供app屏幕之间切换的能力，它是以栈的形式来管理屏幕之间的切换，新切换到的屏幕会放在栈的顶部。&lt;/p&gt;
+
+&lt;h2 id=&quot;屏幕转场风格&quot;&gt;屏幕转场风格&lt;/h2&gt;
+
+&lt;p&gt;默认情况下，createStackNavigator提供了转场过度效果，在android和ios上过渡效果是不同的，这也是rn重平台性的体现，在android上从屏幕底部淡入，在ios上从屏幕的右侧划入，当然你也可以通过配置让StackNavigator支持屏幕从底部滑入的效果。&lt;/p&gt;
+
+&lt;h2 id=&quot;c...
             </description>
             <pubDate>Mon, 06 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -370,9 +407,11 @@
                 http://localhost:4000/reactnative/2020/01/05/RN.html
             </link>
             <description>
-                &lt;p&gt;react-navigation不仅有Navigator全部功能，另外还支持底部导航类似于ios中UITabBarController，另外它也支持侧拉效果方式的导航类似于android中的抽屉效果。&lt;/p&gt;
+                &lt;p&gt;随着React Navigation逐渐稳定，Navigator也被光荣的退休了。在React Native生态环境中需要一款可扩展且易于使用的导航组件，Navigator 自然胜任不了，这时React Native社区便孕育出了一个开源导航组件React Navigation。&lt;/p&gt;
 
+&lt;p&gt;React Navigation的出现替代了Navigator、 Ex-Navigation等老一代的导航组件，React Navigation可以说是Navigator的加强版，不仅有Navigator的全部功能，另外还支持底部导航类似于与iOS中的UITabBarController，此外它也支持侧拉效果方式的导航类似于Android中的抽屉效果。&lt;/p&gt;
 
+&lt;p&gt;这篇文章将向大家分享React Navigation3x开...
             </description>
             <pubDate>Sun, 05 Jan 2020 00:00:00 +0800</pubDate>
             <guid>

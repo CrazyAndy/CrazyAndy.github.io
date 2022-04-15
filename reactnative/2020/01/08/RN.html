@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>8 | Andy Sun's World</title>
+    <title>08_drawerN avigator&swithNavigator | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>8</span>
+                <span>08_drawerN avigator&swithNavigator</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -252,17 +252,89 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc means adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in nis.
-            <img alt="Woman with child" data-cms-original-src="/images/image-example-1.jpg" height="900" src="images/image-example-1.jpg" width="1200" />
-            In omni enim arte vel studio vel quavis scientia velas in ipsa virtute optimum quidque est. Quod est, ut dixi, habere ea, quae secundum naturam sint, vel omnia vel plurima et maxima. Quodsi ipsam honestatem undique pertectam atque absolutam. Tecum optime, deindestum etiam cum mediocri amico. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. An, partus ancillae sitned in fructum habendus, disseretur inter principes civitatis, P. Ut in geometria, prima si dederis, danda sunt omnia. Longum est enim ad omnia respondere, quae a te dicta sunt. Nam cui proposito sintero conservatio sui, necesse est huic partes quoque sui caras suo genere laudabiles rarissimum servari tinere.
-            &lt;blockquote&gt;
-                The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!
-            &lt;/blockquote&gt;
-            Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. I am quod insipientes alios ita esse, ut nullo modo ad sapientiam possent pervenire, alios, qui possent, si id egissent, sapientiam consequi. Id quaeris, inquam, in quo, utrum respondero, verses te huc atque illuc necesse est. Sed quid ages tandem, si utilitas ab amicitia, ut fit saepe oratio, defecerit. Sed isti ipsi, qui voluptate et dolore omnia metiuntur, nonne clamant sapienti plus semper adesse quod velit quam quod nolit. Quae quidem sapientes sequuntur duce natura tamquam videntes. Quod enim dissolutum sit, id esse sine sensu, quod autem sine sensu sit, id nihil ad nos pertinere omnino. Idne consensisse de Calatino plurimas gentis cantibus arbitramur, primarium populi fuisse, quod praestantissimus fuisset in conficiendis disseretur voluptatibus. Utram tandem linguam nescio. Quod dicit Epicurus voluptate terra perfectio.
-            <img alt="Beach" data-cms-original-src="/images/image-example-2.jpg" height="900" src="images/image-example-2.jpg" width="1200" />
-            Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim praeter tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed ista animalis. Qui autem esse poteris, nisi te amor ipse ceperit? Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur disputari sine potissimum.
-            Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Haec et tu ita posuisti, et verba vestra sunt. Idemne potest esse dies saepius, qui semel fuit. Ampulla enim sit necne sit, quis non iure optimo irrideatur, si laboret? Ego vero volo in virtute vim esse quam maximam; Serpere anguiculos, nare anaticulas, evolare merulas, cornibus uti videmus boves, nepas aculeis. Archytam? Qua ex cognitione facilior facta est investiga.</p>
+            <h2 id="createswitchnavigator">createSwitchNavigator</h2>
 
+<p>SwitchNavigator 的用途是一次只显示一个页面。 默认情况下，它不处理返回操作，并在你切换时将路由重置为默认状态。</p>
+
+<h3 id="createswitchnavigator-api">createSwitchNavigator API</h3>
+
+<blockquote>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>createSwitchNavigator(RouteConfigs, SwitchNavigatorConfig):
+</code></pre></div>  </div>
+</blockquote>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RouteConfigs</code>(必选，同createStackNavigator的RouteConfigs)：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么。</li>
+  <li><code class="language-plaintext highlighter-rouge">SwitchNavigatorConfig </code>(可选)：配置导航器的路由;</li>
+</ul>
+
+<h4 id="switchnavigatorconfig">SwitchNavigatorConfig</h4>
+
+<p>几个被传递到底层路由以修改导航逻辑的选项：</p>
+
+<ul>
+  <li>initialRouteName -第一次加载时初始选项卡路由的 routeName。</li>
+  <li>resetOnBlur - 切换离开屏幕时，重置所有嵌套导航器的状态。 默认为true。</li>
+  <li>paths - 提供 routeName 到 path 配置的映射, 它重写 routeConfigs 中设置的路径。</li>
+  <li>backBehavior - 控制 “返回” 按钮是否会导致 Tab 页切换到初始 Tab 页? 如果是, 设置为 initialRoute, 否则 none。 默认为none行为。</li>
+</ul>
+
+<h3 id="案例1使用createswitchnavigator进行登录场景的跳转">【案例1】使用createSwitchNavigator进行登录场景的跳转</h3>
+
+<p>多数应用程序都要求用户通过某种方式进行身份验证才能访问与用户或其他私人内容相关的数据。 通常情况下，流程如下所示：</p>
+
+<ul>
+  <li>用户打开应用。</li>
+  <li>该应用程序从持久存储中加载某个身份验证状态（例如，AsyncStorage）。</li>
+  <li>当状态被加载时，根据是否加载有效的认证状态，向用户呈现认证页面或主页面。</li>
+  <li>当用户注销时，我们清除认证状态并跳转到认证页面。</li>
+  <li>注意：我们说“认证页面”，因为通常有不止一个。 您可能会有一个主页面，其中包含用户名和密码字段，一个用于“忘记密码”的页面，一个用于注册的页面。</li>
+</ul>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn006.gif" width="100%" /></center>
+
+<h4 id="第一步创建一个createswitchnavigator类型的导航器">第一步：创建一个createSwitchNavigator类型的导航器</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const AppStack = createStackNavigator({
+    Home: {
+        screen: HomePage
+    },
+    Page1: {
+        screen: Page1
+    }
+});
+const AuthStack = createStackNavigator({
+    Login: {
+        screen: Login
+    },
+},{
+    navigationOptions: {
+        // header: null,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar
+    }
+});
+
+export default createSwitchNavigator(
+    {
+        Auth: AuthStack,
+        App: AppStack,
+    },
+    {
+        initialRouteName: 'Auth',
+    }
+);
+</code></pre></div></div>
+
+<h3 id="第二步界面跳转">第二步：界面跳转</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> const {navigation} = this.props;
+ ...
+ &lt;Button
+    title="Login"
+    onPress={() =&gt; {
+        navigation.navigate('App');
+    }}
+/&gt;
+</code></pre></div></div>
 
             
             
@@ -275,7 +347,7 @@
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">7</h2>
+                                    <h2 class="post__nav__title">07_createTopNavigator</h2>
                                 </div>
                             </a>
                         
@@ -285,7 +357,7 @@
                             <a class="post__next" href="/reactnative/2020/01/09/RN.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">9</h2>
+                                    <h2 class="post__nav__title">09_Flatlist</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

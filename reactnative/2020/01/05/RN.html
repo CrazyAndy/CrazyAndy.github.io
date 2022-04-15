@@ -252,8 +252,527 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>react-navigation不仅有Navigator全部功能，另外还支持底部导航类似于ios中UITabBarController，另外它也支持侧拉效果方式的导航类似于android中的抽屉效果。</p>
+            <p>随着React Navigation逐渐稳定，Navigator也被光荣的退休了。在React Native生态环境中需要一款可扩展且易于使用的导航组件，Navigator 自然胜任不了，这时React Native社区便孕育出了一个开源导航组件React Navigation。</p>
 
+<p>React Navigation的出现替代了Navigator、 Ex-Navigation等老一代的导航组件，React Navigation可以说是Navigator的加强版，不仅有Navigator的全部功能，另外还支持底部导航类似于与iOS中的UITabBarController，此外它也支持侧拉效果方式的导航类似于Android中的抽屉效果。</p>
+
+<p>这篇文章将向大家分享React Navigation3x开发的一些实用技巧，以及从navigator到React Navigation的一些实战经验。</p>
+
+<h2 id="什么是导航器">什么是导航器？</h2>
+
+<p>导航器也可以看成一个是普通的React组件，你可以通过导航器来定义你的App的导航结构。 导航器还可以渲染通用元素，例如可以配置的标题栏和选项卡栏。</p>
+
+<p>在React Navigation中有以下7种类型的导航器：</p>
+
+<ul>
+  <li>createStackNavigator: 类似于普通的Navigator，屏幕上方导航栏；</li>
+  <li>createTabNavigator: createTabNavigator已弃用，使用createBottomTabNavigator和/或createMaterialTopTabNavigator替代；</li>
+  <li>createBottomTabNavigator：相当于iOS里面的TabBarController，屏幕下方的标签栏；</li>
+  <li>createMaterialTopTabNavigator：屏幕顶部的材料设计主题标签栏；</li>
+  <li>createDrawerNavigator: 抽屉效果，侧边滑出；</li>
+  <li>createSwitchNavigator：SwitchNavigator 的用途是一次只显示一个页面。</li>
+</ul>
+
+<blockquote>
+  <p>你可以通过以上7种导航器来创建你APP，可以是其中一个也可以多个组合，这个可以根据具体的应用场景并结合每一个导航器的特性进行选择。</p>
+</blockquote>
+
+<p>在开始学习7种导航器之前，我们需要先了解两个和导航关于概念：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Screen navigation prop(屏幕导航属性)</code>：通过navigation可以完成屏幕之间的调度操作，例如打开另一个屏幕；</li>
+  <li><code class="language-plaintext highlighter-rouge">Screen navigationOptions(屏幕导航选项)</code>： 通过navigationOptions可以定制导航器显示屏幕的方式（例如：头部标题，选项卡标签等）；</li>
+</ul>
+
+<h3 id="导航器所支持的props">导航器所支持的Props</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const SomeNav = createStackNavigator/createBottomTabNavigator/createMaterialTopTabNavigator/createDrawerNavigator/createSwitchNavigator({
+  // config
+});
+
+&lt;SomeNav
+  screenProps={xxx}
+  ref={nav =&gt; { navigation = nav; }}
+  onNavigationStateChange=(prevState, newState, action)=&gt;{
+
+  }
+/&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>ref：可以通过<code class="language-plaintext highlighter-rouge">ref</code>属性获取到<code class="language-plaintext highlighter-rouge">navigation</code>；</p>
+  </li>
+  <li>
+    <p>onNavigationStateChange(prevState, newState, action)：顶级节点除了</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ref
+</code></pre></div>    </div>
+
+    <p>属性之外，还接受</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  onNavigationStateChange(prevState, newState, action)
+</code></pre></div>    </div>
+
+    <p>属性，每次当导航器所管理的</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  state
+</code></pre></div>    </div>
+
+    <p>发生改变时，都会回调该方法；</p>
+
+    <ul>
+      <li>prevState：变化之前的state；</li>
+      <li>newState：新的state；</li>
+      <li>导致state变化的action；</li>
+    </ul>
+  </li>
+  <li>
+    <p>screenProps：向子屏幕传递额外的数据，子屏幕可以通过this.props.screenProps获取到该数据。</p>
+  </li>
+</ul>
+
+<h3 id="screen-navigation-prop屏幕的navigation-prop">Screen Navigation Prop(屏幕的navigation Prop)</h3>
+
+<p>当导航器中的屏幕被打开时，它会收到一个<code class="language-plaintext highlighter-rouge">navigation</code> prop，<code class="language-plaintext highlighter-rouge">navigation</code> prop是整个导航环节的关键一员，接下来就详细讲解一下<code class="language-plaintext highlighter-rouge">navigation</code>的作用。</p>
+
+<h4 id="navigation包含一下功能">navigation包含一下功能：</h4>
+
+<ul>
+  <li>navigate：跳转到其他界面；</li>
+  <li>state：屏幕的当前state；</li>
+  <li>setParams：改变路由的params；</li>
+  <li>goBack：关闭当前屏幕；</li>
+  <li>dispatch：向路由发送一个action；</li>
+  <li>addListener：订阅导航生命周期的更新；</li>
+  <li>isFocused：true 标识屏幕获取了焦点；</li>
+  <li>getParam：获取具有回退的特定参数；</li>
+  <li>dangerouslyGetParent：返回父导航器；</li>
+</ul>
+
+<blockquote>
+  <p>注意：一个navigation有可能没有navigate、setParams以及goBack，只有state与dispatch，所以在使用navigate时要进行判断，如果没有navigate可以使用navigation去dispatch一个新的action。如：</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const {navigation,theme,selectedTab}=this.props;
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [
+        NavigationActions.navigate({
+            routeName: 'HomePage',
+            params:{
+                theme:theme,
+                selectedTab:selectedTab
+            },
+        })
+    ]
+})
+navigation.dispatch(resetAction)
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote>
+  <p>提示：这里的<code class="language-plaintext highlighter-rouge">reset</code>在2.0及以后版本中被从NavigationActions中移到了<code class="language-plaintext highlighter-rouge">StackActions</code>中，使用时记得留意。</p>
+</blockquote>
+
+<p><strong>StackNavigator的navigation的额外功能:</strong></p>
+
+<p>当且仅当当前 navigator 是 stack navigator 时，<code class="language-plaintext highlighter-rouge">this.props.navigation</code>上有一些附加功能。 这些函数是 navigate 和 goBack 的替代方法， 你可以使用任何你喜欢的方法。 这些功能是：</p>
+
+<ul>
+  <li>this.props.navigation
+    <ul>
+      <li>push - 导航到堆栈中的一个新的路由</li>
+      <li>pop - 返回堆栈中的上一个页面</li>
+      <li>popToTop - 跳转到堆栈中最顶层的页面</li>
+      <li>replace - 用新路由替换当前路由</li>
+      <li>reset - 擦除导航器状态并将其替换为多个操作的结果</li>
+      <li>dismiss - 关闭当前栈</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="使用navigate进行界面之间的跳转">使用navigate进行界面之间的跳转</h4>
+
+<ul>
+  <li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  navigation.navigate({routeName, params, action, key})
+</code></pre></div>    </div>
+
+    <p>或</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  navigation.navigate(routeName, params, action)
+</code></pre></div>    </div>
+
+    <ul>
+      <li>routeName：要跳转到的界面的路由名，也就是在导航其中配置的路由名；</li>
+      <li>params：要传递给下一个界面的参数；</li>
+      <li>action：如果该界面是一个navigator的话，将运行这个sub-action；</li>
+      <li>key：要导航到的路由的可选标识符。 如果已存在，将后退到此路由；</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export const AppStackNavigator = createStackNavigator({
+    HomeScreen: {
+        screen: HomeScreen
+    },
+    Page1: {
+        screen: Page1
+    })
+
+class HomeScreen extends React.Component {
+  render() {
+    const {navigate} = this.props.navigation;
+
+    return (
+      &lt;View&gt;
+        &lt;Text&gt;This is HomeScreen&lt;/Text&gt;
+        &lt;Button
+          onPress={() =&gt; navigate('Page1', {name: 'Devio'})}
+          title="Go to Page1"
+        /&gt;
+      &lt;/View&gt;
+     )
+   }
+}
+</code></pre></div></div>
+
+<h4 id="使用state的params">使用state的params</h4>
+
+<p>可以通过this.props.state.params来获取通过<code class="language-plaintext highlighter-rouge">setParams()</code>，或<code class="language-plaintext highlighter-rouge">navigation.navigate()</code>传递的参数。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Button
+    title={params.mode === 'edit' ? '保存' : '编辑'}
+    onPress={() =&gt;
+        setParams({mode: params.mode === 'edit' ? '' : 'edit'})}
+/&gt;
+&lt;Button
+    title="Go To Page1"
+    onPress={() =&gt; {
+        navigation.navigate('Page1',{ name: 'Devio' });
+    }}
+/&gt;
+const {navigation} = this.props;
+const {state, setParams} = navigation;
+const {params} = state;
+const showText = params.mode === 'edit' ? '正在编辑' : '编辑完成';
+</code></pre></div></div>
+
+<h4 id="使用setparams-改变route-params">使用setParams 改变route params</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">setParams: function setParams(params)</code>： 我们可以借助<code class="language-plaintext highlighter-rouge">setParams</code>来改变route params，比如，通过<code class="language-plaintext highlighter-rouge">setParams</code>来更新页面顶部的标题，返回按钮等；</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ProfileScreen extends React.Component {
+  render() {
+    const {setParams} = this.props.navigation;
+    return (
+      &lt;Button
+        onPress={() =&gt; setParams({name: 'Lucy'})}
+        title="Set title name to 'Lucy'"
+      /&gt;
+     )
+   }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>注意navigation.setParams改变的是当前页面的Params，如果要改变其他页面的Params可以通过NavigationActions.setParams完成</p>
+</blockquote>
+
+<h4 id="使用goback返回到上一页面或指定页面">使用goBack返回到上一页面或指定页面</h4>
+
+<ul>
+  <li>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  goBack: function goBack(key)
+</code></pre></div>    </div>
+
+    <p>：我们可以借助</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  goBack
+</code></pre></div>    </div>
+
+    <p>返回到上一页或者路由栈的指定页面。</p>
+
+    <ul>
+      <li>其中<code class="language-plaintext highlighter-rouge">key</code>表示你要返回到页面的页面标识如<code class="language-plaintext highlighter-rouge">id-1517035332238-4</code>，不是routeName。</li>
+      <li>可以通过指定页面的<code class="language-plaintext highlighter-rouge">navigation.state.key</code>来获得页面的标识。</li>
+      <li>key非必传，也可传null。</li>
+    </ul>
+
+    <p><code class="language-plaintext highlighter-rouge">navigation.state {params: {…}, key: "id-1517035332238-4", routeName: "Page1"}</code></p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default class Page1 extends React.Component {
+    render() {
+        const {navigation} = this.props;
+        return &lt;View style=&gt;
+            &lt;Text style={styles.text}&gt;欢迎来到Page1&lt;/Text&gt;
+            &lt;Button
+                title="Go Back"
+                onPress={() =&gt; {
+                    navigation.goBack();
+                }}
+            /&gt;
+        &lt;/View&gt;
+    }
+}
+</code></pre></div></div>
+
+<h4 id="通过dispatch发送一个action">通过dispatch发送一个action</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dispatch: function dispatch(action)</code>：给当前界面设置action，会替换原来的跳转，回退等事件。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const resetAction = StackActions.reset({
+	index: 0,
+	actions: [
+	    NavigationActions.navigate({
+	        routeName: 'HomePage',
+	        params:{
+	            theme:theme,
+	            selectedTab:selectedTab
+	        },
+	    })
+	]
+	})
+navigation.dispatch(resetAction)
+</code></pre></div></div>
+
+<h3 id="navigationactions">NavigationActions</h3>
+
+<ul>
+  <li>Navigate : 导航到其他的页面；</li>
+  <li>Back : 返回到上一个页面；</li>
+  <li>Set Params : 设置指定页面的Params；</li>
+  <li>Init : 初始化一个 state 如果 state 是 undefined；</li>
+</ul>
+
+<h4 id="navigate">Navigate</h4>
+
+<p>Navigatie action会使用Navigate action的结果来更新当前的state。</p>
+
+<blockquote>
+  <p>方法原型：<code class="language-plaintext highlighter-rouge">navigate({routeName, params, action, key})</code></p>
+</blockquote>
+
+<ul>
+  <li>routeName：字符串，必选项，在app的router里注册的导航目的地的routeName。</li>
+  <li>params：对象，可选项，融合进目的地route的参数。</li>
+  <li>actions：对象，可选项(高级)，如果screen也是一个navigator，次级action可以在子router中运行。在文档中描述的任何actions都可以作为次级action。</li>
+  <li>key： <code class="language-plaintext highlighter-rouge">string or null</code> 可选，要导航到的路由的标识符。如果已存在, 则导航回此路由。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions } from 'react-navigation'
+
+const navigateAction = NavigationActions.navigate({
+  routeName: 'Profile',
+  params: {},
+  action: NavigationActions.navigate({ routeName: 'SubProfileRoute'})
+})
+this.props.navigation.dispatch(navigateAction)
+</code></pre></div></div>
+
+<h4 id="back">Back</h4>
+
+<p>返回到前一个screen并且关闭当前screen.backaction creator接受一个可选的参数:</p>
+
+<blockquote>
+  <p>方法原型：<code class="language-plaintext highlighter-rouge">back(key)</code></p>
+</blockquote>
+
+<ul>
+  <li>key：<code class="language-plaintext highlighter-rouge">String</code> 可选，这个可以和上文中讲到的goBack的key是一个概念；</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions } from 'react-navigation'
+const backAction = NavigationActions.back();
+this.props.navigation.dispatch(backAction);
+</code></pre></div></div>
+
+<h4 id="setparams">SetParams</h4>
+
+<p>通过SetParams我们可以修改指定页面的Params。</p>
+
+<ul>
+  <li>params：对象，必选参数，将会被合并到已经存在页面的Params中。</li>
+  <li>key：字符串，必选参数，页面的key。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions } from 'react-navigation'
+const setParamsAction = NavigationActions.setParams({
+    params: { title: 'HomePage' },
+    key: 'id-1517035332238-4',
+});
+</code></pre></div></div>
+
+<blockquote>
+  <p>有很多小伙伴可能会问：navigation中有setParams为什么还要有NavigationActions.setParams?</p>
+</blockquote>
+
+<p>我从两方面来回答一下这个问题：</p>
+
+<ol>
+  <li>在上文中讲到过navigation中有可能只有state与dispatch，这个时候如果要修改页面的Params，则只能通过<code class="language-plaintext highlighter-rouge">NavigationActions.setParams</code>了；</li>
+  <li>另外，navigation.setParams只能修改当前页面的Params，而<code class="language-plaintext highlighter-rouge">NavigationActions.setParams</code>可以修改所有页面的Params；</li>
+</ol>
+
+<h3 id="stackactions">StackActions</h3>
+
+<ul>
+  <li>Reset ： 重置当前 state 到一个新的state；</li>
+  <li>Replace ： 使用另一个路由替换指定的路由；</li>
+  <li>Push ： 在堆栈顶部添加一个页面，然后跳转到该页面；</li>
+  <li>Pop ： 跳转到上一个页面；</li>
+  <li>PopToTop ： 跳转到堆栈最顶层的页面，并销毁其他所有页面；</li>
+</ul>
+
+<h4 id="reset">Reset：</h4>
+
+<p>Reset action删掉所有的navigation state并且使用这个actions的结果来代替。</p>
+
+<ul>
+  <li>index，数组，必选，navigation state中route数组中激活route的index。</li>
+  <li>actions，数组，必选项，Navigation Actions数组，将会替代navigation state。</li>
+  <li>key：<code class="language-plaintext highlighter-rouge">string or null</code> 可选， 如果设置，具有给定 key 的导航器将重置。 如果为null，则根导航器将重置。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions, StackActions } from 'react-navigation'
+
+const resetAction = StackActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Profile'})
+  ]
+})
+this.props.navigation.dispatch(resetAction)
+</code></pre></div></div>
+
+<blockquote>
+  <p>使用场景比如进入APP首页后的splash页不在使用，这时可以使用<code class="language-plaintext highlighter-rouge">NavigationActions.reset</code>重置它。</p>
+</blockquote>
+
+<p>index参数被用来定制化当前激活的route。举个例子：使用两个routes WelcomePage和HomePage给一个基础的stack navigation设置。为了重置route到HomePage，但是在堆栈中又存放在WelcomePage之上，你可以这么做:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions, StackActions } from 'react-navigation'
+
+const resetAction = StackActions.reset({
+    index: 1,
+    actions: [
+        NavigationActions.navigate({ routeName: 'WelcomePage'}),
+        NavigationActions.navigate({ routeName: 'HomePage'})
+    ]
+});
+this.props.navigation.dispatch(resetAction);
+</code></pre></div></div>
+
+<h4 id="replace">replace</h4>
+
+<p>Replace - 用另一个路由替换指定的路由</p>
+
+<ul>
+  <li>key - string - 被替换的路由的 key，如果未指定，最近的路由将会被替换</li>
+  <li>newKey - string - 用于替换路线的 Key。 如果未提供，则自动生成。</li>
+  <li>routeName - string - routeName用于替换路由。</li>
+  <li>params - object - 要传入替换路由的参数。</li>
+  <li>action - object - 可选的子动作。</li>
+  <li>immediate* - boolean - 目前没有效果, 这是 stack navigator 支持动画替换（它目前不支持）的占位符。</li>
+</ul>
+
+<h4 id="push">push</h4>
+
+<p>Push - 在堆栈顶部添加一条路由，并导航至该路由. 与navigate的区别在于，如果有已经加载的页面，navigate方法将跳转到已经加载的页面，而不会重新创建一个新的页面。 push 总是会创建一个新的页面，所以一个页面可以被多次创建</p>
+
+<ul>
+  <li>routeName - string - routeName用于替换路由。</li>
+  <li>params - object - 将合并到目标路由的参数（通过this.props.navigation.state.params在目标路由获取）。</li>
+  <li>action - Object - 可选 - （高级）如果页面是 navigator，则是在子路由器中运行的子操作。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { StackActions } from 'react-navigation';
+
+const pushAction = StackActions.push({
+  routeName: 'Profile',
+  params: {
+    myUserId: 9,
+  },
+});
+
+this.props.navigation.dispatch(pushAction);
+</code></pre></div></div>
+
+<h4 id="pop">pop</h4>
+
+<p>The pop 一个可以返回到堆栈中上一个路由到方法，通过设置参数 n，可以指定返回的多少层。</p>
+
+<ul>
+  <li>n - number - 返回的层数</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { StackActions } from 'react-navigation';
+
+const popAction = StackActions.pop({
+  n: 1,
+});
+
+this.props.navigation.dispatch(popAction);
+</code></pre></div></div>
+
+<h4 id="poptotop">popToTop</h4>
+
+<p>popToTop 一个可以直接跳转到堆栈最顶层，并销毁其它所有页面的方法，它在功能上与<code class="language-plaintext highlighter-rouge">StackActions.pop({n：currentIndex})</code>相同。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { StackActions } from 'react-navigation';
+
+this.props.navigation.dispatch(StackActions.popToTop());
+</code></pre></div></div>
+
+<h2 id="如何支持schema跳转">如何支持Schema跳转？</h2>
+
+<p><a href="https://reactnavigation.org/docs/guides/linking">Deep Linking</a></p>
+
+<h2 id="还有那些应用场景">还有那些应用场景？</h2>
+
+<h3 id="在导航器屏幕之外使用导航功能巧用导航器的ref">在导航器屏幕之外使用导航功能(巧用导航器的ref)</h3>
+
+<p>有一种场景：有的时候我们需要在导航器中所定义的屏幕之外使用导航器来做页面跳转。</p>
+
+<ul>
+  <li>屏幕之间的跳转是需要借助<code class="language-plaintext highlighter-rouge">navigation</code>来完成的；</li>
+  <li>我们知道导航器中定义的屏幕可以通过<code class="language-plaintext highlighter-rouge">const {navigation} = this.props;</code>来获取<code class="language-plaintext highlighter-rouge">navigation</code>；</li>
+  <li>那么，如果我们在非导航器中所定义的屏幕中做屏幕跳转的关键一步，就是要想法获取<code class="language-plaintext highlighter-rouge">navigation</code>；</li>
+  <li>那么，如何才能在非导航器中所定义的屏幕中获取到这个<code class="language-plaintext highlighter-rouge">navigation</code>呢？</li>
+</ul>
+
+<p>下面就给大家讲解通过<code class="language-plaintext highlighter-rouge">ref</code>属性还获得<code class="language-plaintext highlighter-rouge">navigation</code>：</p>
+
+<h4 id="示例看代码">示例看代码：</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { NavigationActions } from 'react-navigation';
+
+const AppNavigator = StackNavigator(SomeAppRouteConfigs);
+
+class App extends React.Component {
+  someEvent() {
+    // call navigate for AppNavigator here:
+    this. navigation &amp;&amp; this. navigation.dispatch(
+      NavigationActions.navigate({ routeName: someRouteName })
+    );
+  }
+  render() {
+    return (
+      &lt;AppNavigator ref={nav =&gt; { navigation = nav; }} /&gt;
+    );
+  }
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>上述代码通过<strong>导航器的顶级节点</strong>的<code class="language-plaintext highlighter-rouge">ref</code>属性获取到<code class="language-plaintext highlighter-rouge">navigation</code>，当上述代码的<code class="language-plaintext highlighter-rouge">AppNavigator</code>节点被渲染时，ref会被回调这是就可以获取到<code class="language-plaintext highlighter-rouge">navigation</code>了，需要提醒大家的是，这种用法对除<code class="language-plaintext highlighter-rouge">StackNavigator</code>之外的其他两种类型的导航器也是实用的哦；</p>
+</blockquote>
 
             
             
@@ -276,7 +795,7 @@
                             <a class="post__next" href="/reactnative/2020/01/06/RN.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">6</h2>
+                                    <h2 class="post__nav__title">06_createStackNavigator</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

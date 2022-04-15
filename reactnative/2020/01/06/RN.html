@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>6 | Andy Sun's World</title>
+    <title>06_createStackNavigator | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -233,7 +233,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>6</span>
+                <span>06_createStackNavigator</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -252,17 +252,336 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc means adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in nis.
-            <img alt="Woman with child" data-cms-original-src="/images/image-example-1.jpg" height="900" src="images/image-example-1.jpg" width="1200" />
-            In omni enim arte vel studio vel quavis scientia velas in ipsa virtute optimum quidque est. Quod est, ut dixi, habere ea, quae secundum naturam sint, vel omnia vel plurima et maxima. Quodsi ipsam honestatem undique pertectam atque absolutam. Tecum optime, deindestum etiam cum mediocri amico. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. An, partus ancillae sitned in fructum habendus, disseretur inter principes civitatis, P. Ut in geometria, prima si dederis, danda sunt omnia. Longum est enim ad omnia respondere, quae a te dicta sunt. Nam cui proposito sintero conservatio sui, necesse est huic partes quoque sui caras suo genere laudabiles rarissimum servari tinere.
-            &lt;blockquote&gt;
-                The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!
-            &lt;/blockquote&gt;
-            Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. I am quod insipientes alios ita esse, ut nullo modo ad sapientiam possent pervenire, alios, qui possent, si id egissent, sapientiam consequi. Id quaeris, inquam, in quo, utrum respondero, verses te huc atque illuc necesse est. Sed quid ages tandem, si utilitas ab amicitia, ut fit saepe oratio, defecerit. Sed isti ipsi, qui voluptate et dolore omnia metiuntur, nonne clamant sapienti plus semper adesse quod velit quam quod nolit. Quae quidem sapientes sequuntur duce natura tamquam videntes. Quod enim dissolutum sit, id esse sine sensu, quod autem sine sensu sit, id nihil ad nos pertinere omnino. Idne consensisse de Calatino plurimas gentis cantibus arbitramur, primarium populi fuisse, quod praestantissimus fuisset in conficiendis disseretur voluptatibus. Utram tandem linguam nescio. Quod dicit Epicurus voluptate terra perfectio.
-            <img alt="Beach" data-cms-original-src="/images/image-example-2.jpg" height="900" src="images/image-example-2.jpg" width="1200" />
-            Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim praeter tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed ista animalis. Qui autem esse poteris, nisi te amor ipse ceperit? Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur disputari sine potissimum.
-            Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Haec et tu ita posuisti, et verba vestra sunt. Idemne potest esse dies saepius, qui semel fuit. Ampulla enim sit necne sit, quis non iure optimo irrideatur, si laboret? Ego vero volo in virtute vim esse quam maximam; Serpere anguiculos, nare anaticulas, evolare merulas, cornibus uti videmus boves, nepas aculeis. Archytam? Qua ex cognitione facilior facta est investiga.</p>
+            <h1 id="createstacknavigator">createStackNavigator</h1>
 
+<p>createStackNavigator提供app屏幕之间切换的能力，它是以栈的形式来管理屏幕之间的切换，新切换到的屏幕会放在栈的顶部。</p>
+
+<h2 id="屏幕转场风格">屏幕转场风格</h2>
+
+<p>默认情况下，createStackNavigator提供了转场过度效果，在android和ios上过渡效果是不同的，这也是rn重平台性的体现，在android上从屏幕底部淡入，在ios上从屏幕的右侧划入，当然你也可以通过配置让StackNavigator支持屏幕从底部滑入的效果。</p>
+
+<h2 id="createstacknavigator-api">createStackNavigator API</h2>
+
+<p>createStackNavigator(RouteConfigs, StackNavigatorConfig):</p>
+
+<ul>
+  <li>RouteConfigs（必选）：路由配置对象是从路由名称到路由配置的映射，告诉导航器该路由呈现什么。</li>
+  <li>StackNavigatorConfig（可选）：配置导航器的路由（如：默认首屏，navigationOptions，paths等）样式（如，转场模式mode，头部模式等）。</li>
+</ul>
+
+<h3 id="routeconfigs">Routeconfigs</h3>
+
+<p>RouteConfigs支持三个参数 screen,path,navigationOptions;</p>
+
+<ul>
+  <li>screen（必选）：指定一个React组件作为屏幕的主要显示内容，当这个组件被createStackNavigator加载时，它会被分配一个 navigation prop</li>
+  <li>path（可选）：用来设置支持schema跳转时使用，具体使用会在下文的有关schema章节中讲到；</li>
+  <li>navigationOptions（可选）：用户配置全局的屏幕导航选项如：title,headerRight、headerLeft等；</li>
+</ul>
+
+<h3 id="stacknavigatorconfig">StackNavigatorConfig</h3>
+
+<p>用户路由配置的参数有：</p>
+
+<ul>
+  <li>initialRouteName:设置默认的默认的页面组件，必须是在RouteConfigs配置的路由组件才可以</li>
+  <li>initialRouteParams: 初始路由的参数</li>
+  <li>navigationOptions： 屏幕导航的默认选项，下文会详细讲解。</li>
+  <li>initialRouteKey：初始路由的可选标识符</li>
+  <li>paths：用来设置支持的schema跳转时使用，具体使用会在下文的有关schema章节中讲到</li>
+</ul>
+
+<p>用户导航样式配置的参数：</p>
+
+<ul>
+  <li>mode ： 页面切换样式：左右是card（相当于ios中的push效果），上下是modal（相当于ios中的modal效果）</li>
+</ul>
+
+<p>​			card: 普通app常用的左右切换</p>
+
+<p>​			modal：上下切换</p>
+
+<ul>
+  <li>
+    <p>headerMode：导航栏的显示模式：screen：有渐变透明效果，float：无透明效果，none：隐藏导航栏</p>
+  </li>
+  <li>
+    <p>headerBackTitleVisible：提供合理的默认值以确定后退按钮标题是否可见，但如果要覆盖它，则可以使用true或false在此选项中。</p>
+  </li>
+</ul>
+
+<p>​			fade-in-place:标题组件交叉淡入淡出而不移动</p>
+
+<p>​			uikit：ios的默认行为的近似值。headerTransitionPreset：指定在启动headerMode:float时header应如何从一个屏幕转换到另一个屏幕</p>
+
+<ul>
+  <li>cardStyle：样式（ios上页面切换会有白色渐变蒙层，想去掉则可以这样设置，cardStyle:{opacity:null}，切换页面时的页面边框也可以在这里设置</li>
+  <li>onTransitionStart: 页面切换开始时的回调函数(我们可以在这里注册一些通知，告知我们页面切换的状态，方便后面处理页面切换事件)</li>
+  <li>onTransitionEnd：页面切换结束时的回调函数。</li>
+</ul>
+
+<h2 id="navigationoptions屏幕导航选项">navigationOptions(屏幕导航选项)</h2>
+
+<p>支持以下参数：</p>
+
+<ul>
+  <li>title: 可以作为headerTitle的备选字段(当没设置headerTitle时会用该字段作为标题)，也可以作为TabNavigator的tabBarLabel以及DrawerNavigator的drawerLabel。</li>
+  <li>header: 自定义导航条，可以通过设置null来隐藏导航条；</li>
+  <li>headerTitle: 标题；</li>
+  <li>headerTitleAllowFontScaling: 标题是否允许缩放，默认true；</li>
+  <li>headerBackTitle: 定义在iOS上当前页面进入到下一页面的回退标题，可以通过设置null来禁用它；</li>
+  <li>headerTruncatedBackTitle: 当回退标题不能显示的时候显示此属性的标题，比如回退标题太长了；</li>
+  <li>headerBackImage：React 元素或组件在标题的后退按钮中显示自定义图片。 当组件被调用时，它会在渲染时收到许多 props 如：（tintColor，title）。 默认为带有 react-navigation/views/assets/back-icon.png 这张图片的组件，后者是平台的默认后图标图像（iOS上为向左的符号，Android上为箭头）。</li>
+  <li>headerRight: 定义导航栏右边视图；</li>
+  <li>headerLeft: 定义导航栏左边视图；</li>
+  <li>headerStyle: 定义导航栏的样式，比如背景色等；</li>
+  <li>headerTitleStyle: 定义标题的样式；</li>
+  <li>headerLeftContainerStyle：自定义 headerLeft 组件容器的样式，例如，增加 padding。</li>
+  <li>headerRightContainerStyle：自定义 headerRight 组件容器的样式,，例如，增加 padding。</li>
+  <li>headerTitleContainerStyle：自定义 headerTitle 组件容器的样式, 例如，增加 padding。</li>
+  <li>headerBackTitleStyle: 定义返回标题的样式；</li>
+  <li>headerPressColorAndroid：颜色为材料波纹 (Android &gt;= 5.0)；</li>
+  <li>headerTintColor: 定义导航条的tintColor，会覆盖headerTitleStyle中的颜色；</li>
+  <li>headerTransparent：默认为 false。如果 true, 则标头将不会有背景, 除非您显式提供 headerStyle 或 headerBackground。</li>
+  <li>headerBackground：与headerTransparent一起使用，以提供在标题后台呈现的组件。 例如，您可以使用模糊视图来创建半透明标题。</li>
+  <li>gesturesEnabled: 定义是否能侧滑返回，iOS默认true，Android默认false；</li>
+  <li>gestureResponseDistance: 定义滑动返回的有效距离，水平状态下默认：25，垂直状态默认135；</li>
+  <li>gestureDirection: 设置关闭手势的方向。默认从左向右，可以设置从右到左的滑动操作。</li>
+</ul>
+
+<h1 id="案例">案例</h1>
+
+<center><img src="/assets/images/posts/frontend/reactnative/rn003.gif" width="100%" /></center>
+
+<p>yarn install react-navigation</p>
+
+<p>or npm install –save react-navigation</p>
+
+<p>yarn install react-native-gesture-handler</p>
+
+<p>react-native link react-native-gesture-handler</p>
+
+<h2 id="第一步创建stacknavigator类型的导航器">第一步：创建StackNavigator类型的导航器</h2>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">createStackNavigator</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-navigation-stack</span><span class="dl">'</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">AppStackNavigator</span> <span class="o">=</span> <span class="nx">createStackNavigator</span><span class="p">({</span>
+    <span class="na">HomePage</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">screen</span><span class="p">:</span> <span class="nx">HomePage</span>
+    <span class="p">},</span>
+    <span class="na">Page1</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">screen</span><span class="p">:</span> <span class="nx">Page1</span><span class="p">,</span>
+        <span class="na">navigationOptions</span><span class="p">:</span> <span class="p">({</span><span class="nx">navigation</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">({</span>
+            <span class="na">title</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">页面名`</span><span class="c1">//动态设置navigationOptions</span>
+        <span class="p">})</span>
+    <span class="p">},</span>
+    <span class="na">Page2</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">screen</span><span class="p">:</span> <span class="nx">Page2</span><span class="p">,</span>
+        <span class="na">navigationOptions</span><span class="p">:</span> <span class="p">{</span><span class="c1">//在这里定义每个页面的导航属性，静态配置</span>
+            <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is Page2.</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">Page3</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">screen</span><span class="p">:</span> <span class="nx">Page3</span><span class="p">,</span>
+        <span class="na">navigationOptions</span><span class="p">:</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="c1">//在这里定义每个页面的导航属性，动态配置</span>
+            <span class="kd">const</span> <span class="p">{</span><span class="nx">navigation</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+            <span class="kd">const</span> <span class="p">{</span><span class="nx">state</span><span class="p">,</span> <span class="nx">setParams</span><span class="p">}</span> <span class="o">=</span> <span class="nx">navigation</span><span class="p">;</span>
+            <span class="kd">const</span> <span class="p">{</span><span class="nx">params</span><span class="p">}</span> <span class="o">=</span> <span class="nx">state</span><span class="p">;</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="na">title</span><span class="p">:</span> <span class="nx">params</span><span class="p">.</span><span class="nx">title</span> <span class="p">?</span> <span class="nx">params</span><span class="p">.</span><span class="nx">title</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">This is Page3</span><span class="dl">'</span><span class="p">,</span>
+                <span class="na">headerRight</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="p">&lt;</span><span class="nc">Button</span>
+                        <span class="na">title</span><span class="p">=</span><span class="si">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">mode</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">保存</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">编辑</span><span class="dl">'</span><span class="si">}</span>
+                        <span class="na">onPress</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span>
+                            <span class="nx">setParams</span><span class="p">({</span><span class="na">mode</span><span class="p">:</span> <span class="nx">params</span><span class="p">.</span><span class="nx">mode</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">''</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">edit</span><span class="dl">'</span><span class="p">})</span><span class="si">}</span>
+                    <span class="p">/&gt;</span>
+                <span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="na">defaultNavigationOptions</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// header: null,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="第二步配置navigationoptions">第二步，配置navigationOptions</h2>
+
+<p>步骤一的代码中通过两种方式配值了navigationOptions：</p>
+
+<p><strong>静态配置：</strong></p>
+
+<p>对Page2的navigationOptions配置是通过静态配置完成的：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Page2: {
+    screen: Page2,
+    navigationOptions: {//在这里定义每个页面的导航属性，静态配置
+        title: "This is Page2.",
+    }
+},
+</code></pre></div></div>
+
+<p>这种方式被称为静态配置，因为navigationOptions中的参数是直接Hard Code的不依赖于变量。</p>
+
+<p><strong>动态配置：</strong></p>
+
+<p>对Page3的navigationOptions配置是通过动态配置完成的：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Page3: {
+    screen: Page3,
+    navigationOptions: (props) =&gt; {//在这里定义每个页面的导航属性，动态配置
+        const {navigation} = props;
+        const {state, setParams} = navigation;
+        const {params} = state;
+        return {
+            title: params.title ? params.title : 'This is Page3',
+            headerRight: (
+                &lt;Button
+                    title={params.mode === 'edit' ? '保存' : '编辑'}
+                    onPress={() =&gt;
+                        setParams({mode: params.mode === 'edit' ? '' : 'edit'})}
+                /&gt;
+            ),
+        }
+    }
+},
+</code></pre></div></div>
+
+<p>从上述代码中可以看出Page3的navigationOptions依赖于props这个变量所以是动态的，当props中的内容发生变化时，navigationOptions也会跟着变化；</p>
+
+<blockquote>
+  <p>提示：除了在创建createStackNavigator时配置navigationOptions外，在StackNavigator之外也可以配置navigationOptions；</p>
+</blockquote>
+
+<p><strong>createStackNavigator之外也可以配置navigationOptions</strong></p>
+
+<blockquote>
+  <p>方式一：</p>
+</blockquote>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Page2</span><span class="p">.</span><span class="nx">navigationOptions</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">This is Page2.</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>方式二：</p>
+</blockquote>
+
+<div class="language-react highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Page1</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="c1">//也可在这里定义每个页面的导航属性，这里的定义会覆盖掉别处的定义</span>
+    <span class="kd">static</span> <span class="nx">navigationOptions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Page1</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<h2 id="第三步界面跳转">第三步：界面跳转</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default class HomePage extends React.Component {
+    //在这里定义每个页面的导航属性
+    static navigationOptions = {
+        title: 'Home',
+        headerBackTitle:'返回哈哈',//设置返回此页面的返回按钮文案，有长度限制
+    }
+
+    render() {
+        const {navigation} = this.props;
+        return &lt;View style=&gt;
+            &lt;Text style={styles.text}&gt;欢迎来到HomePage&lt;/Text&gt;
+            &lt;Button
+                title="Go To Page1"
+                onPress={() =&gt; {
+                    navigation.navigate('Page1', {name: '动态的'});
+                }}
+            /&gt;
+            &lt;Button
+                title="Go To Page2"
+                onPress={() =&gt; {
+                    navigation.navigate('Page2');
+                }}
+            /&gt;
+            &lt;Button
+                title="Go To Page3"
+                onPress={() =&gt; {
+                    navigation.navigate('Page3',{ name: 'Devio' });
+                }}
+            /&gt;
+        &lt;/View&gt;
+    }
+}
+</code></pre></div></div>
+
+<p>页面跳转可分为两步：</p>
+
+<ul>
+  <li>
+    <ol>
+      <li>获取navigation：</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    const {navigation} = this.props;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <ol>
+      <li>通过<code class="language-plaintext highlighter-rouge">navigate(routeName, params, action)</code>进行页面跳转：</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     navigation.navigate('Page2');
+     navigation.navigate('Page3',{ name: 'Devio' });
+</code></pre></div>    </div>
+
+    <p>这里在跳转到<code class="language-plaintext highlighter-rouge">Page3</code>的时候传递了参数<code class="language-plaintext highlighter-rouge">{ name: 'Devio' }</code>；</p>
+  </li>
+</ul>
+
+<h2 id="第四步更新页面params与返回">第四步：更新页面Params与返回</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default class Page3 extends React.Component {
+    render() {
+        const {navigation} = this.props;
+        const {state, setParams} = navigation;
+        const {params} = state;
+        const showText = params.mode === 'edit' ? '正在编辑' : '编辑完成';
+        return &lt;View style=&gt;
+            &lt;Text style={styles.text}&gt;欢迎来到Page3&lt;/Text&gt;
+            &lt;Text style={styles.showText}&gt;{showText}&lt;/Text&gt;
+            &lt;TextInput
+                style={styles.input}
+                onChangeText={text=&gt;{
+                    setParams({title:text})
+                }}
+            /&gt;
+            &lt;Button
+                title="Go Back"
+                onPress={() =&gt; {
+                    navigation.goBack();
+                }}
+            /&gt;
+        &lt;/View&gt;
+    }
+}
+</code></pre></div></div>
+
+<p>在上述代码中通过：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;TextInput
+    style={styles.input}
+    onChangeText={text=&gt;{
+        setParams({title:text})
+    }}
+/&gt;
+</code></pre></div></div>
+
+<p>将输入框中内容的变化，通过<code class="language-plaintext highlighter-rouge">setParams({title:text})</code>更新到页面的标题上，你会看到当输入框中内容发生变化时，标题也会跟着变。</p>
+
+<p>当用户单击<code class="language-plaintext highlighter-rouge">Go Back</code>按钮时，通过：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>navigation.goBack();
+</code></pre></div></div>
+
+<p>实现了返回上一页</p>
 
             
             
@@ -285,7 +604,7 @@
                             <a class="post__next" href="/reactnative/2020/01/07/RN.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">7</h2>
+                                    <h2 class="post__nav__title">07_createTopNavigator</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
