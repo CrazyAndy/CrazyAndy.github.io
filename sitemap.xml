@@ -6,7 +6,74 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 15 Apr 2022 16:28:25 +0800</lastBuildDate>
+        <lastBuildDate>Thu, 15 Sep 2022 00:45:31 +0800</lastBuildDate>
+        
+        <item>
+            <title>netty nio</title>
+            <link>
+                http://localhost:4000/netty/2022/09/04/netty.html
+            </link>
+            <description>
+                &lt;p&gt;First Netty&lt;/p&gt;
+
+            </description>
+            <pubDate>Sun, 04 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/2022/09/04/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>netty nio</title>
+            <link>
+                http://localhost:4000/netty/2022/09/03/netty.html
+            </link>
+            <description>
+                &lt;p&gt;First Netty&lt;/p&gt;
+
+            </description>
+            <pubDate>Sat, 03 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/2022/09/03/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>netty nio</title>
+            <link>
+                http://localhost:4000/netty/2022/09/02/netty.html
+            </link>
+            <description>
+                &lt;p&gt;First Netty&lt;/p&gt;
+
+            </description>
+            <pubDate>Fri, 02 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/2022/09/02/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>Nio Description</title>
+            <link>
+                http://localhost:4000/netty/2022/09/01/netty.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;一-nio-基础&quot;&gt;一. NIO 基础&lt;/h1&gt;
+
+&lt;p&gt;non-blocking io 非阻塞 IO&lt;/p&gt;
+
+&lt;h2 id=&quot;1-三大组件&quot;&gt;1. 三大组件&lt;/h2&gt;
+
+&lt;h3 id=&quot;11-channel--buffer&quot;&gt;1.1 Channel &amp;amp; Buffer&lt;/h3&gt;
+
+&lt;p&gt;channel 有一点类似于 stream，它就是读写数据的&lt;strong&gt;双向通道&lt;/strong&gt;，可以从 channel 将数据读入 buffer，也可以将 buffer 的数据写入 channel，而之前的 stream 要么是输入，要么是输出，channel 比 str...
+            </description>
+            <pubDate>Thu, 01 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/2022/09/01/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Create github blog by jekyll</title>
@@ -267,12 +334,13 @@
         </item>
         
         <item>
-            <title>12</title>
+            <title>12_趋势模块开发</title>
             <link>
                 http://localhost:4000/reactnative/2020/01/12/RN.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                
+
             </description>
             <pubDate>Sun, 12 Jan 2020 00:00:00 +0800</pubDate>
             <guid>
@@ -531,8 +599,8 @@
             <description>
                 &lt;h1 id=&quot;1hello-world&quot;&gt;1,Hello world&lt;/h1&gt;
 
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;sp...
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt; &lt;span class=&quot;cpf&quot;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+&lt;/span&gt;&lt;span clas...
             </description>
             <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
             <guid>
