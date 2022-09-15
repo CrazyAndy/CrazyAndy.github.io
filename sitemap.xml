@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Thu, 15 Sep 2022 00:45:31 +0800</lastBuildDate>
+        <lastBuildDate>Thu, 15 Sep 2022 17:01:47 +0800</lastBuildDate>
         
         <item>
             <title>netty nio</title>
@@ -15,6 +15,7 @@
             </link>
             <description>
                 &lt;p&gt;First Netty&lt;/p&gt;
+
 
             </description>
             <pubDate>Sun, 04 Sep 2022 00:00:00 +0800</pubDate>
@@ -39,39 +40,45 @@
         </item>
         
         <item>
-            <title>netty nio</title>
+            <title>ByteBuffer</title>
             <link>
-                http://localhost:4000/netty/2022/09/02/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/02/netty.html
             </link>
             <description>
-                &lt;p&gt;First Netty&lt;/p&gt;
+                &lt;h2 id=&quot;bytebuffer&quot;&gt;ByteBuffer&lt;/h2&gt;
 
+&lt;p&gt;create one file named data.txt , the content as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1234567890abcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;get content from data.txt by F...
             </description>
             <pubDate>Fri, 02 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/netty/2022/09/02/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/02/netty.html
             </guid>
         </item>
         
         <item>
             <title>Nio Description</title>
             <link>
-                http://localhost:4000/netty/2022/09/01/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/01/netty.html
             </link>
             <description>
-                &lt;h1 id=&quot;一-nio-基础&quot;&gt;一. NIO 基础&lt;/h1&gt;
+                &lt;h1 id=&quot;一-nio-knowledge&quot;&gt;一. NIO knowledge&lt;/h1&gt;
 
-&lt;p&gt;non-blocking io 非阻塞 IO&lt;/p&gt;
+&lt;p&gt;non-blocking io&lt;/p&gt;
 
-&lt;h2 id=&quot;1-三大组件&quot;&gt;1. 三大组件&lt;/h2&gt;
+&lt;h2 id=&quot;1-three-big-components&quot;&gt;1. Three big components&lt;/h2&gt;
 
 &lt;h3 id=&quot;11-channel--buffer&quot;&gt;1.1 Channel &amp;amp; Buffer&lt;/h3&gt;
 
-&lt;p&gt;channel 有一点类似于 stream，它就是读写数据的&lt;strong&gt;双向通道&lt;/strong&gt;，可以从 channel 将数据读入 buffer，也可以将 buffer 的数据写入 channel，而之前的 stream 要么是输入，要么是输出，channel 比 str...
+&lt;p&gt;channel looks like stream,it is a two-way channel for reading and writing . You can read data from channel into b...
             </description>
             <pubDate>Thu, 01 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/netty/2022/09/01/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/01/netty.html
             </guid>
         </item>
         

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>netty nio | Andy Sun's World</title>
+    <title>Nio Description | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -15,6 +15,20 @@
 <!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
     <link href="/assets/css/ionicons.min.css" rel="stylesheet">
     <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+        <script src="/assets/js/mermaid.min.js"></script>
+        <script>
+            const config = {
+                startOnLoad:true,
+                theme: 'forest',
+                flowchart: {
+                    useMaxWidth:false,
+                    htmlLabels:true
+                    }
+            };
+            mermaid.initialize(config);
+            window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+        </script>
     
 </head>
 
@@ -236,7 +250,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>netty nio</span>
+                <span>Nio Description</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -244,7 +258,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">2 Sep 2022</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">1 Sep 2022</time>
                     </div>
                 </div>
             </div>
@@ -255,30 +269,119 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>First Netty</p>
+            <h1 id="一-nio-knowledge">一. NIO knowledge</h1>
+
+<p>non-blocking io</p>
+
+<h2 id="1-three-big-components">1. Three big components</h2>
+
+<h3 id="11-channel--buffer">1.1 Channel &amp; Buffer</h3>
+
+<p>channel looks like stream,it is a two-way channel for reading and writing . You can read data from channel into buffer , and also write data from buffer into channel .</p>
+
+<div class="mermaid">
+graph LR
+  channel --&gt; buffer
+  buffer --&gt; channel
+</div>
+
+<p>common Channel as follows:</p>
+
+<ul>
+  <li>FileChannel</li>
+  <li>DatagramChannel (UDP)</li>
+  <li>SocketChannel (socket client)</li>
+  <li>ServerSocketChannel (socket server)</li>
+</ul>
+
+<p>Buffer is used to buffer read and write data</p>
+
+<ul>
+  <li>ByteBuffer
+    <ul>
+      <li>MappedByteBuffer</li>
+      <li>DirectByteBuffer</li>
+      <li>HeapByteBuffer</li>
+    </ul>
+  </li>
+  <li>ShortBuffer</li>
+  <li>IntBuffer</li>
+  <li>LongBuffer</li>
+  <li>FloatBuffer</li>
+  <li>DoubleBuffer</li>
+  <li>CharBuffer</li>
+</ul>
+
+<h3 id="12-selector">1.2 Selector</h3>
+
+<p>selector is a bit hard to understand , we need to understand it by knowing the evolution of the server design</p>
+
+<h4 id="multithreading-design">multithreading design</h4>
+
+<div class="mermaid">
+graph TD
+subgraph multithreading
+t1(thread) --&gt; s1(socket1)
+t2(thread) --&gt; s2(socket2)
+t3(thread) --&gt; s3(socket3)
+end
+</div>
+
+<h4 id="️-defect">⚠️ defect</h4>
+
+<ul>
+  <li>High memory usage</li>
+  <li>Thread context switching is costly</li>
+  <li>It is applicable only to scenarios with a small number of connections</li>
+</ul>
+
+<h4 id="thread-pool-design">thread pool design</h4>
+
+<div class="mermaid">
+graph TD
+subgraph thread pool
+t4(thread) --&gt; s4(socket1)
+t5(thread) --&gt; s5(socket2)
+t4(thread) -.-&gt; s6(socket3)
+t5(thread) -.-&gt; s7(socket4)
+end
+</div>
+
+<h4 id="️-defect-1">⚠️ defect</h4>
+
+<ul>
+  <li>A thread can handle only one socket connection at blocking mode</li>
+  <li>It is applicable only to short connection (such as http)</li>
+</ul>
+
+<h4 id="selector-design">selector design</h4>
+
+<p>The use of selectors is to work with a thread to manage multiple channels and get the events that happen on those channels, and these channels work in non-blocking mode, so that the thread doesn’t get stuck on one channel. Suitable for scenarios with a large number of connections but low traffic</p>
+
+<div class="mermaid">
+graph TD
+subgraph selector 
+thread --&gt; selector
+selector --&gt; c1(channel)
+selector --&gt; c2(channel)
+selector --&gt; c3(channel)
+end
+</div>
+<p>Calling the selector’s select() blocks until the channel has read/write ready events, once occur,  the select method returns those events for thread to handle</p>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/netty/2022/09/01/netty.html">
-                                <div class="prev__image">
-                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
-                                </div>
-                                <div class="prev__box">
-                                    <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">Nio Description</h2>
-                                </div>
-                            </a>
-                        
                     
                     
                         
-                            <a class="post__next" href="/netty/2022/09/03/netty.html">
+                            <a class="post__next" href="/netty/index_posts/2022/09/02/netty.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">netty nio</h2>
+                                    <h2 class="post__nav__title">ByteBuffer</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
