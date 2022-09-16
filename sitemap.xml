@@ -6,36 +6,62 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Thu, 15 Sep 2022 17:01:47 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 16 Sep 2022 16:57:32 +0800</lastBuildDate>
         
         <item>
-            <title>netty nio</title>
+            <title>Selector</title>
             <link>
-                http://localhost:4000/netty/2022/09/04/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/05/netty.html
             </link>
             <description>
-                &lt;p&gt;First Netty&lt;/p&gt;
+                &lt;h1 id=&quot;part-i-multiplexing&quot;&gt;Part I Multiplexing&lt;/h1&gt;
 
+&lt;p&gt;Single thread cooperate with Selector to implement monitoring multiple channel’s readable/writable event , we call it multiplexing&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;multiplexing can only be used in network IO , not in common io&lt;/li&gt;
+  &lt;li&gt;if we don’t use Selector under unblocking mode , current thr...
             </description>
-            <pubDate>Sun, 04 Sep 2022 00:00:00 +0800</pubDate>
+            <pubDate>Mon, 05 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/netty/2022/09/04/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/05/netty.html
             </guid>
         </item>
         
         <item>
-            <title>netty nio</title>
+            <title>Blocking & UnBlocking</title>
             <link>
-                http://localhost:4000/netty/2022/09/03/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/04/netty.html
             </link>
             <description>
-                &lt;p&gt;First Netty&lt;/p&gt;
+                &lt;h1 id=&quot;part-i-blocking-mode&quot;&gt;Part I Blocking mode&lt;/h1&gt;
+
+&lt;p&gt;Server&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// single thread&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 0. ByteBuffer&lt;/span&gt;
+&lt;span class...
+            </description>
+            <pubDate>Sun, 04 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/04/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>FileChannel</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/03/netty.html
+            </link>
+            <description>
+                &lt;p&gt;FileChannel can only work under blocking mode .&lt;/p&gt;
+
+&lt;p&gt;There’s no point in describing more about FileChannel here , learn it until you need it .&lt;/p&gt;
 
             </description>
             <pubDate>Sat, 03 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/netty/2022/09/03/netty.html
+                http://localhost:4000/netty/index_posts/2022/09/03/netty.html
             </guid>
         </item>
         
@@ -45,14 +71,14 @@
                 http://localhost:4000/netty/index_posts/2022/09/02/netty.html
             </link>
             <description>
-                &lt;h2 id=&quot;bytebuffer&quot;&gt;ByteBuffer&lt;/h2&gt;
+                &lt;h1 id=&quot;part-i--bytebuffer&quot;&gt;Part I , ByteBuffer&lt;/h1&gt;
 
 &lt;p&gt;create one file named data.txt , the content as follows:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1234567890abcd
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;get content from data.txt by F...
+&lt;p&gt;get content f...
             </description>
             <pubDate>Fri, 02 Sep 2022 00:00:00 +0800</pubDate>
             <guid>

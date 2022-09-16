@@ -3126,7 +3126,7 @@
     }
 
     .section__info .section__description {
-        max-width: 480px;
+        /* max-width: 480px; */
         line-height: 1.6;
         margin: 32px 0 0
     }

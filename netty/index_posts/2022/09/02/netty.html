@@ -16,20 +16,6 @@
     <link href="/assets/css/ionicons.min.css" rel="stylesheet">
     <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
     
-        <script src="/assets/js/mermaid.min.js"></script>
-        <script>
-            const config = {
-                startOnLoad:true,
-                theme: 'forest',
-                flowchart: {
-                    useMaxWidth:false,
-                    htmlLabels:true
-                    }
-            };
-            mermaid.initialize(config);
-            window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
-        </script>
-    
 </head>
 
 <html>
@@ -269,7 +255,7 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h2 id="bytebuffer">ByteBuffer</h2>
+            <h1 id="part-i--bytebuffer">Part I , ByteBuffer</h1>
 
 <p>create one file named data.txt , the content as follows:</p>
 
@@ -366,7 +352,9 @@
 
 <center><img src="/assets/images/posts/backend/netty/0022.png" width="100%" /></center>
 
-<h2 id="functions">Functions</h2>
+<p>​</p>
+
+<h1 id="part-ii--functions">Part II , Functions</h1>
 
 <h3 id="1--allocate-space">1 , allocate space</h3>
 
@@ -423,6 +411,68 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuffer</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">wrap</span><span class="o">(</span><span class="s">"hello"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
 </code></pre></div></div>
 
+<h3 id="7bytebuffer-to-string">7，ByteBuffer to String</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer2</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+<span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer3</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+
+<span class="n">buffer1</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span> <span class="c1">// buffer1 should be switched to read mode</span>
+<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer1</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span> 
+</code></pre></div></div>
+
+<p>8，ByteBuffer is not</p>
+
+<h1 id="part-iii--stick-package--half-package">Part III , stick package &amp; half package</h1>
+
+<p>Let’s take one example here:</p>
+
+<p>multiple message would be sent to another side , we mark the tail of single message with \n</p>
+
+<ul>
+  <li>Hello,world\n</li>
+  <li>I’m zhangsan\n\</li>
+  <li>How are you?\n</li>
+</ul>
+
+<p>Because of network block or receiving data optimizing , perhaps these message would be package together , these three message become two message , we call it stick package</p>
+
+<p>If the buffer for receiving is limit as 27 , the third message will be divided into two half , one is Ho , another is w are you?\n , we call it half package</p>
+
+<ul>
+  <li>Hello,world\nI’m zhangsan\nHo</li>
+  <li>w are you?\n</li>
+</ul>
+
+<p>Now it demand you to program to devide them by \n into every single message</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">ByteBuffer</span> <span class="n">source</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">32</span><span class="o">);</span>
+    <span class="c1">//                    11            24</span>
+    <span class="n">source</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Hello,world\nI'm zhangsan\nHo"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+    <span class="n">split</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+
+    <span class="n">source</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"w are you?\nhaha!\n"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+    <span class="n">split</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">split</span><span class="o">(</span><span class="nc">ByteBuffer</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">source</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">oldLimit</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">oldLimit</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'\n'</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="nc">ByteBuffer</span> <span class="n">target</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">source</span><span class="o">.</span><span class="na">position</span><span class="o">());</span>
+            <span class="c1">// 0 ~ limit</span>
+            <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">target</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">source</span><span class="o">);</span> <span class="c1">// read from source，write into target</span>
+            <span class="n">debugAll</span><span class="o">(</span><span class="n">target</span><span class="o">);</span>
+            <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">oldLimit</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">source</span><span class="o">.</span><span class="na">compact</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
 
             
             
@@ -442,10 +492,10 @@
                     
                     
                         
-                            <a class="post__next" href="/netty/2022/09/03/netty.html">
+                            <a class="post__next" href="/netty/index_posts/2022/09/03/netty.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">netty nio</h2>
+                                    <h2 class="post__nav__title">FileChannel</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
