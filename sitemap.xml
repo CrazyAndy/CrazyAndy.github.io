@@ -6,7 +6,43 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 16 Sep 2022 16:57:32 +0800</lastBuildDate>
+        <lastBuildDate>Wed, 21 Sep 2022 17:39:23 +0800</lastBuildDate>
+        
+        <item>
+            <title>Message border</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/07/netty.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/backend/netty/0023.png&quot; width=&quot;60%&quot; /&gt;&lt;/center&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;the length of ByteBuffer is less than message&lt;/li&gt;
+  &lt;li&gt;the length of ByteBuffer is larger than one time of message ,but less than two time of message  (half package2)&lt;/li&gt;
+  &lt;li&gt;the length of ByteBuffer is larger than two ...
+            </description>
+            <pubDate>Wed, 07 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/07/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>Deal with connection close</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/06/netty.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;1client-shutdown-abnormally&quot;&gt;1,Client shutdown abnormally&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nc&quot;&gt;Selector&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span...
+            </description>
+            <pubDate>Tue, 06 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/06/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Selector</title>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Selector | Andy Sun's World</title>
+    <title>Deal with connection close | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -236,7 +236,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>Selector</span>
+                <span>Deal with connection close</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -244,7 +244,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">5 Sep 2022</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">6 Sep 2022</time>
                     </div>
                 </div>
             </div>
@@ -255,165 +255,97 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h1 id="part-i-multiplexing">Part I Multiplexing</h1>
+            <h2 id="1client-shutdown-abnormally">1,Client shutdown abnormally</h2>
 
-<p>Single thread cooperate with Selector to implement monitoring multiple channel’s readable/writable event , we call it multiplexing</p>
-
-<ul>
-  <li>multiplexing can only be used in network IO , not in common io</li>
-  <li>if we don’t use Selector under unblocking mode , current thread will do useless work most time, but Selector can ensure as follows:
-    <ul>
-      <li>Create connection only connect event happen</li>
-      <li>read only when readable event happen</li>
-      <li>write only when writable event happen
-        <ul>
-          <li>Channel is not writable all the time because the limit of translation ability of network, but writable event will be triggered once the channel is writable</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<div class="mermaid">
-graph TD
-subgraph selector version
-thread --&gt; selector
-selector --&gt; c1(channel)
-selector --&gt; c2(channel)
-selector --&gt; c3(channel)
-end
-</div>
-
-<h3 id="advantage">Advantage</h3>
-
-<ul>
-  <li>one thread cooperate Selector to implement monitoring multiple channel’s event , only hanle with it when those events happen , avoid doing useless work</li>
-  <li>make full use of this thread</li>
-  <li>save amount of thread</li>
-  <li>Reduced thread context switching</li>
-</ul>
-
-<h3 id="1selectkey">1，SelectKey</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1,create selecor ,manage mutiple channel</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="nc">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
 <span class="nc">ServerSocketChannel</span> <span class="n">ssc</span> <span class="o">=</span> <span class="nc">ServerSocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
-<span class="n">ssc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// no blocking</span>
+<span class="n">ssc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> 
 
-<span class="c1">// 2, create connection between selector and channel</span>
-<span class="c1">// SelectionKey is the manager of Server Socket Channel , it bind events for Server channel</span>
-<span class="c1">// event type: accept -&gt; occur for server socket when connection creating is request</span>
-<span class="c1">//						 connect-&gt; occur for client socket when connection is created</span>
-<span class="c1">//						 read   -&gt; occur when data is received</span>
-<span class="c1">//						 write  -&gt; writable event</span>
 <span class="nc">SelectionKey</span> <span class="n">sscKey</span> <span class="o">=</span> <span class="n">ssc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
-<span class="n">sscKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">);</span><span class="c1">// this key only pay attation to accept event</span>
-<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"resiger key:{}"</span><span class="o">,</span><span class="n">sscKey</span><span class="o">);</span>
-
+<span class="n">sscKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">);</span>
 <span class="n">ssc</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="mi">8080</span><span class="o">));</span>
 
 <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-  	<span class="c1">//3, it will block current thread if no event happen, it will go next only when any events happen </span>
     <span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
-  	<span class="c1">//4, deal with event , selectedKeys contain all events</span>
-  	<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span> <span class="c1">//selector would insert key into selectedKyes when event happen</span>
+  	<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span> 
   	<span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
       	<span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+      	<span class="n">iterator</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
       	<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"selected key:{}"</span><span class="o">,</span><span class="n">key</span><span class="o">);</span>
-      	<span class="nc">ServerSocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ServerSocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
-      	<span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span><span class="c1">//block current thread until connection created </span>
-      	<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span><span class="n">sc</span><span class="o">)</span>
+      	<span class="k">if</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">()){</span>
+      			<span class="nc">ServerSocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ServerSocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+            <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> 
+            <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> 
+            <span class="nc">SelectionKey</span> <span class="n">scKey</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+            <span class="n">scKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span><span class="n">sc</span><span class="o">);</span>
+      	<span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">()){</span>
+      			<span class="nc">SocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+            <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span>
+          	<span class="k">try</span><span class="o">{</span>
+              <span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span> <span class="c1">//---&gt; will throw exception here if the client shutdown itself</span>
+              <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
+              <span class="n">debugRead</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+              <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+              <span class="n">key</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span><span class="c1">// --&gt; because the connection is broken,we should call key.cancel() to </span>
+              						<span class="c1">// let selector remove that key which is as same as this key.</span>
+            <span class="o">}</span>
+      	<span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h3 id="2-channelcancel">2, channel.cancel()</h3>
+<center><img src="/assets/images/posts/backend/netty/0053.png" width="40%" /></center>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
-      	<span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-      	<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"selected key:{}"</span><span class="o">,</span><span class="n">key</span><span class="o">);</span>
-      	<span class="c1">//ServerSocketChannel channel = (ServerSocketChannel)key.channel();</span>
-      	<span class="c1">//SocketChannel sc = channel.accept();//block current thread until connection created </span>
-      	<span class="c1">//log.debug("{}",sc);</span>
-    <span class="o">}</span>	 
-</code></pre></div></div>
+<h2 id="2-client-close-the-connection-itself">2, Client close the connection itself</h2>
 
-<p>if we comment some code like up ,selector.select() think  the pervious event is not handled , so it insert this event into selectedKeys again to notify you to deal with it , so that select() will not block here.</p>
+<p>What if the client close the connection by socketChannel.close() , if client is implemented by netty too</p>
 
-<p>Anyway , you can  add key.cancel() to let the select() know current event is cancelled .</p>
+<p>channel.read(buffer); would not throw exception here,  we should judge the result of channel.read(buffer)</p>
 
-<p>Event should be handled by channel.accept() or key.cannel() , then selecor would not add same event into selectedKeys</p>
-
-<h3 id="3-channelread">3, channel.read()</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
-      	<span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-      	<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"selected key:{}"</span><span class="o">,</span><span class="n">key</span><span class="o">);</span>
-      	<span class="c1">//5, distinguish event type</span>
-      	<span class="k">if</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">()){</span>
-      			<span class="nc">ServerSocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ServerSocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
-            <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> 
-            <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> 
-            <span class="nc">SelectionKey</span> <span class="n">scKey</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span><span class="c1">//scKey manage socket channel</span>
-            <span class="n">scKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span><span class="n">sc</span><span class="o">);</span>
-      	<span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">()){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">()){</span>
       			<span class="nc">SocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
             <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span>
-            <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
-            <span class="n">debugRead</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+          	<span class="k">try</span><span class="o">{</span>
+              <span class="kt">int</span> <span class="n">read</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span> 
+              <span class="k">if</span><span class="o">(</span><span class="n">read</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+                <span class="n">key</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span> <span class="c1">// this is the keypoint</span>
+              <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
+              	<span class="n">debugRead</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+              <span class="o">}</span>
+            <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+              <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+              <span class="n">key</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span>
+            <span class="o">}</span>
       	<span class="o">}</span>
-    <span class="o">}</span>	 
 </code></pre></div></div>
 
-<h3 id="4-remove-selectkey">4, Remove SelectKey</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
-      	<span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-      	<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"selected key:{}"</span><span class="o">,</span><span class="n">key</span><span class="o">);</span>
-  		  <span class="n">iterator</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span><span class="c1">// &lt;------------- we should remove this key here</span>
-      	<span class="c1">//5, distinguish event type</span>
-      	<span class="k">if</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">()){</span>
-      			<span class="nc">ServerSocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ServerSocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
-            <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span> 
-            <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> 
-            <span class="nc">SelectionKey</span> <span class="n">scKey</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span><span class="c1">//scKey manage socket channel</span>
-            <span class="n">scKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span><span class="n">sc</span><span class="o">);</span>
-      	<span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">()){</span>
-      			<span class="nc">SocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SocketChannel</span><span class="o">)</span><span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
-            <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span>
-          	<span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
-            <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
-            <span class="n">debugRead</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
-      	<span class="o">}</span>
-    <span class="o">}</span>	 
-</code></pre></div></div>
-
-<center><img src="/assets/images/posts/backend/netty/0052.png" width="100%" /></center>
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/netty/index_posts/2022/09/04/netty.html">
+                            <a class="post__prev" href="/netty/index_posts/2022/09/05/netty.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">Blocking & UnBlocking</h2>
+                                    <h2 class="post__nav__title">Selector</h2>
                                 </div>
                             </a>
                         
                     
                     
                         
-                            <a class="post__next" href="/netty/index_posts/2022/09/06/netty.html">
+                            <a class="post__next" href="/netty/index_posts/2022/09/07/netty.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">Deal with connection close</h2>
+                                    <h2 class="post__nav__title">Message border</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
