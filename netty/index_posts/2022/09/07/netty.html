@@ -16,6 +16,20 @@
     <link href="/assets/css/ionicons.min.css" rel="stylesheet">
     <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
     
+        <script src="/assets/js/mermaid.min.js"></script>
+        <script>
+            const config = {
+                startOnLoad:true,
+                theme: 'forest',
+                flowchart: {
+                    useMaxWidth:false,
+                    htmlLabels:true
+                    }
+            };
+            mermaid.initialize(config);
+            window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+        </script>
+    
 </head>
 
 <html>
@@ -263,6 +277,154 @@
   <li>the length of ByteBuffer is larger than two time of message ,but less than three time of message (stick package1 and package2)</li>
 </ol>
 
+<p>How to deal with these issue?</p>
+
+<ol>
+  <li>client and server make a protocol , the length is stable ,  but this cost bandwidth sometimes</li>
+  <li>separator , low efficiency</li>
+  <li>length + data</li>
+</ol>
+
+<p>​			http1.1     TLV = Type + Length + Value</p>
+
+<p>​			http2.0     LTV = Length + Type + value</p>
+
+<div class="mermaid">
+sequenceDiagram 
+participant c1 as Client 1
+participant s as Server
+participant b1 as ByteBuffer1
+participant b2 as ByteBuffer2
+c1 -&gt;&gt; s: send 01234567890abcdef3333\r
+s -&gt;&gt; b1: first time, read insert 01234567890abcdef
+s -&gt;&gt; b2: enlarge capacity
+b1 -&gt;&gt; b2: copy 01234567890abcdef
+s -&gt;&gt; b2: second time read insert 3333\r
+b2 -&gt;&gt; b2: 01234567890abcdef3333\r
+</div>
+<p>​</p>
+
+<h3 id="server">Server</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">split</span><span class="o">(</span><span class="nc">ByteBuffer</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">source</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// find one complete message</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'\n'</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">source</span><span class="o">.</span><span class="na">position</span><span class="o">();</span>
+            <span class="c1">// insert this message into new ByteBuffer</span>
+            <span class="nc">ByteBuffer</span> <span class="n">target</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="n">length</span><span class="o">);</span>
+            <span class="c1">// read from source，write into target</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">target</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="n">debugAll</span><span class="o">(</span><span class="n">target</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">source</span><span class="o">.</span><span class="na">compact</span><span class="o">();</span> <span class="c1">// 0123456789abcdef  position 16 limit 16</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="nc">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+    <span class="nc">ServerSocketChannel</span> <span class="n">ssc</span> <span class="o">=</span> <span class="nc">ServerSocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+    <span class="n">ssc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+
+    <span class="nc">SelectionKey</span> <span class="n">sscKey</span> <span class="o">=</span> <span class="n">ssc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+   
+    <span class="n">sscKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">);</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sscKey:{}"</span><span class="o">,</span> <span class="n">sscKey</span><span class="o">);</span>
+    <span class="n">ssc</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="mi">8080</span><span class="o">));</span>
+    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
+        <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span> <span class="c1">// accept, read</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">iter</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"key: {}"</span><span class="o">,</span> <span class="n">key</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">ServerSocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ServerSocketChannel</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+                <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+                <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span> <span class="c1">// attachment</span>
+                <span class="c1">// attach this byteBuffer to selectionKey as an attachment</span>
+                <span class="nc">SelectionKey</span> <span class="n">scKey</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">buffer</span><span class="o">);</span>
+                <span class="n">scKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="n">sc</span><span class="o">);</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"scKey:{}"</span><span class="o">,</span> <span class="n">scKey</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">())</span> <span class="o">{</span> 
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="nc">SocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SocketChannel</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span> 
+                    <span class="c1">// get attachment from selectionKey </span>
+                    <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ByteBuffer</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">attachment</span><span class="o">();</span>
+                    <span class="kt">int</span> <span class="n">read</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span> 
+                    <span class="k">if</span><span class="o">(</span><span class="n">read</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">key</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">split</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+                        <span class="c1">// judge whether we need to enlarge the capacity or not </span>
+                        <span class="k">if</span> <span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">position</span><span class="o">()</span> <span class="o">==</span> <span class="n">buffer</span><span class="o">.</span><span class="na">limit</span><span class="o">())</span> <span class="o">{</span>
+                            <span class="nc">ByteBuffer</span> <span class="n">newBuffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">capacity</span><span class="o">()</span> <span class="o">*</span> <span class="mi">2</span><span class="o">);</span>
+                            <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
+                            <span class="n">newBuffer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span> <span class="c1">// 0123456789abcdef3333\n</span>
+                            <span class="n">key</span><span class="o">.</span><span class="na">attach</span><span class="o">(</span><span class="n">newBuffer</span><span class="o">);</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="n">key</span><span class="o">.</span><span class="na">cancel</span><span class="o">();</span>  
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<h2 id="why-we-judge-bufferposition--bufferlimit-here-">why we judge buffer.position() == buffer.limit() here ?</h2>
+
+<h4 id="what-if-we-read-one-complete-message-at--sourcegeti--n---">What if we read one complete message at  (source.get(i) == ‘\n’) { … }</h4>
+
+<center><img src="/assets/images/posts/backend/netty/0054.png" width="100%" /></center>
+
+<center><img src="/assets/images/posts/backend/netty/0055.png" width="100%" /></center>
+
+<center><img src="/assets/images/posts/backend/netty/0056.png" width="100%" /></center>
+
+<p>​</p>
+
+<h4 id="what-if-we-send-0123456789abcdef3333n--spilt-cannot-parse-it-into-one-complete-message-one-time-">What if we send 0123456789abcdef3333\n , spilt() cannot parse it into one complete message one time :</h4>
+
+<center><img src="/assets/images/posts/backend/netty/0054.png" width="100%" /></center>
+
+<center><img src="/assets/images/posts/backend/netty/0057.png" width="100%" /></center>
+
+<p>​</p>
+
+<h3 id="client">Client</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="nc">SocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+<span class="n">sc</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
+<span class="nc">SocketAddress</span> <span class="n">address</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">getLocalAddress</span><span class="o">();</span>
+<span class="c1">// sc.write(Charset.defaultCharset().encode("hello\nworld\n"));</span>
+<span class="n">sc</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="nc">Charset</span><span class="o">.</span><span class="na">defaultCharset</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="s">"0123\n456789abcdef"</span><span class="o">));</span>
+<span class="n">sc</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="nc">Charset</span><span class="o">.</span><span class="na">defaultCharset</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="s">"0123456789abcdef3333\n"</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Socket server deal with reading tcp message, we should pay attention to two points:</p>
+
+<p>1, Message border (half package ,stick packege)</p>
+
+<p>2, Allocate appropriate capacity for ByteBuffer</p>
+
+<ul>
+  <li>every channel need to record tcp message , because ByteBuffer is not thread safe , so it cannot be sharable by multiple channel , we should create single ByteBuffer for every channel</li>
+  <li>the capacity cannot be huge, if we set 1mb for every ByteBuffer , we need 1TB for million connections, so we should make capacity flexible .</li>
+</ul>
+
+
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
@@ -279,6 +441,18 @@
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/08/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">Write event</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             

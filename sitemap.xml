@@ -6,7 +6,45 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Wed, 21 Sep 2022 17:39:23 +0800</lastBuildDate>
+        <lastBuildDate>Thu, 22 Sep 2022 17:11:43 +0800</lastBuildDate>
+        
+        <item>
+            <title>Multiple Thread</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/09/netty.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;1boss--worker&quot;&gt;1,Boss &amp;amp; Worker&lt;/h2&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/backend/netty/0058.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;h3 id=&quot;server&quot;&gt;Server&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&...
+            </description>
+            <pubDate>Fri, 09 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/09/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>Write event</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/08/netty.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;sample-of-cannot-write-one-time&quot;&gt;Sample of cannot write one time&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;unlocking mode cannot ensure data of buffer written into channel one time , so that we should track the result of write()  (the result stands for amount of written data)&lt;/li&gt;
+  &lt;li&gt;If we use SelectionKey to track the buffer , that would cost so much memeory , s...
+            </description>
+            <pubDate>Thu, 08 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/08/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Message border</title>
@@ -93,6 +131,7 @@
                 &lt;p&gt;FileChannel can only work under blocking mode .&lt;/p&gt;
 
 &lt;p&gt;There’s no point in describing more about FileChannel here , learn it until you need it .&lt;/p&gt;
+
 
             </description>
             <pubDate>Sat, 03 Sep 2022 00:00:00 +0800</pubDate>

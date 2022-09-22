@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>ByteBuffer | Andy Sun's World</title>
+    <title>Write event | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -236,7 +236,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>ByteBuffer</span>
+                <span>Write event</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -244,7 +244,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">2 Sep 2022</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">8 Sep 2022</time>
                     </div>
                 </div>
             </div>
@@ -255,221 +255,99 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h1 id="part-i--bytebuffer">Part I , ByteBuffer</h1>
+            <h2 id="sample-of-cannot-write-one-time">Sample of cannot write one time</h2>
 
-<p>create one file named data.txt , the content as follows:</p>
+<ul>
+  <li>unlocking mode cannot ensure data of buffer written into channel one time , so that we should track the result of write()  (the result stands for amount of written data)</li>
+  <li>If we use SelectionKey to track the buffer , that would cost so much memeory , so we decide to follow these steps:
+    <ul>
+      <li>we don’t register the channel to selector until we write message</li>
+      <li>selector check writable on channel , if all data is written , cancel the channel</li>
+      <li>if we don’t cancel it , writable will cause write event every time</li>
+    </ul>
+  </li>
+</ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1234567890abcd
-</code></pre></div></div>
+<h3 id="server">Server</h3>
 
-<p>get content from data.txt by FileChannel</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WriteServer</span> <span class="o">{</span>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChannelDemo1</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">(</span><span class="nc">FileChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"data.txt"</span><span class="o">).</span><span class="na">getChannel</span><span class="o">())</span> <span class="o">{</span>
-            <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span> <span class="c1">//step 1,prepare buffer to load data</span>
-            <span class="k">do</span> <span class="o">{</span>
-                <span class="c1">// step 2,write data into buffer</span>
-                <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
-                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"read byte amount is ：{}"</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="k">break</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">ServerSocketChannel</span> <span class="n">ssc</span> <span class="o">=</span> <span class="nc">ServerSocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+        <span class="n">ssc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="n">ssc</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="mi">8080</span><span class="o">));</span>
+
+        <span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="nc">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+        <span class="n">ssc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">);</span>
+
+        <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
+
+            <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+                <span class="n">iter</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">ssc</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+                    <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+                    <span class="nc">SelectionKey</span> <span class="n">sckey</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
+                    <span class="c1">// 1. send data to client</span>
+                    <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+                    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3000000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"a"</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">Charset</span><span class="o">.</span><span class="na">defaultCharset</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+                    <span class="kt">int</span> <span class="n">write</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+                    <span class="c1">// 3. write stands for how much byte has been written</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"written amount :"</span> <span class="o">+</span> <span class="n">write</span><span class="o">);</span>
+                    <span class="c1">// 4. only focus writable event when buffer has remaining data</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">hasRemaining</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="n">sckey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="n">sckey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">()</span> <span class="o">+</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_WRITE</span><span class="o">);</span>
+                        <span class="n">sckey</span><span class="o">.</span><span class="na">attach</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isWritable</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ByteBuffer</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">attachment</span><span class="o">();</span>
+                    <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SocketChannel</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+                    <span class="kt">int</span> <span class="n">write</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"written amount :"</span> <span class="o">+</span> <span class="n">write</span><span class="o">);</span>
+                    <span class="k">if</span> <span class="o">(!</span><span class="n">buffer</span><span class="o">.</span><span class="na">hasRemaining</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="n">key</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">interestOps</span><span class="o">()</span> <span class="o">-</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_WRITE</span><span class="o">);</span>
+                        <span class="n">key</span><span class="o">.</span><span class="na">attach</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+                    <span class="o">}</span>
                 <span class="o">}</span>
-                <span class="n">buffer</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span><span class="c1">// step 3,switch buffer to read mode</span>
-                <span class="k">while</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">hasRemaining</span><span class="o">())</span> <span class="o">{</span>
-                    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span><span class="n">buffer</span><span class="o">.</span><span class="na">get</span><span class="o">());</span> <span class="c1">//step 4</span>
-                <span class="o">}</span>
-                <span class="n">buffer</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span> <span class="c1">//step 5,switch buffer to write mode</span>
-            <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Out put</p>
+<h3 id="client">client</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - read byte amount is ：10
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 1
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 2
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 3
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 4
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 5
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 6
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 7
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 8
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 9
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - 0
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - read byte amount is ：4
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - a
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - b
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - c
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - d
-10:39:03 [DEBUG] [main] c.i.n.ChannelDemo1 - read byte amount is ：-1
-</code></pre></div></div>
-
-<h3 id="bytebuffer-structure">ByteBuffer structure</h3>
-
-<p>ByteBuffer own these main attributes</p>
-
-<ul>
-  <li>capacity</li>
-  <li>position  (read or write index)</li>
-  <li>limit (limit for read or write)</li>
-</ul>
-
-<h4 id="step-1">Step 1</h4>
-
-<center><img src="/assets/images/posts/backend/netty/0021.png" width="60%" /></center>
-
-<h4 id="step-2">Step 2</h4>
-
-<p>write mode , positon is the writing index , limit is equal capacity . we wrote 4 bytes now:</p>
-
-<center><img src="/assets/images/posts/backend/netty/0018.png" width="60%" /></center>
-
-<h4 id="step-3">Step 3</h4>
-
-<p>flip() was excuted . the mode is swithed to read mode, position is changed to read index, limit is changed to reading limit.</p>
-
-<center><img src="/assets/images/posts/backend/netty/0019.png" width="60%" /></center>
-
-<h4 id="step-4">Step 4</h4>
-
-<p>After we read 4 bytes , then</p>
-
-<center><img src="/assets/images/posts/backend/netty/0020.png" width="60%" /></center>
-
-<h4 id="step-5">Step 5</h4>
-
-<p>clear() was excuted ,then</p>
-
-<center><img src="/assets/images/posts/backend/netty/0021.png" width="60%" /></center>
-
-<p>compact is another method , it compress the unread data to head , and switch buffer to write mode</p>
-
-<center><img src="/assets/images/posts/backend/netty/0022.png" width="100%" /></center>
-
-<p>​</p>
-
-<h1 id="part-ii--functions">Part II , Functions</h1>
-
-<h3 id="1--allocate-space">1 , allocate space</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Bytebuffer</span> <span class="n">buf1</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span><span class="c1">// class java.nio.HeapByteBuffer - java heap memory ,read and write at low efficiency ，be affected by GC</span>
-<span class="nc">Bytebuffer</span> <span class="n">buf2</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocateDirect</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span><span class="c1">// direct memory , zero-copy , read and write at high efficiency,not affected by GC,but to allocate it would cost more</span>
-</code></pre></div></div>
-
-<h3 id="2--write-data">2 , write data</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">readBytesCount</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">)</span>
-<span class="n">or</span>
-<span class="n">buf</span><span class="o">.</span><span class="na">put</span><span class="o">((</span><span class="kt">byte</span><span class="o">)</span><span class="mi">127</span><span class="o">)</span>
-</code></pre></div></div>
-
-<h3 id="3-read-data">3, read data</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">writeBytes</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buf</span><span class="o">)</span>
-
-<span class="n">or</span>
-
-<span class="kt">byte</span> <span class="n">b</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>	
-</code></pre></div></div>
-
-<p>get() would make position++ , if you’d like to repeat reading data, there are two ways to do:</p>
-
-<p>a, call rewind() ,make position = 0</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public final Buffer rewind(){
-	 position = 0;
-	 mark = -1;
-	 return this;
-}
-</code></pre></div></div>
-
-<p>b, or call get(int i) to get data at i , it would not change positon</p>
-
-<h3 id="4mark-and-reset">4,mark and reset</h3>
-
-<p>If you call mark  when you try to call get(), you could call reset() to let position back to where you mark</p>
-
-<h3 id="5-read-into-byte-array">5, read into byte array</h3>
-
-<p>buffer.get(new byte[4])</p>
-
-<h3 id="6-string-to-bytebuffer">6, String to ByteBuffer</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuffer</span> <span class="n">buffer1</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">16</span><span class="o">);</span>
-<span class="n">buffer</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"hello"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span><span class="c1">// buffer1 still in write mode</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuffer</span> <span class="n">buffer2</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="s">"hello"</span><span class="o">)</span> <span class="c1">// buffer2 will be changed to read mode automatically</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuffer</span> <span class="n">buffer3</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">wrap</span><span class="o">(</span><span class="s">"hello"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-</code></pre></div></div>
-
-<h3 id="7bytebuffer-to-string">7，ByteBuffer to String</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer2</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
-<span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer3</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
-
-<span class="n">buffer1</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span> <span class="c1">// buffer1 should be switched to read mode</span>
-<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">buffer1</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span> 
-</code></pre></div></div>
-
-<p>8，ByteBuffer is not</p>
-
-<h1 id="part-iii--stick-package--half-package">Part III , stick package &amp; half package</h1>
-
-<p>Let’s take one example here:</p>
-
-<p>multiple message would be sent to another side , we mark the tail of single message with \n</p>
-
-<ul>
-  <li>Hello,world\n</li>
-  <li>I’m zhangsan\n\</li>
-  <li>How are you?\n</li>
-</ul>
-
-<p>Because of network block or receiving data optimizing , perhaps these message would be package together , these three message become two message , we call it stick package</p>
-
-<p>If the buffer for receiving is limit as 27 , the third message will be divided into two half , one is Ho , another is w are you?\n , we call it half package</p>
-
-<ul>
-  <li>Hello,world\nI’m zhangsan\nHo</li>
-  <li>w are you?\n</li>
-</ul>
-
-<p>Now it demand you to program to devide them by \n into every single message</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">ByteBuffer</span> <span class="n">source</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">32</span><span class="o">);</span>
-    <span class="c1">//                    11            24</span>
-    <span class="n">source</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"Hello,world\nI'm zhangsan\nHo"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-    <span class="n">split</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
-
-    <span class="n">source</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"w are you?\nhaha!\n"</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
-    <span class="n">split</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">split</span><span class="o">(</span><span class="nc">ByteBuffer</span> <span class="n">source</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">source</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">oldLimit</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">();</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">oldLimit</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">source</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'\n'</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="nc">ByteBuffer</span> <span class="n">target</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">source</span><span class="o">.</span><span class="na">position</span><span class="o">());</span>
-            <span class="c1">// 0 ~ limit</span>
-            <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
-            <span class="n">target</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">source</span><span class="o">);</span> <span class="c1">// read from source，write into target</span>
-            <span class="n">debugAll</span><span class="o">(</span><span class="n">target</span><span class="o">);</span>
-            <span class="n">source</span><span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="n">oldLimit</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WriteClient</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="nc">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+        <span class="nc">SocketChannel</span> <span class="n">sc</span> <span class="o">=</span> <span class="nc">SocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_CONNECT</span> <span class="o">|</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">));</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
+            <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+                <span class="n">iter</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isConnectable</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">finishConnect</span><span class="o">());</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isReadable</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="nc">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="nc">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">);</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="n">sc</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+                    <span class="n">buffer</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
-    <span class="n">source</span><span class="o">.</span><span class="na">compact</span><span class="o">();</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
@@ -479,23 +357,23 @@
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/netty/index_posts/2022/09/01/netty.html">
+                            <a class="post__prev" href="/netty/index_posts/2022/09/07/netty.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">Nio Description</h2>
+                                    <h2 class="post__nav__title">Message border</h2>
                                 </div>
                             </a>
                         
                     
                     
                         
-                            <a class="post__next" href="/netty/index_posts/2022/09/03/netty.html">
+                            <a class="post__next" href="/netty/index_posts/2022/09/09/netty.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">FileChannel</h2>
+                                    <h2 class="post__nav__title">Multiple Thread</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
