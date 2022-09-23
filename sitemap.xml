@@ -6,7 +6,22 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Thu, 22 Sep 2022 17:11:43 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 23 Sep 2022 09:33:24 +0800</lastBuildDate>
+        
+        <item>
+            <title>NIO & BIO</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/10/netty.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Sat, 10 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/10/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Multiple Thread</title>
@@ -14,13 +29,13 @@
                 http://localhost:4000/netty/index_posts/2022/09/09/netty.html
             </link>
             <description>
-                &lt;h2 id=&quot;1boss--worker&quot;&gt;1,Boss &amp;amp; Worker&lt;/h2&gt;
+                &lt;h1 id=&quot;1boss--worker&quot;&gt;1,Boss &amp;amp; Worker&lt;/h1&gt;
 
 &lt;center&gt;&lt;img src=&quot;/assets/images/posts/backend/netty/0058.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
 
 &lt;h3 id=&quot;server&quot;&gt;Server&lt;/h3&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&...
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;co...
             </description>
             <pubDate>Fri, 09 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
