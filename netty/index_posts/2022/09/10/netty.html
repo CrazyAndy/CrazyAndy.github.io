@@ -255,7 +255,52 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h2 id="1-stream-vs-channel">1, stream vs channel</h2>
+
+<ul>
+  <li>stream means socket stream or file input oupt stream</li>
+  <li>channel means netty socket channel</li>
+  <li>stream does not buffer data , channel will use sending buffer area , receiving buffer area , channel call system api</li>
+  <li>stream only support blocking api , channel support both blocking ,unblocking</li>
+  <li>Stream and channel are both full duplex, they can read and write at same time</li>
+</ul>
+
+<h2 id="2-io-model">2, IO model</h2>
+
+<center><img src="/assets/images/posts/backend/netty/0059.png" width="100%" /></center>
+
+<p>​</p>
+
+<h3 id="i--blocking-io">I , Blocking IO</h3>
+
+<p>the process follow the steps from 1 to 7  , user thread is blocked until net data come in</p>
+
+<center><img src="/assets/images/posts/backend/netty/0060.png" width="100%" /></center>
+
+<p>​</p>
+
+<h3 id="ii--unblocking-io">II , UnBlocking IO</h3>
+
+<center><img src="/assets/images/posts/backend/netty/0061.png" width="100%" /></center>
+
+<p>​</p>
+
+<h3 id="iii-multiplexing">III, Multiplexing</h3>
+
+<center><img src="/assets/images/posts/backend/netty/0062.png" width="100%" /></center>
+
+<p>According to the image above , Multiplexing looks like low efficiency . Because we haven’t taken advantage of it , let’s compare blocking io and unblocking io</p>
+
+<center><img src="/assets/images/posts/backend/netty/0063.png" width="100%" /></center>
+
+<p>​</p>
+
+<center><img src="/assets/images/posts/backend/netty/0064.png" width="100%" /></center>
+
+<p>​</p>
+
+<h2 id="3sync--async">3,sync &amp; async</h2>
+
 
             
             

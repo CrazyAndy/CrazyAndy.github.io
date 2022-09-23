@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 23 Sep 2022 09:33:24 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 23 Sep 2022 18:06:03 +0800</lastBuildDate>
         
         <item>
             <title>NIO & BIO</title>
@@ -14,8 +14,13 @@
                 http://localhost:4000/netty/index_posts/2022/09/10/netty.html
             </link>
             <description>
-                
+                &lt;h2 id=&quot;1-stream-vs-channel&quot;&gt;1, stream vs channel&lt;/h2&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;stream means socket stream or file input oupt stream&lt;/li&gt;
+  &lt;li&gt;channel means netty socket channel&lt;/li&gt;
+  &lt;li&gt;stream does not buffer data , channel will use sending buffer area , receiving buffer area , channel call system api&lt;/li&gt;
+  &lt;li&gt;stream only support bl...
             </description>
             <pubDate>Sat, 10 Sep 2022 00:00:00 +0800</pubDate>
             <guid>
