@@ -255,45 +255,49 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <h1 id="1hello-world">1,Hello world</h1>
+            <h1 id="1hello-netty">1,Hello Netty</h1>
 
 <h2 id="server">Server</h2>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">ServerBootstrap</span><span class="o">()</span> <span class="c1">// 1, Launcher, package netty component , start server</span>
-    <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span> <span class="c1">// 2, BossEventLoop(slector only interest in accept event,thread) , WorkerEventLoop(selector only interest in read event ,thread) </span>
+    <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span> <span class="c1">// 2, BossEventLoop(slector only interest in accept event,thread) , WorkerEventLoop(selector only interest in read event ,thread)  . NioEventLoopGroup contains BossEventLoop and WorkerEventLoop, deal with accept ,read event . 16, deal with read event ,receive bytebuf </span>
     <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioServerSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="c1">// 3, choose implement of ServerSocketChannel</span>
-    <span class="o">.</span><span class="na">childHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span> <span class="c1">// 4, boss is in responsible for connection, worker(child) is responsible for read and write .  childHandler is used for worker</span>
-      <span class="c1">// 5, ChannelInitializer(channel stand for communication(read,write) channel,Initializer is responsible for adding other handler)</span>
-        <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">.</span><span class="na">childHandler</span><span class="o">(</span><span class="c1">// 4, boss is in responsible for connection, worker(child) is responsible for read and write .  childHandler is used for worker</span>
+  <span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span><span class="c1">// 5, ChannelInitializer(channel stand for communication(read,write) channel,Initializer is responsible for adding other handler)</span>
+        <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//12 , call it when connection created</span>
            <span class="c1">// 6, add handler</span>
-            <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringDecoder</span><span class="o">());</span><span class="c1">//7, bytebuf =&gt; String </span>
+            <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringDecoder</span><span class="o">());</span><span class="c1">//7, bytebuf =&gt; String   17, parse bytebuf to hello</span>
             <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span> <span class="c1">// 8, user-defined handler</span>
                 <span class="nd">@Override</span> <span class="c1">// read event</span>
-                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// msg is string from step 7 </span>
-                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">String</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// msg is string from step 7 . 18 get hello</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span> 
                 <span class="o">}</span>
             <span class="o">});</span>
         <span class="o">}</span>
     <span class="o">})</span>
-    <span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="mi">8080</span><span class="o">);</span> <span class="c1">// 9, bind port to listen </span>
+    <span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="mi">8080</span><span class="o">);</span> <span class="c1">// 6, bind port to listen </span>
 </code></pre></div></div>
 
 <h2 id="client">Client</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span> <span class="c1">// 1, Launcher for socket client </span>
-    <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span> <span class="c1">// 1</span>
-    <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="c1">// 2</span>
-    <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;()</span> <span class="o">{</span> <span class="c1">// 3</span>
-        <span class="nd">@Override</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span> <span class="c1">// 7, Launcher for socket client </span>
+    <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span> <span class="c1">// 8, add event loop</span>
+    <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="c1">// 9, add implement of socket channel </span>
+    <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="c1">// 10, add handler</span>
+  <span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;()</span> <span class="o">{</span> 
+        <span class="nd">@Override</span> <span class="c1">//12, it would be called when connection created</span>
         <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">ch</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span> <span class="c1">// 8</span>
+            <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span> 
+            <span class="c1">// 15 , call method of StringEncoder ,encode string to bytebuf</span>
         <span class="o">}</span>
     <span class="o">})</span>
-    <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"127.0.0.1"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">)</span> <span class="c1">// 4</span>
-    <span class="o">.</span><span class="na">sync</span><span class="o">()</span> <span class="c1">// 5</span>
-    <span class="o">.</span><span class="na">channel</span><span class="o">()</span> <span class="c1">// 6</span>
-    <span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">()</span> <span class="o">+</span> <span class="s">": hello world!"</span><span class="o">);</span> <span class="c1">// 7</span>
+    <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"127.0.0.1"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">)</span> <span class="c1">// 11, connect server</span>
+    <span class="o">.</span><span class="na">sync</span><span class="o">()</span> <span class="c1">// 13, block until connection created </span>
+    <span class="o">.</span><span class="na">channel</span><span class="o">()</span> <span class="c1">// get socket channel (stands for connection obj)</span>
+    <span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">()</span> <span class="o">+</span> <span class="s">": hello world!"</span><span class="o">);</span> <span class="c1">// 14, send data to server </span>
 </code></pre></div></div>
+
+<center><img src="/assets/images/posts/backend/netty/0068.png" width="100%" /></center>
 
 
             
@@ -312,6 +316,18 @@
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/12/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">EventLoop</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             

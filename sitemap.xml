@@ -6,7 +6,27 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Wed, 28 Sep 2022 15:06:16 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 30 Sep 2022 17:08:00 +0800</lastBuildDate>
+        
+        <item>
+            <title>EventLoop</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/12/netty.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;1eventloop&quot;&gt;1,EventLoop&lt;/h1&gt;
+
+&lt;p&gt;The nature of EventLoop  is one single thread executor which mataince a selector . it’s run method deal with io event comming from channel .&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;it extends  java.util.concurrent.ScheduledExecutorService ,so it own all method of ScheduledExecutorService&lt;/li&gt;
+  &lt;li&gt;it also entends Ordere...
+            </description>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/12/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Netty Start</title>
@@ -14,7 +34,7 @@
                 http://localhost:4000/netty/index_posts/2022/09/11/netty.html
             </link>
             <description>
-                &lt;h1 id=&quot;1hello-world&quot;&gt;1,Hello world&lt;/h1&gt;
+                &lt;h1 id=&quot;1hello-netty&quot;&gt;1,Hello Netty&lt;/h1&gt;
 
 &lt;h2 id=&quot;server&quot;&gt;Server&lt;/h2&gt;
 
