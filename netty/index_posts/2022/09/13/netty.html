@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<head>
+    <title>Future & Promise | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Frontend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/frontend/react.html">React</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/reactnative.html">ReactNative</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/flutter.html">Flutter</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/es6.html">Es6</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/front_others.html">Others</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Backend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/backend/java.html">Java</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/netty.html">Netty</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/python.html">Python</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/ruby.html">Ruby</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/rails.html">Rails</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/embedded/c.html">C</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/digit.html">DigitCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Idea <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/idea/strategy.html">DesignStrategy</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/ddd.html">DDD</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/cloud.html">Cloud</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/it/tcpip.html">TCP/IP</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/socket.html">Socket</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mqtt.html">mqtt</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/jvm.html">jvm</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/linux.html">linux</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/docker.html">docker</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/k8s.html">k8s</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mq.html">mq</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/memorycache.html">memorycache</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/elk.html">elk</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/zookeeper.html">zookeeper</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/git.html">git</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>Future & Promise</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">13 Sep 2022</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <p>1, close() // close the channel</p>
+
+<p>2, closeFuture()</p>
+
+<ul>
+  <li>sync()   wait synchronously channel close happen</li>
+  <li>addListener()  wait asynchronously channel close happen</li>
+</ul>
+
+<p>3,pipeline() add handler</p>
+
+<p>4, write() write data into channel</p>
+
+<p>5, writeAndFlush() write and flush</p>
+
+<h2 id="sync">Sync()</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+    <span class="nc">ChannelFuture</span> <span class="n">future</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">})</span>
+            <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="c1">// connect is a asynchronous unlocking method ,</span>
+            <span class="c1">// nio thread do connecting job</span>
+            <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">);</span>
+
+    <span class="n">future</span><span class="o">.</span><span class="na">sync</span><span class="o">();</span><span class="c1">// block current thread,</span>
+    <span class="c1">// wait synchronously until connected event happen in nio thread</span>
+
+    <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+    <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="s">"hello world"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>another way</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+    <span class="nc">ChannelFuture</span> <span class="n">future</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">})</span>
+            <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="c1">// connect is a asynchronous unlocking method ,</span>
+            <span class="c1">// nio thread do connecting job</span>
+            <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">);</span>
+
+    <span class="c1">//bind callable method to nio thread</span>
+    <span class="n">future</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelFutureListener</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span> <span class="c1">// connect event happen in nio thread , call this method</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operationComplete</span><span class="o">(</span><span class="nc">ChannelFuture</span> <span class="n">channelFuture</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">channelFuture</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+            <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="s">"hello world"</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<h2 id="close-is-asynchronous-unlocking-method">close() is asynchronous unlocking method</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static void main(String[] args) throws InterruptedException {
+        ChannelFuture future = new Bootstrap()
+                .group(new NioEventLoopGroup())
+                .handler(new ChannelInitializer&lt;NioSocketChannel&gt;() {
+                    @Override
+                    protected void initChannel(NioSocketChannel ch) throws Exception {
+                        ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
+                        ch.pipeline().addLast(new StringEncoder());
+                    }
+                })
+                .channel(NioSocketChannel.class)
+                .connect("localhost", 8080);
+
+        Channel channel = future.sync().channel();
+
+        new Thread(()-&gt;{
+            Scanner scanner = new Scanner(System.in);
+            while (true){
+                String line = scanner.nextLine();
+                if("q".equals(line)){
+                    channel.close();//same as connect ,
+                    // close is a asynchronous unlocking method too 
+                    log.info("deal with some work after close");
+                    break;
+                }
+                channel.writeAndFlush(line);
+            }
+        },"input").start();
+    }
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q
+10:54:19.837 [input] INFO com.itcast.netty.c3.EventLoopClient3 - deal with some work after close
+10:54:19.837 [nioEventLoopGroup-2-1] DEBUG io.netty.handler.logging.LoggingHandler - [id: 0x38ebeb1a, L:/127.0.0.1:54033 - R:localhost/127.0.0.1:8080] CLOSE
+10:54:19.839 [nioEventLoopGroup-2-1] DEBUG io.netty.handler.logging.LoggingHandler - [id: 0x38ebeb1a, L:/127.0.0.1:54033 ! R:localhost/127.0.0.1:8080] INACTIVE
+10:54:19.839 [nioEventLoopGroup-2-1] DEBUG io.netty.handler.logging.LoggingHandler - [id: 0x38ebeb1a, L:/127.0.0.1:54033 ! R:localhost/127.0.0.1:8080] UNREGISTERED
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+    <span class="nc">ChannelFuture</span> <span class="n">future</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">(</span><span class="nc">LogLevel</span><span class="o">.</span><span class="na">DEBUG</span><span class="o">));</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">})</span>
+            <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">);</span>
+
+    <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">();</span>
+
+    <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()-&gt;{</span>
+        <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+            <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span><span class="s">"q"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">line</span><span class="o">)){</span>
+                <span class="n">channel</span><span class="o">.</span><span class="na">close</span><span class="o">();</span><span class="c1">//same as connect ,</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">},</span><span class="s">"input"</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+    <span class="nc">ChannelFuture</span> <span class="n">closeFuture</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">closeFuture</span><span class="o">();</span>
+    <span class="c1">// close is a asynchronous unlocking method too</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"waiting close ..."</span><span class="o">);</span>
+    <span class="n">closeFuture</span><span class="o">.</span><span class="na">sync</span><span class="o">();</span>
+    <span class="c1">// close is a asynchronous unlocking method too</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"deal with some work after close"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<p>or</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">closeFuture</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelFutureListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operationComplete</span><span class="o">(</span><span class="nc">ChannelFuture</span> <span class="n">future</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"deal with some work after close"</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<p>shutdownGracefully</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+        <span class="nc">ChannelFuture</span> <span class="n">future</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">group</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">NioSocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">NioSocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                        <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">(</span><span class="nc">LogLevel</span><span class="o">.</span><span class="na">DEBUG</span><span class="o">));</span>
+                        <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringEncoder</span><span class="o">());</span>
+                    <span class="o">}</span>
+                <span class="o">})</span>
+                <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">);</span>
+
+        <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">();</span>
+
+        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(</span><span class="s">"q"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">line</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">channel</span><span class="o">.</span><span class="na">close</span><span class="o">();</span><span class="c1">//same as connect ,</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="s">"input"</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="nc">ChannelFuture</span> <span class="n">closeFuture</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">closeFuture</span><span class="o">();</span>
+
+        <span class="n">closeFuture</span><span class="o">.</span><span class="na">addListener</span><span class="o">((</span><span class="nc">ChannelFutureListener</span><span class="o">)</span> <span class="n">future2</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"deal with some work after close"</span><span class="o">);</span>
+            <span class="n">group</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span><span class="c1">//refuse new task,send data which is to be sent , then shutdown itself</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<h2 id="future--promise">Future &amp; Promise</h2>
+
+<p>promise  extends netty future extends jdk future</p>
+
+<ul>
+  <li>
+    <p>jdk future -&gt; it can only wait for result synchronously,get result utill the task end</p>
+  </li>
+  <li>
+    <p>netty future -&gt; it can both wait for result synchronously and asychronously , but still get result utill the task end</p>
+  </li>
+  <li>
+    <p>netty promise -&gt; can be container for both thread .</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function/name</th>
+      <th>jdk Future</th>
+      <th>netty Future</th>
+      <th>Promise</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cancel</td>
+      <td>cancel task</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>isCanceled</td>
+      <td> </td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>isDone</td>
+      <td>Judge task done or not ,cannot get to know success or fail</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>get</td>
+      <td>get result synchronously blocking</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>getNow</td>
+      <td>-</td>
+      <td>get result, no block,get null if the task is not diminished，throw error if task failed</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>await</td>
+      <td>-</td>
+      <td>wait until task done, does not throw error when failed</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>sync</td>
+      <td>-</td>
+      <td>wait task end synchronously blocking，throw error if task failed</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>isSuccess</td>
+      <td>-</td>
+      <td> </td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>cause</td>
+      <td>-</td>
+      <td>get error message, no block</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>addLinstener</td>
+      <td>-</td>
+      <td>add callback , get result asynchronously</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>setSuccess</td>
+      <td>-</td>
+      <td>-</td>
+      <td>Set success result</td>
+    </tr>
+    <tr>
+      <td>setFailure</td>
+      <td>-</td>
+      <td>-</td>
+      <td>Set error result</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="jdk-future">Jdk future</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span><span class="o">,</span> <span class="nc">ExecutionException</span> <span class="o">{</span>
+        <span class="nc">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+        <span class="nc">Future</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">future</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="k">new</span> <span class="nc">Callable</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">call</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"execute now"</span><span class="o">);</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                <span class="k">return</span> <span class="mi">50</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"wait result"</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result is {}"</span><span class="o">,</span><span class="n">future</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="netty-future">Netty future</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span><span class="o">,</span> <span class="nc">ExecutionException</span> <span class="o">{</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+
+        <span class="nc">EventLoop</span> <span class="n">eventLoop</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+
+        <span class="nc">Future</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">future</span> <span class="o">=</span> <span class="n">eventLoop</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="k">new</span> <span class="nc">Callable</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">call</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"execute now"</span><span class="o">);</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                <span class="k">return</span> <span class="mi">70</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"wait result"</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result is {}"</span><span class="o">,</span> <span class="n">future</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="addlistener">addListener</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span><span class="o">,</span> <span class="nc">ExecutionException</span> <span class="o">{</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+
+        <span class="nc">EventLoop</span> <span class="n">eventLoop</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+
+        <span class="nc">Future</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">future</span> <span class="o">=</span> <span class="n">eventLoop</span><span class="o">.</span><span class="na">submit</span><span class="o">(</span><span class="k">new</span> <span class="nc">Callable</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">call</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"execute now"</span><span class="o">);</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                <span class="k">return</span> <span class="mi">70</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">future</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">GenericFutureListener</span><span class="o">&lt;</span><span class="nc">Future</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operationComplete</span><span class="o">(</span><span class="nc">Future</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">future</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result is {}"</span><span class="o">,</span> <span class="n">future</span><span class="o">.</span><span class="na">getNow</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="netty-promise">Netty promise</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span><span class="o">,</span> <span class="nc">ExecutionException</span> <span class="o">{</span>
+
+        <span class="nc">EventLoop</span> <span class="n">eventLoop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">().</span><span class="na">next</span><span class="o">();</span>
+
+        <span class="nc">DefaultPromise</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultPromise</span><span class="o">&lt;&gt;(</span><span class="n">eventLoop</span><span class="o">);</span>
+
+        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"start run"</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">setSuccess</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+        
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"wait result"</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result is {}"</span><span class="o">,</span> <span class="n">promise</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/netty/index_posts/2022/09/12/netty.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">EventLoop</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/14/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">Handler & Pipeline</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

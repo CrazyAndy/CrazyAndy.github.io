@@ -386,6 +386,8 @@ io.netty.channel.nio.NioEventLoop@2d6a9952
 
 <h2 id="optimize-the-code">Optimize the code</h2>
 
+<p>We should not block the worker on channel , we should dispatch the job to other worker when needed.</p>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestEventLoop2</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
@@ -443,6 +445,48 @@ io.netty.channel.nio.NioEventLoop@2d6a9952
 
 <center><img src="/assets/images/posts/backend/netty/0041.png" width="100%" /></center>
 
+<p>​</p>
+
+<h2 id="how-does-the-handler-change-thread-">How does the handler change thread ?</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="s">"handler1"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChannelInboundHandlerAdapter</span><span class="o">()</span> <span class="o">{</span>
+                            <span class="nd">@Override</span>
+                            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelRead</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ByteBuf</span><span class="o">)</span> <span class="n">msg</span><span class="o">;</span>
+                                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="n">buf</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="nc">Charset</span><span class="o">.</span><span class="na">defaultCharset</span><span class="o">()));</span>
+                                <span class="n">ctx</span><span class="o">.</span><span class="na">fireChannelRead</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+                            <span class="o">}</span>
+                        <span class="o">})</span>
+</code></pre></div></div>
+
+<p>io.netty.channel.AbstractChannelHandlerContext.fireChannelRead</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nc">ChannelHandlerContext</span> <span class="nf">fireChannelRead</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Object</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">invokeChannelRead</span><span class="o">(</span><span class="n">findContextInbound</span><span class="o">(</span><span class="no">MASK_CHANNEL_READ</span><span class="o">),</span> <span class="n">msg</span><span class="o">);</span>
+  <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">static</span> <span class="kt">void</span> <span class="nf">invokeChannelRead</span><span class="o">(</span><span class="kd">final</span> <span class="nc">AbstractChannelHandlerContext</span> <span class="n">next</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">Object</span> <span class="n">m</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">pipeline</span><span class="o">.</span><span class="na">touch</span><span class="o">(</span><span class="nc">ObjectUtil</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">(</span><span class="n">msg</span><span class="o">,</span> <span class="s">"msg"</span><span class="o">),</span> <span class="n">next</span><span class="o">);</span>
+  <span class="nc">EventExecutor</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">executor</span><span class="o">();</span> <span class="c1">// get next EventLoop -&gt; executor</span>
+  
+  <span class="k">if</span> <span class="o">(</span><span class="n">executor</span><span class="o">.</span><span class="na">inEventLoop</span><span class="o">())</span> <span class="o">{</span><span class="c1">// judge current thread is equal to the thread of executor or not</span>
+    <span class="n">next</span><span class="o">.</span><span class="na">invokeChannelRead</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="c1">// package to be excuted code to a task , let executer(thread included) handle this task </span>
+    <span class="n">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">next</span><span class="o">.</span><span class="na">invokeChannelRead</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+      <span class="o">}</span>
+    <span class="o">});</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
@@ -459,6 +503,18 @@ io.netty.channel.nio.NioEventLoop@2d6a9952
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/13/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">Future & Promise</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             
