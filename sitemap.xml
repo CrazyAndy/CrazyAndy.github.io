@@ -6,7 +6,22 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sun, 09 Oct 2022 07:01:02 +0800</lastBuildDate>
+        <lastBuildDate>Sun, 09 Oct 2022 23:11:09 +0800</lastBuildDate>
+        
+        <item>
+            <title>ByteBuf</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/15/netty.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Thu, 15 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/15/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Handler & Pipeline</title>
@@ -14,8 +29,14 @@
                 http://localhost:4000/netty/index_posts/2022/09/14/netty.html
             </link>
             <description>
-                
+                &lt;p&gt;ChannelHandler is used for dealing with all events of Channel ，inbond and outbound。All annelHandler is strung together in a string，this is Pipeline&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;inbound handler is subclass of ChannelInboundHandlerAdapter，read data ,&lt;/li&gt;
+  &lt;li&gt;out bond handler is subclass of ChannelOutboundHandlerAdapter，write data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Chann...
             </description>
             <pubDate>Wed, 14 Sep 2022 00:00:00 +0800</pubDate>
             <guid>

@@ -620,6 +620,8 @@
 
 <h3 id="netty-promise">Netty promise</h3>
 
+<h4 id="1sync-success">1,sync success</h4>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span><span class="o">,</span> <span class="nc">ExecutionException</span> <span class="o">{</span>
 
         <span class="nc">EventLoop</span> <span class="n">eventLoop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">().</span><span class="na">next</span><span class="o">();</span>
@@ -640,6 +642,96 @@
         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"wait result"</span><span class="o">);</span>
         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result is {}"</span><span class="o">,</span> <span class="n">promise</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
     <span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="2async-success">2,async success</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DefaultEventLoop</span> <span class="n">eventExecutors</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultEventLoop</span><span class="o">();</span>
+<span class="nc">DefaultPromise</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultPromise</span><span class="o">&lt;&gt;(</span><span class="n">eventExecutors</span><span class="o">);</span>
+
+<span class="c1">// set callback</span>
+<span class="n">promise</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">future</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="c1">// this.fucture == promise </span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span><span class="n">future</span><span class="o">.</span><span class="na">getNow</span><span class="o">());</span>
+<span class="o">});</span>
+
+<span class="n">eventExecutors</span><span class="o">.</span><span class="na">execute</span><span class="o">(()-&gt;{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"set success, {}"</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span>
+    <span class="n">promise</span><span class="o">.</span><span class="na">setSuccess</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="o">});</span>
+
+<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"start..."</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="3-sync-failed-or-get-failed">3, sync failed or get failed</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DefaultEventLoop</span> <span class="n">eventExecutors</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultEventLoop</span><span class="o">();</span>
+        <span class="nc">DefaultPromise</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultPromise</span><span class="o">&lt;&gt;(</span><span class="n">eventExecutors</span><span class="o">);</span>
+
+        <span class="n">eventExecutors</span><span class="o">.</span><span class="na">execute</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="nc">RuntimeException</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"error..."</span><span class="o">);</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"set failure, {}"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">});</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"start..."</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="n">promise</span><span class="o">.</span><span class="na">getNow</span><span class="o">());</span>
+        <span class="n">promise</span><span class="o">.</span><span class="na">get</span><span class="o">();</span> <span class="c1">// sync() throw exception，but get throw ExecutionException</span>
+</code></pre></div></div>
+
+<h4 id="4-sync-failed-await">4, sync failed.&amp; await</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DefaultEventLoop</span> <span class="n">eventExecutors</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultEventLoop</span><span class="o">();</span>
+<span class="nc">DefaultPromise</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultPromise</span><span class="o">&lt;&gt;(</span><span class="n">eventExecutors</span><span class="o">);</span>
+
+<span class="n">eventExecutors</span><span class="o">.</span><span class="na">execute</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nc">RuntimeException</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"error..."</span><span class="o">);</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"set failure, {}"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+<span class="o">});</span>
+
+<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"start..."</span><span class="o">);</span>
+<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="n">promise</span><span class="o">.</span><span class="na">getNow</span><span class="o">());</span>
+<span class="n">promise</span><span class="o">.</span><span class="na">await</span><span class="o">();</span> <span class="c1">// await not throw exception ,compared with async() or get()</span>
+<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result {}"</span><span class="o">,</span> <span class="o">(</span><span class="n">promise</span><span class="o">.</span><span class="na">isSuccess</span><span class="o">()</span> <span class="o">?</span> <span class="n">promise</span><span class="o">.</span><span class="na">getNow</span><span class="o">()</span> <span class="o">:</span> <span class="n">promise</span><span class="o">.</span><span class="na">cause</span><span class="o">()).</span><span class="na">toString</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>5, async failed</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">DefaultEventLoop</span> <span class="n">eventExecutors</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultEventLoop</span><span class="o">();</span>
+<span class="nc">DefaultPromise</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultPromise</span><span class="o">&lt;&gt;(</span><span class="n">eventExecutors</span><span class="o">);</span>
+
+<span class="n">promise</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">future</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"result {}"</span><span class="o">,</span> <span class="o">(</span><span class="n">promise</span><span class="o">.</span><span class="na">isSuccess</span><span class="o">()</span> <span class="o">?</span> <span class="n">promise</span><span class="o">.</span><span class="na">getNow</span><span class="o">()</span> <span class="o">:</span> <span class="n">promise</span><span class="o">.</span><span class="na">cause</span><span class="o">()).</span><span class="na">toString</span><span class="o">());</span>
+<span class="o">});</span>
+
+<span class="n">eventExecutors</span><span class="o">.</span><span class="na">execute</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nc">RuntimeException</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"error..."</span><span class="o">);</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"set failure, {}"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+<span class="o">});</span>
+
+<span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"start..."</span><span class="o">);</span>
 </code></pre></div></div>
 
 

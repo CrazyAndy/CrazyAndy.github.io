@@ -3408,7 +3408,7 @@
     }
 
     .page, .post {
-        max-width: 780px;
+        max-width: 1024px;
         margin: 0 auto 60px
     }
 
