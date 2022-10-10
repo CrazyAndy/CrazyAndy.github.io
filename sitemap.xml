@@ -6,7 +6,23 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sun, 09 Oct 2022 23:11:09 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 10 Oct 2022 14:44:42 +0800</lastBuildDate>
+        
+        <item>
+            <title>StickPackage & Half Package</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/16/netty.html
+            </link>
+            <description>
+                &lt;p&gt;h&lt;/p&gt;
+
+
+            </description>
+            <pubDate>Fri, 16 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/16/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>ByteBuf</title>
@@ -14,8 +30,9 @@
                 http://localhost:4000/netty/index_posts/2022/09/15/netty.html
             </link>
             <description>
-                
+                &lt;h3 id=&quot;bytebuf-is-subclass-of-bytebufferjava-nio&quot;&gt;ByteBuf is subclass of ByteBuffer(java nio)&lt;/h3&gt;
 
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&q...
             </description>
             <pubDate>Thu, 15 Sep 2022 00:00:00 +0800</pubDate>
             <guid>

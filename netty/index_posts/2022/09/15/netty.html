@@ -255,7 +255,448 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h3 id="bytebuf-is-subclass-of-bytebufferjava-nio">ByteBuf is subclass of ByteBuffer(java nio)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+        <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"a"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">buf</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">().</span><span class="na">getBytes</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PooledUnsafeDirectByteBuf(ridx: 0, widx: 0, cap: 256)
+PooledUnsafeDirectByteBuf(ridx: 0, widx: 300, cap: 512)
+</code></pre></div></div>
+
+<p>output bytebuf by formatter</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">log</span><span class="o">(</span><span class="nc">ByteBuf</span> <span class="n">buffer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="na">readableBytes</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="mi">16</span> <span class="o">+</span> <span class="o">(</span><span class="n">length</span> <span class="o">%</span> <span class="mi">15</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="mi">4</span><span class="o">;</span>
+        <span class="nc">StringBuilder</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="n">rows</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"read index:"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">readerIndex</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">" write index:"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">writerIndex</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">" capacity:"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">capacity</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="no">NEWLINE</span><span class="o">);</span>
+        <span class="n">appendPrettyHexDump</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="n">buffer</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">buf</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>if we output 34 byte with log method</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:34 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 |aaaaaaaaaaaaaaaa|
+|00000010| 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 61 |aaaaaaaaaaaaaaaa|
+|00000020| 61 61                                           |aa              |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<h3 id="direct-memory-vs-heap-memory">Direct memory vs Heap memory</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">directBuf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">directBuffer</span><span class="o">();</span><span class="c1">// create or destory will cost more cpu, but read or write cost less</span>
+<span class="nc">ByteBuf</span> <span class="n">heapBuf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">heapBuffer</span><span class="o">();</span><span class="c1">//on the contrary ， be effected by gc</span>
+</code></pre></div></div>
+
+<h3 id="integrant">integrant</h3>
+
+<center><img src="/assets/images/posts/backend/netty/0010.png" width="100%" /></center>
+
+<h3 id="write">Write</h3>
+
+<p>Method list (ignore some unimportant method)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>method name</th>
+      <th>Action</th>
+      <th>Desc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>writeBoolean(boolean value)</td>
+      <td>write boolean value</td>
+      <td>01|00 stands for true|false</td>
+    </tr>
+    <tr>
+      <td>writeByte(int value)</td>
+      <td>write byte</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeShort(int value)</td>
+      <td>write  short</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeInt(int value)</td>
+      <td>write int</td>
+      <td>Big Endian，ex. 0x250 -&gt; 00 00 02 50 .<br />It’s common in network program</td>
+    </tr>
+    <tr>
+      <td>writeIntLE(int value)</td>
+      <td>write int</td>
+      <td>Little Endian，ex. 0x250 -&gt; 50 02 00 00</td>
+    </tr>
+    <tr>
+      <td>writeLong(long value)</td>
+      <td>write long</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeChar(int value)</td>
+      <td>write char</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeFloat(float value)</td>
+      <td>write float</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeDouble(double value)</td>
+      <td>write double</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeBytes(ByteBuf src)</td>
+      <td>write netty ByteBuf</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeBytes(byte[] src)</td>
+      <td>write byte[]</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>writeBytes(ByteBuffer src)</td>
+      <td>write nio  ByteBuffer</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>int writeCharSequence(CharSequence sequence, Charset charset)</td>
+      <td>write string</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>​</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">directBuf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">directBuffer</span><span class="o">();</span>
+<span class="nc">ByteBuf</span> <span class="n">heapBuf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">heapBuffer</span><span class="o">();</span>
+
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">592</span><span class="o">);</span> <span class="c1">///592(int) == 0x250</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+<span class="n">heapBuf</span><span class="o">.</span><span class="na">writeIntLE</span><span class="o">(</span><span class="mi">592</span><span class="o">);</span><span class="c1">/// 592(int) == 0x250</span>
+<span class="n">log</span><span class="o">(</span><span class="n">heapBuf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:4 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 00 00 02 50                                     |...P            |
++--------+-------------------------------------------------+----------------+
+read index:0 write index:4 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 50 02 00 00                                     |P...            |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<h3 id="expansion">Expansion</h3>
+
+<p>the role is</p>
+
+<ul>
+  <li>if the length is smaller than 512 after you write data into current ByteBuf, the capacity would enlarge at 16 per time</li>
+  <li>if the length is larger than 512 after you write data into current ByteBuf,  the capacity would enlarge to next  2^n .EX. if the length is 513 after being written，then the capacity is 2^10=1024（2^9=512 is not enough）</li>
+  <li>it will throw error if expand capacity out of max capacity</li>
+</ul>
+
+<h3 id="read">Read</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">directBuf</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">directBuf</span><span class="o">.</span><span class="na">readByte</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">directBuf</span><span class="o">.</span><span class="na">readByte</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">directBuf</span><span class="o">.</span><span class="na">readByte</span><span class="o">());</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">directBuf</span><span class="o">.</span><span class="na">readByte</span><span class="o">());</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:12 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04 00 00 00 05 00 00 00 06             |............    |
++--------+-------------------------------------------------+----------------+
+1
+2
+3
+4
+read index:4 write index:12 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 00 00 00 05 00 00 00 06                         |........        |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>what if we want to read 5 repeatly</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">directBuf</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">markReaderIndex</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">directBuf</span><span class="o">.</span><span class="na">readInt</span><span class="o">());</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+<span class="n">directBuf</span><span class="o">.</span><span class="na">resetReaderIndex</span><span class="o">();</span>
+<span class="n">log</span><span class="o">(</span><span class="n">directBuf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:4 write index:12 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 00 00 00 05 00 00 00 06                         |........        |
++--------+-------------------------------------------------+----------------+
+5
+read index:8 write index:12 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 00 00 00 06                                     |....            |
++--------+-------------------------------------------------+----------------+
+read index:4 write index:12 capacity:256
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 00 00 00 05 00 00 00 06                         |........        |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>Read would affect readerIndex , but get(i) would not .</p>
+
+<h3 id="retain--release">Retain &amp; release</h3>
+
+<ul>
+  <li>UnpooledHeapByteBuf use JVM memory，GC would recycle memory</li>
+  <li>UnpooledDirectByteBuf use direct memory , need special method to recycle memory ,because GC recycle untimely</li>
+  <li>PooledByteBuf and its subclass use pool strategy , need complex role to recycle memory</li>
+</ul>
+
+<p>谁来负责 release 呢？</p>
+
+<p>不是我们想象的（一般情况下）</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="n">buf</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>​</p>
+
+<p>Attention , because of  existence of pipeline, we should pass ByteBuf amoung all ChannelHandler one by one , if we release ByteBuf at midway , next handler would not receive this ByteBuf . No doubt , if current ChannelHandler deal with this ByteBuf , and this ByteBuf complete its mission, then we no need to pass it to next handler .</p>
+
+<p>Base role: who are the end user for this ByteBuf , who release it .</p>
+
+<ul>
+  <li>At the beginning，speaking of NIO ， io.netty.channel.nio.AbstractNioByteChannel.NioByteUnsafe#read create ByteBuf first time , and put it in pipeline（line 163 pipeline.fireChannelRead(byteBuf)）</li>
+  <li>inbondHandler deal with ByteBuf
+    <ul>
+      <li>if current handler doesn’t deal with ByteBuf ,just call ctx.fireChannelRead(msg)  to pass this ByteBuf to next handler，no need  release this ByteBuf here</li>
+      <li>if current handler parse this ByteBuf to other Java Object for business use, now this ByteBuf is useless, we must release this ByteBuf</li>
+      <li>Even if current handler doesn’t call ctx.fireChannelRead(msg) to pass to next one，we must release it</li>
+      <li>pay more attention to all kinds of exception，if ByteBuf cannot be passed to next ChannelHandler successfully，we must release it</li>
+      <li>assume ByteBuf is passed to next handler one by one , then TailContext will release it（origin ByteBuf）</li>
+    </ul>
+  </li>
+  <li>outBondHandler deal with ByteBuf
+    <ul>
+      <li>all out message will be parse to ByteBuf ，and pass to previous outBondHanlder，finally HeadContext will release it after flush</li>
+    </ul>
+  </li>
+  <li>deal with exception
+    <ul>
+      <li>if you don’t know how much times this ByteBuf is referenced , and you have to release it , so we can release it in loop until release return true</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="slice">Slice</h3>
+
+<p>compared with nio FileChannel , slice is one implentment of 【zero copy】， slice cut origin ByteBuf into several slices , but it does not copy memory , still use the origin memory , every single slice manage indepent read index pointer and write index pointer</p>
+
+<center><img src="/assets/images/posts/backend/netty/0011.png" width="60%" /></center>
+
+<p>EX, init one ByteBuf</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="n">buf</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">});</span>
+<span class="n">log</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:4 capacity:10
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04                                     |....            |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+  <span class="n">buf</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">});</span>
+  <span class="n">log</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+
+  <span class="nc">ByteBuf</span> <span class="n">slice</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="na">slice</span><span class="o">();</span>
+  <span class="n">log</span><span class="o">(</span><span class="n">slice</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:4 capacity:10
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04                                     |....            |
++--------+-------------------------------------------------+----------------+
+read index:0 write index:4 capacity:4
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04                                     |....            |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>Attentation , if we slice.writeByte(5); later , it will throw IndexOutOfBoundsException, because its capacity is 4</p>
+
+<p>If we readByte at origin ByteBuf , it would take no effect to slice .because slice owns its indepent reader index pointer.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slice</span><span class="o">.</span><span class="na">setByte</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+<span class="n">log</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>then</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>read index:0 write index:4 capacity:10
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 05 04                                     |....            |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<h3 id="duplicate">duplicate</h3>
+
+<p>duplicate is also one implentment of 【zero copy】，it cut off all of origin ByteBuf , no limit of max capacity .it also use same memory of origin ByteBuf, and reader index pointer and writer index pointer is independent</p>
+
+<center><img src="/assets/images/posts/backend/netty/0012.png" width="60%" /></center>
+
+<h3 id="copy">Copy</h3>
+
+<p>would create new ByteBuf</p>
+
+<h3 id="compositebytebuf">CompositeByteBuf</h3>
+
+<p>composite is also one implentment of 【zero copy】，it can composite several slice into one big ByteBuf , does not copy memory.</p>
+
+<p>Init</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">buf1</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">buf1</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">});</span>
+<span class="nc">ByteBuf</span> <span class="n">buf2</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">buf2</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">});</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">ByteBufUtil</span><span class="o">.</span><span class="na">prettyHexDump</span><span class="o">(</span><span class="n">buf1</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">ByteBufUtil</span><span class="o">.</span><span class="na">prettyHexDump</span><span class="o">(</span><span class="n">buf2</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04 05                                  |.....           |
++--------+-------------------------------------------------+----------------+
+         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 06 07 08 09 0a                                  |.....           |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>now , we need one new ByteBuf , combine buf1 and buf2 ,what should we do ？</p>
+
+<p>method 1:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">buf3</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span>
+    <span class="o">.</span><span class="na">buffer</span><span class="o">(</span><span class="n">buf1</span><span class="o">.</span><span class="na">readableBytes</span><span class="o">()+</span><span class="n">buf2</span><span class="o">.</span><span class="na">readableBytes</span><span class="o">());</span>
+<span class="n">buf3</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">buf1</span><span class="o">);</span>
+<span class="n">buf3</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">buf2</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">ByteBufUtil</span><span class="o">.</span><span class="na">prettyHexDump</span><span class="o">(</span><span class="n">buf3</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>Result</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04 05 06 07 08 09 0a                   |..........      |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>method 1 cause memory copy .</p>
+
+<p>method2：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">CompositeByteBuf</span> <span class="n">buf3</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">compositeBuffer</span><span class="o">();</span>
+<span class="n">buf3</span><span class="o">.</span><span class="na">addComponents</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">buf1</span><span class="o">,</span> <span class="n">buf2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>same output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         +-------------------------------------------------+
+         |  0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f |
++--------+-------------------------------------------------+----------------+
+|00000000| 01 02 03 04 05 06 07 08 09 0a                   |..........      |
++--------+-------------------------------------------------+----------------+
+</code></pre></div></div>
+
+<p>CompositeByteBuf is a combined ByteBuf，it maintance one Component array，every Component maintance one ByteBuf，record index etc .</p>
+
+<ul>
+  <li>Advantage，virtual view，combine ByteBuf , does not cause memory copy</li>
+  <li>Disadvantage，more complex，cause more cost of cpu</li>
+</ul>
+
 
             
             
@@ -273,6 +714,18 @@
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/16/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">StickPackage & Half Package</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             
