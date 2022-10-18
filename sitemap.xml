@@ -6,7 +6,25 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 10 Oct 2022 14:44:42 +0800</lastBuildDate>
+        <lastBuildDate>Tue, 18 Oct 2022 17:28:10 +0800</lastBuildDate>
+        
+        <item>
+            <title>Protocol</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/17/netty.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;2-protocol-design-and-parse&quot;&gt;2. Protocol design and parse&lt;/h2&gt;
+
+&lt;h3 id=&quot;22-redis-protocol&quot;&gt;2.2 redis protocol&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;NioEventLoopGroup&lt;/span&gt; &lt;span class...
+            </description>
+            <pubDate>Sat, 17 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/17/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>StickPackage & Half Package</title>
@@ -14,9 +32,13 @@
                 http://localhost:4000/netty/index_posts/2022/09/16/netty.html
             </link>
             <description>
-                &lt;p&gt;h&lt;/p&gt;
+                &lt;h2 id=&quot;1-stick-package-and-half-package&quot;&gt;1. stick package and half package&lt;/h2&gt;
 
+&lt;h3 id=&quot;11-stick-package&quot;&gt;1.1 stick package&lt;/h3&gt;
 
+&lt;p&gt;Server&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;...
             </description>
             <pubDate>Fri, 16 Sep 2022 00:00:00 +0800</pubDate>
             <guid>

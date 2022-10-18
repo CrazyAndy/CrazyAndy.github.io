@@ -507,10 +507,6 @@ read index:4 write index:12 capacity:256
   <li>PooledByteBuf and its subclass use pool strategy , need complex role to recycle memory</li>
 </ul>
 
-<p>谁来负责 release 呢？</p>
-
-<p>不是我们想象的（一般情况下）</p>
-
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="o">...</span>
 <span class="k">try</span> <span class="o">{</span>
     <span class="o">...</span>
