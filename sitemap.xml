@@ -6,7 +6,25 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Tue, 18 Oct 2022 17:28:10 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 21 Oct 2022 00:28:41 +0800</lastBuildDate>
+        
+        <item>
+            <title>Chat Room</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/18/netty.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;3-chat-room&quot;&gt;3. chat room&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-description&quot;&gt;3.1 description&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;spa...
+            </description>
+            <pubDate>Sun, 18 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/18/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Protocol</title>
@@ -406,12 +424,34 @@
         </item>
         
         <item>
-            <title>BikeSharing System</title>
+            <title>Grow Lights</title>
+            <link>
+                http://localhost:4000/projects/index_projects/2022/03/19/GrowLights.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;the-controller-of-grow-lights-system&quot;&gt;The controller of Grow Lights System&lt;/h1&gt;
+
+&lt;h2 id=&quot;iintroduction&quot;&gt;I.Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;1research-background-and-significance&quot;&gt;1.Research Background and Significance&lt;/h3&gt;
+
+&lt;p&gt; With the rapid development of smart agriculture , IOT is playing more and more important role in...
+            </description>
+            <pubDate>Sat, 19 Mar 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/projects/index_projects/2022/03/19/GrowLights.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>Bike Sharing System</title>
             <link>
                 http://localhost:4000/projects/index_projects/2022/03/18/BikeSharing.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;​		to do&lt;/p&gt;
+
+
             </description>
             <pubDate>Fri, 18 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
@@ -420,72 +460,77 @@
         </item>
         
         <item>
-            <title>km sharing</title>
+            <title>National Grid network data acquisition system</title>
             <link>
-                http://localhost:4000/projects/2022/03/08/KM.html
+                http://localhost:4000/projects/2022/03/08/networkspider.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;​		This project is a data collection system of the State Grid in order to analyze the financial index and stock quotation information. The system is divided into two subsystems: crawler core system and data management system. Background management personnel through the management page according to the specified target page document structure of the crawl rules and crawl task, start the...
             </description>
             <pubDate>Tue, 08 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/projects/2022/03/08/KM.html
+                http://localhost:4000/projects/2022/03/08/networkspider.html
             </guid>
         </item>
         
         <item>
-            <title>km sharing</title>
+            <title>GPMall</title>
             <link>
-                http://localhost:4000/projects/2022/03/07/KM.html
+                http://localhost:4000/projects/2022/03/07/GPMall.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;Spring boot  kafka  ElasticSearch    zookeeper&lt;/p&gt;
+
             </description>
             <pubDate>Mon, 07 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/projects/2022/03/07/KM.html
+                http://localhost:4000/projects/2022/03/07/GPMall.html
             </guid>
         </item>
         
         <item>
-            <title>km sharing</title>
+            <title>HttpServerFramework</title>
             <link>
-                http://localhost:4000/projects/2022/03/06/KM.html
+                http://localhost:4000/projects/2022/03/06/HttpServerFramework.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;todo&lt;/p&gt;
+
             </description>
             <pubDate>Sun, 06 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/projects/2022/03/06/KM.html
+                http://localhost:4000/projects/2022/03/06/HttpServerFramework.html
             </guid>
         </item>
         
         <item>
-            <title>km sharing</title>
+            <title>IOT</title>
             <link>
-                http://localhost:4000/projects/2022/03/05/KM.html
+                http://localhost:4000/projects/2022/03/05/IOT.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                &lt;p&gt;todo&lt;/p&gt;
+
+
             </description>
             <pubDate>Sat, 05 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/projects/2022/03/05/KM.html
+                http://localhost:4000/projects/2022/03/05/IOT.html
             </guid>
         </item>
         
         <item>
-            <title>km sharing</title>
+            <title>spider</title>
             <link>
-                http://localhost:4000/projects/2022/03/04/KM.html
+                http://localhost:4000/projects/2022/03/04/spider.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                
+
             </description>
             <pubDate>Fri, 04 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/projects/2022/03/04/KM.html
+                http://localhost:4000/projects/2022/03/04/spider.html
             </guid>
         </item>
         
@@ -495,39 +540,12 @@
                 http://localhost:4000/projects/2022/03/03/KM.html
             </link>
             <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
+                
+
             </description>
             <pubDate>Thu, 03 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
                 http://localhost:4000/projects/2022/03/03/KM.html
-            </guid>
-        </item>
-        
-        <item>
-            <title>km sharing</title>
-            <link>
-                http://localhost:4000/projects/2022/03/02/KM.html
-            </link>
-            <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
-            </description>
-            <pubDate>Wed, 02 Mar 2022 00:00:00 +0800</pubDate>
-            <guid>
-                http://localhost:4000/projects/2022/03/02/KM.html
-            </guid>
-        </item>
-        
-        <item>
-            <title>km sharing</title>
-            <link>
-                http://localhost:4000/projects/2022/03/01/KM.html
-            </link>
-            <description>
-                &lt;p&gt;In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteri...
-            </description>
-            <pubDate>Tue, 01 Mar 2022 00:00:00 +0800</pubDate>
-            <guid>
-                http://localhost:4000/projects/2022/03/01/KM.html
             </guid>
         </item>
         

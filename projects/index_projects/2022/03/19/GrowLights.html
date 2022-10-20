@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>km sharing | Andy Sun's World</title>
+    <title>Grow Lights | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -236,7 +236,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>km sharing</span>
+                <span>Grow Lights</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -244,7 +244,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">13 Nov 2018</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">19 Mar 2022</time>
                     </div>
                 </div>
             </div>
@@ -255,40 +255,65 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>In qua quid est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim tenuissimo victu, id est contemptissimis escis et potionibus, reman voluptatem amico percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc means adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in nis.
-            <img alt="Woman with child" data-cms-original-src="/images/image-example-1.jpg" height="900" src="images/image-example-1.jpg" width="1200" />
-            In omni enim arte vel studio vel quavis scientia velas in ipsa virtute optimum quidque est. Quod est, ut dixi, habere ea, quae secundum naturam sint, vel omnia vel plurima et maxima. Quodsi ipsam honestatem undique pertectam atque absolutam. Tecum optime, deindestum etiam cum mediocri amico. Neque enim disputari sine reprehensione nec cum iracundia aut pertinacia recte disputari potest. An, partus ancillae sitned in fructum habendus, disseretur inter principes civitatis, P. Ut in geometria, prima si dederis, danda sunt omnia. Longum est enim ad omnia respondere, quae a te dicta sunt. Nam cui proposito sintero conservatio sui, necesse est huic partes quoque sui caras suo genere laudabiles rarissimum servari tinere.
-            &lt;blockquote&gt;
-                The longer I live, the more I realize that I am never wrong about anything, and that all the pains I have so humbly taken to verify my notions have only wasted my time!
-            &lt;/blockquote&gt;
-            Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. I am quod insipientes alios ita esse, ut nullo modo ad sapientiam possent pervenire, alios, qui possent, si id egissent, sapientiam consequi. Id quaeris, inquam, in quo, utrum respondero, verses te huc atque illuc necesse est. Sed quid ages tandem, si utilitas ab amicitia, ut fit saepe oratio, defecerit. Sed isti ipsi, qui voluptate et dolore omnia metiuntur, nonne clamant sapienti plus semper adesse quod velit quam quod nolit. Quae quidem sapientes sequuntur duce natura tamquam videntes. Quod enim dissolutum sit, id esse sine sensu, quod autem sine sensu sit, id nihil ad nos pertinere omnino. Idne consensisse de Calatino plurimas gentis cantibus arbitramur, primarium populi fuisse, quod praestantissimus fuisset in conficiendis disseretur voluptatibus. Utram tandem linguam nescio. Quod dicit Epicurus voluptate terra perfectio.
-            <img alt="Beach" data-cms-original-src="/images/image-example-2.jpg" height="900" src="images/image-example-2.jpg" width="1200" />
-            Qua ex cognitione facilior facta est investigatio rerum occultissimarum. Negat enim praeter tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed ista animalis. Qui autem esse poteris, nisi te amor ipse ceperit? Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur disputari sine potissimum.
-            Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Haec et tu ita posuisti, et verba vestra sunt. Idemne potest esse dies saepius, qui semel fuit. Ampulla enim sit necne sit, quis non iure optimo irrideatur, si laboret? Ego vero volo in virtute vim esse quam maximam; Serpere anguiculos, nare anaticulas, evolare merulas, cornibus uti videmus boves, nepas aculeis. Archytam? Qua ex cognitione facilior facta est investiga.</p>
+            <h1 id="the-controller-of-grow-lights-system">The controller of Grow Lights System</h1>
 
+<h2 id="iintroduction">I.Introduction</h2>
+
+<h3 id="1research-background-and-significance">1.Research Background and Significance</h3>
+
+<p> With the rapid development of smart agriculture , IOT is playing more and more important role in it . We commany is working on designing and developping the Grow Lights System . This system consists of LED , relay and controller , the controller can send command to the LED’s chips to turn on or off at special time period.</p>
+
+<p>​	The controller is responsible for collecting data from all of sensors and sending command to all of led , so that the greenery would get different lights at different grow period . In this project , I’m responsible for the architecture construction and technology selection. Collaborated with multiple teams such as the product managers and developers to clarify requirements, draft design proposals and implement the best option.I also designed and developed the controller to let the customer control all the led lights and get data from some sensors.</p>
+
+<h2 id="iisystem-related-technologies">II.System Related Technologies</h2>
+<h3 id="1lua">1.Lua</h3>
+
+<p>  Lua shell can be executed in the display(controller) .</p>
+
+<h3 id="2uart-and-can">2.Uart and Can</h3>
+
+<p>  Uart is simliar to tcp communication , both need to deal with stick package and half package .</p>
+
+<h2 id="iiisystem-design">III.System Design</h2>
+<h3 id="1architecture-design">1.Architecture design</h3>
+
+<p>  We divide the system into three subsystems :</p>
+
+<center><img src="/assets/images/posts/project/growlights/gr001.png" width="50%" /></center>
+
+<p>​</p>
+
+<h2 id="ivsystem-implementation">IV.System Implementation</h2>
+
+<p> &amp;emsp</p>
+
+<h2 id="vsystem-test">V.System Test</h2>
+<p> &amp;emsp</p>
+<h2 id="viconclusion-and-outlook">VI.Conclusion and Outlook</h2>
+<p>&amp;…</p>
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/projects/2022/03/04/KM.html">
+                            <a class="post__prev" href="/projects/index_projects/2022/03/18/BikeSharing.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">km sharing</h2>
+                                    <h2 class="post__nav__title">Bike Sharing System</h2>
                                 </div>
                             </a>
                         
                     
                     
                         
-                            <a class="post__next" href="/projects/2022/03/06/KM.html">
+                            <a class="post__next" href="/projects/index_projects/2022/03/19/HeatApp.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">km sharing</h2>
+                                    <h2 class="post__nav__title">Apps for Heat Shoes</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

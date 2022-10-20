@@ -325,6 +325,8 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
+<p>​</p>
+
 <h3 id="23-http-protocol">2.3 http protocol</h3>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">NioEventLoopGroup</span> <span class="n">boss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
@@ -360,9 +362,9 @@
                 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                     log.debug("{}", msg.getClass());
 
-                    if (msg instanceof HttpRequest) { // 请求行，请求头
+                    if (msg instanceof HttpRequest) { // head
 
-                    } else if (msg instanceof HttpContent) { //请求体
+                    } else if (msg instanceof HttpContent) { //body
 
                     }
                 }
@@ -382,44 +384,44 @@
 <h3 id="24-self-define-protocol">2.4 self define protocol</h3>
 
 <ul>
-  <li>魔数，用来在第一时间判定是否是无效数据包</li>
-  <li>版本号，可以支持协议的升级</li>
-  <li>序列化算法，消息正文到底采用哪种序列化反序列化方式，可以由此扩展，例如：json、protobuf、hessian、jdk</li>
-  <li>指令类型，是登录、注册、单聊、群聊… 跟业务相关</li>
-  <li>请求序号，为了双工通信，提供异步能力</li>
-  <li>正文长度</li>
-  <li>消息正文</li>
+  <li>magic number，judge whether this message is valid or not quickly</li>
+  <li>Version number，support upgarding of protocol</li>
+  <li>serialization algorithm，e.x：json、protobuf、hessian、jdk</li>
+  <li>command type，such as login、register、single chat、group chat… matter with business</li>
+  <li>sequence id，support async</li>
+  <li>length of data</li>
+  <li>Data</li>
 </ul>
 
-<h4 id="编解码器">编解码器</h4>
+<h4 id="encode-and-decode">encode and decode</h4>
 
-<p>根据上面的要素，设计一个登录请求消息和登录响应消息，并使用 Netty 完成收发</p>
+<p>design how to login and reply</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageCodec</span> <span class="kd">extends</span> <span class="nc">ByteToMessageCodec</span><span class="o">&lt;</span><span class="nc">Message</span><span class="o">&gt;</span> <span class="o">{</span>
 
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">encode</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Message</span> <span class="n">msg</span><span class="o">,</span> <span class="nc">ByteBuf</span> <span class="n">out</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="c1">// 1. 4 字节的魔数</span>
+        <span class="c1">// 1. 4 magic number</span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">});</span>
-        <span class="c1">// 2. 1 字节的版本,</span>
+        <span class="c1">// 2. 1 version,</span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-        <span class="c1">// 3. 1 字节的序列化方式 jdk 0 , json 1</span>
+        <span class="c1">// 3. 1 serialization jdk 0 , json 1</span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-        <span class="c1">// 4. 1 字节的指令类型</span>
+        <span class="c1">// 4. 1 command type</span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getMessageType</span><span class="o">());</span>
-        <span class="c1">// 5. 4 个字节</span>
+        <span class="c1">// 5. 4 bytes , sequence id </span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getSequenceId</span><span class="o">());</span>
-        <span class="c1">// 无意义，对齐填充</span>
+        <span class="c1">// no sense </span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mh">0xff</span><span class="o">);</span>
-        <span class="c1">// 6. 获取内容的字节数组</span>
+        <span class="c1">// 6. get byte array of data</span>
         <span class="nc">ByteArrayOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
         <span class="nc">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectOutputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">);</span>
         <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
         <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">bos</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
-        <span class="c1">// 7. 长度</span>
+        <span class="c1">// 7. length of data</span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-        <span class="c1">// 8. 写入内容</span>
+        <span class="c1">// 8. write data </span>
         <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -443,7 +445,7 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>测试</p>
+<p>Test</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">EmbeddedChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EmbeddedChannel</span><span class="o">(</span>
     <span class="k">new</span> <span class="nf">LoggingHandler</span><span class="o">(),</span>
@@ -452,7 +454,7 @@
     <span class="k">new</span> <span class="nf">MessageCodec</span><span class="o">()</span>
 <span class="o">);</span>
 <span class="c1">// encode</span>
-<span class="nc">LoginRequestMessage</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginRequestMessage</span><span class="o">(</span><span class="s">"zhangsan"</span><span class="o">,</span> <span class="s">"123"</span><span class="o">,</span> <span class="s">"张三"</span><span class="o">);</span>
+<span class="nc">LoginRequestMessage</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginRequestMessage</span><span class="o">(</span><span class="s">"zhangsan"</span><span class="o">,</span> <span class="s">"123"</span><span class="o">);</span>
 <span class="c1">//        channel.writeOutbound(message);</span>
 <span class="c1">// decode</span>
 <span class="nc">ByteBuf</span> <span class="n">buf</span> <span class="o">=</span> <span class="nc">ByteBufAllocator</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">buffer</span><span class="o">();</span>
@@ -460,572 +462,37 @@
 
 <span class="nc">ByteBuf</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="na">slice</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
 <span class="nc">ByteBuf</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="na">slice</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="n">buf</span><span class="o">.</span><span class="na">readableBytes</span><span class="o">()</span> <span class="o">-</span> <span class="mi">100</span><span class="o">);</span>
-<span class="n">s1</span><span class="o">.</span><span class="na">retain</span><span class="o">();</span> <span class="c1">// 引用计数 2</span>
+<span class="n">s1</span><span class="o">.</span><span class="na">retain</span><span class="o">();</span> <span class="c1">// ref count 2</span>
 <span class="n">channel</span><span class="o">.</span><span class="na">writeInbound</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span> <span class="c1">// release 1</span>
 <span class="n">channel</span><span class="o">.</span><span class="na">writeInbound</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>解读</p>
+<center><img src="/assets/images/posts/backend/netty/0013.png" width="80%" /></center>
 
-<p><img src="/Users/crazyandy/Documents/video/Netty教程源码资料/讲义/Netty-讲义/img/0013.png" alt="" /></p>
-
-<h4 id="-什么时候可以加-sharable">💡 什么时候可以加 @Sharable</h4>
+<h4 id="-when-we-can-insert-sharable-to-handler">💡 when we can insert @Sharable to handler</h4>
 
 <ul>
-  <li>当 handler 不保存状态时，就可以安全地在多线程下被共享</li>
-  <li>但要注意对于编解码器类，不能继承 ByteToMessageCodec 或 CombinedChannelDuplexHandler 父类，他们的构造方法对 @Sharable 有限制</li>
-  <li>如果能确保编解码器不会保存状态，可以继承 MessageToMessageCodec 父类</li>
+  <li>When handler does not hold on status of message，this handler can be shared under multiple thread</li>
+  <li>we cannot let handler extends ByteToMessageCodec or CombinedChannelDuplexHandler ，because their construct method forbid sharable</li>
+  <li>we can make the handler extends MessageToMessageCodec</li>
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
 <span class="cm">/**
- * 必须和 LengthFieldBasedFrameDecoder 一起使用，确保接到的 ByteBuf 消息是完整的
+ * must cooperate with LengthFieldBasedFrameDecoder to ensure ByteBuf message is complete (avoid stick package or half package)
  */</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageCodecSharable</span> <span class="kd">extends</span> <span class="nc">MessageToMessageCodec</span><span class="o">&lt;</span><span class="nc">ByteBuf</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">encode</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Message</span> <span class="n">msg</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">outList</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">ByteBuf</span> <span class="n">out</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">alloc</span><span class="o">().</span><span class="na">buffer</span><span class="o">();</span>
-        <span class="c1">// 1. 4 字节的魔数</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">});</span>
-        <span class="c1">// 2. 1 字节的版本,</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-        <span class="c1">// 3. 1 字节的序列化方式 jdk 0 , json 1</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-        <span class="c1">// 4. 1 字节的指令类型</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getMessageType</span><span class="o">());</span>
-        <span class="c1">// 5. 4 个字节</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getSequenceId</span><span class="o">());</span>
-        <span class="c1">// 无意义，对齐填充</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mh">0xff</span><span class="o">);</span>
-        <span class="c1">// 6. 获取内容的字节数组</span>
-        <span class="nc">ByteArrayOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
-        <span class="nc">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectOutputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">);</span>
-        <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
-        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">bos</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
-        <span class="c1">// 7. 长度</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-        <span class="c1">// 8. 写入内容</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
-        <span class="n">outList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+       <span class="c1">//...</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">decode</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">ByteBuf</span> <span class="n">in</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">out</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">magicNum</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
-        <span class="kt">byte</span> <span class="n">version</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
-        <span class="kt">byte</span> <span class="n">serializerType</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
-        <span class="kt">byte</span> <span class="n">messageType</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
-        <span class="kt">int</span> <span class="n">sequenceId</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
-        <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
-        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
-        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">length</span><span class="o">];</span>
-        <span class="n">in</span><span class="o">.</span><span class="na">readBytes</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
-        <span class="nc">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">));</span>
-        <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Message</span><span class="o">)</span> <span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}, {}, {}, {}, {}, {}"</span><span class="o">,</span> <span class="n">magicNum</span><span class="o">,</span> <span class="n">version</span><span class="o">,</span> <span class="n">serializerType</span><span class="o">,</span> <span class="n">messageType</span><span class="o">,</span> <span class="n">sequenceId</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
-        <span class="n">out</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="c1">//...</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
-
-<h2 id="3-聊天室案例">3. 聊天室案例</h2>
-
-<h3 id="31-聊天室业务介绍">3.1 聊天室业务介绍</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * 用户管理接口
- */</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserService</span> <span class="o">{</span>
-
-    <span class="cm">/**
-     * 登录
-     * @param username 用户名
-     * @param password 密码
-     * @return 登录成功返回 true, 否则返回 false
-     */</span>
-    <span class="kt">boolean</span> <span class="nf">login</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * 会话管理接口
- */</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Session</span> <span class="o">{</span>
-
-    <span class="cm">/**
-     * 绑定会话
-     * @param channel 哪个 channel 要绑定会话
-     * @param username 会话绑定用户
-     */</span>
-    <span class="kt">void</span> <span class="nf">bind</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span><span class="o">,</span> <span class="nc">String</span> <span class="n">username</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 解绑会话
-     * @param channel 哪个 channel 要解绑会话
-     */</span>
-    <span class="kt">void</span> <span class="nf">unbind</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 获取属性
-     * @param channel 哪个 channel
-     * @param name 属性名
-     * @return 属性值
-     */</span>
-    <span class="nc">Object</span> <span class="nf">getAttribute</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 设置属性
-     * @param channel 哪个 channel
-     * @param name 属性名
-     * @param value 属性值
-     */</span>
-    <span class="kt">void</span> <span class="nf">setAttribute</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">value</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 根据用户名获取 channel
-     * @param username 用户名
-     * @return channel
-     */</span>
-    <span class="nc">Channel</span> <span class="nf">getChannel</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
- * 聊天组会话管理接口
- */</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">GroupSession</span> <span class="o">{</span>
-
-    <span class="cm">/**
-     * 创建一个聊天组, 如果不存在才能创建成功, 否则返回 null
-     * @param name 组名
-     * @param members 成员
-     * @return 成功时返回组对象, 失败返回 null
-     */</span>
-    <span class="nc">Group</span> <span class="nf">createGroup</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 加入聊天组
-     * @param name 组名
-     * @param member 成员名
-     * @return 如果组不存在返回 null, 否则返回组对象
-     */</span>
-    <span class="nc">Group</span> <span class="nf">joinMember</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">member</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 移除组成员
-     * @param name 组名
-     * @param member 成员名
-     * @return 如果组不存在返回 null, 否则返回组对象
-     */</span>
-    <span class="nc">Group</span> <span class="nf">removeMember</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">member</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 移除聊天组
-     * @param name 组名
-     * @return 如果组不存在返回 null, 否则返回组对象
-     */</span>
-    <span class="nc">Group</span> <span class="nf">removeGroup</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 获取组成员
-     * @param name 组名
-     * @return 成员集合, 没有成员会返回 empty set
-     */</span>
-    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getMembers</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
-
-    <span class="cm">/**
-     * 获取组成员的 channel 集合, 只有在线的 channel 才会返回
-     * @param name 组名
-     * @return 成员 channel 集合
-     */</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="nf">getMembersChannel</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="32-聊天室业务-登录">3.2 聊天室业务-登录</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChatServer</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">NioEventLoopGroup</span> <span class="n">boss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
-        <span class="nc">NioEventLoopGroup</span> <span class="n">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
-        <span class="nc">LoggingHandler</span> <span class="no">LOGGING_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">(</span><span class="nc">LogLevel</span><span class="o">.</span><span class="na">DEBUG</span><span class="o">);</span>
-        <span class="nc">MessageCodecSharable</span> <span class="no">MESSAGE_CODEC</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageCodecSharable</span><span class="o">();</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="nc">ServerBootstrap</span> <span class="n">serverBootstrap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerBootstrap</span><span class="o">();</span>
-            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioServerSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">boss</span><span class="o">,</span> <span class="n">worker</span><span class="o">);</span>
-            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">childHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">SocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
-                <span class="nd">@Override</span>
-                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">SocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ProcotolFrameDecoder</span><span class="o">());</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">LOGGING_HANDLER</span><span class="o">);</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">MESSAGE_CODEC</span><span class="o">);</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">LoginRequestMessage</span><span class="o">&gt;()</span> <span class="o">{</span>
-                        <span class="nd">@Override</span>
-                        <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">LoginRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-                            <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getUsername</span><span class="o">();</span>
-                            <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getPassword</span><span class="o">();</span>
-                            <span class="kt">boolean</span> <span class="n">login</span> <span class="o">=</span> <span class="nc">UserServiceFactory</span><span class="o">.</span><span class="na">getUserService</span><span class="o">().</span><span class="na">login</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
-                            <span class="nc">LoginResponseMessage</span> <span class="n">message</span><span class="o">;</span>
-                            <span class="k">if</span><span class="o">(</span><span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-                                <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="s">"登录成功"</span><span class="o">);</span>
-                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                                <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginResponseMessage</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"用户名或密码不正确"</span><span class="o">);</span>
-                            <span class="o">}</span>
-                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-                        <span class="o">}</span>
-                    <span class="o">});</span>
-                <span class="o">}</span>
-            <span class="o">});</span>
-            <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="mi">8080</span><span class="o">).</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">();</span>
-            <span class="n">channel</span><span class="o">.</span><span class="na">closeFuture</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"server error"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">boss</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
-            <span class="n">worker</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChatClient</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">NioEventLoopGroup</span> <span class="n">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
-        <span class="nc">LoggingHandler</span> <span class="no">LOGGING_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">(</span><span class="nc">LogLevel</span><span class="o">.</span><span class="na">DEBUG</span><span class="o">);</span>
-        <span class="nc">MessageCodecSharable</span> <span class="no">MESSAGE_CODEC</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageCodecSharable</span><span class="o">();</span>
-        <span class="nc">CountDownLatch</span> <span class="no">WAIT_FOR_LOGIN</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CountDownLatch</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-        <span class="nc">AtomicBoolean</span> <span class="no">LOGIN</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AtomicBoolean</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="nc">Bootstrap</span> <span class="n">bootstrap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">();</span>
-            <span class="n">bootstrap</span><span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-            <span class="n">bootstrap</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">group</span><span class="o">);</span>
-            <span class="n">bootstrap</span><span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">SocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
-                <span class="nd">@Override</span>
-                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">SocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ProcotolFrameDecoder</span><span class="o">());</span>
-<span class="c1">//                    ch.pipeline().addLast(LOGGING_HANDLER);</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">MESSAGE_CODEC</span><span class="o">);</span>
-                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="s">"client handler"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ChannelInboundHandlerAdapter</span><span class="o">()</span> <span class="o">{</span>
-                        <span class="c1">// 接收响应消息</span>
-                        <span class="nd">@Override</span>
-                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelRead</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-                            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"msg: {}"</span><span class="o">,</span> <span class="n">msg</span><span class="o">);</span>
-                            <span class="k">if</span> <span class="o">((</span><span class="n">msg</span> <span class="k">instanceof</span> <span class="nc">LoginResponseMessage</span><span class="o">))</span> <span class="o">{</span>
-                                <span class="nc">LoginResponseMessage</span> <span class="n">response</span> <span class="o">=</span> <span class="o">(</span><span class="nc">LoginResponseMessage</span><span class="o">)</span> <span class="n">msg</span><span class="o">;</span>
-                                <span class="k">if</span> <span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">isSuccess</span><span class="o">())</span> <span class="o">{</span>
-                                    <span class="c1">// 如果登录成功</span>
-                                    <span class="no">LOGIN</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-                                <span class="o">}</span>
-                                <span class="c1">// 唤醒 system in 线程</span>
-                                <span class="no">WAIT_FOR_LOGIN</span><span class="o">.</span><span class="na">countDown</span><span class="o">();</span>
-                            <span class="o">}</span>
-                        <span class="o">}</span>
-
-                        <span class="c1">// 在连接建立后触发 active 事件</span>
-                        <span class="nd">@Override</span>
-                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelActive</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-                            <span class="c1">// 负责接收用户在控制台的输入，负责向服务器发送各种消息</span>
-                            <span class="k">new</span> <span class="nf">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
-                                <span class="nc">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Scanner</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
-                                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"请输入用户名:"</span><span class="o">);</span>
-                                <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"请输入密码:"</span><span class="o">);</span>
-                                <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                                <span class="c1">// 构造消息对象</span>
-                                <span class="nc">LoginRequestMessage</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginRequestMessage</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
-                                <span class="c1">// 发送消息</span>
-                                <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-                                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"等待后续操作..."</span><span class="o">);</span>
-                                <span class="k">try</span> <span class="o">{</span>
-                                    <span class="no">WAIT_FOR_LOGIN</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
-                                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                                <span class="o">}</span>
-                                <span class="c1">// 如果登录失败</span>
-                                <span class="k">if</span> <span class="o">(!</span><span class="no">LOGIN</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
-                                    <span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">().</span><span class="na">close</span><span class="o">();</span>
-                                    <span class="k">return</span><span class="o">;</span>
-                                <span class="o">}</span>
-                                <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=================================="</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"send [username] [content]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"gsend [group name] [content]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"gcreate [group name] [m1,m2,m3...]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"gmembers [group name]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"gjoin [group name]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"gquit [group name]"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"quit"</span><span class="o">);</span>
-                                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=================================="</span><span class="o">);</span>
-                                    <span class="nc">String</span> <span class="n">command</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                                    <span class="nc">String</span><span class="o">[]</span> <span class="n">s</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
-                                    <span class="k">switch</span> <span class="o">(</span><span class="n">s</span><span class="o">[</span><span class="mi">0</span><span class="o">]){</span>
-                                        <span class="k">case</span> <span class="s">"send"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatRequestMessage</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">s</span><span class="o">[</span><span class="mi">2</span><span class="o">]));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"gsend"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupChatRequestMessage</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">s</span><span class="o">[</span><span class="mi">2</span><span class="o">]));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"gcreate"</span><span class="o">:</span>
-                                            <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">s</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">","</span><span class="o">)));</span>
-                                            <span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">username</span><span class="o">);</span> <span class="c1">// 加入自己</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupCreateRequestMessage</span><span class="o">(</span><span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">],</span> <span class="n">set</span><span class="o">));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"gmembers"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupMembersRequestMessage</span><span class="o">(</span><span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"gjoin"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupJoinRequestMessage</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"gquit"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupQuitRequestMessage</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">s</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
-                                            <span class="k">break</span><span class="o">;</span>
-                                        <span class="k">case</span> <span class="s">"quit"</span><span class="o">:</span>
-                                            <span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">().</span><span class="na">close</span><span class="o">();</span>
-                                            <span class="k">return</span><span class="o">;</span>
-                                    <span class="o">}</span>
-                                <span class="o">}</span>
-                            <span class="o">},</span> <span class="s">"system in"</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-                        <span class="o">}</span>
-                    <span class="o">});</span>
-                <span class="o">}</span>
-            <span class="o">});</span>
-            <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">).</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">();</span>
-            <span class="n">channel</span><span class="o">.</span><span class="na">closeFuture</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"client error"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">group</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="33-聊天室业务-单聊">3.3 聊天室业务-单聊</h3>
-
-<p>服务器端将 handler 独立出来</p>
-
-<p>登录 handler</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">LoginRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">LoginRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getUsername</span><span class="o">();</span>
-        <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getPassword</span><span class="o">();</span>
-        <span class="kt">boolean</span> <span class="n">login</span> <span class="o">=</span> <span class="nc">UserServiceFactory</span><span class="o">.</span><span class="na">getUserService</span><span class="o">().</span><span class="na">login</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
-        <span class="nc">LoginResponseMessage</span> <span class="n">message</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">SessionFactory</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">bind</span><span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">(),</span> <span class="n">username</span><span class="o">);</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="s">"登录成功"</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginResponseMessage</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"用户名或密码不正确"</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>单聊 handler</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChatRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">ChatRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">ChatRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">to</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getTo</span><span class="o">();</span>
-        <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="nc">SessionFactory</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getChannel</span><span class="o">(</span><span class="n">to</span><span class="o">);</span>
-        <span class="c1">// 在线</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">channel</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatResponseMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getFrom</span><span class="o">(),</span> <span class="n">msg</span><span class="o">.</span><span class="na">getContent</span><span class="o">()));</span>
-        <span class="o">}</span>
-        <span class="c1">// 不在线</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChatResponseMessage</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"对方用户不存在或者不在线"</span><span class="o">));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="34-聊天室业务-群聊">3.4 聊天室业务-群聊</h3>
-
-<p>创建群聊</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GroupCreateRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">GroupCreateRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">GroupCreateRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">groupName</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">();</span>
-        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getMembers</span><span class="o">();</span>
-        <span class="c1">// 群管理器</span>
-        <span class="nc">GroupSession</span> <span class="n">groupSession</span> <span class="o">=</span> <span class="nc">GroupSessionFactory</span><span class="o">.</span><span class="na">getGroupSession</span><span class="o">();</span>
-        <span class="nc">Group</span> <span class="n">group</span> <span class="o">=</span> <span class="n">groupSession</span><span class="o">.</span><span class="na">createGroup</span><span class="o">(</span><span class="n">groupName</span><span class="o">,</span> <span class="n">members</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">group</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// 发生成功消息</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupCreateResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">groupName</span> <span class="o">+</span> <span class="s">"创建成功"</span><span class="o">));</span>
-            <span class="c1">// 发送拉群消息</span>
-            <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">channels</span> <span class="o">=</span> <span class="n">groupSession</span><span class="o">.</span><span class="na">getMembersChannel</span><span class="o">(</span><span class="n">groupName</span><span class="o">);</span>
-            <span class="k">for</span> <span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span> <span class="o">:</span> <span class="n">channels</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupCreateResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="s">"您已被拉入"</span> <span class="o">+</span> <span class="n">groupName</span><span class="o">));</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupCreateResponseMessage</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">groupName</span> <span class="o">+</span> <span class="s">"已经存在"</span><span class="o">));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>群聊</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GroupChatRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">GroupChatRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">GroupChatRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">channels</span> <span class="o">=</span> <span class="nc">GroupSessionFactory</span><span class="o">.</span><span class="na">getGroupSession</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">getMembersChannel</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">());</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span> <span class="o">:</span> <span class="n">channels</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">channel</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupChatResponseMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getFrom</span><span class="o">(),</span> <span class="n">msg</span><span class="o">.</span><span class="na">getContent</span><span class="o">()));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>加入群聊</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GroupJoinRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">GroupJoinRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">GroupJoinRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">Group</span> <span class="n">group</span> <span class="o">=</span> <span class="nc">GroupSessionFactory</span><span class="o">.</span><span class="na">getGroupSession</span><span class="o">().</span><span class="na">joinMember</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">(),</span> <span class="n">msg</span><span class="o">.</span><span class="na">getUsername</span><span class="o">());</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">group</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupJoinResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"群加入成功"</span><span class="o">));</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupJoinResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"群不存在"</span><span class="o">));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>退出群聊</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GroupQuitRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">GroupQuitRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">GroupQuitRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">Group</span> <span class="n">group</span> <span class="o">=</span> <span class="nc">GroupSessionFactory</span><span class="o">.</span><span class="na">getGroupSession</span><span class="o">().</span><span class="na">removeMember</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">(),</span> <span class="n">msg</span><span class="o">.</span><span class="na">getUsername</span><span class="o">());</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">group</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupJoinResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="s">"已退出群"</span> <span class="o">+</span> <span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">()));</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupJoinResponseMessage</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"群不存在"</span><span class="o">));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>查看成员</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ChannelHandler</span><span class="o">.</span><span class="na">Sharable</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GroupMembersRequestMessageHandler</span> <span class="kd">extends</span> <span class="nc">SimpleChannelInboundHandler</span><span class="o">&lt;</span><span class="nc">GroupMembersRequestMessage</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">channelRead0</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">GroupMembersRequestMessage</span> <span class="n">msg</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="nc">GroupSessionFactory</span><span class="o">.</span><span class="na">getGroupSession</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">getMembers</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getGroupName</span><span class="o">());</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">GroupMembersResponseMessage</span><span class="o">(</span><span class="n">members</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="35-聊天室业务-退出">3.5 聊天室业务-退出</h3>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Slf4j
-@ChannelHandler.Sharable
-public class QuitHandler extends ChannelInboundHandlerAdapter {
-
-    // 当连接断开时触发 inactive 事件
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        SessionFactory.getSession().unbind(ctx.channel());
-        log.debug("{} 已经断开", ctx.channel());
-    }
-
-	// 当出现异常时触发
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        SessionFactory.getSession().unbind(ctx.channel());
-        log.debug("{} 已经异常断开 异常是{}", ctx.channel(), cause.getMessage());
-    }
-}
-</code></pre></div></div>
-
-<h3 id="36-聊天室业务-空闲检测">3.6 聊天室业务-空闲检测</h3>
-
-<h4 id="连接假死">连接假死</h4>
-
-<p>原因</p>
-
-<ul>
-  <li>网络设备出现故障，例如网卡，机房等，底层的 TCP 连接已经断开了，但应用程序没有感知到，仍然占用着资源。</li>
-  <li>公网网络不稳定，出现丢包。如果连续出现丢包，这时现象就是客户端数据发不出去，服务端也一直收不到数据，就这么一直耗着</li>
-  <li>应用程序线程阻塞，无法进行数据读写</li>
-</ul>
-
-<p>问题</p>
-
-<ul>
-  <li>假死的连接占用的资源不能自动释放</li>
-  <li>向假死的连接发送数据，得到的反馈是发送超时</li>
-</ul>
-
-<p>服务器端解决</p>
-
-<ul>
-  <li>怎么判断客户端连接是否假死呢？如果能收到客户端数据，说明没有假死。因此策略就可以定为，每隔一段时间就检查这段时间内是否接收到客户端数据，没有就可以判定为连接假死</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 用来判断是不是 读空闲时间过长，或 写空闲时间过长</span>
-<span class="c1">// 5s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件</span>
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">IdleStateHandler</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
-<span class="c1">// ChannelDuplexHandler 可以同时作为入站和出站处理器</span>
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelDuplexHandler</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 用来触发特殊事件</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">userEventTriggered</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">evt</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
-        <span class="nc">IdleStateEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="o">(</span><span class="nc">IdleStateEvent</span><span class="o">)</span> <span class="n">evt</span><span class="o">;</span>
-        <span class="c1">// 触发了读空闲事件</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">state</span><span class="o">()</span> <span class="o">==</span> <span class="nc">IdleState</span><span class="o">.</span><span class="na">READER_IDLE</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"已经 5s 没有读到数据了"</span><span class="o">);</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">().</span><span class="na">close</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">});</span>
-</code></pre></div></div>
-
-<p>客户端定时心跳</p>
-
-<ul>
-  <li>客户端可以定时向服务器端发送数据，只要这个时间间隔小于服务器定义的空闲检测的时间间隔，那么就能防止前面提到的误判，客户端可以定义如下心跳处理器</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 用来判断是不是 读空闲时间过长，或 写空闲时间过长</span>
-<span class="c1">// 3s 内如果没有向服务器写数据，会触发一个 IdleState#WRITER_IDLE 事件</span>
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">IdleStateHandler</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
-<span class="c1">// ChannelDuplexHandler 可以同时作为入站和出站处理器</span>
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelDuplexHandler</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 用来触发特殊事件</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">userEventTriggered</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">evt</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
-        <span class="nc">IdleStateEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="o">(</span><span class="nc">IdleStateEvent</span><span class="o">)</span> <span class="n">evt</span><span class="o">;</span>
-        <span class="c1">// 触发了写空闲事件</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">state</span><span class="o">()</span> <span class="o">==</span> <span class="nc">IdleState</span><span class="o">.</span><span class="na">WRITER_IDLE</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">//                                log.debug("3s 没有写数据了，发送一个心跳包");</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">PingMessage</span><span class="o">());</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">});</span>
 </code></pre></div></div>
 
 
@@ -1045,6 +512,18 @@ public class QuitHandler extends ChannelInboundHandlerAdapter {
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/18/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">Chat Room</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             
