@@ -651,20 +651,274 @@ public class QuitHandler extends ChannelInboundHandlerAdapter {
   <li>if client send message so frequently, the server would not be triggered by  IdleState#READER_IDLE event</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//  if client hasn't send any messge in 3s, it would be triggered by  IdleState#WRITER_IDLE event</span>
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">IdleStateHandler</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChatServer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">boss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+        <span class="nc">LoggingHandler</span> <span class="no">LOGGING_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">(</span><span class="nc">LogLevel</span><span class="o">.</span><span class="na">DEBUG</span><span class="o">);</span>
+        <span class="nc">MessageCodecSharable</span> <span class="no">MESSAGE_CODEC</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MessageCodecSharable</span><span class="o">();</span>
+        <span class="nc">LoginRequestMessageHandler</span> <span class="no">LOGIN_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LoginRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">ChatRequestMessageHandler</span> <span class="no">CHAT_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ChatRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">GroupCreateRequestMessageHandler</span> <span class="no">GROUP_CREATE_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GroupCreateRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">GroupJoinRequestMessageHandler</span> <span class="no">GROUP_JOIN_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GroupJoinRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">GroupMembersRequestMessageHandler</span> <span class="no">GROUP_MEMBERS_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GroupMembersRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">GroupQuitRequestMessageHandler</span> <span class="no">GROUP_QUIT_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GroupQuitRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">GroupChatRequestMessageHandler</span> <span class="no">GROUP_CHAT_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GroupChatRequestMessageHandler</span><span class="o">();</span>
+        <span class="nc">QuitHandler</span> <span class="no">QUIT_HANDLER</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QuitHandler</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">ServerBootstrap</span> <span class="n">serverBootstrap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerBootstrap</span><span class="o">();</span>
+            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioServerSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">boss</span><span class="o">,</span> <span class="n">worker</span><span class="o">);</span>
+            <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">childHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">SocketChannel</span><span class="o">&gt;()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">SocketChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ProcotolFrameDecoder</span><span class="o">());</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">LOGGING_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">MESSAGE_CODEC</span><span class="o">);</span>
+                  <span class="c1">// IdleStateHandler should be ahead of other logic message</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">IdleStateHandler</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">));</span>
+                    <span class="c1">// ChannelDuplexHandler deal with inbound and outbond </span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelDuplexHandler</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nd">@Override</span>
+                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">userEventTriggered</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">evt</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+                            <span class="nc">IdleStateEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="o">(</span><span class="nc">IdleStateEvent</span><span class="o">)</span> <span class="n">evt</span><span class="o">;</span>
+                            <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">state</span><span class="o">()</span> <span class="o">==</span> <span class="nc">IdleState</span><span class="o">.</span><span class="na">READER_IDLE</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"have received message in 5 seconds"</span><span class="o">);</span>
+                                <span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">().</span><span class="na">close</span><span class="o">();</span>
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">LOGIN_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">CHAT_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">GROUP_CREATE_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">GROUP_JOIN_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">GROUP_MEMBERS_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">GROUP_QUIT_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">GROUP_CHAT_HANDLER</span><span class="o">);</span>
+                    <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="no">QUIT_HANDLER</span><span class="o">);</span>
 
-<span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelDuplexHandler</span><span class="o">()</span> <span class="o">{</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">userEventTriggered</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">evt</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
-        <span class="nc">IdleStateEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="o">(</span><span class="nc">IdleStateEvent</span><span class="o">)</span> <span class="n">evt</span><span class="o">;</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">state</span><span class="o">()</span> <span class="o">==</span> <span class="nc">IdleState</span><span class="o">.</span><span class="na">WRITER_IDLE</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="na">writeAndFlush</span><span class="o">(</span><span class="k">new</span> <span class="nc">PingMessage</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+            <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">serverBootstrap</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="mi">8080</span><span class="o">).</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">();</span>
+            <span class="n">channel</span><span class="o">.</span><span class="na">closeFuture</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"server error"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">boss</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
+            <span class="n">worker</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
         <span class="o">}</span>
     <span class="o">}</span>
-<span class="o">});</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="11-extended-serialization-algorithm">1.1 Extended serialization algorithm</h3>
+
+<p>serialization，Deserialization are used to exchange the data</p>
+
+<p>Currently , we converse java object by its default method</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Deserialization</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">body</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">bodyLength</span><span class="o">];</span>
+<span class="n">byteByf</span><span class="o">.</span><span class="na">readBytes</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+<span class="nc">ObjectInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">body</span><span class="o">));</span>
+<span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Message</span><span class="o">)</span> <span class="n">in</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+<span class="n">message</span><span class="o">.</span><span class="na">setSequenceId</span><span class="o">(</span><span class="n">sequenceId</span><span class="o">);</span>
+
+<span class="c1">// serialization</span>
+<span class="nc">ByteArrayOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
+<span class="k">new</span> <span class="nf">ObjectOutputStream</span><span class="o">(</span><span class="n">out</span><span class="o">).</span><span class="na">writeObject</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>To support more serialization algorithm</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Serializer</span> <span class="o">{</span>
+
+    <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">deserialize</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">clazz</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">);</span>
+
+    <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="o">(</span><span class="no">T</span> <span class="n">object</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>implement</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">SerializerAlgorithm</span> <span class="kd">implements</span> <span class="nc">Serializer</span> <span class="o">{</span>
+	<span class="c1">// Java implement</span>
+    <span class="nc">Java</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">deserialize</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">clazz</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">ObjectInputStream</span> <span class="n">in</span> <span class="o">=</span> 
+                    <span class="k">new</span> <span class="nf">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">ByteArrayInputStream</span><span class="o">(</span><span class="n">bytes</span><span class="o">));</span>
+                <span class="nc">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+                <span class="k">return</span> <span class="o">(</span><span class="no">T</span><span class="o">)</span> <span class="n">object</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="o">|</span> <span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"SerializerAlgorithm.Java deserialize failed"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="o">(</span><span class="no">T</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">ByteArrayOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ByteArrayOutputStream</span><span class="o">();</span>
+                <span class="k">new</span> <span class="nf">ObjectOutputStream</span><span class="o">(</span><span class="n">out</span><span class="o">).</span><span class="na">writeObject</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+                <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"SerializerAlgorithm.Java serialize failed"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">},</span> 
+    <span class="nc">Json</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">deserialize</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">clazz</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">().</span><span class="na">fromJson</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span> <span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">),</span> <span class="n">clazz</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="o">(</span><span class="no">T</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Gson</span><span class="o">().</span><span class="na">toJson</span><span class="o">(</span><span class="n">object</span><span class="o">).</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SerializerAlgorithm</span> <span class="nf">getByInt</span><span class="o">(</span><span class="kt">int</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SerializerAlgorithm</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="nc">SerializerAlgorithm</span><span class="o">.</span><span class="na">values</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">type</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">type</span> <span class="o">&gt;</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"exceed the scope of SerializerAlgorithm"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">array</span><span class="o">[</span><span class="n">type</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Configuration</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Config</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">Properties</span> <span class="n">properties</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">(</span><span class="nc">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="nc">Config</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span><span class="s">"/application.properties"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Properties</span><span class="o">();</span>
+            <span class="n">properties</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ExceptionInInitializerError</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getServerPort</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"server.port"</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">8080</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Serializer</span><span class="o">.</span><span class="na">Algorithm</span> <span class="nf">getSerializerAlgorithm</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"serializer.algorithm"</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Serializer</span><span class="o">.</span><span class="na">Algorithm</span><span class="o">.</span><span class="na">Java</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Serializer</span><span class="o">.</span><span class="na">Algorithm</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>application.properties</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">serializer.algorithm</span><span class="p">=</span><span class="s">Json</span>
+</code></pre></div></div>
+
+<p>modify MessageCodecSharable</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageCodecSharable</span> <span class="kd">extends</span> <span class="nc">MessageToMessageCodec</span><span class="o">&lt;</span><span class="nc">ByteBuf</span><span class="o">,</span> <span class="nc">Message</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">encode</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Message</span> <span class="n">msg</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">outList</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">ByteBuf</span> <span class="n">out</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">alloc</span><span class="o">().</span><span class="na">buffer</span><span class="o">();</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">});</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="nc">Config</span><span class="o">.</span><span class="na">getSerializerAlgorithm</span><span class="o">().</span><span class="na">ordinal</span><span class="o">());</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getMessageType</span><span class="o">());</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">getSequenceId</span><span class="o">());</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeByte</span><span class="o">(</span><span class="mh">0xff</span><span class="o">);</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="nc">Config</span><span class="o">.</span><span class="na">getSerializerAlgorithm</span><span class="o">().</span><span class="na">serialize</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeBytes</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span>
+        <span class="n">outList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">decode</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">ByteBuf</span> <span class="n">in</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">out</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">magicNum</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="kt">byte</span> <span class="n">version</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
+        <span class="kt">byte</span> <span class="n">serializerAlgorithm</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
+        <span class="kt">byte</span> <span class="n">messageType</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">sequenceId</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="n">in</span><span class="o">.</span><span class="na">readByte</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">length</span><span class="o">];</span>
+        <span class="n">in</span><span class="o">.</span><span class="na">readBytes</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
+
+        <span class="nc">Serializer</span><span class="o">.</span><span class="na">Algorithm</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="nc">Serializer</span><span class="o">.</span><span class="na">Algorithm</span><span class="o">.</span><span class="na">values</span><span class="o">()[</span><span class="n">serializerAlgorithm</span><span class="o">];</span>
+        <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Message</span><span class="o">&gt;</span> <span class="n">messageClass</span> <span class="o">=</span> <span class="nc">Message</span><span class="o">.</span><span class="na">getMessageClass</span><span class="o">(</span><span class="n">messageType</span><span class="o">);</span>
+        <span class="nc">Message</span> <span class="n">message</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="na">deserialize</span><span class="o">(</span><span class="n">messageClass</span><span class="o">,</span> <span class="n">bytes</span><span class="o">);</span>
+<span class="c1">//        log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);</span>
+<span class="c1">//        log.debug("{}", message);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We need to get messageClass by messageType</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Data</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Message</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Message</span><span class="o">&gt;</span> <span class="nf">getMessageClass</span><span class="o">(</span><span class="kt">int</span> <span class="n">messageType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">messageClasses</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">messageType</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">sequenceId</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">messageType</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">getMessageType</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">LoginRequestMessage</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">LoginResponseMessage</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">ChatRequestMessage</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">ChatResponseMessage</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupCreateRequestMessage</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupCreateResponseMessage</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupJoinRequestMessage</span> <span class="o">=</span> <span class="mi">6</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupJoinResponseMessage</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupQuitRequestMessage</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupQuitResponseMessage</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupChatRequestMessage</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupChatResponseMessage</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupMembersRequestMessage</span> <span class="o">=</span> <span class="mi">12</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">GroupMembersResponseMessage</span> <span class="o">=</span> <span class="mi">13</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">PingMessage</span> <span class="o">=</span> <span class="mi">14</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nc">PongMessage</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Message</span><span class="o">&gt;&gt;</span> <span class="n">messageClasses</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">LoginRequestMessage</span><span class="o">,</span> <span class="nc">LoginRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">LoginResponseMessage</span><span class="o">,</span> <span class="nc">LoginResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ChatRequestMessage</span><span class="o">,</span> <span class="nc">ChatRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">ChatResponseMessage</span><span class="o">,</span> <span class="nc">ChatResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupCreateRequestMessage</span><span class="o">,</span> <span class="nc">GroupCreateRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupCreateResponseMessage</span><span class="o">,</span> <span class="nc">GroupCreateResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupJoinRequestMessage</span><span class="o">,</span> <span class="nc">GroupJoinRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupJoinResponseMessage</span><span class="o">,</span> <span class="nc">GroupJoinResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupQuitRequestMessage</span><span class="o">,</span> <span class="nc">GroupQuitRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupQuitResponseMessage</span><span class="o">,</span> <span class="nc">GroupQuitResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupChatRequestMessage</span><span class="o">,</span> <span class="nc">GroupChatRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupChatResponseMessage</span><span class="o">,</span> <span class="nc">GroupChatResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupMembersRequestMessage</span><span class="o">,</span> <span class="nc">GroupMembersRequestMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">messageClasses</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="nc">GroupMembersResponseMessage</span><span class="o">,</span> <span class="nc">GroupMembersResponseMessage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 
@@ -684,6 +938,18 @@ public class QuitHandler extends ChannelInboundHandlerAdapter {
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/netty/index_posts/2022/09/19/netty.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">Channel option</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             

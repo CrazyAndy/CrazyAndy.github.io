@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>FileChannel | Andy Sun's World</title>
+    <title>Channel option | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -15,6 +15,20 @@
 <!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
     <link href="/assets/css/ionicons.min.css" rel="stylesheet">
     <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+        <script src="/assets/js/mermaid.min.js"></script>
+        <script>
+            const config = {
+                startOnLoad:true,
+                theme: 'forest',
+                flowchart: {
+                    useMaxWidth:false,
+                    htmlLabels:true
+                    }
+            };
+            mermaid.initialize(config);
+            window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+        </script>
     
 </head>
 
@@ -236,7 +250,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>FileChannel</span>
+                <span>Channel option</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -244,7 +258,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">03 Sep 2022</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">19 Sep 2022</time>
                     </div>
                 </div>
             </div>
@@ -255,39 +269,242 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>FileChannel can only work under blocking mode .</p>
+            <h4 id="1connect_timeout_millis">1）CONNECT_TIMEOUT_MILLIS</h4>
 
-<p>There’s no point in describing more about FileChannel here , learn it until you need it .</p>
+<ul>
+  <li>This is for SocketChannal  (client)</li>
+  <li>
+    <p>when the client create connection , it will throw timeout exception if it is not connected  to server in timeout time</p>
+  </li>
+  <li>SO_TIMEOUT is mainly used in blocking io</li>
+</ul>
 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestConnectionTimeout</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">NioEventLoopGroup</span> <span class="n">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioEventLoopGroup</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Bootstrap</span> <span class="n">bootstrap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bootstrap</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="n">group</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">option</span><span class="o">(</span><span class="nc">ChannelOption</span><span class="o">.</span><span class="na">CONNECT_TIMEOUT_MILLIS</span><span class="o">,</span> <span class="mi">300</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">channel</span><span class="o">(</span><span class="nc">NioSocketChannel</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="k">new</span> <span class="nc">LoggingHandler</span><span class="o">());</span>
+            <span class="nc">ChannelFuture</span> <span class="n">future</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="s">"127.0.0.1"</span><span class="o">,</span> <span class="mi">8080</span><span class="o">);</span>
+            <span class="n">future</span><span class="o">.</span><span class="na">sync</span><span class="o">().</span><span class="na">channel</span><span class="o">().</span><span class="na">closeFuture</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"timeout"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">group</span><span class="o">.</span><span class="na">shutdownGracefully</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.AbstractNioChannel.AbstractNioUnsafe#connect</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">connect</span><span class="o">(</span>
+        <span class="kd">final</span> <span class="nc">SocketAddress</span> <span class="n">remoteAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">SocketAddress</span> <span class="n">localAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// Schedule connect timeout.</span>
+    <span class="kt">int</span> <span class="n">connectTimeoutMillis</span> <span class="o">=</span> <span class="n">config</span><span class="o">().</span><span class="na">getConnectTimeoutMillis</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">connectTimeoutMillis</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">connectTimeoutFuture</span> <span class="o">=</span> <span class="n">eventLoop</span><span class="o">().</span><span class="na">schedule</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>                
+                <span class="nc">ChannelPromise</span> <span class="n">connectPromise</span> <span class="o">=</span> <span class="nc">AbstractNioChannel</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">connectPromise</span><span class="o">;</span>
+                <span class="nc">ConnectTimeoutException</span> <span class="n">cause</span> <span class="o">=</span>
+                    <span class="k">new</span> <span class="nf">ConnectTimeoutException</span><span class="o">(</span><span class="s">"connection timed out: "</span> <span class="o">+</span> <span class="n">remoteAddress</span><span class="o">);</span> 
+                <span class="k">if</span> <span class="o">(</span><span class="n">connectPromise</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">connectPromise</span><span class="o">.</span><span class="na">tryFailure</span><span class="o">(</span><span class="n">cause</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">close</span><span class="o">(</span><span class="n">voidPromise</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="n">connectTimeoutMillis</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">);</span>
+    <span class="o">}</span>
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="2so_backlog">2）SO_BACKLOG</h4>
+
+<ul>
+  <li>
+    <p>belong the setting of ServerSocketChannal</p>
+
+    <div class="mermaid">
+  sequenceDiagram
+  participant c as client
+  participant s as server
+  participant sq as syns queue
+  participant aq as accept queue
+  s -&gt;&gt; s : bind()
+  s -&gt;&gt; s : listen()
+  c -&gt;&gt; c : connect()
+  c -&gt;&gt; s : 1. SYN
+  Note left of c : SYN_SEND
+  s -&gt;&gt; sq : put
+  Note right of s : SYN_RCVD
+  s -&gt;&gt; c : 2. SYN + ACK
+  Note left of c : ESTABLISHED
+  c -&gt;&gt; s : 3. ACK
+  sq -&gt;&gt; aq : put
+  Note right of s : ESTABLISHED
+  aq --&gt;&gt; s : 
+  s -&gt;&gt; s : accept()
+  </div>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p>First handshake，client send SYN to server，its status is changed to SYN_SEND ;</p>
+
+    <p>server received，its status is changed to  SYN_REVD，and put this request into  sync queue</p>
+  </li>
+  <li>
+    <p>Second handshake，server reply  SYN + ACK to client ;</p>
+
+    <p>client got it，its status is changed to ESTABLISHED，and send ACK to server</p>
+  </li>
+  <li>
+    <p>Third handshake，server got ACK，its status is changed to  ESTABLISHED，put this request from  sync queue to accept queue</p>
+  </li>
+</ol>
+
+<p>Attention</p>
+
+<ul>
+  <li>
+    <p>Before linux 2.2 ，backlog contain two queue , after 2.2 ，set them sepratly as below:</p>
+  </li>
+  <li>sync queue - half connection queue
+    <ul>
+      <li>It is set by  /proc/sys/net/ipv4/tcp_max_syn_backlog ，if syncookies  is inuse ，this setting would be ignored</li>
+    </ul>
+  </li>
+  <li>accept queue - complete connection queue
+    <ul>
+      <li>It is set by /proc/sys/net/core/somaxconn ，core will get the less value if use listen method</li>
+      <li>accpet queue is full，server send refusing connecting messasge to  client</li>
+    </ul>
+  </li>
+</ul>
+
+<p>netty set the value by  option(ChannelOption.SO_BACKLOG, value)</p>
+
+<p>the source code is</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DefaultServerSocketChannelConfig</span> <span class="kd">extends</span> <span class="nc">DefaultChannelConfig</span>
+                                              <span class="kd">implements</span> <span class="nc">ServerSocketChannelConfig</span> <span class="o">{</span>
+		
+    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">backlog</span> <span class="o">=</span> <span class="nc">NetUtil</span><span class="o">.</span><span class="na">SOMAXCONN</span><span class="o">;</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>breakpiont ：<code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#processSelectedKey</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">ServerSocket</span> <span class="n">ss</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServerSocket</span><span class="o">(</span><span class="mi">8888</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="nc">Socket</span> <span class="n">accept</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">accept</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>start 4 client</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Socket</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Socket</span><span class="o">();</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">()+</span><span class="s">" connecting..."</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">,</span> <span class="mi">8888</span><span class="o">),</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">()+</span><span class="s">" connected..."</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">().</span><span class="na">write</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">Date</span><span class="o">()+</span><span class="s">" connecting timeout..."</span><span class="o">);</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>client 1，2，3  print connected ，only client 1  accpet ，other two are in accept queue  , connecting</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Tue</span> <span class="nc">Apr</span> <span class="mi">21</span> <span class="mi">20</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="mi">28</span> <span class="no">CST</span> <span class="mi">2020</span> <span class="n">connecting</span><span class="o">...</span>
+<span class="nc">Tue</span> <span class="nc">Apr</span> <span class="mi">21</span> <span class="mi">20</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="mi">28</span> <span class="no">CST</span> <span class="mi">2020</span> <span class="n">connected</span><span class="o">...</span>
+</code></pre></div></div>
+
+<p>Client 4 throw error</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tue Apr 21 20:53:58 CST 2020 connecting...
+Tue Apr 21 20:53:59 CST 2020 connecting timeout...
+java.net.SocketTimeoutException: connect timed out
+</code></pre></div></div>
+
+<h4 id="3ulimit--n">3）ulimit -n</h4>
+
+<ul>
+  <li>handler count</li>
+</ul>
+
+<h4 id="4tcp_nodelay">4）TCP_NODELAY</h4>
+
+<ul>
+  <li>Belong to  SocketChannal , is set true , the messge will be sent right now</li>
+</ul>
+
+<h4 id="5so_sndbuf--so_rcvbuf">5）SO_SNDBUF &amp; SO_RCVBUF</h4>
+
+<ul>
+  <li>
+    <p>SO_SNDBUF belong  SocketChannal</p>
+  </li>
+  <li>
+    <p>SO_RCVBUF belong to  SocketChannal and ServerSocketChannal （suggest set it on ServerSocketChannal ）</p>
+
+    <p>sliding window，do not set it ，depend on system setting</p>
+  </li>
+</ul>
+
+<h4 id="6allocator">6）ALLOCATOR</h4>
+
+<ul>
+  <li>belong to  SocketChannal</li>
+  <li>allocate ByteBuf， ctx.alloc()</li>
+</ul>
+
+<p>childOption</p>
+
+<h4 id="7rcvbuf_allocator">7）RCVBUF_ALLOCATOR</h4>
+
+<ul>
+  <li>belong to  SocketChannal</li>
+  <li>control the capacity of netty receving cache</li>
+  <li>Use direct buffer，pool or unpool depend on which allocator you choose</li>
+</ul>
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/netty/index_posts/2022/09/02/netty.html">
+                            <a class="post__prev" href="/netty/index_posts/2022/09/18/netty.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">ByteBuffer</h2>
+                                    <h2 class="post__nav__title">Chat Room</h2>
                                 </div>
                             </a>
                         
                     
-                    
-                        
-                            <a class="post__next" href="/netty/index_posts/2022/09/04/netty.html">
-                                <div class="next__box">
-                                    <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">Blocking & UnBlocking</h2>
-                                </div>
-                                <div class="next__image">
-                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
-                                </div>
-                            </a>
-                        
                     
                 </div>
             

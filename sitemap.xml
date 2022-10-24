@@ -6,7 +6,29 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Fri, 21 Oct 2022 00:28:41 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 24 Oct 2022 17:25:18 +0800</lastBuildDate>
+        
+        <item>
+            <title>Channel option</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/19/netty.html
+            </link>
+            <description>
+                &lt;h4 id=&quot;1connect_timeout_millis&quot;&gt;1）CONNECT_TIMEOUT_MILLIS&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This is for SocketChannal  (client)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;when the client create connection , it will throw timeout exception if it is not connected  to server in timeout time&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SO_TIMEOUT is mainly used in blocking io&lt;/li&gt;
+&lt;/ul&g...
+            </description>
+            <pubDate>Mon, 19 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/19/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Chat Room</title>
