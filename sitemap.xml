@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 24 Oct 2022 17:25:18 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 24 Oct 2022 17:48:47 +0800</lastBuildDate>
         
         <item>
             <title>Channel option</title>
@@ -455,9 +455,9 @@
 
 &lt;h2 id=&quot;iintroduction&quot;&gt;I.Introduction&lt;/h2&gt;
 
-&lt;h3 id=&quot;1research-background-and-significance&quot;&gt;1.Research Background and Significance&lt;/h3&gt;
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/project/growlights/gr000.png&quot; width=&quot;50%&quot; /&gt;&lt;/center&gt;
 
-&lt;p&gt; With the rapid development of smart agriculture , IOT is playing more and more important role in...
+&lt;h3 id=&quot;1research-background-and-significance&quot;&gt;1.Research Background and...
             </description>
             <pubDate>Sat, 19 Mar 2022 00:00:00 +0800</pubDate>
             <guid>
