@@ -660,11 +660,6 @@
                       <span class="c1">// block by select , set wakeup status with false</span>
                         <span class="kt">boolean</span> <span class="n">oldWakenUp</span> <span class="o">=</span> <span class="n">wakenUp</span><span class="o">.</span><span class="na">getAndSet</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
                         
-                        <span class="c1">// 如果在这个位置，非 EventLoop 线程抢先将 wakenUp 置为 true，并 wakeup</span>
-                        <span class="c1">// 下面的 select 方法不会阻塞</span>
-                        <span class="c1">// 等 runAllTasks 处理完成后，到再循环进来这个阶段新增的任务会不会及时执行呢?</span>
-                        <span class="c1">// 因为 oldWakenUp 为 true，因此下面的 select 方法就会阻塞，直到超时</span>
-                        <span class="c1">// 才能执行，让 select 方法无谓阻塞</span>
                         <span class="n">select</span><span class="o">(</span><span class="n">oldWakenUp</span><span class="o">);</span>
 
                         <span class="k">if</span> <span class="o">(</span><span class="n">wakenUp</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
@@ -716,17 +711,6 @@
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
-
-<h4 id="️-attention">⚠️ Attention</h4>
-
-<blockquote>
-  <p>这里有个费解的地方就是 wakeup，它既可以由提交任务的线程来调用（比较好理解），也可以由 EventLoop 线程来调用（比较费解），这里要知道 wakeup 方法的效果：</p>
-
-  <ul>
-    <li>由非 EventLoop 线程调用，会唤醒当前在执行 select 阻塞的 EventLoop 线程</li>
-    <li>由 EventLoop 自己调用，会本次的 wakeup 会取消下一次的 select 操作</li>
-  </ul>
-</blockquote>
 
 <p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#select</code></p>
 
