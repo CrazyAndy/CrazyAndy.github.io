@@ -6,7 +6,41 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 24 Oct 2022 17:48:47 +0800</lastBuildDate>
+        <lastBuildDate>Wed, 26 Oct 2022 17:01:45 +0800</lastBuildDate>
+        
+        <item>
+            <title>Netty Source Code</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/21/netty.html
+            </link>
+            <description>
+                &lt;h3 id=&quot;21-analyse&quot;&gt;2.1 Analyse&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//1 netty use NioEventLoopGroup to encapsulate thread and selector&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Selector&lt;/span&gt; &lt;span class=&qu...
+            </description>
+            <pubDate>Wed, 21 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/21/netty.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>RPC framework</title>
+            <link>
+                http://localhost:4000/netty/index_posts/2022/09/20/netty.html
+            </link>
+            <description>
+                &lt;h4 id=&quot;1preparation&quot;&gt;1）Preparation&lt;/h4&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;k...
+            </description>
+            <pubDate>Tue, 20 Sep 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/netty/index_posts/2022/09/20/netty.html
+            </guid>
+        </item>
         
         <item>
             <title>Channel option</title>

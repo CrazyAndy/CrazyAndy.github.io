@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<head>
+    <title>Netty Source Code | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Frontend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/frontend/react.html">React</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/reactnative.html">ReactNative</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/flutter.html">Flutter</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/es6.html">Es6</a>
+                                            
+                                                <a class="nav__link" href="/categories/frontend/front_others.html">Others</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">Backend <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/backend/java.html">Java</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/netty.html">Netty</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/python.html">Python</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/ruby.html">Ruby</a>
+                                            
+                                                <a class="nav__link" href="/categories/backend/rails.html">Rails</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Embedded <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/embedded/c.html">C</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/digit.html">DigitCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
+                                            
+                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Idea <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/idea/strategy.html">DesignStrategy</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/ddd.html">DDD</a>
+                                            
+                                                <a class="nav__link" href="/categories/idea/cloud.html">Cloud</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">IT <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/it/tcpip.html">TCP/IP</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/socket.html">Socket</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mqtt.html">mqtt</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/jvm.html">jvm</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/linux.html">linux</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/docker.html">docker</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/k8s.html">k8s</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/mq.html">mq</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/memorycache.html">memorycache</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/elk.html">elk</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/zookeeper.html">zookeeper</a>
+                                            
+                                                <a class="nav__link" href="/categories/it/git.html">git</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>Netty Source Code</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">21 Sep 2022</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h3 id="21-analyse">2.1 Analyse</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1 netty use NioEventLoopGroup to encapsulate thread and selector</span>
+<span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="nc">Selector</span><span class="o">.</span><span class="na">open</span><span class="o">();</span> 
+
+<span class="c1">//2 create NioServerSocketChannel，</span>
+<span class="c1">//ch.configureBlocking(false); init head and tail handler ; config</span>
+<span class="nc">NioServerSocketChannel</span> <span class="n">attachment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NioServerSocketChannel</span><span class="o">();</span>
+
+<span class="c1">//3 create origin java ServerSocketChannel when we create NioServerSocketChannel here</span>
+<span class="nc">ServerSocketChannel</span> <span class="n">serverSocketChannel</span> <span class="o">=</span> <span class="nc">ServerSocketChannel</span><span class="o">.</span><span class="na">open</span><span class="o">();</span> 
+<span class="n">serverSocketChannel</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+
+<span class="c1">//4 these following actions is excuted after nio boss thread started</span>
+
+<span class="c1">//5 register（only attach selector and NioServerSocketChannel,not pay attentation to any events)</span>
+<span class="nc">SelectionKey</span> <span class="n">selectionKey</span> <span class="o">=</span> <span class="n">serverSocketChannel</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">attachment</span><span class="o">);</span>
+
+<span class="c1">//6 head -&gt; init method -&gt; ServerBootstrapAcceptor -&gt; tail</span>
+
+<span class="c1">//7 bind port to listen tcp </span>
+<span class="n">serverSocketChannel</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="k">new</span> <span class="nc">InetSocketAddress</span><span class="o">(</span><span class="mi">8080</span><span class="o">));</span>
+
+<span class="c1">//8 keep a watchful eye on op_accept event</span>
+<span class="n">selectionKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.bootstrap.ServerBootstrap#bind</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.bootstrap.AbstractBootstrap#doBind</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ChannelFuture</span> <span class="nf">doBind</span><span class="o">(</span><span class="kd">final</span> <span class="nc">SocketAddress</span> <span class="n">localAddress</span><span class="o">)</span> <span class="o">{</span>
+	  <span class="c1">// 1.  initAndRegister return regFuture , init channel and register it</span>
+    <span class="kd">final</span> <span class="nc">ChannelFuture</span> <span class="n">regFuture</span> <span class="o">=</span> <span class="n">initAndRegister</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">regFuture</span><span class="o">.</span><span class="na">channel</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">regFuture</span><span class="o">.</span><span class="na">cause</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">regFuture</span><span class="o">;</span>
+    <span class="o">}</span>
+		
+    <span class="c1">// 2. initAndRegister is sync asynchronous</span>
+    <span class="c1">// 2.1 if done</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">regFuture</span><span class="o">.</span><span class="na">isDone</span><span class="o">())</span> <span class="o">{</span>
+        <span class="nc">ChannelPromise</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">newPromise</span><span class="o">();</span>
+        <span class="c1">// 3.1 call doBind0 ,bind address </span>
+        <span class="n">doBind0</span><span class="o">(</span><span class="n">regFuture</span><span class="o">,</span> <span class="n">channel</span><span class="o">,</span> <span class="n">localAddress</span><span class="o">,</span> <span class="n">promise</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">promise</span><span class="o">;</span>
+    <span class="o">}</span> 
+    <span class="c1">// 2.2 not done</span>
+    <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// Registration future is almost always fulfilled already, but just in case it's not.</span>
+        <span class="kd">final</span> <span class="nc">PendingRegistrationPromise</span> <span class="n">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PendingRegistrationPromise</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+        <span class="c1">// 3.2 call doBind0</span>
+        <span class="n">regFuture</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelFutureListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operationComplete</span><span class="o">(</span><span class="nc">ChannelFuture</span> <span class="n">future</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="nc">Throwable</span> <span class="n">cause</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="na">cause</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">cause</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">cause</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">promise</span><span class="o">.</span><span class="na">registered</span><span class="o">();</span>
+                    <span class="n">doBind0</span><span class="o">(</span><span class="n">regFuture</span><span class="o">,</span> <span class="n">channel</span><span class="o">,</span> <span class="n">localAddress</span><span class="o">,</span> <span class="n">promise</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="k">return</span> <span class="n">promise</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>KeyPoint <code class="language-plaintext highlighter-rouge">io.netty.bootstrap.AbstractBootstrap#initAndRegister</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="nc">ChannelFuture</span> <span class="nf">initAndRegister</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Channel</span> <span class="n">channel</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">channelFactory</span><span class="o">.</span><span class="na">newChannel</span><span class="o">();</span>
+        <span class="c1">// 1.1 int - and ChannelInitializer</span>
+        <span class="n">init</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DefaultChannelPromise</span><span class="o">(</span><span class="k">new</span> <span class="nc">FailedChannel</span><span class="o">(),</span> <span class="nc">GlobalEventExecutor</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">).</span><span class="na">setFailure</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 1.2 register java channel to selector 上</span>
+    <span class="nc">ChannelFuture</span> <span class="n">regFuture</span> <span class="o">=</span> <span class="n">config</span><span class="o">().</span><span class="na">group</span><span class="o">().</span><span class="na">register</span><span class="o">(</span><span class="n">channel</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">regFuture</span><span class="o">.</span><span class="na">cause</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">regFuture</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.bootstrap.ServerBootstrap#init</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// this channel is instance of NioServerSocketChannel</span>
+<span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="nc">Channel</span> <span class="n">channel</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+   <span class="n">setChannelOptions</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="n">newOptionsArray</span><span class="o">(),</span> <span class="n">logger</span><span class="o">);</span>
+   <span class="n">setAttributes</span><span class="o">(</span><span class="n">channel</span><span class="o">,</span> <span class="n">newAttributesArray</span><span class="o">());</span>
+
+   <span class="nc">ChannelPipeline</span> <span class="n">p</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
+
+   <span class="kd">final</span> <span class="nc">EventLoopGroup</span> <span class="n">currentChildGroup</span> <span class="o">=</span> <span class="n">childGroup</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="nc">ChannelHandler</span> <span class="n">currentChildHandler</span> <span class="o">=</span> <span class="n">childHandler</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="nc">ChannelOption</span><span class="o">&lt;?&gt;,</span> <span class="nc">Object</span><span class="o">&gt;[]</span> <span class="n">currentChildOptions</span> <span class="o">=</span> <span class="n">newOptionsArray</span><span class="o">(</span><span class="n">childOptions</span><span class="o">);</span>
+   <span class="kd">final</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="nc">AttributeKey</span><span class="o">&lt;?&gt;,</span> <span class="nc">Object</span><span class="o">&gt;[]</span> <span class="n">currentChildAttrs</span> <span class="o">=</span> <span class="n">newAttributesArray</span><span class="o">(</span><span class="n">childAttrs</span><span class="o">);</span>
+	
+    <span class="c1">// add initializer for  NioServerSocketChannel</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelInitializer</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initChannel</span><span class="o">(</span><span class="kd">final</span> <span class="nc">Channel</span> <span class="n">ch</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="nc">ChannelPipeline</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
+            <span class="nc">ChannelHandler</span> <span class="n">handler</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">handler</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">handler</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="n">handler</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="c1">// put ServerBootstrapAcceptor into pipeline of NioServerSocketChannel</span>
+            <span class="n">ch</span><span class="o">.</span><span class="na">eventLoop</span><span class="o">().</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="n">pipeline</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="k">new</span> <span class="nc">ServerBootstrapAcceptor</span><span class="o">(</span>
+                            <span class="n">ch</span><span class="o">,</span> <span class="n">currentChildGroup</span><span class="o">,</span> <span class="n">currentChildHandler</span><span class="o">,</span> <span class="n">currentChildOptions</span><span class="o">,</span> <span class="n">currentChildAttrs</span><span class="o">));</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.AbstractChannel.AbstractUnsafe#register</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">register</span><span class="o">(</span><span class="nc">EventLoop</span> <span class="n">eventLoop</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    
+    <span class="nc">ObjectUtil</span><span class="o">.</span><span class="na">checkNotNull</span><span class="o">(</span><span class="n">eventLoop</span><span class="o">,</span> <span class="s">"eventLoop"</span><span class="o">);</span>
+  	<span class="k">if</span> <span class="o">(</span><span class="n">isRegistered</span><span class="o">())</span> <span class="o">{</span>
+    	<span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="k">new</span> <span class="nc">IllegalStateException</span><span class="o">(</span><span class="s">"registered to an event loop already"</span><span class="o">));</span>
+    	<span class="k">return</span><span class="o">;</span>
+  	<span class="o">}</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">isCompatible</span><span class="o">(</span><span class="n">eventLoop</span><span class="o">))</span> <span class="o">{</span>
+      <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span>
+        <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"incompatible event loop type: "</span> <span class="o">+</span> <span class="n">eventLoop</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">()));</span>
+      <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">eventLoop</span><span class="o">.</span><span class="na">inEventLoop</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">register0</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+           <span class="c1">// execute would start the thread of eventLoop, and register will be call in that thread</span>
+           <span class="c1">// since there is one NioServerSocketChannel,there is only one boss nio thread</span>
+           <span class="c1">// in fact , eventLoop.execute means main thread change to nio boss thread</span>
+            <span class="n">eventLoop</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="n">register0</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">closeForcibly</span><span class="o">();</span>
+            <span class="n">closeFuture</span><span class="o">.</span><span class="na">setClosed</span><span class="o">();</span>
+            <span class="n">safeSetFailure</span><span class="o">(</span><span class="n">promise</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.AbstractChannel.AbstractUnsafe#register0</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">register0</span><span class="o">(</span><span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">promise</span><span class="o">.</span><span class="na">setUncancellable</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">ensureOpen</span><span class="o">(</span><span class="n">promise</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">boolean</span> <span class="n">firstRegistration</span> <span class="o">=</span> <span class="n">neverRegistered</span><span class="o">;</span>
+        <span class="c1">// 1.2.1 origin nio channel bind to selector ，but it does not register events to selector</span>
+        <span class="n">doRegister</span><span class="o">();</span>
+        <span class="n">neverRegistered</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">registered</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="c1">// 1.2.2 execute initChannel of NioServerSocketChannel </span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">invokeHandlerAddedIfNeeded</span><span class="o">();</span>
+
+        <span class="c1">// call back 3.2 io.netty.bootstrap.AbstractBootstrap#doBind0</span>
+        <span class="n">safeSetSuccess</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelRegistered</span><span class="o">();</span>
+        
+        <span class="c1">//  server socket channel is not bond，isActive is false</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isActive</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">firstRegistration</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelActive</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">config</span><span class="o">().</span><span class="na">isAutoRead</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">beginRead</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Close the channel directly to avoid FD leak.</span>
+        <span class="n">closeForcibly</span><span class="o">();</span>
+        <span class="n">closeFuture</span><span class="o">.</span><span class="na">setClosed</span><span class="o">();</span>
+        <span class="n">safeSetFailure</span><span class="o">(</span><span class="n">promise</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.ChannelInitializer#initChannel</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">initChannel</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">initMap</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">ctx</span><span class="o">))</span> <span class="o">{</span> <span class="c1">// Guard against re-entrance.</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// 1.2.2.1 init</span>
+            <span class="n">initChannel</span><span class="o">((</span><span class="no">C</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">channel</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">cause</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">exceptionCaught</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="n">cause</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="c1">// 1.2.2.2 remove initializer</span>
+            <span class="nc">ChannelPipeline</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">pipeline</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pipeline</span><span class="o">.</span><span class="na">context</span><span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">pipeline</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.bootstrap.AbstractBootstrap#doBind0</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 3.1 or 3.2 execute doBind0</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doBind0</span><span class="o">(</span>
+        <span class="kd">final</span> <span class="nc">ChannelFuture</span> <span class="n">regFuture</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">Channel</span> <span class="n">channel</span><span class="o">,</span>
+        <span class="kd">final</span> <span class="nc">SocketAddress</span> <span class="n">localAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">channel</span><span class="o">.</span><span class="na">eventLoop</span><span class="o">().</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">regFuture</span><span class="o">.</span><span class="na">isSuccess</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">channel</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="n">localAddress</span><span class="o">,</span> <span class="n">promise</span><span class="o">).</span><span class="na">addListener</span><span class="o">(</span><span class="nc">ChannelFutureListener</span><span class="o">.</span><span class="na">CLOSE_ON_FAILURE</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">promise</span><span class="o">.</span><span class="na">setFailure</span><span class="o">(</span><span class="n">regFuture</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.AbstractChannel.AbstractUnsafe#bind</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">bind</span><span class="o">(</span><span class="kd">final</span> <span class="nc">SocketAddress</span> <span class="n">localAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">assertEventLoop</span><span class="o">();</span>
+
+    <span class="k">if</span> <span class="o">(!</span><span class="n">promise</span><span class="o">.</span><span class="na">setUncancellable</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">ensureOpen</span><span class="o">(</span><span class="n">promise</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="nc">Boolean</span><span class="o">.</span><span class="na">TRUE</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">config</span><span class="o">().</span><span class="na">getOption</span><span class="o">(</span><span class="nc">ChannelOption</span><span class="o">.</span><span class="na">SO_BROADCAST</span><span class="o">))</span> <span class="o">&amp;&amp;</span>
+        <span class="n">localAddress</span> <span class="k">instanceof</span> <span class="nc">InetSocketAddress</span> <span class="o">&amp;&amp;</span>
+        <span class="o">!((</span><span class="nc">InetSocketAddress</span><span class="o">)</span> <span class="n">localAddress</span><span class="o">).</span><span class="na">getAddress</span><span class="o">().</span><span class="na">isAnyLocalAddress</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
+        <span class="o">!</span><span class="nc">PlatformDependent</span><span class="o">.</span><span class="na">isWindows</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nc">PlatformDependent</span><span class="o">.</span><span class="na">maybeSuperUser</span><span class="o">())</span> <span class="o">{</span>
+        
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">wasActive</span> <span class="o">=</span> <span class="n">isActive</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">{</span>
+        
+        <span class="n">doBind</span><span class="o">(</span><span class="n">localAddress</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">safeSetFailure</span><span class="o">(</span><span class="n">promise</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+        <span class="n">closeIfClosed</span><span class="o">();</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(!</span><span class="n">wasActive</span> <span class="o">&amp;&amp;</span> <span class="n">isActive</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">invokeLater</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelActive</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="n">safeSetSuccess</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>3.3  <code class="language-plaintext highlighter-rouge">io.netty.channel.socket.nio.NioServerSocketChannel#doBind</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBind</span><span class="o">(</span><span class="nc">SocketAddress</span> <span class="n">localAddress</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nc">PlatformDependent</span><span class="o">.</span><span class="na">javaVersion</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">javaChannel</span><span class="o">().</span><span class="na">bind</span><span class="o">(</span><span class="n">localAddress</span><span class="o">,</span> <span class="n">config</span><span class="o">.</span><span class="na">getBacklog</span><span class="o">());</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">javaChannel</span><span class="o">().</span><span class="na">socket</span><span class="o">().</span><span class="na">bind</span><span class="o">(</span><span class="n">localAddress</span><span class="o">,</span> <span class="n">config</span><span class="o">.</span><span class="na">getBacklog</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>3.4  <code class="language-plaintext highlighter-rouge">io.netty.channel.DefaultChannelPipeline.HeadContext#channelActive</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelActive</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">fireChannelActive</span><span class="o">();</span>
+	  <span class="c1">// read (read of NioServerSocketChannel not aim to read message，just trigger channel's registering events)</span>
+    <span class="n">readIfIsAutoRead</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.AbstractNioChannel#doBeginRead</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBeginRead</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="c1">// Channel.read() or ChannelHandlerContext.read() was called</span>
+    <span class="kd">final</span> <span class="nc">SelectionKey</span> <span class="n">selectionKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">selectionKey</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">selectionKey</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">readPending</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">interestOps</span> <span class="o">=</span> <span class="n">selectionKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">();</span>
+    <span class="c1">// readInterestOp is equal to 16，inited when NioServerSocketChannel is set up，stands for focus on accept event</span>
+    <span class="k">if</span> <span class="o">((</span><span class="n">interestOps</span> <span class="o">&amp;</span> <span class="n">readInterestOp</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">selectionKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="n">interestOps</span> <span class="o">|</span> <span class="n">readInterestOp</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="22-nioeventloop">2.2 NioEventLoop</h3>
+
+<p>NioEventLoop thread not only deal with io event , but also deal with Task(common task and scheduled task)，</p>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.util.concurrent.SingleThreadEventExecutor#execute</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">execute</span><span class="o">(</span><span class="nc">Runnable</span> <span class="n">task</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">task</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">NullPointerException</span><span class="o">(</span><span class="s">"task"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">inEventLoop</span> <span class="o">=</span> <span class="n">inEventLoop</span><span class="o">();</span>
+    <span class="n">addTask</span><span class="o">(</span><span class="n">task</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">inEventLoop</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">//if inEventLoop = false, we need to call execute by other thread, that means fist call, submit task to eventLoop, start loop </span>
+        <span class="n">startThread</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isShutdown</span><span class="o">())</span> <span class="o">{</span>
+          <span class="c1">//refuse </span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(!</span><span class="n">addTaskWakesUp</span> <span class="o">&amp;&amp;</span> <span class="n">wakesUpForTask</span><span class="o">(</span><span class="n">task</span><span class="o">))</span> <span class="o">{</span>
+      <span class="c1">// if IO select block , the thread which add task need to wakeup thread of NioEventLoop</span>
+        <span class="n">wakeup</span><span class="o">(</span><span class="n">inEventLoop</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>wakeup  select blocking thread <code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#wakeup</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">wakeup</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">inEventLoop</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">inEventLoop</span> <span class="o">&amp;&amp;</span> <span class="n">wakenUp</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">selector</span><span class="o">.</span><span class="na">wakeup</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Start EventLoop main loop, <code class="language-plaintext highlighter-rouge">io.netty.util.concurrent.SingleThreadEventExecutor#doStartThread</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">doStartThread</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">assert</span> <span class="n">thread</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">thread</span> <span class="o">=</span> <span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">interrupted</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">thread</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
+            <span class="o">}</span>
+
+            <span class="kt">boolean</span> <span class="n">success</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="n">updateLastExecutionTime</span><span class="o">();</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">SingleThreadEventExecutor</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"Unexpected exception from an event executor: "</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#run</code> do infinite loop to check whether there is new task/io event or not</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="c1">// calculateStrategy </span>
+                <span class="c1">// if has tasks，execute selectNow one time，clear the result of previous wakeup，skip switch no matter there is  IO or not</span>
+                <span class="c1">// if no task，will match SelectStrategy.SELECT，consider whether we need to block here</span>
+                <span class="k">switch</span> <span class="o">(</span><span class="n">selectStrategy</span><span class="o">.</span><span class="na">calculateStrategy</span><span class="o">(</span><span class="n">selectNowSupplier</span><span class="o">,</span> <span class="n">hasTasks</span><span class="o">()))</span> <span class="o">{</span>
+                    <span class="k">case</span> <span class="nc">SelectStrategy</span><span class="o">.</span><span class="na">CONTINUE</span><span class="o">:</span>
+                        <span class="k">continue</span><span class="o">;</span>
+
+                    <span class="k">case</span> <span class="nc">SelectStrategy</span><span class="o">.</span><span class="na">BUSY_WAIT</span><span class="o">:</span>
+
+                    <span class="k">case</span> <span class="nc">SelectStrategy</span><span class="o">.</span><span class="na">SELECT</span><span class="o">:</span>
+                       <span class="c1">// IO thread and task thread both execute wakeup, since wakeup cost much of cpu, so use  atomic bool object named wakenUp ,it wake up current thread if we set it true</span>
+                      <span class="c1">// block by select , set wakeup status with false</span>
+                        <span class="kt">boolean</span> <span class="n">oldWakenUp</span> <span class="o">=</span> <span class="n">wakenUp</span><span class="o">.</span><span class="na">getAndSet</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+                        
+                        <span class="c1">// 如果在这个位置，非 EventLoop 线程抢先将 wakenUp 置为 true，并 wakeup</span>
+                        <span class="c1">// 下面的 select 方法不会阻塞</span>
+                        <span class="c1">// 等 runAllTasks 处理完成后，到再循环进来这个阶段新增的任务会不会及时执行呢?</span>
+                        <span class="c1">// 因为 oldWakenUp 为 true，因此下面的 select 方法就会阻塞，直到超时</span>
+                        <span class="c1">// 才能执行，让 select 方法无谓阻塞</span>
+                        <span class="n">select</span><span class="o">(</span><span class="n">oldWakenUp</span><span class="o">);</span>
+
+                        <span class="k">if</span> <span class="o">(</span><span class="n">wakenUp</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">{</span>
+                            <span class="n">selector</span><span class="o">.</span><span class="na">wakeup</span><span class="o">();</span>
+                        <span class="o">}</span>
+                    <span class="k">default</span><span class="o">:</span>
+                <span class="o">}</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">rebuildSelector0</span><span class="o">();</span>
+                <span class="n">handleLoopException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">cancelledKeys</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">needsToSelectAgain</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="c1">// ioRatio default value 50</span>
+            <span class="kd">final</span> <span class="kt">int</span> <span class="n">ioRatio</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">ioRatio</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">ioRatio</span> <span class="o">==</span> <span class="mi">100</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">processSelectedKeys</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                    <span class="c1">// when ioRatio is 100 ，run all unIO task</span>
+                    <span class="n">runAllTasks</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>                
+                <span class="kd">final</span> <span class="kt">long</span> <span class="n">ioStartTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">processSelectedKeys</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                    <span class="c1">// record io event execute time</span>
+                    <span class="kd">final</span> <span class="kt">long</span> <span class="n">ioTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">()</span> <span class="o">-</span> <span class="n">ioStartTime</span><span class="o">;</span>
+                    <span class="c1">// if timeout when run unIO task ,quit runAllTasks</span>
+                    <span class="n">runAllTasks</span><span class="o">(</span><span class="n">ioTime</span> <span class="o">*</span> <span class="o">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">ioRatio</span><span class="o">)</span> <span class="o">/</span> <span class="n">ioRatio</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">handleLoopException</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isShuttingDown</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">closeAll</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">confirmShutdown</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="k">return</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">handleLoopException</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="️-attention">⚠️ Attention</h4>
+
+<blockquote>
+  <p>这里有个费解的地方就是 wakeup，它既可以由提交任务的线程来调用（比较好理解），也可以由 EventLoop 线程来调用（比较费解），这里要知道 wakeup 方法的效果：</p>
+
+  <ul>
+    <li>由非 EventLoop 线程调用，会唤醒当前在执行 select 阻塞的 EventLoop 线程</li>
+    <li>由 EventLoop 自己调用，会本次的 wakeup 会取消下一次的 select 操作</li>
+  </ul>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#select</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">select</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">oldWakenUp</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="nc">Selector</span> <span class="n">selector</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">selector</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">currentTimeNanos</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+        <span class="c1">//  caculate wait time</span>
+        <span class="c1">// * no scheduledTask，timeout is 1s</span>
+        <span class="c1">// * have scheduledTask，timeout is next execute time of next task - currenttime超时时间为 `下一个定时任务执行时间 - 当前时间`</span>
+        <span class="kt">long</span> <span class="n">selectDeadLineNanos</span> <span class="o">=</span> <span class="n">currentTimeNanos</span> <span class="o">+</span> <span class="n">delayNanos</span><span class="o">(</span><span class="n">currentTimeNanos</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">timeoutMillis</span> <span class="o">=</span> <span class="o">(</span><span class="n">selectDeadLineNanos</span> <span class="o">-</span> <span class="n">currentTimeNanos</span> <span class="o">+</span> <span class="mi">500000L</span><span class="o">)</span> <span class="o">/</span> <span class="mi">1000000L</span><span class="o">;</span>
+            <span class="c1">// quit loop if timeout</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">timeoutMillis</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">selectCnt</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">selector</span><span class="o">.</span><span class="na">selectNow</span><span class="o">();</span>
+                    <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">// if one task quit loop , this task will be executed until timeout of next select if not judge here</span>
+            <span class="c1">// wakenUp.compareAndSet(false, true) aim to  UN-NioEventLoop not execute wakeup</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">hasTasks</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">wakenUp</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">selector</span><span class="o">.</span><span class="na">selectNow</span><span class="o">();</span>
+                <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="c1">// select block in limit time</span>
+            <span class="c1">// there is bug from nio，when this bug occur，select will not be blocke even if no event happen, it cause empty loop,cause cpu up to 100%</span>
+            <span class="kt">int</span> <span class="n">selectedKeys</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">timeoutMillis</span><span class="o">);</span>
+           
+            <span class="n">selectCnt</span> <span class="o">++;</span>
+
+            <span class="c1">// quit loop when these condition is true</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">selectedKeys</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">oldWakenUp</span> <span class="o">||</span> <span class="n">wakenUp</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">||</span> <span class="n">hasTasks</span><span class="o">()</span> <span class="o">||</span> <span class="n">hasScheduledTasks</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">())</span> <span class="o">{</span>
+               	<span class="c1">// quit loop if interrupted</span>
+                <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kt">long</span> <span class="n">time</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">time</span> <span class="o">-</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">.</span><span class="na">toNanos</span><span class="o">(</span><span class="n">timeoutMillis</span><span class="o">)</span> <span class="o">&gt;=</span> <span class="n">currentTimeNanos</span><span class="o">)</span> <span class="o">{</span>
+                
+                <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span> 
+            <span class="c1">// handle with bug of nio empty loop</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="no">SELECTOR_AUTO_REBUILD_THRESHOLD</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+                    <span class="n">selectCnt</span> <span class="o">&gt;=</span> <span class="no">SELECTOR_AUTO_REBUILD_THRESHOLD</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// rebuild selector</span>
+                <span class="n">selector</span> <span class="o">=</span> <span class="n">selectRebuildSelector</span><span class="o">(</span><span class="n">selectCnt</span><span class="o">);</span>
+                <span class="n">selectCnt</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">currentTimeNanos</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">selectCnt</span> <span class="o">&gt;</span> <span class="no">MIN_PREMATURE_SELECTOR_RETURNS</span><span class="o">)</span> <span class="o">{</span>
+          
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">CancelledKeyException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>keys <code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#processSelectedKeys</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">processSelectedKeys</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">selectedKeys</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+ 
+        <span class="n">processSelectedKeysOptimized</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">processSelectedKeysPlain</span><span class="o">(</span><span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.NioEventLoop#processSelectedKey</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">processSelectedKey</span><span class="o">(</span><span class="nc">SelectionKey</span> <span class="n">k</span><span class="o">,</span> <span class="nc">AbstractNioChannel</span> <span class="n">ch</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">AbstractNioChannel</span><span class="o">.</span><span class="na">NioUnsafe</span> <span class="n">unsafe</span> <span class="o">=</span> <span class="n">ch</span><span class="o">.</span><span class="na">unsafe</span><span class="o">();</span>
+   
+    <span class="k">if</span> <span class="o">(!</span><span class="n">k</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">readyOps</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="na">readyOps</span><span class="o">();</span>
+       <span class="c1">//connection event</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">readyOps</span> <span class="o">&amp;</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_CONNECT</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">ops</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="na">interestOps</span><span class="o">();</span>
+            <span class="n">ops</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_CONNECT</span><span class="o">;</span>
+            <span class="n">k</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="n">ops</span><span class="o">);</span>
+
+            <span class="n">unsafe</span><span class="o">.</span><span class="na">finishConnect</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="c1">// writable event</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">readyOps</span> <span class="o">&amp;</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_WRITE</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ch</span><span class="o">.</span><span class="na">unsafe</span><span class="o">().</span><span class="na">forceFlush</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="c1">// readable or accept event</span>
+        <span class="k">if</span> <span class="o">((</span><span class="n">readyOps</span> <span class="o">&amp;</span> <span class="o">(</span><span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span> <span class="o">|</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_ACCEPT</span><span class="o">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">readyOps</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// writable -&gt; io.netty.channel.nio.AbstractNioMessageChannel.NioMessageUnsafe#read</span>
+            <span class="c1">// readable -&gt; io.netty.channel.nio.AbstractNioByteChannel.NioByteUnsafe#read</span>
+            <span class="n">unsafe</span><span class="o">.</span><span class="na">read</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">CancelledKeyException</span> <span class="n">ignored</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">unsafe</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">unsafe</span><span class="o">.</span><span class="na">voidPromise</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="23-accept">2.3 accept</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//1 block untill event occur</span>
+<span class="n">selector</span><span class="o">.</span><span class="na">select</span><span class="o">();</span>
+
+<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">SelectionKey</span><span class="o">&gt;</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="na">selectedKeys</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>    
+    <span class="c1">//2 get one event</span>
+    <span class="nc">SelectionKey</span> <span class="n">key</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    
+    <span class="c1">//3 if this event is accept event</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">isAcceptable</span><span class="o">())</span> <span class="o">{</span>
+        
+        <span class="c1">//4 execute accept</span>
+        <span class="nc">SocketChannel</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">serverSocketChannel</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+        <span class="n">channel</span><span class="o">.</span><span class="na">configureBlocking</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        
+        <span class="c1">//5 pay attention to  read event</span>
+        <span class="n">channel</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">selector</span><span class="o">,</span> <span class="nc">SelectionKey</span><span class="o">.</span><span class="na">OP_READ</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>accept event</p>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.AbstractNioMessageChannel.NioMessageUnsafe#read</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">read</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">assert</span> <span class="nf">eventLoop</span><span class="o">().</span><span class="na">inEventLoop</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="nc">ChannelConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="nc">ChannelPipeline</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">();</span>    
+    <span class="kd">final</span> <span class="nc">RecvByteBufAllocator</span><span class="o">.</span><span class="na">Handle</span> <span class="n">allocHandle</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">().</span><span class="na">recvBufAllocHandle</span><span class="o">();</span>
+    <span class="n">allocHandle</span><span class="o">.</span><span class="na">reset</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+
+    <span class="kt">boolean</span> <span class="n">closed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="nc">Throwable</span> <span class="n">exception</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">do</span> <span class="o">{</span>
+				<span class="c1">// doReadMessages execute accept and create NioSocketChannel ,put readBuf</span>
+                <span class="c1">// readBuf is one ArrayList to cache message</span>
+                <span class="kt">int</span> <span class="n">localRead</span> <span class="o">=</span> <span class="n">doReadMessages</span><span class="o">(</span><span class="n">readBuf</span><span class="o">);</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">localRead</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">localRead</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">closed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+				<span class="c1">// localRead is 1 means one message , receive one connection</span>
+                <span class="n">allocHandle</span><span class="o">.</span><span class="na">incMessagesRead</span><span class="o">(</span><span class="n">localRead</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">allocHandle</span><span class="o">.</span><span class="na">continueReading</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">exception</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">readBuf</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span> <span class="o">++)</span> <span class="o">{</span>
+            <span class="n">readPending</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="c1">// trigger read event，handler of pipeline deal with it</span>
+            <span class="c1">// io.netty.bootstrap.ServerBootstrap.ServerBootstrapAcceptor#channelRead</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelRead</span><span class="o">(</span><span class="n">readBuf</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="n">readBuf</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+        <span class="n">allocHandle</span><span class="o">.</span><span class="na">readComplete</span><span class="o">();</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelReadComplete</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">exception</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">closed</span> <span class="o">=</span> <span class="n">closeOnReadError</span><span class="o">(</span><span class="n">exception</span><span class="o">);</span>
+
+            <span class="n">pipeline</span><span class="o">.</span><span class="na">fireExceptionCaught</span><span class="o">(</span><span class="n">exception</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">closed</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">inputShutdown</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isOpen</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">close</span><span class="o">(</span><span class="n">voidPromise</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">readPending</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">config</span><span class="o">.</span><span class="na">isAutoRead</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">removeReadOp</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.bootstrap.ServerBootstrap.ServerBootstrapAcceptor#channelRead</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelRead</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// msg is NioSocketChannel</span>
+    <span class="kd">final</span> <span class="nc">Channel</span> <span class="n">child</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Channel</span><span class="o">)</span> <span class="n">msg</span><span class="o">;</span>
+
+    <span class="c1">// NioSocketChannel add  childHandler (initialer)</span>
+    <span class="n">child</span><span class="o">.</span><span class="na">pipeline</span><span class="o">().</span><span class="na">addLast</span><span class="o">(</span><span class="n">childHandler</span><span class="o">);</span>
+
+    <span class="c1">// set option</span>
+    <span class="n">setChannelOptions</span><span class="o">(</span><span class="n">child</span><span class="o">,</span> <span class="n">childOptions</span><span class="o">,</span> <span class="n">logger</span><span class="o">);</span>
+
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Entry</span><span class="o">&lt;</span><span class="nc">AttributeKey</span><span class="o">&lt;?&gt;,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nl">e:</span> <span class="n">childAttrs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">child</span><span class="o">.</span><span class="na">attr</span><span class="o">((</span><span class="nc">AttributeKey</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;)</span> <span class="n">e</span><span class="o">.</span><span class="na">getKey</span><span class="o">()).</span><span class="na">set</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="c1">//  NioSocketChannel register to nio worker thread，and following actions would be up to nio worker thread to handle</span>
+        <span class="n">childGroup</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">child</span><span class="o">).</span><span class="na">addListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">ChannelFutureListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">operationComplete</span><span class="o">(</span><span class="nc">ChannelFuture</span> <span class="n">future</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">future</span><span class="o">.</span><span class="na">isSuccess</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="n">forceClose</span><span class="o">(</span><span class="n">child</span><span class="o">,</span> <span class="n">future</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">forceClose</span><span class="o">(</span><span class="n">child</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.AbstractChannel.AbstractUnsafe#register</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">register</span><span class="o">(</span><span class="nc">EventLoop</span> <span class="n">eventLoop</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="nc">AbstractChannel</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">eventLoop</span> <span class="o">=</span> <span class="n">eventLoop</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">eventLoop</span><span class="o">.</span><span class="na">inEventLoop</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">register0</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">eventLoop</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="n">register0</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">closeForcibly</span><span class="o">();</span>
+            <span class="n">closeFuture</span><span class="o">.</span><span class="na">setClosed</span><span class="o">();</span>
+            <span class="n">safeSetFailure</span><span class="o">(</span><span class="n">promise</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.AbstractChannel.AbstractUnsafe#register0</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">register0</span><span class="o">(</span><span class="nc">ChannelPromise</span> <span class="n">promise</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">promise</span><span class="o">.</span><span class="na">setUncancellable</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">ensureOpen</span><span class="o">(</span><span class="n">promise</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">boolean</span> <span class="n">firstRegistration</span> <span class="o">=</span> <span class="n">neverRegistered</span><span class="o">;</span>
+        <span class="n">doRegister</span><span class="o">();</span>
+        <span class="n">neverRegistered</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">registered</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+		
+        <span class="c1">// execute initializer，pipeline only own head -&gt; initializer -&gt; tail before executed</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">invokeHandlerAddedIfNeeded</span><span class="o">();</span>
+        <span class="c1">//  head -&gt; logging handler -&gt; my handler -&gt; tail after executed</span>
+				
+        <span class="n">safeSetSuccess</span><span class="o">(</span><span class="n">promise</span><span class="o">);</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelRegistered</span><span class="o">();</span>
+        
+        <span class="k">if</span> <span class="o">(</span><span class="n">isActive</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">firstRegistration</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// trigger active event of pipeline</span>
+                <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelActive</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">config</span><span class="o">().</span><span class="na">isAutoRead</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">beginRead</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">closeForcibly</span><span class="o">();</span>
+        <span class="n">closeFuture</span><span class="o">.</span><span class="na">setClosed</span><span class="o">();</span>
+        <span class="n">safeSetFailure</span><span class="o">(</span><span class="n">promise</span><span class="o">,</span> <span class="n">t</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.DefaultChannelPipeline.HeadContext#channelActive</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">channelActive</span><span class="o">(</span><span class="nc">ChannelHandlerContext</span> <span class="n">ctx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">fireChannelActive</span><span class="o">();</span> 
+	<span class="c1">// trigger read (read of NioSocketChannel here，only trigger registering channel event，not relate to reading data)</span>
+    <span class="n">readIfIsAutoRead</span><span class="o">();</span> 
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.AbstractNioChannel#doBeginRead</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doBeginRead</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="c1">// Channel.read() or ChannelHandlerContext.read() was called</span>
+    <span class="kd">final</span> <span class="nc">SelectionKey</span> <span class="n">selectionKey</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">selectionKey</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">selectionKey</span><span class="o">.</span><span class="na">isValid</span><span class="o">())</span> <span class="o">{</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">readPending</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+	<span class="c1">//  interestOps is 0 here</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">interestOps</span> <span class="o">=</span> <span class="n">selectionKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">((</span><span class="n">interestOps</span> <span class="o">&amp;</span> <span class="n">readInterestOp</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// pay attention to  read event</span>
+        <span class="n">selectionKey</span><span class="o">.</span><span class="na">interestOps</span><span class="o">(</span><span class="n">interestOps</span> <span class="o">|</span> <span class="n">readInterestOp</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="24-read">2.4 read</h3>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.nio.AbstractNioByteChannel.NioByteUnsafe#read</code>，the message perhaps cannot be read complete one time , so it will trigger multiple nio read event, one single reading event cause multiple pipeline reading, one event trigger one pipeline read complete</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">read</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">ChannelConfig</span> <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">shouldBreakReadReady</span><span class="o">(</span><span class="n">config</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">clearReadPending</span><span class="o">();</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">final</span> <span class="nc">ChannelPipeline</span> <span class="n">pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">();</span>
+    <span class="c1">// io.netty.allocator.type decide implement of allocator</span>
+    <span class="kd">final</span> <span class="nc">ByteBufAllocator</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">getAllocator</span><span class="o">();</span>
+    <span class="c1">//  allocate bytebuf, set size ofone time reading </span>
+    <span class="kd">final</span> <span class="nc">RecvByteBufAllocator</span><span class="o">.</span><span class="na">Handle</span> <span class="n">allocHandle</span> <span class="o">=</span> <span class="n">recvBufAllocHandle</span><span class="o">();</span>
+    <span class="n">allocHandle</span><span class="o">.</span><span class="na">reset</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+
+    <span class="nc">ByteBuf</span> <span class="n">byteBuf</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">close</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">byteBuf</span> <span class="o">=</span> <span class="n">allocHandle</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="n">allocator</span><span class="o">);</span>
+            <span class="c1">// </span>
+            <span class="n">allocHandle</span><span class="o">.</span><span class="na">lastBytesRead</span><span class="o">(</span><span class="n">doReadBytes</span><span class="o">(</span><span class="n">byteBuf</span><span class="o">));</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">allocHandle</span><span class="o">.</span><span class="na">lastBytesRead</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">byteBuf</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+                <span class="n">byteBuf</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+                <span class="n">close</span> <span class="o">=</span> <span class="n">allocHandle</span><span class="o">.</span><span class="na">lastBytesRead</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">close</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">readPending</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">allocHandle</span><span class="o">.</span><span class="na">incMessagesRead</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="n">readPending</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="c1">// trigger read event，let handler of pipeline to deal with it，</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelRead</span><span class="o">(</span><span class="n">byteBuf</span><span class="o">);</span>
+            <span class="n">byteBuf</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span> 
+        
+        <span class="k">while</span> <span class="o">(</span><span class="n">allocHandle</span><span class="o">.</span><span class="na">continueReading</span><span class="o">());</span>
+
+        <span class="n">allocHandle</span><span class="o">.</span><span class="na">readComplete</span><span class="o">();</span>
+        <span class="c1">// cause read complete event</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="na">fireChannelReadComplete</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">close</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">closeOnRead</span><span class="o">(</span><span class="n">pipeline</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">handleReadException</span><span class="o">(</span><span class="n">pipeline</span><span class="o">,</span> <span class="n">byteBuf</span><span class="o">,</span> <span class="n">t</span><span class="o">,</span> <span class="n">close</span><span class="o">,</span> <span class="n">allocHandle</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">readPending</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">config</span><span class="o">.</span><span class="na">isAutoRead</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">removeReadOp</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">io.netty.channel.DefaultMaxMessagesRecvByteBufAllocator.MaxMessageHandle#continueReading(io.netty.util.UncheckedBooleanSupplier)</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">continueReading</span><span class="o">(</span><span class="nc">UncheckedBooleanSupplier</span> <span class="n">maybeMoreDataSupplier</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> 
+           <span class="c1">//  true in common</span>
+           <span class="n">config</span><span class="o">.</span><span class="na">isAutoRead</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
+           <span class="c1">// respectMaybeMoreData default is true</span>
+           <span class="c1">// maybeMoreDataSupplier </span>
+           <span class="o">(!</span><span class="n">respectMaybeMoreData</span> <span class="o">||</span> <span class="n">maybeMoreDataSupplier</span><span class="o">.</span><span class="na">get</span><span class="o">())</span> <span class="o">&amp;&amp;</span>
+           <span class="c1">// maxMessagePerRead default is 16</span>
+           <span class="n">totalMessages</span> <span class="o">&lt;</span> <span class="n">maxMessagePerRead</span> <span class="o">&amp;&amp;</span>
+           
+           <span class="n">totalBytesRead</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/netty/index_posts/2022/09/20/netty.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">RPC framework</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>
