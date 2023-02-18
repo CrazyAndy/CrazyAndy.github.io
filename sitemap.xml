@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sat, 18 Feb 2023 23:03:44 +0800</lastBuildDate>
+        <lastBuildDate>Sat, 18 Feb 2023 23:51:53 +0800</lastBuildDate>
         
         <item>
             <title>Esp32Board</title>
@@ -25,6 +25,21 @@
             <pubDate>Sat, 18 Feb 2023 00:00:00 +0800</pubDate>
             <guid>
                 http://localhost:4000/projects/index_projects/2023/02/18/ESP32Board.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>esp32-learning-001</title>
+            <link>
+                http://localhost:4000/esp32/2023/02/18/esp32.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Sat, 18 Feb 2023 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/esp32/2023/02/18/esp32.html
             </guid>
         </item>
         
