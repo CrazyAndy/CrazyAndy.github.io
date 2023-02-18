@@ -112,9 +112,7 @@
                                             
                                                 <a class="nav__link" href="/categories/embedded/artificial.html">ArtificialCircuit</a>
                                             
-                                                <a class="nav__link" href="/categories/embedded/51.html">51</a>
-                                            
-                                                <a class="nav__link" href="/categories/embedded/stm32.html">stm32</a>
+                                                <a class="nav__link" href="/categories/embedded/esp32.html">esp32</a>
                                             
                                         </div>
                                     </li>
@@ -255,9 +253,148 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            <p>​		These days I bought one board of esp32 to learn how to program with micropython and burn it to mcu of esp32.</p>
+            <p>​			These days I bought one board of esp32 to learn how to program with micropython.</p>
+
+<p>​			Esp32 = mcu + wifi + bluetooth .</p>
+
+<center><img src="/assets/images/posts/project/esp32/esp001.png" width="100%" /></center>
+
+<p>​	This package suply us so much components to use :DS1302 timer, ADC , LED ,OLED,RGB,Louder , Relay , SG90 steering engine,IR remote control, DC motor , and all kinds of sensor . It help me to learn how to communicate with these hardware by micropython .</p>
+
+<h1 id="esp32-core-board">ESP32 core board</h1>
+
+<center><img src="/assets/images/posts/project/esp32/esp002.png" width="50%" /></center>
+
+<center><img src="/assets/images/posts/project/esp32/esp003.png" width="100%" /></center>
 
 <p>​</p>
+
+<h1 id="base-board">Base Board</h1>
+
+<center><img src="/assets/images/posts/project/esp32/esp004.png" width="100%" /></center>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">SN</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>4 Buttons</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>DS1302 Clock</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>TF  Card</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>Esp32 core board port</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td>Esp32 core board gpio</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td>Power switch of base board</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td>3.3v voltage stabilizer module</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td>5v&amp;3.3v input and output</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td>ADC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td>8 LED lights</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td>5 RGB lights</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td>TM1637 module</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">13</td>
+      <td>self driven buzzer</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">14</td>
+      <td>infrared receiver</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">15</td>
+      <td>DS18B20&amp;DHT11 sensor port</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">16</td>
+      <td>SG90 steering engine port</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">17</td>
+      <td>Common Anodedigital tube</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">18</td>
+      <td>ULN2004 chip , for drving electrical machinery</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">19</td>
+      <td>OLED&amp;LCD port</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">20</td>
+      <td>Relay module</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="all-kinds-of-sensors">All kinds of sensors</h1>
+
+<center><img src="/assets/images/posts/project/esp32/esp005.png" width="100%" /></center>
+
+<h1 id="program">Program</h1>
+
+<p>​	There are a lot of function in Micropython library and other third python library we can use to control all kinds of electronic devices.</p>
+
+<p>Meanwhile , there are some special function for unique chips such as esp32 ,esp8266 .</p>
+
+<p>I take one example here to show how to turn on or off the led light here .</p>
+
+<p>main.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+		<span class="n">led1</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">led1</span><span class="p">.</span><span class="n">on</span><span class="p">()</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">led1</span><span class="p">.</span><span class="n">off</span><span class="p">()</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>You can burn this python file into esp32 board by Thonny or PyCharm .Make sure connect gpio15 with one LED light. Then Restart the board , you could see the led light shine per second .</p>
+
+<p>I will introduce how to program with micropython one by one , and write blog at <a href="/categories/embedded/esp32.html">Embedded/esp32</a></p>
+
+<p>Thanks for reading my blog .</p>
 
             
             

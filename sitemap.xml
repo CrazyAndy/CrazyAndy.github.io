@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sat, 18 Feb 2023 17:08:15 +0800</lastBuildDate>
+        <lastBuildDate>Sat, 18 Feb 2023 23:03:44 +0800</lastBuildDate>
         
         <item>
             <title>Esp32Board</title>
@@ -14,10 +14,13 @@
                 http://localhost:4000/projects/index_projects/2023/02/18/ESP32Board.html
             </link>
             <description>
-                &lt;p&gt;​		These days I bought one board of esp32 to learn how to program with micropython and burn it to mcu of esp32.&lt;/p&gt;
+                &lt;p&gt;​			These days I bought one board of esp32 to learn how to program with micropython.&lt;/p&gt;
 
-&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;​			Esp32 = mcu + wifi + bluetooth .&lt;/p&gt;
 
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/project/esp32/esp001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;​	This package suply us so much components to use :DS1302 timer, ADC , LED ,OLED,RGB,Louder , Rel...
             </description>
             <pubDate>Sat, 18 Feb 2023 00:00:00 +0800</pubDate>
             <guid>
