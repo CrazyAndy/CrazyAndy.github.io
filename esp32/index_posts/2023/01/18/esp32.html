@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>esp32 | Andy Sun's World</title>
+    <title>light one led | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -230,156 +230,106 @@
 </header>
 <!-- end header -->
 
-<script src="/assets/js/jquery-2.1.1.min.js"></script>
-<script src="/assets/js/jPages.js"></script>
-<script type="text/javascript">
-    $(function () {
-        /* initiate the plugin */
-        $("div.pag-holder").jPages({
-            containerID: "pag-itemContainer",
-        });
-    });
-</script>
-<div class="c-page">
-    <!--bookshop-live name(page-heading/page-heading.jekyll.html) params(bind=block) context(block=content_blocks[0]) -->
+<div class="post-top">
     <div class="container">
-        <div class="c-page-heading">
-            
-            <h1 class="c-page-heading__title">esp32</h1>
-            <p class="c-page-heading__description"></p>
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>light one led</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">18 Jan 2023</time>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!--bookshop-live end-->
-    <!--bookshop-live name(posts-list/posts-list.jekyll.html) params(bind=block) context(block=content_blocks[1]) -->
-    <div class="container animate">
-        <div id="pag-itemContainer" class="row">
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <p>​	We should pull high level at one side of the LED light , and connect the other side to GND, that would make the light shine .This is the base role .</p>
+
+<center><img src="/assets/images/posts/embedded/esp32/esp101.png" width="100%" /></center>
+
+<p>​	Because we need to make J1 at high level to let led shine , so we have to connect one gpio of esp32 with J1 terminal.Here are 8 led and corresponding J1 teminal and GPIO (15,2,0,4,16,17,5,18)</p>
+
+<center><img src="/assets/images/posts/embedded/esp32/esp102.png" width="100%" /></center>
+
+<p>​</p>
+
+<p>​	Now here’s the problem, how can we program with micropython to control the GPIO of esp32?</p>
+
+<p>​	MicroPython supply one module named machine . machine supply a lot of elements to support us to control GPIO , Now we use Pin of machine here .</p>
+
+<p>​	led = machine.Pin(id, mode,pull)</p>
+
+<p>​	to create one object named led, id is number of gpio,mode :out, in ,pull up or down resistance.</p>
+
+<p>​	led.value([x]) x=0 low level , x=1 high level</p>
+
+<p>​	led.on() equal to led.value(1)</p>
+
+<p>​	led.off() equal to led.value(0)</p>
+
+<p>​	main.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+
+<span class="n">led_1</span> <span class="o">=</span>  <span class="n">machine</span><span class="p">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="p">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="n">led_1</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+
             
             
-            
-            
-            
-            <div class="c-blog-card col col-4 col-d-6 col-t-12">
-                <div class="c-blog-card__inner">
-                    <div class="c-blog-card__image-wrap">
-                        <a class="c-blog-card__image" href="/esp32/index_posts/2023/01/21/esp32.html"> <img
-                                alt="That which does not kill us makes us stronger"
-                                data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy"
-                                src="/assets/images/default/post-1.jpg"> </a>
-                    </div>
-                    <div class="c-blog-card__content">
-                        <h2 class="c-blog-card__title"><a href="/esp32/index_posts/2023/01/21/esp32.html">bluetooth</a></h2>
-                        <p class="c-blog-card__excerpt"> esp32,bluetooth </p>
-                        <div class="c-blog-card__meta">
-                            <div class="c-blog-card__author-image">
-                                <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg"
-                                     loading="lazy" src="/assets/images/default/andy_icon.jpeg">
-                            </div>
-                            <div class="c-blog-card__info">
-                                <div class="c-blog-card__author-name">
-                                    Andy Sun
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/esp32/index_posts/2023/01/19/esp32.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">buzzer</h2>
                                 </div>
-                                <span class="c-blog-card__date"><time>21 Feb 2023</time></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-            
-            <div class="c-blog-card col col-4 col-d-6 col-t-12">
-                <div class="c-blog-card__inner">
-                    <div class="c-blog-card__image-wrap">
-                        <a class="c-blog-card__image" href="/esp32/index_posts/2023/01/20/esp32.html"> <img
-                                alt="That which does not kill us makes us stronger"
-                                data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy"
-                                src="/assets/images/default/post-2.jpg"> </a>
-                    </div>
-                    <div class="c-blog-card__content">
-                        <h2 class="c-blog-card__title"><a href="/esp32/index_posts/2023/01/20/esp32.html">relay</a></h2>
-                        <p class="c-blog-card__excerpt"> esp32,relay </p>
-                        <div class="c-blog-card__meta">
-                            <div class="c-blog-card__author-image">
-                                <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg"
-                                     loading="lazy" src="/assets/images/default/andy_icon.jpeg">
-                            </div>
-                            <div class="c-blog-card__info">
-                                <div class="c-blog-card__author-name">
-                                    Andy Sun
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
                                 </div>
-                                <span class="c-blog-card__date"><time>20 Jan 2023</time></span>
-                            </div>
-                        </div>
-                    </div>
+                            </a>
+                        
+                    
                 </div>
-            </div>
             
-            
-            
-            
-            <div class="c-blog-card col col-4 col-d-6 col-t-12">
-                <div class="c-blog-card__inner">
-                    <div class="c-blog-card__image-wrap">
-                        <a class="c-blog-card__image" href="/esp32/index_posts/2023/01/19/esp32.html"> <img
-                                alt="That which does not kill us makes us stronger"
-                                data-cms-original-src="/assets/images/default/post-3.jpg" loading="lazy"
-                                src="/assets/images/default/post-3.jpg"> </a>
-                    </div>
-                    <div class="c-blog-card__content">
-                        <h2 class="c-blog-card__title"><a href="/esp32/index_posts/2023/01/19/esp32.html">buzzer</a></h2>
-                        <p class="c-blog-card__excerpt"> esp32,buzzer </p>
-                        <div class="c-blog-card__meta">
-                            <div class="c-blog-card__author-image">
-                                <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg"
-                                     loading="lazy" src="/assets/images/default/andy_icon.jpeg">
-                            </div>
-                            <div class="c-blog-card__info">
-                                <div class="c-blog-card__author-name">
-                                    Andy Sun
-                                </div>
-                                <span class="c-blog-card__date"><time>19 Jan 2023</time></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-            
-            <div class="c-blog-card col col-4 col-d-6 col-t-12">
-                <div class="c-blog-card__inner">
-                    <div class="c-blog-card__image-wrap">
-                        <a class="c-blog-card__image" href="/esp32/index_posts/2023/01/18/esp32.html"> <img
-                                alt="That which does not kill us makes us stronger"
-                                data-cms-original-src="/assets/images/default/post-4.jpg" loading="lazy"
-                                src="/assets/images/default/post-4.jpg"> </a>
-                    </div>
-                    <div class="c-blog-card__content">
-                        <h2 class="c-blog-card__title"><a href="/esp32/index_posts/2023/01/18/esp32.html">light one led</a></h2>
-                        <p class="c-blog-card__excerpt"> esp32,LED </p>
-                        <div class="c-blog-card__meta">
-                            <div class="c-blog-card__author-image">
-                                <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg"
-                                     loading="lazy" src="/assets/images/default/andy_icon.jpeg">
-                            </div>
-                            <div class="c-blog-card__info">
-                                <div class="c-blog-card__author-name">
-                                    Andy Sun
-                                </div>
-                                <span class="c-blog-card__date"><time>18 Jan 2023</time></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
         </div>
-    </div>
-    
-
-
+    </article>
 </div>
 
 <!--bookshop-live end-->

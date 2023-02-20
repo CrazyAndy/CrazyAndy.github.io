@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Sat, 18 Feb 2023 23:51:53 +0800</lastBuildDate>
+        <lastBuildDate>Mon, 20 Feb 2023 22:01:34 +0800</lastBuildDate>
         
         <item>
             <title>Esp32Board</title>
@@ -29,17 +29,80 @@
         </item>
         
         <item>
-            <title>esp32-learning-001</title>
+            <title>bluetooth</title>
             <link>
-                http://localhost:4000/esp32/2023/02/18/esp32.html
+                http://localhost:4000/esp32/index_posts/2023/01/21/esp32.html
             </link>
             <description>
-                
+                 	This time we control one led by both button and bluetooth command .
 
+&lt;p&gt;​	 At first , power on the board , the esp32 chip advertise the bluetooth signal , once the app connect it , then press the button , then the esp32 chip send message to app .&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/embedded/esp32/esp201.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&...
             </description>
-            <pubDate>Sat, 18 Feb 2023 00:00:00 +0800</pubDate>
+            <pubDate>Sat, 21 Jan 2023 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/esp32/2023/02/18/esp32.html
+                http://localhost:4000/esp32/index_posts/2023/01/21/esp32.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>relay</title>
+            <link>
+                http://localhost:4000/esp32/index_posts/2023/01/20/esp32.html
+            </link>
+            <description>
+                &lt;p&gt;​	A relay is an electronic control device, equivalent to a switch.&lt;/p&gt;
+
+&lt;p&gt;​	Usually, a relay can be used to control a large current with a small current, or to control a high voltage with a low voltage.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/embedded/esp32/esp105.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;​	By default, NC and C...
+            </description>
+            <pubDate>Fri, 20 Jan 2023 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/esp32/index_posts/2023/01/20/esp32.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>buzzer</title>
+            <link>
+                http://localhost:4000/esp32/index_posts/2023/01/19/esp32.html
+            </link>
+            <description>
+                &lt;p&gt;​	There are two kinds of buzzer , active buzzer and passive buzzer .&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/embedded/esp32/esp103.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;​	We need to connect GPIO25 to BEEP of J2 .and J2 connect to ULN2003D module .&lt;/p&gt;
+
+&lt;p&gt;​	GPIO25 –&amp;gt; BEEP(J2) –&amp;gt;BEEP(6,ULN2003D) –&amp;gt;BEEP OU...
+            </description>
+            <pubDate>Thu, 19 Jan 2023 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/esp32/index_posts/2023/01/19/esp32.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>light one led</title>
+            <link>
+                http://localhost:4000/esp32/index_posts/2023/01/18/esp32.html
+            </link>
+            <description>
+                &lt;p&gt;​	We should pull high level at one side of the LED light , and connect the other side to GND, that would make the light shine .This is the base role .&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/embedded/esp32/esp101.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;​	Because we need to make J1 at high level to let led shine , so we have to connect one...
+            </description>
+            <pubDate>Wed, 18 Jan 2023 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/esp32/index_posts/2023/01/18/esp32.html
             </guid>
         </item>
         
