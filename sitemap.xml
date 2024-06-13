@@ -6,7 +6,247 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 20 Feb 2023 22:01:34 +0800</lastBuildDate>
+        <lastBuildDate>Thu, 13 Jun 2024 08:01:50 +0800</lastBuildDate>
+        
+        <item>
+            <title>LangChain 012</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/08/langchain.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Sat, 08 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/08/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 011</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/07/langchain.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Fri, 07 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/07/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 010</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/06/langchain.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Thu, 06 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/06/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 009</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/05/langchain.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/lostinmiddle.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+
+            </description>
+            <pubDate>Wed, 05 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/05/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 008</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/04/langchain.html
+            </link>
+            <description>
+                &lt;h2 id=&quot;文档切割&quot;&gt;文档切割&lt;/h2&gt;
+
+&lt;h3 id=&quot;原理&quot;&gt;原理&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将文档分成小的、有意义的块(句子).&lt;/li&gt;
+  &lt;li&gt;将小的块组合成为一个更大的块，直到达到一定的大小.&lt;/li&gt;
+  &lt;li&gt;一旦达到一定的大小，接着开始创建与下一个块重叠的部分.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;示例&quot;&gt;示例&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第一个文档分割&lt;/li&gt;
+  &lt;li&gt;按字符切割&lt;/li&gt;
+  &lt;li&gt;代码文档切割&lt;/li&g...
+            </description>
+            <pubDate>Tue, 04 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/04/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 007</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/03/langchain.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/loader.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;h3 id=&quot;loader机制&quot;&gt;Loader机制&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;加载markdown&lt;/li&gt;
+  &lt;li&gt;加载cvs&lt;/li&gt;
+  &lt;li&gt;加载文件目录&lt;/li&gt;
+  &lt;li&gt;加载html&lt;/li&gt;
+  &lt;li&gt;加载JSON&lt;/li&gt;
+  &lt;li&gt;加载PDF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;di...
+            </description>
+            <pubDate>Mon, 03 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/03/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 006</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/02/langchain.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/rag.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;为LLM提供来自外部知识源的额外信息的概念，这允许它们生成更准确和有上下文的答案，同时减少幻觉。&lt;/p&gt;
+
+&lt;p&gt;检索：外部相似性搜索
+增强：提示词更新
+生成：更详细的提示词输入LLM&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/langchainrag.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+            </description>
+            <pubDate>Sun, 02 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/02/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 005</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/01/langchain.html
+            </link>
+            <description>
+                &lt;h3 id=&quot;正常调用&quot;&gt;正常调用&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#调用chatmodels，以openai为例
+&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.chat_models&lt;/span&gt; &lt;span...
+            </description>
+            <pubDate>Sat, 01 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/01/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 004</title>
+            <link>
+                http://localhost:4000/langchain/2024/05/31/langchain.html
+            </link>
+            <description>
+                &lt;p&gt;提示词长度有限制，示例选择器就是要选择合适长度的提示词，提供给大模型&lt;/p&gt;
+
+&lt;h3 id=&quot;示例选择器&quot;&gt;示例选择器&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;根据长度要求智能选择示例&lt;/li&gt;
+  &lt;li&gt;根据输入相似度选择示例(最大边际相关性)&lt;/li&gt;
+  &lt;li&gt;根据输入相似度选择示例（最大余弦相似度）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;...
+            </description>
+            <pubDate>Fri, 31 May 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/05/31/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 003</title>
+            <link>
+                http://localhost:4000/langchain/2024/05/30/langchain.html
+            </link>
+            <description>
+                &lt;p&gt;PromptTemplate&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#字符模板
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.prompts&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;...
+            </description>
+            <pubDate>Thu, 30 May 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/05/30/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 002</title>
+            <link>
+                http://localhost:4000/langchain/2024/05/29/langchain.html
+            </link>
+            <description>
+                &lt;p&gt;使用langchain作为脚手架工具，构建提示语工程，请求chat gpt 回答问题简单示例如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#起名大师，输出格式为一个数组
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.llms&lt;/span&gt; &...
+            </description>
+            <pubDate>Wed, 29 May 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/05/29/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 001</title>
+            <link>
+                http://localhost:4000/langchain/2024/05/28/langchain.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;part-i--what-is-langchain&quot;&gt;Part I  What is LangChain&lt;/h1&gt;
+&lt;p&gt;LangChain是一个框架，用于开发由大型语言模型（）LLMs提供支持的应用程序。&lt;/p&gt;
+
+&lt;p&gt;LangChain简化LLM了应用程序生命周期的每个阶段：&lt;/p&gt;
+
+&lt;p&gt;开发：使用LangChain的开源构建块和组件构建应用程序。使用第三方集成和模板开始运行。
+生产化：使用 LangSmith 检查、监控和评估您的链条，以便您可以自信地持续优化和部署。
+部署：使用 LangServe 将任何链转换为 API。&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/a...
+            </description>
+            <pubDate>Tue, 28 May 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/05/28/langchain.html
+            </guid>
+        </item>
         
         <item>
             <title>Esp32Board</title>
@@ -736,6 +976,86 @@
         <item>
             <title>algorithm</title>
             <link>
+                http://localhost:4000/algorithm/index_posts/2022/02/05/algorithm.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;95unique-binary-search-trees-ii&quot;&gt;95,Unique Binary Search Trees II&lt;/h1&gt;
+
+&lt;p&gt;Given an integer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt;, return &lt;em&gt;all the structurally unique &lt;strong&gt;BST’&lt;/strong&gt;s (binary search trees), which has exactly&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-ro...
+            </description>
+            <pubDate>Sat, 05 Feb 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/algorithm/index_posts/2022/02/05/algorithm.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>algorithm</title>
+            <link>
+                http://localhost:4000/algorithm/index_posts/2022/02/04/algorithm.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;897increasing-order-search-tree&quot;&gt;897.Increasing Order Search Tree&lt;/h1&gt;
+
+&lt;p&gt;Given the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; of a binary search tree, rearrange the tree in &lt;strong&gt;in-order&lt;/strong&gt; so that the leftmost node in the tree is now the root of the tree, and every node has no left child and on...
+            </description>
+            <pubDate>Fri, 04 Feb 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/algorithm/index_posts/2022/02/04/algorithm.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>algorithm</title>
+            <link>
+                http://localhost:4000/algorithm/index_posts/2022/02/03/algorithm.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;637average-of-levels-in-binary-tree&quot;&gt;637,Average of Levels in Binary Tree&lt;/h1&gt;
+
+&lt;p&gt;Given the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; of a binary tree, return &lt;em&gt;the average value of the nodes on each level in the form of an array&lt;/em&gt;. Answers within &lt;code class=&quot;language-plaintext highlighter-...
+            </description>
+            <pubDate>Thu, 03 Feb 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/algorithm/index_posts/2022/02/03/algorithm.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>algorithm</title>
+            <link>
+                http://localhost:4000/algorithm/index_posts/2022/02/02/algorithm.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;501find-mode-in-binary-search-tree&quot;&gt;501,Find Mode in Binary Search Tree&lt;/h1&gt;
+
+&lt;p&gt;Given the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root&lt;/code&gt; of a binary search tree (BST) with duplicates, return &lt;em&gt;all the &lt;a href=&quot;https://en.wikipedia.org/wiki/Mode_(statistics)&quot;&gt;mode(s)&lt;/a&gt; (i.e., the most frequ...
+            </description>
+            <pubDate>Wed, 02 Feb 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/algorithm/index_posts/2022/02/02/algorithm.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>algorithm</title>
+            <link>
+                http://localhost:4000/algorithm/index_posts/2022/02/01/algorithm.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;69sqrtx&quot;&gt;69,Sqrt(x)&lt;/h1&gt;
+
+&lt;p&gt;Given a non-negative integer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt;, return &lt;em&gt;the square root of&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; &lt;em&gt;rounded down to the nearest integer&lt;/em&gt;. The returned integer should be &l...
+            </description>
+            <pubDate>Tue, 01 Feb 2022 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/algorithm/index_posts/2022/02/01/algorithm.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>algorithm</title>
+            <link>
                 http://localhost:4000/algorithm/index_posts/2022/01/02/algorithm.html
             </link>
             <description>
@@ -754,8 +1074,11 @@
                 http://localhost:4000/algorithm/index_posts/2022/01/01/algorithm.html
             </link>
             <description>
-                
+                &lt;h1 id=&quot;data-structure&quot;&gt;Data Structure&lt;/h1&gt;
 
+&lt;p&gt;Data structure is the way a computer stores and organizes data. A data structure is a collection of data elements that have one or more specific relationships with each other.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/maths/algorithm/algorithm001.png&quot; width=&quot;100%&quot; /&gt;&lt;/center&gt...
             </description>
             <pubDate>Sat, 01 Jan 2022 00:00:00 +0800</pubDate>
             <guid>
@@ -1045,8 +1368,8 @@
             <description>
                 &lt;h1 id=&quot;1类&quot;&gt;1.类&lt;/h1&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Animal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;construc...
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nf&quot;&gt;construc...
             </description>
             <pubDate>Thu, 02 Jan 2020 00:00:00 +0800</pubDate>
             <guid>

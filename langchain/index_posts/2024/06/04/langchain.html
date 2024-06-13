@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 008 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 008</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">4 Jun 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h2 id="文档切割">文档切割</h2>
+
+<h3 id="原理">原理</h3>
+
+<ol>
+  <li>将文档分成小的、有意义的块(句子).</li>
+  <li>将小的块组合成为一个更大的块，直到达到一定的大小.</li>
+  <li>一旦达到一定的大小，接着开始创建与下一个块重叠的部分.</li>
+</ol>
+
+<h3 id="示例">示例</h3>
+
+<ul>
+  <li>第一个文档分割</li>
+  <li>按字符切割</li>
+  <li>代码文档切割</li>
+  <li>按token来切割</li>
+</ul>
+<hr />
+
+<h3 id="文档分割">文档分割</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="c1">#加载要切割的文档
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">test.txt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">zuizhonghuanxiang</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+<span class="c1">#初始化切割器
+</span><span class="n">text_splitter</span> <span class="o">=</span> <span class="nc">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="c1">#切分的文本块大小，一般通过长度函数计算
+</span>    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="c1">#切分的文本块重叠大小，一般通过长度函数计算
+</span>    <span class="n">length_function</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span><span class="c1">#长度函数,也可以传递tokenize函数
+</span>    <span class="n">add_start_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="c1">#是否添加起始索引
+</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="p">.</span><span class="nf">create_documents</span><span class="p">([</span><span class="n">zuizhonghuanxiang</span><span class="p">])</span>
+<span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="字符串切割">字符串切割</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+
+<span class="c1">#加载要切分的文档
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">test.txt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">zuizhonghuanxiang</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+<span class="c1">#初始化切分器
+</span><span class="n">text_splitter</span> <span class="o">=</span> <span class="nc">CharacterTextSplitter</span><span class="p">(</span>
+    <span class="n">separator</span><span class="o">=</span><span class="sh">"</span><span class="s">。</span><span class="sh">"</span><span class="p">,</span><span class="c1">#切割的标志字符，默认是\n\n
+</span>    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="c1">#切分的文本块大小，一般通过长度函数计算
+</span>    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="c1">#切分的文本块重叠大小，一般通过长度函数计算
+</span>    <span class="n">length_function</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span><span class="c1">#长度函数,也可以传递tokenize函数
+</span>    <span class="n">add_start_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="c1">#是否添加起始索引
+</span>    <span class="n">is_separator_regex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="c1">#是否是正则表达式
+</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="p">.</span><span class="nf">create_documents</span><span class="p">([</span><span class="n">zuizhonghuanxiang</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="代码切割">代码切割</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RecursiveCharacterTextSplitter</span><span class="p">,</span>
+    <span class="n">Language</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#支持解析的编程语言
+#[e.value for e in Language]
+</span>
+<span class="c1">#要切割的代码文档
+</span><span class="n">PYTHON_CODE</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">
+def hello_world():
+    print(</span><span class="sh">"</span><span class="s">Hello, World!</span><span class="sh">"</span><span class="s">)
+#调用函数
+hello_world()
+</span><span class="sh">"""</span>
+<span class="n">py_spliter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">.</span><span class="nf">from_language</span><span class="p">(</span>
+    <span class="n">language</span><span class="o">=</span><span class="n">Language</span><span class="p">.</span><span class="n">PYTHON</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">python_docs</span> <span class="o">=</span> <span class="n">py_spliter</span><span class="p">.</span><span class="nf">create_documents</span><span class="p">([</span><span class="n">PYTHON_CODE</span><span class="p">])</span>
+<span class="n">python_docs</span>
+</code></pre></div></div>
+
+<h3 id="按token来切割文档">按token来切割文档</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+
+<span class="c1">#要切割的文档
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">test.txt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">zuizhonghuanxiang</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+<span class="c1">#初始化切分器
+</span><span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">.</span><span class="nf">from_tiktoken_encoder</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span><span class="c1">#切分的文本块大小，一般通过长度函数计算
+</span>    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="c1">#切分的文本块重叠大小，一般通过长度函数计算
+</span><span class="p">)</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="p">.</span><span class="nf">create_documents</span><span class="p">([</span><span class="n">zuizhonghuanxiang</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="文档的总结精炼和翻译">文档的总结、精炼和翻译</h3>
+<hr />
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#加载文档
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">letter.txt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="n">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="nf">load_dotenv</span><span class="p">(</span><span class="sh">"</span><span class="s">openai.env</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">OPENAI_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">OPEN_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">OPENAI_API_BASE</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_BASE</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">OPENAI_MODEL</span> <span class="o">=</span> <span class="sh">"</span><span class="s">gpt-3.5-turbo-16k</span><span class="sh">"</span>
+<span class="n">OPENAI_TOKEN_LIMIT</span> <span class="o">=</span> <span class="mi">8000</span>
+
+<span class="kn">from</span> <span class="n">doctran</span> <span class="kn">import</span> <span class="n">Doctran</span>
+<span class="n">doctrans</span> <span class="o">=</span> <span class="nc">Doctran</span><span class="p">(</span>
+    <span class="n">openai_api_key</span><span class="o">=</span><span class="n">OPENAI_API_KEY</span><span class="p">,</span>
+    <span class="n">openai_model</span><span class="o">=</span><span class="n">OPENAI_MODEL</span><span class="p">,</span>
+    <span class="n">openai_token_limit</span><span class="o">=</span><span class="n">OPENAI_TOKEN_LIMIT</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">doctrans</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#总结文档
+</span><span class="n">summary</span> <span class="o">=</span> <span class="n">documents</span><span class="p">.</span><span class="nf">summarize</span><span class="p">(</span><span class="n">token_limit</span><span class="o">=</span><span class="mi">100</span><span class="p">).</span><span class="nf">execute</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">summary</span><span class="p">.</span><span class="n">transformed_content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#翻译一下文档
+</span><span class="n">translation</span> <span class="o">=</span> <span class="n">documents</span><span class="p">.</span><span class="nf">translate</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="sh">"</span><span class="s">chinese</span><span class="sh">"</span><span class="p">).</span><span class="nf">execute</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">.</span><span class="n">transformed_content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#精炼文档，删除除了某个主题或关键词之外的内容，仅保留与主题相关的内容
+</span><span class="n">refined</span> <span class="o">=</span> <span class="n">documents</span><span class="p">.</span><span class="nf">refine</span><span class="p">(</span><span class="n">topics</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">marketing</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">Development</span><span class="sh">"</span><span class="p">]).</span><span class="nf">execute</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">refined</span><span class="p">.</span><span class="n">transformed_content</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/03/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 007</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/index_posts/2024/06/05/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 009</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

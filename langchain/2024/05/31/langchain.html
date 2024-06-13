@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 004 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 004</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">31 May 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <p>提示词长度有限制，示例选择器就是要选择合适长度的提示词，提供给大模型</p>
+
+<h3 id="示例选择器">示例选择器</h3>
+
+<ul>
+  <li>根据长度要求智能选择示例</li>
+  <li>根据输入相似度选择示例(最大边际相关性)</li>
+  <li>根据输入相似度选择示例（最大余弦相似度）</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#根据输入的提示词长度综合计算最终长度，智能截取或者添加提示词的示例
+</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">FewShotPromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.prompts.example_selector</span> <span class="kn">import</span> <span class="n">LengthBasedExampleSelector</span>
+
+<span class="c1">#假设已经有这么多的提示词示例组：
+</span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">happy</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">sad</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tall</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">short</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">sunny</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">gloomy</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">windy</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">calm</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">高兴</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">悲伤</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">#构造提示词模板
+</span><span class="n">example_prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">],</span> 
+    <span class="n">template</span><span class="o">=</span><span class="sh">"</span><span class="s">原词：{input}</span><span class="se">\n</span><span class="s">反义：{output}</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1">#调用长度示例选择器
+</span><span class="n">example_selector</span> <span class="o">=</span> <span class="nc">LengthBasedExampleSelector</span><span class="p">(</span>
+    <span class="c1">#传入提示词示例组
+</span>    <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
+    <span class="c1">#传入提示词模板
+</span>    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    <span class="c1">#设置格式化后的提示词最大长度
+</span>    <span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="c1">#内置的get_text_length,如果默认分词计算方式不满足，可以自己扩展
+</span>    <span class="c1">#get_text_length:Callable[[str],int] = lambda x:len(re.split("\n| ",x))
+</span><span class="p">)</span>
+
+<span class="c1">#使用小样本提示词模版来实现动态示例的调用
+</span><span class="n">dynamic_prompt</span> <span class="o">=</span> <span class="nc">FewShotPromptTemplate</span><span class="p">(</span>
+    <span class="n">example_selector</span><span class="o">=</span><span class="n">example_selector</span><span class="p">,</span>
+    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="sh">"</span><span class="s">给出每个输入词的反义词</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="sh">"</span><span class="s">原词：{adjective}</span><span class="se">\n</span><span class="s">反义：</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">adjective</span><span class="sh">"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1">#小样本获得所有示例
+</span><span class="nf">print</span><span class="p">(</span><span class="n">dynamic_prompt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">adjective</span><span class="o">=</span><span class="sh">"</span><span class="s">big</span><span class="sh">"</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#如果输入长度很长，则最终输出会根据长度要求减少
+</span><span class="n">long_string</span> <span class="o">=</span> <span class="sh">"</span><span class="s">big and huge adn massive and large and gigantic and tall and much much much much much much bigger then everyone</span><span class="sh">"</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">dynamic_prompt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">adjective</span><span class="o">=</span><span class="n">long_string</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h5 id="根据输入相似度选择示例最大边际相关性">根据输入相似度选择示例(最大边际相关性)</h5>
+
+<ul>
+  <li>MMR是一种在信息检索中常用的方法，它的目标是在相关性和多样性之间找到一个平衡</li>
+  <li>MMR会首先找出与输入最相似（即余弦相似度最大）的样本</li>
+  <li>然后在迭代添加样本的过程中，对于与已选择样本过于接近（即相似度过高）的样本进行惩罚</li>
+  <li>MMR既能确保选出的样本与输入高度相关，又能保证选出的样本之间有足够的多样性</li>
+  <li>关注如何在相关性和多样性之间找到一个平衡</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#使用MMR来检索相关示例，以使示例尽量符合输入
+</span>
+<span class="kn">from</span> <span class="n">langchain.prompts.example_selector</span> <span class="kn">import</span> <span class="n">MaxMarginalRelevanceExampleSelector</span>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+<span class="kn">from</span> <span class="n">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">FewShotPromptTemplate</span><span class="p">,</span><span class="n">PromptTemplate</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#假设已经有这么多的提示词示例组：
+</span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">happy</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">sad</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tall</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">short</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">sunny</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">gloomy</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">windy</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">calm</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">高兴</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">悲伤</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">#构造提示词模版
+</span><span class="n">example_prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="sh">"</span><span class="s">原词：{input}</span><span class="se">\n</span><span class="s">反义：{output}</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="c1">#调用MMR
+</span><span class="n">example_selector</span> <span class="o">=</span> <span class="n">MaxMarginalRelevanceExampleSelector</span><span class="p">.</span><span class="nf">from_examples</span><span class="p">(</span>
+    <span class="c1">#传入示例组
+</span>    <span class="n">examples</span><span class="p">,</span>
+    <span class="c1">#使用openai的嵌入来做相似性搜索
+</span>    <span class="nc">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_base</span><span class="o">=</span><span class="n">api_base</span><span class="p">,</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">),</span>
+    <span class="c1">#设置使用的向量数据库是什么
+</span>    <span class="n">FAISS</span><span class="p">,</span>
+    <span class="c1">#结果条数
+</span>    <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#使用小样本模版
+</span><span class="n">mmr_prompt</span> <span class="o">=</span> <span class="nc">FewShotPromptTemplate</span><span class="p">(</span>
+    <span class="n">example_selector</span><span class="o">=</span><span class="n">example_selector</span><span class="p">,</span>
+    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="sh">"</span><span class="s">给出每个输入词的反义词</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="sh">"</span><span class="s">原词：{adjective}</span><span class="se">\n</span><span class="s">反义：</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">adjective</span><span class="sh">"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1">#当我们输入一个描述情绪的词语的时候，应该选择同样是描述情绪的一对示例组来填充提示词模版
+</span><span class="nf">print</span><span class="p">(</span><span class="n">mmr_prompt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">adjective</span><span class="o">=</span><span class="sh">"</span><span class="s">难过</span><span class="sh">"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h5 id="根据输入相似度选择示例最大余弦相似度">根据输入相似度选择示例(最大余弦相似度)</h5>
+
+<ul>
+  <li>一种常见的相似度计算方法</li>
+  <li>它通过计算两个向量（在这里，向量可以代表文本、句子或词语）之间的余弦值来衡量它们的相似度</li>
+  <li>余弦值越接近1，表示两个向量越相似</li>
+  <li>主要关注的是如何准确衡量两个向量的相似度</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 使用最大余弦相似度来检索相关示例，以使示例尽量符合输入
+</span><span class="kn">from</span> <span class="n">langchain.prompts.example_selector</span> <span class="kn">import</span> <span class="n">SemanticSimilarityExampleSelector</span>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span> <span class="n">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">FewShotPromptTemplate</span><span class="p">,</span> <span class="n">PromptTemplate</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="n">example_prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="sh">"</span><span class="s">原词: {input}</span><span class="se">\n</span><span class="s">反义: {output}</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Examples of a pretend task of creating antonyms.
+</span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">happy</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">sad</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">tall</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">short</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">energetic</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">lethargic</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">sunny</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">gloomy</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">windy</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">calm</span><span class="sh">"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">example_selector</span> <span class="o">=</span> <span class="n">SemanticSimilarityExampleSelector</span><span class="p">.</span><span class="nf">from_examples</span><span class="p">(</span>
+    <span class="c1"># 传入示例组.
+</span>    <span class="n">examples</span><span class="p">,</span>
+    <span class="c1"># 使用openAI嵌入来做相似性搜索
+</span>    <span class="nc">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span><span class="n">openai_api_base</span><span class="o">=</span><span class="n">api_base</span><span class="p">),</span>
+    <span class="c1"># 使用Chroma向量数据库来实现对相似结果的过程存储
+</span>    <span class="n">Chroma</span><span class="p">,</span>
+    <span class="c1"># 结果条数
+</span>    <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#使用小样本提示词模板
+</span><span class="n">similar_prompt</span> <span class="o">=</span> <span class="nc">FewShotPromptTemplate</span><span class="p">(</span>
+    <span class="c1"># 传入选择器和模板以及前缀后缀和输入变量
+</span>    <span class="n">example_selector</span><span class="o">=</span><span class="n">example_selector</span><span class="p">,</span>
+    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="sh">"</span><span class="s">给出每个输入词的反义词</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="sh">"</span><span class="s">原词: {adjective}</span><span class="se">\n</span><span class="s">反义:</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">adjective</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="c1"># 输入一个形容感觉的词语，应该查找近似的 happy/sad 示例
+</span><span class="nf">print</span><span class="p">(</span><span class="n">similar_prompt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">adjective</span><span class="o">=</span><span class="sh">"</span><span class="s">worried</span><span class="sh">"</span><span class="p">))</span>
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/2024/05/30/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 003</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/2024/06/01/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 005</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

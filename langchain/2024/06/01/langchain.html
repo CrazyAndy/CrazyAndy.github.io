@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 005 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 005</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">1 Jun 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h3 id="正常调用">正常调用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#调用chatmodels，以openai为例
+</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.schema.messages</span> <span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span><span class="n">AIMessage</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="n">openai_api_base</span> <span class="o">=</span> <span class="n">api_base</span>
+
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nc">AIMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span><span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">你好，我是tomie！</span><span class="sh">"</span><span class="p">),</span>
+    <span class="nc">HumanMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span><span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">你好tomie，我是狗剩!</span><span class="sh">"</span><span class="p">),</span>
+    <span class="nc">AIMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span><span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">认识你很高兴!</span><span class="sh">"</span><span class="p">),</span>
+    <span class="nc">HumanMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">,</span><span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">你知道我叫什么吗？</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">chat</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1">#print(chat.predict("你好"))
+</span>
+</code></pre></div></div>
+
+<h3 id="流式调用">流式调用</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#LLM类大模型的流式输出方法
+</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#构造一个llm
+</span><span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="sh">"</span><span class="s">gpt-3.5-turbo-instruct</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="n">openai_api_base</span> <span class="o">=</span> <span class="n">api_base</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">llm</span><span class="p">.</span><span class="nf">stream</span><span class="p">(</span><span class="sh">"</span><span class="s">写一首关于秋天的诗歌</span><span class="sh">"</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="sh">""</span><span class="p">,</span><span class="n">flush</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="追踪token">追踪token</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#LLM的toekn追踪
+</span><span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.callbacks</span> <span class="kn">import</span> <span class="n">get_openai_callback</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#构造一个llm
+</span><span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="sh">"</span><span class="s">gpt-3.5-turbo-instruct</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="n">openai_api_base</span> <span class="o">=</span> <span class="n">api_base</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="nf">get_openai_callback</span><span class="p">()</span> <span class="k">as</span> <span class="n">cb</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">llm</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="sh">"</span><span class="s">给我讲一个笑话</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">cb</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="自定义输出">自定义输出</h3>
+
+<ul>
+  <li>输出函数参数</li>
+  <li>输出json</li>
+  <li>输出List</li>
+  <li>输出日期</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#讲笑话机器人：希望每次根据指令，可以输出一个这样的笑话(小明是怎么死的？笨死的)
+</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span>  <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">PydanticOutputParser</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.pydantic_v1</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span><span class="n">Field</span><span class="p">,</span><span class="n">validator</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span>  <span class="n">List</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#构造LLM
+</span><span class="n">model</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="sh">"</span><span class="s">gpt-3.5-turbo-instruct</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="n">openai_api_base</span> <span class="o">=</span> <span class="n">api_base</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#定义个数据模型，用来描述最终的实例结构
+</span><span class="k">class</span> <span class="nc">Joke</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">setup</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">设置笑话的问题</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">punchline</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">回答笑话的答案</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="c1">#验证问题是否符合要求
+</span>    <span class="nd">@validator</span><span class="p">(</span><span class="sh">"</span><span class="s">setup</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">question_mark</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span><span class="n">field</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">？</span><span class="sh">"</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">不符合预期的问题格式!</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">field</span>
+
+<span class="c1">#将Joke数据模型传入
+</span><span class="n">parser</span> <span class="o">=</span> <span class="nc">PydanticOutputParser</span><span class="p">(</span><span class="n">pydantic_object</span><span class="o">=</span><span class="n">Joke</span><span class="p">)</span>
+
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="sh">"</span><span class="s">回答用户的输入.</span><span class="se">\n</span><span class="s">{format_instructions}</span><span class="se">\n</span><span class="s">{query}</span><span class="se">\n</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">input_variables</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">query</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">partial_variables</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">format_instructions</span><span class="sh">"</span><span class="p">:</span><span class="n">parser</span><span class="p">.</span><span class="nf">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">prompt_and_model</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span>
+<span class="n">out_put</span> <span class="o">=</span> <span class="n">prompt_and_model</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">query</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">给我讲一个笑话</span><span class="sh">"</span><span class="p">})</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">out_put:</span><span class="sh">"</span><span class="p">,</span><span class="n">out_put</span><span class="p">)</span>
+<span class="n">parser</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">out_put</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="输出list">输出list</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#LLM的输出格式化成python list形式，类似['a','b','c']
+</span>
+<span class="kn">from</span> <span class="n">langchain.output_parsers</span> <span class="kn">import</span>  <span class="n">CommaSeparatedListOutputParser</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span>  <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="n">api_base</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_PROXY</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="nf">getenv</span><span class="p">(</span><span class="sh">"</span><span class="s">OPENAI_API_KEY</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#构造LLM
+</span><span class="n">model</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="sh">"</span><span class="s">gpt-3.5-turbo-instruct</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">api_key</span><span class="p">,</span>
+    <span class="n">openai_api_base</span> <span class="o">=</span> <span class="n">api_base</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="nc">CommaSeparatedListOutputParser</span><span class="p">()</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="sh">"</span><span class="s">列出5个{subject}.</span><span class="se">\n</span><span class="s">{format_instructions}</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">input_variables</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">subject</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">partial_variables</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">format_instructions</span><span class="sh">"</span><span class="p">:</span><span class="n">parser</span><span class="p">.</span><span class="nf">get_format_instructions</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">_input</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="sh">"</span><span class="s">常见的小狗的名字</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">_input</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="c1">#格式化
+</span><span class="n">parser</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/2024/05/31/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 004</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/2024/06/02/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 006</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>
