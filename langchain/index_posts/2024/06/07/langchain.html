@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 011 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 011</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">7 Jun 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="chatdoc功能逻辑">ChatDoc:功能逻辑</h1>
+
+<ul>
+  <li>读取pdf、excel、doc三种常见的文档格式</li>
+  <li>根据文档内容，智能抽取内容并输出相应格式</li>
+</ul>
+<hr />
+
+<p>1，将文档向量化并索引入库
+2，使用自然语言找出相关文本块</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#导入必须的包
+</span><span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">UnstructuredExcelLoader</span><span class="p">,</span><span class="n">Docx2txtLoader</span><span class="p">,</span><span class="n">PyPDFLoader</span>
+<span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span>  <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span>  <span class="n">Chroma</span>
+
+
+<span class="c1">#定义chatdoc
+</span><span class="k">class</span> <span class="nc">ChatDoc</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">doc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">splitText</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#分割后的文本
+</span>
+    <span class="k">def</span> <span class="nf">getFile</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">doc</span>
+        <span class="n">loaders</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">docx</span><span class="sh">"</span><span class="p">:</span><span class="n">Docx2txtLoader</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">pdf</span><span class="sh">"</span><span class="p">:</span><span class="n">PyPDFLoader</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">xlsx</span><span class="sh">"</span><span class="p">:</span><span class="n">UnstructuredExcelLoader</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">file_extension</span> <span class="o">=</span> <span class="n">doc</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s">.</span><span class="sh">"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">loader_class</span> <span class="o">=</span> <span class="n">loaders</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">file_extension</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">loader_class</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="nf">loader_class</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">text</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Error loading </span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="s"> files:</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+             <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Unsupported file extension: </span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+             <span class="k">return</span>  <span class="bp">None</span> 
+
+    <span class="c1">#处理文档的函数
+</span>    <span class="k">def</span> <span class="nf">splitSentences</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">full_text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">getFile</span><span class="p">()</span> <span class="c1">#获取文档内容
+</span>        <span class="k">if</span> <span class="n">full_text</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1">#对文档进行分割
+</span>            <span class="n">text_split</span> <span class="o">=</span> <span class="nc">CharacterTextSplitter</span><span class="p">(</span>
+                <span class="n">chunk_size</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">texts</span> <span class="o">=</span> <span class="n">text_split</span><span class="p">.</span><span class="nf">split_documents</span><span class="p">(</span><span class="n">full_text</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">splitText</span> <span class="o">=</span> <span class="n">texts</span>
+    
+    <span class="c1">#向量化与向量存储
+</span>    <span class="k">def</span> <span class="nf">embeddingAndVectorDB</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="nc">OpenAIEmbeddings</span><span class="p">(</span>
+             <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">text-embedding-3-small</span><span class="sh">"</span>
+        <span class="p">)</span>
+        <span class="n">db</span> <span class="o">=</span><span class="n">Chroma</span><span class="p">.</span><span class="nf">from_documents</span><span class="p">(</span>
+            <span class="n">documents</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">splitText</span><span class="p">,</span>
+            <span class="n">embedding</span> <span class="o">=</span> <span class="n">embeddings</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">db</span>
+    
+    <span class="c1">#提问并找到相关的文本块
+</span>    <span class="k">def</span> <span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">embeddingAndVectorDB</span><span class="p">()</span>
+        <span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">retriever</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+<span class="n">chat_doc</span> <span class="o">=</span> <span class="nc">ChatDoc</span><span class="p">()</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="n">doc</span> <span class="o">=</span> <span class="sh">"</span><span class="s">example/fake.docx</span><span class="sh">"</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="nf">splitSentences</span><span class="p">()</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="nf">askAndFindFiles</span><span class="p">(</span><span class="sh">"</span><span class="s">这家公司叫什么名字?</span><span class="sh">"</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<h1 id="提高文档检索精度">提高文档检索精度</h1>
+
+<h2 id="使用多重查询提高文档检索精确度">使用多重查询提高文档检索精确度</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#提问并找到相关的文本块
+</span>    <span class="k">def</span> <span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">embeddingAndVectorDB</span><span class="p">()</span>
+        <span class="c1">#把问题交给LLM进行多角度的扩展
+</span>        <span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">retriever_from_llm</span> <span class="o">=</span> <span class="n">MultiQueryRetriever</span><span class="p">.</span><span class="nf">from_llm</span><span class="p">(</span>
+            <span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">(),</span>
+            <span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">retriever_from_llm</span><span class="p">.</span><span class="nf">get_relevant_documents</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="使用上下文压缩检索降低冗余信息">使用上下文压缩检索降低冗余信息</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ <span class="c1">#提问并找到相关的文本块
+</span>    <span class="k">def</span> <span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">embeddingAndVectorDB</span><span class="p">()</span>
+        <span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">()</span>
+        <span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">compressor</span> <span class="o">=</span> <span class="n">LLMChainExtractor</span><span class="p">.</span><span class="nf">from_llm</span><span class="p">(</span>
+            <span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">compressor_retriever</span> <span class="o">=</span> <span class="nc">ContextualCompressionRetriever</span><span class="p">(</span>
+            <span class="n">base_retriever</span> <span class="o">=</span> <span class="n">retriever</span><span class="p">,</span>
+            <span class="n">base_compressor</span> <span class="o">=</span> <span class="n">compressor</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">compressor_retriever</span><span class="p">.</span><span class="nf">get_relevant_documents</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="在向量存储里使用最大边际相似性mmr和相似性打分">在向量存储里使用最大边际相似性（MMR）和相似性打分</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#提问并找到相关的文本块
+</span>    <span class="k">def</span> <span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">embeddingAndVectorDB</span><span class="p">()</span>
+        <span class="c1">#retriever = db.as_retriever(search_type="mmr")
+</span>        <span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">(</span><span class="n">search_type</span><span class="o">=</span><span class="sh">"</span><span class="s">similarity_score_threshold</span><span class="sh">"</span><span class="p">,</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">score_threshold</span><span class="sh">"</span><span class="p">:.</span><span class="mi">1</span><span class="p">,</span><span class="sh">"</span><span class="s">k</span><span class="sh">"</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">retriever</span><span class="p">.</span><span class="nf">get_relevant_documents</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h1 id="和文件聊天">和文件聊天</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#导入必须的包
+</span><span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">UnstructuredExcelLoader</span><span class="p">,</span><span class="n">Docx2txtLoader</span><span class="p">,</span><span class="n">PyPDFLoader</span>
+<span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span>  <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="n">langchain.embeddings</span> <span class="kn">import</span>  <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span>  <span class="n">Chroma</span>
+<span class="c1">#导入聊天所需的模块
+</span><span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+
+<span class="c1">#定义chatdoc
+</span><span class="k">class</span> <span class="nc">ChatDoc</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">doc</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">splitText</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#分割后的文本
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">template</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">你是一个处理文档的秘书,你从不说自己是一个大模型或者AI助手,你会根据下面提供的上下文内容来继续回答问题.</span><span class="se">\n</span><span class="s"> 上下文内容</span><span class="se">\n</span><span class="s"> {context} </span><span class="se">\n</span><span class="sh">"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">human</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">你好！</span><span class="sh">"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">ai</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">你好</span><span class="sh">"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">human</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">{question}</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_messages</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">template</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getFile</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">doc</span>
+        <span class="n">loaders</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">docx</span><span class="sh">"</span><span class="p">:</span><span class="n">Docx2txtLoader</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">pdf</span><span class="sh">"</span><span class="p">:</span><span class="n">PyPDFLoader</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">xlsx</span><span class="sh">"</span><span class="p">:</span><span class="n">UnstructuredExcelLoader</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">file_extension</span> <span class="o">=</span> <span class="n">doc</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="s">.</span><span class="sh">"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">loader_class</span> <span class="o">=</span> <span class="n">loaders</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">file_extension</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">loader_class</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">loader</span> <span class="o">=</span> <span class="nf">loader_class</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">text</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Error loading </span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="s"> files:</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+             <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Unsupported file extension: </span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+             <span class="k">return</span>  <span class="bp">None</span> 
+
+    <span class="c1">#处理文档的函数
+</span>    <span class="k">def</span> <span class="nf">splitSentences</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">full_text</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">getFile</span><span class="p">()</span> <span class="c1">#获取文档内容
+</span>        <span class="k">if</span> <span class="n">full_text</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1">#对文档进行分割
+</span>            <span class="n">text_split</span> <span class="o">=</span> <span class="nc">CharacterTextSplitter</span><span class="p">(</span>
+                <span class="n">chunk_size</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">texts</span> <span class="o">=</span> <span class="n">text_split</span><span class="p">.</span><span class="nf">split_documents</span><span class="p">(</span><span class="n">full_text</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">splitText</span> <span class="o">=</span> <span class="n">texts</span>
+    
+    <span class="c1">#向量化与向量存储
+</span>    <span class="k">def</span> <span class="nf">embeddingAndVectorDB</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="nc">OpenAIEmbeddings</span><span class="p">()</span>
+        <span class="n">db</span> <span class="o">=</span><span class="n">Chroma</span><span class="p">.</span><span class="nf">from_documents</span><span class="p">(</span>
+            <span class="n">documents</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">splitText</span><span class="p">,</span>
+            <span class="n">embedding</span> <span class="o">=</span> <span class="n">embeddings</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">db</span>
+    
+    <span class="c1">#提问并找到相关的文本块
+</span>    <span class="k">def</span> <span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">embeddingAndVectorDB</span><span class="p">()</span>
+        <span class="c1">#retriever = db.as_retriever(search_type="mmr")
+</span>        <span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">(</span><span class="n">search_type</span><span class="o">=</span><span class="sh">"</span><span class="s">similarity_score_threshold</span><span class="sh">"</span><span class="p">,</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">score_threshold</span><span class="sh">"</span><span class="p">:.</span><span class="mi">5</span><span class="p">,</span><span class="sh">"</span><span class="s">k</span><span class="sh">"</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">retriever</span><span class="p">.</span><span class="nf">get_relevant_documents</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+    
+    <span class="c1">#用自然语言和文档聊天
+</span>    <span class="k">def</span> <span class="nf">chatWithDoc</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">question</span><span class="p">):</span>
+        <span class="n">_content</span> <span class="o">=</span> <span class="sh">""</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">askAndFindFiles</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">_content</span> <span class="o">+=</span> <span class="n">i</span><span class="p">.</span><span class="n">page_content</span>
+        
+        <span class="n">messages</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">prompt</span><span class="p">.</span><span class="nf">format_messages</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">_content</span><span class="p">,</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+        <span class="n">chat</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4</span><span class="sh">"</span><span class="p">,</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">chat</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+
+<span class="n">chat_doc</span> <span class="o">=</span> <span class="nc">ChatDoc</span><span class="p">()</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="n">doc</span> <span class="o">=</span> <span class="sh">"</span><span class="s">example/fake.docx</span><span class="sh">"</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="nf">splitSentences</span><span class="p">()</span>
+<span class="n">chat_doc</span><span class="p">.</span><span class="nf">chatWithDoc</span><span class="p">(</span><span class="sh">"</span><span class="s">公司注册地址是哪里？</span><span class="sh">"</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/06/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 010</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/2024/06/08/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 012</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

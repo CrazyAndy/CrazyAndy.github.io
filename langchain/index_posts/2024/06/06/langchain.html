@@ -151,7 +151,60 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="n">e_model</span> <span class="o">=</span> <span class="nc">OpenAIEmbeddings</span><span class="p">()</span>
+<span class="n">ebeddings</span> <span class="o">=</span> <span class="n">e_model</span><span class="p">.</span><span class="nf">embed_documents</span><span class="p">(</span>
+     <span class="p">[</span>
+        <span class="sh">"</span><span class="s">你好</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">你好啊</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">你叫什么名字?</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">我叫王大锤</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">很高兴认识你大锤</span><span class="sh">"</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">ebeddings</span>
+
+<span class="n">embedded_query</span> <span class="o">=</span> <span class="n">e_model</span><span class="p">.</span><span class="nf">embed_query</span><span class="p">(</span><span class="sh">"</span><span class="s">这段对话中提到了什么名字?</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">embedded_query</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.embeddings</span> <span class="kn">import</span> <span class="n">CacheBackedEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.storage</span> <span class="kn">import</span>  <span class="n">LocalFileStore</span>
+<span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="n">u_embeddings</span> <span class="o">=</span> <span class="nc">OpenAIEmbeddings</span><span class="p">()</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="nc">LocalFileStore</span><span class="p">(</span><span class="sh">"</span><span class="s">./cache/</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">cached_embeddings</span> <span class="o">=</span> <span class="n">CacheBackedEmbeddings</span><span class="p">.</span><span class="nf">from_bytes_store</span><span class="p">(</span>
+    <span class="n">u_embeddings</span><span class="p">,</span>
+    <span class="n">fs</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="n">u_embeddings</span><span class="p">.</span><span class="n">model</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nf">list</span><span class="p">(</span><span class="n">fs</span><span class="p">.</span><span class="nf">yield_keys</span><span class="p">())</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#加载文档，切分文档，将切分文档向量化病存储在缓存中
+</span>
+<span class="n">raw_documents</span> <span class="o">=</span> <span class="nc">TextLoader</span><span class="p">(</span><span class="sh">"</span><span class="s">letter.txt</span><span class="sh">"</span><span class="p">).</span><span class="nf">load</span><span class="p">()</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="nc">CharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="p">.</span><span class="nf">split_documents</span><span class="p">(</span><span class="n">raw_documents</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span>  <span class="n">FAISS</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">r</span>  <span class="mi">1</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="n">db</span><span class="o">=</span> <span class="n">FAISS</span><span class="p">.</span><span class="nf">from_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span><span class="n">cached_embeddings</span><span class="p">)</span>
+
+<span class="c1">#查看缓存中的键
+</span><span class="nf">list</span><span class="p">(</span><span class="n">fs</span><span class="p">.</span><span class="nf">yield_keys</span><span class="p">())</span>
+
+</code></pre></div></div>
 
             
             
@@ -171,7 +224,7 @@
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/07/langchain.html">
+                            <a class="post__next" href="/langchain/index_posts/2024/06/07/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
                                     <h2 class="post__nav__title">LangChain 011</h2>
