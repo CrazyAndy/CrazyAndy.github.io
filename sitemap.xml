@@ -6,7 +6,7 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Thu, 13 Jun 2024 16:37:16 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 14 Jun 2024 16:15:48 +0800</lastBuildDate>
         
         <item>
             <title>LangChain 016</title>
@@ -26,60 +26,92 @@
         <item>
             <title>LangChain 015</title>
             <link>
-                http://localhost:4000/langchain/2024/06/11/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/11/langchain.html
             </link>
             <description>
-                
+                &lt;h1 id=&quot;不同的memory工具&quot;&gt;不同的Memory工具&lt;/h1&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;短时记忆：存储在内存中&lt;/li&gt;
+  &lt;li&gt;构建记忆实体清单&lt;/li&gt;
+  &lt;li&gt;接入知识图谱&lt;/li&gt;
+  &lt;li&gt;长对话在内存中的处理方式&lt;/li&gt;
+  &lt;li&gt;长时记忆实现方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;内存中的短时记忆&quot;&gt;内存中的短时记忆&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&q...
             </description>
             <pubDate>Tue, 11 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/11/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/11/langchain.html
             </guid>
         </item>
         
         <item>
             <title>LangChain 014</title>
             <link>
-                http://localhost:4000/langchain/2024/06/10/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/10/langchain.html
             </link>
             <description>
-                
+                &lt;h3 id=&quot;stuffchain&quot;&gt;stuffChain&lt;/h3&gt;
 
+&lt;p&gt;最常见的文档链，将文档直接塞进prompt中，为LLM回答问题提供上下文资料，适合小文档场景&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.chains.comb...
             </description>
             <pubDate>Mon, 10 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/10/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/10/langchain.html
             </guid>
         </item>
         
         <item>
             <title>LangChain 013</title>
             <link>
-                http://localhost:4000/langchain/2024/06/09/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/09/langchain.html
             </link>
             <description>
-                
+                &lt;h3 id=&quot;使用文件加载专用chains&quot;&gt;使用文件加载专用chains&lt;/h3&gt;
 
+&lt;p&gt;https://smith.langchain.com/hub&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.chains&lt;/span&gt; &lt;span cl...
             </description>
             <pubDate>Sun, 09 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/09/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/09/langchain.html
             </guid>
         </item>
         
         <item>
             <title>LangChain 012</title>
             <link>
-                http://localhost:4000/langchain/2024/06/08/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/08/langchain.html
             </link>
             <description>
-                
+                &lt;h1 id=&quot;chains&quot;&gt;Chains&lt;/h1&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;四种通用链的使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;llmchain&quot;&gt;LLMChain&lt;/h4&gt;
+&lt;p&gt;最常用的链&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/...
             </description>
             <pubDate>Sat, 08 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/08/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/08/langchain.html
             </guid>
         </item>
         

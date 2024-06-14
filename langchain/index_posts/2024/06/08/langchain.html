@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 012 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 012</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">8 Jun 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="chains">Chains</h1>
+
+<ul>
+  <li>四种通用链的使用</li>
+</ul>
+
+<hr />
+
+<h4 id="llmchain">LLMChain</h4>
+<p>最常用的链</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="sh">"</span><span class="s">帮我给{product}想三个可以注册的域名?</span><span class="sh">"</span>
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">prompt_template</span><span class="p">),</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="c1">#是否开启日志
+</span><span class="p">)</span>
+
+<span class="c1">#llm_chain({"product":"AI研习社"})
+</span><span class="nf">llm_chain</span><span class="p">(</span><span class="sh">"</span><span class="s">AI研习社</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="顺序链-simplesequentialchain--sequentialchain">顺序链 SimpleSequentialChain &amp; SequentialChain</h3>
+
+<center><img src="/assets/images/posts/ai/sequentchain.png" width="80%" /></center>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#simpleSequentialChain 只支持固定的链路
+</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">SimpleSequentialChain</span>
+
+<span class="n">chat_model</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-3.5-turbo</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 1
+</span><span class="n">first_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">帮我给{product}的公司起一个响亮容易记忆的名字?</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">chain_one</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">chat_model</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">first_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 2
+</span><span class="n">second_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">用5个词来描述一下这个公司名字：{company_name}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">chain_two</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">chat_model</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">second_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">overall_simple_chain</span> <span class="o">=</span> <span class="nc">SimpleSequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">chain_one</span><span class="p">,</span> <span class="n">chain_two</span><span class="p">],</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="c1">#打开日志
+</span><span class="p">)</span>
+
+<span class="n">overall_simple_chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">AI教育培训机构</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#SequentialChain 支持多个链路的顺序执行 
+# chain 1 -&gt; chain 2 --&gt;  chain 4
+# chain 3           --&gt;  chain 4
+</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">SequentialChain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-3.5-turbo</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 1 任务：翻译成中文
+</span><span class="n">first_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">把下面内容翻译成中文:</span><span class="se">\n\n</span><span class="s">{content}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain_one</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">first_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">output_key</span><span class="o">=</span><span class="sh">"</span><span class="s">Chinese_Rview</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 2 任务：对翻译后的中文进行总结摘要 input_key是上一个chain的output_key
+</span><span class="n">second_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">用一句话总结下面内容:</span><span class="se">\n\n</span><span class="s">{Chinese_Rview}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain_two</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">second_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">output_key</span><span class="o">=</span><span class="sh">"</span><span class="s">Chinese_Summary</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 3 任务:智能识别语言 input_key是上一个chain的output_key
+</span><span class="n">third_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">下面内容是什么语言:</span><span class="se">\n\n</span><span class="s">{Chinese_Summary}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain_three</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">third_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">output_key</span><span class="o">=</span><span class="sh">"</span><span class="s">Language</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#chain 4 任务:针对摘要使用指定语言进行评论 input_key是上一个chain的output_key   
+</span><span class="n">fourth_prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">请使用指定的语言对以下内容进行回复:</span><span class="se">\n\n</span><span class="s">内容:{Chinese_Summary}</span><span class="se">\n\n</span><span class="s">语言:{Language}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain_four</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">fourth_prompt</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">output_key</span><span class="o">=</span><span class="sh">"</span><span class="s">Reply</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#overall 任务：翻译成中文-&gt;对翻译后的中文进行总结摘要-&gt;智能识别语言-&gt;针对摘要使用指定语言进行评论
+</span><span class="n">overall_chain</span> <span class="o">=</span> <span class="nc">SequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">chain_one</span><span class="p">,</span> <span class="n">chain_two</span><span class="p">,</span> <span class="n">chain_three</span><span class="p">,</span> <span class="n">chain_four</span><span class="p">],</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">content</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">output_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">Chinese_Rview</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Chinese_Summary</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Language</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Reply</span><span class="sh">"</span><span class="p">],</span>
+<span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="routerchain">RouterChain</h3>
+
+<center><img src="/assets/images/posts/ai/routerchain.png" width="80%" /></center>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1">#物理链
+</span><span class="n">physics_template</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">您是一位非常聪明的物理教授.</span><span class="se">\n</span><span class="s">
+您擅长以简洁易懂的方式回答物理问题.</span><span class="se">\n</span><span class="s">
+当您不知道问题答案的时候，您会坦率承认不知道.</span><span class="se">\n</span><span class="s">
+下面是一个问题:
+{input}</span><span class="sh">"""</span>
+<span class="n">physics_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">physics_template</span><span class="p">)</span>
+
+<span class="c1">#数学链
+</span><span class="n">math_template</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">您是一位非常优秀的数学教授.</span><span class="se">\n</span><span class="s">
+您擅长回答数学问题.</span><span class="se">\n</span><span class="s">
+您之所以如此优秀，是因为您能够将困难问题分解成组成的部分，回答这些部分，然后将它们组合起来，回答更广泛的问题.</span><span class="se">\n</span><span class="s">
+下面是一个问题:
+{input}</span><span class="sh">"""</span>
+<span class="n">math_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">math_template</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+
+<span class="n">prompt_infos</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">physics</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">擅长回答物理问题</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">prompt_template</span><span class="sh">"</span><span class="p">:</span><span class="n">physics_template</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">math</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">擅长回答数学问题</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">prompt_template</span><span class="sh">"</span><span class="p">:</span><span class="n">math_template</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">destination_chains</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">p_info</span> <span class="ow">in</span> <span class="n">prompt_infos</span><span class="p">:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">p_info</span><span class="p">[</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">p_info</span><span class="p">[</span><span class="sh">"</span><span class="s">prompt_template</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+        <span class="n">template</span><span class="o">=</span><span class="n">prompt_template</span><span class="p">,</span>
+        <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+        <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+        <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">destination_chains</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">chain</span>
+<span class="n">default_chain</span> <span class="o">=</span> <span class="nc">ConversationChain</span><span class="p">(</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">llm</span><span class="p">,</span>
+    <span class="n">output_key</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span>
+<span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chains.router.llm_router</span> <span class="kn">import</span> <span class="n">LLMRouterChain</span><span class="p">,</span><span class="n">RouterOutputParser</span>
+<span class="kn">from</span> <span class="n">langchain.chains.router.multi_prompt_prompt</span> <span class="kn">import</span> <span class="n">MULTI_PROMPT_ROUTER_TEMPLATE</span>
+<span class="kn">from</span> <span class="n">langchain.chains.router</span> <span class="kn">import</span> <span class="n">MultiPromptChain</span>
+
+<span class="n">destinations</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="sh">'</span><span class="s">description</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prompt_infos</span><span class="p">]</span>
+<span class="n">destinations_str</span> <span class="o">=</span> <span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+<span class="n">router_template</span> <span class="o">=</span> <span class="n">MULTI_PROMPT_ROUTER_TEMPLATE</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">destinations</span><span class="o">=</span><span class="n">destinations_str</span><span class="p">)</span>
+<span class="c1">#print(MULTI_PROMPT_ROUTER_TEMPLATE)
+</span>
+<span class="n">router_prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="n">router_template</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">output_parser</span><span class="o">=</span><span class="nc">RouterOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">router_chain</span> <span class="o">=</span> <span class="n">LLMRouterChain</span><span class="p">.</span><span class="nf">from_llm</span><span class="p">(</span>
+    <span class="n">llm</span><span class="p">,</span>
+    <span class="n">router_prompt</span>
+<span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="nc">MultiPromptChain</span><span class="p">(</span>
+    <span class="n">router_chain</span><span class="o">=</span><span class="n">router_chain</span><span class="p">,</span>
+    <span class="n">destination_chains</span><span class="o">=</span><span class="n">destination_chains</span><span class="p">,</span>
+    <span class="n">default_chain</span><span class="o">=</span><span class="n">default_chain</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">什么是牛顿第一定律?</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">2+2等于几?</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">两个黄鹂鸣翠柳，下一句?</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="transformation-文档转换链">Transformation 文档转换链</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">"</span><span class="s">letter.txt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">letters</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LLMChain</span><span class="p">,</span>
+    <span class="n">SimpleSequentialChain</span><span class="p">,</span>
+    <span class="n">TransformChain</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="k">def</span> <span class="nf">transform_func</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">shortened_text</span> <span class="o">=</span> <span class="sh">"</span><span class="se">\n\n</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="se">\n\n</span><span class="sh">"</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">{</span><span class="sh">"</span><span class="s">output_text</span><span class="sh">"</span><span class="p">:</span><span class="n">shortened_text</span><span class="p">}</span>
+
+<span class="c1">#文档转换链
+</span><span class="n">transform_chain</span> <span class="o">=</span> <span class="nc">TransformChain</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">output_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">output_text</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transform_func</span>
+<span class="p">)</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">对下面的文字进行总结:
+{output_text}
+
+总结:</span><span class="sh">"""</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="nc">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">output_text</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="n">template</span>
+<span class="p">)</span>
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(),</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span>
+<span class="p">)</span>
+<span class="c1">#使用顺序链连接起来
+</span><span class="n">squential_chain</span> <span class="o">=</span> <span class="nc">SimpleSequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">transform_chain</span><span class="p">,</span><span class="n">llm_chain</span><span class="p">],</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1">#print(letters)
+</span><span class="n">squential_chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="链的五种运行方式">链的五种运行方式</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PromptTemplate</span><span class="p">,</span>
+    <span class="n">OpenAI</span><span class="p">,</span>
+    <span class="n">LLMChain</span>
+<span class="p">)</span>
+
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="sh">"</span><span class="s">给做{product}的公司起一个名字?</span><span class="sh">"</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">prompt_template</span><span class="p">),</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1">#llm_chain("儿童玩具")
+#llm_chain.run("儿童玩具")
+#llm_chain.apply([
+#    {"product":"儿童玩具"},
+#])
+#a = llm_chain.generate([
+#    {"product":"儿童玩具"},
+#])
+#print(a)
+</span><span class="n">llm_chain</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="sh">"</span><span class="s">儿童玩具</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/07/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 011</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/index_posts/2024/06/09/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 013</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>LangChain 012 | Andy Sun's World</title>
+    <title>LangChain 015 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>LangChain 012</span>
+                <span>LangChain 015</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -140,7 +140,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">8 Jun 2024</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">11 Jun 2024</time>
                     </div>
                 </div>
             </div>
@@ -151,30 +151,101 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h1 id="不同的memory工具">不同的Memory工具</h1>
+
+<ul>
+  <li>短时记忆：存储在内存中</li>
+  <li>构建记忆实体清单</li>
+  <li>接入知识图谱</li>
+  <li>长对话在内存中的处理方式</li>
+  <li>长时记忆实现方式</li>
+</ul>
+<hr />
+
+<h3 id="内存中的短时记忆">内存中的短时记忆</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span>  <span class="n">ConversationBufferMemory</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationBufferMemory</span><span class="p">()</span>
+<span class="n">memory</span><span class="p">.</span><span class="n">chat_memory</span><span class="p">.</span><span class="nf">add_user_message</span><span class="p">(</span><span class="sh">"</span><span class="s">你好，我是人类！</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="n">chat_memory</span><span class="p">.</span><span class="nf">add_ai_message</span><span class="p">(</span><span class="sh">"</span><span class="s">你好，我是AI，有什么可以帮助你的吗？</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+</code></pre></div></div>
+
+<h3 id="构建记忆实体概念清单">构建记忆实体概念清单</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span>  <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationEntityMemory</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationEntityMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+<span class="n">_input</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">胡八一和王胖子雪莉杨经常在一起冒险，合称盗墓铁三角.</span><span class="sh">"</span>
+<span class="p">}</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="n">_input</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">听起来很刺激，我也想加入他们！</span><span class="sh">"</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">铁三角是谁?</span><span class="sh">"</span><span class="p">})</span>
+
+</code></pre></div></div>
+
+<h3 id="使用知识图谱构建记忆">使用知识图谱构建记忆</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span>  <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationKGMemory</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>   
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationKGMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span><span class="n">return_messages</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">帮我找一下tomie</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">对不起请问什么是tomie？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是一个培训讲师</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是谁?</span><span class="sh">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="长对话在内存中的处理方式总结摘要以及token计算">长对话在内存中的处理方式：总结摘要以及token计算</h3>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/index_posts/2024/06/07/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/10/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">LangChain 011</h2>
+                                    <h2 class="post__nav__title">LangChain 014</h2>
                                 </div>
                             </a>
                         
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/09/langchain.html">
+                            <a class="post__next" href="/langchain/2024/06/12/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">LangChain 013</h2>
+                                    <h2 class="post__nav__title">LangChain 016</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">

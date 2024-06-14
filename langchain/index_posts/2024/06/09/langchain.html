@@ -151,14 +151,100 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h3 id="使用文件加载专用chains">使用文件加载专用chains</h3>
+
+<p>https://smith.langchain.com/hub</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">load_chain</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="nf">load_chain</span><span class="p">(</span><span class="sh">"</span><span class="s">lc://chains/hello-world/chain.json</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">男人</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="customchain">CustomChain</h2>
+<p>当通用链不满足的时候，可以自行构建来实现特定的目的</p>
+<hr />
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="n">langchain.callbacks.manager</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CallbackManagerForChainRun</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="n">langchain.chains.base</span> <span class="kn">import</span>  <span class="n">Chain</span>
+<span class="kn">from</span> <span class="n">langchain.prompts.base</span> <span class="kn">import</span> <span class="n">BasePromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.base_language</span> <span class="kn">import</span>  <span class="n">BaseLanguageModel</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">class</span> <span class="nc">wiki_article_chain</span><span class="p">(</span><span class="n">Chain</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">开发一个wiki文章生成器</span><span class="sh">"""</span>
+    <span class="n">prompt</span><span class="p">:</span><span class="n">BasePromptTemplate</span>
+    <span class="n">llm</span><span class="p">:</span><span class="n">BaseLanguageModel</span>
+    <span class="n">out_key</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_keys</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">将返回Prompt所需的所有键</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">prompt</span><span class="p">.</span><span class="n">input_variables</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_keys</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">将始终返回text键</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">out_key</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">_call</span><span class="p">(</span>
+        <span class="n">self</span><span class="p">,</span>
+        <span class="n">inputs</span><span class="p">:</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">run_manager</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">CallbackManagerForChainRun</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sh">"""</span><span class="s">运行链</span><span class="sh">"""</span>
+        <span class="n">prompt_value</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">prompt</span><span class="p">.</span><span class="nf">format_prompt</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="c1">#print("prompt_value:",prompt_value)
+</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">llm</span><span class="p">.</span><span class="nf">generate_prompt</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">prompt_value</span><span class="p">],</span><span class="n">callbacks</span><span class="o">=</span><span class="n">run_manager</span><span class="p">.</span><span class="nf">get_child</span><span class="p">()</span> <span class="k">if</span> <span class="n">run_manager</span> <span class="k">else</span> <span class="bp">None</span>
+        <span class="p">)</span>
+        <span class="c1">#print("response:",response)
+</span>        <span class="k">if</span> <span class="n">run_manager</span><span class="p">:</span>
+            <span class="n">run_manager</span><span class="p">.</span><span class="nf">on_text</span><span class="p">(</span><span class="sh">"</span><span class="s">wiki article is written</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">self</span><span class="p">.</span><span class="n">out_key</span><span class="p">:</span><span class="n">response</span><span class="p">.</span><span class="n">generations</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">}</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_chain_type</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sh">"""</span><span class="s">链类型</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="sh">"</span><span class="s">wiki_article_chain</span><span class="sh">"</span>
+       
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span>  <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span>  <span class="n">PromptTemplate</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="nf">wiki_article_chain</span><span class="p">(</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="nc">PromptTemplate</span><span class="p">(</span>
+        <span class="n">template</span><span class="o">=</span><span class="sh">"</span><span class="s">写一篇关于{topic}的维基百科形式的文章</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">topic</span><span class="sh">"</span><span class="p">]</span>
+    <span class="p">),</span>
+    <span class="n">llm</span><span class="o">=</span><span class="nc">ChatOpenAI</span><span class="p">(</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">({</span><span class="sh">"</span><span class="s">topic</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">降本增效</span><span class="sh">"</span><span class="p">})</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/2024/06/08/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/08/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
@@ -171,7 +257,7 @@
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/10/langchain.html">
+                            <a class="post__next" href="/langchain/index_posts/2024/06/10/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
                                     <h2 class="post__nav__title">LangChain 014</h2>

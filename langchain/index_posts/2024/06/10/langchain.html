@@ -151,14 +151,132 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h3 id="stuffchain">stuffChain</h3>
+
+<p>最常见的文档链，将文档直接塞进prompt中，为LLM回答问题提供上下文资料，适合小文档场景</p>
+<hr />
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.chains.combine_documents.stuff</span> <span class="kn">import</span> <span class="n">StuffDocumentsChain</span>
+<span class="kn">from</span> <span class="n">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span>  <span class="n">PyPDFLoader</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="nc">PyPDFLoader</span><span class="p">(</span><span class="sh">"</span><span class="s">loader.pdf</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1">#print(loader.load())
+</span>
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">对以下文字做简洁的总结:
+{text}
+简洁的总结:</span><span class="sh">"""</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">prompt_template</span><span class="p">)</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4-1106-preview</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="nc">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">stuff_chain</span> <span class="o">=</span> <span class="nc">StuffDocumentsChain</span><span class="p">(</span>
+    <span class="n">llm_chain</span><span class="o">=</span><span class="n">llm_chain</span><span class="p">,</span>
+    <span class="n">document_variable_name</span><span class="o">=</span><span class="sh">"</span><span class="s">text</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">stuff_chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">docs</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#使用预封装好的load_summarize_chain
+</span><span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span>  <span class="n">PyPDFLoader</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="nc">PyPDFLoader</span><span class="p">(</span><span class="sh">"</span><span class="s">loader.pdf</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4-1106-preview</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="nf">load_summarize_chain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">chain_type</span><span class="o">=</span><span class="sh">"</span><span class="s">stuff</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="refine">refine</h3>
+<p>通过循环引用LLM，将文档不断投喂，并产生各种中间答案，适合逻辑有上下文关联的文档，不适合交叉引用的文档</p>
+<hr />
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.prompts</span> <span class="kn">import</span>  <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">PyPDFLoader</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="n">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
+
+<span class="c1">#load
+</span><span class="n">loader</span> <span class="o">=</span> <span class="nc">PyPDFLoader</span><span class="p">(</span><span class="sh">"</span><span class="s">loader.pdf</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">loader</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="c1">#split
+</span><span class="n">text_split</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">.</span><span class="nf">from_tiktoken_encoder</span><span class="p">(</span>
+    <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">split_docs</span> <span class="o">=</span> <span class="n">text_split</span><span class="p">.</span><span class="nf">split_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">对以下文字做简洁的总结:
+{text}
+简洁的总结:</span><span class="sh">"""</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">prompt_template</span><span class="p">)</span>
+
+<span class="n">refine_template</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sh">"</span><span class="s">你的任务是产生最终摘要</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">我们已经提供了一个到某个特定点的现有回答:{existing_answer}</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">我们有机会通过下面的一些更多上下文来完善现有的回答(仅在需要时使用).</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">------------</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">{text}</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">------------</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">根据新的上下文，用中文完善原始回答.</span><span class="se">\n</span><span class="sh">"</span>
+    <span class="sh">"</span><span class="s">如果上下文没有用处,返回原始回答.</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">refine_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="n">refine_template</span><span class="p">)</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-3.5-turbo</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="nf">load_summarize_chain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">chain_type</span><span class="o">=</span><span class="sh">"</span><span class="s">refine</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">question_prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+    <span class="n">refine_prompt</span> <span class="o">=</span> <span class="n">refine_prompt</span><span class="p">,</span>
+    <span class="n">return_intermediate_steps</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">input_key</span> <span class="o">=</span> <span class="sh">"</span><span class="s">documents</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">output_key</span> <span class="o">=</span> <span class="sh">"</span><span class="s">output_text</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="map-reduce">Map reduce</h3>
+<p>先将每个文档或文档块分别投喂给LLM，并得到结果集（Map步骤），然后通过一个文档合并链，获得一个输出结果（Reduce步骤）</p>
+
+<h3 id="map-re-rank">Map re-rank</h3>
+
+<p>先将每个文档或文档块投喂给LLM,并对每个文档或文档块生成问题的答案进行打分，然后将打分最高的文档或文档块作为最终答案返回</p>
+<hr />
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/2024/06/09/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/09/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
@@ -171,7 +289,7 @@
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/11/langchain.html">
+                            <a class="post__next" href="/langchain/index_posts/2024/06/11/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
                                     <h2 class="post__nav__title">LangChain 015</h2>
