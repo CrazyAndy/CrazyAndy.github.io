@@ -173,6 +173,19 @@
 <span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
 </code></pre></div></div>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#实现一个最近的对话窗口，超过窗口条数的对话将被删除
+</span><span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span>  <span class="n">ConversationBufferWindowMemory</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationBufferWindowMemory</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">你好，我是人类!</span><span class="sh">"</span><span class="p">},{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">你好，我是AI，有什么可以帮助你的吗？</span><span class="sh">"</span><span class="p">})</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">我想吃鸡肉</span><span class="sh">"</span><span class="p">},{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我帮你找找鸡肉的做法</span><span class="sh">"</span><span class="p">})</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+
+<span class="c1"># 这里只会显示 最近一句话
+</span></code></pre></div></div>
+
 <h3 id="构建记忆实体概念清单">构建记忆实体概念清单</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -219,10 +232,173 @@
     <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
 <span class="p">)</span>
 <span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是谁?</span><span class="sh">"</span><span class="p">})</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">get_current_entities</span><span class="p">(</span><span class="sh">"</span><span class="s">tomie最喜欢做什么事?</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">get_knowledge_triplets</span><span class="p">(</span><span class="sh">"</span><span class="s">tomie最喜欢打游戏</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="长对话在内存中的处理方式总结摘要以及token计算">长对话在内存中的处理方式：总结摘要以及token计算</h3>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationSummaryMemory</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span>  <span class="n">OpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationSummaryMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">帮我找一下tomie</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">对不起请问什么是tomie？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是一个培训讲师</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">memory</span><span class="p">.</span><span class="n">chat_memory</span><span class="p">.</span><span class="n">messages</span>
+<span class="c1">#print(messages)
+</span><span class="n">memory</span><span class="p">.</span><span class="nf">predict_new_summary</span><span class="p">(</span><span class="n">messages</span><span class="p">,</span><span class="sh">""</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#使用ChatMessageHistory来快速获得对话摘要
+</span><span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationSummaryMemory</span>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ChatMessageHistory</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span>  <span class="n">OpenAI</span>
+
+<span class="n">hisiory</span> <span class="o">=</span> <span class="nc">ChatMessageHistory</span><span class="p">()</span>
+<span class="n">hisiory</span><span class="p">.</span><span class="nf">add_user_message</span><span class="p">(</span><span class="sh">"</span><span class="s">你好，我是人类！</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">hisiory</span><span class="p">.</span><span class="nf">add_ai_message</span><span class="p">(</span><span class="sh">"</span><span class="s">你好，我是AI小丸子，有什么可以帮助你的吗？</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1">#memory = ConversationSummaryMemory.from_messages(
+#    llm=OpenAI(temperature=0),
+#    chat_memory=hisiory,
+#    return_messages=True
+#)
+</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationSummaryMemory</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="nc">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">return_messages</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="nb">buffer</span><span class="o">=</span><span class="sh">"</span><span class="se">\n</span><span class="s">The AI introduces itself as AI Little Maruko and asks if there is anything it can help the human with.</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">chat_memory</span><span class="o">=</span><span class="n">hisiory</span>
+<span class="p">)</span>
+<span class="c1">#memory.buffer
+</span><span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 当对话持续进行且对话内容很多的时候
+# 可以使用ConversationSummaryBufferMemory来存储对话摘要
+# 这是一种非常有用的方式,它会根据token的数量来自动判断是否需要进行摘要
+# 当token数量超过阈值的时候,会自动进行摘要
+# 在缓冲区中,会保留最近的k条对话
+# 比较久的对话会被删除，在删除前会进行摘要
+</span>
+
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationSummaryBufferMemory</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationSummaryBufferMemory</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">max_token_limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">return_messages</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">帮我找一下tomie</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">对不起请问什么是tomie？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是一个培训讲师</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">今天他要讲一门关于RAG的课程</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。需要RAG的资料吗？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+</code></pre></div></div>
+
+<h3 id="conversation-token-buffer使用token长度来决定什么时候刷新内存">Conversation Token Buffer使用token长度来决定什么时候刷新内存</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationTokenBufferMemory</span>
+<span class="kn">from</span> <span class="n">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationTokenBufferMemory</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">max_token_limit</span><span class="o">=</span><span class="mi">150</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">帮我找一下tomie</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">对不起请问什么是tomie？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是一个培训讲师</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">今天他要讲一门关于RAG的课程</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。需要RAG的资料吗？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">不需要资料了，谢谢</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，那我就不打扰你了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">memory</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({})</span>
+</code></pre></div></div>
+
+<h2 id="长时记忆的是实现方式">长时记忆的是实现方式</h2>
+
+<p>通过向量数据库来存储之前的对话内容，有的向量数据库服务还提供自动摘要等，每次对话的时候，都会从向量数据库里查询最相关的文档或历史对话</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationBufferMemory</span>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="nc">ConversationBufferMemory</span><span class="p">()</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">帮我找一下tomie</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">对不起请问什么是tomie？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是一个培训讲师</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">今天他要讲一门关于RAG的课程</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，我知道了。需要RAG的资料吗？</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory</span><span class="p">.</span><span class="nf">save_context</span><span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">不需要资料了，谢谢</span><span class="sh">"</span><span class="p">},</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">output</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">好的，那我就不打扰你了。</span><span class="sh">"</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">FAISS</span><span class="p">.</span><span class="nf">from_texts</span><span class="p">(</span>
+    <span class="n">memory</span><span class="p">.</span><span class="nb">buffer</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">),</span>
+    <span class="nc">OpenAIEmbeddings</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">FAISS</span><span class="p">.</span><span class="nf">save_local</span><span class="p">(</span><span class="n">vectorstore</span><span class="p">,</span><span class="sh">"</span><span class="s">test_faiss</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="n">langchain.memory</span> <span class="kn">import</span> <span class="n">VectorStoreRetrieverMemory</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">FAISS</span><span class="p">.</span><span class="nf">load_local</span><span class="p">(</span><span class="sh">"</span><span class="s">test_faiss</span><span class="sh">"</span><span class="p">,</span><span class="nc">OpenAIEmbeddings</span><span class="p">(),</span><span class="n">allow_dangerous_deserialization</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r1</span><span class="p">.</span><span class="nf">as_retriever</span><span class="p">(</span>
+    <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">k</span><span class="sh">"</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">memory2</span> <span class="o">=</span> <span class="nc">VectorStoreRetrieverMemory</span><span class="p">(</span>
+    <span class="n">retriever</span><span class="o">=</span><span class="n">r2</span>
+<span class="p">)</span>
+<span class="n">memory2</span><span class="p">.</span><span class="nf">load_memory_variables</span><span class="p">({</span><span class="sh">"</span><span class="s">prompt</span><span class="sh">"</span><span class="p">:</span><span class="sh">"</span><span class="s">tomie是什么职业?</span><span class="sh">"</span><span class="p">})</span>
+
+</code></pre></div></div>
 
             
             
@@ -242,7 +418,7 @@
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/12/langchain.html">
+                            <a class="post__next" href="/langchain/index_posts/2024/06/12/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
                                     <h2 class="post__nav__title">LangChain 016</h2>
