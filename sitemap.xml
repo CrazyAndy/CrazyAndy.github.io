@@ -6,65 +6,188 @@
         <link>http://localhost:4000</link>
         <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml" />
         <description>Andy Say Hi to World</description>
-        <lastBuildDate>Mon, 17 Jun 2024 17:17:41 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 21 Jun 2024 17:08:46 +0800</lastBuildDate>
         
         <item>
-            <title>LangChain 019</title>
+            <title>LangChain 025</title>
             <link>
-                http://localhost:4000/langchain/2024/06/16/langchain.html
+                http://localhost:4000/langchain/2024/06/21/langchain.html
             </link>
             <description>
                 
 
             </description>
+            <pubDate>Fri, 21 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/21/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 024</title>
+            <link>
+                http://localhost:4000/langchain/2024/06/20/langchain.html
+            </link>
+            <description>
+                
+
+            </description>
+            <pubDate>Thu, 20 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/2024/06/20/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 023</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/19/langchain.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/lcel.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/lcel02.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/lcel03.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;h1 id=&quot;lcellangchain-expression-languag...
+            </description>
+            <pubDate>Wed, 19 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/19/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 022</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/18/langchain.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;tookit&quot;&gt;Tookit&lt;/h1&gt;
+&lt;p&gt;tookit是langchain已经封装好的一系列工具，一个工具包是一组工具来组合完成特定的任务&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Azure认知服务 https://portal.azure.com/#allservices&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;AzureCogsFormRecognizerTool：从文档里提取文本&lt;/li&gt;
+  &lt;li&gt;AzureCogsSpeech2TextTool：语音到文本&lt;/li&gt;
+  &lt;li&gt;AzureCogsText2SpeechTool：文本到语音&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;di...
+            </description>
+            <pubDate>Tue, 18 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/18/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 021</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/17/langchain.html
+            </link>
+            <description>
+                &lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/toolandtoolkit.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;h1 id=&quot;如何加载使用tool&quot;&gt;如何加载使用tool&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;加载预制tool的方法&lt;/li&gt;
+  &lt;li&gt;几种tool的使用方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;langchain预制了大量的tools，基本这些工具能满足大部分需求，https://github.com/langchain-ai/langchain/tree/v0.0.352/docs/d...
+            </description>
+            <pubDate>Mon, 17 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/17/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 020</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/16/langchain.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;如何给agent正确的增加记忆&quot;&gt;如何给agent正确的增加记忆&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将memory插入到提示词模板中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;langchain.agen...
+            </description>
             <pubDate>Sun, 16 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/16/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/16/langchain.html
+            </guid>
+        </item>
+        
+        <item>
+            <title>LangChain 019</title>
+            <link>
+                http://localhost:4000/langchain/index_posts/2024/06/15/langchain.html
+            </link>
+            <description>
+                &lt;h1 id=&quot;几种不同的agent类型&quot;&gt;几种不同的agent类型&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;ZERO_SHOT_REACT_DESCRIPTION&lt;/li&gt;
+  &lt;li&gt;CHAT_ZERO_SHOT_REACT_DESCRIPTION&lt;/li&gt;
+  &lt;li&gt;CONVERSATIONAL_REACT_DESCRIPTION&lt;/li&gt;
+  &lt;li&gt;CHAT_CONVERSATIONAL_REACT_DESCRIPTION&lt;/li&gt;
+  &lt;li&gt;OPENAI_FUNCTIONS&lt;/li&gt;
+  &lt;li&gt;STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION&lt;/...
+            </description>
+            <pubDate>Sat, 15 Jun 2024 00:00:00 +0800</pubDate>
+            <guid>
+                http://localhost:4000/langchain/index_posts/2024/06/15/langchain.html
             </guid>
         </item>
         
         <item>
             <title>LangChain 018</title>
             <link>
-                http://localhost:4000/langchain/2024/06/15/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/14/langchain.html
             </link>
             <description>
-                
+                &lt;p&gt;搭建工具&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;serpai是一个聚合搜索引擎，需要安装谷歌搜索包以及申请账号 https://serpapi.com/manage-api-key&lt;/li&gt;
+  &lt;li&gt;llm-math是一个封装好的数学计算链&lt;/li&gt;
+&lt;/ul&gt;
 
-            </description>
-            <pubDate>Sat, 15 Jun 2024 00:00:00 +0800</pubDate>
-            <guid>
-                http://localhost:4000/langchain/2024/06/15/langchain.html
-            </guid>
-        </item>
-        
-        <item>
-            <title>LangChain 017</title>
-            <link>
-                http://localhost:4000/langchain/2024/06/14/langchain.html
-            </link>
-            <description>
-                
-
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span c...
             </description>
             <pubDate>Fri, 14 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/14/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/14/langchain.html
             </guid>
         </item>
         
         <item>
             <title>LangChain 017</title>
             <link>
-                http://localhost:4000/langchain/2024/06/13/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/13/langchain.html
             </link>
             <description>
-                
+                &lt;h1 id=&quot;agent-介绍&quot;&gt;Agent 介绍&lt;/h1&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/agent.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
+
+&lt;h1 id=&quot;agent在langchain中如何使用&quot;&gt;Agent在LangChain中如何使用&lt;/h1&gt;
+
+&lt;center&gt;&lt;img src=&quot;/assets/images/posts/ai/langchainagent.png&quot; width=&quot;80%&quot; /&gt;&lt;/center&gt;
 
             </description>
             <pubDate>Thu, 13 Jun 2024 00:00:00 +0800</pubDate>
             <guid>
-                http://localhost:4000/langchain/2024/06/13/langchain.html
+                http://localhost:4000/langchain/index_posts/2024/06/13/langchain.html
             </guid>
         </item>
         

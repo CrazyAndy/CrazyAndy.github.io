@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>LangChain 019 | Andy Sun's World</title>
+    <title>LangChain 018 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>LangChain 019</span>
+                <span>LangChain 018</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -140,7 +140,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">16 Jun 2024</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">14 Jun 2024</time>
                     </div>
                 </div>
             </div>
@@ -151,24 +151,91 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <p>搭建工具</p>
+<ul>
+  <li>serpai是一个聚合搜索引擎，需要安装谷歌搜索包以及申请账号 https://serpapi.com/manage-api-key</li>
+  <li>llm-math是一个封装好的数学计算链</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="nf">load_tools</span><span class="p">([</span><span class="sh">"</span><span class="s">serpapi</span><span class="sh">"</span><span class="p">,</span><span class="sh">"</span><span class="s">llm-math</span><span class="sh">"</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>定义agent,使用小样本增强生成类型</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">initialize_agent</span>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentType</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="nf">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="p">,</span>
+    <span class="n">llm</span><span class="p">,</span>
+    <span class="n">agent</span><span class="o">=</span><span class="n">AgentType</span><span class="p">.</span><span class="n">ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span><span class="c1">#这里有不同的类型
+</span>    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="c1">#是否打印日志
+</span><span class="p">)</span>
+
+<span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">请问现任的美国总统是谁？他的年龄的平方是多少?</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>/Users/tomiezhang/.pyenv/versions/3.10.12/envs/langchains/lib/python3.11/site-packages/langchain_core/_api/deprecation.py:117: LangChainDeprecationWarning: The function <code class="language-plaintext highlighter-rouge">run</code> was deprecated in LangChain 0.1.0 and will be removed in 0.2.0. Use invoke instead.
+  warn_deprecated(</p>
+
+<blockquote>
+  <p>Entering new AgentExecutor chain…
+I need to find out who the current president of the United States is and then calculate the square of his age.
+Action: Search
+Action Input: current president of the United States
+Observation: Joe Biden
+Thought:Now I need to find out Joe Biden’s age and calculate the square of it.
+Action: Search
+Action Input: Joe Biden age
+Observation: 81 years
+Thought:I will now calculate the square of Joe Biden’s age.
+Action: Calculator
+Action Input: 81 * 81
+Observation: Answer: 6561
+Thought:I now know the final answer.
+Final Answer: Joe Biden, 81 years old, square of his age is 6561.</p>
+</blockquote>
+
+<blockquote>
+  <p>Finished chain.</p>
+</blockquote>
+
+<p>‘Joe Biden, 81 years old, square of his age is 6561.’</p>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/2024/06/15/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/13/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">LangChain 018</h2>
+                                    <h2 class="post__nav__title">LangChain 017</h2>
                                 </div>
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/langchain/index_posts/2024/06/15/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 019</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             

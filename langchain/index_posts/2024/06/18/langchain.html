@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>LangChain 017 | Andy Sun's World</title>
+    <title>LangChain 022 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>LangChain 017</span>
+                <span>LangChain 022</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -140,7 +140,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">13 Jun 2024</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">18 Jun 2024</time>
                     </div>
                 </div>
             </div>
@@ -151,30 +151,105 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h1 id="tookit">Tookit</h1>
+<p>tookit是langchain已经封装好的一系列工具，一个工具包是一组工具来组合完成特定的任务</p>
+<hr />
+
+<p>Azure认知服务 https://portal.azure.com/#allservices</p>
+<ul>
+  <li>AzureCogsFormRecognizerTool：从文档里提取文本</li>
+  <li>AzureCogsSpeech2TextTool：语音到文本</li>
+  <li>AzureCogsText2SpeechTool：文本到语音</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">#创建toolkit
+</span><span class="kn">from</span> <span class="n">langchain.agents.agent_toolkits</span> <span class="kn">import</span> <span class="n">AzureCognitiveServicesToolkit</span>
+
+<span class="n">toolkit</span> <span class="o">=</span> <span class="nc">AzureCognitiveServicesToolkit</span><span class="p">()</span>
+
+<span class="p">[</span><span class="n">tool</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">toolkit</span><span class="p">.</span><span class="nf">get_tools</span><span class="p">()]</span>
+
+
+<span class="c1">#agent使用
+</span><span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">initialize_agent</span><span class="p">,</span> <span class="n">AgentType</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4-1106-preview</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="nf">initialize_agent</span><span class="p">(</span>
+    <span class="n">tools</span><span class="o">=</span><span class="n">toolkit</span><span class="p">.</span><span class="nf">get_tools</span><span class="p">(),</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">agent</span><span class="o">=</span><span class="n">AgentType</span><span class="p">.</span><span class="n">STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">audio_file</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">Tell me a joke and read it out for me.</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="python">python</h2>
+<p>一个python代码机器人</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_experimental.agents.agent_toolkits</span> <span class="kn">import</span> <span class="n">create_python_agent</span>
+<span class="kn">from</span> <span class="n">langchain_experimental.tools</span> <span class="kn">import</span> <span class="n">PythonREPLTool</span>
+<span class="kn">from</span> <span class="n">langchain_experimental.utilities</span> <span class="kn">import</span> <span class="n">PythonREPL</span>
+<span class="kn">from</span> <span class="n">langchain.llms.openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="n">langchain.agents.agent_types</span> <span class="kn">import</span> <span class="n">AgentType</span>
+<span class="kn">from</span> <span class="n">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">agent_executor</span> <span class="o">=</span> <span class="nf">create_python_agent</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="nc">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4-1106-preview</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">tool</span><span class="o">=</span><span class="nc">PythonREPLTool</span><span class="p">(),</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">agent_type</span><span class="o">=</span><span class="n">AgentType</span><span class="p">.</span><span class="n">OPENAI_FUNCTIONS</span><span class="p">,</span>
+    <span class="n">agent_executor_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">handle_parsing_errors</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="n">agent_executor</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">What is the 10th fibonacci number?</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="sql-database">SQL Database</h3>
+<p>使用SQLDatabaseChain构建的agent，用来根据数据库回答一般行动饿问题</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">db</span> <span class="o">=</span> <span class="n">SQLDatabase</span><span class="p">.</span><span class="nf">from_uri</span><span class="p">(</span><span class="sh">"</span><span class="s">sqlite:///Chinook.db</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">toolkit</span> <span class="o">=</span> <span class="nc">SQLDatabaseToolkit</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="nc">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">agent_executor</span> <span class="o">=</span> <span class="nf">create_sql_agent</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="nc">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4-1106-preview</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">toolkit</span><span class="o">=</span><span class="n">toolkit</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">agent_type</span><span class="o">=</span><span class="n">AgentType</span><span class="p">.</span><span class="n">OPENAI_FUNCTIONS</span>
+<span class="p">)</span>
+
+<span class="c1"># 用自然语言描述一个数据库表
+</span><span class="n">agent_executor</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="sh">"</span><span class="s">Describe the playlisttrack table</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># 用自然语言跑sql查询
+</span><span class="n">agent_executor</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">List the total sales per country. Which country</span><span class="sh">'</span><span class="s">s customers spent the most?</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/index_posts/2024/06/12/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/17/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">LangChain 016</h2>
+                                    <h2 class="post__nav__title">LangChain 021</h2>
                                 </div>
                             </a>
                         
                     
                     
                         
-                            <a class="post__next" href="/langchain/2024/06/14/langchain.html">
+                            <a class="post__next" href="/langchain/index_posts/2024/06/19/langchain.html">
                                 <div class="next__box">
                                     <span class="post__nav post__nav__next">Next post</span>
-                                    <h2 class="post__nav__title">LangChain 017</h2>
+                                    <h2 class="post__nav__title">LangChain 023</h2>
                                 </div>
                                 <div class="next__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
