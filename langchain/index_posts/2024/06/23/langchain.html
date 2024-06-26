@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>LangChain 025 | Andy Sun's World</title>
+    <title>LangChain 026 | Andy Sun's World</title>
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -64,7 +64,7 @@
                                             
                                                 <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
                                             
-                                                <a class="nav__link" href="/categories/ai/vector.html">Vector</a>
+                                                <a class="nav__link" href="/categories/ai/agent_fortune.html">Agent_Fortune_Telling</a>
                                             
                                         </div>
                                     </li>
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="post__info">
             <h1 class="post__title">
-                <span>LangChain 025</span>
+                <span>LangChain 026</span>
             </h1>
             <div class="post__meta">
                 <div class="post__author-image" style="text-align: center">
@@ -140,7 +140,7 @@
                 </div>
                 <div class="post__meta-bottom">
                     <div class="post__author">
-                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">21 Jun 2024</time>
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">23 Jun 2024</time>
                     </div>
                 </div>
             </div>
@@ -151,24 +151,77 @@
 <div class="container animate">
     <article class="post">
         <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
-            
+            <h1 id="第一个agent">第一个Agent</h1>
+<ul>
+  <li>注意当前使用的langchain版本为0.1.4，调用方式和之前旧版本有所差异</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="n">langchain</span> <span class="kn">import</span> <span class="n">hub</span>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span>
+<span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">create_openai_functions_agent</span> <span class="c1">#不同的agent有不同的创建方式
+</span><span class="kn">from</span> <span class="n">langchain.agents</span> <span class="kn">import</span> <span class="n">AgentExecutor</span>
+<span class="c1">#创建LLM
+</span><span class="n">llm</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-4</span><span class="sh">"</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#定义agent的prompt
+#https://smith.langchain.com/hub/hwchase17/openai-functions-agent
+</span><span class="n">prompt</span> <span class="o">=</span> <span class="n">hub</span><span class="p">.</span><span class="nf">pull</span><span class="p">(</span><span class="sh">"</span><span class="s">hwchase17/openai-functions-agent</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1">#定义工具,加载预制的工具,注意有的工具需要提供LLM
+</span><span class="n">tools</span> <span class="o">=</span> <span class="nf">load_tools</span><span class="p">([</span><span class="sh">"</span><span class="s">llm-math</span><span class="sh">"</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+<span class="c1">#创建agent
+</span><span class="n">agent</span> <span class="o">=</span> <span class="nf">create_openai_functions_agent</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+<span class="c1">#定义agent的执行器，这里注意与老版本的不同
+</span><span class="n">agent_executor</span> <span class="o">=</span> <span class="nc">AgentExecutor</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">agent_executor</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">你好</span><span class="sh">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<h1 id="agent">Agent</h1>
+<ul>
+  <li>中间步骤处理</li>
+  <li>提示词</li>
+  <li>模型配置(停止符必要的话)</li>
+  <li>输出解析器</li>
+</ul>
+<hr />
+
+<h1 id="定义agent">定义agent</h1>
+
+<h1 id="一个比较复杂的agent">一个比较复杂的agent</h1>
+<ul>
+  <li>工具</li>
+  <li>检索增强RAG</li>
+  <li>记忆</li>
+</ul>
+
 
             
             
                 <div class="post__navigation animate" style="margin-top: 10px">
                     
                         
-                            <a class="post__prev" href="/langchain/2024/06/20/langchain.html">
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/22/langchain.html">
                                 <div class="prev__image">
                                     <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
                                 </div>
                                 <div class="prev__box">
                                     <span class="post__nav post__nav__prev">Prev post</span>
-                                    <h2 class="post__nav__title">LangChain 024</h2>
+                                    <h2 class="post__nav__title">LangChain 026</h2>
                                 </div>
                             </a>
                         
                     
+                    
+                        
+                            <a class="post__next" href="/langchain/index_posts/2024/06/24/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 026</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
                     
                 </div>
             

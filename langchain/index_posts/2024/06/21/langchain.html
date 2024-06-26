@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<head>
+    <title>LangChain 025 | Andy Sun's World</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Andy's Blog</title>
+    <meta content="Andy Say Hi to World" name="description">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/default/favicon.ico">
+    <!-- Fonts -->
+    <link href="/assets/css/googlecss.css" rel="stylesheet">
+    <link href="/assets/css/jPages.css" rel="stylesheet">
+    <!-- Ionicons -->
+<!--    <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">-->
+    <link href="/assets/css/ionicons.min.css" rel="stylesheet">
+    <link data-cms-original-href="/assets/css/main.css" href="/assets/css/main.css" rel="stylesheet">
+    
+</head>
+
+<html>
+<body>
+<!-- begin header -->
+<header class="c-header">
+    <div class="container">
+        <div class="row">
+            <div class="c-header__inner">
+                <div class="logo">
+                    <a class="logo__link" href="/">
+                        <img alt="Vonge" class="logo__image" data-cms-original-src="/assets/images/default/favicon.ico" src="/assets/images/default/favicon.ico">
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <div class="main-nav__box">
+                        <div class="nav__icon-close">
+                            <i class="ion ion-md-close"></i>
+                        </div>
+                        <div class="nav__title">
+                            Menu
+                        </div>
+                        <ul class="nav__list list-reset">
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/">Home</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item"><a class="nav__link " href="/projects.html">Projects</a></li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle active-link">AI <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/ai/langchain.html">LangChain</a>
+                                            
+                                                <a class="nav__link" href="/categories/ai/agent_fortune.html">Agent_Fortune_Telling</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">Maths <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/maths/algorithm.html">Algorithm</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/structure.html">DataStructure</a>
+                                            
+                                                <a class="nav__link" href="/categories/maths/linear.html">LinearAlgebra</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                                
+                                
+                                
+                                
+                                    <li class="nav__item dropdown"><span class="nav__link dropdown-toggle ">English <i
+                                            class="ion ion-ios-arrow-down arrow-down"></i></span>
+                                        <div class="dropdown-menu">
+                                            
+                                                <a class="nav__link" href="/categories/english/grammar.html">Grammar</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/kaiyan.html">KaiYan</a>
+                                            
+                                                <a class="nav__link" href="/categories/english/reading.html">Reading</a>
+                                            
+                                        </div>
+                                    </li>
+                                
+                            
+                        </ul>
+                    </div>
+                    <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+                    <div class="social">
+                        <ul class="social__list list-reset">
+                            <li class="social__item"><a aria-label="github icon" class="social__link"
+                                                        href="https://github.com/CrazyAndy" rel="noopener"
+                                                        target="_blank"><i
+                                    class="ion ion-logo-github"></i></a></li>
+                        </ul>
+                    </div>
+                    <!--bookshop-live end-->
+                </nav>
+                <div class="nav-button">
+                    <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<div class="post-top">
+    <div class="container">
+        <div class="post__info">
+            <h1 class="post__title">
+                <span>LangChain 025</span>
+            </h1>
+            <div class="post__meta">
+                <div class="post__author-image" style="text-align: center">
+                    <img alt="Andy Sun" data-cms-original-src="/assets/images/default/andy_icon.jpeg" loading="lazy" src="/assets/images/default/andy_icon.jpeg">
+                </div>
+                <div class="post__meta-bottom">
+                    <div class="post__author">
+                        Andy Sun  <time style="margin-left: 10px" class="post__date" datetime="">21 Jun 2024</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- begin post -->
+<div class="container animate">
+    <article class="post">
+        <div class="post__content" data-cms-content-wrapper="/site/_layouts/post.html">
+            <h1 id="promptllm">Prompt+LLM</h1>
+<p>基本构成： 
+PromptTemplate / ChatPromptTemplate -&gt; LLM / ChatModel -&gt; OutputParser</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">给我讲一个关于{foo}的笑话</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">gpt-3.5-turbo</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">狗熊</span><span class="sh">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<p>自定义停止输出符</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">])</span> <span class="c1"># 大模型输出的内容遇到换行就停止了
+</span></code></pre></div></div>
+
+<p>兼容openai函数调用的方式</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">functions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">joke</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">讲笑话</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">parameters</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">object</span><span class="sh">"</span><span class="p">,</span>
+            <span class="sh">"</span><span class="s">properties</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sh">"</span><span class="s">setup</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">笑话的开头</span><span class="sh">"</span><span class="p">},</span>
+                <span class="sh">"</span><span class="s">punchline</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">string</span><span class="sh">"</span><span class="p">,</span>
+                    <span class="sh">"</span><span class="s">description</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">爆梗的结尾</span><span class="sh">"</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="sh">"</span><span class="s">required</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">setup</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">punchline</span><span class="sh">"</span><span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="n">function_call</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">joke</span><span class="sh">"</span><span class="p">},</span> <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">)</span>
+
+<span class="n">chain</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">男人</span><span class="sh">"</span><span class="p">},</span> <span class="n">config</span><span class="o">=</span><span class="p">{})</span>
+</code></pre></div></div>
+
+<p>输出解析器</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">model</span> <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span> 
+</code></pre></div></div>
+
+<p>与函数调用混合使用</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain.output_parsers.openai_functions</span> <span class="kn">import</span> <span class="n">JsonOutputFunctionsParser</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">prompt</span>
+    <span class="o">|</span> <span class="n">model</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="n">function_call</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">joke</span><span class="sh">"</span><span class="p">},</span> <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">)</span>
+    <span class="o">|</span> <span class="nc">JsonOutputFunctionsParser</span><span class="p">()</span> <span class="c1"># 返回json格式
+</span><span class="p">)</span>
+
+<span class="c1">#只输出setup
+</span><span class="n">chain</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">:</span> <span class="nc">RunnablePassthrough</span><span class="p">()}</span> <span class="c1">#使用RunnablePassthrough()跳过prompt
+</span>    <span class="o">|</span> <span class="n">prompt</span>
+    <span class="o">|</span> <span class="n">model</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="n">function_call</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">joke</span><span class="sh">"</span><span class="p">},</span> <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">)</span>
+    <span class="o">|</span> <span class="nc">JsonKeyOutputFunctionsParser</span><span class="p">(</span><span class="n">key_name</span><span class="o">=</span><span class="sh">"</span><span class="s">setup</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># 定义输出的key
+</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="使用runnables来连接多链结构">使用Runnables来连接多链结构</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="n">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span> <span class="c1">#获取可迭代对象中指定索引或键对应的元素
+</span>
+<span class="kn">from</span> <span class="n">langchain.schema</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+<span class="kn">from</span> <span class="n">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span> <span class="n">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">prompt1</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">{person}来自于哪个城市?</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">prompt2</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">{city}属于哪个省? 用{language}来回答</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="nc">ChatOpenAI</span><span class="p">()</span>
+
+<span class="n">chain1</span> <span class="o">=</span> <span class="n">prompt1</span> <span class="o">|</span> <span class="n">model</span> <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+
+<span class="n">chain2</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">city</span><span class="sh">"</span><span class="p">:</span> <span class="n">chain1</span><span class="p">,</span> <span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">:</span> <span class="nf">itemgetter</span><span class="p">(</span><span class="sh">"</span><span class="s">language</span><span class="sh">"</span><span class="p">)}</span> <span class="c1">#获取invoke中的language
+</span>    <span class="o">|</span> <span class="n">prompt2</span>
+    <span class="o">|</span> <span class="n">model</span>
+    <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">chain1</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">person</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">马化腾</span><span class="sh">"</span><span class="p">})</span>
+<span class="c1">#chain2.invoke({"person": "马化腾", "language": "中文"})
+</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">langchain_core.runnables</span> <span class="kn">import</span> <span class="n">RunnablePassthrough</span>
+
+<span class="n">prompt1</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">生成一个{attribute}属性的颜色。除了返回这个颜色的名字不要做其他事:</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">prompt2</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">什么水果是这个颜色:{color},只返回这个水果的名字不要做其他事情:</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">prompt3</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">哪个国家的国旗有这个颜色:{color},只返回这个国家的名字不要做其他事情:</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">prompt4</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">有这个颜色的水果是{fruit},有这个颜色的国旗是{country}？</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">model_parser</span> <span class="o">=</span> <span class="n">model</span> <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+<span class="c1"># 生成一个颜色
+</span><span class="n">color_generator</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">{</span><span class="sh">"</span><span class="s">attribute</span><span class="sh">"</span><span class="p">:</span> <span class="nc">RunnablePassthrough</span><span class="p">()}</span> <span class="o">|</span> <span class="n">prompt1</span> <span class="o">|</span> <span class="p">{</span><span class="sh">"</span><span class="s">color</span><span class="sh">"</span><span class="p">:</span> <span class="n">model_parser</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">color_to_fruit</span> <span class="o">=</span> <span class="n">prompt2</span> <span class="o">|</span> <span class="n">model_parser</span>
+<span class="n">color_to_country</span> <span class="o">=</span> <span class="n">prompt3</span> <span class="o">|</span> <span class="n">model_parser</span>
+<span class="n">question_generator</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">color_generator</span> <span class="o">|</span> <span class="p">{</span><span class="sh">"</span><span class="s">fruit</span><span class="sh">"</span><span class="p">:</span> <span class="n">color_to_fruit</span><span class="p">,</span> <span class="sh">"</span><span class="s">country</span><span class="sh">"</span><span class="p">:</span> <span class="n">color_to_country</span><span class="p">}</span> <span class="o">|</span> <span class="n">prompt4</span>
+<span class="p">)</span>
+
+<span class="n">question_generator</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="sh">"</span><span class="s">强烈的</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>多链执行与结果合并
+      输入
+      / <br />
+     /   <br />
+ 分支1   分支2
+     \   /
+      \ /
+    合并结果</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">planner</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span><span class="sh">"</span><span class="s">生成一个关于{input}的论点</span><span class="sh">"</span><span class="p">)</span>
+    <span class="o">|</span> <span class="nc">ChatOpenAI</span><span class="p">()</span>
+    <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+    <span class="o">|</span> <span class="p">{</span><span class="sh">"</span><span class="s">base_response</span><span class="sh">"</span><span class="p">:</span> <span class="nc">RunnablePassthrough</span><span class="p">()}</span>
+<span class="p">)</span>
+
+<span class="n">arguments_for</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">列出以下内容的优点或积极方面:{base_response}</span><span class="sh">"</span>
+    <span class="p">)</span>
+    <span class="o">|</span> <span class="nc">ChatOpenAI</span><span class="p">()</span>
+    <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">arguments_against</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_template</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">列出以下内容的缺点或消极方面:{base_response}</span><span class="sh">"</span>
+    <span class="p">)</span>
+    <span class="o">|</span> <span class="nc">ChatOpenAI</span><span class="p">()</span>
+    <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">final_responder</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">.</span><span class="nf">from_messages</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">ai</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">{original_response}</span><span class="sh">"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">human</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">积极:</span><span class="se">\n</span><span class="s">{results_1}</span><span class="se">\n\n</span><span class="s">消极:</span><span class="se">\n</span><span class="s">{results_2}</span><span class="sh">"</span><span class="p">),</span>
+            <span class="p">(</span><span class="sh">"</span><span class="s">system</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">根据评论生成最终的回复</span><span class="sh">"</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="o">|</span> <span class="nc">ChatOpenAI</span><span class="p">()</span>
+    <span class="o">|</span> <span class="nc">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">planner</span>
+    <span class="o">|</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">results_1</span><span class="sh">"</span><span class="p">:</span> <span class="n">arguments_for</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">results_2</span><span class="sh">"</span><span class="p">:</span> <span class="n">arguments_against</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">original_response</span><span class="sh">"</span><span class="p">:</span> <span class="nf">itemgetter</span><span class="p">(</span><span class="sh">"</span><span class="s">base_response</span><span class="sh">"</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="o">|</span> <span class="n">final_responder</span>
+<span class="p">)</span>
+<span class="n">chain</span><span class="p">.</span><span class="nf">invoke</span><span class="p">({</span><span class="sh">"</span><span class="s">input</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">生孩子</span><span class="sh">"</span><span class="p">})</span>
+
+</code></pre></div></div>
+
+
+            
+            
+                <div class="post__navigation animate" style="margin-top: 10px">
+                    
+                        
+                            <a class="post__prev" href="/langchain/index_posts/2024/06/20/langchain.html">
+                                <div class="prev__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-1.jpg" loading="lazy" src="/assets/images/default/post-6.jpg">
+                                </div>
+                                <div class="prev__box">
+                                    <span class="post__nav post__nav__prev">Prev post</span>
+                                    <h2 class="post__nav__title">LangChain 024</h2>
+                                </div>
+                            </a>
+                        
+                    
+                    
+                        
+                            <a class="post__next" href="/langchain/index_posts/2024/06/22/langchain.html">
+                                <div class="next__box">
+                                    <span class="post__nav post__nav__next">Next post</span>
+                                    <h2 class="post__nav__title">LangChain 026</h2>
+                                </div>
+                                <div class="next__image">
+                                    <img alt="" data-cms-original-src="/assets/images/default/post-2.jpg" loading="lazy" src="/assets/images/default/post-4.jpg">
+                                </div>
+                            </a>
+                        
+                    
+                </div>
+            
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://https-crazyandy-github-io.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <script id="dsq-count-scr" src="//https-crazyandy-github-io.disqus.com/count.js" async></script>
+        </div>
+    </article>
+</div>
+
+<!--bookshop-live end-->
+<div class="top" title="Top">
+    <i class="ion ion-ios-arrow-up"></i>
+</div>
+<!-- begin footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col col-12">
+                <!--bookshop-live end-->
+
+                <div class="copyright">
+                    <p> 2011 © <a href="https://github.com/CrazyAndy">Andy Sun</a>. Template by <a href="https://github.com/CrazyAndy/NewWorldBlogTemplate">GitHub</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+<!--
+      load the live component for CloudCannon live previews.
+  -->
+<script>
+    (function () {
+        const bookshopLiveSetup = (CloudCannon) => {
+            CloudCannon.enableEvents();
+
+            const head = document.querySelector('head');
+            const script = document.createElement('script');
+            script.src = `/_cloudcannon/bookshop-live.js`;
+            script.onload = function () {
+                window.bookshopLive = new window.BookshopLive({
+                    remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+                });
+                const updateBookshopLive = async () => {
+                    const frontMatter = await CloudCannon.value();
+                    const options = window.bookshopLiveOptions || {};
+                    await window.bookshopLive.update({page: frontMatter}, options);
+                    CloudCannon?.refreshInterface?.();
+                }
+                document.addEventListener('cloudcannon:update', updateBookshopLive);
+                updateBookshopLive();
+            }
+            head.appendChild(script);
+        }
+
+        document.addEventListener('cloudcannon:load', function (e) {
+            bookshopLiveSetup(e.detail.CloudCannon);
+        });
+    })();
+</script>
+<script data-cms-original-src="/assets/js/scripts.js" src="/assets/js/scripts.js"></script>
+<script data-cms-original-src="/assets/js/common.js" src="/assets/js/common.js"></script>
+
+</body>
+</html>
